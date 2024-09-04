@@ -23,8 +23,8 @@ public final class CapabilityAttachEvent {
 
     private static void registerItemCaps(RegisterCapabilitiesEvent event) {
         for (Item item : BuiltInRegistries.ITEM) {
-            if (item instanceof IPowerItem) {
-                event.registerItem(MJCapabilities.PowerStorage.ITEM, (stack, ctx) -> new ItemPowerWrapper(stack), item);
+            if (item instanceof IPowerItem powerItem) {
+                event.registerItem(MJCapabilities.PowerStorage.ITEM, (stack, ctx) -> new ItemPowerWrapper(stack, powerItem), item);
             }
 
             if (item instanceof IFluidItem fluidItem) {

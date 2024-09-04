@@ -20,11 +20,15 @@ public record ComponentPowerStorage(int powerStored, int powerCapacity, float pu
             ByteBufCodecs.INT,
             ComponentPowerStorage::powerStored,
             ByteBufCodecs.INT,
-            ComponentPowerStorage::powerStored,
+            ComponentPowerStorage::powerCapacity,
             ByteBufCodecs.FLOAT,
             ComponentPowerStorage::purity,
             ComponentPowerStorage::new
     );
+
+    public static ComponentPowerStorage withCapacity(int initialCapacity) {
+        return new ComponentPowerStorage(0, initialCapacity, 0);
+    }
 
     @Override
     public boolean equals(Object o) {
