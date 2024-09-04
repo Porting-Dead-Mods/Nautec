@@ -24,7 +24,7 @@ public final class MJArmorMaterials {
         map.put(ArmorItem.Type.CHESTPLATE, 8);
         map.put(ArmorItem.Type.HELMET, 3);
         map.put(ArmorItem.Type.BODY, 11);
-    }), 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> Ingredient.of(Items.PRISMARINE));
+    }), 10, SoundEvents.ARMOR_EQUIP_ELYTRA, 0, 0, () -> Ingredient.of(Items.PRISMARINE));
 
     private static Holder<ArmorMaterial> register(
             String name,
@@ -57,7 +57,7 @@ public final class MJArmorMaterials {
 
         return Registry.registerForHolder(
                 BuiltInRegistries.ARMOR_MATERIAL,
-                ResourceLocation.fromNamespaceAndPath(ModJam.MODID, name),
+                ResourceLocation.withDefaultNamespace(name),
                 new ArmorMaterial(enummap, enchantmentValue, equipSound, repairIngridient, layers, toughness, knockbackResistance)
         );
     }

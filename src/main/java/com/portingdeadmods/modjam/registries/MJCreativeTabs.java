@@ -17,6 +17,8 @@ public final class MJCreativeTabs {
             .icon(() -> Blocks.DARK_PRISMARINE.asItem().getDefaultInstance())
             .displayItems((params, output) -> {
                 output.accept(MJItems.EXAMPLE_POWER_ITEM);
+                output.accept(MJItems.PRISM_MONOCLE);
+                output.accept(MJBlocks.EXAMPLE_BLOCK);
             })
             .build());
 }
