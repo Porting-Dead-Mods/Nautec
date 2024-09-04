@@ -7,6 +7,7 @@ import com.portingdeadmods.modjam.capabilities.MJCapabilities;
 import com.portingdeadmods.modjam.capabilities.power.ItemPowerWrapper;
 import com.portingdeadmods.modjam.data.MJDataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -19,6 +20,11 @@ public final class CapabilityAttachEvent {
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         registerItemCaps(event);
+        registerEntityCaps(event);
+    }
+
+    private static void registerEntityCaps(RegisterCapabilitiesEvent event){
+        // TODO: Register Player Augmentation Capability
     }
 
     private static void registerItemCaps(RegisterCapabilitiesEvent event) {
