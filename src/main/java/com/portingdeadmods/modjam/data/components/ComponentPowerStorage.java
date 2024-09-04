@@ -2,7 +2,6 @@ package com.portingdeadmods.modjam.data.components;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.modjam.capabilities.power.IPowerStorage;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -10,6 +9,8 @@ import net.minecraft.network.codec.StreamCodec;
 import java.util.Objects;
 
 public record ComponentPowerStorage(int powerStored, int powerCapacity, float purity) {
+    public static final ComponentPowerStorage EMPTY = new ComponentPowerStorage(0, 0, 0);
+
     public static final Codec<ComponentPowerStorage> CODEC = RecordCodecBuilder.create(builder -> builder.group(
             Codec.INT.fieldOf("power_stored").forGetter(ComponentPowerStorage::powerStored),
             Codec.INT.fieldOf("power_capacity").forGetter(ComponentPowerStorage::powerCapacity),
