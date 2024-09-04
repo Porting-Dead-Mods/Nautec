@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 public final class MJCapabilities {
     public static final class PowerStorage {
         public static final BlockCapability<IPowerStorage, @Nullable Direction> BLOCK = BlockCapability.createSided(create("power"), IPowerStorage.class);
-        public static final ItemCapability<IPowerStorage, Void> ITEM = ItemCapability.createVoid(create("power"), IPowerStorage.class);
+        public static final ItemCapability<IPowerStorage, @Nullable Void> ITEM = ItemCapability.createVoid(create("power"), IPowerStorage.class);
         public static final EntityCapability<IPowerStorage, @Nullable Direction> ENTITY = EntityCapability.createSided(create("power"), IPowerStorage.class);
     }
 
