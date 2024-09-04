@@ -13,6 +13,6 @@ public final class MJItems {
 
     public static final DeferredItem<Item> EXAMPLE_POWER_ITEM = ITEMS.register("example_power_item",
             () -> new ExamplePowerItem(new Item.Properties()));
-    public static final DeferredItem<Item> PRISM_MONOCLE = ITEMS.register("prism_monocle",
+    public static final DeferredItem<PrismMonocleItem> PRISM_MONOCLE = ITEMS.register("prism_monocle",
             () -> new PrismMonocleItem(MJArmorMaterials.PRISMARINE, new Item.Properties()));
 }

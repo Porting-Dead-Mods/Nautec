@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam;
 
 import com.portingdeadmods.modjam.data.MJDataComponents;
+import com.portingdeadmods.modjam.registries.MJBlocks;
 import com.portingdeadmods.modjam.registries.MJCreativeTabs;
 import com.portingdeadmods.modjam.registries.MJItems;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ public class ModJam {
 
     public ModJam(IEventBus modEventBus, ModContainer modContainer) {
         MJItems.ITEMS.register(modEventBus);
+        MJBlocks.BLOCKS.register(modEventBus);
         MJCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         MJDataComponents.DATA_COMPONENT_TYPES.register(modEventBus);
 

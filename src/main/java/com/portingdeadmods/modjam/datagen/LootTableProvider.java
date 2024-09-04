@@ -11,11 +11,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.Set;
 
-public class MJLootTableProvider extends BlockLootSubProvider {
+public class LootTableProvider extends BlockLootSubProvider {
 
     private final Set<Block> knownBlocks = new ReferenceOpenHashSet<>();
 
-    protected MJLootTableProvider(HolderLookup.Provider pRegistries) {
+    protected LootTableProvider(HolderLookup.Provider pRegistries) {
         super(Collections.emptySet(), FeatureFlags.VANILLA_SET, pRegistries);
     }
 
