@@ -30,6 +30,7 @@ public final class ModJam {
 
         modEventBus.addListener(PrismMonocleItem::registerCapabilities);
 
+
         modContainer.registerConfig(ModConfig.Type.COMMON, MJConfig.SPEC);
     }
 }
