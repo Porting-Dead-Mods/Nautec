@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam;
 
+import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
 import com.portingdeadmods.modjam.data.MJDataComponents;
 import com.portingdeadmods.modjam.registries.MJBlocks;
 import com.portingdeadmods.modjam.registries.MJCreativeTabs;
@@ -23,6 +24,8 @@ public class ModJam {
         MJBlocks.BLOCKS.register(modEventBus);
         MJCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         MJDataComponents.DATA_COMPONENT_TYPES.register(modEventBus);
+
+        modEventBus.addListener(PrismMonocleItem::registerCapabilities);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, MJConfig.SPEC);
     }
