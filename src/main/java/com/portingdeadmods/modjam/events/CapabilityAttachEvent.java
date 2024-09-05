@@ -1,14 +1,19 @@
 package com.portingdeadmods.modjam.events;
 
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.api.blockentities.IPowerBE;
 import com.portingdeadmods.modjam.api.items.IFluidItem;
 import com.portingdeadmods.modjam.api.items.IPowerItem;
 import com.portingdeadmods.modjam.capabilities.MJCapabilities;
 import com.portingdeadmods.modjam.capabilities.power.ItemPowerWrapper;
 import com.portingdeadmods.modjam.data.MJDataComponents;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -35,6 +40,15 @@ public final class CapabilityAttachEvent {
 
             if (item instanceof IFluidItem fluidItem) {
                 event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidHandlerItemStack(MJDataComponents.FLUID, stack, fluidItem.getFluidCapacity()), item);
+            }
+        }
+    }
+
+    private static void registerBECaps(RegisterCapabilitiesEvent event) {
+        for (BlockEntityType<?> be : BuiltInRegistries.BLOCK_ENTITY_TYPE) {
+            Block validBlock = be.getValidBlocks().stream().iterator().next();
+            BlockEntity actualBE = be.create(BlockPos.ZERO, validBlock.defaultBlockState());
+            if (actualBE instanceof IPowerBE powerBE) {
             }
         }
     }
