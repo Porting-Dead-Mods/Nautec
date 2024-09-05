@@ -1,11 +1,16 @@
 package com.portingdeadmods.modjam;
 
+import com.mojang.datafixers.optics.Prism;
+import com.portingdeadmods.modjam.registries.MJItems;
+import com.portingdeadmods.modjam.render.curios.PrismMonocleCuriosRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 @Mod(value = ModJamClient.MODID, dist = Dist.CLIENT)
 public final class ModJamClient {
@@ -13,5 +18,10 @@ public final class ModJamClient {
 
     public ModJamClient(IEventBus modEventBus, ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        modEventBus.addListener(ModJamClient::clientSetup);
+    }
+
+    private static void clientSetup(final FMLClientSetupEvent evt) {
+        CuriosRendererRegistry.register(MJItems.PRISM_MONOCLE.get(), PrismMonocleCuriosRenderer::new);
     }
 }
