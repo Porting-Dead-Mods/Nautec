@@ -20,6 +20,8 @@ public final class MJCreativeTabs {
                 for (ItemLike item : MJItems.CREATIVE_TAB_ITEMS) {
                     output.accept(item);
                 }
+
+                output.accept(MJItems.SALT_WATER_BUCKET);
             })
             .build());
 }
