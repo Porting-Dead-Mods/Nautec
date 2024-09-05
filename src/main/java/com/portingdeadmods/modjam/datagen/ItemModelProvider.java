@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam.datagen;
 
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.registries.MJBlocks;
 import com.portingdeadmods.modjam.registries.MJItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -21,5 +22,16 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
     protected void registerModels() {
         // Register item models here
         basicItem(MJItems.PRISM_MONOCLE.get());
+        parentItemBlock(MJBlocks.DARK_PRISMARINE_PILLAR.asItem());
+    }
+
+    public ItemModelBuilder parentItemBlock(Item item) {
+        return parentItemBlock(item, "");
+    }
+
+    public ItemModelBuilder parentItemBlock(Item item, String suffix) {
+        ResourceLocation name = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item));
+        return getBuilder(name.toString())
+                .parent(new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(name.getNamespace(), "block/" + name.getPath() + suffix)));
     }
 }

@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam.datagen;
 
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.registries.MJBlocks;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -12,6 +13,7 @@ public class BlockModelProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        // Register block models here
+        axisBlock(MJBlocks.DARK_PRISMARINE_PILLAR.get());
+        ModJam.LOGGER.debug("Blocks");
     }
 }
