@@ -1,6 +1,5 @@
-package com.portingdeadmods.modjam.tiers;
+package com.portingdeadmods.modjam.content.items.tiers;
 
-import com.portingdeadmods.modjam.ModJam;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
