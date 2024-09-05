@@ -5,6 +5,7 @@ import com.portingdeadmods.modjam.data.MJDataComponents;
 import com.portingdeadmods.modjam.registries.MJBlocks;
 import com.portingdeadmods.modjam.registries.MJCreativeTabs;
 import com.portingdeadmods.modjam.registries.MJItems;
+import net.neoforged.neoforge.registries.NewRegistryEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -15,11 +16,13 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 @Mod(ModJam.MODID)
-public class ModJam {
+public final class ModJam {
     public static final String MODID = "modjam";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public ModJam(IEventBus modEventBus, ModContainer modContainer) {
+        modEventBus.addListener(NewRegistryEvent.class, event -> event.register(MJRegistries.MULTIBLOCK));
+
         MJItems.ITEMS.register(modEventBus);
         MJBlocks.BLOCKS.register(modEventBus);
         MJCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
