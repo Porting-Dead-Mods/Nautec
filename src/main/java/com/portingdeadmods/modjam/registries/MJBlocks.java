@@ -6,6 +6,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -20,6 +21,10 @@ public final class MJBlocks {
     public static final DeferredBlock<RotatedPillarBlock> DARK_PRISMARINE_PILLAR = registerBlockAndItem("dark_prismarine_pillar", RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
     public static final DeferredBlock<Block> CHISELED_DARK_PRISMARINE = registerBlockAndItem("chiseled_dark_prismarine", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
     public static final DeferredBlock<Block> AQUATIC_CATALYST = registerBlockAndItem("aquatic_catalyst", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
+
+    public static final DeferredBlock<LiquidBlock> SALT_WATER_FLUID_BLOCK = BLOCKS.register("salt_water_block",
+            () -> new LiquidBlock(MJFluids.SALT_WATER_SOURCE.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
+
 
     private static <T extends Block> DeferredBlock<T> registerBlockAndItem(String name, Function<BlockBehaviour.Properties, T> blockConstructor, BlockBehaviour.Properties properties) {
         return registerBlockAndItem(name, blockConstructor, properties, true);

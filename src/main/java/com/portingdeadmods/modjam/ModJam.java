@@ -2,9 +2,7 @@ package com.portingdeadmods.modjam;
 
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
 import com.portingdeadmods.modjam.data.MJDataComponents;
-import com.portingdeadmods.modjam.registries.MJBlocks;
-import com.portingdeadmods.modjam.registries.MJCreativeTabs;
-import com.portingdeadmods.modjam.registries.MJItems;
+import com.portingdeadmods.modjam.registries.*;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import org.slf4j.Logger;
 
@@ -25,11 +23,12 @@ public final class ModJam {
 
         MJItems.ITEMS.register(modEventBus);
         MJBlocks.BLOCKS.register(modEventBus);
+        MJFluids.FLUIDS.register(modEventBus);
+        MJFluidTypes.FLUID_TYPES.register(modEventBus);
         MJCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         MJDataComponents.DATA_COMPONENT_TYPES.register(modEventBus);
 
         modEventBus.addListener(PrismMonocleItem::registerCapabilities);
-
 
         modContainer.registerConfig(ModConfig.Type.COMMON, MJConfig.SPEC);
     }
