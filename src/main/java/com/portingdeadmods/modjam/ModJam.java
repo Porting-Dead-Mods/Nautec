@@ -27,6 +27,7 @@ public final class ModJam {
         MJFluidTypes.FLUID_TYPES.register(modEventBus);
         MJCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         MJDataComponents.DATA_COMPONENT_TYPES.register(modEventBus);
+        MJBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
 
         modEventBus.addListener(PrismMonocleItem::registerCapabilities);
 

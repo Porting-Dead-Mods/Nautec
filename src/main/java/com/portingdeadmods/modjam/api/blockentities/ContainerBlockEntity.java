@@ -2,6 +2,7 @@ package com.portingdeadmods.modjam.api.blockentities;
 
 import com.google.common.collect.ImmutableMap;
 import com.portingdeadmods.modjam.capabilities.IOActions;
+import com.portingdeadmods.modjam.capabilities.MJCapabilities;
 import com.portingdeadmods.modjam.capabilities.fluid.SidedFluidHandler;
 import com.portingdeadmods.modjam.capabilities.item.SidedItemHandler;
 import com.portingdeadmods.modjam.capabilities.power.IPowerStorage;
