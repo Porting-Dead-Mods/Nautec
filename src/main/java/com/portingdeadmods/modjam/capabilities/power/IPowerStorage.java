@@ -21,6 +21,9 @@ public interface IPowerStorage {
 
     int getMaxOutput();
 
+    default void onEnergyChanged() {
+    }
+
     default boolean canFillPower() {
         return getMaxInput() > 0;
     }
