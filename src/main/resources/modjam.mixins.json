@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.portingdeadmods.modjam.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "GrowingPlantHeadBlockMixin",
+    "StructurePieceMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
