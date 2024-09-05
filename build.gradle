@@ -20,6 +20,9 @@ repositories {
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
     }
+    maven {
+        url "https://cursemaven.com"
+    }
 }
 
 base {
@@ -64,10 +67,13 @@ configurations {
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
+    implementation "curse.maven:curios-continuation-1037991:5690713"
+
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
 
     localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+    runtimeOnly "curse.maven:embeddium-908741:5556146"
 }
 
 tasks.withType(ProcessResources).configureEach {
