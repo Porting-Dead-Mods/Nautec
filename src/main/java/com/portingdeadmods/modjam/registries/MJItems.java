@@ -4,7 +4,9 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.items.ExamplePowerItem;
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -24,8 +26,15 @@ public final class MJItems {
     public static final DeferredItem<PrismMonocleItem> PRISM_MONOCLE = registerItem("prism_monocle",
             PrismMonocleItem::new, new Item.Properties());
 
+    public static final DeferredItem<BucketItem> SALT_WATER_BUCKET = registerItemBucket("salt_water_bucket",
+            () -> new BucketItem(MJFluids.SALT_WATER_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Item.Properties properties) {
         return registerItem(name, itemConstructor, properties, true);
+    }
+
+    private static <T extends Item> DeferredItem<T> registerItemBucket(String name, Supplier<T> item) {
+        return ITEMS.register(name, item);
     }
 
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Item.Properties properties, boolean addToTab) {
