@@ -4,6 +4,7 @@ import com.portingdeadmods.modjam.ModJam;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -16,9 +17,9 @@ public final class MJCreativeTabs {
             .title(Component.translatable("modjam.creative_tab.main"))
             .icon(() -> Blocks.DARK_PRISMARINE.asItem().getDefaultInstance())
             .displayItems((params, output) -> {
-                output.accept(MJItems.EXAMPLE_POWER_ITEM);
-                output.accept(MJItems.PRISM_MONOCLE);
-                output.accept(MJBlocks.EXAMPLE_BLOCK);
+                for (ItemLike item : MJItems.CREATIVE_TAB_ITEMS) {
+                    output.accept(item);
+                }
             })
             .build());
 }

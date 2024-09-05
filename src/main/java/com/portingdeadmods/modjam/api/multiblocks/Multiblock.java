@@ -1,6 +1,6 @@
 package com.portingdeadmods.modjam.api.multiblocks;
 
-import com.portingdeadmods.modjam.api.blockentities.MultiblockEntity;
+import com.portingdeadmods.modjam.api.blockentities.multiblock.MultiblockEntity;
 import com.portingdeadmods.modjam.api.utils.HorizontalDirection;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.IntIntPair;
