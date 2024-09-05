@@ -1,15 +1,15 @@
 package com.portingdeadmods.modjam.events;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.api.blockentities.IPowerBE;
+import com.portingdeadmods.modjam.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.modjam.api.items.IFluidItem;
 import com.portingdeadmods.modjam.api.items.IPowerItem;
 import com.portingdeadmods.modjam.capabilities.MJCapabilities;
 import com.portingdeadmods.modjam.capabilities.power.ItemPowerWrapper;
 import com.portingdeadmods.modjam.data.MJDataComponents;
+import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -19,12 +19,14 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 @EventBusSubscriber(modid = ModJam.MODID, bus = EventBusSubscriber.Bus.MOD)
 public final class CapabilityAttachEvent {
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         registerItemCaps(event);
+        registerBECaps(event);
         registerEntityCaps(event);
     }
 
@@ -45,10 +47,21 @@ public final class CapabilityAttachEvent {
     }
 
     private static void registerBECaps(RegisterCapabilitiesEvent event) {
-        for (BlockEntityType<?> be : BuiltInRegistries.BLOCK_ENTITY_TYPE) {
-            Block validBlock = be.getValidBlocks().stream().iterator().next();
-            BlockEntity actualBE = be.create(BlockPos.ZERO, validBlock.defaultBlockState());
-            if (actualBE instanceof IPowerBE powerBE) {
+        for (DeferredHolder<BlockEntityType<?>, ? extends BlockEntityType<?>> be : MJBlockEntityTypes.BLOCK_ENTITIES.getEntries()) {
+            Block validBlock = be.get().getValidBlocks().stream().iterator().next();
+            BlockEntity testBE = be.get().create(BlockPos.ZERO, validBlock.defaultBlockState());
+            if (testBE instanceof ContainerBlockEntity containerBE) {
+                if (containerBE.getPowerStorage() != null) {
+                    event.registerBlockEntity(MJCapabilities.PowerStorage.BLOCK, be.get(), (blockEntity, dir) -> ((ContainerBlockEntity) blockEntity).getPowerStorage());
+                }
+
+                if (containerBE.getItemHandler() != null) {
+                    event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, be.get(), (blockEntity, dir) -> ((ContainerBlockEntity) blockEntity).getItemHandlerOnSide(dir));
+                }
+
+                if (containerBE.getFluidHandler() != null) {
+                    event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, be.get(), (blockEntity, dir) -> ((ContainerBlockEntity) blockEntity).getFluidHandlerOnSide(dir));
+                }
             }
         }
     }

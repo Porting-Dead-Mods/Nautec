@@ -1,7 +1,8 @@
 package com.portingdeadmods.modjam.utils;
 
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import com.portingdeadmods.modjam.api.utils.OptionalDirection;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public final class MJBlockStateProperties {
-    public static final DirectionProperty HOS_ACTIVE = DirectionProperty.create("hos_active");
+    public static final EnumProperty<OptionalDirection> HOS_ACTIVE = EnumProperty.create("hos_active", OptionalDirection.class);
 }

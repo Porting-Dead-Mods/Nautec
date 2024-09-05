@@ -31,7 +31,8 @@ public class DataGatherer {
         generator.addProvider(event.includeServer(), new net.minecraft.data.loot.LootTableProvider(output, Collections.emptySet(), List.of(
                 new net.minecraft.data.loot.LootTableProvider.SubProviderEntry(LootTableProvider::new, LootContextParamSets.BLOCK)
         ), lookupProvider));
-        // generator.addProvider(event.includeClient(), new ItemTagProvider(output, lookupProvider,));
-        generator.addProvider(event.includeClient(), new BlockTagProvider(output, lookupProvider, ModJam.MODID, existingFileHelper));
+        BlockTagProvider blockTagProvider = new BlockTagProvider(output, lookupProvider, existingFileHelper);
+        generator.addProvider(event.includeClient(), blockTagProvider);
+        generator.addProvider(event.includeClient(), new ItemTagProvider(output, lookupProvider, blockTagProvider.contentsGetter()));
     }
 }
