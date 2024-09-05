@@ -4,7 +4,7 @@ import com.portingdeadmods.modjam.api.items.IPowerItem;
 import com.portingdeadmods.modjam.data.MJDataComponents;
 import com.portingdeadmods.modjam.data.components.ComponentPowerStorage;
 import com.portingdeadmods.modjam.registries.MJItems;
-import com.portingdeadmods.modjam.tiers.MJArmorMaterials;
+import com.portingdeadmods.modjam.content.items.tiers.MJArmorMaterials;
 import com.portingdeadmods.modjam.utils.ItemUtils;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;

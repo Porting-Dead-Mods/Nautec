@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.content.blocks.AquaticCatalaystBlock;
 import com.portingdeadmods.modjam.content.blocks.ExampleBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -19,7 +20,7 @@ public final class MJBlocks {
 
     public static final DeferredBlock<RotatedPillarBlock> DARK_PRISMARINE_PILLAR = registerBlockAndItem("dark_prismarine_pillar", RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
     public static final DeferredBlock<Block> CHISELED_DARK_PRISMARINE = registerBlockAndItem("chiseled_dark_prismarine", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
-    public static final DeferredBlock<Block> AQUATIC_CATALYST = registerBlockAndItem("aquatic_catalyst", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
+    public static final DeferredBlock<Block> AQUATIC_CATALYST = registerBlockAndItem("aquatic_catalyst", AquaticCatalaystBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
 
     private static <T extends Block> DeferredBlock<T> registerBlockAndItem(String name, Function<BlockBehaviour.Properties, T> blockConstructor, BlockBehaviour.Properties properties) {
         return registerBlockAndItem(name, blockConstructor, properties, true);
