@@ -26,6 +26,7 @@ public final class PrismMonocleOverlay {
         Level level = mc.level;
         Player player = mc.player;
         ItemStack item = player.getItemBySlot(EquipmentSlot.HEAD);
+
         Optional<SlotResult> slotResult = CuriosApi.getCuriosInventory(player).flatMap(handler -> handler.findFirstCurio(MJItems.PRISM_MONOCLE.get()));
 
         if ((item.getItem() instanceof PrismMonocleItem || slotResult.isPresent()) && mc.hitResult instanceof BlockHitResult blockHitResult) {
