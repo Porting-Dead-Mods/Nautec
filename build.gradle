@@ -16,12 +16,16 @@ group = mod_group_id
 repositories {
     mavenLocal()
     maven {
+        url "https://cursemaven.com"
+    }
+    maven {
         // location of the maven that hosts JEI files since January 2023
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
     }
     maven {
-        url "https://cursemaven.com"
+        name = "OctoStudios"
+        url = uri("https://maven.octo-studios.com/releases")
     }
 }
 
@@ -46,7 +50,7 @@ runs {
 
     server {
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-        programArgument '--nogui'
+        argument '--nogui'
     }
 
     gameTestServer {
@@ -54,7 +58,7 @@ runs {
     }
 
     data {
-        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        arguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
     }
 }
 
@@ -67,7 +71,7 @@ configurations {
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
-    implementation "curse.maven:curios-continuation-1037991:5690713"
+    implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}+1.21"
 
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"

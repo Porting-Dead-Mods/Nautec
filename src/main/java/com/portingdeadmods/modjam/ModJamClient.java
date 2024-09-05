@@ -1,8 +1,7 @@
 package com.portingdeadmods.modjam;
 
-import com.mojang.datafixers.optics.Prism;
 import com.portingdeadmods.modjam.registries.MJItems;
-import com.portingdeadmods.modjam.render.curios.PrismMonocleCuriosRenderer;
+import com.portingdeadmods.modjam.client.renderer.curios.PrismMonocleCuriosRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;

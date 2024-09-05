@@ -14,6 +14,7 @@ public class BlockModelProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         axisBlock(MJBlocks.DARK_PRISMARINE_PILLAR.get());
-        blockTexture(MJBlocks.CHISELED_DARK_PRISMARINE.get());
+        simpleBlock(MJBlocks.CHISELED_DARK_PRISMARINE.get());
+        simpleBlock(MJBlocks.AQUATIC_CATALYST.get());
     }
 }
