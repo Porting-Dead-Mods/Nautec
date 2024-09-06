@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "modjam:block/dark_prismarine_pillar_end",
+    "side": "modjam:block/dark_prismarine_pillar_side"
+  }
+}

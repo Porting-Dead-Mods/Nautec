@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "modjam:block/dark_prismarine_pillar_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "modjam:block/dark_prismarine_pillar"
+    },
+    "axis=z": {
+      "model": "modjam:block/dark_prismarine_pillar_horizontal",
+      "x": 90
+    }
+  }
+}
