@@ -22,6 +22,7 @@ public final class MJCreativeTabs {
                 }
 
                 output.accept(MJItems.SALT_WATER_BUCKET);
+                output.accept(MJItems.ELECTROLYTE_ALGAE_SERUM_BUCKET);
             })
             .build());
 }
