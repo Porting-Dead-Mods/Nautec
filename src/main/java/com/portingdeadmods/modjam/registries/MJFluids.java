@@ -19,9 +19,19 @@ public class MJFluids {
     public static final Supplier<FlowingFluid> SALT_WATER_FLOWING = FLUIDS.register("salt_water_flowing",
             () -> new BaseFlowingFluid.Flowing(MJFluids.SALT_WATER_PROPERTIES));
 
+    public static final Supplier<FlowingFluid> ELECTROLYTE_ALGAE_SERUM_SOURCE = FLUIDS.register("electrolyte_algae_serum",
+            () -> new BaseFlowingFluid.Source(MJFluids.ELECTROLYTE_SERUM_ALGAE_PROPERTIES));
+    public static final Supplier<FlowingFluid> ELECTROLYTE_ALGAE_SERUM_FLOWING = FLUIDS.register("electrolyte_algae_serum_flowing",
+            () -> new BaseFlowingFluid.Flowing(MJFluids.ELECTROLYTE_SERUM_ALGAE_PROPERTIES));
+
 
     public static final BaseFlowingFluid.Properties SALT_WATER_PROPERTIES = new BaseFlowingFluid.Properties(
             MJFluidTypes.SALT_WATER_FLUID_TYPE, SALT_WATER_SOURCE, SALT_WATER_FLOWING)
             .slopeFindDistance(2).levelDecreasePerBlock(2).block(MJBlocks.SALT_WATER_FLUID_BLOCK)
             .bucket(MJItems.SALT_WATER_BUCKET);
+
+    public static final BaseFlowingFluid.Properties ELECTROLYTE_SERUM_ALGAE_PROPERTIES = new BaseFlowingFluid.Properties(
+            MJFluidTypes.ELECTROLYTE_ALGAE_SERUM_FLUID_TYPE, ELECTROLYTE_ALGAE_SERUM_SOURCE, ELECTROLYTE_ALGAE_SERUM_FLOWING)
+            .slopeFindDistance(2).levelDecreasePerBlock(2).block(MJBlocks.ELECTROLYTE_ALGAE_SERUM_FLUID_BLOCK)
+            .bucket(MJItems.ELECTROLYTE_ALGAE_SERUM_BUCKET);
 }
