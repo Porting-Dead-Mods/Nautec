@@ -8,6 +8,8 @@ import com.portingdeadmods.modjam.content.augments.Augments;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
 @SuppressWarnings("unused")
@@ -20,4 +22,25 @@ public class AugmentEvents {
             Augment.onBreak(event);
         }
     }
+    @SubscribeEvent
+    public static void breakSpeedEvent(PlayerEvent.BreakSpeed event){
+        Player player = event.getEntity();
+        if(AugmentHelper.playerHasAugment(player, Slot.HEAD, Augments.TEST_AUGMENT)){
+            ModJam.LOGGER.info("break speed with augment");
+            Augment.onBreakSpeed(event);
+        }
+    }
+    @SubscribeEvent
+    public static void blockInteractionEvent(PlayerInteractEvent.LeftClickBlock event){
+        Player player = event.getEntity();
+        if(AugmentHelper.playerHasAugment(player, Slot.HEAD, Augments.TEST_AUGMENT)){
+            ModJam.LOGGER.info("interact with augment");
+            Augment.onBlockLeftClick(event);
+        }
+    }
+    @SubscribeEvent
+    public static void loggedIn(PlayerEvent.PlayerLoggedInEvent event){
+        ModJam.LOGGER.info("Id on logged in: "+AugmentHelper.getId(event.getEntity(),Slot.HEAD));
+    }
+
 }

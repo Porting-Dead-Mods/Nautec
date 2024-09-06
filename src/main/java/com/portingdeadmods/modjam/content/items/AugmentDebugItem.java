@@ -32,7 +32,7 @@ public class AugmentDebugItem extends Item {
         Level level = context.getLevel();
         Player player = context.getPlayer();
         Block clickedBlock = level.getBlockState(context.getClickedPos()).getBlock();
-
+        if (level.isClientSide) return InteractionResult.SUCCESS;
         if (clickedBlock == Blocks.DIRT){
             if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(),InputConstants.KEY_LSHIFT)){
                 AugmentHelper.decId(player, Slot.HEAD);
