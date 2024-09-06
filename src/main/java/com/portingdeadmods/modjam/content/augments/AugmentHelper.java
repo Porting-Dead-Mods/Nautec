@@ -3,51 +3,52 @@ package com.portingdeadmods.modjam.content.augments;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
 import com.portingdeadmods.modjam.registries.MJDataAttachments;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.attachment.AttachmentType;
+
+import java.util.function.Supplier;
 
 public class AugmentHelper {
-    public static int getId(Player player, Slot slot){
-        switch (slot) {
-            case HEAD -> {
-                return player.getData(MJDataAttachments.HEAD_AUGMENTATION);
-            }
-            case BODY -> {
-                return player.getData(MJDataAttachments.BODY_AUGMENTATION);
-            }
-            case LEGS -> {
-                return player.getData(MJDataAttachments.LEGS_AUGMENTATION);
-            }
-            case ARMS -> {
-                return player.getData(MJDataAttachments.ARMS_AUGMENTATION);
-            }
-            case HEART -> {
-                return player.getData(MJDataAttachments.HEART_AUGMENTATION);
-            }
-        }
-        ModJam.LOGGER.warn("Error parsing Augment {}", slot.name());
-        return -2;
-    }
-
-    public static void setId(Player player, Slot slot , int id){
+    private static Supplier<AttachmentType<Integer>> getAttachment(Slot slot){
         switch (slot){
             case HEAD -> {
-                player.setData(MJDataAttachments.HEAD_AUGMENTATION, id);
+                return MJDataAttachments.HEAD_AUGMENTATION;
             }
             case BODY -> {
-                player.setData(MJDataAttachments.BODY_AUGMENTATION, id);
+                return MJDataAttachments.BODY_AUGMENTATION;
             }
             case LEGS -> {
-                player.setData(MJDataAttachments.LEGS_AUGMENTATION, id);
+                return MJDataAttachments.LEGS_AUGMENTATION;
             }
             case ARMS -> {
-                player.setData(MJDataAttachments.ARMS_AUGMENTATION, id);
+                return MJDataAttachments.ARMS_AUGMENTATION;
             }
             case HEART -> {
-                player.setData(MJDataAttachments.HEART_AUGMENTATION, id);
+                return MJDataAttachments.HEART_AUGMENTATION;
             }
         }
+        ModJam.LOGGER.warn("Error parsing slot {} (I thought this was unreachable)", slot.name());
+        return MJDataAttachments.HEAD_AUGMENTATION;
+    }
+    public static int getId(Player player, Slot slot){
+        return player.getData(getAttachment(slot));
+        // return -2;
+    }
+    public static void setId(Player player, Slot slot , int id){
+        player.setData(getAttachment(slot), id);
     }
     public static void incId(Player player, Slot slot){
         setId(player, slot, AugmentHelper.getId(player, slot) + 1);
+        player.sendSystemMessage(Component.literal("Incremented to Id "+getId(player, slot)+" for slot "+slot.name()));
+
     }
+    public static void decId(Player player, Slot slot){
+        setId(player, slot, AugmentHelper.getId(player, slot) - 1);
+        player.sendSystemMessage(Component.literal("Decremented to Id "+getId(player, slot)+" for slot "+slot.name()));
+    }
+    public static boolean playerHasAugment(Player player, Slot slot, Augments augment){
+        return getId(player, slot) == augment.id;
+    }
+
 }
