@@ -26,10 +26,15 @@ public final class MJItems {
             Item::new, new Item.Properties());
     public static final DeferredItem<PrismMonocleItem> PRISM_MONOCLE = registerItem("prism_monocle",
             PrismMonocleItem::new, new Item.Properties());
+
     public static final DeferredItem<BucketItem> SALT_WATER_BUCKET = registerItemBucket("salt_water_bucket",
             () -> new BucketItem(MJFluids.SALT_WATER_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     public static final DeferredItem<AugmentDebugItem> AUGMENT_DEBUG_ITEM = registerItem("augment_debug_item", AugmentDebugItem::new, new Item.Properties());
+
+    public static final DeferredItem<BucketItem> ELECTROLYTE_ALGAE_SERUM_BUCKET = registerItemBucket("electrolyte_algae_serum_bucket",
+            () -> new BucketItem(MJFluids.ELECTROLYTE_ALGAE_SERUM_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
 
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Item.Properties properties) {
         return registerItem(name, itemConstructor, properties, true);
