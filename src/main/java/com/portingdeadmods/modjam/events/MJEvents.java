@@ -5,6 +5,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.fluids.BaseFluidType;
 import com.portingdeadmods.modjam.client.hud.PrismMonocleOverlay;
+import com.portingdeadmods.modjam.client.renderer.blockentities.AquaticCatalystBERenderer;
+import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
@@ -14,6 +16,7 @@ import net.minecraft.util.FastColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
@@ -72,6 +75,11 @@ public final class MJEvents {
                     }, baseFluidType);
                 }
             }
+        }
+
+        @SubscribeEvent
+        public static void registerBERenderers(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(MJBlockEntityTypes.AQUATIC_CATALYST.get(), AquaticCatalystBERenderer::new);
         }
     }
 }

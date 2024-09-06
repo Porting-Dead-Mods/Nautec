@@ -10,5 +10,7 @@ import java.util.List;
 public interface DisplayBlock {
     List<Component> displayText(Level level, BlockPos blockPos, Player player);
 
-    boolean display(Level level, BlockPos blockPos, Player player);
+    default boolean display(Level level, BlockPos blockPos, Player player) {
+        return true;
+    }
 }
