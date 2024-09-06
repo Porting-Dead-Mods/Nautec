@@ -29,9 +29,9 @@ public class AugmentDebugItem extends Item {
         Level level = context.getLevel();
         Player player = context.getPlayer();
 
-        if (level.getBlockState(context.getClickedPos()) == Blocks.DIRT.defaultBlockState()){
+        if (level.getBlockState(context.getClickedPos()).is(Blocks.DIRT)){
             AugmentHelper.incId(player, Slot.HEAD);
-        } else if (level.getBlockState(context.getClickedPos()) == Blocks.STONE.defaultBlockState()){
+        } else if (level.getBlockState(context.getClickedPos()).is(Blocks.STONE)){
             AugmentHelper.incId(player, Slot.BODY);
         }
 
