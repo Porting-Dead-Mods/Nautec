@@ -21,8 +21,8 @@ public final class MJItems {
     public static final List<ItemLike> CREATIVE_TAB_ITEMS = new ArrayList<>();
     public static final List<Supplier<BlockItem>> BLOCK_ITEMS = new ArrayList<>();
 
-    public static final DeferredItem<Item> EXAMPLE_POWER_ITEM = registerItem("example_power_item",
-            ExamplePowerItem::new, new Item.Properties());
+    public static final DeferredItem<Item> AQUARINE_STEEL = registerItem("aquarine_steel",
+            Item::new, new Item.Properties());
     public static final DeferredItem<PrismMonocleItem> PRISM_MONOCLE = registerItem("prism_monocle",
             PrismMonocleItem::new, new Item.Properties());
 

@@ -2,10 +2,9 @@ package com.portingdeadmods.modjam.datagen;
 
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.utils.OptionalDirection;
-import com.portingdeadmods.modjam.content.blocks.AquaticCatalaystBlock;
+import com.portingdeadmods.modjam.content.blocks.AquaticCatalystBlock;
 import com.portingdeadmods.modjam.registries.MJBlocks;
 import com.portingdeadmods.modjam.utils.MJBlockStateProperties;
-import net.minecraft.client.model.Model;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -26,17 +25,18 @@ public class BlockModelProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         axisBlock(MJBlocks.DARK_PRISMARINE_PILLAR.get());
         simpleBlock(MJBlocks.CHISELED_DARK_PRISMARINE.get());
+        simpleBlock(MJBlocks.AQUARINE_STEEL_BLOCK.get());
         aquaticCatalyst(MJBlocks.AQUATIC_CATALYST.get());
     }
 
-    private void aquaticCatalyst(AquaticCatalaystBlock block) {
+    private void aquaticCatalyst(AquaticCatalystBlock block) {
         VariantBlockStateBuilder builder = getVariantBuilder(block);
         for (OptionalDirection direction : OptionalDirection.values()) {
             builder.partialState().with(MJBlockStateProperties.HOS_ACTIVE, direction).modelForState().modelFile(createACModel(block, direction)).addModel();
         }
     }
 
-    private ModelFile createACModel(AquaticCatalaystBlock block, OptionalDirection activeSide) {
+    private ModelFile createACModel(AquaticCatalystBlock block, OptionalDirection activeSide) {
         if (activeSide != OptionalDirection.NONE) {
             BlockModelBuilder builder = models().withExistingParent(name(block) + "_" + activeSide.getSerializedName(), "cube");
             for (Direction dir : Direction.values()) {

@@ -24,6 +24,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
     protected void registerModels() {
         // Register item models here
         basicItem(MJItems.PRISM_MONOCLE.get());
+        basicItem(MJItems.AQUARINE_STEEL.get());
         blockItems();
     }
 
