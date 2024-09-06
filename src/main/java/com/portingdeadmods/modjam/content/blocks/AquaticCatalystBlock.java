@@ -72,7 +72,9 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
         } else if (stack.isEmpty() && direction == state.getValue(MJBlockStateProperties.HOS_ACTIVE)) {
             level.setBlockAndUpdate(pos, state.setValue(MJBlockStateProperties.HOS_ACTIVE, OptionalDirection.NONE));
             level.playLocalSound(player, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1, 1);
-            ItemUtils.giveItemToPlayerNoSound(player, Items.HEART_OF_THE_SEA.getDefaultInstance());
+            if(!player.isCreative()){
+                ItemUtils.giveItemToPlayerNoSound(player, Items.HEART_OF_THE_SEA.getDefaultInstance());
+            }
             return ItemInteractionResult.SUCCESS;
         }
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);

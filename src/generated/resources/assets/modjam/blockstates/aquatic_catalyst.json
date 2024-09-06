@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "hos_active=down": {
+      "model": "modjam:block/aquatic_catalyst_down"
+    },
+    "hos_active=east": {
+      "model": "modjam:block/aquatic_catalyst_east"
+    },
+    "hos_active=none": {
+      "model": "modjam:block/aquatic_catalyst"
+    },
+    "hos_active=north": {
+      "model": "modjam:block/aquatic_catalyst_north"
+    },
+    "hos_active=south": {
+      "model": "modjam:block/aquatic_catalyst_south"
+    },
+    "hos_active=up": {
+      "model": "modjam:block/aquatic_catalyst_up"
+    },
+    "hos_active=west": {
+      "model": "modjam:block/aquatic_catalyst_west"
+    }
+  }
+}

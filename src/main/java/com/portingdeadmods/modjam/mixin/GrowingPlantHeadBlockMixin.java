@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.mixin;
 
+import com.portingdeadmods.modjam.MJConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -38,7 +39,7 @@ public abstract class GrowingPlantHeadBlockMixin {
     @Overwrite
     protected boolean isRandomlyTicking(BlockState state) {
         if (state.getBlock() instanceof KelpBlock) {
-            return state.getValue(GrowingPlantHeadBlock.AGE) < 40;
+            return state.getValue(GrowingPlantHeadBlock.AGE) < MJConfig.kelpHeight;
         }
         return state.getValue(GrowingPlantHeadBlock.AGE) < GrowingPlantHeadBlock.MAX_AGE; // Default behavior for other plants
     }
@@ -50,7 +51,7 @@ public abstract class GrowingPlantHeadBlockMixin {
     @Overwrite
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (state.getBlock() instanceof KelpBlock) {
-            if (state.getValue(GrowingPlantHeadBlock.AGE) < 40 && net.neoforged.neoforge.common.CommonHooks.canCropGrow(level, pos.relative(Direction.UP), state, random.nextDouble() < this.growPerTickProbability)) {
+            if (state.getValue(GrowingPlantHeadBlock.AGE) < MJConfig.kelpHeight && net.neoforged.neoforge.common.CommonHooks.canCropGrow(level, pos.relative(Direction.UP), state, random.nextDouble() < this.growPerTickProbability)) {
                 BlockPos blockpos = pos.relative(Direction.UP);
                 if (this.canGrowInto(level.getBlockState(blockpos))) {
                     level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state, level.random));

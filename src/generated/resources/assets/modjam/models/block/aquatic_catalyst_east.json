@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "modjam:block/aquatic_catalyst",
+    "east": "modjam:block/aquatic_catalyst_active",
+    "north": "modjam:block/aquatic_catalyst",
+    "south": "modjam:block/aquatic_catalyst",
+    "up": "modjam:block/aquatic_catalyst",
+    "west": "modjam:block/aquatic_catalyst"
+  }
+}
