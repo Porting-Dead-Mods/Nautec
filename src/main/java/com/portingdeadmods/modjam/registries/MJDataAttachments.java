@@ -12,18 +12,18 @@ public class MJDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, ModJam.MODID);
 
     public static final Supplier<AttachmentType<Integer>> HEAD_AUGMENTATION = ATTACHMENTS.register(
-           "head_augment_id", ()-> AttachmentType.<Integer>builder(()->0).serialize(Codec.INT).build()
+           "head_augment_id", ()-> AttachmentType.<Integer>builder(()->0).serialize(Codec.INT).copyOnDeath().build()
     );
     public static final Supplier<AttachmentType<Integer>> BODY_AUGMENTATION = ATTACHMENTS.register(
-            "body_augment_id", ()-> AttachmentType.<Integer>builder(()->0).serialize(Codec.INT).build()
+            "body_augment_id", ()-> AttachmentType.<Integer>builder(()->0).serialize(Codec.INT).copyOnDeath().build()
     );
     public static final Supplier<AttachmentType<Integer>> ARMS_AUGMENTATION = ATTACHMENTS.register(
-            "arms_augment_id", ()-> AttachmentType.<Integer>builder(()->0).serialize(Codec.INT).build()
+            "arms_augment_id", ()-> AttachmentType.<Integer>builder(()->0).serialize(Codec.INT).copyOnDeath().build()
     );
     public static final Supplier<AttachmentType<Integer>> LEGS_AUGMENTATION = ATTACHMENTS.register(
-            "legs_augment_id", ()-> AttachmentType.<Integer>builder(()->0).serialize(Codec.INT).build()
+            "legs_augment_id", ()-> AttachmentType.<Integer>builder(()->0).serialize(Codec.INT).copyOnDeath().build()
     );
     public static final Supplier<AttachmentType<Integer>> HEART_AUGMENTATION = ATTACHMENTS.register(
-            "heart_augment_id", ()-> AttachmentType.<Integer>builder(()->0).serialize(Codec.INT).build()
+            "heart_augment_id", ()-> AttachmentType.<Integer>builder(()->0).serialize(Codec.INT).copyOnDeath().build()
     );
 }
