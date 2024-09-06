@@ -42,4 +42,17 @@ public enum OptionalDirection implements StringRepresentable {
             case null -> NONE;
         };
     }
+
+
+    public OptionalDirection rotateClockwise() {
+        return switch (this) {
+            case NORTH -> EAST;
+            case EAST -> SOUTH;
+            case SOUTH -> WEST;
+            case WEST -> NORTH;
+            case UP -> UP;
+            case DOWN -> DOWN;
+            default -> NONE;
+        };
+    }
 }
