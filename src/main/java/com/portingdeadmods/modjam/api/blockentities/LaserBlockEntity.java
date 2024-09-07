@@ -1,16 +1,11 @@
 package com.portingdeadmods.modjam.api.blockentities;
 
-import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blocks.blockentities.LaserBlock;
-import com.portingdeadmods.modjam.registries.MJItems;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
