@@ -42,11 +42,6 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
     }
 
     @Override
-    public boolean tickingEnabled() {
-        return false;
-    }
-
-    @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
         return MJBlockEntityTypes.AQUATIC_CATALYST.get();
     }

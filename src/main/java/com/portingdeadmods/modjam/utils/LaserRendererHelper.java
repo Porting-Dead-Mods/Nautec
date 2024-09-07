@@ -3,7 +3,6 @@ package com.portingdeadmods.modjam.utils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.LaserBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -22,7 +21,7 @@ public final class LaserRendererHelper {
 
     public static <T extends LaserBlockEntity> void renderOuterBeam(T blockEntity, BlockPos originPos, BlockPos targetPos, Direction direction, PoseStack poseStack, MultiBufferSource bufferSource, float partialTicks) {
         float f = blockEntity.getLaserScale(partialTicks);
-        float f1 = blockEntity.getLaserAnimTime() + (partialTicks * 24);
+        float f1 = blockEntity.getClientLaserTime() + (partialTicks * 24);
         float f2 = f1 * 0.5F % 1.0F;
         float f3 = 0.5f;
 

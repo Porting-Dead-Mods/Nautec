@@ -1,47 +1,112 @@
 package com.portingdeadmods.modjam.api.blockentities;
 
+import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.api.blocks.blockentities.LaserBlock;
+import com.portingdeadmods.modjam.registries.MJItems;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
 public abstract class LaserBlockEntity extends ContainerBlockEntity {
-    private int laserAnimTime;
+    private static final int MAX_DISTANCE = 16;
+
+    private float clientLaserTime;
+    private final Object2IntMap<Direction> laserDistances;
+    private int itemTransformTime;
+    public AABB box;
 
     public LaserBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
+        this.laserDistances = new Object2IntOpenHashMap<>();
+        this.box = new AABB(blockPos);
     }
 
     public abstract List<Direction> getLaserInputs();
 
     public abstract List<Direction> getLaserOutputs();
 
-    public abstract int getLaserDistance(Direction direction);
+    public Object2IntMap<Direction> getLaserDistances() {
+        return laserDistances;
+    }
 
     public int getLaserAnimTimeDuration() {
         return 80;
     }
 
-    public int getLaserAnimTime() {
-        return laserAnimTime;
+    public float getClientLaserTime() {
+        return clientLaserTime;
     }
 
     public float getLaserScale(float partialTick) {
-        return ((float) this.laserAnimTime + partialTick) / (float) this.getLaserAnimTimeDuration();
+        return (this.clientLaserTime + partialTick) / (float) this.getLaserAnimTimeDuration();
     }
 
     @Override
     public void commonTick() {
         super.commonTick();
-        if (laserAnimTime < getLaserAnimTimeDuration()) {
-            this.laserAnimTime++;
-        } else {
-            this.laserAnimTime = 0;
+        if (level.isClientSide()) {
+            if (clientLaserTime < getLaserAnimTimeDuration()) {
+                this.clientLaserTime += 0.5f;
+            } else {
+                this.clientLaserTime = 0;
+            }
+        }
+
+        if (level.getGameTime() % 10 == 0) {
+            checkConnections();
+        }
+        damageLiving();
+
+        transmitPower();
+    }
+
+    private void transmitPower() {
+
+    }
+
+    private void damageLiving() {
+        for (Direction direction : getLaserOutputs()) {
+            int distance = this.laserDistances.getInt(direction);
+            BlockPos pos = worldPosition.above().relative(direction, distance - 1);
+            Vec3 start = worldPosition.getCenter().subtract(0.1, 0, 0.1);
+            Vec3 end = pos.getCenter().add(0.1, 0, 0.1);
+            AABB box = new AABB(start, end);
+            this.box = box;
+            ModJam.LOGGER.debug("Distance: {}", box);
+            List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, box);
+            for (LivingEntity livingEntity : livingEntities) {
+                livingEntity.hurt(level.damageSources().inFire(), 3);
+            }
+        }
+    }
+
+    private void checkConnections() {
+        for (Direction direction : getLaserOutputs()) {
+            for (int i = 1; i < MAX_DISTANCE; i++) {
+                BlockPos pos = worldPosition.relative(direction, i);
+                BlockState state = level.getBlockState(pos);
+
+                if (state.getBlock() instanceof LaserBlock) {
+                    laserDistances.put(direction, i);
+                    break;
+                }
+
+                if (!state.canBeReplaced() || i == MAX_DISTANCE - 1) {
+                    laserDistances.put(direction, 0);
+                    break;
+                }
+            }
         }
     }
 }
