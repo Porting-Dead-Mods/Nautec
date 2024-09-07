@@ -3,9 +3,11 @@ package com.portingdeadmods.modjam.events;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.api.client.renderer.blockentities.LaserBlockEntityRenderer;
 import com.portingdeadmods.modjam.api.fluids.BaseFluidType;
 import com.portingdeadmods.modjam.client.hud.PrismMonocleOverlay;
-import com.portingdeadmods.modjam.client.renderer.blockentities.AquaticCatalystBERenderer;
+import com.portingdeadmods.modjam.client.model.DrainTopModel;
+import com.portingdeadmods.modjam.client.renderer.blockentities.DrainBERenderer;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -79,7 +81,14 @@ public final class MJClientEvents {
 
         @SubscribeEvent
         public static void registerBERenderers(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerBlockEntityRenderer(MJBlockEntityTypes.AQUATIC_CATALYST.get(), AquaticCatalystBERenderer::new);
+            event.registerBlockEntityRenderer(MJBlockEntityTypes.AQUATIC_CATALYST.get(), LaserBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(MJBlockEntityTypes.DRAIN.get(), DrainBERenderer::new);
+            event.registerBlockEntityRenderer(MJBlockEntityTypes.DRAIN_PART.get(), LaserBlockEntityRenderer::new);
+        }
+
+        @SubscribeEvent
+        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(DrainTopModel.LAYER_LOCATION, DrainTopModel::createBodyLayer);
         }
     }
 }

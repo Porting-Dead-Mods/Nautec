@@ -1,4 +1,4 @@
-package com.portingdeadmods.modjam.content.blockentities;
+package com.portingdeadmods.modjam.content.blockentities.multiblock.part;
 
 import com.google.common.collect.ImmutableMap;
 import com.portingdeadmods.modjam.api.blockentities.LaserBlockEntity;
@@ -12,9 +12,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
 
-public class PrismarineCrucibleBlockEntity extends LaserBlockEntity {
-    public PrismarineCrucibleBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(MJBlockEntityTypes.PRISMARINE_CRUCIBLE.get(), blockPos, blockState);
+public class DrainPartBlockEntity extends LaserBlockEntity {
+    public DrainPartBlockEntity(BlockPos blockPos, BlockState blockState) {
+        super(MJBlockEntityTypes.DRAIN_PART.get(), blockPos, blockState);
     }
 
     @Override
