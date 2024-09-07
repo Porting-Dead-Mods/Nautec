@@ -25,6 +25,10 @@ public final class MJItems {
 
     public static final DeferredItem<Item> AQUARINE_STEEL = registerItem("aquarine_steel",
             Item::new, new Item.Properties());
+
+    public static final DeferredItem<Item> GLASS_VIAL = registerItem("glass_vial", Item::new, new Item.Properties());
+    public static final DeferredItem<Item> ELECTROLYTE_ALGAE_SERUM_VIAL = registerItem("eas_vial", Item::new, new Item.Properties());
+
     public static final DeferredItem<PrismMonocleItem> PRISM_MONOCLE = registerItem("prism_monocle",
             PrismMonocleItem::new, new Item.Properties());
 
