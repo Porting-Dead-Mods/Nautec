@@ -1,18 +1,26 @@
 package com.portingdeadmods.modjam.api.blockentities;
 
 import com.portingdeadmods.modjam.api.blocks.blockentities.LaserBlock;
+import com.portingdeadmods.modjam.registries.MJItems;
+import com.portingdeadmods.modjam.utils.ParticlesUtils;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public abstract class LaserBlockEntity extends ContainerBlockEntity {
@@ -72,6 +80,9 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
 
     }
 
+    private ItemEntity cookingItem = null;
+    private int cookTime = 0;
+
     private void damageLiving() {
         for (Direction direction : getLaserOutputs()) {
             int distance = this.laserDistances.getInt(direction);
@@ -80,9 +91,36 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
             Vec3 end = pos.getCenter().add(0.1, 0, 0.1);
             AABB box = new AABB(start, end);
             this.box = box;
+
+            assert level != null;
             List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, box);
             for (LivingEntity livingEntity : livingEntities) {
                 livingEntity.hurt(level.damageSources().inFire(), 3);
+            }
+
+            List<ItemEntity> itemEntities = level.getEntitiesOfClass(ItemEntity.class, box);
+            if (cookingItem == null) {
+                for (ItemEntity itemEntity : itemEntities) {
+                    if (itemEntity.getItem().is(Items.IRON_INGOT)) {
+                        cookingItem = itemEntity;
+                        cookTime = 0;
+                        break;
+                    }
+                }
+            } else {
+                if (cookTime >= 40) {
+                    cookingItem.setItem(new ItemStack(MJItems.AQUARINE_STEEL.get()));
+                    cookingItem = null;
+                    cookTime = 0;
+                } else {
+                    cookTime++;
+                    ParticlesUtils.spawnParticles(cookingItem,level,ParticleTypes.END_ROD);
+                }
+            }
+
+            if (cookingItem != null && (!cookingItem.isAlive() || !cookingItem.getItem().is(Items.IRON_INGOT))) {
+                cookingItem = null;
+                cookTime = 0;
             }
         }
     }
