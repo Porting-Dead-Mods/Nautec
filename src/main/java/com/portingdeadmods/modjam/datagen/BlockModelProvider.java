@@ -23,7 +23,6 @@ public class BlockModelProvider extends BlockStateProvider {
         simpleBlock(MJBlocks.CHISELED_DARK_PRISMARINE.get());
         simpleBlock(MJBlocks.AQUARINE_STEEL_BLOCK.get());
         aquaticCatalyst(MJBlocks.AQUATIC_CATALYST.get());
-        simpleBlock(MJBlocks.PRISMARINE_CRUCIBLE.get(), models().getExistingFile(existingModelFile(MJBlocks.PRISMARINE_CRUCIBLE.get())));
     }
 
     private void aquaticCatalyst(AquaticCatalystBlock block) {

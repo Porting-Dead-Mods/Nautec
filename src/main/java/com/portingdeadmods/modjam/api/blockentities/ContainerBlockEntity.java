@@ -76,7 +76,7 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void loadAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
+    protected final void loadAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
         super.loadAdditional(nbt, provider);
         if (this.getFluidTank() != null)
             this.getFluidTank().readFromNBT(provider, nbt);
@@ -88,7 +88,7 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
+    protected final void saveAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
         super.saveAdditional(nbt, provider);
         if (getFluidTank() != null)
             getFluidTank().writeToNBT(provider, nbt);

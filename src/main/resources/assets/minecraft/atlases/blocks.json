@@ -1,0 +1,13 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "modjam:entity/drain_top"
+    },
+    {
+      "type": "directory",
+      "source": "fluid",
+      "prefix": "fluid/"
+    }
+  ]
+}
