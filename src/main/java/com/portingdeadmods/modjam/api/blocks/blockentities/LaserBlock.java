@@ -6,9 +6,6 @@ import com.portingdeadmods.modjam.registries.MJDataAttachments;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
-
-import java.util.Set;
 
 public abstract class LaserBlock extends ContainerBlock {
     public LaserBlock(Properties properties) {
@@ -23,11 +20,11 @@ public abstract class LaserBlock extends ContainerBlock {
     @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        ChunkAccess chunk = level.getChunk(pos);
-        Set<BlockPos> chunkLasers = chunk.getData(MJDataAttachments.CHUNK_LASERS);
-        ImmutableSet<BlockPos> newSet = ImmutableSet.<BlockPos>builder().addAll(chunkLasers).add(pos).build();
-        chunk.setData(MJDataAttachments.CHUNK_LASERS, newSet);
-        ModJam.LOGGER.debug("Chunk lasers: {}", chunkLasers);
+//        ChunkAccess chunk = level.getChunk(pos);
+//        Set<BlockPos> chunkLasers = chunk.getData(MJDataAttachments.CHUNK_LASERS);
+//        ImmutableSet<BlockPos> newSet = ImmutableSet.<BlockPos>builder().addAll(chunkLasers).add(pos).build();
+//        chunk.setData(MJDataAttachments.CHUNK_LASERS, newSet);
+//        ModJam.LOGGER.debug("Chunk lasers: {}", chunkLasers);
     }
 
     @Override

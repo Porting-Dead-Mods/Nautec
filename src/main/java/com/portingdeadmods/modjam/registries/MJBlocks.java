@@ -1,9 +1,8 @@
 package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.api.utils.OptionalDirection;
 import com.portingdeadmods.modjam.content.blocks.AquaticCatalystBlock;
-import com.portingdeadmods.modjam.utils.MJBlockStateProperties;
+import com.portingdeadmods.modjam.content.blocks.PrismarineCrucibleBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -11,6 +10,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -27,7 +27,9 @@ public final class MJBlocks {
     public static final DeferredBlock<Block> AQUARINE_STEEL_BLOCK = registerBlockAndItem("aquarine_steel_block", Block::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<AquaticCatalystBlock> AQUATIC_CATALYST = registerBlockAndItem("aquatic_catalyst", AquaticCatalystBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).lightLevel(state -> state.getValue(MJBlockStateProperties.HOS_ACTIVE) != OptionalDirection.NONE ? 12 : 0));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).lightLevel(state -> state.getValue(AquaticCatalystBlock.CORE_ACTIVE) ? 12 : 0));
+    public static final DeferredBlock<PrismarineCrucibleBlock> PRISMARINE_CRUCIBLE = registerBlockAndItem("prismarine_crucible", PrismarineCrucibleBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.DIAMOND).requiresCorrectToolForDrops().strength(2.0F).noOcclusion());
 
     public static final DeferredBlock<LiquidBlock> SALT_WATER_FLUID_BLOCK = BLOCKS.register("salt_water_block",
             () -> new LiquidBlock(MJFluids.SALT_WATER_SOURCE.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));

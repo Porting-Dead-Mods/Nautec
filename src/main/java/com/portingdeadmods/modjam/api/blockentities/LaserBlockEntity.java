@@ -3,6 +3,7 @@ package com.portingdeadmods.modjam.api.blockentities;
 import com.portingdeadmods.modjam.api.blocks.blockentities.LaserBlock;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,6 +13,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.Set;
 
 public abstract class LaserBlockEntity extends ContainerBlockEntity {
     private static final int MAX_DISTANCE = 16;
@@ -27,9 +29,9 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         this.box = new AABB(blockPos);
     }
 
-    public abstract List<Direction> getLaserInputs();
+    public abstract ObjectSet<Direction> getLaserInputs();
 
-    public abstract List<Direction> getLaserOutputs();
+    public abstract ObjectSet<Direction> getLaserOutputs();
 
     public Object2IntMap<Direction> getLaserDistances() {
         return laserDistances;

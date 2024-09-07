@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-07T16:00:13.3184328	Item Models: modjam
+// 1.21.1	2024-09-07T19:25:16.955058691	Item Models: modjam
 207e815e9b4c9ebca4f444f877e2488a5ce9b1c5 assets/modjam/models/item/aquarine_steel.json
 51765874ad3111adf69684269ad9a422bfbaac4a assets/modjam/models/item/aquarine_steel_block.json
 dd0c37deb1f33fb0844da4a540706681887fc3d4 assets/modjam/models/item/aquatic_catalyst.json
@@ -7,3 +7,4 @@ dd0c37deb1f33fb0844da4a540706681887fc3d4 assets/modjam/models/item/aquatic_catal
 5b6b9e8621c065cb4167e4b6dfdfaecb0fd7186d assets/modjam/models/item/eas_vial.json
 f0f9891cd57b3a66f7440a71b925348bb8ea745b assets/modjam/models/item/glass_vial.json
 dab337d602d93b0a4930b69e652b1155300c6502 assets/modjam/models/item/prism_monocle.json
+c01b567bc1c1fdc5563e08b663fa59595f3efed8 assets/modjam/models/item/prismarine_crucible.json
