@@ -37,11 +37,6 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     }
 
     @Override
-    public int getLaserDistance(Direction direction) {
-        return 5;
-    }
-
-    @Override
     public <T> ImmutableMap<Direction, Pair<IOActions, int[]>> getSidedInteractions(BlockCapability<T, @Nullable Direction> capability) {
         return ImmutableMap.of();
     }
