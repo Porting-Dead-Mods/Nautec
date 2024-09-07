@@ -25,8 +25,10 @@ public abstract class LaserBlockEntityRenderer<T extends LaserBlockEntity> imple
         Object2IntMap<Direction> laserDistances = blockEntity.getLaserDistances();
         for (Direction direction : blockEntity.getLaserOutputs()) {
             int laserDistance = laserDistances.getOrDefault(direction, 0);
-            BlockPos targetPos = originPos.relative(direction, laserDistance);
-            LaserRendererHelper.renderOuterBeam(blockEntity, originPos, targetPos, direction, poseStack, bufferSource, partialTick);
+            BlockPos targetPos = originPos.relative(direction, laserDistance-2);
+            if(laserDistance != 0){
+                LaserRendererHelper.renderOuterBeam(blockEntity, originPos, targetPos, direction, poseStack, bufferSource, partialTick);
+            }
             poseStack.pushPose();
             {
                 poseStack.mulPose(direction.getRotation());
@@ -39,8 +41,10 @@ public abstract class LaserBlockEntityRenderer<T extends LaserBlockEntity> imple
                     case EAST -> poseStack.translate(-4.5f, 0, -4.5);
                     case SOUTH, WEST -> poseStack.translate(3.375, 0, -4.5);
                 }
-                LaserRendererHelper.renderInnerBeam(poseStack, bufferSource, partialTick, blockEntity.getLevel().getGameTime(),
-                        0, laserDistance + 1, FastColor.ARGB32.color(202, 214, 224));
+                if(laserDistance != 0){
+                    LaserRendererHelper.renderInnerBeam(poseStack, bufferSource, partialTick, blockEntity.getLevel().getGameTime(),
+                            0, laserDistance-1, FastColor.ARGB32.color(202, 214, 224));
+                }
             }
             poseStack.popPose();
         }

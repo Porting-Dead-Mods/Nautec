@@ -83,7 +83,6 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
             Vec3 end = pos.getCenter().add(0.1, 0, 0.1);
             AABB box = new AABB(start, end);
             this.box = box;
-            ModJam.LOGGER.debug("Distance: {}", box);
             List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, box);
             for (LivingEntity livingEntity : livingEntities) {
                 livingEntity.hurt(level.damageSources().inFire(), 3);
