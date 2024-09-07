@@ -3,6 +3,7 @@
   "package": "com.portingdeadmods.modjam.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BucketItemMixin",
     "GrowingPlantHeadBlockMixin",
     "StructurePieceMixin"
   ],
