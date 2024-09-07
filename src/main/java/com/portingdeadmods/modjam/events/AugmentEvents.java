@@ -1,46 +1,33 @@
 package com.portingdeadmods.modjam.events;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
-import com.portingdeadmods.modjam.content.augments.Augment;
 import com.portingdeadmods.modjam.content.augments.AugmentHelper;
-import com.portingdeadmods.modjam.content.augments.Augments;
-import net.minecraft.world.entity.player.Player;
+import com.portingdeadmods.modjam.content.augments.StaticAugment;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 @SuppressWarnings("unused")
 @EventBusSubscriber(modid = ModJam.MODID)
 public class AugmentEvents {
     @SubscribeEvent
     public static void breakEvent(BlockEvent.BreakEvent event){
-        Player player = event.getPlayer();
-        if(AugmentHelper.playerHasAugment(player, Slot.HEAD, Augments.TEST_AUGMENT)){
-            Augment.onBreak(event);
+        StaticAugment[] augments = AugmentHelper.getAugments(event.getPlayer());
+        for (int i = 0; i < augments.length; i++) {
+            if (augments[i] != null){
+                augments[i].breakBlock(event);
+            }
         }
-    }
-    @SubscribeEvent
-    public static void breakSpeedEvent(PlayerEvent.BreakSpeed event){
-        Player player = event.getEntity();
-        if(AugmentHelper.playerHasAugment(player, Slot.HEAD, Augments.TEST_AUGMENT)){
-            ModJam.LOGGER.info("break speed with augment");
-            Augment.onBreakSpeed(event);
-        }
-    }
-    @SubscribeEvent
-    public static void blockInteractionEvent(PlayerInteractEvent.LeftClickBlock event){
-        Player player = event.getEntity();
-        if(AugmentHelper.playerHasAugment(player, Slot.HEAD, Augments.TEST_AUGMENT)){
-            ModJam.LOGGER.info("interact with augment");
-            Augment.onBlockLeftClick(event);
-        }
-    }
-    @SubscribeEvent
-    public static void loggedIn(PlayerEvent.PlayerLoggedInEvent event){
-        ModJam.LOGGER.info("Id on logged in: "+AugmentHelper.getId(event.getEntity(),Slot.HEAD));
     }
 
+    @SubscribeEvent
+    public static void playerTick(PlayerTickEvent.Post event){
+        StaticAugment[] augments = AugmentHelper.getAugments(event.getEntity());
+        for (int i = 0; i < augments.length; i++) {
+            if (augments[i] != null){
+                augments[i].tick(event);
+            }
+        }
+    }
 }
