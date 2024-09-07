@@ -15,7 +15,7 @@ import net.minecraft.util.FastColor;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements BlockEntityRenderer<T> {
+public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements BlockEntityRenderer<T> {
     public LaserBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
     }
 
