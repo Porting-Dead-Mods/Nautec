@@ -2,10 +2,15 @@
   "curios.identifier.prism_monocle": "Monocle",
   "modjam.creative_tab.main": "ModJam",
 
+  "fluid_type.modjam.soap_water": "Soap Water",
+  "fluid_type.modjam.electrolyte_algae_serum": "Electrolyte Algae Serum",
+
   "item.modjam.prism_monocle": "Prism Monocle",
   "item.modjam.aquarine_steel": "Aquarine Steel Ingot",
   "item.modjam.salt_water_bucket": "Salt Water Bucket",
   "item.modjam.electrolyte_algae_serum_bucket": "Electrolyte Algae Serum (EAS) Bucket",
+  "item.modjam.glass_vial": "Glass Vial",
+  "item.modjam.eas_vial": "Vial of Electrolyte Algae Serum",
 
   "block.modjam.aquarine_steel_block": "Aquarine Steel Block",
   "block.modjam.aquatic_catalyst": "Aquatic Catalyst",
