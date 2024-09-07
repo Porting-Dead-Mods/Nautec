@@ -25,7 +25,7 @@ public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements Blo
         Object2IntMap<Direction> laserDistances = blockEntity.getLaserDistances();
         for (Direction direction : blockEntity.getLaserOutputs()) {
             int laserDistance = laserDistances.getOrDefault(direction, 0);
-            BlockPos targetPos = originPos.relative(direction, laserDistance-2);
+            BlockPos targetPos = originPos.relative(direction, laserDistance-1);
             if(laserDistance != 0){
                 LaserRendererHelper.renderOuterBeam(blockEntity, originPos, targetPos, direction, poseStack, bufferSource, partialTick);
             }
@@ -43,7 +43,7 @@ public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements Blo
                 }
                 if(laserDistance != 0){
                     LaserRendererHelper.renderInnerBeam(poseStack, bufferSource, partialTick, blockEntity.getLevel().getGameTime(),
-                            0, laserDistance-1, FastColor.ARGB32.color(202, 214, 224));
+                            0, laserDistance, FastColor.ARGB32.color(202, 214, 224));
                 }
             }
             poseStack.popPose();
