@@ -1,7 +1,6 @@
 package com.portingdeadmods.modjam.utils;
 
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
 
@@ -11,7 +10,7 @@ public class ParticlesUtils {
     private static final double PARTICLE_RADIUS = 0.5; // Radius of the sphere around the item
     private static final int PARTICLE_DELAY = 5; // Number of ticks between particle spawns
 
-    private int particleTicks = 0;
+    private static int particleTicks = 0;
 
     public static void spawnParticles(ItemEntity itemEntity, Level level, ParticleOptions particlesTypes) {
         // Spawn particles around the item entity in a spherical pattern
