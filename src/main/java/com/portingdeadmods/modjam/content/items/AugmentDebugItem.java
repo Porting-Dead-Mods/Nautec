@@ -3,6 +3,7 @@ package com.portingdeadmods.modjam.content.items;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
 import com.portingdeadmods.modjam.content.augments.AugmentHelper;
+import com.portingdeadmods.modjam.utils.InputUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -33,21 +34,15 @@ public class AugmentDebugItem extends Item {
         Player player = context.getPlayer();
         Block clickedBlock = level.getBlockState(context.getClickedPos()).getBlock();
         if (level.isClientSide) return InteractionResult.SUCCESS;
-        if (clickedBlock == Blocks.DIRT){
-            if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(),InputConstants.KEY_LSHIFT)){
-                AugmentHelper.decId(player, Slot.HEAD);
-            } else {
-                AugmentHelper.incId(player, Slot.HEAD);
-            }
-        } else if (clickedBlock == Blocks.STONE){
-            if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(),InputConstants.KEY_LSHIFT)){
-                AugmentHelper.decId(player, Slot.BODY);
-            } else {
-                AugmentHelper.incId(player, Slot.BODY);
-            }
+        if (InputUtils.isKeyDown(InputConstants.KEY_LSHIFT)){
+            if (clickedBlock == Blocks.DIRT) AugmentHelper.decId(player,Slot.HEAD);
+            else if (clickedBlock == Blocks.STONE) AugmentHelper.decId(player, Slot.BODY);
+        } else if (InputUtils.isKeyDown(InputConstants.KEY_LCONTROL)){
+            onDroppedByPlayer(context.getItemInHand(),player);
+        } else {
+            if (clickedBlock == Blocks.DIRT) AugmentHelper.incId(player,Slot.HEAD);
+            else if (clickedBlock == Blocks.STONE) AugmentHelper.incId(player, Slot.BODY);
         }
-
-
         return super.useOn(context);
     }
 }
