@@ -1,13 +1,9 @@
-package com.portingdeadmods.modjam.events;
+package com.portingdeadmods.modjam.network;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.network.AugmentDataPayload;
-import com.portingdeadmods.modjam.network.KeyPressedPayload;
-import com.portingdeadmods.modjam.network.PayloadActions;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 @EventBusSubscriber(modid = ModJam.MODID, bus = EventBusSubscriber.Bus.MOD)
@@ -20,10 +16,10 @@ public class NetworkEvents {
                 KeyPressedPayload.STREAM_CODEC,
                 PayloadActions::keyPressedAction
         );
-        registrar.playToServer(
-                AugmentDataPayload.TYPE,
-                AugmentDataPayload.STREAM_CODEC,
-                PayloadActions::augmentDataAction
+        registrar.playBidirectional(
+                SetAugmentDataPayload.TYPE,
+                SetAugmentDataPayload.STREAM_CODEC,
+                PayloadActions::setAugmentDataAction
         );
     }
 }
