@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class AugmentHelper {
-    private static HashMap<Integer, StaticAugment> augmentHashMap = new HashMap<>();
+    private static final HashMap<Integer, StaticAugment> augmentHashMap = new HashMap<>();
+
     public static void AddAugment(StaticAugment augment, int id){
         augmentHashMap.put(id, augment);
     }
