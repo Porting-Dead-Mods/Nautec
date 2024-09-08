@@ -19,7 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemTransformationRecipeCategory implements IRecipeCategory<ItemTransformationRecipe> {
-    private static final ResourceLocation BURN_PROGRESS_SPRITE = ResourceLocation.withDefaultNamespace("container/furnace/burn_progress");
+    private static final ResourceLocation BURN_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(ModJam.MODID,"container/furnace/empty_arrow");
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "item_transformation");
     public static final RecipeType<ItemTransformationRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, ItemTransformationRecipe.class);
@@ -56,18 +56,13 @@ public class ItemTransformationRecipeCategory implements IRecipeCategory<ItemTra
     @Override
     public void draw(ItemTransformationRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         IRecipeCategory.super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
-        guiGraphics.blitSprite(BURN_PROGRESS_SPRITE, 0, 0, 24, 16);
+        guiGraphics.blitSprite(BURN_PROGRESS_SPRITE, 28, 0, 24, 16);
     }
-
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, ItemTransformationRecipe recipe, IFocusGroup focuses) {
         //Just one input slot, an arrow and an output slot
         builder.addSlot(RecipeIngredientRole.INPUT, 0,0 ).addItemStack(recipe.getIngredients().get(0).getItems()[0]);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 64, 0).addItemStack(recipe.getResultItem(null));
-    }
-
-    public static void drawImg(GuiGraphics guiGraphics, ResourceLocation texturePath, int x, int y, int width, int height) {
-        guiGraphics.blit(texturePath, x, y, 0, 0, 0, width, height, width, height);
     }
 
 }
