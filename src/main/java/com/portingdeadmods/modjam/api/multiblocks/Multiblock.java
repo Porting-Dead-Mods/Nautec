@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.apache.commons.lang3.IntegerRange;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface Multiblock {
+    BooleanProperty FORMED = BooleanProperty.create("formed");
+
     /**
      * This method provides the controller block of your unformed multiblock.
      * Your multiblock needs at least one of these in its structure.
