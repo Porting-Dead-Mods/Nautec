@@ -36,12 +36,13 @@ public class AugmentEvents {
     @SubscribeEvent
     public static void playerTick(PlayerTickEvent.Post event){
         StaticAugment[] augments = AugmentHelper.getAugments(event.getEntity());
-        for (int i = 0; i < augments.length; i++) {
-            if (augments[i] != null){
-                if (event.getEntity().level().isClientSide){
-                    augments[i].clientTick(event);
+        for (StaticAugment augment : augments) {
+            if (augment != null) {
+                if (event.getEntity().level().isClientSide) {
+                    augment.clientTick(event);
+                    ModJam.LOGGER.debug("AAAA");
                 } else {
-                    augments[i].serverTick(event);
+                    augment.serverTick(event);
                 }
             }
         }

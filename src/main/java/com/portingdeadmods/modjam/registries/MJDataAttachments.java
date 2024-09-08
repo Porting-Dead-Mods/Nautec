@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public class MJDataAttachments {
+public final class MJDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, ModJam.MODID);
 
     public static final Supplier<AttachmentType<Integer>> HEAD_AUGMENTATION = ATTACHMENTS.register(
