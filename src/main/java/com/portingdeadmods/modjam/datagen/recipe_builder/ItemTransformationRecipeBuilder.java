@@ -13,9 +13,6 @@ import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class ItemTransformationRecipeBuilder implements RecipeBuilder {
     @NotNull private IngredientWithCount ingredient;
     @NotNull private final ItemStack result;
@@ -48,7 +45,7 @@ public class ItemTransformationRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
-    public final ItemTransformationRecipeBuilder ingredients(TagKey<Item> item) {
+    public final ItemTransformationRecipeBuilder ingredient(TagKey<Item> item) {
         this.ingredient = IngredientWithCount.fromItemTag(item);
         return this;
     }
