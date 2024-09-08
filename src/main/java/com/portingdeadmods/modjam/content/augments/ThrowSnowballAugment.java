@@ -19,11 +19,11 @@ public class ThrowSnowballAugment extends Augment {
 
     @Override
     public void clientTick(PlayerTickEvent.Post event) {
-        ModJam.LOGGER.info("ClientTick for id {}", getId());
+        // ModJam.LOGGER.info("ClientTick for id {}", getId());
 
         if (InputUtils.isKeyDown(InputConstants.KEY_Y)) {
-            ModJam.LOGGER.info("Snow");
-            PacketDistributor.sendToAllPlayers(new KeyPressedPayload(getId()));
+            // ModJam.LOGGER.info("Snow");
+            PacketDistributor.sendToServer(new KeyPressedPayload(getId()));
         }
     }
 
