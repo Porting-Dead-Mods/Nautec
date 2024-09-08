@@ -100,18 +100,32 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     private ItemEntity cookingItem = null;
     private int cookTime = 0;
 
+    private Map<ItemEntity, Integer> activeCookings = new HashMap<>();
+
     private void processItemCrafting(AABB box) {
+        // Get all item entities within the box
         List<ItemEntity> itemEntities = level.getEntitiesOfClass(ItemEntity.class, box);
-        if (cookingItem == null) {
-            for (ItemEntity itemEntity : itemEntities) {
+
+        for (ItemEntity itemEntity : itemEntities) {
+            if (!activeCookings.containsKey(itemEntity)) {
                 Optional<ItemTransformationRecipe> optionalRecipe = getCurrentRecipe(itemEntity.getItem());
                 if (optionalRecipe.isPresent()) {
-                    cookingItem = itemEntity;
-                    cookTime = 0;
-                    break;
+                    activeCookings.put(itemEntity, 0);
                 }
             }
-        } else {
+        }
+
+        Iterator<Map.Entry<ItemEntity, Integer>> iterator = activeCookings.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<ItemEntity, Integer> entry = iterator.next();
+            ItemEntity cookingItem = entry.getKey();
+            int cookTime = entry.getValue();
+
+            if (!cookingItem.isAlive()) {
+                iterator.remove();
+                continue;
+            }
+
             if (cookTime >= 40) {
                 Optional<ItemTransformationRecipe> optionalRecipe = getCurrentRecipe(cookingItem.getItem());
                 if (optionalRecipe.isPresent()) {
@@ -122,20 +136,15 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
                     level.addFreshEntity(resultEntity);
 
                     cookingItem.discard();
+                    iterator.remove();
                 }
-                cookingItem = null;
-                cookTime = 0;
             } else {
-                cookTime++;
+                activeCookings.put(cookingItem, cookTime + 1);
                 ParticlesUtils.spawnParticles(cookingItem, level, ParticleTypes.END_ROD);
             }
         }
-
-        if (cookingItem != null && (!cookingItem.isAlive())) {
-            cookingItem = null;
-            cookTime = 0;
-        }
     }
+
 
     private void damageLiving() {
         for (Direction direction : getLaserOutputs()) {
