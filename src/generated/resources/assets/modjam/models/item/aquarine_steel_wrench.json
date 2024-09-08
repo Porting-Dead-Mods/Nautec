@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "modjam:item/aquarine_steel_wrench"
+  }
+}
