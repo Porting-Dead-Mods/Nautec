@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam.content.augments;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
 import com.portingdeadmods.modjam.network.KeyPressedPayload;
 import com.portingdeadmods.modjam.utils.InputUtils;
 import net.minecraft.world.entity.player.Player;
@@ -16,19 +17,19 @@ public class DisallowBreakingAugment extends Augment{
     }
 
     @Override
-    public void breakBlock(BlockEvent.BreakEvent event) {
+    public void breakBlock(Slot slot, BlockEvent.BreakEvent event) {
         event.setCanceled(true);
     }
 
     @Override
-    public void clientTick(PlayerTickEvent.Post event) {
+    public void clientTick(Slot slot, PlayerTickEvent.Post event) {
         if (InputUtils.isKeyDown(InputConstants.KEY_Y)){
-            PacketDistributor.sendToServer(new KeyPressedPayload(getId()));
+            PacketDistributor.sendToServer(new KeyPressedPayload(getId(),slot.slotId));
         }
     }
 
     @Override
-    public void handleKeybindPress(Player player) {
+    public void handleKeybindPress(Slot slot, Player player) {
         player.addItem(Items.EMERALD.getDefaultInstance());
     }
 }

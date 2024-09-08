@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.content.augments;
 
+import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -8,22 +9,22 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 public class Augment implements StaticAugment {
 
     @Override
-    public void breakBlock(BlockEvent.BreakEvent event) {
+    public void breakBlock(Slot slot, BlockEvent.BreakEvent event) {
 
     }
 
     @Override
-    public void clientTick(PlayerTickEvent.Post event) {
+    public void clientTick(Slot slot, PlayerTickEvent.Post event) {
 
     }
 
     @Override
-    public void serverTick(PlayerTickEvent.Post event) {
+    public void serverTick(Slot slot, PlayerTickEvent.Post event) {
 
     }
 
     @Override
-    public void handleKeybindPress(Player player) {
+    public void handleKeybindPress(Slot slot, Player player) {
 
     }
 

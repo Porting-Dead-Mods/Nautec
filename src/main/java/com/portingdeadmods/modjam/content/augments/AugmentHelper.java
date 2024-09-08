@@ -3,6 +3,7 @@ package com.portingdeadmods.modjam.content.augments;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
 import com.portingdeadmods.modjam.network.SetAugmentDataPayload;
+import com.portingdeadmods.modjam.network.SetCooldownPayload;
 import com.portingdeadmods.modjam.registries.MJDataAttachments;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,7 +28,29 @@ public class AugmentHelper {
         return augmentHashMap.get(id);
     }
 
-    public static Supplier<AttachmentType<Integer>> getAttachment(Slot slot) {
+    public static Supplier<AttachmentType<Integer>> getDataAttachment(Slot slot){
+        return switch (slot) {
+            case HEAD -> MJDataAttachments.HEAD_AUGMENTATION_DATA;
+            case BODY -> MJDataAttachments.BODY_AUGMENTATION_DATA;
+            case LEGS -> MJDataAttachments.LEGS_AUGMENTATION_DATA;
+            case ARMS -> MJDataAttachments.ARMS_AUGMENTATION_DATA;
+            case HEART -> MJDataAttachments.HEART_AUGMENTATION_DATA;
+            case NONE -> null;
+        };
+    }
+
+    public static Supplier<AttachmentType<Integer>> getCooldownAttachment(Slot slot){
+        return switch (slot) {
+            case HEAD -> MJDataAttachments.HEAD_AUGMENTATION_COOLDOWN;
+            case BODY -> MJDataAttachments.BODY_AUGMENTATION_COOLDOWN;
+            case LEGS -> MJDataAttachments.LEGS_AUGMENTATION_COOLDOWN;
+            case ARMS -> MJDataAttachments.ARMS_AUGMENTATION_COOLDOWN;
+            case HEART -> MJDataAttachments.HEART_AUGMENTATION_COOLDOWN;
+            case NONE -> null;
+        };
+    }
+
+    private static Supplier<AttachmentType<Integer>> getAttachment(Slot slot) {
         return switch (slot) {
             case HEAD -> MJDataAttachments.HEAD_AUGMENTATION;
             case BODY -> MJDataAttachments.BODY_AUGMENTATION;
@@ -40,11 +63,22 @@ public class AugmentHelper {
 
     public static int getId(Player player, Slot slot) {
         return player.getData(getAttachment(slot).get());
-        // return -2;
+    }
+    public static int getCooldown(Player player, Slot slot) {
+        return player.getData(getCooldownAttachment(slot).get());
+    }
+    public static int getData(Player player, Slot slot) {
+        return player.getData(getDataAttachment(slot).get());
     }
 
     public static void setId(Player player, Slot slot, int id) {
         player.setData(getAttachment(slot).get(), id);
+    }
+    public static void setCooldown(Player player, Slot slot, int cooldown) {
+        player.setData(getCooldownAttachment(slot).get(), cooldown);
+    }
+    public static void setData(Player player, Slot slot, int data){
+        player.setData(getDataAttachment(slot).get(),data);
     }
 
     public static void setIdAndUpdate(Player player, Slot slot, int id) {
@@ -54,6 +88,15 @@ public class AugmentHelper {
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SetAugmentDataPayload(id, slot.slotId));
         }
         setId(player, slot, id);
+    }
+    public static void setCooldownAndUpdate(Player player, Slot slot, int cooldown) {
+        ModJam.LOGGER.info("Setting Cooldown to {}", cooldown);
+        if (player.level().isClientSide()) {
+            PacketDistributor.sendToServer(new SetCooldownPayload(cooldown, slot.slotId));
+        } else {
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SetCooldownPayload(cooldown, slot.slotId));
+        }
+        setCooldown(player, slot, cooldown);
     }
 
     public static void incId(Player player, Slot slot) {
