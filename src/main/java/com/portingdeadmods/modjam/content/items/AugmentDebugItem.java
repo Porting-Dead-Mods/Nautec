@@ -38,6 +38,8 @@ public class AugmentDebugItem extends Item {
                 AugmentHelper.decId(player, Slot.HEAD);
             } else if (clickedBlock == Blocks.STONE) {
                 AugmentHelper.incId(player, Slot.BODY);
+            } else if (clickedBlock == Blocks.SAND) {
+                AugmentHelper.setCooldownAndUpdate(player, Slot.HEAD, 60);
             }
         }
 
