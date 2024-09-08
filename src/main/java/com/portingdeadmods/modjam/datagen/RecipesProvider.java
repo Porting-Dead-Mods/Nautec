@@ -19,11 +19,11 @@ public class RecipesProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(@NotNull RecipeOutput pRecipeOutput) {
         ItemTransformationRecipeBuilder.newRecipe(new ItemStack(MJItems.AQUARINE_STEEL.get(), 1))
-                .ingredient(new ItemStack(Items.IRON_INGOT, 1))
+                .ingredient(new ItemStack(Items.IRON_INGOT))
                 .save(pRecipeOutput);
 
         ItemTransformationRecipeBuilder.newRecipe(new ItemStack(Items.NETHERITE_INGOT, 1))
-                .ingredient(new ItemStack(Items.SNOWBALL, 1))
+                .ingredient(new ItemStack(Items.SNOWBALL))
                 .save(pRecipeOutput);
     }
 }
