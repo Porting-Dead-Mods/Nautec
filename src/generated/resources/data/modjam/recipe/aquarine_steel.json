@@ -1,10 +1,8 @@
 {
   "type": "modjam:item_transformation",
-  "ingredients": [
-    {
-      "item": "minecraft:iron_ingot"
-    }
-  ],
+  "ingredient": {
+    "item": "minecraft:iron_ingot"
+  },
   "result": {
     "count": 1,
     "id": "modjam:aquarine_steel"

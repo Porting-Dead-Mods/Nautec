@@ -2,16 +2,20 @@ package com.portingdeadmods.modjam.api.blockentities;
 
 import com.portingdeadmods.modjam.api.blocks.blockentities.LaserBlock;
 import com.portingdeadmods.modjam.recipes.ItemTransformationRecipe;
+import com.portingdeadmods.modjam.registries.MJItems;
+import com.portingdeadmods.modjam.utils.ParticlesUtils;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -24,7 +28,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
 
     private float clientLaserTime;
     private final Object2IntMap<Direction> laserDistances;
-    private int cookTime = 0;
+    private int itemTransformTime;
     public AABB box;
 
     public LaserBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
@@ -76,49 +80,62 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
 
     }
 
+
+
     private void damageLivingEntities(AABB box) {
-        List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, box);
-        for (LivingEntity livingEntity : livingEntities) {
-            livingEntity.hurt(level.damageSources().inFire(), 3);
+        for (Direction direction : getLaserOutputs()) {
+            assert level != null;
+            List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, box);
+            for (LivingEntity livingEntity : livingEntities) {
+                livingEntity.hurt(level.damageSources().inFire(), 3);
+            }
         }
     }
 
-    private Optional<ItemTransformationRecipe> getCurrentRecipe(List<ItemEntity> entities) {
-        List<ItemStack> itemStacks = entities.stream().map(ItemEntity::getItem).toList();
-        MJRecipeInput recipeInput = new MJRecipeInput(itemStacks);
+    private Optional<ItemTransformationRecipe> getCurrentRecipe(ItemStack itemStack) {
+        SingleRecipeInput recipeInput = new SingleRecipeInput(itemStack);
         return this.level.getRecipeManager().getRecipeFor(ItemTransformationRecipe.Type.INSTANCE, recipeInput, level).map(RecipeHolder::value);
     }
 
+    private ItemEntity cookingItem = null;
+    private int cookTime = 0;
+
     private void processItemCrafting(AABB box) {
-        assert level != null;
         List<ItemEntity> itemEntities = level.getEntitiesOfClass(ItemEntity.class, box);
-
-        Optional<ItemTransformationRecipe> optionalRecipe = getCurrentRecipe(itemEntities);
-
-        if (optionalRecipe.isPresent()) {
-            ItemTransformationRecipe recipe = optionalRecipe.get();
-            List<Ingredient> ingredients = recipe.getIngredients();
-            if (cookTime >= 40) {
-                BlockPos spawnPos = cookingItem.blockPosition();
-                ItemStack resultStack = recipe.getResultItem(null);
-                ItemEntity newItemEntity = new ItemEntity(level, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), newStack);
-                level.addFreshEntity(newItemEntity);
+        if (cookingItem == null) {
+            for (ItemEntity itemEntity : itemEntities) {
+                Optional<ItemTransformationRecipe> optionalRecipe = getCurrentRecipe(itemEntity.getItem());
+                if (optionalRecipe.isPresent()) {
+                    cookingItem = itemEntity;
+                    cookTime = 0;
+                    break;
+                }
             }
+        } else {
+            if (cookTime >= 40) {
+                Optional<ItemTransformationRecipe> optionalRecipe = getCurrentRecipe(cookingItem.getItem());
+                if (optionalRecipe.isPresent()) {
+                    ItemStack resultStack = optionalRecipe.get().getResultItem(null).copy();
+                    resultStack.setCount(cookingItem.getItem().getCount());
 
-//            if (cookTime >= 40) {
-//                cookingItem.getItem().shrink(recipe.get().getIngredientsWithCount().getFirst().count());
-//                ItemStack newStack = recipe.get().getResultItem(null);
-//                ItemEntity newItemEntity = new ItemEntity(level, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), newStack);
-//                level.addFreshEntity(newItemEntity);
-//                cookingItem = null;
-//                cookTime = 0;
-//            } else {
-//                cookTime++;
-//                ParticlesUtils.spawnParticles(cookingItem, level, ParticleTypes.END_ROD);
-//            }
+                    ItemEntity resultEntity = new ItemEntity(level, cookingItem.getX(), cookingItem.getY(), cookingItem.getZ(), resultStack);
+                    level.addFreshEntity(resultEntity);
+
+                    cookingItem.discard();
+                }
+                cookingItem = null;
+                cookTime = 0;
+            } else {
+                cookTime++;
+                ParticlesUtils.spawnParticles(cookingItem, level, ParticleTypes.END_ROD);
+            }
+        }
+
+        if (cookingItem != null && (!cookingItem.isAlive())) {
+            cookingItem = null;
+            cookTime = 0;
         }
     }
-
 
     private void damageLiving() {
         for (Direction direction : getLaserOutputs()) {
@@ -136,7 +153,6 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
             processItemCrafting(box);
         }
     }
-
 
     private void checkConnections() {
         for (Direction direction : getLaserOutputs()) {
