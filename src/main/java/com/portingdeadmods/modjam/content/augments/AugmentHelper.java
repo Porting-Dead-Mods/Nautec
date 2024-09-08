@@ -2,10 +2,13 @@ package com.portingdeadmods.modjam.content.augments;
 
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
+import com.portingdeadmods.modjam.network.SetAugmentDataPayload;
 import com.portingdeadmods.modjam.registries.MJDataAttachments;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,25 +46,35 @@ public class AugmentHelper {
         ModJam.LOGGER.warn("Error parsing slot {} (I thought this was unreachable)", slot.name());
         return MJDataAttachments.HEAD_AUGMENTATION;
     }
+
     public static int getId(Player player, Slot slot){
         return player.getData(getAttachment(slot));
         // return -2;
     }
+
     public static void setId(Player player, Slot slot , int id){
-        player.setData(getAttachment(slot), id);
+        if (player.level().isClientSide){
+            PacketDistributor.sendToServer(new SetAugmentDataPayload(id , slot.slotId));
+        } else {
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SetAugmentDataPayload(id, slot.slotId));
+        }
     }
+
     public static void incId(Player player, Slot slot){
         setId(player, slot, AugmentHelper.getId(player, slot) + 1);
         player.sendSystemMessage(Component.literal("Incremented to Id "+getId(player, slot)+" for slot "+slot.name()));
 
     }
+
     public static void decId(Player player, Slot slot){
         setId(player, slot, AugmentHelper.getId(player, slot) - 1);
         player.sendSystemMessage(Component.literal("Decremented to Id "+getId(player, slot)+" for slot "+slot.name()));
     }
+
     public static StaticAugment getAugment(int id){
         return augmentHashMap.get(id);
     }
+
     public static StaticAugment[] getAugments(Player player) {
         List<StaticAugment> augments = new ArrayList<>();
         augments.add(getAugment(player, Slot.HEAD));

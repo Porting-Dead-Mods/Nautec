@@ -20,9 +20,9 @@ public class GiveDiamondAugment extends Augment {
 
     @Override
     public void clientTick(PlayerTickEvent.Post event) {
-        ModJam.LOGGER.info("ClientTick for id {}", getId());
+        // ModJam.LOGGER.info("ClientTick for id {}", getId());
         if (InputUtils.isKeyDown(InputConstants.KEY_Y)) {
-            PacketDistributor.sendToAllPlayers(new KeyPressedPayload(getId()));
+            PacketDistributor.sendToServer(new KeyPressedPayload(getId()));
         }
     }
 
