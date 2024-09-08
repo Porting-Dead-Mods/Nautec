@@ -43,6 +43,8 @@ public final class MJItems {
     public static final DeferredItem<BucketItem> ELECTROLYTE_ALGAE_SERUM_BUCKET = registerItemBucket("electrolyte_algae_serum_bucket",
             () -> new BucketItem(MJFluids.ELECTROLYTE_ALGAE_SERUM_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
+    public static final DeferredItem<Item> CROWBAR = registerItem("crowbar",Item::new,new Item.Properties().stacksTo(1));
+
 
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Item.Properties properties) {
         return registerItem(name, itemConstructor, properties, true);
