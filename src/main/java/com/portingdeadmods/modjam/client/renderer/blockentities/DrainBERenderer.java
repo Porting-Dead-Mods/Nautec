@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.phys.AABB;
 
 public class DrainBERenderer implements BlockEntityRenderer<DrainBlockEntity> {
     private final DrainTopModel model;
@@ -34,5 +35,15 @@ public class DrainBERenderer implements BlockEntityRenderer<DrainBlockEntity> {
         int blockLight = level.getBrightness(LightLayer.BLOCK, pos);
         int skyLight = level.getBrightness(LightLayer.SKY, pos);
         return LightTexture.pack(skyLight, blockLight);
+    }
+
+    @Override
+    public boolean shouldRenderOffScreen(DrainBlockEntity blockEntity) {
+        return true;
+    }
+
+    @Override
+    public AABB getRenderBoundingBox(DrainBlockEntity blockEntity) {
+        return BlockEntityRenderer.super.getRenderBoundingBox(blockEntity).inflate(1);
     }
 }
