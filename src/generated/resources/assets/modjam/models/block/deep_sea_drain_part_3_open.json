@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "east": "modjam:block/multiblock/drain/side_1_open",
+    "north": "modjam:block/multiblock/drain/side_1_open",
+    "south": "modjam:block/multiblock/drain/side_1_open",
+    "up": "modjam:block/multiblock/drain/top_3",
+    "west": "modjam:block/multiblock/drain/side_1_open"
+  }
+}

@@ -1,21 +1,34 @@
 package com.portingdeadmods.modjam.content.augments;
 
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 @SuppressWarnings("unused")
-public class Augment {
-    public static void onBreak(BlockEvent.BreakEvent event){
-        Player player = event.getPlayer();
-        event.setCanceled(true);
+public class Augment implements StaticAugment {
+
+    @Override
+    public void breakBlock(BlockEvent.BreakEvent event) {
+
     }
-    public static void onBreakSpeed(PlayerEvent.BreakSpeed event){
-        event.setNewSpeed(0.0f);
-        event.setCanceled(true);
+
+    @Override
+    public void clientTick(PlayerTickEvent.Post event) {
+
     }
-    public static void onBlockLeftClick(PlayerInteractEvent.LeftClickBlock event){
-        event.setCanceled(true);
+
+    @Override
+    public void serverTick(PlayerTickEvent.Post event) {
+
+    }
+
+    @Override
+    public void handleKeybindPress(Player player) {
+
+    }
+
+    @Override
+    public int getId() {
+        return -1;
     }
 }
