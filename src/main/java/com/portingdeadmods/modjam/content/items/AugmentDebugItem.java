@@ -36,10 +36,6 @@ public class AugmentDebugItem extends Item {
         Player player = context.getPlayer();
         Block clickedBlock = level.getBlockState(context.getClickedPos()).getBlock();
 
-        if (level.isClientSide) {
-            return InteractionResult.SUCCESS;
-        }
-
         if (clickedBlock == Blocks.DIRT) {
             AugmentHelper.incId(player, Slot.HEAD);
         } else if (clickedBlock == Blocks.GRASS_BLOCK){
@@ -48,7 +44,7 @@ public class AugmentDebugItem extends Item {
             AugmentHelper.incId(player, Slot.BODY);
         }
 
-        return super.useOn(context);
+        return InteractionResult.SUCCESS;
     }
 
 
