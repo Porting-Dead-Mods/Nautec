@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "open=false,rusty=false": {
+      "model": "modjam:block/crate"
+    },
+    "open=false,rusty=true": {
+      "model": "modjam:block/rusty_crate"
+    },
+    "open=true,rusty=false": {
+      "model": "modjam:block/crate_open"
+    },
+    "open=true,rusty=true": {
+      "model": "modjam:block/rusty_crate_open"
+    }
+  }
+}

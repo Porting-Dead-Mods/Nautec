@@ -1,7 +1,8 @@
-// 1.21.1	2024-09-08T14:54:06.450838244	Block States: modjam
+// 1.21.1	2024-09-08T21:58:23.7229483	Block States: modjam
 af3ef9c17c60ced537516e8aa1215fcb76e3683e assets/modjam/blockstates/aquarine_steel_block.json
 865a45a4d022b56bc54dc32dae4b666af2df7d6f assets/modjam/blockstates/aquatic_catalyst.json
 6e42254717fc67a953282f50517eb06c02193129 assets/modjam/blockstates/chiseled_dark_prismarine.json
+3f474de85f7cf428f3ecd383cde71be56c940ecd assets/modjam/blockstates/crate.json
 791da2d01b6b33bb1ce175d5c9c1fa5b737c9dfc assets/modjam/blockstates/dark_prismarine_pillar.json
 74a08c3614f8cf6dace6f155476015776d839ce1 assets/modjam/blockstates/deep_sea_drain_part.json
 5ca1917566d04d2f7fefbfa648958c06d3238f67 assets/modjam/models/block/aquarine_steel_block.json
@@ -33,3 +34,5 @@ c6666b1b7a9b97708afc337463d65c098bcd0c38 assets/modjam/models/block/deep_sea_dra
 8149cf16f075d4a3e9ccb4f224376ed7011e3db9 assets/modjam/models/block/deep_sea_drain_part_7_open.json
 c726d4f7c530beadc3bb9035ea46017faba9f4f2 assets/modjam/models/block/deep_sea_drain_part_8.json
 c726d4f7c530beadc3bb9035ea46017faba9f4f2 assets/modjam/models/block/deep_sea_drain_part_8_open.json
+944f8a549bbc7f13a4b7022e63d680f6d533d68b assets/modjam/models/block/rusty_crate.json
+e9266445328047f5d61b4e0d111da3842d005fa8 assets/modjam/models/block/rusty_crate_open.json

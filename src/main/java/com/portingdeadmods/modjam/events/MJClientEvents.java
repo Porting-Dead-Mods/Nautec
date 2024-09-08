@@ -9,7 +9,9 @@ import com.portingdeadmods.modjam.api.fluids.BaseFluidType;
 import com.portingdeadmods.modjam.client.hud.PrismMonocleOverlay;
 import com.portingdeadmods.modjam.client.model.DrainTopModel;
 import com.portingdeadmods.modjam.client.renderer.blockentities.DrainBERenderer;
+import com.portingdeadmods.modjam.client.screen.CrateScreen;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
+import com.portingdeadmods.modjam.registries.MJMenuTypes;
 import net.minecraft.client.Camera;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -23,6 +25,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.common.util.Lazy;
@@ -103,6 +106,11 @@ public final class MJClientEvents {
         @SubscribeEvent
         public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(DrainTopModel.LAYER_LOCATION, DrainTopModel::createBodyLayer);
+        }
+
+        @SubscribeEvent
+        public static void registerMenus(RegisterMenuScreensEvent event){
+            event.register(MJMenuTypes.CRATE.get(), CrateScreen::new);
         }
     }
 }

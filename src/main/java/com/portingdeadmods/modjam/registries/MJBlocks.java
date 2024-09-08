@@ -2,6 +2,7 @@ package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.blocks.AquaticCatalystBlock;
+import com.portingdeadmods.modjam.content.blocks.CrateBlock;
 import com.portingdeadmods.modjam.content.blocks.multiblock.controller.DrainBlock;
 import com.portingdeadmods.modjam.content.blocks.multiblock.part.DrainPartBlock;
 import net.minecraft.world.item.BlockItem;
@@ -28,6 +29,9 @@ public final class MJBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<AquaticCatalystBlock> AQUATIC_CATALYST = registerBlockAndItem("aquatic_catalyst", AquaticCatalystBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).lightLevel(state -> state.getValue(AquaticCatalystBlock.CORE_ACTIVE) ? 12 : 0));
+    public static final DeferredBlock<CrateBlock> CRATE = registerBlockAndItem("crate", CrateBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL));
+
 
     // MULTIBLOCKS
     public static final DeferredBlock<DrainBlock> DRAIN = registerBlockAndItem("deep_sea_drain", DrainBlock::new,

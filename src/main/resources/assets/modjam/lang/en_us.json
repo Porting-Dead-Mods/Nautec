@@ -11,11 +11,13 @@
   "item.modjam.electrolyte_algae_serum_bucket": "Electrolyte Algae Serum (EAS) Bucket",
   "item.modjam.glass_vial": "Glass Vial",
   "item.modjam.eas_vial": "Vial of Electrolyte Algae Serum",
+  "item.modjam.crowbar": "Crowbar",
 
   "block.modjam.aquarine_steel_block": "Aquarine Steel Block",
   "block.modjam.aquatic_catalyst": "Aquatic Catalyst",
   "block.modjam.dark_prismarine_pillar": "Dark Prismarine Pillar",
   "block.modjam.chiseled_dark_prismarine": "Chiseled Dark Prismarine",
+  "block.modjam.crate": "Crate",
 
 
   "multiblock.info.failed_to_construct": "Missing or invalid block",

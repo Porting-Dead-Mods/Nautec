@@ -2,6 +2,7 @@ package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.blockentities.AquaticCatalystBlockEntity;
+import com.portingdeadmods.modjam.content.blockentities.CrateBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.DrainBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.part.DrainPartBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -22,4 +23,7 @@ public final class MJBlockEntityTypes {
     public static final Supplier<BlockEntityType<DrainPartBlockEntity>> DRAIN_PART = BLOCK_ENTITIES.register("drain_part",
             () -> BlockEntityType.Builder.of(DrainPartBlockEntity::new,
                     MJBlocks.DRAIN_PART.get()).build(null));
+    public static final Supplier<BlockEntityType<CrateBlockEntity>> CRATE = BLOCK_ENTITIES.register("crate",
+            () -> BlockEntityType.Builder.of(CrateBlockEntity::new,
+                    MJBlocks.CRATE.get()).build(null));
 }
