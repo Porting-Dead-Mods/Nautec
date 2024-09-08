@@ -21,5 +21,9 @@ public class RecipesProvider extends RecipeProvider {
         ItemTransformationRecipeBuilder.newRecipe(new ItemStack(MJItems.AQUARINE_STEEL.get(), 1))
                 .ingredients(new ItemStack(Items.IRON_INGOT, 1))
                 .save(pRecipeOutput);
+
+        ItemTransformationRecipeBuilder.newRecipe(new ItemStack(Items.NETHERITE_INGOT, 1))
+                .ingredients(new ItemStack(Items.SNOWBALL, 1))
+                .save(pRecipeOutput);
     }
 }

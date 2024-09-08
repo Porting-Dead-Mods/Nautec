@@ -1,0 +1,12 @@
+{
+  "type": "modjam:item_transformation",
+  "ingredients": [
+    {
+      "item": "minecraft:snowball"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:netherite_ingot"
+  }
+}

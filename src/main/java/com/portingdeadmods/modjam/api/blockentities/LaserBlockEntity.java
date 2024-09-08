@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.items.ItemStackHandler;
 
 import java.util.*;
 
@@ -91,23 +90,32 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         }
     }
 
+    private Optional<ItemTransformationRecipe> getCurrentRecipe(List<ItemEntity> entities, AABB box) {
+        List<ItemStack> itemStacks = entities.stream().map(ItemEntity::getItem).toList();
+        MJRecipeInput recipeInput = new MJRecipeInput(itemStacks);
+        return this.level.getRecipeManager().getRecipeFor(ItemTransformationRecipe.Type.INSTANCE, recipeInput, level).map(RecipeHolder::value);
+    }
+
     private void processItemCrafting(AABB box) {
         assert level != null;
         List<ItemEntity> itemEntities = level.getEntitiesOfClass(ItemEntity.class, box);
+
+        Optional<ItemTransformationRecipe> recipe = getCurrentRecipe(itemEntities,box);
+
         if (cookingItem == null) {
             for (ItemEntity itemEntity : itemEntities) {
-                if (itemEntity.getItem().is(Items.IRON_INGOT)) {
+                if (recipe.isPresent()) {
                     cookingItem = itemEntity;
                     cookTime = 0;
                     break;
                 }
             }
+
         } else {
             if (cookTime >= 40) {
-                int stackSize = cookingItem.getItem().getCount();
                 BlockPos spawnPos = cookingItem.blockPosition();
-                cookingItem.discard();
-                ItemStack newStack = new ItemStack(MJItems.AQUARINE_STEEL.get(), stackSize);
+                cookingItem.getItem().shrink(recipe.get().getIngredientsWithCount().getFirst().count());
+                ItemStack newStack = recipe.get().getResultItem(null);
                 ItemEntity newItemEntity = new ItemEntity(level, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), newStack);
                 level.addFreshEntity(newItemEntity);
                 cookingItem = null;
@@ -118,22 +126,12 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
             }
         }
 
-        if (cookingItem != null && (!cookingItem.isAlive() || !cookingItem.getItem().is(Items.IRON_INGOT))) {
+        if (cookingItem != null && (!cookingItem.isAlive() || !box.contains(cookingItem.position()))) {
             cookingItem = null;
             cookTime = 0;
         }
     }
 
-
-    private Optional<RecipeHolder<ItemTransformationRecipe>> getCurrentRecipe() {
-        ItemStackHandler stackHandler = this.getItemStackHandler();
-        List<ItemStack> itemStacks = new ArrayList<>(stackHandler.getSlots());
-        for (int i = 0; i < stackHandler.getSlots() - 1; i++) {
-            itemStacks.add(stackHandler.getStackInSlot(i));
-        }
-        MJRecipeInput recipeInput = new MJRecipeInput(itemStacks);
-        return this.level.getRecipeManager().getRecipeFor(ItemTransformationRecipe.Type.INSTANCE, recipeInput, level);
-    }
 
 
     private void damageLiving() {
