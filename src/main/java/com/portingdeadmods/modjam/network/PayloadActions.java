@@ -23,7 +23,8 @@ public class PayloadActions {
     }
     public static void setAugmentDataAction(SetAugmentDataPayload payload, IPayloadContext context){
         context.enqueueWork(()->{
-            AugmentHelper.setId(context.player(), Slot.GetValue(payload.slot()), payload.augmentId());
+            // Whoops, recursive packets bring sent
+            // AugmentHelper.setId(context.player(), Slot.GetValue(payload.slot()), payload.augmentId());
             ModJam.LOGGER.info("Syncing data {}", payload.slot());
         });
     }
