@@ -25,7 +25,7 @@ public class AugmentHelper {
         int id = getId(player, slot);
         return augmentHashMap.get(id);
     }
-    private static Supplier<AttachmentType<Integer>> getAttachment(Slot slot){
+    public static Supplier<AttachmentType<Integer>> getAttachment(Slot slot){
         switch (slot){
             case HEAD -> {
                 return MJDataAttachments.HEAD_AUGMENTATION;
