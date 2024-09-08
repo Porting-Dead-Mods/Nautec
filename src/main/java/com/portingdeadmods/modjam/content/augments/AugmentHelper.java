@@ -63,13 +63,13 @@ public class AugmentHelper {
         return augmentHashMap.get(id);
     }
     public static StaticAugment[] getAugments(Player player) {
-        List<StaticAugment> augments = new ArrayList<StaticAugment>();
+        List<StaticAugment> augments = new ArrayList<>();
         augments.add(getAugment(player, Slot.HEAD));
         augments.add(getAugment(player, Slot.BODY));
         augments.add(getAugment(player, Slot.ARMS));
         augments.add(getAugment(player, Slot.LEGS));
         augments.add(getAugment(player, Slot.HEART));
 
-        return augments.toArray(new StaticAugment[0]);
+        return augments.toArray(new StaticAugment[10]);
     }
 }

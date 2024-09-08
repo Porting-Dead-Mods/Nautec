@@ -8,6 +8,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class PayloadActions {
     public static void keyPressedAction(KeyPressedPayload payload, IPayloadContext context){
+        ModJam.LOGGER.debug("Key pressed");
         context.enqueueWork(()->{
             Player player = context.player();
             int augmentId = payload.augmentId();

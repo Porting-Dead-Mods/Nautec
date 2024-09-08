@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 public record KeyPressedPayload(int augmentId) implements CustomPacketPayload {
     public static final Type<KeyPressedPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "key_pressesd_paylad"));
     public static final StreamCodec<RegistryFriendlyByteBuf, KeyPressedPayload> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.VAR_INT,
+            ByteBufCodecs.INT,
             KeyPressedPayload::augmentId,
             KeyPressedPayload::new
     );
