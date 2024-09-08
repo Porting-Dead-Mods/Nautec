@@ -22,7 +22,7 @@ public class DrainTopModel extends Model {
     private final ModelPart top;
 
     public DrainTopModel(ModelPart root) {
-        super(RenderType::entitySolid);
+        super(RenderType::entityTranslucent);
         this.top = root.getChild("top");
     }
 
@@ -49,5 +49,9 @@ public class DrainTopModel extends Model {
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
         top.render(poseStack, buffer, packedLight, packedOverlay, color);
+    }
+
+    public void setupAnimation() {
+        top.xRot = (float) Math.toRadians(180);
     }
 }
