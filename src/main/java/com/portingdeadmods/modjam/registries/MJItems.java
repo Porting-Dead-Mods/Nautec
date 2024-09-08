@@ -2,9 +2,8 @@ package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.items.AugmentDebugItem;
-import com.portingdeadmods.modjam.content.items.ExamplePowerItem;
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
-import com.portingdeadmods.modjam.content.items.PrismarineWrenchItem;
+import com.portingdeadmods.modjam.content.items.AquarineWrenchItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -23,7 +22,9 @@ public final class MJItems {
     public static final List<ItemLike> CREATIVE_TAB_ITEMS = new ArrayList<>();
     public static final List<Supplier<BlockItem>> BLOCK_ITEMS = new ArrayList<>();
 
-    public static final DeferredItem<Item> AQUARINE_STEEL = registerItem("aquarine_steel",
+    public static final DeferredItem<Item> AQUARINE_STEEL_INGOT = registerItem("aquarine_steel_ingot",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> ATLANTIC_GOLD_INGOT = registerItem("atlantic_gold_ingot",
             Item::new, new Item.Properties());
 
     public static final DeferredItem<Item> GLASS_VIAL = registerItem("glass_vial", Item::new, new Item.Properties());
@@ -37,11 +38,11 @@ public final class MJItems {
 
     public static final DeferredItem<AugmentDebugItem> AUGMENT_DEBUG_ITEM = registerItem("augment_debug_item", AugmentDebugItem::new, new Item.Properties());
 
-    public static final DeferredItem<PrismarineWrenchItem> PRISMARINE_WRENCH = registerItem("prismarine_wrench",
-            PrismarineWrenchItem::new, new Item.Properties());
+    public static final DeferredItem<AquarineWrenchItem> AQUARINE_WRENCH = registerItem("aquarine_steel_wrench",
+            AquarineWrenchItem::new, new Item.Properties());
 
-    public static final DeferredItem<BucketItem> ELECTROLYTE_ALGAE_SERUM_BUCKET = registerItemBucket("electrolyte_algae_serum_bucket",
-            () -> new BucketItem(MJFluids.ELECTROLYTE_ALGAE_SERUM_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final DeferredItem<BucketItem> EAS_BUCKET = registerItemBucket("eas_bucket",
+            () -> new BucketItem(MJFluids.EAS_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     public static final DeferredItem<Item> CROWBAR = registerItem("crowbar",Item::new,new Item.Properties().stacksTo(1));
 

@@ -1,13 +1,8 @@
 package com.portingdeadmods.modjam.content.items;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
 import com.portingdeadmods.modjam.content.augments.AugmentHelper;
-import com.portingdeadmods.modjam.network.SetAugmentDataPayload;
-import com.portingdeadmods.modjam.utils.InputUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -16,9 +11,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 public class AugmentDebugItem extends Item {
@@ -39,12 +31,14 @@ public class AugmentDebugItem extends Item {
         Player player = context.getPlayer();
         Block clickedBlock = level.getBlockState(context.getClickedPos()).getBlock();
 
-        if (clickedBlock == Blocks.DIRT) {
-            AugmentHelper.incId(player, Slot.HEAD);
-        } else if (clickedBlock == Blocks.GRASS_BLOCK){
-            AugmentHelper.decId(player,Slot.HEAD);
-        } else if (clickedBlock == Blocks.STONE) {
-            AugmentHelper.incId(player, Slot.BODY);
+        if (level.isClientSide()) {
+            if (clickedBlock == Blocks.DIRT) {
+                AugmentHelper.incId(player, Slot.HEAD);
+            } else if (clickedBlock == Blocks.GRASS_BLOCK) {
+                AugmentHelper.decId(player, Slot.HEAD);
+            } else if (clickedBlock == Blocks.STONE) {
+                AugmentHelper.incId(player, Slot.BODY);
+            }
         }
 
         return super.useOn(context);

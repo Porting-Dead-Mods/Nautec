@@ -3,14 +3,10 @@ package com.portingdeadmods.modjam.events;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.augments.AugmentHelper;
 import com.portingdeadmods.modjam.content.augments.StaticAugment;
-import com.portingdeadmods.modjam.network.SetAugmentDataPayload;
-import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 @SuppressWarnings("unused")
 @EventBusSubscriber(modid = ModJam.MODID)

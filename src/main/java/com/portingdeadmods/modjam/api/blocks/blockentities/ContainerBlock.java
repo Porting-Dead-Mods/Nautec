@@ -47,12 +47,6 @@ public abstract class ContainerBlock extends BaseEntityBlock {
 
     @Override
     public void onRemove(BlockState p_60515_, Level level, BlockPos pos, BlockState p_60518_, boolean p_60519_) {
-        if (!p_60515_.is(p_60518_.getBlock())) {
-            BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof ContainerBlockEntity containerBlockEntity && containerBlockEntity.getItemHandler() != null) {
-                containerBlockEntity.drop();
-            }
-        }
         super.onRemove(p_60515_, level, pos, p_60518_, p_60519_);
     }
 

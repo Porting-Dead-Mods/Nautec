@@ -159,9 +159,11 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
                 BlockPos pos = worldPosition.relative(direction, i);
                 BlockState state = level.getBlockState(pos);
 
-                if (state.getBlock() instanceof LaserBlock) {
-                    laserDistances.put(direction, i);
-                    break;
+                if (level.getBlockEntity(pos) instanceof LaserBlockEntity laserBlockEntity) {
+                    if (laserBlockEntity.getLaserInputs().contains(direction.getOpposite())) {
+                        laserDistances.put(direction, i);
+                        break;
+                    }
                 }
 
                 if (!state.canBeReplaced() || i == MAX_DISTANCE - 1) {

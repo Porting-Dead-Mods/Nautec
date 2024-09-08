@@ -1,7 +1,6 @@
 package com.portingdeadmods.modjam.datagen;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.registries.MJBlocks;
 import com.portingdeadmods.modjam.registries.MJItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -23,11 +22,17 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
     @Override
     protected void registerModels() {
         // Register item models here
-        basicItem(MJItems.PRISM_MONOCLE.get());
-        basicItem(MJItems.AQUARINE_STEEL.get());
-        basicItem(MJItems.ELECTROLYTE_ALGAE_SERUM_VIAL.get());
+        basicItem(MJItems.AQUARINE_STEEL_INGOT.get());
+        basicItem(MJItems.ATLANTIC_GOLD_INGOT.get());
+
         basicItem(MJItems.GLASS_VIAL.get());
-        basicItem(MJItems.CROWBAR.get());
+        basicItem(MJItems.ELECTROLYTE_ALGAE_SERUM_VIAL.get());
+
+        basicItem(MJItems.PRISM_MONOCLE.get());
+        handHeldItem(MJItems.AQUARINE_WRENCH.get());
+        handHeldItem(MJItems.CROWBAR.get());
+
+        basicItem(MJItems.EAS_BUCKET.get());
 
         blockItems();
     }
@@ -46,5 +51,12 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         ResourceLocation name = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item));
         return getBuilder(name.toString())
                 .parent(new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(name.getNamespace(), "block/" + name.getPath() + suffix)));
+    }
+
+    public ItemModelBuilder handHeldItem(Item item) {
+        ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
+        return getBuilder(location.toString())
+                .parent(new ModelFile.UncheckedModelFile("item/handheld"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath()));
     }
 }

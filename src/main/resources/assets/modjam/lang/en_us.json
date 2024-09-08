@@ -6,9 +6,10 @@
   "fluid_type.modjam.electrolyte_algae_serum": "Electrolyte Algae Serum",
 
   "item.modjam.prism_monocle": "Prism Monocle",
-  "item.modjam.aquarine_steel": "Aquarine Steel Ingot",
+  "item.modjam.aquarine_steel_ingot": "Aquarine Steel Ingot",
+  "item.modjam.atlantic_gold_ingot": "Atlantic Gold Ingot",
   "item.modjam.salt_water_bucket": "Salt Water Bucket",
-  "item.modjam.electrolyte_algae_serum_bucket": "Electrolyte Algae Serum (EAS) Bucket",
+  "item.modjam.eas_bucket": "Electrolyte Algae Serum (EAS) Bucket",
   "item.modjam.glass_vial": "Glass Vial",
   "item.modjam.eas_vial": "Vial of Electrolyte Algae Serum",
   "item.modjam.crowbar": "Crowbar",
@@ -18,7 +19,6 @@
   "block.modjam.dark_prismarine_pillar": "Dark Prismarine Pillar",
   "block.modjam.chiseled_dark_prismarine": "Chiseled Dark Prismarine",
   "block.modjam.crate": "Crate",
-
 
   "multiblock.info.failed_to_construct": "Missing or invalid block",
   "multiblock.info.actual_block": "Block: %s",
