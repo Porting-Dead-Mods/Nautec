@@ -83,6 +83,45 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     private ItemEntity cookingItem = null;
     private int cookTime = 0;
 
+    private void damageLivingEntities(AABB box) {
+        List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, box);
+        for (LivingEntity livingEntity : livingEntities) {
+            livingEntity.hurt(level.damageSources().inFire(), 3);
+        }
+    }
+
+    private void processItemCrafting(AABB box) {
+        List<ItemEntity> itemEntities = level.getEntitiesOfClass(ItemEntity.class, box);
+        if (cookingItem == null) {
+            for (ItemEntity itemEntity : itemEntities) {
+                if (itemEntity.getItem().is(Items.IRON_INGOT)) {
+                    cookingItem = itemEntity;
+                    cookTime = 0;
+                    break;
+                }
+            }
+        } else {
+            if (cookTime >= 40) {
+                int stackSize = cookingItem.getItem().getCount();
+                BlockPos spawnPos = cookingItem.blockPosition();
+                cookingItem.discard();
+                ItemStack newStack = new ItemStack(MJItems.AQUARINE_STEEL.get(), stackSize);
+                ItemEntity newItemEntity = new ItemEntity(level, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), newStack);
+                level.addFreshEntity(newItemEntity);
+                cookingItem = null;
+                cookTime = 0;
+            } else {
+                cookTime++;
+                ParticlesUtils.spawnParticles(cookingItem, level, ParticleTypes.END_ROD);
+            }
+        }
+
+        if (cookingItem != null && (!cookingItem.isAlive() || !cookingItem.getItem().is(Items.IRON_INGOT))) {
+            cookingItem = null;
+            cookTime = 0;
+        }
+    }
+
     private void damageLiving() {
         for (Direction direction : getLaserOutputs()) {
             int distance = this.laserDistances.getInt(direction);
@@ -93,37 +132,13 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
             this.box = box;
 
             assert level != null;
-            List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, box);
-            for (LivingEntity livingEntity : livingEntities) {
-                livingEntity.hurt(level.damageSources().inFire(), 3);
-            }
 
-            List<ItemEntity> itemEntities = level.getEntitiesOfClass(ItemEntity.class, box);
-            if (cookingItem == null) {
-                for (ItemEntity itemEntity : itemEntities) {
-                    if (itemEntity.getItem().is(Items.IRON_INGOT)) {
-                        cookingItem = itemEntity;
-                        cookTime = 0;
-                        break;
-                    }
-                }
-            } else {
-                if (cookTime >= 40) {
-                    cookingItem.setItem(new ItemStack(MJItems.AQUARINE_STEEL.get()));
-                    cookingItem = null;
-                    cookTime = 0;
-                } else {
-                    cookTime++;
-                    ParticlesUtils.spawnParticles(cookingItem,level,ParticleTypes.END_ROD);
-                }
-            }
+            damageLivingEntities(box);
 
-            if (cookingItem != null && (!cookingItem.isAlive() || !cookingItem.getItem().is(Items.IRON_INGOT))) {
-                cookingItem = null;
-                cookTime = 0;
-            }
+            processItemCrafting(box);
         }
     }
+
 
     private void checkConnections() {
         for (Direction direction : getLaserOutputs()) {
