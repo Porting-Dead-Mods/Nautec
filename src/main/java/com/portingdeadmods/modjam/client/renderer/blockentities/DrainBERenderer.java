@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.portingdeadmods.modjam.client.model.DrainTopModel;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.DrainBlockEntity;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -18,7 +19,8 @@ public class DrainBERenderer implements BlockEntityRenderer<DrainBlockEntity> {
 
     @Override
     public void render(DrainBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        VertexConsumer consumer = DrainTopModel.DRAIN_TOP_LOCATION.buffer(bufferSource, RenderType::entitySolid);
-        this.model.renderToBuffer(poseStack, consumer, packedLight, packedOverlay);
+        VertexConsumer consumer = DrainTopModel.DRAIN_TOP_LOCATION.buffer(bufferSource, RenderType::entityTranslucent);
+        this.model.setupAnimation();
+        this.model.renderToBuffer(poseStack, consumer, LightTexture.FULL_BLOCK, packedOverlay);
     }
 }
