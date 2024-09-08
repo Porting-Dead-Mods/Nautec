@@ -7,9 +7,20 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class AugmentHelper {
+    private static HashMap<Integer, StaticAugment> augmentHashMap = new HashMap<>();
+    public static void AddAugment(StaticAugment augment, int id){
+        augmentHashMap.put(id, augment);
+    }
+    public static StaticAugment getAugment(Player player, Slot slot){
+        int id = getId(player, slot);
+        return augmentHashMap.get(id);
+    }
     private static Supplier<AttachmentType<Integer>> getAttachment(Slot slot){
         switch (slot){
             case HEAD -> {
@@ -51,4 +62,14 @@ public class AugmentHelper {
         return getId(player, slot) == augment.id;
     }
 
+    public static StaticAugment[] getAugments(Player player) {
+        List<StaticAugment> augments = new ArrayList<StaticAugment>();
+        augments.add(getAugment(player, Slot.HEAD));
+        augments.add(getAugment(player, Slot.BODY));
+        augments.add(getAugment(player, Slot.ARMS));
+        augments.add(getAugment(player, Slot.LEGS));
+        augments.add(getAugment(player, Slot.HEART));
+
+        return augments.toArray(new StaticAugment[0]);
+    }
 }
