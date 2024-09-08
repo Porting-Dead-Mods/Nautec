@@ -18,7 +18,7 @@ public class RecipesProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(@NotNull RecipeOutput pRecipeOutput) {
-        ItemTransformationRecipeBuilder.newRecipe(new ItemStack(MJItems.AQUARINE_STEEL.get(), 1))
+        ItemTransformationRecipeBuilder.newRecipe(new ItemStack(MJItems.AQUARINE_STEEL_INGOT.get(), 1))
                 .ingredient(new ItemStack(Items.IRON_INGOT))
                 .save(pRecipeOutput);
 

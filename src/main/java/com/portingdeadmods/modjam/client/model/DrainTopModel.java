@@ -20,10 +20,12 @@ public class DrainTopModel extends Model {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "drain_top"), "main");
     private final ModelPart top;
+    private final ModelPart valve;
 
     public DrainTopModel(ModelPart root) {
         super(RenderType::entityTranslucent);
         this.top = root.getChild("top");
+        this.valve = root.getChild("valve");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -31,9 +33,7 @@ public class DrainTopModel extends Model {
         PartDefinition partdefinition = meshdefinition.getRoot();
 
         PartDefinition top = partdefinition.addOrReplaceChild("top", CubeListBuilder.create().texOffs(0, 0).addBox(-30.0F, -19.0F, -14.0F, 44.0F, 3.0F, 44.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 47).addBox(-20.0F, -21.0F, -4.0F, 24.0F, 2.0F, 24.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 16).addBox(-10.0F, -25.0F, 6.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
-                .texOffs(56, 47).addBox(-16.0F, -25.0F, 0.0F, 16.0F, 0.0F, 16.0F, new CubeDeformation(0.0F)), PartPose.offset(8.0F, 40.0F, -8.0F));
+                .texOffs(0, 47).addBox(-20.0F, -21.0F, -4.0F, 24.0F, 2.0F, 24.0F, new CubeDeformation(0.0F)), PartPose.offset(8.0F, 40.0F, -8.0F));
 
         PartDefinition cube_r1 = top.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -2.0F, -3.0F, 4.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-9.0F, -18.0042F, -5.9937F, 0.3927F, 0.0F, 0.0F));
 
@@ -43,6 +43,9 @@ public class DrainTopModel extends Model {
 
         PartDefinition cube_r4 = top.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 8).addBox(-3.0F, -2.0F, -3.0F, 4.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-7.0F, -18.0042F, 22.0063F, -0.3927F, 0.0F, 0.0F));
 
+        PartDefinition valve = partdefinition.addOrReplaceChild("valve", CubeListBuilder.create().texOffs(56, 47).addBox(-8.0F, -9.0F, -8.0F, 16.0F, 0.0F, 16.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 16).addBox(-2.0F, -9.0F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
         return LayerDefinition.create(meshdefinition, 256, 256);
     }
 
@@ -51,7 +54,8 @@ public class DrainTopModel extends Model {
         poseStack.pushPose();
         {
             poseStack.translate(1.0625, 0, 1.0625);
-            top.render(poseStack, buffer, packedLight, packedOverlay, color);
+            this.top.render(poseStack, buffer, packedLight, packedOverlay, color);
+            this.valve.render(poseStack, buffer, packedLight, packedOverlay, color);
         }
         poseStack.popPose();
     }

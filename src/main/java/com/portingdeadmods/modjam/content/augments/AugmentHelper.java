@@ -18,60 +18,56 @@ import java.util.function.Supplier;
 public class AugmentHelper {
     private static final HashMap<Integer, StaticAugment> augmentHashMap = new HashMap<>();
 
-    public static void AddAugment(StaticAugment augment, int id){
+    public static void AddAugment(StaticAugment augment, int id) {
         augmentHashMap.put(id, augment);
     }
-    public static StaticAugment getAugment(Player player, Slot slot){
+
+    public static StaticAugment getAugment(Player player, Slot slot) {
         int id = getId(player, slot);
         return augmentHashMap.get(id);
     }
-    public static Supplier<AttachmentType<Integer>> getAttachment(Slot slot){
-        switch (slot){
-            case HEAD -> {
-                return MJDataAttachments.HEAD_AUGMENTATION;
-            }
-            case BODY -> {
-                return MJDataAttachments.BODY_AUGMENTATION;
-            }
-            case LEGS -> {
-                return MJDataAttachments.LEGS_AUGMENTATION;
-            }
-            case ARMS -> {
-                return MJDataAttachments.ARMS_AUGMENTATION;
-            }
-            case HEART -> {
-                return MJDataAttachments.HEART_AUGMENTATION;
-            }
-        }
-        ModJam.LOGGER.warn("Error parsing slot {} (I thought this was unreachable)", slot.name());
-        return MJDataAttachments.HEAD_AUGMENTATION;
+
+    public static Supplier<AttachmentType<Integer>> getAttachment(Slot slot) {
+        return switch (slot) {
+            case HEAD -> MJDataAttachments.HEAD_AUGMENTATION;
+            case BODY -> MJDataAttachments.BODY_AUGMENTATION;
+            case LEGS -> MJDataAttachments.LEGS_AUGMENTATION;
+            case ARMS -> MJDataAttachments.ARMS_AUGMENTATION;
+            case HEART -> MJDataAttachments.HEART_AUGMENTATION;
+            case NONE -> null;
+        };
     }
 
-    public static int getId(Player player, Slot slot){
-        return player.getData(getAttachment(slot));
+    public static int getId(Player player, Slot slot) {
+        return player.getData(getAttachment(slot).get());
         // return -2;
     }
 
-    public static void setId(Player player, Slot slot , int id){
-        if (player.level().isClientSide){
-            PacketDistributor.sendToServer(new SetAugmentDataPayload(id , slot.slotId));
+    public static void setId(Player player, Slot slot, int id) {
+        player.setData(getAttachment(slot).get(), id);
+    }
+
+    public static void setIdAndUpdate(Player player, Slot slot, int id) {
+        if (player.level().isClientSide()) {
+            PacketDistributor.sendToServer(new SetAugmentDataPayload(id, slot.slotId));
         } else {
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SetAugmentDataPayload(id, slot.slotId));
         }
+        setId(player, slot, id);
     }
 
-    public static void incId(Player player, Slot slot){
-        setId(player, slot, AugmentHelper.getId(player, slot) + 1);
-        player.sendSystemMessage(Component.literal("Incremented to Id "+getId(player, slot)+" for slot "+slot.name()));
+    public static void incId(Player player, Slot slot) {
+        setIdAndUpdate(player, slot, AugmentHelper.getId(player, slot) + 1);
+        player.sendSystemMessage(Component.literal("Incremented to Id " + getId(player, slot) + " for slot " + slot.name()));
 
     }
 
-    public static void decId(Player player, Slot slot){
-        setId(player, slot, AugmentHelper.getId(player, slot) - 1);
-        player.sendSystemMessage(Component.literal("Decremented to Id "+getId(player, slot)+" for slot "+slot.name()));
+    public static void decId(Player player, Slot slot) {
+        setIdAndUpdate(player, slot, AugmentHelper.getId(player, slot) - 1);
+        player.sendSystemMessage(Component.literal("Decremented to Id " + getId(player, slot) + " for slot " + slot.name()));
     }
 
-    public static StaticAugment getAugment(int id){
+    public static StaticAugment getAugment(int id) {
         return augmentHashMap.get(id);
     }
 

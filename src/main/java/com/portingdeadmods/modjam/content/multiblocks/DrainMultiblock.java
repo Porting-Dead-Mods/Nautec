@@ -64,12 +64,20 @@ public class DrainMultiblock implements Multiblock {
         if (blockState.is(Blocks.IRON_BLOCK)) {
             return MJBlocks.DRAIN_PART.get().defaultBlockState()
                     .setValue(FORMED, true)
-                    .setValue(DrainPartBlock.LASER_PORT, false)
                     .setValue(DRAIN_PART, layerIndex);
         } else if (blockState.is(getUnformedController())) {
             return getFormedController().defaultBlockState().setValue(FORMED, true);
         }
         return null;
+    }
+
+    @Override
+    public void afterFormBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, MultiblockData multiblockData, @Nullable Player player) {
+        level.setBlockAndUpdate(blockPos.above(), MJBlocks.DRAIN_PART.get().defaultBlockState()
+                .setValue(DrainPartBlock.TOP, true)
+                .setValue(FORMED, true)
+                .setValue(DRAIN_PART, layerIndex)
+        );
     }
 
     @Override

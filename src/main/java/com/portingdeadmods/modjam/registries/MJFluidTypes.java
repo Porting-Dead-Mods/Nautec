@@ -2,7 +2,6 @@ package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.fluids.BaseFluidType;
-import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.neoforged.neoforge.common.SoundAction;
@@ -22,7 +21,7 @@ public final class MJFluidTypes {
             FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
                     SoundEvents.HONEY_DRINK), new Vector4i(142, 189, 190, 100), FluidTemplate.WATER);
 
-    public static final Supplier<FluidType> ELECTROLYTE_ALGAE_SERUM_FLUID_TYPE = register("electrolyte_algae_serum",
+    public static final Supplier<FluidType> EAS_FLUID_TYPE = register("electrolyte_algae_serum",
             FluidType.Properties.create().lightLevel(2).density(30).viscosity(5).sound(SoundAction.get("drink"),
                     SoundEvents.HONEY_DRINK), new Vector4i(255, 255, 255, 255), FluidTemplate.EAS);
 
