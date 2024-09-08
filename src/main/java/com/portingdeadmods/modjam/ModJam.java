@@ -41,6 +41,7 @@ public final class ModJam {
         MJCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         MJDataComponents.DATA_COMPONENT_TYPES.register(modEventBus);
         MJMultiblocks.MULTIBLOCKS.register(modEventBus);
+        MJMenuTypes.MENUS.register(modEventBus);
 
         modEventBus.addListener(PrismMonocleItem::registerCapabilities);
 

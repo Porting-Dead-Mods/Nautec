@@ -4,6 +4,7 @@ import com.portingdeadmods.modjam.MJRegistries;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.multiblocks.Multiblock;
 import com.portingdeadmods.modjam.content.blocks.AquaticCatalystBlock;
+import com.portingdeadmods.modjam.content.blocks.CrateBlock;
 import com.portingdeadmods.modjam.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.modjam.content.multiblocks.DrainMultiblock;
 import com.portingdeadmods.modjam.registries.MJBlocks;
@@ -30,7 +31,29 @@ public class BlockModelProvider extends BlockStateProvider {
         simpleBlock(MJBlocks.AQUARINE_STEEL_BLOCK.get());
         aquaticCatalyst(MJBlocks.AQUATIC_CATALYST.get());
         drainPart(MJBlocks.DRAIN_PART.get(), IntegerRange.of(0, 8));
+        crateBlock(MJBlocks.CRATE.get());
     }
+
+    private void crateBlock(CrateBlock crateBlock) {
+        VariantBlockStateBuilder builder = getVariantBuilder(crateBlock);
+        builder.partialState().with(CrateBlock.RUSTY,false).with(BlockStateProperties.OPEN,false)
+                .modelForState().modelFile(models().getExistingFile(existingModelFile(crateBlock))).addModel();
+        builder.partialState().with(CrateBlock.RUSTY,true).with(BlockStateProperties.OPEN,false)
+                .modelForState().modelFile(rustedCrateModel(crateBlock,false)).addModel();
+        builder.partialState().with(CrateBlock.RUSTY,false).with(BlockStateProperties.OPEN,true)
+                .modelForState().modelFile(models().getExistingFile(extend(existingModelFile(crateBlock),"_open"))).addModel();
+        builder.partialState().with(CrateBlock.RUSTY,true).with(BlockStateProperties.OPEN,true)
+                .modelForState().modelFile(rustedCrateModel(crateBlock,true)).addModel();
+    }
+
+    private ModelFile rustedCrateModel(CrateBlock block,boolean open) {
+        return models().withExistingParent("rusty_" + name(block) + (open ? "_open": ""), extend(existingModelFile(block),open ? "_open":""))
+                .texture("2", "modjam:block/crate/rusty_top_inner")
+                .texture("4", "modjam:block/crate/rusty")
+                .texture("5", "modjam:block/crate/rusty_top")
+                .texture("particle", "modjam:block/crate/rusty");
+    }
+
 
     private void drainPart(DrainPartBlock drainPartBlock, IntegerRange range) {
         VariantBlockStateBuilder builder = getVariantBuilder(drainPartBlock);

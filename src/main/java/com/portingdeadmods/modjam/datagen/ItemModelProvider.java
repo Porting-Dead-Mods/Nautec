@@ -27,6 +27,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(MJItems.AQUARINE_STEEL.get());
         basicItem(MJItems.ELECTROLYTE_ALGAE_SERUM_VIAL.get());
         basicItem(MJItems.GLASS_VIAL.get());
+        basicItem(MJItems.CROWBAR.get());
 
         blockItems();
     }
