@@ -15,14 +15,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class ItemTransformationRecipeBuilder implements RecipeBuilder {
-    @NotNull private final List<IngredientWithCount> ingredients;
+    @NotNull private IngredientWithCount ingredient;
     @NotNull private final ItemStack result;
 
     private ItemTransformationRecipeBuilder(ItemStack result) {
-        this.ingredients = new ArrayList<>();
+        this.ingredient = IngredientWithCount.EMPTY;
         this.result = result;
     }
 
@@ -35,23 +34,22 @@ public class ItemTransformationRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
-    public ItemTransformationRecipeBuilder ingredients(IngredientWithCount... ingredients) {
-        this.ingredients.addAll(Arrays.stream(ingredients).toList());
+    public ItemTransformationRecipeBuilder ingredient(IngredientWithCount ingredient) {
+        this.ingredient = ingredient;
         return this;
     }
-    public ItemTransformationRecipeBuilder ingredients(ItemStack... items) {
-        this.ingredients.addAll(Arrays.stream(items).map(IngredientWithCount::fromItemStack).toList());
-        return this;
-    }
-
-    public ItemTransformationRecipeBuilder ingredients(ItemLike... items) {
-        this.ingredients.addAll(Arrays.stream(items).map(IngredientWithCount::fromItemLike).toList());
+    public ItemTransformationRecipeBuilder ingredient(ItemStack ingredient) {
+        this.ingredient = IngredientWithCount.fromItemStack(ingredient);
         return this;
     }
 
-    @SafeVarargs
-    public final ItemTransformationRecipeBuilder ingredients(TagKey<Item>... items) {
-        this.ingredients.addAll(Arrays.stream(items).map(IngredientWithCount::fromItemTag).toList());
+    public ItemTransformationRecipeBuilder ingredient(ItemLike ingredient) {
+        this.ingredient = IngredientWithCount.fromItemLike(ingredient);
+        return this;
+    }
+
+    public final ItemTransformationRecipeBuilder ingredients(TagKey<Item> item) {
+        this.ingredient = IngredientWithCount.fromItemTag(item);
         return this;
     }
 
@@ -67,7 +65,7 @@ public class ItemTransformationRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
-        ItemTransformationRecipe recipe = new ItemTransformationRecipe(this.ingredients, this.result);
+        ItemTransformationRecipe recipe = new ItemTransformationRecipe(this.ingredient, this.result);
         recipeOutput.accept(resourceLocation, recipe, null);
     }
 }
