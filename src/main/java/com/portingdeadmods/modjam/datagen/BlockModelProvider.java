@@ -1,8 +1,13 @@
 package com.portingdeadmods.modjam.datagen;
 
+import com.portingdeadmods.modjam.MJRegistries;
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.api.multiblocks.Multiblock;
 import com.portingdeadmods.modjam.content.blocks.AquaticCatalystBlock;
+import com.portingdeadmods.modjam.content.blocks.multiblock.part.DrainPartBlock;
+import com.portingdeadmods.modjam.content.multiblocks.DrainMultiblock;
 import com.portingdeadmods.modjam.registries.MJBlocks;
+import com.portingdeadmods.modjam.registries.MJMultiblocks;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -11,6 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.apache.commons.lang3.IntegerRange;
 
 public class BlockModelProvider extends BlockStateProvider {
     public BlockModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -23,6 +29,50 @@ public class BlockModelProvider extends BlockStateProvider {
         simpleBlock(MJBlocks.CHISELED_DARK_PRISMARINE.get());
         simpleBlock(MJBlocks.AQUARINE_STEEL_BLOCK.get());
         aquaticCatalyst(MJBlocks.AQUATIC_CATALYST.get());
+        drainPart(MJBlocks.DRAIN_PART.get(), IntegerRange.of(0, 8));
+    }
+
+    private void drainPart(DrainPartBlock drainPartBlock, IntegerRange range) {
+        VariantBlockStateBuilder builder = getVariantBuilder(drainPartBlock);
+        builder.partialState().with(DrainMultiblock.FORMED, false)
+                .modelForState().modelFile(drainPartModel(drainPartBlock, 0, false)).addModel();
+        for (int i = range.getMinimum(); i <= range.getMaximum(); i++) {
+            builder.partialState().with(DrainMultiblock.DRAIN_PART, i).with(DrainMultiblock.FORMED, true).with(DrainPartBlock.LASER_PORT, false)
+                    .modelForState().modelFile(drainPartModel(drainPartBlock, i, false)).addModel();
+            builder.partialState().with(DrainMultiblock.DRAIN_PART, i).with(DrainMultiblock.FORMED, true).with(DrainPartBlock.LASER_PORT, true)
+                    .modelForState().modelFile(drainPartModel(drainPartBlock, i, true)).addModel();
+        }
+    }
+
+    private ModelFile drainPartModel(DrainPartBlock drainPartBlock, int index, boolean laserPort) {
+        String postfix = laserPort ? "_open" : "";
+        BlockModelBuilder builder = models().withExistingParent(name(drainPartBlock) + "_" + index + postfix, "cube");
+        Multiblock multiblock = MJMultiblocks.DRAIN.get();
+        // TODO: Clean up
+        if (index % 2 != 0) {
+            builder.texture("up", multiblockTexture(multiblock, "top_" + index))
+                    .texture("north", multiblockTexture(multiblock, "side_1" + postfix))
+                    .texture("east", multiblockTexture(multiblock, "side_1" + postfix))
+                    .texture("south", multiblockTexture(multiblock, "side_1" + postfix))
+                    .texture("west", multiblockTexture(multiblock, "side_1" + postfix));
+        } else if (index == 0 || index == 2) {
+            builder.texture("up", multiblockTexture(multiblock, "top_" + index))
+                    .texture("north", multiblockTexture(multiblock, "side_" + (2 - index % 3)))
+                    .texture("east", multiblockTexture(multiblock, "side_" + index % 3))
+                    .texture("south", multiblockTexture(multiblock, "side_" + (2 - index % 3)))
+                    .texture("west", multiblockTexture(multiblock, "side_" + index % 3));
+        } else {
+            builder.texture("up", multiblockTexture(multiblock, "top_" + index))
+                    .texture("north", multiblockTexture(multiblock, "side_" + index % 3))
+                    .texture("east", multiblockTexture(multiblock, "side_" + (2 - index % 3)))
+                    .texture("south", multiblockTexture(multiblock, "side_" + index % 3))
+                    .texture("west", multiblockTexture(multiblock, "side_" + (2 - index % 3)));
+        }
+        return builder;
+    }
+
+    public ResourceLocation multiblockTexture(Multiblock multiblock, String name) {
+        return modLoc(ModelProvider.BLOCK_FOLDER + "/multiblock/" + MJRegistries.MULTIBLOCK.getKey(multiblock).getPath() + "/" + name);
     }
 
     private void aquaticCatalyst(AquaticCatalystBlock block) {

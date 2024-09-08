@@ -14,6 +14,8 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 public class AugmentDebugItem extends Item {
@@ -33,16 +35,21 @@ public class AugmentDebugItem extends Item {
         Level level = context.getLevel();
         Player player = context.getPlayer();
         Block clickedBlock = level.getBlockState(context.getClickedPos()).getBlock();
-        if (level.isClientSide) return InteractionResult.SUCCESS;
-        if (InputUtils.isKeyDown(InputConstants.KEY_LSHIFT)){
-            if (clickedBlock == Blocks.DIRT) AugmentHelper.decId(player,Slot.HEAD);
-            else if (clickedBlock == Blocks.STONE) AugmentHelper.decId(player, Slot.BODY);
-        } else if (InputUtils.isKeyDown(InputConstants.KEY_LCONTROL)){
-            onDroppedByPlayer(context.getItemInHand(),player);
-        } else {
-            if (clickedBlock == Blocks.DIRT) AugmentHelper.incId(player,Slot.HEAD);
-            else if (clickedBlock == Blocks.STONE) AugmentHelper.incId(player, Slot.BODY);
+
+        if (level.isClientSide) {
+            return InteractionResult.SUCCESS;
         }
+
+        if (clickedBlock == Blocks.DIRT) {
+            AugmentHelper.incId(player, Slot.HEAD);
+        } else if (clickedBlock == Blocks.GRASS_BLOCK){
+            AugmentHelper.decId(player,Slot.HEAD);
+        } else if (clickedBlock == Blocks.STONE) {
+            AugmentHelper.incId(player, Slot.BODY);
+        }
+
         return super.useOn(context);
     }
+
+
 }

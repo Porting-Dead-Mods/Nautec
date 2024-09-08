@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class AugmentHelper {
-    private static HashMap<Integer, StaticAugment> augmentHashMap = new HashMap<>();
+    private static final HashMap<Integer, StaticAugment> augmentHashMap = new HashMap<>();
+
     public static void AddAugment(StaticAugment augment, int id){
         augmentHashMap.put(id, augment);
     }
@@ -58,10 +59,9 @@ public class AugmentHelper {
         setId(player, slot, AugmentHelper.getId(player, slot) - 1);
         player.sendSystemMessage(Component.literal("Decremented to Id "+getId(player, slot)+" for slot "+slot.name()));
     }
-    public static boolean playerHasAugment(Player player, Slot slot, Augments augment){
-        return getId(player, slot) == augment.id;
+    public static StaticAugment getAugment(int id){
+        return augmentHashMap.get(id);
     }
-
     public static StaticAugment[] getAugments(Player player) {
         List<StaticAugment> augments = new ArrayList<StaticAugment>();
         augments.add(getAugment(player, Slot.HEAD));

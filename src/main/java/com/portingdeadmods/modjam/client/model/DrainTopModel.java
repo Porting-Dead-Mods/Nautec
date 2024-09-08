@@ -48,10 +48,18 @@ public class DrainTopModel extends Model {
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        top.render(poseStack, buffer, packedLight, packedOverlay, color);
+        poseStack.pushPose();
+        {
+            poseStack.translate(1.0625, 0, 1.0625);
+            top.render(poseStack, buffer, packedLight, packedOverlay, color);
+        }
+        poseStack.popPose();
     }
 
     public void setupAnimation() {
         top.xRot = (float) Math.toRadians(180);
+        top.x = -1;
+        top.y = 0;
+        top.z = -1;
     }
 }
