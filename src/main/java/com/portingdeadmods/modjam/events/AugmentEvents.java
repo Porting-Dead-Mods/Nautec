@@ -1,11 +1,9 @@
 package com.portingdeadmods.modjam.events;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
 import com.portingdeadmods.modjam.content.augments.AugmentHelper;
 import com.portingdeadmods.modjam.content.augments.StaticAugment;
-import com.portingdeadmods.modjam.network.AugmentDataPayload;
-import com.portingdeadmods.modjam.network.KeyPressedPayload;
+import com.portingdeadmods.modjam.network.SetAugmentDataPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -17,10 +15,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 @SuppressWarnings("unused")
 @EventBusSubscriber(modid = ModJam.MODID)
 public class AugmentEvents {
-    public static void logInEvent(PlayerEvent.PlayerLoggedInEvent event){
-        if (event.getEntity().level().isClientSide) return;
-        PacketDistributor.sendToPlayer((ServerPlayer) event.getEntity(), new AugmentDataPayload(1,1));
-    }
 
     @SubscribeEvent
     public static void breakEvent(BlockEvent.BreakEvent event){
@@ -40,7 +34,7 @@ public class AugmentEvents {
             if (augment != null) {
                 if (event.getEntity().level().isClientSide) {
                     augment.clientTick(event);
-                    ModJam.LOGGER.debug("AAAA");
+                    // ModJam.LOGGER.debug("AAAA");
                 } else {
                     augment.serverTick(event);
                 }
