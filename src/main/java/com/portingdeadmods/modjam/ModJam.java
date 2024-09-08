@@ -32,13 +32,14 @@ public final class ModJam {
         AugmentHelper.AddAugment(new ThrowSnowballAugment(), 3);
 
         MJItems.ITEMS.register(modEventBus);
-        MJBlocks.BLOCKS.register(modEventBus);
-        MJDataAttachments.ATTACHMENTS.register(modEventBus);
         MJFluids.FLUIDS.register(modEventBus);
+        MJBlocks.BLOCKS.register(modEventBus);
+        MJRecipes.SERIALIZERS.register(modEventBus);
         MJFluidTypes.FLUID_TYPES.register(modEventBus);
+        MJDataAttachments.ATTACHMENTS.register(modEventBus);
+        MJBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
         MJCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         MJDataComponents.DATA_COMPONENT_TYPES.register(modEventBus);
-        MJBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
 
         modEventBus.addListener(PrismMonocleItem::registerCapabilities);
 
