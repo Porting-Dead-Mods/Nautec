@@ -16,17 +16,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public record ItemTransformationRecipe(List<IngredientWithCount> ingredients, ItemStack result) implements Recipe<MJRecipeInput> {
+public record ItemTransformationRecipe(IngredientWithCount ingredient, ItemStack result) implements Recipe<SingleRecipeInput> {
     public static final String NAME = "item_transformation";
 
     @Override
-    public boolean matches(@NotNull MJRecipeInput recipeInput, @NotNull Level level) {
-        List<ItemStack> inputItems = recipeInput.items().stream().filter(input -> !input.isEmpty()).toList();
-        return RecipeUtils.compareItems(inputItems, ingredients);
+    public boolean matches(@NotNull SingleRecipeInput recipeInput, @NotNull Level level) {
+        return ingredient.test(recipeInput.item());
     }
 
     @Override
-    public @NotNull ItemStack assemble(@NotNull MJRecipeInput input, HolderLookup.@NotNull Provider registries) {
+    public @NotNull ItemStack assemble(@NotNull SingleRecipeInput input, HolderLookup.@NotNull Provider registries) {
         return result.copy();
     }
 
@@ -52,22 +51,22 @@ public record ItemTransformationRecipe(List<IngredientWithCount> ingredients, It
 
     @Override
     public @NotNull NonNullList<Ingredient> getIngredients() {
-        return RecipeUtils.listToNonNullList(RecipeUtils.iWCToIngredientsSaveCount(ingredients));
+        return NonNullList.of(Ingredient.EMPTY, RecipeUtils.iWCToIngredientSaveCount(ingredient));
     }
 
     public @NotNull NonNullList<IngredientWithCount> getIngredientsWithCount() {
-        return RecipeUtils.listToNonNullList(ingredients);
+        return NonNullList.of(IngredientWithCount.EMPTY, ingredient);
     }
 
     public static class Serializer implements RecipeSerializer<ItemTransformationRecipe> {
         public static final ItemTransformationRecipe.Serializer INSTANCE = new ItemTransformationRecipe.Serializer();
         private static final MapCodec<ItemTransformationRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec((builder) -> builder.group(
-                IngredientWithCount.CODEC.listOf().fieldOf("ingredients").forGetter(ItemTransformationRecipe::ingredients),
+                IngredientWithCount.CODEC.fieldOf("ingredient").forGetter(ItemTransformationRecipe::ingredient),
                 ItemStack.OPTIONAL_CODEC.fieldOf("result").forGetter(ItemTransformationRecipe::result)
         ).apply(builder, ItemTransformationRecipe::new));
         private static final StreamCodec<RegistryFriendlyByteBuf, ItemTransformationRecipe> STREAM_CODEC = StreamCodec.composite(
-                IngredientWithCount.STREAM_CODEC.apply(ByteBufCodecs.list()),
-                ItemTransformationRecipe::ingredients,
+                IngredientWithCount.STREAM_CODEC,
+                ItemTransformationRecipe::ingredient,
                 ItemStack.OPTIONAL_STREAM_CODEC,
                 ItemTransformationRecipe::result,
                 ItemTransformationRecipe::new
