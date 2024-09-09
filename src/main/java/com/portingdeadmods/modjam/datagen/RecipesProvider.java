@@ -1,6 +1,5 @@
 package com.portingdeadmods.modjam.datagen;
 
-import com.portingdeadmods.modjam.content.recipes.AquaticCatalystChannelingRecipe;
 import com.portingdeadmods.modjam.datagen.recipeBuilder.AquaticCatalystChannelingRecipeBuilder;
 import com.portingdeadmods.modjam.datagen.recipeBuilder.ItemTransformationRecipeBuilder;
 import com.portingdeadmods.modjam.registries.MJItems;

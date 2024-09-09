@@ -3,8 +3,6 @@ package com.portingdeadmods.modjam.content.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.modjam.content.recipes.utils.IngredientWithCount;
-import com.portingdeadmods.modjam.content.recipes.utils.RecipeUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;

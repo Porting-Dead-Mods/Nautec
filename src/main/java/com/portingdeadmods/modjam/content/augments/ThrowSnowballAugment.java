@@ -1,14 +1,12 @@
 package com.portingdeadmods.modjam.content.augments;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
 import com.portingdeadmods.modjam.network.KeyPressedPayload;
 import com.portingdeadmods.modjam.utils.InputUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 

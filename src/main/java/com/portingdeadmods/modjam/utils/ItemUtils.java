@@ -2,8 +2,6 @@ package com.portingdeadmods.modjam.utils;
 
 import com.portingdeadmods.modjam.capabilities.MJCapabilities;
 import com.portingdeadmods.modjam.capabilities.power.IPowerStorage;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;

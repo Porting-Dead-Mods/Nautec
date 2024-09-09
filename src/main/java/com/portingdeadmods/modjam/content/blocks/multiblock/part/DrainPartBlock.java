@@ -1,7 +1,6 @@
 package com.portingdeadmods.modjam.content.blocks.multiblock.part;
 
 import com.mojang.serialization.MapCodec;
-import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.modjam.api.blocks.DisplayBlock;
 import com.portingdeadmods.modjam.api.blocks.blockentities.LaserBlock;
@@ -26,7 +25,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
