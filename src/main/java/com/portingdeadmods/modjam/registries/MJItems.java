@@ -1,7 +1,6 @@
 package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.content.items.AugmentDebugItem;
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
 import com.portingdeadmods.modjam.content.items.AquarineWrenchItem;
 import net.minecraft.world.item.BlockItem;
@@ -45,7 +44,6 @@ public final class MJItems {
     public static final DeferredItem<BucketItem> SALT_WATER_BUCKET = registerItemBucket("salt_water_bucket",
             () -> new BucketItem(MJFluids.SALT_WATER_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
-    public static final DeferredItem<AugmentDebugItem> AUGMENT_DEBUG_ITEM = registerItem("augment_debug_item", AugmentDebugItem::new, new Item.Properties());
 
     public static final DeferredItem<AquarineWrenchItem> AQUARINE_WRENCH = registerItem("aquarine_steel_wrench",
             AquarineWrenchItem::new, new Item.Properties());
