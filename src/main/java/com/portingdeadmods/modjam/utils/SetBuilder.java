@@ -1,6 +1,5 @@
 package com.portingdeadmods.modjam.utils;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.*;
 

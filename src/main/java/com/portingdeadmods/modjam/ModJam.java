@@ -1,14 +1,8 @@
 package com.portingdeadmods.modjam;
 
-import com.portingdeadmods.modjam.content.augments.AugmentHelper;
-import com.portingdeadmods.modjam.content.augments.DisallowBreakingAugment;
-import com.portingdeadmods.modjam.content.augments.GiveDiamondAugment;
-import com.portingdeadmods.modjam.content.augments.ThrowSnowballAugment;
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
 import com.portingdeadmods.modjam.data.MJDataComponents;
 import com.portingdeadmods.modjam.registries.*;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import org.slf4j.Logger;
 

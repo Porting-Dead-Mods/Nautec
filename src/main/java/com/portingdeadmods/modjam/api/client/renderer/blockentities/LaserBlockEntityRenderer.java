@@ -1,7 +1,6 @@
 package com.portingdeadmods.modjam.api.client.renderer.blockentities;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import com.portingdeadmods.modjam.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.modjam.utils.LaserRendererHelper;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -10,7 +9,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
