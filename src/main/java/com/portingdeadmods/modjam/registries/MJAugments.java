@@ -15,4 +15,5 @@ public final class MJAugments {
     public static final Supplier<DisallowBreakingAugment> DISALLOW_BREAKING = AUGMENTS.register("disallow_breaking", DisallowBreakingAugment::new);
     public static final Supplier<GiveDiamondAugment> GIVE_DIAMOND = AUGMENTS.register("give_diamond", GiveDiamondAugment::new);
     public static final Supplier<ThrowSnowballAugment> THROW_SNOWBALL = AUGMENTS.register("throw_snowball", ThrowSnowballAugment::new);
+    public static final Supplier<ThrowRandomPotionAugments> THROW_POTION_AUGMENT = AUGMENTS.register("throw_random_potion", ThrowRandomPotionAugments::new);
 }
