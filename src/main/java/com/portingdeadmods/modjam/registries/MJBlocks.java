@@ -47,6 +47,9 @@ public final class MJBlocks {
     public static final DeferredBlock<LiquidBlock> EAS_FLUID_BLOCK = BLOCKS.register("electrolyte_algae_serum_block",
             () -> new LiquidBlock(MJFluids.EAS_SOURCE.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
 
+    public static final DeferredBlock<LiquidBlock> ETCHING_ACID_FLUID_BLOCK = BLOCKS.register("etching_acid_block",
+            () -> new LiquidBlock(MJFluids.ETCHING_ACID_SOURCE.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.LAVA)));
+
     private static <T extends Block> DeferredBlock<T> registerBlockAndItem(String name, Function<BlockBehaviour.Properties, T> blockConstructor, BlockBehaviour.Properties properties) {
         return registerBlockAndItem(name, blockConstructor, properties, true);
     }

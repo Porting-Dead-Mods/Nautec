@@ -45,11 +45,15 @@ public final class MJItems {
             () -> new BucketItem(MJFluids.SALT_WATER_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
 
+
     public static final DeferredItem<AquarineWrenchItem> AQUARINE_WRENCH = registerItem("aquarine_steel_wrench",
             AquarineWrenchItem::new, new Item.Properties());
 
     public static final DeferredItem<BucketItem> EAS_BUCKET = registerItemBucket("eas_bucket",
             () -> new BucketItem(MJFluids.EAS_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
+    public static final DeferredItem<BucketItem> ETCHING_ACID_BUCKET = registerItemBucket("etching_acid_bucket",
+            () -> new BucketItem(MJFluids.ETCHING_ACID_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     public static final DeferredItem<Item> CROWBAR = registerItem("crowbar",Item::new,new Item.Properties().stacksTo(1));
 
