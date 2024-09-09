@@ -13,10 +13,13 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
+import java.util.Random;
+
 @Mod(ModJam.MODID)
 public final class ModJam {
     public static final String MODID = "modjam";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static final Random random = new Random();
 
     public ModJam(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(NewRegistryEvent.class, event -> {
