@@ -11,4 +11,5 @@ public interface StaticAugment {
     void serverTick(Slot slot, PlayerTickEvent.Post event);
     void handleKeybindPress(Slot slot, Player player);
     int getId();
+    boolean onCooldown(Slot slot, Player player);
 }
