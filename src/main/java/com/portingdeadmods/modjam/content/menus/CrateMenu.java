@@ -1,4 +1,4 @@
-package com.portingdeadmods.modjam.inventory;
+package com.portingdeadmods.modjam.content.menus;
 
 import com.portingdeadmods.modjam.registries.MJMenuTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;

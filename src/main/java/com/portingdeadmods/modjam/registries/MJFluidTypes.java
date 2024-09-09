@@ -19,7 +19,7 @@ public final class MJFluidTypes {
 
     public static final Supplier<FluidType> SALT_WATER_FLUID_TYPE = register("soap_water",
             FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
-                    SoundEvents.HONEY_DRINK), new Vector4i(142, 189, 190, 100), FluidTemplate.WATER);
+                    SoundEvents.HONEY_DRINK), new Vector4i(174, 227, 227, 176), FluidTemplate.WATER);
 
     public static final Supplier<FluidType> EAS_FLUID_TYPE = register("electrolyte_algae_serum",
             FluidType.Properties.create().lightLevel(2).density(30).viscosity(5).sound(SoundAction.get("drink"),

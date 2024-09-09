@@ -1,4 +1,4 @@
-package com.portingdeadmods.modjam.datagen.recipe_builder;
+package com.portingdeadmods.modjam.datagen.recipeBuilder;
 
 import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.modjam.content.recipes.utils.IngredientWithCount;
