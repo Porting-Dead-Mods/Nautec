@@ -2,6 +2,7 @@ package com.portingdeadmods.modjam.content.augments;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
 import com.portingdeadmods.modjam.network.KeyPressedPayload;
 import com.portingdeadmods.modjam.utils.InputUtils;
 import net.minecraft.client.Minecraft;
@@ -19,15 +20,15 @@ public class GiveDiamondAugment extends Augment {
     }
 
     @Override
-    public void clientTick(PlayerTickEvent.Post event) {
+    public void clientTick(Slot slot, PlayerTickEvent.Post event) {
         // ModJam.LOGGER.info("ClientTick for id {}", getId());
         if (InputUtils.isKeyDown(InputConstants.KEY_Y)) {
-            PacketDistributor.sendToServer(new KeyPressedPayload(getId()));
+            PacketDistributor.sendToServer(new KeyPressedPayload(getId(), slot.slotId));
         }
     }
 
     @Override
-    public void handleKeybindPress(Player player) {
+    public void handleKeybindPress(Slot slot, Player player) {
         player.addItem(Items.DIAMOND.getDefaultInstance());
     }
 }

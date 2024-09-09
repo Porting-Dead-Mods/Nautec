@@ -21,5 +21,10 @@ public class NetworkEvents {
                 SetAugmentDataPayload.STREAM_CODEC,
                 PayloadActions::setAugmentDataAction
         );
+        registrar.playBidirectional(
+                SetCooldownPayload.TYPE,
+                SetCooldownPayload.STREAM_CODEC,
+                PayloadActions::setCooldownAction
+        );
     }
 }
