@@ -21,6 +21,8 @@ import java.util.function.Function;
 public final class MJBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(ModJam.MODID);
 
+    public static final DeferredBlock<CrateBlock> CRATE = registerBlockAndItem("crate", CrateBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL));
     public static final DeferredBlock<RotatedPillarBlock> DARK_PRISMARINE_PILLAR = registerBlockAndItem("dark_prismarine_pillar", RotatedPillarBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
     public static final DeferredBlock<Block> CHISELED_DARK_PRISMARINE = registerBlockAndItem("chiseled_dark_prismarine", Block::new,
@@ -29,9 +31,8 @@ public final class MJBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<AquaticCatalystBlock> AQUATIC_CATALYST = registerBlockAndItem("aquatic_catalyst", AquaticCatalystBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).lightLevel(state -> state.getValue(AquaticCatalystBlock.CORE_ACTIVE) ? 12 : 0));
-    public static final DeferredBlock<CrateBlock> CRATE = registerBlockAndItem("crate", CrateBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL));
-
+    public static final DeferredBlock<RotatedPillarBlock> PRISMARINE_RELAY = registerBlockAndItem("prismarine_relay", RotatedPillarBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
 
     // MULTIBLOCKS
     public static final DeferredBlock<DrainBlock> DRAIN = registerBlockAndItem("deep_sea_drain", DrainBlock::new,
