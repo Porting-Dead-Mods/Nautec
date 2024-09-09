@@ -27,6 +27,15 @@ public final class MJItems {
     public static final DeferredItem<Item> ATLANTIC_GOLD_INGOT = registerItem("atlantic_gold_ingot",
             Item::new, new Item.Properties());
 
+    public static final DeferredItem<Item> RUSTY_GEAR = registerItem("rusty_gear",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> GEAR = registerItem("gear",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> ANCIENT_VALVE = registerItem("ancient_valve",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> VALVE = registerItem("valve",
+            Item::new, new Item.Properties());
+
     public static final DeferredItem<Item> GLASS_VIAL = registerItem("glass_vial", Item::new, new Item.Properties());
     public static final DeferredItem<Item> ELECTROLYTE_ALGAE_SERUM_VIAL = registerItem("eas_vial", Item::new, new Item.Properties());
 
