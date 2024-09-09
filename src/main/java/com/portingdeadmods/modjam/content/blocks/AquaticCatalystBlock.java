@@ -5,6 +5,7 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.modjam.api.blocks.DisplayBlock;
 import com.portingdeadmods.modjam.api.blocks.blockentities.LaserBlock;
+import com.portingdeadmods.modjam.content.blockentities.AquaticCatalystBlockEntity;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import com.portingdeadmods.modjam.tags.MJTags;
 import com.portingdeadmods.modjam.utils.ItemUtils;
@@ -99,8 +100,10 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
         BlockState blockState = level.getBlockState(blockPos);
         Direction direction = blockState.getValue(BlockStateProperties.FACING);
         boolean coreActive = blockState.getValue(CORE_ACTIVE);
+        AquaticCatalystBlockEntity be = (AquaticCatalystBlockEntity) level.getBlockEntity(blockPos);
         return List.of(
-                Component.literal("Active: " + (coreActive ? direction : "None")).withStyle(ChatFormatting.WHITE)
+                Component.literal("Active: " + (coreActive ? direction : "None")).withStyle(ChatFormatting.WHITE),
+                Component.literal("Duration: " + be.getDuration())
         );
     }
 
