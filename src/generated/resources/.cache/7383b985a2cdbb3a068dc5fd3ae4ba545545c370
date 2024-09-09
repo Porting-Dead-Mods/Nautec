@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-09T16:28:40.662678864	Block States: modjam
+// 1.21.1	2024-09-09T19:42:22.399781792	Block States: modjam
 af3ef9c17c60ced537516e8aa1215fcb76e3683e assets/modjam/blockstates/aquarine_steel_block.json
 865a45a4d022b56bc54dc32dae4b666af2df7d6f assets/modjam/blockstates/aquatic_catalyst.json
 6e42254717fc67a953282f50517eb06c02193129 assets/modjam/blockstates/chiseled_dark_prismarine.json
@@ -6,6 +6,7 @@ af3ef9c17c60ced537516e8aa1215fcb76e3683e assets/modjam/blockstates/aquarine_stee
 791da2d01b6b33bb1ce175d5c9c1fa5b737c9dfc assets/modjam/blockstates/dark_prismarine_pillar.json
 ff480f6623e46679671977b783f08e28c536578d assets/modjam/blockstates/deep_sea_drain.json
 74a08c3614f8cf6dace6f155476015776d839ce1 assets/modjam/blockstates/deep_sea_drain_part.json
+1f3da306face8fd06aa163eec7cc411123921f90 assets/modjam/blockstates/prismarine_laser_relay.json
 5ca1917566d04d2f7fefbfa648958c06d3238f67 assets/modjam/models/block/aquarine_steel_block.json
 4d2484ce030aeac9f86e39b1dffd193afb69271f assets/modjam/models/block/aquatic_catalyst.json
 7dac030be8fd8eb7409ecb588476b3379d53142f assets/modjam/models/block/aquatic_catalyst_down.json
