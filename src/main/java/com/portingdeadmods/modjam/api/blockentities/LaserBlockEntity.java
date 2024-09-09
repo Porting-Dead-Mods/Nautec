@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.api.blockentities;
 
+import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.modjam.utils.ParticlesUtils;
 import it.unimi.dsi.fastutil.objects.*;
@@ -67,6 +68,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         if (level.getGameTime() % 10 == 0) {
             checkConnections();
         }
+
         interactWithEntities();
 
         transmitPower();
@@ -81,12 +83,10 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     }
 
     private void damageLivingEntities(AABB box) {
-        for (Direction direction : getLaserOutputs()) {
-            assert level != null;
-            List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, box);
-            for (LivingEntity livingEntity : livingEntities) {
-                livingEntity.hurt(level.damageSources().inFire(), 3);
-            }
+        assert level != null;
+        List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, box);
+        for (LivingEntity livingEntity : livingEntities) {
+            livingEntity.hurt(level.damageSources().inFire(), 3);
         }
     }
 
@@ -167,6 +167,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
 
                 if (!state.canBeReplaced() || i == MAX_DISTANCE - 1) {
                     laserDistances.put(direction, 0);
+                    ModJam.LOGGER.debug("Encountered block at: {}", pos);
                     break;
                 }
             }
