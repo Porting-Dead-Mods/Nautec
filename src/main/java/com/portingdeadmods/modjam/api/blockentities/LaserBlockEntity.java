@@ -167,7 +167,6 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
 
                 if (!state.canBeReplaced() || i == MAX_DISTANCE - 1) {
                     laserDistances.put(direction, 0);
-                    ModJam.LOGGER.debug("Encountered block at: {}", pos);
                     break;
                 }
             }

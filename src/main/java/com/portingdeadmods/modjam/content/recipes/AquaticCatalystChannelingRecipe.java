@@ -13,7 +13,7 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public record AquaticCatalystChannelingRecipe(Ingredient ingredient, int powerAmount) implements Recipe<SingleRecipeInput> {
+public record AquaticCatalystChannelingRecipe(Ingredient ingredient, int powerAmount, int duration) implements Recipe<SingleRecipeInput> {
     public static final String NAME = "aquatic_catalyst_channeling";
 
     @Override
@@ -55,13 +55,16 @@ public record AquaticCatalystChannelingRecipe(Ingredient ingredient, int powerAm
         public static final AquaticCatalystChannelingRecipe.Serializer INSTANCE = new AquaticCatalystChannelingRecipe.Serializer();
         private static final MapCodec<AquaticCatalystChannelingRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec((builder) -> builder.group(
                 Ingredient.CODEC.fieldOf("ingredient").forGetter(AquaticCatalystChannelingRecipe::ingredient),
-                Codec.INT.fieldOf("power_amount").forGetter(AquaticCatalystChannelingRecipe::powerAmount)
+                Codec.INT.fieldOf("power_amount").forGetter(AquaticCatalystChannelingRecipe::powerAmount),
+                Codec.INT.fieldOf("duration").forGetter(AquaticCatalystChannelingRecipe::duration)
         ).apply(builder, AquaticCatalystChannelingRecipe::new));
         private static final StreamCodec<RegistryFriendlyByteBuf, AquaticCatalystChannelingRecipe> STREAM_CODEC = StreamCodec.composite(
                 Ingredient.CONTENTS_STREAM_CODEC,
                 AquaticCatalystChannelingRecipe::ingredient,
                 ByteBufCodecs.INT,
                 AquaticCatalystChannelingRecipe::powerAmount,
+                ByteBufCodecs.INT,
+                AquaticCatalystChannelingRecipe::duration,
                 AquaticCatalystChannelingRecipe::new
         );
 

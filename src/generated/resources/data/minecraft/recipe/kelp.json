@@ -1,0 +1,8 @@
+{
+  "type": "modjam:aquatic_catalyst_channeling",
+  "duration": 100,
+  "ingredient": {
+    "item": "minecraft:kelp"
+  },
+  "power_amount": 100
+}

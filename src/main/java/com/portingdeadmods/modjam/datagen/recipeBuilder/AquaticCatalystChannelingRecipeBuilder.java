@@ -12,17 +12,28 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class AquaticCatalystChannelingRecipeBuilder implements RecipeBuilder {
-    @NotNull
-    private Ingredient ingredient;
+    private final Ingredient ingredient;
     private final int powerAmount;
+    private final int duration;
 
     private AquaticCatalystChannelingRecipeBuilder(Ingredient ingredient, int powerAmount) {
         this.ingredient = ingredient;
         this.powerAmount = powerAmount;
+        this.duration = 100;
+    }
+
+    private AquaticCatalystChannelingRecipeBuilder(Ingredient ingredient, int powerAmount, int duration) {
+        this.ingredient = ingredient;
+        this.powerAmount = powerAmount;
+        this.duration = duration;
     }
 
     public static AquaticCatalystChannelingRecipeBuilder newRecipe(Ingredient ingredient, int powerAmount) {
         return new AquaticCatalystChannelingRecipeBuilder(ingredient, powerAmount);
+    }
+
+    public static AquaticCatalystChannelingRecipeBuilder newRecipe(Ingredient ingredient, int powerAmount, int duration) {
+        return new AquaticCatalystChannelingRecipeBuilder(ingredient, powerAmount, duration);
     }
 
     @Override
@@ -37,12 +48,12 @@ public class AquaticCatalystChannelingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public @NotNull Item getResult() {
-        return Items.AIR;
+        return ingredient.getItems().length > 0 ? ingredient.getItems()[0].getItem() : Items.AIR;
     }
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
-        AquaticCatalystChannelingRecipe recipe = new AquaticCatalystChannelingRecipe(this.ingredient, this.powerAmount);
+        AquaticCatalystChannelingRecipe recipe = new AquaticCatalystChannelingRecipe(this.ingredient, this.powerAmount, this.duration);
         recipeOutput.accept(resourceLocation, recipe, null);
     }
 }

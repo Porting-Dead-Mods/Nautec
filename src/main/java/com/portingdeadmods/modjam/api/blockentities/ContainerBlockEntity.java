@@ -1,6 +1,6 @@
 package com.portingdeadmods.modjam.api.blockentities;
 
-import com.google.common.collect.ImmutableMap;
+import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.capabilities.IOActions;
 import com.portingdeadmods.modjam.capabilities.fluid.SidedFluidHandler;
 import com.portingdeadmods.modjam.capabilities.item.SidedItemHandler;
@@ -216,22 +216,33 @@ public abstract class ContainerBlockEntity extends BlockEntity {
                 return handlerSupplier.get(baseHandler, ioPorts.get(direction));
             }
 
-            if (!this.getBlockState().hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
-                return null;
+            if (this.getBlockState().hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+                Direction localDir = this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+
+                return getCapOnSide(handlerSupplier, direction, baseHandler, ioPorts, localDir);
             }
 
-            Direction localDir = this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+            if (getBlockState().hasProperty(BlockStateProperties.FACING)) {
+                Direction localDir = this.getBlockState().getValue(BlockStateProperties.FACING);
 
-            return switch (localDir) {
-                case NORTH -> handlerSupplier.get(baseHandler, ioPorts.get(direction.getOpposite()));
-                case EAST -> handlerSupplier.get(baseHandler, ioPorts.get(direction.getClockWise()));
-                case SOUTH -> handlerSupplier.get(baseHandler, ioPorts.get(direction));
-                case WEST -> handlerSupplier.get(baseHandler, ioPorts.get(direction.getCounterClockWise()));
-                default -> null;
-            };
+                return getCapOnSide(handlerSupplier, direction, baseHandler, ioPorts, localDir);
+            }
+
+            ModJam.LOGGER.warn("Sided io for non facing block");
         }
 
         return null;
+    }
+
+    @Nullable
+    private <T> T getCapOnSide(SidedHandlerSupplier<T> handlerSupplier, Direction direction, T baseHandler, Map<Direction, Pair<IOActions, int[]>> ioPorts, Direction localDir) {
+        return switch (localDir) {
+            case NORTH -> handlerSupplier.get(baseHandler, ioPorts.get(direction.getOpposite()));
+            case EAST -> handlerSupplier.get(baseHandler, ioPorts.get(direction.getClockWise()));
+            case SOUTH -> handlerSupplier.get(baseHandler, ioPorts.get(direction));
+            case WEST -> handlerSupplier.get(baseHandler, ioPorts.get(direction.getCounterClockWise()));
+            default -> null;
+        };
     }
 
     public IItemHandler getItemHandlerOnSide(Direction direction) {
@@ -258,7 +269,7 @@ public abstract class ContainerBlockEntity extends BlockEntity {
      *
      * @return Map of directions that each map to a pair that defines the IOAction as well as the tanks that are affected. Return an empty map if you do not have an itemhandler
      */
-    public abstract <T> ImmutableMap<Direction, Pair<IOActions, int[]>> getSidedInteractions(BlockCapability<T, @Nullable Direction> capability);
+    public abstract <T> Map<Direction, Pair<IOActions, int[]>> getSidedInteractions(BlockCapability<T, @Nullable Direction> capability);
 
     @Nullable
     @Override
