@@ -1,4 +1,4 @@
-package com.portingdeadmods.modjam.recipes.utils;
+package com.portingdeadmods.modjam.content.recipes.utils;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;

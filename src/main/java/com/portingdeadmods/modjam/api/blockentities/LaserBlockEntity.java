@@ -1,7 +1,6 @@
 package com.portingdeadmods.modjam.api.blockentities;
 
-import com.portingdeadmods.modjam.api.blocks.blockentities.LaserBlock;
-import com.portingdeadmods.modjam.recipes.ItemTransformationRecipe;
+import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.modjam.utils.ParticlesUtils;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.core.BlockPos;
