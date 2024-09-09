@@ -18,4 +18,5 @@ public final class MJAugments {
     public static final Supplier<ThrowSnowballAugment> THROW_SNOWBALL = AUGMENTS.register("throw_snowball", ThrowSnowballAugment::new);
     public static final Supplier<ThrowRandomPotionAugments> THROW_POTION_AUGMENT = AUGMENTS.register("throw_random_potion", ThrowRandomPotionAugments::new);
     public static final Supplier<PreventPlayerLoseAirAugment> PREVENT_PLAYER_LOSE_AIR_AUGMENT = AUGMENTS.register("prevent_player_lose_air_supply", PreventPlayerLoseAirAugment::new);
+    public static final Supplier<UnderwaterMovementSpeedAugment> UNDERWATER_MOVEMENT_SPEED_AUGMENT = AUGMENTS.register("underwater_movement_speed", UnderwaterMovementSpeedAugment::new);
 }
