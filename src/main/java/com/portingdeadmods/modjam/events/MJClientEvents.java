@@ -99,6 +99,7 @@ public final class MJClientEvents {
         @SubscribeEvent
         public static void registerBERenderers(EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(MJBlockEntityTypes.AQUATIC_CATALYST.get(), LaserBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(MJBlockEntityTypes.PRISMARINE_LASER_RELAY.get(), LaserBlockEntityRenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.DRAIN.get(), DrainBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.DRAIN_PART.get(), LaserBlockEntityRenderer::new);
         }
