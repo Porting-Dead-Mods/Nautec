@@ -1,7 +1,7 @@
 package com.portingdeadmods.modjam.datagen.recipe_builder;
 
-import com.portingdeadmods.modjam.recipes.ItemTransformationRecipe;
-import com.portingdeadmods.modjam.recipes.utils.IngredientWithCount;
+import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
+import com.portingdeadmods.modjam.content.recipes.utils.IngredientWithCount;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;

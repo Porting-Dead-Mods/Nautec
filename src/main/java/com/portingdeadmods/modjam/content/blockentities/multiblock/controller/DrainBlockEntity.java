@@ -104,7 +104,7 @@ public class DrainBlockEntity extends ContainerBlockEntity implements Multiblock
 
     private void performDraining() {
         // Every second
-        if (level.getGameTime() % 20 == 0) {
+        if (level.getGameTime() % 20 == 0 && lidInUse == 0) {
             ModJam.LOGGER.debug("Filling 0 ");
             if (hasWater()) {
                 ModJam.LOGGER.debug("Filling 1 ");
@@ -149,8 +149,8 @@ public class DrainBlockEntity extends ContainerBlockEntity implements Multiblock
             if (valveLidInterval == 0) {
                 if (!closing) {
                     // Start opening lid
-                    this.lidInUse = 36;
-                    this.lidSpeed = 6;
+                    this.lidInUse = 72;
+                    this.lidSpeed = 3;
                 } else {
                     this.valveInUse = 12;
                     this.valveSpeed = -30;
@@ -228,11 +228,13 @@ public class DrainBlockEntity extends ContainerBlockEntity implements Multiblock
     protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
         super.saveData(tag, provider);
         tag.put("multiblockData", saveMBData());
+        tag.putFloat("angle", this.lidIndependentAngle);
     }
 
     @Override
     protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
         super.loadData(tag, provider);
         this.multiblockData = loadMBData(tag.getCompound("multiblockData"));
+        this.lidIndependentAngle = tag.getFloat("angle");
     }
 }
