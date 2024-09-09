@@ -51,19 +51,37 @@ public class DrainTopModel extends Model {
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+        renderLid(poseStack, buffer, packedLight, packedOverlay);
+
+        renderValve(poseStack, buffer, packedLight, packedOverlay);
+    }
+
+    public void renderLid(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         {
-            poseStack.translate(1.0625, 0, 1.0625);
-            this.top.render(poseStack, buffer, packedLight, packedOverlay, color);
-            this.valve.render(poseStack, buffer, packedLight, packedOverlay, color);
+            poseStack.translate(1, 0, 1);
+            this.top.render(poseStack, buffer, packedLight, packedOverlay, -1);
+        }
+        poseStack.popPose();
+    }
+
+    public void renderValve(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay) {
+        poseStack.pushPose();
+        {
+            poseStack.translate(0.5, 1, 0.5);
+            this.valve.render(poseStack, buffer, packedLight, packedOverlay, -1);
         }
         poseStack.popPose();
     }
 
     public void setupAnimation() {
         top.xRot = (float) Math.toRadians(180);
-        top.x = -1;
+        top.x = 0;
         top.y = 0;
-        top.z = -1;
+        top.z = 0;
+        valve.xRot = (float) Math.toRadians(180);
+        valve.x = 0;
+        valve.y = 0;
+        valve.z = 0;
     }
 }

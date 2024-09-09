@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam.content.multiblocks;
 
 import com.portingdeadmods.modjam.api.blockentities.multiblock.MultiblockEntity;
+import com.portingdeadmods.modjam.api.blockentities.multiblock.SavesControllerPosBlockEntity;
 import com.portingdeadmods.modjam.api.multiblocks.Multiblock;
 import com.portingdeadmods.modjam.api.multiblocks.MultiblockData;
 import com.portingdeadmods.modjam.api.multiblocks.MultiblockLayer;
@@ -11,10 +12,12 @@ import com.portingdeadmods.modjam.registries.MJBlocks;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -77,7 +80,13 @@ public class DrainMultiblock implements Multiblock {
                 .setValue(DrainPartBlock.TOP, true)
                 .setValue(FORMED, true)
                 .setValue(DRAIN_PART, layerIndex)
+                .setValue(DrainPartBlock.WATERLOGGED, level.getBlockState(blockPos).getFluidState().is(FluidTags.WATER))
+                .setValue(DrainPartBlock.OPEN, false)
         );
+        BlockEntity be = level.getBlockEntity(blockPos.above());
+        if (be instanceof SavesControllerPosBlockEntity savesControllerPosBE) {
+            savesControllerPosBE.setControllerPos(controllerPos);
+        }
     }
 
     @Override
