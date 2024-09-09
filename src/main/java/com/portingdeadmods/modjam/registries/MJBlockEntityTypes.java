@@ -3,6 +3,7 @@ package com.portingdeadmods.modjam.registries;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.blockentities.AquaticCatalystBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.CrateBlockEntity;
+import com.portingdeadmods.modjam.content.blockentities.PrismarineLaserRelayBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.DrainBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.part.DrainPartBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,6 +18,9 @@ public final class MJBlockEntityTypes {
     public static final Supplier<BlockEntityType<AquaticCatalystBlockEntity>> AQUATIC_CATALYST = BLOCK_ENTITIES.register("aquatic_catalyst",
             () -> BlockEntityType.Builder.of(AquaticCatalystBlockEntity::new,
                     MJBlocks.AQUATIC_CATALYST.get()).build(null));
+    public static final Supplier<BlockEntityType<PrismarineLaserRelayBlockEntity>> PRISMARINE_LASER_RELAY = BLOCK_ENTITIES.register("prismarine_laser_relay",
+            () -> BlockEntityType.Builder.of(PrismarineLaserRelayBlockEntity::new,
+                    MJBlocks.PRISMARINE_RELAY.get()).build(null));
     public static final Supplier<BlockEntityType<DrainBlockEntity>> DRAIN = BLOCK_ENTITIES.register("drain",
             () -> BlockEntityType.Builder.of(DrainBlockEntity::new,
                     MJBlocks.DRAIN.get()).build(null));

@@ -14,6 +14,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -34,22 +35,40 @@ public class BlockModelProvider extends BlockStateProvider {
         drainPart(MJBlocks.DRAIN_PART.get(), IntegerRange.of(0, 8));
         drainController(MJBlocks.DRAIN.get());
         crateBlock(MJBlocks.CRATE.get());
+        facingBlock(MJBlocks.PRISMARINE_RELAY.get());
+    }
+
+    public void facingBlock(Block block) {
+        ModelFile.ExistingModelFile model = models().getExistingFile(existingModelFile(block));
+        getVariantBuilder(block)
+                .partialState().with(BlockStateProperties.FACING, Direction.UP)
+                .modelForState().modelFile(model).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.DOWN)
+                .modelForState().modelFile(model).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.NORTH)
+                .modelForState().modelFile(model).rotationX(90).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.SOUTH)
+                .modelForState().modelFile(model).rotationX(90).rotationY(180).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.EAST)
+                .modelForState().modelFile(model).rotationX(90).rotationY(90).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.WEST)
+                .modelForState().modelFile(model).rotationX(90).rotationY(270).addModel();
     }
 
     private void crateBlock(CrateBlock crateBlock) {
         VariantBlockStateBuilder builder = getVariantBuilder(crateBlock);
-        builder.partialState().with(CrateBlock.RUSTY,false).with(BlockStateProperties.OPEN,false)
+        builder.partialState().with(CrateBlock.RUSTY, false).with(BlockStateProperties.OPEN, false)
                 .modelForState().modelFile(models().getExistingFile(existingModelFile(crateBlock))).addModel();
-        builder.partialState().with(CrateBlock.RUSTY,true).with(BlockStateProperties.OPEN,false)
-                .modelForState().modelFile(rustedCrateModel(crateBlock,false)).addModel();
-        builder.partialState().with(CrateBlock.RUSTY,false).with(BlockStateProperties.OPEN,true)
-                .modelForState().modelFile(models().getExistingFile(extend(existingModelFile(crateBlock),"_open"))).addModel();
-        builder.partialState().with(CrateBlock.RUSTY,true).with(BlockStateProperties.OPEN,true)
-                .modelForState().modelFile(rustedCrateModel(crateBlock,true)).addModel();
+        builder.partialState().with(CrateBlock.RUSTY, true).with(BlockStateProperties.OPEN, false)
+                .modelForState().modelFile(rustedCrateModel(crateBlock, false)).addModel();
+        builder.partialState().with(CrateBlock.RUSTY, false).with(BlockStateProperties.OPEN, true)
+                .modelForState().modelFile(models().getExistingFile(extend(existingModelFile(crateBlock), "_open"))).addModel();
+        builder.partialState().with(CrateBlock.RUSTY, true).with(BlockStateProperties.OPEN, true)
+                .modelForState().modelFile(rustedCrateModel(crateBlock, true)).addModel();
     }
 
-    private ModelFile rustedCrateModel(CrateBlock block,boolean open) {
-        return models().withExistingParent("rusty_" + name(block) + (open ? "_open": ""), extend(existingModelFile(block),open ? "_open":""))
+    private ModelFile rustedCrateModel(CrateBlock block, boolean open) {
+        return models().withExistingParent("rusty_" + name(block) + (open ? "_open" : ""), extend(existingModelFile(block), open ? "_open" : ""))
                 .texture("2", "modjam:block/crate/rusty_top_inner")
                 .texture("4", "modjam:block/crate/rusty")
                 .texture("5", "modjam:block/crate/rusty_top")
@@ -148,6 +167,10 @@ public class BlockModelProvider extends BlockStateProvider {
     private ResourceLocation existingModelFile(Block block) {
         ResourceLocation name = key(block);
         return ResourceLocation.fromNamespaceAndPath(name.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + name.getPath());
+    }
+
+    private ResourceLocation existingModelFile(String name) {
+        return modLoc(ModelProvider.BLOCK_FOLDER + "/" + name);
     }
 
     private ResourceLocation key(Block block) {

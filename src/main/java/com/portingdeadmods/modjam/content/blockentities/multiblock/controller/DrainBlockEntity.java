@@ -105,13 +105,9 @@ public class DrainBlockEntity extends ContainerBlockEntity implements Multiblock
     private void performDraining() {
         // Every second
         if (level.getGameTime() % 20 == 0 && lidInUse == 0) {
-            ModJam.LOGGER.debug("Filling 0 ");
             if (hasWater()) {
-                ModJam.LOGGER.debug("Filling 1 ");
                 if (openAndFormed()) {
-                    ModJam.LOGGER.debug("Filling 2 ");
-                    if (level.getBiome(worldPosition).getRegisteredName().contains("ocean")) {
-                        ModJam.LOGGER.debug("Filling");
+                    if (level.getBiome(worldPosition).is(BiomeTags.IS_OCEAN)) {
                         getFluidHandler().fill(new FluidStack(MJFluids.SALT_WATER_SOURCE.get(), 500), IFluidHandler.FluidAction.EXECUTE);
                     }
                 }
