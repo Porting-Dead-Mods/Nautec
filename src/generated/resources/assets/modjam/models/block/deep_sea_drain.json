@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "modjam:block/multiblock/drain/drain_bottom_unformed",
+    "east": "modjam:block/multiblock/drain/drain_side_unformed",
+    "north": "modjam:block/multiblock/drain/drain_side_unformed",
+    "south": "modjam:block/multiblock/drain/drain_side_unformed",
+    "up": "modjam:block/multiblock/drain/drain_top_unformed",
+    "west": "modjam:block/multiblock/drain/drain_side_unformed"
+  }
+}

@@ -1,7 +1,7 @@
 package com.portingdeadmods.modjam.compat.jei;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.recipes.ItemTransformationRecipe;
+import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;

@@ -1,7 +1,7 @@
 package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.recipes.ItemTransformationRecipe;
+import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredRegister;

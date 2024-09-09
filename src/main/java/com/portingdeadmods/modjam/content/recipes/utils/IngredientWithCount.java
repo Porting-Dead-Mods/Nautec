@@ -1,4 +1,4 @@
-package com.portingdeadmods.modjam.recipes.utils;
+package com.portingdeadmods.modjam.content.recipes.utils;
 
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;

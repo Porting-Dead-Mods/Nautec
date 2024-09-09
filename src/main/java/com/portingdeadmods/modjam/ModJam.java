@@ -25,11 +25,10 @@ public final class ModJam {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public ModJam(IEventBus modEventBus, ModContainer modContainer) {
-        modEventBus.addListener(NewRegistryEvent.class, event -> event.register(MJRegistries.MULTIBLOCK));
-
-        AugmentHelper.AddAugment(new DisallowBreakingAugment(), 1);
-        AugmentHelper.AddAugment(new GiveDiamondAugment(), 2);
-        AugmentHelper.AddAugment(new ThrowSnowballAugment(), 3);
+        modEventBus.addListener(NewRegistryEvent.class, event -> {
+            event.register(MJRegistries.MULTIBLOCK);
+            event.register(MJRegistries.AUGMENT);
+        });
 
         MJItems.ITEMS.register(modEventBus);
         MJFluids.FLUIDS.register(modEventBus);
@@ -41,6 +40,7 @@ public final class ModJam {
         MJCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         MJDataComponents.DATA_COMPONENT_TYPES.register(modEventBus);
         MJMultiblocks.MULTIBLOCKS.register(modEventBus);
+        MJAugments.AUGMENTS.register(modEventBus);
         MJMenuTypes.MENUS.register(modEventBus);
 
         modEventBus.addListener(PrismMonocleItem::registerCapabilities);
