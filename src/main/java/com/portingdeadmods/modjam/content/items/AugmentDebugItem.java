@@ -19,13 +19,6 @@ public class AugmentDebugItem extends Item {
     }
 
     @Override
-    public boolean onDroppedByPlayer(@NotNull ItemStack item, Player player) {
-        player.sendSystemMessage(Component.literal("Head Id = " + AugmentHelper.getId(player, Slot.HEAD)));
-        player.sendSystemMessage(Component.literal("Body Id = " + AugmentHelper.getId(player, Slot.BODY)));
-        return super.onDroppedByPlayer(item, player);
-    }
-
-    @Override
     public @NotNull InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         Player player = context.getPlayer();

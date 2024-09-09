@@ -1,6 +1,8 @@
 package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.content.commands.SetAugmentIdCommand;
+import com.portingdeadmods.modjam.content.commands.ShowAugmentIdCommand;
 import com.portingdeadmods.modjam.content.commands.TestCommand;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -12,7 +14,8 @@ public final class MJCommands {
     @SubscribeEvent
     public static void onCommandRegister(RegisterCommandsEvent event) {
         TestCommand.register(event.getDispatcher());
-
+        ShowAugmentIdCommand.register(event.getDispatcher());
+        SetAugmentIdCommand.register(event.getDispatcher());
         ConfigCommand.register(event.getDispatcher());
     }
 }
