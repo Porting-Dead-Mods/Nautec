@@ -2,6 +2,7 @@ package com.portingdeadmods.modjam.client.renderer.blockentities;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import com.portingdeadmods.modjam.api.multiblocks.Multiblock;
 import com.portingdeadmods.modjam.client.model.DrainTopModel;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.DrainBlockEntity;
@@ -27,7 +28,26 @@ public class DrainBERenderer implements BlockEntityRenderer<DrainBlockEntity> {
         if (blockEntity.getBlockState().getValue(Multiblock.FORMED)) {
             VertexConsumer consumer = DrainTopModel.DRAIN_TOP_LOCATION.buffer(bufferSource, RenderType::entityTranslucent);
             this.model.setupAnimation();
-            this.model.renderToBuffer(poseStack, consumer, getLightLevel(blockEntity.getLevel(), blockEntity.getBlockPos().above()), packedOverlay);
+            poseStack.pushPose();
+            {
+                float lidAngle = blockEntity.getLidIndependentAngle(partialTick);
+
+                poseStack.translate(-0.75, 0, -0.75);
+                poseStack.mulPose(Axis.YP.rotation(lidAngle));
+                poseStack.translate(0.75, 0, 0.75);
+                this.model.renderLid(poseStack, consumer, getLightLevel(blockEntity.getLevel(), blockEntity.getBlockPos().above()), packedOverlay);
+                poseStack.pushPose();
+                {
+                    float valveAngle = blockEntity.getValveIndependentAngle(partialTick);
+
+                    poseStack.translate(0.5, 0, 0.5);
+                    poseStack.mulPose(Axis.YP.rotation(valveAngle));
+                    poseStack.translate(-0.5, 0, -0.5);
+                    this.model.renderValve(poseStack, consumer, getLightLevel(blockEntity.getLevel(), blockEntity.getBlockPos().above()), packedOverlay);
+                }
+                poseStack.popPose();
+            }
+            poseStack.popPose();
         }
     }
 

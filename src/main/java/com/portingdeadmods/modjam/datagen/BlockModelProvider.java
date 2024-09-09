@@ -31,6 +31,7 @@ public class BlockModelProvider extends BlockStateProvider {
         simpleBlock(MJBlocks.AQUARINE_STEEL_BLOCK.get());
         aquaticCatalyst(MJBlocks.AQUATIC_CATALYST.get());
         drainPart(MJBlocks.DRAIN_PART.get(), IntegerRange.of(0, 8));
+        drainController(MJBlocks.DRAIN.get());
         crateBlock(MJBlocks.CRATE.get());
     }
 
@@ -54,8 +55,18 @@ public class BlockModelProvider extends BlockStateProvider {
                 .texture("particle", "modjam:block/crate/rusty");
     }
 
+    private void drainController(Block drainController) {
+        Multiblock multiblock = MJMultiblocks.DRAIN.get();
+        BlockModelBuilder builder = models().withExistingParent(name(drainController), "cube");
+        builder.texture("up", multiblockTexture(multiblock, "top_4"))
+                .texture("north", multiblockTexture(multiblock, "side_1"))
+                .texture("east", multiblockTexture(multiblock, "side_1"))
+                .texture("south", multiblockTexture(multiblock, "side_1"))
+                .texture("west", multiblockTexture(multiblock, "side_1"));
+        simpleBlock(drainController, builder);
+    }
 
-    private void drainPart(DrainPartBlock drainPartBlock, IntegerRange range) {
+    private void drainPart(Block drainPartBlock, IntegerRange range) {
         VariantBlockStateBuilder builder = getVariantBuilder(drainPartBlock);
         builder.partialState().with(DrainMultiblock.FORMED, false)
                 .modelForState().modelFile(drainPartModel(drainPartBlock, 0, false)).addModel();
@@ -67,7 +78,7 @@ public class BlockModelProvider extends BlockStateProvider {
         }
     }
 
-    private ModelFile drainPartModel(DrainPartBlock drainPartBlock, int index, boolean laserPort) {
+    private ModelFile drainPartModel(Block drainPartBlock, int index, boolean laserPort) {
         String postfix = laserPort ? "_open" : "";
         BlockModelBuilder builder = models().withExistingParent(name(drainPartBlock) + "_" + index + postfix, "cube");
         Multiblock multiblock = MJMultiblocks.DRAIN.get();
