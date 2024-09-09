@@ -32,4 +32,9 @@ public class Augment implements StaticAugment {
     public int getId() {
         return -1;
     }
+
+    @Override
+    public boolean onCooldown(Slot slot, Player player) {
+        return (AugmentHelper.getCooldown(player, slot)>=0);
+    }
 }

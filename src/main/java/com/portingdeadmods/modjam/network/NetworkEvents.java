@@ -14,17 +14,17 @@ public class NetworkEvents {
         registrar.playToServer(
                 KeyPressedPayload.TYPE,
                 KeyPressedPayload.STREAM_CODEC,
-                PayloadActions::keyPressedAction
+                KeyPressedPayload::keyPressedAction
         );
         registrar.playBidirectional(
                 SetAugmentDataPayload.TYPE,
                 SetAugmentDataPayload.STREAM_CODEC,
-                PayloadActions::setAugmentDataAction
+                SetAugmentDataPayload::setAugmentDataAction
         );
         registrar.playBidirectional(
                 SetCooldownPayload.TYPE,
                 SetCooldownPayload.STREAM_CODEC,
-                PayloadActions::setCooldownAction
+                SetCooldownPayload::setCooldownAction
         );
     }
 }

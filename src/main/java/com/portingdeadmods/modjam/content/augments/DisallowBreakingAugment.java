@@ -20,16 +20,4 @@ public class DisallowBreakingAugment extends Augment{
     public void breakBlock(Slot slot, BlockEvent.BreakEvent event) {
         event.setCanceled(true);
     }
-
-    @Override
-    public void clientTick(Slot slot, PlayerTickEvent.Post event) {
-        if (InputUtils.isKeyDown(InputConstants.KEY_Y)){
-            PacketDistributor.sendToServer(new KeyPressedPayload(getId(),slot.slotId));
-        }
-    }
-
-    @Override
-    public void handleKeybindPress(Slot slot, Player player) {
-        player.addItem(Items.EMERALD.getDefaultInstance());
-    }
 }
