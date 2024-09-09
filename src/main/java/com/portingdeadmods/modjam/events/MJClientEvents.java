@@ -77,7 +77,7 @@ public final class MJClientEvents {
                         @Override
                         public int getTintColor() {
                             Vector4i color = baseFluidType.getColor();
-                            return FastColor.ARGB32.color(color.x, color.y, color.z, color.w);
+                            return FastColor.ARGB32.color(color.w, color.x, color.y, color.z);
                         }
 
                         @Override
