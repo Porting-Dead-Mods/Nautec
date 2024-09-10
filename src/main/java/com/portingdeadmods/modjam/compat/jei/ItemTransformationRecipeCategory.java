@@ -19,7 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemTransformationRecipeCategory implements IRecipeCategory<ItemTransformationRecipe> {
-    private static final ResourceLocation BURN_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(ModJam.MODID,"container/furnace/empty_arrow");
+    static final ResourceLocation BURN_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(ModJam.MODID,"container/furnace/empty_arrow");
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "item_transformation");
     public static final RecipeType<ItemTransformationRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, ItemTransformationRecipe.class);
