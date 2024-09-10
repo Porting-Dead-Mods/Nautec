@@ -23,5 +23,20 @@
   "multiblock.info.failed_to_construct": "Missing or invalid block",
   "multiblock.info.actual_block": "Block: %s",
   "multiblock.info.expected_block": "Expected: %s",
-  "multiblock.info.block_pos": "Coordinates: %d, %d, %d"
+  "multiblock.info.block_pos": "Coordinates: %d, %d, %d",
+
+  "item.modjam.atlantic_gold_nugget": "Atlantic Gold Nugget",
+  "item.modjam.rusty_gear": "Rusty Gear",
+  "item.modjam.gear": "Gear",
+  "item.modjam.ancient_valve": "Ancient Valve",
+  "item.modjam.valve": "Valve",
+  "item.modjam.drowned_lungs": "Drowned Lungs",
+  "item.modjam.diving_helmet": "Diving Helmet",
+  "item.modjam.diving_chestplate": "Diving Chestplate",
+  "item.modjam.diving_leggings": "Diving Leggings",
+  "item.modjam.diving_boots": "Diving Boots",
+  "item.modjam.aquarine_steel_wrench": "Aquarine Steel Wrench",
+  "block.modjam.prismarine_laser_relay": "Prismarine Laser Relay",
+  "block.modjam.deep_sea_drain": "Deep Sea Drain",
+  "item.modjam.etching_acid_bucket": "Etching Acid Bucket"
 }
