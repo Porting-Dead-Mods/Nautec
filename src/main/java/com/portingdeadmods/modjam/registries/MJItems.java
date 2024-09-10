@@ -41,6 +41,8 @@ public final class MJItems {
     // MOB DROPS
     public static final DeferredItem<Item> DROWNED_LUNGS = registerItem("drowned_lungs",
             Item::new, new Item.Properties());
+    public static final DeferredItem<Item> DOLPHIN_FIN = registerItem("dolphin_fin",
+            Item::new, new Item.Properties());
 
     // VIALS
     public static final DeferredItem<Item> GLASS_VIAL = registerItem("glass_vial", Item::new, new Item.Properties());

@@ -67,15 +67,8 @@ public class ArmorModelsHandler {
 		return model;
 	}
 
-	private static class Layer {
-
-		final Supplier<LayerDefinition> definition;
-		final BiFunction<ModelPart, EquipmentSlot, MJArmorModel> armorModelConstructor;
-		
-		public Layer(Supplier<LayerDefinition> definition, BiFunction<ModelPart, EquipmentSlot, MJArmorModel> armorModelConstructor) {
-			this.definition = definition;
-			this.armorModelConstructor = armorModelConstructor;
-		}
+	private record Layer(Supplier<LayerDefinition> definition,
+						 BiFunction<ModelPart, EquipmentSlot, MJArmorModel> armorModelConstructor) {
 
 	}
 
