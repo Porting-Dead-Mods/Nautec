@@ -45,14 +45,14 @@ public class CrateBlock extends BaseEntityBlock {
     public CrateBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState()
-                .setValue(RUSTY,false)
-                .setValue(BlockStateProperties.OPEN,false)
+                .setValue(RUSTY, false)
+                .setValue(BlockStateProperties.OPEN, false)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder.add(RUSTY,BlockStateProperties.OPEN));
+        super.createBlockStateDefinition(builder.add(RUSTY, BlockStateProperties.OPEN));
     }
 
     @Override
@@ -68,19 +68,24 @@ public class CrateBlock extends BaseEntityBlock {
     @Override
     protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (level.isClientSide) return ItemInteractionResult.sidedSuccess(true);
-        if (state.getValue(BlockStateProperties.OPEN)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        if (!(level.getBlockEntity(pos) instanceof CrateBlockEntity be)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        if (stack.isEmpty()) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        if (!stack.is(MJItems.CROWBAR)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+        if (!(level.getBlockEntity(pos) instanceof CrateBlockEntity be)
+                || !stack.is(MJItems.CROWBAR)
+                || state.getValue(BlockStateProperties.OPEN))
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
         if (player.getCooldowns().isOnCooldown(stack.getItem())) return ItemInteractionResult.FAIL;
-        if (Math.random() > 0.2){
-            be.playSound(state,SoundEvents.ANVIL_HIT);
-            player.getCooldowns().addCooldown(stack.getItem(),10);
+
+        RandomSource random = level.getRandom();
+
+        if (random.nextInt(0, 7) == 0) {
+            be.playSound(state, SoundEvents.ANVIL_HIT);
+            player.getCooldowns().addCooldown(stack.getItem(), 10);
             return ItemInteractionResult.FAIL;
         }
-        level.setBlockAndUpdate(pos,state.setValue(BlockStateProperties.OPEN,true));
-        player.getCooldowns().addCooldown(stack.getItem(),30);
-        be.playSound(state,SoundEvents.ANVIL_USE);
+        level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.OPEN, true));
+        player.getCooldowns().addCooldown(stack.getItem(), 30);
+        be.playSound(state, SoundEvents.ANVIL_USE);
 
         return ItemInteractionResult.SUCCESS;
     }
@@ -97,7 +102,7 @@ public class CrateBlock extends BaseEntityBlock {
                 player.awardStat(Stats.OPEN_BARREL);
                 PiglinAi.angerNearbyPiglins(player, true);
             } else {
-                be.playSound(state,SoundEvents.CHEST_LOCKED);
+                be.playSound(state, SoundEvents.CHEST_LOCKED);
             }
             return InteractionResult.CONSUME;
         } else {
@@ -118,7 +123,7 @@ public class CrateBlock extends BaseEntityBlock {
         shape = Shapes.join(shape, Shapes.box(0.8125, 0.125, 0.8125, 0.9375, 0.75, 0.9375), BooleanOp.OR);
         shape = Shapes.join(shape, Shapes.box(0.0625, 0.125, 0.8125, 0.1875, 0.75, 0.9375), BooleanOp.OR);
 
-        if (!state.getValue(BlockStateProperties.OPEN)){
+        if (!state.getValue(BlockStateProperties.OPEN)) {
             shape = Shapes.join(shape, Shapes.box(0.1875, 0.75, 0.1875, 0.8125, 0.8125, 0.8125), BooleanOp.OR);
             shape = Shapes.join(shape, Shapes.box(0.0625, 0.75, 0.8125, 0.9375, 0.875, 0.9375), BooleanOp.OR);
             shape = Shapes.join(shape, Shapes.box(0.0625, 0.75, 0.1875, 0.1875, 0.875, 0.8125), BooleanOp.OR);
@@ -130,19 +135,19 @@ public class CrateBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new CrateBlockEntity(pos,state);
+        return new CrateBlockEntity(pos, state);
     }
 
     @Override
-    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (level.isClientSide())return super.playerWillDestroy(level, pos, state, player);
+    public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (level.isClientSide()) return super.playerWillDestroy(level, pos, state, player);
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof CrateBlockEntity be) {
-            if (be.isEmpty() && !state.getValue(BlockStateProperties.OPEN)){
+            if (be.isEmpty() && !state.getValue(BlockStateProperties.OPEN)) {
                 ItemStack itemstack = MJBlocks.CRATE.toStack();
                 itemstack.applyComponents(blockentity.collectComponents());
                 ItemEntity itementity = new ItemEntity(
-                        level, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, itemstack
+                        level, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, itemstack
                 );
                 itementity.setDefaultPickUpDelay();
                 level.addFreshEntity(itementity);
@@ -154,7 +159,7 @@ public class CrateBlock extends BaseEntityBlock {
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (state.getValue(BlockStateProperties.OPEN)){
+        if (state.getValue(BlockStateProperties.OPEN)) {
             Containers.dropContentsOnDestroy(state, newState, level, pos);
             return;
         }
@@ -162,7 +167,7 @@ public class CrateBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+    protected @NotNull List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
         BlockEntity blockentity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (blockentity instanceof CrateBlockEntity be) {
             params = params.withDynamicDrop(CONTENTS, p_56219_ -> {
@@ -180,7 +185,7 @@ public class CrateBlock extends BaseEntityBlock {
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof CrateBlockEntity) {
-            ((CrateBlockEntity)blockentity).recheckOpen();
+            ((CrateBlockEntity) blockentity).recheckOpen();
         }
     }
 }

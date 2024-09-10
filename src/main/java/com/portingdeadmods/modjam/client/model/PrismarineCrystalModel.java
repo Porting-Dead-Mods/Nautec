@@ -58,4 +58,13 @@ public class PrismarineCrystalModel extends Model {
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
         main.render(poseStack, buffer, packedLight, packedOverlay, color);
     }
+
+    public void render(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay) {
+        poseStack.pushPose();
+        {
+            poseStack.translate(0.5, 0, 0.5);
+            this.main.render(poseStack, buffer, packedLight, packedOverlay, -1);
+        }
+        poseStack.popPose();
+    }
 }

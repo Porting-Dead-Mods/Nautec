@@ -26,7 +26,7 @@ public class PrismarineCrystalBERenderer extends LaserBlockEntityRenderer<Prisma
         super.render(blockEntity, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
         VertexConsumer consumer = PrismarineCrystalModel.PRISMARINE_CRYSTAL_LOCATION.buffer(bufferSource, RenderType::entitySolid);
         model.setupAnim();
-        model.renderToBuffer(poseStack, consumer, getLightLevel(blockEntity.getLevel(), blockEntity.getBlockPos().above()), packedOverlay);
+        model.render(poseStack, consumer, getLightLevel(blockEntity.getLevel(), blockEntity.getBlockPos().above()), packedOverlay);
     }
 
     private int getLightLevel(Level level, BlockPos pos) {
