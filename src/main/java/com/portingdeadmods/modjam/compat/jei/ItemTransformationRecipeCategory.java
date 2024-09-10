@@ -30,7 +30,7 @@ public class ItemTransformationRecipeCategory implements IRecipeCategory<ItemTra
 
     public ItemTransformationRecipeCategory(IGuiHelper helper) {
         this.background = helper.createBlankDrawable(80, 16);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MJBlocks.AQUATIC_CATALYST.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MJBlocks.PRISMARINE_RELAY.get()));
     }
 
     @Override
@@ -64,5 +64,6 @@ public class ItemTransformationRecipeCategory implements IRecipeCategory<ItemTra
         builder.addSlot(RecipeIngredientRole.INPUT, 0,0 ).addItemStack(recipe.getIngredients().get(0).getItems()[0]);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 64, 0).addItemStack(recipe.getResultItem(null));
     }
+
 
 }
