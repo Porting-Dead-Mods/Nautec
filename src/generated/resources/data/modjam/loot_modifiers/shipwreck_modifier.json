@@ -1,0 +1,22 @@
+{
+  "type": "modjam:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:chests/shipwreck_treasure"
+    },
+    {
+      "chance": 0.33,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": {
+    "components": {
+      "minecraft:container_loot": {
+        "loot_table": "modjam:chests/crate"
+      }
+    },
+    "count": 1,
+    "id": "modjam:crate"
+  }
+}

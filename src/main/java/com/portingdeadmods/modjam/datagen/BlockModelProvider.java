@@ -54,6 +54,7 @@ public class BlockModelProvider extends BlockStateProvider {
                 .modelForState().modelFile(model).rotationX(90).rotationY(270).addModel();
     }
 
+
     private void crateBlock(CrateBlock crateBlock) {
         VariantBlockStateBuilder builder = getVariantBuilder(crateBlock);
         builder.partialState().with(CrateBlock.RUSTY, false).with(BlockStateProperties.OPEN, false)

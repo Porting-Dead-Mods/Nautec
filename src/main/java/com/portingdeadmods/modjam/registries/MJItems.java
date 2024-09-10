@@ -1,12 +1,10 @@
 package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.content.items.DivingSuitArmorItem;
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
 import com.portingdeadmods.modjam.content.items.AquarineWrenchItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -52,6 +50,11 @@ public final class MJItems {
     public static final DeferredItem<PrismMonocleItem> PRISM_MONOCLE = registerItem("prism_monocle",
             PrismMonocleItem::new, new Item.Properties());
 
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_HELMET = registerItem("diving_helmet",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_CHESTPLATE = registerItem("diving_chestplate",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_LEGGINGS = registerItem("diving_leggings",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_BOOTS = registerItem("diving_boots",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.BOOTS, new Item.Properties()));
+
     // BUCKETS
     public static final DeferredItem<BucketItem> SALT_WATER_BUCKET = registerItemBucket("salt_water_bucket",
             () -> new BucketItem(MJFluids.SALT_WATER_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
@@ -72,6 +75,12 @@ public final class MJItems {
 
     private static <T extends Item> DeferredItem<T> registerItemBucket(String name, Supplier<T> item) {
         return ITEMS.register(name, item);
+    }
+
+    public static <T extends Item> DeferredItem<T> registerItem(String name, Supplier<T> item) {
+        DeferredItem<T> toReturn = ITEMS.register(name, item);
+        CREATIVE_TAB_ITEMS.add(toReturn);
+        return toReturn;
     }
 
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Item.Properties properties, boolean addToTab) {
