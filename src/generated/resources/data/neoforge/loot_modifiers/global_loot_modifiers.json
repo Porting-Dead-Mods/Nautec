@@ -1,0 +1,10 @@
+{
+  "entries": [
+    "modjam:ocean_ruins_modifier",
+    "modjam:guardian_modifier",
+    "modjam:elder_guardian_modifier",
+    "modjam:suspicious_ruins_sand_modifier",
+    "modjam:shipwreck_modifier"
+  ],
+  "replace": false
+}
