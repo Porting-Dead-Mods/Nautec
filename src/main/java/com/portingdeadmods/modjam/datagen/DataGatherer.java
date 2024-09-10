@@ -35,5 +35,6 @@ public class DataGatherer {
         BlockTagProvider blockTagProvider = new BlockTagProvider(output, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeClient(), blockTagProvider);
         generator.addProvider(event.includeClient(), new ItemTagProvider(output, lookupProvider, blockTagProvider.contentsGetter()));
+        generator.addProvider(event.includeServer(),new LootModifierProvider(output,lookupProvider));
     }
 }
