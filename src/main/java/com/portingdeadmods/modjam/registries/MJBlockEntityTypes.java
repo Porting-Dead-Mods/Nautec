@@ -3,6 +3,7 @@ package com.portingdeadmods.modjam.registries;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.blockentities.AquaticCatalystBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.CrateBlockEntity;
+import com.portingdeadmods.modjam.content.blockentities.PrismarineCrystalBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.PrismarineLaserRelayBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.DrainBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.part.DrainPartBlockEntity;
@@ -21,13 +22,19 @@ public final class MJBlockEntityTypes {
     public static final Supplier<BlockEntityType<PrismarineLaserRelayBlockEntity>> PRISMARINE_LASER_RELAY = BLOCK_ENTITIES.register("prismarine_laser_relay",
             () -> BlockEntityType.Builder.of(PrismarineLaserRelayBlockEntity::new,
                     MJBlocks.PRISMARINE_RELAY.get()).build(null));
+    public static final Supplier<BlockEntityType<CrateBlockEntity>> CRATE = BLOCK_ENTITIES.register("crate",
+            () -> BlockEntityType.Builder.of(CrateBlockEntity::new,
+                    MJBlocks.CRATE.get()).build(null));
+
+    public static final Supplier<BlockEntityType<PrismarineCrystalBlockEntity>> PRISMARINE_CRYSTAL = BLOCK_ENTITIES.register("prismarine_crystal",
+            () -> BlockEntityType.Builder.of(PrismarineCrystalBlockEntity::new,
+                    MJBlocks.PRISMARINE_CRYSTAL.get()).build(null));
+
+    // MULTIBLOCKS
     public static final Supplier<BlockEntityType<DrainBlockEntity>> DRAIN = BLOCK_ENTITIES.register("drain",
             () -> BlockEntityType.Builder.of(DrainBlockEntity::new,
                     MJBlocks.DRAIN.get()).build(null));
     public static final Supplier<BlockEntityType<DrainPartBlockEntity>> DRAIN_PART = BLOCK_ENTITIES.register("drain_part",
             () -> BlockEntityType.Builder.of(DrainPartBlockEntity::new,
                     MJBlocks.DRAIN_PART.get()).build(null));
-    public static final Supplier<BlockEntityType<CrateBlockEntity>> CRATE = BLOCK_ENTITIES.register("crate",
-            () -> BlockEntityType.Builder.of(CrateBlockEntity::new,
-                    MJBlocks.CRATE.get()).build(null));
 }

@@ -5,6 +5,10 @@
       "resource": "modjam:entity/drain_top"
     },
     {
+      "type": "single",
+      "resource": "modjam:entity/prismarine_crystal"
+    },
+    {
       "type": "directory",
       "source": "fluid",
       "prefix": "fluid/"

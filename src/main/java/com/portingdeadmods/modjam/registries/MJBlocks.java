@@ -3,6 +3,7 @@ package com.portingdeadmods.modjam.registries;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.blocks.AquaticCatalystBlock;
 import com.portingdeadmods.modjam.content.blocks.CrateBlock;
+import com.portingdeadmods.modjam.content.blocks.PrismarineCrystalBlock;
 import com.portingdeadmods.modjam.content.blocks.PrismarineLaserRelayBlock;
 import com.portingdeadmods.modjam.content.blocks.multiblock.controller.DrainBlock;
 import com.portingdeadmods.modjam.content.blocks.multiblock.part.DrainPartBlock;
@@ -31,6 +32,9 @@ public final class MJBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).lightLevel(state -> state.getValue(AquaticCatalystBlock.CORE_ACTIVE) ? 12 : 0));
     public static final DeferredBlock<PrismarineLaserRelayBlock> PRISMARINE_RELAY = registerBlockAndItem("prismarine_laser_relay", PrismarineLaserRelayBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS));
+
+    public static final DeferredBlock<PrismarineCrystalBlock> PRISMARINE_CRYSTAL = registerBlockAndItem("prismarine_crystal", PrismarineCrystalBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
 
     // MULTIBLOCKS
     public static final DeferredBlock<DrainBlock> DRAIN = registerBlockAndItem("deep_sea_drain", DrainBlock::new,
