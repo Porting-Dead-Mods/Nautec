@@ -8,7 +8,9 @@ import com.portingdeadmods.modjam.api.client.renderer.blockentities.LaserBlockEn
 import com.portingdeadmods.modjam.api.fluids.BaseFluidType;
 import com.portingdeadmods.modjam.client.hud.PrismMonocleOverlay;
 import com.portingdeadmods.modjam.client.model.DrainTopModel;
+import com.portingdeadmods.modjam.client.model.PrismarineCrystalModel;
 import com.portingdeadmods.modjam.client.renderer.blockentities.DrainBERenderer;
+import com.portingdeadmods.modjam.client.renderer.blockentities.PrismarineCrystalBERenderer;
 import com.portingdeadmods.modjam.client.screen.CrateScreen;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import com.portingdeadmods.modjam.registries.MJMenuTypes;
@@ -99,6 +101,7 @@ public final class MJClientEvents {
         public static void registerBERenderers(EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(MJBlockEntityTypes.AQUATIC_CATALYST.get(), LaserBlockEntityRenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.PRISMARINE_LASER_RELAY.get(), LaserBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(MJBlockEntityTypes.PRISMARINE_CRYSTAL.get(), PrismarineCrystalBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.DRAIN.get(), DrainBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.DRAIN_PART.get(), LaserBlockEntityRenderer::new);
         }
@@ -106,6 +109,7 @@ public final class MJClientEvents {
         @SubscribeEvent
         public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(DrainTopModel.LAYER_LOCATION, DrainTopModel::createBodyLayer);
+            event.registerLayerDefinition(PrismarineCrystalModel.LAYER_LOCATION, PrismarineCrystalModel::createBodyLayer);
         }
 
         @SubscribeEvent

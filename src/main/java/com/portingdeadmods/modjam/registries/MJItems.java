@@ -81,4 +81,10 @@ public final class MJItems {
         }
         return toReturn;
     }
+
+    public static <T extends Item> DeferredItem<T> registerItem(String name, Supplier<T> item) {
+        DeferredItem<T> toReturn = ITEMS.register(name, item);
+        CREATIVE_TAB_ITEMS.add(toReturn);
+        return toReturn;
+    }
 }
