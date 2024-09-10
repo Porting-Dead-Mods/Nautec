@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.events;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -13,20 +14,23 @@ import com.portingdeadmods.modjam.client.renderer.blockentities.DrainBERenderer;
 import com.portingdeadmods.modjam.client.renderer.blockentities.PrismarineCrystalBERenderer;
 import com.portingdeadmods.modjam.client.screen.CrateScreen;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
+import com.portingdeadmods.modjam.registries.MJItems;
 import com.portingdeadmods.modjam.registries.MJMenuTypes;
 import net.minecraft.client.Camera;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.common.util.Lazy;
@@ -115,6 +119,24 @@ public final class MJClientEvents {
         @SubscribeEvent
         public static void registerMenus(RegisterMenuScreensEvent event){
             event.register(MJMenuTypes.CRATE.get(), CrateScreen::new);
+        }
+    }
+
+
+    @EventBusSubscriber(modid = ModJam.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
+    public static final class ClientInGameBus {
+
+        @SubscribeEvent
+        public static void onRenderFog(ViewportEvent.RenderFog event) {
+            Entity cameraEntity = Minecraft.getInstance().cameraEntity;
+            if(cameraEntity instanceof Player player){
+                if(cameraEntity.isUnderWater() && player.getItemBySlot(EquipmentSlot.HEAD).is(MJItems.DIVING_HELMET.get())){
+                    event.setNearPlaneDistance(-8.0f);
+                    event.setFarPlaneDistance(250.0f);
+                    event.setFogShape(FogShape.CYLINDER);
+                    event.setCanceled(true);
+                }
+            }
         }
     }
 }

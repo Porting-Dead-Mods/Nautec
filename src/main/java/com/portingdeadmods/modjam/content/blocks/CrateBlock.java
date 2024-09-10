@@ -73,7 +73,7 @@ public class CrateBlock extends BaseEntityBlock {
         if (stack.isEmpty()) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (!stack.is(MJItems.CROWBAR)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (player.getCooldowns().isOnCooldown(stack.getItem())) return ItemInteractionResult.FAIL;
-        if (Math.random() > 0.1){
+        if (Math.random() > 0.2){
             be.playSound(state,SoundEvents.ANVIL_HIT);
             player.getCooldowns().addCooldown(stack.getItem(),10);
             return ItemInteractionResult.FAIL;
