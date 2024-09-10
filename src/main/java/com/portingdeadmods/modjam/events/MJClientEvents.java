@@ -12,6 +12,7 @@ import com.portingdeadmods.modjam.client.model.DrainTopModel;
 import com.portingdeadmods.modjam.client.renderer.blockentities.DrainBERenderer;
 import com.portingdeadmods.modjam.client.screen.CrateScreen;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
+import com.portingdeadmods.modjam.registries.MJItems;
 import com.portingdeadmods.modjam.registries.MJMenuTypes;
 import net.minecraft.client.Camera;
 import net.minecraft.client.KeyMapping;
@@ -22,6 +23,7 @@ import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -121,22 +123,13 @@ public final class MJClientEvents {
     public static final class ClientInGameBus {
 
         @SubscribeEvent
-        public static void removeWaterFog(ClientTickEvent.Post event) {
-            Entity cameraEntity = Minecraft.getInstance().cameraEntity;
-            if(cameraEntity instanceof Player player){
-                if(cameraEntity.isUnderWater()){
-                    RenderSystem.setShaderFogStart(-8.0f);
-                    RenderSystem.setShaderFogEnd(250.0f);
-                    RenderSystem.setShaderFogShape(FogShape.CYLINDER);
-                }
-            }
-        }
-
-        @SubscribeEvent
         public static void onRenderFog(ViewportEvent.RenderFog event) {
             Entity cameraEntity = Minecraft.getInstance().cameraEntity;
             if(cameraEntity instanceof Player player){
-                if(cameraEntity.isUnderWater()){
+                if(cameraEntity.isUnderWater() && player.getItemBySlot(EquipmentSlot.HEAD).is(MJItems.DIVING_HELMET.get())){
+                    event.setNearPlaneDistance(-8.0f);
+                    event.setFarPlaneDistance(250.0f);
+                    event.setFogShape(FogShape.CYLINDER);
                     event.setCanceled(true);
                 }
             }
