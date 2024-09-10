@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam.compat.jei;
 
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.content.recipes.AquaticCatalystChannelingRecipe;
 import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.modjam.registries.MJBlocks;
 import mezz.jei.api.IModPlugin;
@@ -29,6 +30,9 @@ public class MJJeiPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new ItemTransformationRecipeCategory(
                 registration.getJeiHelpers().getGuiHelper()));
+
+        registration.addRecipeCategories(new AquaticCatalystChannelingRecipeCategory(
+                registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -37,12 +41,20 @@ public class MJJeiPlugin implements IModPlugin {
 
         List<ItemTransformationRecipe> transformationRecipes = recipeManager.getAllRecipesFor(ItemTransformationRecipe.Type.INSTANCE)
                 .stream().map(RecipeHolder::value).toList();
+
+        List<AquaticCatalystChannelingRecipe> channelingRecipes = recipeManager.getAllRecipesFor(AquaticCatalystChannelingRecipe.Type.INSTANCE)
+                .stream().map(RecipeHolder::value).toList();
+
         registration.addRecipes(ItemTransformationRecipeCategory.RECIPE_TYPE, transformationRecipes);
+        registration.addRecipes(AquaticCatalystChannelingRecipeCategory.RECIPE_TYPE, channelingRecipes);
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(MJBlocks.AQUATIC_CATALYST.get()),
                 ItemTransformationRecipeCategory.RECIPE_TYPE);
+
+        registration.addRecipeCatalyst(new ItemStack(MJBlocks.AQUATIC_CATALYST.get()),
+                AquaticCatalystChannelingRecipeCategory.RECIPE_TYPE);
     }
 }
