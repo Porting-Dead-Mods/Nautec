@@ -13,18 +13,6 @@
   "item.modjam.glass_vial": "Glass Vial",
   "item.modjam.eas_vial": "Vial of Electrolyte Algae Serum",
   "item.modjam.crowbar": "Crowbar",
-
-  "block.modjam.aquarine_steel_block": "Aquarine Steel Block",
-  "block.modjam.aquatic_catalyst": "Aquatic Catalyst",
-  "block.modjam.dark_prismarine_pillar": "Dark Prismarine Pillar",
-  "block.modjam.chiseled_dark_prismarine": "Chiseled Dark Prismarine",
-  "block.modjam.crate": "Crate",
-
-  "multiblock.info.failed_to_construct": "Missing or invalid block",
-  "multiblock.info.actual_block": "Block: %s",
-  "multiblock.info.expected_block": "Expected: %s",
-  "multiblock.info.block_pos": "Coordinates: %d, %d, %d",
-
   "item.modjam.atlantic_gold_nugget": "Atlantic Gold Nugget",
   "item.modjam.rusty_gear": "Rusty Gear",
   "item.modjam.gear": "Gear",
@@ -36,7 +24,18 @@
   "item.modjam.diving_leggings": "Diving Leggings",
   "item.modjam.diving_boots": "Diving Boots",
   "item.modjam.aquarine_steel_wrench": "Aquarine Steel Wrench",
+  "item.modjam.etching_acid_bucket": "Etching Acid Bucket",
+
+  "block.modjam.aquarine_steel_block": "Aquarine Steel Block",
+  "block.modjam.aquatic_catalyst": "Aquatic Catalyst",
+  "block.modjam.dark_prismarine_pillar": "Dark Prismarine Pillar",
+  "block.modjam.chiseled_dark_prismarine": "Chiseled Dark Prismarine",
+  "block.modjam.crate": "Crate",
   "block.modjam.prismarine_laser_relay": "Prismarine Laser Relay",
   "block.modjam.deep_sea_drain": "Deep Sea Drain",
-  "item.modjam.etching_acid_bucket": "Etching Acid Bucket"
+
+  "multiblock.info.failed_to_construct": "Missing or invalid block",
+  "multiblock.info.actual_block": "Block: %s",
+  "multiblock.info.expected_block": "Expected: %s",
+  "multiblock.info.block_pos": "Coordinates: %d, %d, %d"
 }
