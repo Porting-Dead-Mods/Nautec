@@ -16,6 +16,7 @@ import com.portingdeadmods.modjam.client.screen.CrateScreen;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import com.portingdeadmods.modjam.registries.MJItems;
 import com.portingdeadmods.modjam.registries.MJMenuTypes;
+import com.portingdeadmods.modjam.utils.ArmorModelsHandler;
 import net.minecraft.client.Camera;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -114,6 +115,7 @@ public final class MJClientEvents {
         public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(DrainTopModel.LAYER_LOCATION, DrainTopModel::createBodyLayer);
             event.registerLayerDefinition(PrismarineCrystalModel.LAYER_LOCATION, PrismarineCrystalModel::createBodyLayer);
+            ArmorModelsHandler.registerLayers(event);
         }
 
         @SubscribeEvent
