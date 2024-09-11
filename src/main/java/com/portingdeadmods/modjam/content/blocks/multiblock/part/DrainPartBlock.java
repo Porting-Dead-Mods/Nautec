@@ -203,9 +203,13 @@ public class DrainPartBlock extends LaserBlock implements SimpleWaterloggedBlock
             );
 
             if (fluidHandler != null) {
-                return List.of(
-                        Component.literal("Fluid Stored: " + fluidHandler.getFluidInTank(0).getAmount()).withStyle(ChatFormatting.WHITE)
-                );
+                Component first = super.displayText(level, blockPos, player).getFirst();
+                if (first != null) {
+                    return List.of(
+                            first,
+                            Component.literal("Fluid Stored: " + fluidHandler.getFluidInTank(0).getAmount()).withStyle(ChatFormatting.WHITE)
+                    );
+                }
             }
         }
         return List.of();

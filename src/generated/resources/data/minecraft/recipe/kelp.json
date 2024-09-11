@@ -4,5 +4,6 @@
   "ingredient": {
     "item": "minecraft:kelp"
   },
-  "power_amount": 100
+  "power_amount": 500,
+  "purity": 0.0
 }

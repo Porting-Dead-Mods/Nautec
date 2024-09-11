@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam.api.client.renderer.blockentities;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.modjam.utils.LaserRendererHelper;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -23,28 +24,25 @@ public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements Blo
         Object2IntMap<Direction> laserDistances = blockEntity.getLaserDistances();
         for (Direction direction : blockEntity.getLaserOutputs()) {
             int laserDistance = laserDistances.getOrDefault(direction, 0);
-            BlockPos targetPos = originPos.relative(direction, laserDistance-1);
-            if(laserDistance != 0){
+            BlockPos targetPos = originPos.relative(direction, laserDistance - 1);
+            if (laserDistance != 0 && blockEntity.shouldRender(direction)) {
                 LaserRendererHelper.renderOuterBeam(blockEntity, originPos, targetPos, direction, poseStack, bufferSource, partialTick);
-            }
-            poseStack.pushPose();
-            {
-                poseStack.mulPose(direction.getRotation());
-                poseStack.scale(0.125f, 1, 0.125f);
-                // These are completely random values that I got from testing ._.
-                switch (direction) {
-                    case UP -> poseStack.translate(3.375f, 0, 3.375f);
-                    case DOWN -> poseStack.translate(3.4, 0, -4.5);
-                    case NORTH -> poseStack.translate(-4.5f, 0, -4.5f);
-                    case EAST -> poseStack.translate(-4.5f, 0, -4.5);
-                    case SOUTH, WEST -> poseStack.translate(3.375, 0, -4.5);
-                }
-                if(laserDistance != 0){
+
+                poseStack.pushPose();
+                {
+                    poseStack.mulPose(direction.getRotation());
+                    poseStack.scale(0.125f, 1, 0.125f);
+                    // These are completely random values that I got from testing ._.
+                    switch (direction) {
+                        case UP -> poseStack.translate(3.375f, 0, 3.375f);
+                        case DOWN, SOUTH, WEST -> poseStack.translate(3.375f, 0, -4.5f);
+                        case NORTH, EAST -> poseStack.translate(-4.5f, 0, -4.5f);
+                    }
                     LaserRendererHelper.renderInnerBeam(poseStack, bufferSource, partialTick, blockEntity.getLevel().getGameTime(),
                             0, laserDistance, FastColor.ARGB32.color(202, 214, 224));
                 }
+                poseStack.popPose();
             }
-            poseStack.popPose();
         }
     }
 
@@ -61,7 +59,8 @@ public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements Blo
         for (Direction direction : blockEntity.getLaserOutputs()) {
             int distance = laserDistances.getOrDefault(direction, 0);
             BlockPos pos = blockPos.relative(direction, distance);
-            box = box.expandTowards(pos.getX(), pos.getY(), pos.getZ());
+            BlockPos relative = blockPos.subtract(pos);
+            box = box.expandTowards(-relative.getX(), -relative.getY(), -relative.getZ());
         }
         return box;
     }

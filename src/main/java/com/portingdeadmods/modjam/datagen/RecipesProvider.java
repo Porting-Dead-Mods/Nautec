@@ -28,7 +28,10 @@ public class RecipesProvider extends RecipeProvider {
                 .ingredient(new ItemStack(Items.SNOWBALL))
                 .save(pRecipeOutput);
 
-        AquaticCatalystChannelingRecipeBuilder.newRecipe(Ingredient.of(Items.KELP), 100)
+        AquaticCatalystChannelingRecipeBuilder.newRecipe(Ingredient.of(Items.KELP))
+                .powerAmount(500)
+                .purity(0)
+                .duration(100)
                 .save(pRecipeOutput);
     }
 }
