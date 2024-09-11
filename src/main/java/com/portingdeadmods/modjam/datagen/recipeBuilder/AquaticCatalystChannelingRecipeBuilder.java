@@ -13,27 +13,31 @@ import org.jetbrains.annotations.Nullable;
 
 public class AquaticCatalystChannelingRecipeBuilder implements RecipeBuilder {
     private final Ingredient ingredient;
-    private final int powerAmount;
-    private final int duration;
+    private int powerAmount;
+    private float purity;
+    private int duration;
 
-    private AquaticCatalystChannelingRecipeBuilder(Ingredient ingredient, int powerAmount) {
+    private AquaticCatalystChannelingRecipeBuilder(Ingredient ingredient) {
         this.ingredient = ingredient;
-        this.powerAmount = powerAmount;
-        this.duration = 100;
     }
 
-    private AquaticCatalystChannelingRecipeBuilder(Ingredient ingredient, int powerAmount, int duration) {
-        this.ingredient = ingredient;
+    public static AquaticCatalystChannelingRecipeBuilder newRecipe(Ingredient ingredient) {
+        return new AquaticCatalystChannelingRecipeBuilder(ingredient);
+    }
+
+    public AquaticCatalystChannelingRecipeBuilder powerAmount(int powerAmount) {
         this.powerAmount = powerAmount;
+        return this;
+    }
+
+    public AquaticCatalystChannelingRecipeBuilder purity(float purity) {
+        this.purity = purity;
+        return this;
+    }
+
+    public AquaticCatalystChannelingRecipeBuilder duration(int duration) {
         this.duration = duration;
-    }
-
-    public static AquaticCatalystChannelingRecipeBuilder newRecipe(Ingredient ingredient, int powerAmount) {
-        return new AquaticCatalystChannelingRecipeBuilder(ingredient, powerAmount);
-    }
-
-    public static AquaticCatalystChannelingRecipeBuilder newRecipe(Ingredient ingredient, int powerAmount, int duration) {
-        return new AquaticCatalystChannelingRecipeBuilder(ingredient, powerAmount, duration);
+        return this;
     }
 
     @Override
@@ -53,7 +57,7 @@ public class AquaticCatalystChannelingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
-        AquaticCatalystChannelingRecipe recipe = new AquaticCatalystChannelingRecipe(this.ingredient, this.powerAmount, this.duration);
+        AquaticCatalystChannelingRecipe recipe = new AquaticCatalystChannelingRecipe(this.ingredient, this.powerAmount, this.purity, this.duration);
         recipeOutput.accept(resourceLocation, recipe, null);
     }
 }

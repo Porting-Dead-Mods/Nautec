@@ -52,9 +52,6 @@ public class MJJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(MJBlocks.AQUATIC_CATALYST.get()),
-                ItemTransformationRecipeCategory.RECIPE_TYPE);
-
-        registration.addRecipeCatalyst(new ItemStack(MJBlocks.AQUATIC_CATALYST.get()),
                 AquaticCatalystChannelingRecipeCategory.RECIPE_TYPE);
     }
 }

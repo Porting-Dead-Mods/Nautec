@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.content.blockentities;
 
+import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.modjam.capabilities.IOActions;
 import com.portingdeadmods.modjam.content.blocks.AquaticCatalystBlock;
@@ -20,7 +21,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -78,7 +78,8 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
                 getItemStackHandler().setStackInSlot(0, stack.copyWithCount(stack.getCount() - 1));
                 duration = 0;
             } else {
-                transmitPower(recipe.powerAmount() / recipe.duration());
+                int amount = recipe.powerAmount() / recipe.duration();
+                transmitPower(amount);
                 duration++;
             }
         } else {
@@ -89,22 +90,12 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     @Override
     public <T> Map<Direction, Pair<IOActions, int[]>> getSidedInteractions(BlockCapability<T, @Nullable Direction> capability) {
         if (capability == Capabilities.ItemHandler.BLOCK) {
-            boolean coreActive = isActive();
-            if (coreActive) {
-                Direction activeDir = getBlockState().getValue(BlockStateProperties.FACING);
-                Map<Direction, Pair<IOActions, int[]>> map = new Object2ObjectArrayMap<>();
-                for (Direction direction : Direction.values()) {
-                    map.put(direction, Pair.of(IOActions.INSERT, new int[]{0}));
-                }
-                map.remove(activeDir);
-                return map;
-            }
             return SidedCapUtils.allInsert(0);
         }
         return Map.of();
     }
 
-    private @NotNull Boolean isActive() {
+    private boolean isActive() {
         return getBlockState().getValue(AquaticCatalystBlock.CORE_ACTIVE);
     }
 

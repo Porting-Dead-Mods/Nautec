@@ -36,4 +36,12 @@ public class PrismarineLaserRelayBlockEntity extends LaserBlockEntity {
     public <T> ImmutableMap<Direction, Pair<IOActions, int[]>> getSidedInteractions(BlockCapability<T, @Nullable Direction> capability) {
         return ImmutableMap.of();
     }
+
+    @Override
+    public void commonTick() {
+        super.commonTick();
+
+        transmitPower(this.getPower());
+        this.setPower(0);
+    }
 }

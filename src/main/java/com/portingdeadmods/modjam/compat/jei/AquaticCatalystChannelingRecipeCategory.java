@@ -15,11 +15,14 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 import static com.portingdeadmods.modjam.compat.jei.ItemTransformationRecipeCategory.BURN_PROGRESS_SPRITE;
 
@@ -31,7 +34,8 @@ public class AquaticCatalystChannelingRecipeCategory implements IRecipeCategory<
     private final IDrawable background;
 
     public AquaticCatalystChannelingRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createBlankDrawable(88, 16);
+        Font font = Minecraft.getInstance().font;
+        this.background = helper.createBlankDrawable(136, 24 + 4 * font.lineHeight);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MJBlocks.AQUATIC_CATALYST.get()));
     }
 
@@ -57,12 +61,23 @@ public class AquaticCatalystChannelingRecipeCategory implements IRecipeCategory<
 
     @Override
     public void draw(AquaticCatalystChannelingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        guiGraphics.drawString(Minecraft.getInstance().font, String.valueOf(recipe.powerAmount()) + " AP", 56, 4, ChatFormatting.WHITE.getColor().byteValue());
-        guiGraphics.blitSprite(BURN_PROGRESS_SPRITE, 28, 0, 24, 16);
+        Font font = Minecraft.getInstance().font;
+        int fontSize = font.lineHeight;
+        Component[] text = new Component[]{
+                Component.literal("Power per tick: " + recipe.powerAmount() / recipe.duration() + " AP/t"),
+                Component.literal("Total Power amount: " + recipe.powerAmount() + " AP"),
+                Component.literal("Duration: "+recipe.duration()),
+                Component.literal("Purity: "+recipe.purity()),
+        };
+
+        for (int i = 0; i < text.length; i++) {
+            guiGraphics.drawCenteredString(font, text[i], 66, 18 + i * fontSize, ChatFormatting.WHITE.getColor().byteValue());
+        }
+
     }
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, AquaticCatalystChannelingRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 0,0 ).addItemStack(recipe.getIngredients().get(0).getItems()[0]);
+        builder.addSlot(RecipeIngredientRole.INPUT, getWidth() / 2 - 8, 0).addItemStack(recipe.getIngredients().get(0).getItems()[0]);
     }
 }
