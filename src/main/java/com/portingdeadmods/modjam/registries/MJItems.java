@@ -4,6 +4,7 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.items.DivingSuitArmorItem;
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
 import com.portingdeadmods.modjam.content.items.AquarineWrenchItem;
+import com.portingdeadmods.modjam.data.MJDataComponents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -53,7 +54,7 @@ public final class MJItems {
             PrismMonocleItem::new, new Item.Properties());
 
     public static final DeferredItem<DivingSuitArmorItem> DIVING_HELMET = registerItem("diving_helmet",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final DeferredItem<DivingSuitArmorItem> DIVING_CHESTPLATE = registerItem("diving_chestplate",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_CHESTPLATE = registerItem("diving_chestplate",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.CHESTPLATE, new Item.Properties().component(MJDataComponents.OXYGEN,0)));
     public static final DeferredItem<DivingSuitArmorItem> DIVING_LEGGINGS = registerItem("diving_leggings",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final DeferredItem<DivingSuitArmorItem> DIVING_BOOTS = registerItem("diving_boots",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.BOOTS, new Item.Properties()));
 
