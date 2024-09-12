@@ -18,6 +18,7 @@ public class ItemTagProvider extends ItemTagsProvider{
         super(output, lookupProvider, blockTags);
     }
 
+
     // FIX THE DATA GATHERER FOR THIS CLASS PLEASE
 
     @Override
