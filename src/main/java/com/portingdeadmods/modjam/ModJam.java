@@ -41,6 +41,7 @@ public final class ModJam {
         MJMultiblocks.MULTIBLOCKS.register(modEventBus);
         MJAugments.AUGMENTS.register(modEventBus);
         MJMenuTypes.MENUS.register(modEventBus);
+        MJStructures.STRUCTURES.register(modEventBus);
         MJLootModifier.LOOT_MODIFIERS.register(modEventBus);
 
         modEventBus.addListener(PrismMonocleItem::registerCapabilities);
