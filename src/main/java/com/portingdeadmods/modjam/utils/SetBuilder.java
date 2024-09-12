@@ -1,7 +1,10 @@
 package com.portingdeadmods.modjam.utils;
 
 import com.google.common.collect.ImmutableSet;
-import com.mojang.serialization.*;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.DynamicOps;
+import com.mojang.serialization.Encoder;
+import com.mojang.serialization.Lifecycle;
 
 import java.util.function.UnaryOperator;
 

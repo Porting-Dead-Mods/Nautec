@@ -3,8 +3,6 @@ package com.portingdeadmods.modjam.registries;
 import com.portingdeadmods.modjam.MJRegistries;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.augments.*;
-import com.portingdeadmods.modjam.content.entites.ThrownBouncingTrident;
-import net.neoforged.neoforge.event.level.PistonEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;

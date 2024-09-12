@@ -1,7 +1,6 @@
 package com.portingdeadmods.modjam.exampleCustom3DArmor;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.registries.MJItems;
 import com.portingdeadmods.modjam.utils.ArmorModelsHandler;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;

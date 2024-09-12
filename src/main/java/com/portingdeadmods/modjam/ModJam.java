@@ -1,18 +1,16 @@
 package com.portingdeadmods.modjam;
 
+import com.mojang.logging.LogUtils;
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
 import com.portingdeadmods.modjam.data.MJDataComponents;
 import com.portingdeadmods.modjam.exampleCustom3DArmor.ExampleItems;
 import com.portingdeadmods.modjam.registries.*;
-import net.neoforged.neoforge.registries.NewRegistryEvent;
-import org.slf4j.Logger;
-
-import com.mojang.logging.LogUtils;
-
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.registries.NewRegistryEvent;
+import org.slf4j.Logger;
 
 import java.util.Random;
 

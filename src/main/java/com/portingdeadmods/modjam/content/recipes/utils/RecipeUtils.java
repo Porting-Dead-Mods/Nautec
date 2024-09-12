@@ -1,6 +1,5 @@
 package com.portingdeadmods.modjam.content.recipes.utils;
 
-import com.portingdeadmods.modjam.content.recipes.AquaticCatalystChannelingRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;

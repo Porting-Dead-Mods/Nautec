@@ -1,9 +1,14 @@
 package com.portingdeadmods.modjam.compat.jei;
 
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.compat.jei.categories.AquaticCatalystChannelingRecipeCategory;
+import com.portingdeadmods.modjam.compat.jei.categories.ItemEtchingRecipeCategory;
+import com.portingdeadmods.modjam.compat.jei.categories.ItemTransformationRecipeCategory;
+import com.portingdeadmods.modjam.compat.jei.categories.MixingRecipeCategory;
 import com.portingdeadmods.modjam.content.recipes.AquaticCatalystChannelingRecipe;
 import com.portingdeadmods.modjam.content.recipes.ItemEtchingRecipe;
 import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
+import com.portingdeadmods.modjam.content.recipes.MixingRecipe;
 import com.portingdeadmods.modjam.registries.MJBlocks;
 import com.portingdeadmods.modjam.registries.MJItems;
 import mezz.jei.api.IModPlugin;
@@ -38,6 +43,9 @@ public class MJJeiPlugin implements IModPlugin {
 
         registration.addRecipeCategories(new ItemEtchingRecipeCategory(
                 registration.getJeiHelpers().getGuiHelper()));
+
+        registration.addRecipeCategories(new MixingRecipeCategory(
+                registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -53,9 +61,13 @@ public class MJJeiPlugin implements IModPlugin {
         List<ItemEtchingRecipe> etchingRecipes = recipeManager.getAllRecipesFor(ItemEtchingRecipe.Type.INSTANCE)
                 .stream().map(RecipeHolder::value).toList();
 
+        List<MixingRecipe> mixingRecipes = recipeManager.getAllRecipesFor(MixingRecipe.Type.INSTANCE)
+                .stream().map(RecipeHolder::value).toList();
+
         registration.addRecipes(ItemTransformationRecipeCategory.RECIPE_TYPE, transformationRecipes);
         registration.addRecipes(AquaticCatalystChannelingRecipeCategory.RECIPE_TYPE, channelingRecipes);
         registration.addRecipes(ItemEtchingRecipeCategory.RECIPE_TYPE, etchingRecipes);
+        registration.addRecipes(MixingRecipeCategory.RECIPE_TYPE, mixingRecipes);
     }
 
     @Override

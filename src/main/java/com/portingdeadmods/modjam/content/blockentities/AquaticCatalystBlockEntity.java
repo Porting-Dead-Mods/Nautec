@@ -1,6 +1,5 @@
 package com.portingdeadmods.modjam.content.blockentities;
 
-import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.modjam.capabilities.IOActions;
 import com.portingdeadmods.modjam.content.blocks.AquaticCatalystBlock;
@@ -8,7 +7,6 @@ import com.portingdeadmods.modjam.content.recipes.AquaticCatalystChannelingRecip
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import com.portingdeadmods.modjam.utils.SidedCapUtils;
 import it.unimi.dsi.fastutil.Pair;
-import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

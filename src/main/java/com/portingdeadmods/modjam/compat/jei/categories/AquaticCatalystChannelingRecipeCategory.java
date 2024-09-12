@@ -1,8 +1,7 @@
-package com.portingdeadmods.modjam.compat.jei;
+package com.portingdeadmods.modjam.compat.jei.categories;
 
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.recipes.AquaticCatalystChannelingRecipe;
-import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.modjam.registries.MJBlocks;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -21,10 +20,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-
-import static com.portingdeadmods.modjam.compat.jei.ItemTransformationRecipeCategory.BURN_PROGRESS_SPRITE;
 
 public class AquaticCatalystChannelingRecipeCategory implements IRecipeCategory<AquaticCatalystChannelingRecipe> {
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "aquatic_catalyst_channeling");

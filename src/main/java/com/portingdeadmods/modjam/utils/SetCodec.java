@@ -2,7 +2,10 @@ package com.portingdeadmods.modjam.utils;
 
 import com.mojang.datafixers.util.Pair;
 import com.mojang.datafixers.util.Unit;
-import com.mojang.serialization.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.DynamicOps;
+import com.mojang.serialization.Lifecycle;
 
 import java.util.HashSet;
 import java.util.Set;
