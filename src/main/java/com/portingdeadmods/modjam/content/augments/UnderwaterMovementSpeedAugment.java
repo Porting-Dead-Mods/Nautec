@@ -14,7 +14,7 @@ public class UnderwaterMovementSpeedAugment extends Augment{
     @Override
     public void serverTick(Slot slot, PlayerTickEvent.Post event) {
         if (event.getEntity().isUnderWater()){
-            event.getEntity().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED,20,1));
+            event.getEntity().addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE,20,1));
         }
     }
 }
