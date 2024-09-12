@@ -3,6 +3,7 @@ package com.portingdeadmods.modjam.registries;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.recipes.AquaticCatalystChannelingRecipe;
 import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
+import com.portingdeadmods.modjam.content.recipes.MixingRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -14,6 +15,7 @@ public final class MJRecipes {
     static {
         SERIALIZERS.register(AquaticCatalystChannelingRecipe.NAME, () -> AquaticCatalystChannelingRecipe.Serializer.INSTANCE);
         SERIALIZERS.register(ItemTransformationRecipe.NAME, () -> ItemTransformationRecipe.Serializer.INSTANCE);
+        SERIALIZERS.register(MixingRecipe.NAME, () -> MixingRecipe.Serializer.INSTANCE);
     }
 
 }

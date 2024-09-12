@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -22,12 +23,15 @@ public class MixerBlockEntity extends LaserBlockEntity {
 
     public MixerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(MJBlockEntityTypes.MIXER.get(), blockPos, blockState);
-        this.speed = 20;
+        addFluidTank(1000);
+        addItemHandler(5, (slot, stack) -> slot != 4);
     }
 
     @Override
     public ObjectSet<Direction> getLaserInputs() {
-        return ObjectSet.of();
+        return ObjectSet.of(
+                Direction.DOWN
+        );
     }
 
     @Override
@@ -37,6 +41,21 @@ public class MixerBlockEntity extends LaserBlockEntity {
 
     @Override
     public <T> Map<Direction, Pair<IOActions, int[]>> getSidedInteractions(BlockCapability<T, @Nullable Direction> capability) {
+        if (capability == Capabilities.ItemHandler.BLOCK) {
+            return Map.of(
+                    Direction.NORTH, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3}),
+                    Direction.EAST, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3}),
+                    Direction.SOUTH, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3}),
+                    Direction.WEST, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3})
+            );
+        } else if (capability == Capabilities.FluidHandler.BLOCK) {
+            return Map.of(
+                    Direction.NORTH, Pair.of(IOActions.INSERT, new int[]{0}),
+                    Direction.EAST, Pair.of(IOActions.INSERT, new int[]{0}),
+                    Direction.SOUTH, Pair.of(IOActions.INSERT, new int[]{0}),
+                    Direction.WEST, Pair.of(IOActions.INSERT, new int[]{0})
+            );
+        }
         return Map.of();
     }
 
@@ -46,6 +65,12 @@ public class MixerBlockEntity extends LaserBlockEntity {
         float actualSpeed = getSpeed();
         chasingVelocity += ((actualSpeed * 10 / 3f) - chasingVelocity) * .25f;
         independentAngle += chasingVelocity;
+
+        performRecipe();
+    }
+
+    private void performRecipe() {
+
     }
 
     public int getSpeed() {
