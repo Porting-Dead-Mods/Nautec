@@ -35,6 +35,7 @@ public class BlockModelProvider extends BlockStateProvider {
         drainController(MJBlocks.DRAIN.get());
         crateBlock(MJBlocks.CRATE.get());
         facingBlock(MJBlocks.PRISMARINE_RELAY.get());
+        simpleBlock(MJBlocks.MIXER.get(), models().getExistingFile(existingModelFile(MJBlocks.MIXER.get())));
     }
 
     public void facingBlock(Block block) {
