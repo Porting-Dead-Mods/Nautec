@@ -27,6 +27,8 @@ public final class MJItems {
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> ATLANTIC_GOLD_NUGGET = registerItem("atlantic_gold_nugget",
             Item::new, new Item.Properties());
+    public static final DeferredItem<Item> PRISMARINE_CRYSTAL_SHARD = registerItem("prismarine_crystal_shard",
+            Item::new, new Item.Properties());
 
 
     // MACHINE PARTS

@@ -9,6 +9,10 @@
       "resource": "modjam:entity/prismarine_crystal"
     },
     {
+      "type": "single",
+      "resource": "modjam:entity/whisk"
+    },
+    {
       "type": "directory",
       "source": "fluid",
       "prefix": "fluid/"
