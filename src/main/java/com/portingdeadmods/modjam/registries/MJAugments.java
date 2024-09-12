@@ -3,6 +3,7 @@ package com.portingdeadmods.modjam.registries;
 import com.portingdeadmods.modjam.MJRegistries;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.augments.*;
+import com.portingdeadmods.modjam.content.entites.ThrownBouncingTrident;
 import net.neoforged.neoforge.event.level.PistonEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -19,4 +20,5 @@ public final class MJAugments {
     public static final Supplier<ThrowRandomPotionAugments> THROW_POTION_AUGMENT = AUGMENTS.register("throw_random_potion", ThrowRandomPotionAugments::new);
     public static final Supplier<PreventPlayerLoseAirAugment> PREVENT_PLAYER_LOSE_AIR_AUGMENT = AUGMENTS.register("prevent_player_lose_air_supply", PreventPlayerLoseAirAugment::new);
     public static final Supplier<UnderwaterMovementSpeedAugment> UNDERWATER_MOVEMENT_SPEED_AUGMENT = AUGMENTS.register("underwater_movement_speed", UnderwaterMovementSpeedAugment::new);
+    public static final Supplier<ThrowBouncingTridentAugment> THROWN_BOUNCING_TRIDENT_AUGMENT = AUGMENTS.register("throw_bouncing_trident", ThrowBouncingTridentAugment::new);
 }
