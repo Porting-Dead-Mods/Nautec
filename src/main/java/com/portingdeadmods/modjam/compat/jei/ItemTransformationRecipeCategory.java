@@ -1,7 +1,7 @@
 package com.portingdeadmods.modjam.compat.jei;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.recipes.ItemTransformationRecipe;
+import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.modjam.registries.MJBlocks;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -19,7 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemTransformationRecipeCategory implements IRecipeCategory<ItemTransformationRecipe> {
-    private static final ResourceLocation BURN_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(ModJam.MODID,"container/furnace/empty_arrow");
+    static final ResourceLocation BURN_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(ModJam.MODID,"container/furnace/empty_arrow");
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "item_transformation");
     public static final RecipeType<ItemTransformationRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, ItemTransformationRecipe.class);
@@ -30,7 +30,7 @@ public class ItemTransformationRecipeCategory implements IRecipeCategory<ItemTra
 
     public ItemTransformationRecipeCategory(IGuiHelper helper) {
         this.background = helper.createBlankDrawable(80, 16);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MJBlocks.AQUATIC_CATALYST.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MJBlocks.PRISMARINE_RELAY.get()));
     }
 
     @Override
@@ -64,5 +64,6 @@ public class ItemTransformationRecipeCategory implements IRecipeCategory<ItemTra
         builder.addSlot(RecipeIngredientRole.INPUT, 0,0 ).addItemStack(recipe.getIngredients().get(0).getItems()[0]);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 64, 0).addItemStack(recipe.getResultItem(null));
     }
+
 
 }

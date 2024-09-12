@@ -1,32 +1,42 @@
 package com.portingdeadmods.modjam.events;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.client.renderer.blockentities.LaserBlockEntityRenderer;
+import com.portingdeadmods.modjam.api.client.renderer.items.PrismarineCrystalItemRenderer;
 import com.portingdeadmods.modjam.api.fluids.BaseFluidType;
 import com.portingdeadmods.modjam.client.hud.PrismMonocleOverlay;
 import com.portingdeadmods.modjam.client.model.DrainTopModel;
+import com.portingdeadmods.modjam.client.model.PrismarineCrystalModel;
 import com.portingdeadmods.modjam.client.renderer.blockentities.DrainBERenderer;
+import com.portingdeadmods.modjam.client.renderer.blockentities.PrismarineCrystalBERenderer;
 import com.portingdeadmods.modjam.client.screen.CrateScreen;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
+import com.portingdeadmods.modjam.registries.MJBlocks;
+import com.portingdeadmods.modjam.registries.MJItems;
 import com.portingdeadmods.modjam.registries.MJMenuTypes;
+import com.portingdeadmods.modjam.utils.ArmorModelsHandler;
 import net.minecraft.client.Camera;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -40,6 +50,8 @@ import org.lwjgl.glfw.GLFW;
 public final class MJClientEvents {
     @EventBusSubscriber(modid = ModJam.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
     public static final class ClientBus {
+        public static final PrismarineCrystalItemRenderer PRISMARINE_CRYSTAL_RENDERER = new PrismarineCrystalItemRenderer();
+
         public static final Lazy<KeyMapping> AUGMENT_TEST_KEYMAP = Lazy.of(() -> new KeyMapping(
                 "Test", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_N, "ModJam"));
 
@@ -77,7 +89,7 @@ public final class MJClientEvents {
                         @Override
                         public int getTintColor() {
                             Vector4i color = baseFluidType.getColor();
-                            return FastColor.ARGB32.color(color.x, color.y, color.z, color.w);
+                            return FastColor.ARGB32.color(color.w, color.x, color.y, color.z);
                         }
 
                         @Override
@@ -94,11 +106,20 @@ public final class MJClientEvents {
                     }, baseFluidType);
                 }
             }
+
+            event.registerItem(new IClientItemExtensions() {
+                @Override
+                public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                    return PRISMARINE_CRYSTAL_RENDERER;
+                }
+            }, MJBlocks.PRISMARINE_CRYSTAL.asItem());
         }
 
         @SubscribeEvent
         public static void registerBERenderers(EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(MJBlockEntityTypes.AQUATIC_CATALYST.get(), LaserBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(MJBlockEntityTypes.PRISMARINE_LASER_RELAY.get(), LaserBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(MJBlockEntityTypes.PRISMARINE_CRYSTAL.get(), PrismarineCrystalBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.DRAIN.get(), DrainBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.DRAIN_PART.get(), LaserBlockEntityRenderer::new);
         }
@@ -106,11 +127,31 @@ public final class MJClientEvents {
         @SubscribeEvent
         public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
             event.registerLayerDefinition(DrainTopModel.LAYER_LOCATION, DrainTopModel::createBodyLayer);
+            event.registerLayerDefinition(PrismarineCrystalModel.LAYER_LOCATION, PrismarineCrystalModel::createBodyLayer);
+            ArmorModelsHandler.registerLayers(event);
         }
 
         @SubscribeEvent
-        public static void registerMenus(RegisterMenuScreensEvent event){
+        public static void registerMenus(RegisterMenuScreensEvent event) {
             event.register(MJMenuTypes.CRATE.get(), CrateScreen::new);
+        }
+    }
+
+
+    @EventBusSubscriber(modid = ModJam.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
+    public static final class ClientInGameBus {
+
+        @SubscribeEvent
+        public static void onRenderFog(ViewportEvent.RenderFog event) {
+            Entity cameraEntity = Minecraft.getInstance().cameraEntity;
+            if (cameraEntity instanceof Player player) {
+                if (cameraEntity.isUnderWater() && player.getItemBySlot(EquipmentSlot.HEAD).is(MJItems.DIVING_HELMET.get())) {
+                    event.setNearPlaneDistance(-8.0f);
+                    event.setFarPlaneDistance(250.0f);
+                    event.setFogShape(FogShape.CYLINDER);
+                    event.setCanceled(true);
+                }
+            }
         }
     }
 }

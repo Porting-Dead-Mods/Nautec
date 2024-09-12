@@ -25,6 +25,7 @@ public class DataGatherer {
         PackOutput output = generator.getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+
         generator.addProvider(event.includeClient(), new ItemModelProvider(output, existingFileHelper));
         generator.addProvider(event.includeClient(), new BlockModelProvider(output, existingFileHelper));
         generator.addProvider(event.includeClient(), new RecipesProvider(output, lookupProvider));
@@ -34,5 +35,6 @@ public class DataGatherer {
         BlockTagProvider blockTagProvider = new BlockTagProvider(output, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeClient(), blockTagProvider);
         generator.addProvider(event.includeClient(), new ItemTagProvider(output, lookupProvider, blockTagProvider.contentsGetter()));
+        generator.addProvider(event.includeServer(),new LootModifierProvider(output,lookupProvider));
     }
 }

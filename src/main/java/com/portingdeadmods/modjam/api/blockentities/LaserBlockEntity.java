@@ -1,7 +1,6 @@
 package com.portingdeadmods.modjam.api.blockentities;
 
-import com.portingdeadmods.modjam.api.blocks.blockentities.LaserBlock;
-import com.portingdeadmods.modjam.recipes.ItemTransformationRecipe;
+import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.modjam.utils.ParticlesUtils;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.core.BlockPos;
@@ -16,15 +15,16 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 public abstract class LaserBlockEntity extends ContainerBlockEntity {
-    private static final int MAX_DISTANCE = 16;
-
-    private final Object2IntMap<Direction> laserDistances;
+    protected final Object2IntMap<Direction> laserDistances;
     private final Object2IntMap<ItemEntity> activeTransformations;
+
     private int powerToTransfer;
+    private int power;
 
     private float clientLaserTime;
 
@@ -38,20 +38,28 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
 
     public abstract ObjectSet<Direction> getLaserOutputs();
 
+    public boolean shouldRender(Direction direction) {
+        return getLaserOutputs().contains(direction) && (power > 0 || powerToTransfer > 0);
+    }
+
     public Object2IntMap<Direction> getLaserDistances() {
         return laserDistances;
     }
 
-    public int getLaserAnimTimeDuration() {
-        return 80;
+    public void setPower(int power) {
+        this.power = power;
     }
 
-    public float getClientLaserTime() {
-        return clientLaserTime;
+    public int getPower() {
+        return power;
     }
 
-    public float getLaserScale(float partialTick) {
-        return (this.clientLaserTime + partialTick) / (float) this.getLaserAnimTimeDuration();
+    public void transmitPower(int amount) {
+        this.powerToTransfer = amount;
+    }
+
+    public int getMaxLaserDistance() {
+        return 16;
     }
 
     @Override
@@ -68,26 +76,28 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         if (level.getGameTime() % 10 == 0) {
             checkConnections();
         }
-        interactWithEntities();
 
-        transmitPower();
-    }
+        for (Direction direction : getLaserOutputs()) {
+            int distance = this.laserDistances.getInt(direction);
+            if (distance > 0) {
+                AABB box = createLaserBeamAABB(direction, distance);
 
-    private void transmitPower() {
+                damageLivingEntities(box);
 
-    }
+                processItemCrafting(box);
 
-    public void transmitPower(int powerToTransfer) {
-        this.powerToTransfer = powerToTransfer;
+                BlockPos targetPos = worldPosition.relative(direction, distance);
+                if (level.getBlockEntity(targetPos) instanceof LaserBlockEntity laserBE) {
+                    laserBE.setPower(powerToTransfer);
+                }
+            }
+        }
     }
 
     private void damageLivingEntities(AABB box) {
-        for (Direction direction : getLaserOutputs()) {
-            assert level != null;
-            List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, box);
-            for (LivingEntity livingEntity : livingEntities) {
-                livingEntity.hurt(level.damageSources().inFire(), 3);
-            }
+        List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, box);
+        for (LivingEntity livingEntity : livingEntities) {
+            livingEntity.hurt(level.damageSources().inFire(), 3);
         }
     }
 
@@ -139,23 +149,34 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         }
     }
 
-    private void interactWithEntities() {
-        for (Direction direction : getLaserOutputs()) {
-            int distance = this.laserDistances.getInt(direction);
-            BlockPos pos = worldPosition.above().relative(direction, distance - 1);
-            Vec3 start = worldPosition.getCenter().subtract(0.1, 0, 0.1);
-            Vec3 end = pos.getCenter().add(0.1, 0, 0.1);
-            AABB box = new AABB(start, end);
+    private @NotNull AABB createLaserBeamAABB(Direction direction, int distance) {
+        BlockPos pos = worldPosition.relative(direction, distance - 1);
 
-            damageLivingEntities(box);
-
-            processItemCrafting(box);
+        Vec3 start = worldPosition.relative(direction).getCenter();
+        if (direction == Direction.UP || direction == Direction.DOWN) {
+            start = start.subtract(0.2, 0, 0.2);
+        } else if (direction == Direction.NORTH || direction == Direction.SOUTH) {
+            start = start.subtract(0.2, 0.2, 0);
+        } else if (direction == Direction.EAST || direction == Direction.WEST) {
+            start = start.subtract(0, 0.2, 0.2);
         }
+
+        Vec3 end = pos.getCenter().add(0.1, 0, 0.1);
+        if (direction == Direction.UP || direction == Direction.DOWN) {
+            end = end.add(0.2, 0, 0.2);
+        } else if (direction == Direction.NORTH || direction == Direction.SOUTH) {
+            end = end.add(0.2, 0.2, 0);
+        } else if (direction == Direction.EAST || direction == Direction.WEST) {
+            end = end.add(0, 0.2, 0.2);
+        }
+
+        return new AABB(start, end);
     }
 
-    private void checkConnections() {
+    protected void checkConnections() {
         for (Direction direction : getLaserOutputs()) {
-            for (int i = 1; i < MAX_DISTANCE; i++) {
+            int maxLaserDistance = getMaxLaserDistance();
+            for (int i = 1; i < maxLaserDistance; i++) {
                 BlockPos pos = worldPosition.relative(direction, i);
                 BlockState state = level.getBlockState(pos);
 
@@ -166,11 +187,23 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
                     }
                 }
 
-                if (!state.canBeReplaced() || i == MAX_DISTANCE - 1) {
+                if (!state.canBeReplaced() || i == maxLaserDistance - 1) {
                     laserDistances.put(direction, 0);
                     break;
                 }
             }
         }
+    }
+
+    public int getLaserAnimTimeDuration() {
+        return 80;
+    }
+
+    public float getClientLaserTime() {
+        return clientLaserTime;
+    }
+
+    public float getLaserScale(float partialTick) {
+        return (this.clientLaserTime + partialTick) / (float) this.getLaserAnimTimeDuration();
     }
 }

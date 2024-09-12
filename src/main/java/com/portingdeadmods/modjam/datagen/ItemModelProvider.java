@@ -24,6 +24,13 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         // Register item models here
         basicItem(MJItems.AQUARINE_STEEL_INGOT.get());
         basicItem(MJItems.ATLANTIC_GOLD_INGOT.get());
+        basicItem(MJItems.ATLANTIC_GOLD_NUGGET.get());
+
+        basicItem(MJItems.DROWNED_LUNGS.get());
+        basicItem(MJItems.DOLPHIN_FIN.get());
+
+        basicItem(MJItems.RUSTY_GEAR.get());
+        basicItem(MJItems.GEAR.get());
 
         basicItem(MJItems.GLASS_VIAL.get());
         basicItem(MJItems.ELECTROLYTE_ALGAE_SERUM_VIAL.get());
@@ -32,7 +39,9 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         handHeldItem(MJItems.AQUARINE_WRENCH.get());
         handHeldItem(MJItems.CROWBAR.get());
 
+        basicItem(MJItems.SALT_WATER_BUCKET.get());
         basicItem(MJItems.EAS_BUCKET.get());
+        basicItem(MJItems.ETCHING_ACID_BUCKET.get());
 
         blockItems();
     }

@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
+    "down": "modjam:block/multiblock/drain/bottom_3",
     "east": "modjam:block/multiblock/drain/side_1",
     "north": "modjam:block/multiblock/drain/side_1",
     "south": "modjam:block/multiblock/drain/side_1",

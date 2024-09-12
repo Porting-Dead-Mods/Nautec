@@ -1,0 +1,29 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "modjam:block/prismarine_laser_relay"
+    },
+    "facing=east": {
+      "model": "modjam:block/prismarine_laser_relay",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "modjam:block/prismarine_laser_relay",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "modjam:block/prismarine_laser_relay",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "modjam:block/prismarine_laser_relay"
+    },
+    "facing=west": {
+      "model": "modjam:block/prismarine_laser_relay",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
