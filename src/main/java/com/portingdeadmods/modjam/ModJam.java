@@ -29,6 +29,7 @@ public final class ModJam {
         });
 
         new ExampleItems();
+        MJEntites.ENTITIES.register(modEventBus);
         MJItems.ITEMS.register(modEventBus);
         MJFluids.FLUIDS.register(modEventBus);
         MJBlocks.BLOCKS.register(modEventBus);
