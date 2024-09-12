@@ -70,14 +70,8 @@ public final class LaserRendererHelper {
             float f30 = f4 * 2.5F + f29;
             VertexConsumer vertexconsumer = bufferSource.getBuffer(BEAM_RENDER_TYPE);
             PoseStack.Pose posestack$pose = poseStack.last();
-            vertex(vertexconsumer, posestack$pose, f19, f4, f20, red, green, blue, 0.4999F, f30);
-            vertex(vertexconsumer, posestack$pose, f19, 0.0F, f20, red, green, blue, 0.4999F, f29);
-            vertex(vertexconsumer, posestack$pose, f21, 0.0F, f22, red, green, blue, 0.0F, f29);
-            vertex(vertexconsumer, posestack$pose, f21, f4, f22, red, green, blue, 0.0F, f30);
-            vertex(vertexconsumer, posestack$pose, f23, f4, f24, red, green, blue, 0.4999F, f30);
-            vertex(vertexconsumer, posestack$pose, f23, 0.0F, f24, red, green, blue, 0.4999F, f29);
-            vertex(vertexconsumer, posestack$pose, f25, 0.0F, f26, red, green, blue, 0.0F, f29);
-            vertex(vertexconsumer, posestack$pose, f25, f4, f26, red, green, blue, 0.0F, f30);
+            outerBeamVertex(red, green, blue, f4, f19, f20, f21, f22, f29, f30, vertexconsumer, posestack$pose);
+            outerBeamVertex(red, green, blue, f4, f23, f24, f25, f26, f29, f30, vertexconsumer, posestack$pose);
             float f31 = 0.0F;
             if (blockEntity.getLevel().getGameTime() % 2 == 0) {
                 f31 = 0.5F;
@@ -89,6 +83,13 @@ public final class LaserRendererHelper {
             vertex(vertexconsumer, posestack$pose, f15, f4, f16, red, green, blue, 0.5F, f31);
         }
         poseStack.popPose();
+    }
+
+    private static void outerBeamVertex(int red, int green, int blue, float f4, float f19, float f20, float f21, float f22, float f29, float f30, VertexConsumer vertexconsumer, PoseStack.Pose posestack$pose) {
+        vertex(vertexconsumer, posestack$pose, f19, f4, f20, red, green, blue, 0.4999F, f30);
+        vertex(vertexconsumer, posestack$pose, f19, 0.0F, f20, red, green, blue, 0.4999F, f29);
+        vertex(vertexconsumer, posestack$pose, f21, 0.0F, f22, red, green, blue, 0.0F, f29);
+        vertex(vertexconsumer, posestack$pose, f21, f4, f22, red, green, blue, 0.0F, f30);
     }
 
     private static void vertex(
@@ -139,14 +140,10 @@ public final class LaserRendererHelper {
         float f2 = Mth.frac(f1 * 0.2F - (float) Mth.floor(f1 * 0.1F));
         poseStack.pushPose();
         poseStack.mulPose(Axis.YP.rotationDegrees(f * 2.25F - 45.0F));
-        float f3 = 0.0F;
-        float f5 = 0.0F;
+        float f3;
+        float f5;
         float f6 = -beamRadius;
-        float f7 = 0.0F;
-        float f8 = 0.0F;
         float f9 = -beamRadius;
-        float f10 = 0.0F;
-        float f11 = 1.0F;
         float f12 = -1.0F + f2;
         float f13 = (float) height * textureScale * (0.5F / beamRadius) + f12;
         renderPart(

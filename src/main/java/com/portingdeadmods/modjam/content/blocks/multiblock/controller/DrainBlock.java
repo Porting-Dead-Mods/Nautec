@@ -4,13 +4,20 @@ import com.mojang.serialization.MapCodec;
 import com.portingdeadmods.modjam.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.modjam.api.blocks.blockentities.ContainerBlock;
 import com.portingdeadmods.modjam.api.multiblocks.Multiblock;
+import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.DrainBlockEntity;
 import com.portingdeadmods.modjam.content.multiblocks.DrainMultiblock;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 
 public class DrainBlock extends ContainerBlock {
     public DrainBlock(Properties properties) {
@@ -37,4 +44,13 @@ public class DrainBlock extends ContainerBlock {
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return simpleCodec(DrainBlock::new);
     }
+
+    @Override
+    protected @NotNull InteractionResult useWithoutItem(BlockState p_60503_, Level level, BlockPos pos, Player player, BlockHitResult p_60508_) {
+        if (player.isShiftKeyDown() && level.getBlockEntity(pos) instanceof DrainBlockEntity drainBlockEntity) {
+            drainBlockEntity.close();
+        }
+        return super.useWithoutItem(p_60503_, level, pos, player, p_60508_);
+    }
+
 }

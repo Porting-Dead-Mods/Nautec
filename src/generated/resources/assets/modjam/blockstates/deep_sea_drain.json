@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "formed=false": {
+      "model": "modjam:block/deep_sea_drain"
+    },
+    "formed=true": {
+      "model": "modjam:block/deep_sea_drain_formed"
+    }
+  }
+}

@@ -1,10 +1,12 @@
 package com.portingdeadmods.modjam.content.blockentities.multiblock.part;
 
 import com.google.common.collect.ImmutableMap;
+import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.modjam.api.blockentities.multiblock.FakeBlockEntity;
 import com.portingdeadmods.modjam.api.blockentities.multiblock.SavesControllerPosBlockEntity;
 import com.portingdeadmods.modjam.capabilities.IOActions;
+import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.DrainBlockEntity;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
@@ -30,6 +32,14 @@ public class DrainPartBlockEntity extends LaserBlockEntity implements FakeBlockE
 
     public boolean hasLaserPort() {
         return laserPort != null;
+    }
+
+    public void open() {
+        BlockPos actualBlockEntityPos = getActualBlockEntityPos();
+        ModJam.LOGGER.debug("Attempt to open");
+        if (actualBlockEntityPos != null && level.getBlockEntity(actualBlockEntityPos) instanceof DrainBlockEntity drainBlockEntity) {
+            drainBlockEntity.open();
+        }
     }
 
     @Override

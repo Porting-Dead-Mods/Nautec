@@ -1,6 +1,5 @@
 package com.portingdeadmods.modjam.api.fluids;
 
-import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.fluids.FluidType;
 import org.joml.Vector4i;

@@ -1,13 +1,11 @@
 package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.content.items.AugmentDebugItem;
+import com.portingdeadmods.modjam.content.items.DivingSuitArmorItem;
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
 import com.portingdeadmods.modjam.content.items.AquarineWrenchItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import com.portingdeadmods.modjam.data.MJDataComponents;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -22,30 +20,57 @@ public final class MJItems {
     public static final List<ItemLike> CREATIVE_TAB_ITEMS = new ArrayList<>();
     public static final List<Supplier<BlockItem>> BLOCK_ITEMS = new ArrayList<>();
 
+    // MATERIALS
     public static final DeferredItem<Item> AQUARINE_STEEL_INGOT = registerItem("aquarine_steel_ingot",
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> ATLANTIC_GOLD_INGOT = registerItem("atlantic_gold_ingot",
             Item::new, new Item.Properties());
+    public static final DeferredItem<Item> ATLANTIC_GOLD_NUGGET = registerItem("atlantic_gold_nugget",
+            Item::new, new Item.Properties());
 
+
+    // MACHINE PARTS
+    public static final DeferredItem<Item> RUSTY_GEAR = registerItem("rusty_gear",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> GEAR = registerItem("gear",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> ANCIENT_VALVE = registerItem("ancient_valve",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> VALVE = registerItem("valve",
+            Item::new, new Item.Properties());
+
+    // MOB DROPS
+    public static final DeferredItem<Item> DROWNED_LUNGS = registerItem("drowned_lungs",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> DOLPHIN_FIN = registerItem("dolphin_fin",
+            Item::new, new Item.Properties());
+
+    // VIALS
     public static final DeferredItem<Item> GLASS_VIAL = registerItem("glass_vial", Item::new, new Item.Properties());
     public static final DeferredItem<Item> ELECTROLYTE_ALGAE_SERUM_VIAL = registerItem("eas_vial", Item::new, new Item.Properties());
 
+    // ARMOR
     public static final DeferredItem<PrismMonocleItem> PRISM_MONOCLE = registerItem("prism_monocle",
             PrismMonocleItem::new, new Item.Properties());
 
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_HELMET = registerItem("diving_helmet",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_CHESTPLATE = registerItem("diving_chestplate",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.CHESTPLATE, new Item.Properties().component(MJDataComponents.OXYGEN,0)));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_LEGGINGS = registerItem("diving_leggings",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_BOOTS = registerItem("diving_boots",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    // BUCKETS
     public static final DeferredItem<BucketItem> SALT_WATER_BUCKET = registerItemBucket("salt_water_bucket",
             () -> new BucketItem(MJFluids.SALT_WATER_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-
-    public static final DeferredItem<AugmentDebugItem> AUGMENT_DEBUG_ITEM = registerItem("augment_debug_item", AugmentDebugItem::new, new Item.Properties());
-
-    public static final DeferredItem<AquarineWrenchItem> AQUARINE_WRENCH = registerItem("aquarine_steel_wrench",
-            AquarineWrenchItem::new, new Item.Properties());
-
     public static final DeferredItem<BucketItem> EAS_BUCKET = registerItemBucket("eas_bucket",
             () -> new BucketItem(MJFluids.EAS_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final DeferredItem<BucketItem> ETCHING_ACID_BUCKET = registerItemBucket("etching_acid_bucket",
+            () -> new BucketItem(MJFluids.ETCHING_ACID_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
-    public static final DeferredItem<Item> CROWBAR = registerItem("crowbar",Item::new,new Item.Properties().stacksTo(1));
-
+    // TOOLS
+    public static final DeferredItem<AquarineWrenchItem> AQUARINE_WRENCH = registerItem("aquarine_steel_wrench",
+            AquarineWrenchItem::new, new Item.Properties());
+    public static final DeferredItem<Item> CROWBAR = registerItem("crowbar",
+            Item::new, new Item.Properties().stacksTo(1));
 
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Item.Properties properties) {
         return registerItem(name, itemConstructor, properties, true);
@@ -55,6 +80,12 @@ public final class MJItems {
         return ITEMS.register(name, item);
     }
 
+    public static <T extends Item> DeferredItem<T> registerItem(String name, Supplier<T> item) {
+        DeferredItem<T> toReturn = ITEMS.register(name, item);
+        CREATIVE_TAB_ITEMS.add(toReturn);
+        return toReturn;
+    }
+
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Item.Properties properties, boolean addToTab) {
         DeferredItem<T> toReturn = ITEMS.registerItem(name, itemConstructor, properties);
         if (addToTab) {
@@ -62,4 +93,5 @@ public final class MJItems {
         }
         return toReturn;
     }
+
 }

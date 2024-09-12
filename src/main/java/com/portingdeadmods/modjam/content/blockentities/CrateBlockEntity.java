@@ -1,9 +1,8 @@
 package com.portingdeadmods.modjam.content.blockentities;
 
 import com.portingdeadmods.modjam.data.MJDataComponents;
-import com.portingdeadmods.modjam.inventory.CrateMenu;
+import com.portingdeadmods.modjam.content.menus.CrateMenu;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
-import com.portingdeadmods.modjam.registries.MJDataAttachments;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;

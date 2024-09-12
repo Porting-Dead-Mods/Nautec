@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.content.augments;
 
+import com.portingdeadmods.modjam.MJRegistries;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
 import com.portingdeadmods.modjam.network.SetAugmentDataPayload;
@@ -12,23 +13,20 @@ import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.function.Supplier;
 
 public class AugmentHelper {
-    private static final HashMap<Integer, StaticAugment> augmentHashMap = new HashMap<>();
-
-    public static void AddAugment(StaticAugment augment, int id) {
-        augmentHashMap.put(id, augment);
-    }
-
     public static StaticAugment getAugment(Player player, Slot slot) {
         int id = getId(player, slot);
-        return augmentHashMap.get(id);
+        return getAugment(id);
     }
 
-    public static Supplier<AttachmentType<Integer>> getDataAttachment(Slot slot){
+    public static StaticAugment getAugment(int id) {
+        return MJRegistries.AUGMENT.byId(id);
+    }
+
+    public static Supplier<AttachmentType<Integer>> getDataAttachment(Slot slot) {
         return switch (slot) {
             case HEAD -> MJDataAttachments.HEAD_AUGMENTATION_DATA;
             case BODY -> MJDataAttachments.BODY_AUGMENTATION_DATA;
@@ -39,7 +37,7 @@ public class AugmentHelper {
         };
     }
 
-    public static Supplier<AttachmentType<Integer>> getCooldownAttachment(Slot slot){
+    public static Supplier<AttachmentType<Integer>> getCooldownAttachment(Slot slot) {
         return switch (slot) {
             case HEAD -> MJDataAttachments.HEAD_AUGMENTATION_COOLDOWN;
             case BODY -> MJDataAttachments.BODY_AUGMENTATION_COOLDOWN;
@@ -64,9 +62,11 @@ public class AugmentHelper {
     public static int getId(Player player, Slot slot) {
         return player.getData(getAttachment(slot).get());
     }
+
     public static int getCooldown(Player player, Slot slot) {
         return player.getData(getCooldownAttachment(slot).get());
     }
+
     public static int getData(Player player, Slot slot) {
         return player.getData(getDataAttachment(slot).get());
     }
@@ -74,11 +74,13 @@ public class AugmentHelper {
     public static void setId(Player player, Slot slot, int id) {
         player.setData(getAttachment(slot).get(), id);
     }
+
     public static void setCooldown(Player player, Slot slot, int cooldown) {
         player.setData(getCooldownAttachment(slot).get(), cooldown);
     }
-    public static void setData(Player player, Slot slot, int data){
-        player.setData(getDataAttachment(slot).get(),data);
+
+    public static void setData(Player player, Slot slot, int data) {
+        player.setData(getDataAttachment(slot).get(), data);
     }
 
     public static void setIdAndUpdate(Player player, Slot slot, int id) {
@@ -89,6 +91,7 @@ public class AugmentHelper {
         }
         setId(player, slot, id);
     }
+
     public static void setCooldownAndUpdate(Player player, Slot slot, int cooldown) {
         ModJam.LOGGER.info("Setting Cooldown to {}", cooldown);
         if (player.level().isClientSide()) {
@@ -108,10 +111,6 @@ public class AugmentHelper {
     public static void decId(Player player, Slot slot) {
         setIdAndUpdate(player, slot, AugmentHelper.getId(player, slot) - 1);
         player.sendSystemMessage(Component.literal("Decremented to Id " + getId(player, slot) + " for slot " + slot.name()));
-    }
-
-    public static StaticAugment getAugment(int id) {
-        return augmentHashMap.get(id);
     }
 
     public static StaticAugment[] getAugments(Player player) {

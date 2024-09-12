@@ -5,6 +5,7 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.modjam.api.blocks.DisplayBlock;
 import com.portingdeadmods.modjam.api.blocks.blockentities.LaserBlock;
+import com.portingdeadmods.modjam.content.blockentities.AquaticCatalystBlockEntity;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import com.portingdeadmods.modjam.tags.MJTags;
 import com.portingdeadmods.modjam.utils.ItemUtils;
@@ -20,7 +21,6 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -100,8 +100,11 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
         BlockState blockState = level.getBlockState(blockPos);
         Direction direction = blockState.getValue(BlockStateProperties.FACING);
         boolean coreActive = blockState.getValue(CORE_ACTIVE);
+        AquaticCatalystBlockEntity be = (AquaticCatalystBlockEntity) level.getBlockEntity(blockPos);
         return List.of(
-                Component.literal("Active: " + (coreActive ? direction : "None")).withStyle(ChatFormatting.WHITE)
+                Component.literal("Active: " + (coreActive ? direction : "None")).withStyle(ChatFormatting.WHITE),
+                Component.literal("Duration: " + be.getDuration())
         );
     }
+
 }
