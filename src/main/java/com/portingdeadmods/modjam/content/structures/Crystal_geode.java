@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.content.structures;
 
+import net.minecraft.world.level.levelgen.structure.Structure;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -22,8 +23,8 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSetting
 
 import java.util.Optional;
 
-public class Ruins1 extends Structure {
-    public static final MapCodec<Ruins1> CODEC = RecordCodecBuilder.mapCodec(instance ->
+public class Crystal_geode extends Structure {
+    public static final MapCodec<Crystal_geode> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(Ruins1.settingsCodec(instance),
                     StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
                     ResourceLocation.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(structure -> structure.startJigsawName),
@@ -33,7 +34,7 @@ public class Ruins1 extends Structure {
                     Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
                     DimensionPadding.CODEC.optionalFieldOf("dimension_padding", JigsawStructure.DEFAULT_DIMENSION_PADDING).forGetter(structure -> structure.dimensionPadding),
                     LiquidSettings.CODEC.optionalFieldOf("liquid_settings", JigsawStructure.DEFAULT_LIQUID_SETTINGS).forGetter(structure -> structure.liquidSettings)
-            ).apply(instance, Ruins1::new));
+            ).apply(instance, Crystal_geode::new));
 
     private final Holder<StructureTemplatePool> startPool;
     private final Optional<ResourceLocation> startJigsawName;
@@ -44,7 +45,7 @@ public class Ruins1 extends Structure {
     private final DimensionPadding dimensionPadding;
     private final LiquidSettings liquidSettings;
 
-    public Ruins1(Structure.StructureSettings config,
+    public Crystal_geode(Structure.StructureSettings config,
                   Holder<StructureTemplatePool> startPool,
                   Optional<ResourceLocation> startJigsawName,
                   int size,
@@ -82,7 +83,7 @@ public class Ruins1 extends Structure {
     @Override
     public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
 
-        if (!Ruins1.extraSpawningChecks(context)) {
+        if (!Crystal_geode.extraSpawningChecks(context)) {
             return Optional.empty();
         }
 
@@ -114,7 +115,6 @@ public class Ruins1 extends Structure {
 
     @Override
     public StructureType<?> type() {
-        return MJStructures.RUINS_1.get();
+        return MJStructures.CRYSTAL_GEODE.get();
     }
 }
-
