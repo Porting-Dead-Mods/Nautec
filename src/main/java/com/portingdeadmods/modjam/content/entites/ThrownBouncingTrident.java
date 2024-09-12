@@ -26,48 +26,56 @@ public class ThrownBouncingTrident extends ThrownTrident {
         if (thrower == null)
             return null;
         ThrownBouncingTrident trident = new ThrownBouncingTrident(level, thrower, ItemStack.EMPTY);
+        trident.hasBounced = true;
         return trident;
     }
 
     @Override
     protected void onHit(HitResult result) {
         super.onHit(result);
+        this.pickup = Pickup.DISALLOWED;
         if (result instanceof BlockHitResult && !hasBounced) {
             bounce(((BlockHitResult) result));
             hasBounced = true;
+            remove(RemovalReason.DISCARDED);
         }
     }
     private void bounce(BlockHitResult result) {
         Direction face = result.getDirection();
 
-        Vec3 normal = new Vec3(face.getNormal().getX(), face.getNormal().getY(), face.getNormal().getY());
+        Vec3 normal = new Vec3(face.getNormal().getX(), face.getNormal().getY(), face.getNormal().getZ());
 
         Vec3 motion = getDeltaMovement();
-        double dot = motion.dot(normal) * 1.5D;
+        double dot = motion.dot(normal) * 2.0D;
+        Vec3 reflect = motion.subtract(normal.scale(dot));
 
-        Vec3 reflect = motion.subtract(normal.scale(dot)).add(0.0D, 0.10000000149011612D, 0.0D);
+        double verticalBoost = 0.3D;
+        reflect = reflect.add(0.0D, verticalBoost, 0.0D);
 
+        double forwardDamping = 0.5D;
+        reflect = reflect.multiply(new Vec3(forwardDamping, 1.0D, forwardDamping));
 
         ThrownBouncingTrident trident = createBouncingTrident(this.level(), (LivingEntity) getOwner());
         trident.setPos(
                 result.getLocation().x() + reflect.x() / 5.0D,
                 result.getLocation().y() + reflect.y() / 5.0D,
                 result.getLocation().z() + reflect.z() / 5.0D
-            );
+        );
 
         trident.setDeltaMovement(reflect);
 
         double speed = reflect.length();
-        trident.xRotO = (float)(Mth.atan2(reflect.y(), speed) * 57.2957763671875D);  // Convert radians to degrees
-        trident.yRotO = (float)(Mth.atan2(reflect.x(), reflect.z()) * 57.2957763671875D);
+        trident.setXRot((float)(Mth.atan2(reflect.y(), speed) * 57.2957763671875D));  // Convert radians to degrees for pitch (x rotation)
+        trident.setYRot((float)(Mth.atan2(reflect.x(), reflect.z()) * 57.2957763671875D));  // Convert for yaw (y rotation)
 
         trident.reapplyPosition();
         trident.pickup = Pickup.DISALLOWED;
         trident.noPhysics = this.noPhysics;
 
         this.level().addFreshEntity(trident);
-
     }
+
+
 
 
     @Override

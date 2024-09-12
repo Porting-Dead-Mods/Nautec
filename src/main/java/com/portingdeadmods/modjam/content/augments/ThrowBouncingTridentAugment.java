@@ -26,7 +26,7 @@ public class ThrowBouncingTridentAugment extends Augment{
     @Override
     public void handleKeybindPress(Slot slot, Player player) {
         ThrownBouncingTrident trident = new ThrownBouncingTrident(player.level(),player,Items.TRIDENT.getDefaultInstance());
-        trident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 3.0f, 0.0f);
+        trident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 1.5f, 0.0f);
         player.level().addFreshEntity(trident);
         AugmentHelper.setCooldownAndUpdate(player, slot, 20); // Set the cooldown, which decrements by 1 every tick
     }
