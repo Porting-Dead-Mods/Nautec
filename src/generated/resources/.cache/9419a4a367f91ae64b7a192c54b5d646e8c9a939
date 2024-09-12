@@ -1,7 +1,0 @@
-// 1.21.1	2024-09-10T20:26:46.030593	Global Loot Modifiers : modjam
-e7f11a46f5a3672b7ccab65e075c363596d0bf4b data/modjam/loot_modifiers/elder_guardian_modifier.json
-197ecc005cf8fcaa86f4fedcff635b94804f9aa2 data/modjam/loot_modifiers/guardian_modifier.json
-4c83e5f61706ea5181128230627d9cfff7e3c15b data/modjam/loot_modifiers/ocean_ruins_modifier.json
-c011af8fc50a517e0473e9113f9a2672c854d882 data/modjam/loot_modifiers/shipwreck_modifier.json
-655a48f63f1b41627dd1fc25c31ad537eb8da0ca data/modjam/loot_modifiers/suspicious_ruins_sand_modifier.json
-15f14af3dcb92ee9a8901ef211bd4feb415420bf data/neoforge/loot_modifiers/global_loot_modifiers.json

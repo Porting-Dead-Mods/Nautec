@@ -1,7 +1,6 @@
 package com.portingdeadmods.modjam.api.client.renderer.blockentities;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.modjam.utils.LaserRendererHelper;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;

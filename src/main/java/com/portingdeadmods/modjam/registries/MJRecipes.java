@@ -1,14 +1,13 @@
 package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.content.recipes.MixingRecipe;
 import com.portingdeadmods.modjam.content.recipes.AquaticCatalystChannelingRecipe;
 import com.portingdeadmods.modjam.content.recipes.ItemEtchingRecipe;
 import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
+import com.portingdeadmods.modjam.content.recipes.MixingRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import java.lang.invoke.SerializedLambda;
 
 public final class MJRecipes {
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS =

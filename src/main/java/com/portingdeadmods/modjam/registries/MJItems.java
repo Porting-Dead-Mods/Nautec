@@ -1,9 +1,9 @@
 package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.content.items.AquarineWrenchItem;
 import com.portingdeadmods.modjam.content.items.DivingSuitArmorItem;
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
-import com.portingdeadmods.modjam.content.items.AquarineWrenchItem;
 import com.portingdeadmods.modjam.data.MJDataComponents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;

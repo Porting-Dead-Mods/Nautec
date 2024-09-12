@@ -12,7 +12,10 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
@@ -45,12 +48,12 @@ public record MixingRecipe(List<IngredientWithCount> ingredients, FluidStack flu
 
     @Override
     public @NotNull RecipeSerializer<?> getSerializer() {
-        return ItemTransformationRecipe.Serializer.INSTANCE;
+        return MixingRecipe.Serializer.INSTANCE;
     }
 
     @Override
     public @NotNull RecipeType<?> getType() {
-        return ItemTransformationRecipe.Type.INSTANCE;
+        return MixingRecipe.Type.INSTANCE;
     }
 
     @Override

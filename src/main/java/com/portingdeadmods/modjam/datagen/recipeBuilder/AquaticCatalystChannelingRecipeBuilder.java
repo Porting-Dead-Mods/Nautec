@@ -2,7 +2,6 @@ package com.portingdeadmods.modjam.datagen.recipeBuilder;
 
 import com.portingdeadmods.modjam.content.recipes.AquaticCatalystChannelingRecipe;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -11,7 +10,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class AquaticCatalystChannelingRecipeBuilder implements RecipeBuilder {
+public class AquaticCatalystChannelingRecipeBuilder implements MJRecipeBuilder {
     private final Ingredient ingredient;
     private int powerAmount;
     private float purity;

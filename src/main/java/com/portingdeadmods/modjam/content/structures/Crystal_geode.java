@@ -1,6 +1,5 @@
 package com.portingdeadmods.modjam.content.structures;
 
-import net.minecraft.world.level.levelgen.structure.Structure;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

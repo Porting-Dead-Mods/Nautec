@@ -17,7 +17,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public abstract class LaserBlockEntity extends ContainerBlockEntity {
     protected final Object2IntMap<Direction> laserDistances;

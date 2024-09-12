@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.datagen.recipeBuilder;
 
+import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.modjam.content.recipes.MixingRecipe;
 import com.portingdeadmods.modjam.content.recipes.utils.IngredientWithCount;
 import net.minecraft.advancements.Criterion;
@@ -9,19 +10,18 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MixingRecipeBuilder implements RecipeBuilder {
+public class MixingRecipeBuilder implements MJRecipeBuilder {
     private List<IngredientWithCount> ingredients;
     private FluidStack fluidIngredient;
-    private final ItemStack result;
-    private FluidStack fluidResult;
+    private ItemStack result;
+    private FluidStack resultFluid;
     private int duration;
 
-    public MixingRecipeBuilder(ItemStack result) {
+    private MixingRecipeBuilder(ItemStack result) {
         this.result = result;
         this.duration = 120;
     }
@@ -40,8 +40,8 @@ public class MixingRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
-    public MixingRecipeBuilder fluidResult(FluidStack fluidResult) {
-        this.fluidResult = fluidResult;
+    public MixingRecipeBuilder fluidResult(FluidStack resultFluid) {
+        this.resultFluid = resultFluid;
         return this;
     }
 
@@ -51,26 +51,23 @@ public class MixingRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public @NotNull RecipeBuilder unlockedBy(String name, Criterion<?> criterion) {
+    public RecipeBuilder unlockedBy(String s, Criterion<?> criterion) {
         return this;
     }
 
     @Override
-    public @NotNull RecipeBuilder group(@Nullable String groupName) {
+    public RecipeBuilder group(@Nullable String s) {
         return this;
     }
 
     @Override
-    public @NotNull Item getResult() {
+    public Item getResult() {
         return result.getItem();
     }
 
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        if (ingredients.isEmpty()) {
-            throw new IllegalStateException("Cannot generate recipe without ingredients, affected recipe: " + getClass().getName() + ", result: " + result);
-        }
-
-        recipeOutput.accept(id, new MixingRecipe(ingredients, fluidIngredient, result, fluidResult, duration), null);
+    public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
+        MixingRecipe recipe = new MixingRecipe(ingredients, fluidIngredient, result, resultFluid, duration);
+        recipeOutput.accept(resourceLocation, recipe, null);
     }
 }
