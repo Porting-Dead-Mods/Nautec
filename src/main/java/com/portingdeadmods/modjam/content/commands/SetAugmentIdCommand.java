@@ -14,7 +14,7 @@ public class SetAugmentIdCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("set_augment")
                 .then(Commands.argument("slotId", IntegerArgumentType.integer(0,6))
-                .then(Commands.argument("augId", IntegerArgumentType.integer(0,8))
+                .then(Commands.argument("augId", IntegerArgumentType.integer(0,18))
                 .executes(SetAugmentIdCommand::execute))));
     }
     private static int execute(CommandContext<CommandSourceStack> ctx) {
