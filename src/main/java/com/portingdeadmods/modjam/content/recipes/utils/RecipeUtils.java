@@ -1,13 +1,22 @@
 package com.portingdeadmods.modjam.content.recipes.utils;
 
+import com.portingdeadmods.modjam.content.recipes.AquaticCatalystChannelingRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 public final class RecipeUtils {
+
+    public static boolean hasRecipe(ItemStack stack, Level level, RecipeType type) {
+        return level.getRecipeManager().getRecipeFor(type, new SingleRecipeInput(stack), level).isPresent();
+    }
+
     public static List<IngredientWithCount> ingredientsToIWC(List<Ingredient> ingredients) {
         return ingredients.stream().map(ingredient -> new IngredientWithCount(ingredient, 1)).toList();
     }

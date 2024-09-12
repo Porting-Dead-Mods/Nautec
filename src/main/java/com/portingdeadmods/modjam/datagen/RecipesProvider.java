@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam.datagen;
 
 import com.portingdeadmods.modjam.datagen.recipeBuilder.AquaticCatalystChannelingRecipeBuilder;
+import com.portingdeadmods.modjam.datagen.recipeBuilder.ItemEtchingRecipeBuilder;
 import com.portingdeadmods.modjam.datagen.recipeBuilder.ItemTransformationRecipeBuilder;
 import com.portingdeadmods.modjam.registries.MJItems;
 import net.minecraft.core.HolderLookup;
@@ -32,6 +33,10 @@ public class RecipesProvider extends RecipeProvider {
                 .powerAmount(500)
                 .purity(0)
                 .duration(100)
+                .save(pRecipeOutput);
+
+        ItemEtchingRecipeBuilder.newRecipe(new ItemStack(Items.DIAMOND, 1))
+                .ingredient(new ItemStack(Items.EMERALD))
                 .save(pRecipeOutput);
     }
 }
