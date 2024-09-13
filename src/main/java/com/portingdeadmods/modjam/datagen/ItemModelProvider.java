@@ -37,6 +37,12 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(MJItems.ELECTROLYTE_ALGAE_SERUM_VIAL.get());
 
         basicItem(MJItems.PRISM_MONOCLE.get());
+
+        basicItem(MJItems.DIVING_HELMET.get());
+        basicItem(MJItems.DIVING_CHESTPLATE.get());
+        basicItem(MJItems.DIVING_LEGGINGS.get());
+        basicItem(MJItems.DIVING_BOOTS.get());
+
         handHeldItem(MJItems.AQUARINE_WRENCH.get());
         handHeldItem(MJItems.CROWBAR.get());
 
