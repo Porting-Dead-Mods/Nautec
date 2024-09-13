@@ -30,6 +30,7 @@ public class MixerBlockEntity extends LaserBlockEntity {
     @Override
     public ObjectSet<Direction> getLaserInputs() {
         return ObjectSet.of(
+                Direction.UP,
                 Direction.DOWN
         );
     }
