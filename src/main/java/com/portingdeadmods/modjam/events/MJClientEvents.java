@@ -8,9 +8,9 @@ import com.portingdeadmods.modjam.api.client.renderer.blockentities.LaserBlockEn
 import com.portingdeadmods.modjam.api.client.renderer.items.PrismarineCrystalItemRenderer;
 import com.portingdeadmods.modjam.api.fluids.BaseFluidType;
 import com.portingdeadmods.modjam.client.hud.PrismMonocleOverlay;
-import com.portingdeadmods.modjam.client.model.DrainTopModel;
-import com.portingdeadmods.modjam.client.model.PrismarineCrystalModel;
-import com.portingdeadmods.modjam.client.model.WhiskModel;
+import com.portingdeadmods.modjam.client.model.block.DrainTopModel;
+import com.portingdeadmods.modjam.client.model.block.PrismarineCrystalModel;
+import com.portingdeadmods.modjam.client.model.block.WhiskModel;
 import com.portingdeadmods.modjam.client.renderer.blockentities.DrainBERenderer;
 import com.portingdeadmods.modjam.client.renderer.blockentities.MixerBERenderer;
 import com.portingdeadmods.modjam.client.renderer.blockentities.PrismarineCrystalBERenderer;

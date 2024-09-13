@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.portingdeadmods.modjam.api.client.renderer.blockentities.LaserBlockEntityRenderer;
 import com.portingdeadmods.modjam.api.utils.HorizontalDirection;
-import com.portingdeadmods.modjam.client.model.WhiskModel;
+import com.portingdeadmods.modjam.client.model.block.WhiskModel;
 import com.portingdeadmods.modjam.content.blockentities.MixerBlockEntity;
 import com.portingdeadmods.modjam.content.blocks.MixerBlock;
 import net.minecraft.client.Minecraft;

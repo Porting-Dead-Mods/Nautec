@@ -2,7 +2,7 @@ package com.portingdeadmods.modjam.api.client.renderer.items;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.portingdeadmods.modjam.client.model.PrismarineCrystalModel;
+import com.portingdeadmods.modjam.client.model.block.PrismarineCrystalModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;

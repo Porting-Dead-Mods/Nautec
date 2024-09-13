@@ -1,7 +1,14 @@
+/*
+ * 3d armor rendering is mostly from quark
+ * Thank you to Vazkii, VioletMoon and all
+ * contributors of quark <3
+ */
+
 package com.portingdeadmods.modjam.utils;
 
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.client.model.MJArmorModel;
+import com.portingdeadmods.modjam.client.model.armor.DivingArmorModel;
 import com.portingdeadmods.modjam.exampleCustom3DArmor.TestArmorModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -19,57 +26,57 @@ import java.util.function.Supplier;
 
 public class ArmorModelsHandler {
 
-	private static final Map<ModelLayerLocation, Layer> layers = new HashMap<>();
-	private static final Map<Pair<ModelLayerLocation, EquipmentSlot>, MJArmorModel> cachedArmors = new HashMap<>();
-	
-	public static ModelLayerLocation test;
+    private static final Map<ModelLayerLocation, Layer> LAYERS = new HashMap<>();
+    private static final Map<Pair<ModelLayerLocation, EquipmentSlot>, MJArmorModel> CACHED_ARMORS = new HashMap<>();
 
-	private static boolean modelsInitted = false;
+    public static ModelLayerLocation test;
+    public static ModelLayerLocation divingSuit;
 
-	private static void initModels() {
-		if(modelsInitted)
-			return;
+    private static boolean modelsInitted = false;
 
-		test = addArmorModel("test", TestArmorModel::createLayerDefinition);
+    private static void initModels() {
+        if (modelsInitted)
+            return;
 
-		modelsInitted = true;
-	}
+        test = addArmorModel("test", TestArmorModel::createLayerDefinition);
+        divingSuit = addArmorModel("diving_suit", DivingArmorModel::createBodyLayer);
 
-
-	private static ModelLayerLocation addArmorModel(String name, Supplier<LayerDefinition> supplier) {
-		return addLayer(name, new Layer(supplier, MJArmorModel::new));
-	}
-
-	private static ModelLayerLocation addLayer(String name, Layer layer) {
-		ModelLayerLocation loc = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ModJam.MODID,name), "main");
-		layers.put(loc, layer);
-		return loc;
-	}
+        modelsInitted = true;
+    }
 
 
-	public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event){
-		initModels();
-		layers.forEach((loc,layer)->event.registerLayerDefinition(loc,layer.definition));
-	}
+    private static ModelLayerLocation addArmorModel(String name, Supplier<LayerDefinition> supplier) {
+        return addLayer(name, new Layer(supplier, MJArmorModel::new));
+    }
 
-	public static MJArmorModel armorModel(ModelLayerLocation location, EquipmentSlot slot) {
-		Pair<ModelLayerLocation, EquipmentSlot> key = Pair.of(location, slot);
-		if(cachedArmors.containsKey(key))
-			return cachedArmors.get(key);
+    private static ModelLayerLocation addLayer(String name, Layer layer) {
+        ModelLayerLocation loc = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ModJam.MODID, name), "main");
+        LAYERS.put(loc, layer);
+        return loc;
+    }
 
-		initModels();
+    public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        initModels();
+        LAYERS.forEach((loc, layer) -> event.registerLayerDefinition(loc, layer.definition));
+    }
 
-		Layer layer = layers.get(location);
-		Minecraft mc = Minecraft.getInstance();
-		MJArmorModel model = layer.armorModelConstructor.apply(mc.getEntityModels().bakeLayer(location), slot);
-		cachedArmors.put(key, model);
+    public static MJArmorModel armorModel(ModelLayerLocation location, EquipmentSlot slot) {
+        Pair<ModelLayerLocation, EquipmentSlot> key = Pair.of(location, slot);
+        if (CACHED_ARMORS.containsKey(key))
+            return CACHED_ARMORS.get(key);
 
-		return model;
-	}
+        initModels();
 
-	private record Layer(Supplier<LayerDefinition> definition,
-						 BiFunction<ModelPart, EquipmentSlot, MJArmorModel> armorModelConstructor) {
+        Layer layer = LAYERS.get(location);
+        Minecraft mc = Minecraft.getInstance();
+        MJArmorModel model = layer.armorModelConstructor.apply(mc.getEntityModels().bakeLayer(location), slot);
+        CACHED_ARMORS.put(key, model);
 
-	}
+        return model;
+    }
+
+    private record Layer(Supplier<LayerDefinition> definition,
+                         BiFunction<ModelPart, EquipmentSlot, MJArmorModel> armorModelConstructor) {
+    }
 
 }

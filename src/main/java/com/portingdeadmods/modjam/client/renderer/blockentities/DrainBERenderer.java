@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.portingdeadmods.modjam.api.multiblocks.Multiblock;
-import com.portingdeadmods.modjam.client.model.DrainTopModel;
+import com.portingdeadmods.modjam.client.model.block.DrainTopModel;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.DrainBlockEntity;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;

@@ -3,8 +3,10 @@ package com.portingdeadmods.modjam.registries;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.items.AquarineWrenchItem;
 import com.portingdeadmods.modjam.content.items.DivingSuitArmorItem;
+import com.portingdeadmods.modjam.content.items.NeptunesTridentItem;
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
 import com.portingdeadmods.modjam.data.MJDataComponents;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -61,8 +63,10 @@ public final class MJItems {
     public static final DeferredItem<DivingSuitArmorItem> DIVING_BOOTS = registerItem("diving_boots",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     // TOOLS 'N WEAPONS
-    public static final DeferredItem<Item> NEPTUNES_TRIDENT = registerItem("neptunes_trident",
-            Item::new, new Item.Properties());
+    public static final DeferredItem<NeptunesTridentItem> NEPTUNES_TRIDENT = registerItem("neptunes_trident",
+            NeptunesTridentItem::new, new Item.Properties()
+                    .attributes(NeptunesTridentItem.createAttributes())
+                    .component(DataComponents.TOOL, NeptunesTridentItem.createToolProperties()));
 
     // BUCKETS
     public static final DeferredItem<BucketItem> SALT_WATER_BUCKET = registerItemBucket("salt_water_bucket",

@@ -1,4 +1,4 @@
-package com.portingdeadmods.modjam.client.model;
+package com.portingdeadmods.modjam.client.model.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
