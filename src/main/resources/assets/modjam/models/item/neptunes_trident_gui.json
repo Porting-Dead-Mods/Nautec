@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "modjam:item/neptunes_trident_gui"
+  }
+}

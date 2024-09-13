@@ -60,6 +60,10 @@ public final class MJItems {
     public static final DeferredItem<DivingSuitArmorItem> DIVING_LEGGINGS = registerItem("diving_leggings",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final DeferredItem<DivingSuitArmorItem> DIVING_BOOTS = registerItem("diving_boots",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.BOOTS, new Item.Properties()));
 
+    // TOOLS 'N WEAPONS
+    public static final DeferredItem<Item> NEPTUNES_TRIDENT = registerItem("neptunes_trident",
+            Item::new, new Item.Properties());
+
     // BUCKETS
     public static final DeferredItem<BucketItem> SALT_WATER_BUCKET = registerItemBucket("salt_water_bucket",
             () -> new BucketItem(MJFluids.SALT_WATER_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
