@@ -54,55 +54,56 @@ public class MJArmorModel extends HumanoidArmorModel<LivingEntity> {
     protected void setPartVisibility(EquipmentSlot slot) {
         setAllVisible(false);
         switch (slot) {
-            case HEAD:
+            case HEAD -> {
                 head.visible = true;
                 hat.visible = true;
-                break;
-            case CHEST:
+            }
+            case CHEST -> {
                 body.visible = true;
                 rightArm.visible = true;
                 leftArm.visible = true;
-                break;
-            case LEGS:
+            }
+            case LEGS -> {
                 body.visible = true;
                 rightLeg.visible = true;
                 leftLeg.visible = true;
-                break;
-            case FEET:
+            }
+            case FEET -> {
                 rightLeg.visible = true;
                 leftLeg.visible = true;
+            }
         }
     }
 
     public record PartsDefinition(PartDefinition root) {
 
         public PartDefinition getHat() {
-                return root().addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
-            }
+            return root().addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
+        }
 
         public PartDefinition getHead() {
-                return root().addOrReplaceChild("head", CubeListBuilder.create(), PartPose.ZERO);
-            }
+            return root().addOrReplaceChild("head", CubeListBuilder.create(), PartPose.ZERO);
+        }
 
-            public PartDefinition getBody() {
-                return root().addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
-            }
+        public PartDefinition getBody() {
+            return root().addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
+        }
 
-            public PartDefinition getLeftArm() {
-                return root().addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.ZERO);
-            }
+        public PartDefinition getLeftArm() {
+            return root().addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.ZERO);
+        }
 
         public PartDefinition getRightArm() {
-                return root().addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.ZERO);
-            }
+            return root().addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.ZERO);
+        }
 
-            public PartDefinition getLeftLeg() {
-                return root().addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.ZERO);
-            }
+        public PartDefinition getLeftLeg() {
+            return root().addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.ZERO);
+        }
 
         public PartDefinition getRightLeg() {
-                return root().addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.ZERO);
-            }
-
+            return root().addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.ZERO);
         }
+
+    }
 }

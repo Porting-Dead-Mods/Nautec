@@ -3,7 +3,7 @@ package com.portingdeadmods.modjam.client.renderer.blockentities;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.portingdeadmods.modjam.api.client.renderer.blockentities.LaserBlockEntityRenderer;
-import com.portingdeadmods.modjam.client.model.PrismarineCrystalModel;
+import com.portingdeadmods.modjam.client.model.block.PrismarineCrystalModel;
 import com.portingdeadmods.modjam.content.blockentities.PrismarineCrystalBlockEntity;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
