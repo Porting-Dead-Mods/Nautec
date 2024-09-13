@@ -3,7 +3,7 @@
 	"textures": {
 		"0": "modjam:block/dark_prismarine_pillar_side",
 		"1": "block/prismarine_bricks",
-		"2": "block/dark_prismarine",
+		"2": "modjam:block/mixer_bottom",
 		"particle": "modjam:block/dark_prismarine_pillar_side"
 	},
 	"elements": [

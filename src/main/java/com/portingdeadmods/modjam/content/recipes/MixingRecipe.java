@@ -28,7 +28,9 @@ public record MixingRecipe(List<IngredientWithCount> ingredients, FluidStack flu
 
     @Override
     public boolean matches(@NotNull MixingRecipeInput recipeInput, @NotNull Level level) {
-        return RecipeUtils.compareItems(recipeInput.items(), this.ingredients) && FluidStack.isSameFluid(recipeInput.fluidStack(), fluidIngredient);
+        return RecipeUtils.compareItems(recipeInput.items(), this.ingredients)
+                && recipeInput.fluidStack().is(fluidIngredient.getFluid())
+                && recipeInput.fluidStack().getAmount() >= fluidIngredient.getAmount();
     }
 
     @Override
