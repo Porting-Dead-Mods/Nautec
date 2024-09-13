@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+  "textures": {
+    "layer0": "modjam:item/neptunes_trident_gui"
+  },
+  "base": {
+    "parent": "modjam:item/neptunes_trident_handheld"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "modjam:item/neptunes_trident_gui"
+    },
+    "fixed": {
+      "parent": "modjam:item/neptunes_trident_gui"
+    },
+    "ground": {
+      "parent": "modjam:item/neptunes_trident_gui"
+    }
+  }
+}
