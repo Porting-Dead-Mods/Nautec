@@ -34,12 +34,27 @@ public class BlockModelProvider extends BlockStateProvider {
         drainPart(MJBlocks.DRAIN_PART.get(), IntegerRange.of(0, 8));
         drainController(MJBlocks.DRAIN.get());
         crateBlock(MJBlocks.CRATE.get());
-        facingBlock(MJBlocks.PRISMARINE_RELAY.get());
+        existingFacingBlock(MJBlocks.PRISMARINE_RELAY.get());
         simpleBlock(MJBlocks.MIXER.get(), models().getExistingFile(existingModelFile(MJBlocks.MIXER.get())));
+        longDistanceLaser(MJBlocks.LONG_DISTANCE_LASER.get());
     }
 
-    public void facingBlock(Block block) {
-        ModelFile.ExistingModelFile model = models().getExistingFile(existingModelFile(block));
+    public void longDistanceLaser(Block block) {
+        BlockModelBuilder modelBuilder = models().withExistingParent(name(block), "cube")
+                .texture("up", extend(blockTexture(block), "_top"))
+                .texture("down", extend(blockTexture(block), "_bottom"))
+                .texture("north", extend(blockTexture(block), "_side"))
+                .texture("east", extend(blockTexture(block), "_side"))
+                .texture("south", extend(blockTexture(block), "_side"))
+                .texture("west", extend(blockTexture(block), "_side"));
+        facingBlock(block, modelBuilder);
+    }
+
+    public void existingFacingBlock(Block block) {
+        facingBlock(block, models().getExistingFile(existingModelFile(MJBlocks.PRISMARINE_RELAY.get())));
+    }
+
+    public void facingBlock(Block block, ModelFile model) {
         getVariantBuilder(block)
                 .partialState().with(BlockStateProperties.FACING, Direction.UP)
                 .modelForState().modelFile(model).addModel()

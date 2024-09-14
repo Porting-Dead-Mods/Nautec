@@ -19,7 +19,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import java.util.Optional;
 
 @EventBusSubscriber(modid = "modjam",bus = EventBusSubscriber.Bus.GAME)
-public class MJEvents {
+public final class MJEvents {
 
     private static final Object2IntMap<ItemEntity> activeTransformations = new Object2IntOpenHashMap<>();
 

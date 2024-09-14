@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "modjam:block/long_distance_laser_bottom",
+    "east": "modjam:block/long_distance_laser_side",
+    "north": "modjam:block/long_distance_laser_side",
+    "south": "modjam:block/long_distance_laser_side",
+    "up": "modjam:block/long_distance_laser_top",
+    "west": "modjam:block/long_distance_laser_side"
+  }
+}

@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-13T22:19:12.116440381	Item Models: modjam
+// 1.21.1	2024-09-14T21:27:11.087432861	Item Models: modjam
 51765874ad3111adf69684269ad9a422bfbaac4a assets/modjam/models/item/aquarine_steel_block.json
 e674d6859446f65b4ee805ed6e9f47d6cde82515 assets/modjam/models/item/aquarine_steel_ingot.json
 098a336dd0b210f2b650174de2346a665b921edd assets/modjam/models/item/aquarine_steel_wrench.json
@@ -21,6 +21,7 @@ a089323dae9de79cf909c7f0340251864eaed85f assets/modjam/models/item/diving_helmet
 c78201ce0b7023d1bd6173df7f9263b243caaeb6 assets/modjam/models/item/etching_acid_bucket.json
 054c0dfda629903fcf6880f0db40241af562a1a8 assets/modjam/models/item/gear.json
 f0f9891cd57b3a66f7440a71b925348bb8ea745b assets/modjam/models/item/glass_vial.json
+ded81f67ccb99458d5f971322bfe07b2bcf64129 assets/modjam/models/item/long_distance_laser.json
 70e7405579c5908091d6c50ab13bb62c8a3fea61 assets/modjam/models/item/mixer.json
 dab337d602d93b0a4930b69e652b1155300c6502 assets/modjam/models/item/prism_monocle.json
 b1280404594f844671030bc27b7dccec112a81b6 assets/modjam/models/item/prismarine_crystal.json

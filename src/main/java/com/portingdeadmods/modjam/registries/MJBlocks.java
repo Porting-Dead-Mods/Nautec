@@ -34,8 +34,13 @@ public final class MJBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS));
     public static final DeferredBlock<MixerBlock> MIXER = registerBlockAndItem("mixer", MixerBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS));
+    public static final DeferredBlock<LongDistanceLaserBlock> LONG_DISTANCE_LASER = registerBlockAndItem("long_distance_laser", LongDistanceLaserBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
 
     public static final DeferredBlock<PrismarineCrystalBlock> PRISMARINE_CRYSTAL = registerBlockAndItem("prismarine_crystal", PrismarineCrystalBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+
+    public static final DeferredBlock<CreativePowerSourceBlock> CREATIVE_POWER_SOURCE = registerBlockAndItem("creative_power_source", CreativePowerSourceBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
 
     // MULTIBLOCKS

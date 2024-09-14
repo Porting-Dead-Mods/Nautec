@@ -24,6 +24,7 @@ public class MixerBlockEntity extends LaserBlockEntity {
     public MixerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(MJBlockEntityTypes.MIXER.get(), blockPos, blockState);
         addFluidTank(1000);
+        addSecondaryFluidTank( 1000);
         addItemHandler(5, (slot, stack) -> slot != 4);
     }
 

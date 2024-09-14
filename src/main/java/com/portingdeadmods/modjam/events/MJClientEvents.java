@@ -12,6 +12,7 @@ import com.portingdeadmods.modjam.client.model.block.DrainTopModel;
 import com.portingdeadmods.modjam.client.model.block.PrismarineCrystalModel;
 import com.portingdeadmods.modjam.client.model.block.WhiskModel;
 import com.portingdeadmods.modjam.client.renderer.blockentities.DrainBERenderer;
+import com.portingdeadmods.modjam.client.renderer.blockentities.LongDistanceLaserBERenderer;
 import com.portingdeadmods.modjam.client.renderer.blockentities.MixerBERenderer;
 import com.portingdeadmods.modjam.client.renderer.blockentities.PrismarineCrystalBERenderer;
 import com.portingdeadmods.modjam.client.screen.CrateScreen;
@@ -23,6 +24,7 @@ import com.portingdeadmods.modjam.utils.ArmorModelsHandler;
 import net.minecraft.client.Camera;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.FogRenderer;
@@ -30,7 +32,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -109,16 +113,26 @@ public final class MJClientEvents {
 
             event.registerItem(new IClientItemExtensions() {
                 @Override
-                public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                     return PRISMARINE_CRYSTAL_RENDERER;
                 }
             }, MJBlocks.PRISMARINE_CRYSTAL.asItem());
+
+            event.registerItem(new IClientItemExtensions() {
+                @Override
+                public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack
+                        itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                    return ArmorModelsHandler.armorModel(ArmorModelsHandler.divingSuit, equipmentSlot);
+                }
+            }, MJItems.DIVING_HELMET);
         }
 
         @SubscribeEvent
         public static void registerBERenderers(EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(MJBlockEntityTypes.AQUATIC_CATALYST.get(), LaserBlockEntityRenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.PRISMARINE_LASER_RELAY.get(), LaserBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(MJBlockEntityTypes.CREATIVE_POWER_SOURCE.get(), LaserBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(MJBlockEntityTypes.LONG_DISTANCE_LASER.get(), LongDistanceLaserBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.PRISMARINE_CRYSTAL.get(), PrismarineCrystalBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.MIXER.get(), MixerBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.DRAIN.get(), DrainBERenderer::new);
