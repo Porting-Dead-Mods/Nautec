@@ -7,6 +7,8 @@ import com.portingdeadmods.modjam.capabilities.item.SidedItemHandler;
 import com.portingdeadmods.modjam.capabilities.power.IPowerStorage;
 import com.portingdeadmods.modjam.capabilities.power.PowerStorage;
 import it.unimi.dsi.fastutil.Pair;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -32,7 +34,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -73,6 +75,7 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     protected FluidTank getFluidTank() {
         return fluidTank;
     }
+
     protected FluidTank getSecondaryFluidTank() {
         return fluidTank;
     }
@@ -233,6 +236,19 @@ public abstract class ContainerBlockEntity extends BlockEntity {
         ItemStack[] itemStacks = new ItemStack[itemStackHandler.getSlots()];
         for (int i = 0; i < itemStackHandler.getSlots(); i++) {
             itemStacks[i] = itemStackHandler.getStackInSlot(i);
+        }
+        return itemStacks;
+    }
+
+    public List<ItemStack> getItemHandlerStacksList() {
+        IItemHandler itemStackHandler = getItemHandler();
+
+        if (itemStackHandler == null) return null;
+
+        int slots = itemStackHandler.getSlots();
+        ObjectList<ItemStack> itemStacks = new ObjectArrayList<>(slots);
+        for (int i = 0; i < slots; i++) {
+            itemStacks.add(itemStackHandler.getStackInSlot(i));
         }
         return itemStacks;
     }

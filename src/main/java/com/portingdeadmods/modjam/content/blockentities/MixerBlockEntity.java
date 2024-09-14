@@ -2,19 +2,26 @@ package com.portingdeadmods.modjam.content.blockentities;
 
 import com.portingdeadmods.modjam.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.modjam.capabilities.IOActions;
+import com.portingdeadmods.modjam.content.recipes.MixingRecipe;
+import com.portingdeadmods.modjam.content.recipes.utils.MixingRecipeInput;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class MixerBlockEntity extends LaserBlockEntity {
+    public static final int OUTPUT_SLOT = 4;
     private boolean active;
 
     private float independentAngle;
@@ -23,9 +30,11 @@ public class MixerBlockEntity extends LaserBlockEntity {
 
     public MixerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(MJBlockEntityTypes.MIXER.get(), blockPos, blockState);
-        addFluidTank(1000);
-        addSecondaryFluidTank( 1000);
         addItemHandler(5, (slot, stack) -> slot != 4);
+        // in
+        addFluidTank(1000);
+        // out
+        addSecondaryFluidTank(1000, fluidStack -> false);
     }
 
     @Override
@@ -72,7 +81,26 @@ public class MixerBlockEntity extends LaserBlockEntity {
     }
 
     private void performRecipe() {
+        Optional<MixingRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(MixingRecipe.Type.INSTANCE, new MixingRecipeInput(getItemHandlerStacksList(), getFluidTank().getFluid()), level).map(RecipeHolder::value);
+        if (recipe.isPresent() && canInsertFluid(recipe.get().fluidResult()) && canInsertItem(recipe.get().result())) {
 
+        }
+    }
+
+    private boolean canInsertItem(ItemStack result) {
+        ItemStack stack = getItemHandler().getStackInSlot(OUTPUT_SLOT);
+        boolean itemMatches = result.isEmpty() || stack.isEmpty() || result.is(stack.getItem());
+        int stackLimit = stack.isEmpty() ? result.getMaxStackSize() : stack.getMaxStackSize();
+        boolean amountMatches = result.getCount() + stack.getCount() <= Math.min(stackLimit, getItemHandler().getSlotLimit(OUTPUT_SLOT));
+        return itemMatches && amountMatches;
+    }
+
+    private boolean canInsertFluid(FluidStack fluidStack) {
+        boolean fluidMatches = fluidStack.isEmpty() || getSecondaryFluidTank().isEmpty() || fluidStack.is(getSecondaryFluidTank().getFluid().getFluid());
+        int fluidAmount = getSecondaryFluidTank().getFluidAmount();
+        boolean amountMatches = fluidAmount + fluidStack.getAmount() <= getSecondaryFluidTank().getCapacity();
+        return fluidMatches && amountMatches;
     }
 
     public int getSpeed() {
