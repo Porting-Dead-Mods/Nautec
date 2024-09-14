@@ -32,6 +32,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.util.Map;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -39,6 +40,7 @@ import java.util.function.Predicate;
 public abstract class ContainerBlockEntity extends BlockEntity {
     private @Nullable ItemStackHandler itemHandler;
     private @Nullable FluidTank fluidTank;
+    private @Nullable FluidTank secondaryFluidTank;
     private @Nullable PowerStorage powerStorage;
 
     public ContainerBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
@@ -56,6 +58,10 @@ public abstract class ContainerBlockEntity extends BlockEntity {
         return fluidTank;
     }
 
+    public IFluidHandler getSecondaryFluidHandler() {
+        return secondaryFluidTank;
+    }
+
     public IPowerStorage getPowerStorage() {
         return powerStorage;
     }
@@ -65,6 +71,9 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     }
 
     protected FluidTank getFluidTank() {
+        return fluidTank;
+    }
+    protected FluidTank getSecondaryFluidTank() {
         return fluidTank;
     }
 
@@ -77,10 +86,12 @@ public abstract class ContainerBlockEntity extends BlockEntity {
         super.loadAdditional(nbt, provider);
         if (this.getFluidTank() != null)
             this.getFluidTank().readFromNBT(provider, nbt);
+        if (this.getSecondaryFluidTank() != null)
+            this.getSecondaryFluidTank().readFromNBT(provider, nbt.getCompound("secondary_fluid"));
         if (this.getItemStackHandler() != null)
             this.getItemStackHandler().deserializeNBT(provider, nbt.getCompound("itemhandler"));
         if (this.getEnergyStorageImpl() != null)
-            this.getEnergyStorageImpl().deserializeNBT(provider, nbt.getCompound("energy_storage"));
+            this.getEnergyStorageImpl().deserializeNBT(provider, nbt.getCompound("power_storage"));
         loadData(nbt, provider);
     }
 
@@ -89,10 +100,15 @@ public abstract class ContainerBlockEntity extends BlockEntity {
         super.saveAdditional(nbt, provider);
         if (getFluidTank() != null)
             getFluidTank().writeToNBT(provider, nbt);
+        if (getSecondaryFluidTank() != null) {
+            CompoundTag tag = new CompoundTag();
+            getSecondaryFluidTank().writeToNBT(provider, tag);
+            nbt.put("secondary_fluid", tag);
+        }
         if (getItemStackHandler() != null)
             nbt.put("itemhandler", getItemStackHandler().serializeNBT(provider));
         if (getEnergyStorageImpl() != null)
-            nbt.put("energy_storage", getEnergyStorageImpl().serializeNBT(provider));
+            nbt.put("power_storage", getEnergyStorageImpl().serializeNBT(provider));
         saveData(nbt, provider);
     }
 
@@ -112,10 +128,6 @@ public abstract class ContainerBlockEntity extends BlockEntity {
 
     protected final void addItemHandler(int slots, BiPredicate<Integer, ItemStack> validation) {
         addItemHandler(slots, 64, validation);
-    }
-
-    protected final void addFluidTank(int capacityInMb) {
-        addFluidTank(capacityInMb, fluidStack -> true);
     }
 
     protected final void addItemHandler(int slots, int slotLimit, BiPredicate<Integer, ItemStack> validation) {
@@ -140,8 +152,24 @@ public abstract class ContainerBlockEntity extends BlockEntity {
         };
     }
 
-    protected final void addFluidTank(int capacityInMb, Predicate<FluidStack> validation) {
-        this.fluidTank = new FluidTank(capacityInMb) {
+    protected final void addFluidTank(int capacityInMb) {
+        addFluidTank(capacityInMb, ignored -> true);
+    }
+
+    protected final void addSecondaryFluidTank(int capacityInMb) {
+        addSecondaryFluidTank(capacityInMb, ignored -> true);
+    }
+
+    protected final void addSecondaryFluidTank(int capacityInMb, Predicate<FluidStack> validation) {
+        addFluidTank(capacityInMb, validation, true);
+    }
+
+    protected final void addFluidTank(int capacityInMn, Predicate<FluidStack> validation) {
+        addFluidTank(capacityInMn, validation, false);
+    }
+
+    protected final void addFluidTank(int capacityInMb, Predicate<FluidStack> validation, boolean secondary) {
+        FluidTank tank = new FluidTank(capacityInMb) {
             @Override
             protected void onContentsChanged() {
                 update();
@@ -154,9 +182,14 @@ public abstract class ContainerBlockEntity extends BlockEntity {
                 return validation.test(stack);
             }
         };
+        if (!secondary) {
+            this.fluidTank = tank;
+        } else {
+            this.secondaryFluidTank = tank;
+        }
     }
 
-    protected final void addEnergyStorage(int powerCapacity) {
+    protected final void addPowerStorage(int powerCapacity) {
         this.powerStorage = new PowerStorage() {
             @Override
             public void onEnergyChanged() {

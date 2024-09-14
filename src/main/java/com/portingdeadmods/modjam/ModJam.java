@@ -3,7 +3,6 @@ package com.portingdeadmods.modjam;
 import com.mojang.logging.LogUtils;
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
 import com.portingdeadmods.modjam.data.MJDataComponents;
-import com.portingdeadmods.modjam.exampleCustom3DArmor.ExampleItems;
 import com.portingdeadmods.modjam.registries.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -26,7 +25,6 @@ public final class ModJam {
             event.register(MJRegistries.AUGMENT);
         });
 
-        new ExampleItems();
         MJEntites.ENTITIES.register(modEventBus);
         MJItems.ITEMS.register(modEventBus);
         MJFluids.FLUIDS.register(modEventBus);

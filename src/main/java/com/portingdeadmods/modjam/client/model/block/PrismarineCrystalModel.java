@@ -60,6 +60,7 @@ public class PrismarineCrystalModel extends Model {
     }
 
     public void render(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay) {
+        ModJam.LOGGER.debug("Rendring");
         poseStack.pushPose();
         {
             poseStack.translate(0.5, 0, 0.5);

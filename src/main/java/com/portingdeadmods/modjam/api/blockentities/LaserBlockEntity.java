@@ -75,7 +75,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
             }
         }
 
-        if (level.getGameTime() % 10 == 0) {
+        if (level.getGameTime() % checkConnectionsInterval() == 0) {
             checkConnections();
         }
 
@@ -94,6 +94,10 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
                 }
             }
         }
+    }
+
+    protected int checkConnectionsInterval() {
+        return 10;
     }
 
     private void damageLivingEntities(AABB box) {

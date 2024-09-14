@@ -9,7 +9,6 @@ package com.portingdeadmods.modjam.utils;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.client.model.MJArmorModel;
 import com.portingdeadmods.modjam.client.model.armor.DivingArmorModel;
-import com.portingdeadmods.modjam.exampleCustom3DArmor.TestArmorModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -29,7 +28,6 @@ public class ArmorModelsHandler {
     private static final Map<ModelLayerLocation, Layer> LAYERS = new HashMap<>();
     private static final Map<Pair<ModelLayerLocation, EquipmentSlot>, MJArmorModel> CACHED_ARMORS = new HashMap<>();
 
-    public static ModelLayerLocation test;
     public static ModelLayerLocation divingSuit;
 
     private static boolean modelsInitted = false;
@@ -38,7 +36,6 @@ public class ArmorModelsHandler {
         if (modelsInitted)
             return;
 
-        test = addArmorModel("test", TestArmorModel::createLayerDefinition);
         divingSuit = addArmorModel("diving_suit", DivingArmorModel::createBodyLayer);
 
         modelsInitted = true;
