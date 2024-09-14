@@ -44,7 +44,6 @@ public class ArmorModelsHandler {
         modelsInitted = true;
     }
 
-
     private static ModelLayerLocation addArmorModel(String name, Supplier<LayerDefinition> supplier) {
         return addLayer(name, new Layer(supplier, MJArmorModel::new));
     }

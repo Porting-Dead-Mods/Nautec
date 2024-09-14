@@ -33,7 +33,7 @@ public class ExampleClientEvents {
                     itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 return ArmorModelsHandler.armorModel(ArmorModelsHandler.divingSuit, equipmentSlot);
             }
-        }, MJItems.DIVING_HELMET, MJItems.DIVING_CHESTPLATE);
+        }, MJItems.DIVING_HELMET);
     }
 
 }

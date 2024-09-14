@@ -1,11 +1,13 @@
 package com.portingdeadmods.modjam.content.items;
 
+import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.data.MJDataComponentsUtils;
 import com.portingdeadmods.modjam.registries.MJItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -14,6 +16,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -54,6 +57,7 @@ public class DivingSuitArmorItem extends ArmorItem {
         if(stack.is(MJItems.DIVING_HELMET.get())) {
             tooltipComponents.add(Component.literal("Allows you to see better underwater.").withStyle(ChatFormatting.GRAY));
         }
+
         if (stack.is(MJItems.DIVING_CHESTPLATE.get())) {
             int oxygen = MJDataComponentsUtils.getOxygenLevels(stack);
             int minutesRemaining = oxygen / 60;
@@ -67,5 +71,10 @@ public class DivingSuitArmorItem extends ArmorItem {
             tooltipComponents.add(Component.literal(String.format("Oxygen: %d minutes %d seconds", minutesRemaining, secondsRemaining))
                     .withStyle(style -> style.withColor(TextColor.fromRgb(colorHex))));
         }
+    }
+
+    @Override
+    public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+        return stack.is(MJItems.DIVING_HELMET.get()) ? ResourceLocation.fromNamespaceAndPath(ModJam.MODID,"textures/example/diving_suit.png") : super.getArmorTexture(stack, entity, slot, layer, innerModel);
     }
 }
