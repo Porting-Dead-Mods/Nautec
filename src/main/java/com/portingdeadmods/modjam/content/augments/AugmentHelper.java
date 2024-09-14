@@ -123,4 +123,14 @@ public class AugmentHelper {
 
         return augments.toArray(new StaticAugment[10]);
     }
+    public static Integer[] getAugmentVals(Player player) {
+        List<Integer> augments = new ArrayList<>();
+        augments.add(getAugment(player, Slot.HEAD).getId());
+        augments.add(getAugment(player, Slot.BODY).getId());
+        augments.add(getAugment(player, Slot.ARMS).getId());
+        augments.add(getAugment(player, Slot.LEGS).getId());
+        augments.add(getAugment(player, Slot.HEART).getId());
+
+        return augments.toArray(new Integer[10]);
+    }
 }
