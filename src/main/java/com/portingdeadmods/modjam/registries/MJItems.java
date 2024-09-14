@@ -5,6 +5,7 @@ import com.portingdeadmods.modjam.content.items.AquarineWrenchItem;
 import com.portingdeadmods.modjam.content.items.DivingSuitArmorItem;
 import com.portingdeadmods.modjam.content.items.NeptunesTridentItem;
 import com.portingdeadmods.modjam.content.items.PrismMonocleItem;
+import com.portingdeadmods.modjam.content.items.tiers.MJArmorMaterials;
 import com.portingdeadmods.modjam.data.MJDataComponents;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.*;
@@ -57,10 +58,10 @@ public final class MJItems {
     public static final DeferredItem<PrismMonocleItem> PRISM_MONOCLE = registerItem("prism_monocle",
             PrismMonocleItem::new, new Item.Properties());
 
-    public static final DeferredItem<DivingSuitArmorItem> DIVING_HELMET = registerItem("diving_helmet",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final DeferredItem<DivingSuitArmorItem> DIVING_CHESTPLATE = registerItem("diving_chestplate",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.CHESTPLATE, new Item.Properties().component(MJDataComponents.OXYGEN,0)));
-    public static final DeferredItem<DivingSuitArmorItem> DIVING_LEGGINGS = registerItem("diving_leggings",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static final DeferredItem<DivingSuitArmorItem> DIVING_BOOTS = registerItem("diving_boots",() -> new DivingSuitArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_HELMET = registerItem("diving_helmet", () -> new DivingSuitArmorItem(MJArmorMaterials.DIVING_SUIT, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_CHESTPLATE = registerItem("diving_chestplate", () -> new DivingSuitArmorItem(MJArmorMaterials.DIVING_SUIT, ArmorItem.Type.CHESTPLATE, new Item.Properties().component(MJDataComponents.OXYGEN, 0)));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_LEGGINGS = registerItem("diving_leggings", () -> new DivingSuitArmorItem(MJArmorMaterials.DIVING_SUIT, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_BOOTS = registerItem("diving_boots", () -> new DivingSuitArmorItem(MJArmorMaterials.DIVING_SUIT, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     // TOOLS 'N WEAPONS
     public static final DeferredItem<NeptunesTridentItem> NEPTUNES_TRIDENT = registerItem("neptunes_trident",
