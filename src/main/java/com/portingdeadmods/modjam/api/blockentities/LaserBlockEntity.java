@@ -1,6 +1,9 @@
 package com.portingdeadmods.modjam.api.blockentities;
 
+import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.content.blockentities.PrismarineCrystalBlockEntity;
 import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
+import com.portingdeadmods.modjam.content.recipes.inputs.ItemTransformationRecipeInput;
 import com.portingdeadmods.modjam.utils.ParticlesUtils;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.core.BlockPos;
@@ -26,7 +29,13 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     private final Object2IntMap<ItemEntity> activeTransformations;
 
     private int powerToTransfer;
-    private int power;
+    protected int power;
+
+    private final Object2IntMap<Direction> powerPerSide;
+    private final Object2FloatMap<Direction> purityPerSide;
+
+    private float newPurity;
+    protected float purity;
 
     private float clientLaserTime;
 
@@ -34,6 +43,9 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         super(blockEntityType, blockPos, blockState);
         this.laserDistances = new Object2IntOpenHashMap<>();
         this.activeTransformations = new Object2IntArrayMap<>();
+        this.powerPerSide = new Object2IntArrayMap<>();
+        this.purityPerSide = new Object2FloatArrayMap<>();
+        this.purity = 0;
     }
 
     public abstract ObjectSet<Direction> getLaserInputs();
@@ -48,8 +60,17 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         return laserDistances;
     }
 
-    public void setPower(int power) {
-        this.power = power;
+    public int getMaxLaserDistance() {
+        return 16;
+    }
+
+    protected int checkConnectionsInterval() {
+        return 10;
+    }
+
+    // POWER
+    public void setPowerPerSide(Direction direction, int power) {
+        this.powerPerSide.put(direction, power);
     }
 
     public int getPower() {
@@ -61,16 +82,31 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     }
 
     public void receivePower(int amount, Direction direction, BlockPos originPos) {
-        setPower(amount);
+        setPowerPerSide(direction, amount);
     }
 
-    public int getMaxLaserDistance() {
-        return 16;
+    // PURITY
+    public void setPurityPerSide(Direction direction, float purity) {
+        this.purityPerSide.put(direction, purity);
     }
 
+    public float getPurity() {
+        return purity;
+    }
+
+    public void setPurity(float amount) {
+        this.newPurity = amount;
+    }
+
+    public void receiveNewPurity(float amount, Direction direction, BlockPos originPos) {
+        setPurityPerSide(direction, amount);
+    }
+
+    // LOGIC
     @Override
     public void commonTick() {
         super.commonTick();
+
         if (level.isClientSide()) {
             if (clientLaserTime < getLaserAnimTimeDuration()) {
                 this.clientLaserTime += 0.5f;
@@ -95,13 +131,25 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
                 BlockPos targetPos = worldPosition.relative(direction, distance);
                 if (level.getBlockEntity(targetPos) instanceof LaserBlockEntity laserBE) {
                     laserBE.receivePower(powerToTransfer, direction, worldPosition);
+                    laserBE.receiveNewPurity(purity, direction, worldPosition);
                 }
             }
         }
-    }
 
-    protected int checkConnectionsInterval() {
-        return 10;
+        int power = 0;
+        for (int pps : this.powerPerSide.values()) {
+            power += pps;
+        }
+        this.power = power;
+
+        float purity = 0;
+        for (float pps : this.purityPerSide.values()) {
+            purity += pps;
+        }
+        int size = this.purityPerSide.size();
+        this.purity = newPurity + purity / (size > 0 ? size : 1);
+
+        this.powerPerSide.clear();
     }
 
     private void damageLivingEntities(AABB box) {
@@ -112,15 +160,17 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     }
 
     private Optional<ItemTransformationRecipe> getCurrentRecipe(ItemStack itemStack) {
-        SingleRecipeInput recipeInput = new SingleRecipeInput(itemStack);
+        ItemTransformationRecipeInput recipeInput = new ItemTransformationRecipeInput(itemStack, getPurity());
         return this.level.getRecipeManager().getRecipeFor(ItemTransformationRecipe.Type.INSTANCE, recipeInput, level).map(RecipeHolder::value);
     }
 
+    // FIXME: If items are moved out of the aabb recipe still works
     private void processItemCrafting(AABB box) {
         // Get all item entities within the box
         List<ItemEntity> itemEntities = level.getEntitiesOfClass(ItemEntity.class, box);
 
         for (ItemEntity itemEntity : itemEntities) {
+            ModJam.LOGGER.debug("found item");
             if (!activeTransformations.containsKey(itemEntity)) {
                 Optional<ItemTransformationRecipe> optionalRecipe = getCurrentRecipe(itemEntity.getItem());
                 if (optionalRecipe.isPresent()) {
@@ -140,9 +190,9 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
                 continue;
             }
 
-            if (cookTime >= 40) {
-                Optional<ItemTransformationRecipe> optionalRecipe = getCurrentRecipe(cookingItem.getItem());
-                if (optionalRecipe.isPresent()) {
+            Optional<ItemTransformationRecipe> optionalRecipe = getCurrentRecipe(cookingItem.getItem());
+            if (optionalRecipe.isPresent()) {
+                if (cookTime >= optionalRecipe.get().duration()) {
                     ItemStack resultStack = optionalRecipe.get().getResultItem(null).copy();
                     resultStack.setCount(cookingItem.getItem().getCount());
 
@@ -151,33 +201,35 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
 
                     cookingItem.discard();
                     iterator.remove();
+                } else {
+                    activeTransformations.put(cookingItem, cookTime + 1);
+                    ParticlesUtils.spawnParticles(cookingItem, level, ParticleTypes.END_ROD);
                 }
-            } else {
-                activeTransformations.put(cookingItem, cookTime + 1);
-                ParticlesUtils.spawnParticles(cookingItem, level, ParticleTypes.END_ROD);
             }
         }
     }
 
     private @NotNull AABB createLaserBeamAABB(Direction direction, int distance) {
-        BlockPos pos = worldPosition.relative(direction, distance - 1);
+        BlockPos pos = worldPosition.relative(direction, distance);
 
         Vec3 start = worldPosition.relative(direction).getCenter();
+        double v = 0.2;
         if (direction == Direction.UP || direction == Direction.DOWN) {
-            start = start.subtract(0.2, 0, 0.2);
+            start = start.subtract(v, 0, v);
         } else if (direction == Direction.NORTH || direction == Direction.SOUTH) {
-            start = start.subtract(0.2, 0.2, 0);
+            start = start.subtract(v, v, 0);
         } else if (direction == Direction.EAST || direction == Direction.WEST) {
-            start = start.subtract(0, 0.2, 0.2);
+            start = start.subtract(0, v, v);
         }
 
         Vec3 end = pos.getCenter().add(0.1, 0, 0.1);
         if (direction == Direction.UP || direction == Direction.DOWN) {
-            end = end.add(0.2, 0, 0.2);
+            Vec3 endPos = pos.below().getCenter();
+            end = endPos.add(v, 0, v);
         } else if (direction == Direction.NORTH || direction == Direction.SOUTH) {
-            end = end.add(0.2, 0.2, 0);
+            end = end.add(v, v, 0);
         } else if (direction == Direction.EAST || direction == Direction.WEST) {
-            end = end.add(0, 0.2, 0.2);
+            end = end.add(0, v, v);
         }
 
         return new AABB(start, end);
@@ -205,6 +257,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         }
     }
 
+    // CLIENT
     public int getLaserAnimTimeDuration() {
         return 80;
     }

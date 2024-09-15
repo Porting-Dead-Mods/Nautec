@@ -12,11 +12,15 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class ItemEtchingRecipeCategory implements IRecipeCategory<ItemEtchingRecipe> {
     static final ResourceLocation BURN_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(ModJam.MODID,"container/furnace/empty_arrow");
@@ -29,8 +33,8 @@ public class ItemEtchingRecipeCategory implements IRecipeCategory<ItemEtchingRec
 
 
     public ItemEtchingRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createBlankDrawable(80, 16);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MJItems.CROWBAR.get()));
+        this.background = helper.createBlankDrawable(80, 28);
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MJItems.ETCHING_ACID_BUCKET.get()));
     }
 
     @Override
@@ -57,12 +61,25 @@ public class ItemEtchingRecipeCategory implements IRecipeCategory<ItemEtchingRec
     public void draw(ItemEtchingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         IRecipeCategory.super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
         guiGraphics.blitSprite(BURN_PROGRESS_SPRITE, 28, 0, 24, 16);
+        Font font = Minecraft.getInstance().font;
+        guiGraphics.drawString(font, ((float) recipe.duration() / 20)+"s", 0, 20, 0xFF808080, false);
     }
+
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, ItemEtchingRecipe recipe, IFocusGroup focuses) {
         //Just one input slot, an arrow and an output slot
         builder.addSlot(RecipeIngredientRole.INPUT, 0,0 ).addItemStack(recipe.getIngredients().get(0).getItems()[0]);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 64, 0).addItemStack(recipe.getResultItem(null));
+    }
+
+    private boolean shouldRenderTooltip(double mouseX, double mouseY) {
+        int width = 24;
+        int height = 16;
+        int x = 28;
+        int y = 0;
+        boolean matchesOnX = mouseX > x && mouseX < x + width;
+        boolean matchesOnY = mouseY > y && mouseY < y + height;
+        return matchesOnX && matchesOnY;
     }
 
 

@@ -4,7 +4,7 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.modjam.capabilities.IOActions;
 import com.portingdeadmods.modjam.content.recipes.MixingRecipe;
-import com.portingdeadmods.modjam.content.recipes.utils.MixingRecipeInput;
+import com.portingdeadmods.modjam.content.recipes.inputs.MixingRecipeInput;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;

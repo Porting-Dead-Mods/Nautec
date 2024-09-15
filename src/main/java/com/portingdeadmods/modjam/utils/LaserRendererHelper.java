@@ -134,7 +134,6 @@ public final class LaserRendererHelper {
         int i = yOffset + height;
         poseStack.pushPose();
         poseStack.translate(0.5, 0.0, 0.5);
-        // TODO: Make rotation slowa
         float f = (float) Math.floorMod(gameTime, 40) + partialTick;
         float f1 = height < 0 ? f : -f;
         float f2 = Mth.frac(f1 * 0.2F - (float) Mth.floor(f1 * 0.1F));

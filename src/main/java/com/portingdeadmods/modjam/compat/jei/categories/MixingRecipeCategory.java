@@ -7,6 +7,10 @@ import com.portingdeadmods.modjam.content.recipes.MixingRecipe;
 import com.portingdeadmods.modjam.content.recipes.utils.RecipeUtils;
 import com.portingdeadmods.modjam.registries.MJBlocks;
 import com.portingdeadmods.modjam.registries.MJRecipes;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -21,8 +25,11 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.material.Fluids;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector2i;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,15 +69,15 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
         return icon;
     }
 
-    private final List<Pair<Integer, Integer>> slotPositions = new ArrayList<>();
+    private final Object2ObjectMap<MixingRecipe, Vector2i[]> slotPositions = new Object2ObjectOpenHashMap<>();
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, MixingRecipe recipe, IFocusGroup focuses) {
-        slotPositions.clear(); // Clear previous slot positions
-
         int maxSlots = 4;
         int slotSize = 18; // Assuming each slot is 18x18 pixels
         int gap = 2;       // Assuming a small gap between the slots (optional)
+
+        Vector2i[] slots = new Vector2i[recipe.getIngredients().size()+1];
 
         // Check if there are ingredients
         if (!recipe.getIngredients().isEmpty()) {
@@ -87,7 +94,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
                 int y = 0; // All inputs are at the same Y level
                 builder.addSlot(RecipeIngredientRole.INPUT, x, y)
                         .addIngredients(RecipeUtils.iWCToIngredientSaveCount(recipe.ingredients().get(i)));
-                slotPositions.add(Pair.of(x, y)); // Store the slot position
+                slots[i] = new Vector2i(x, y); // Store the slot position
             }
         }
 
@@ -99,7 +106,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
             // Output slot
             builder.addSlot(RecipeIngredientRole.OUTPUT, outputX, 50)
                     .addItemStack(recipe.result());
-            slotPositions.add(Pair.of(outputX, 50)); // Store the output slot position
+            slots[recipe.getIngredients().size()] = new Vector2i(outputX, 50); // Store the output slot position
         }
 
 
@@ -107,24 +114,24 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
         if (recipe.fluidIngredient().getFluid() != Fluids.EMPTY) {
             builder.addSlot(RecipeIngredientRole.INPUT, 0, 64)
                     .addFluidStack(recipe.fluidIngredient().getFluid(), recipe.fluidIngredient().getAmount());
-            slotPositions.add(Pair.of(0, 64)); // Store the fluid input slot position
         }
 
         // Check if there is a fluid output
         if (recipe.fluidResult().getFluid() != Fluids.EMPTY) {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 0, 96)
                     .addFluidStack(recipe.fluidResult().getFluid(), recipe.fluidResult().getAmount());
-            slotPositions.add(Pair.of(0, 96)); // Store the fluid output slot position
         }
+
+        slotPositions.put(recipe, slots);
 
     }
 
     @Override
-    public void draw(MixingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(@NotNull MixingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         // Iterate through stored slot positions and render the slot textures
-        for (Pair<Integer, Integer> slotPos : slotPositions) {
-            int x = slotPos.getFirst();
-            int y = slotPos.getSecond();
+        for (Vector2i slotPos : slotPositions.get(recipe)) {
+            int x = slotPos.x;
+            int y = slotPos.y;
 
             // Adjust for 1 pixel up and 1 pixel left
             guiGraphics.blitSprite(SINGLE_SLOT_SPRITE, x - 1, y - 1, 18, 18);
@@ -132,4 +139,5 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
 
         guiGraphics.blitSprite(DOWN_ARROW_SPRITE, 32, 22, 15, 23); // Adjust position as needed
 
-    }}
+    }
+}

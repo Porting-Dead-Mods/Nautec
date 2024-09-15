@@ -121,7 +121,7 @@ public class DrainPartBlock extends LaserBlock implements SimpleWaterloggedBlock
 
     @Override
     protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult p_60508_) {
-        if (player.isShiftKeyDown() && state.getValue(TOP) && state.getValue(DrainMultiblock.DRAIN_PART) == 4) {
+        if (player.isShiftKeyDown() && state.getValue(TOP) && state.getValue(DrainMultiblock.DRAIN_PART) == 4 && !state.getValue(OPEN)) {
             if (level.getBlockEntity(pos) instanceof DrainPartBlockEntity drainPartBlockEntity) {
                 drainPartBlockEntity.open();
                 return InteractionResult.SUCCESS;

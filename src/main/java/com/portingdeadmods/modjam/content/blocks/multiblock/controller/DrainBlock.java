@@ -47,7 +47,7 @@ public class DrainBlock extends ContainerBlock {
 
     @Override
     protected @NotNull InteractionResult useWithoutItem(BlockState p_60503_, Level level, BlockPos pos, Player player, BlockHitResult p_60508_) {
-        if (player.isShiftKeyDown() && level.getBlockEntity(pos) instanceof DrainBlockEntity drainBlockEntity) {
+        if (player.isShiftKeyDown() && level.getBlockEntity(pos) instanceof DrainBlockEntity drainBlockEntity && !drainBlockEntity.isClosing()) {
             drainBlockEntity.close();
         }
         return super.useWithoutItem(p_60503_, level, pos, player, p_60508_);
