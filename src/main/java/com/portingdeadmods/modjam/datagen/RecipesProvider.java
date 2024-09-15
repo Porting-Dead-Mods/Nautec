@@ -1,27 +1,20 @@
 package com.portingdeadmods.modjam.datagen;
 
-import com.portingdeadmods.modjam.content.recipes.MixingRecipe;
 import com.portingdeadmods.modjam.content.recipes.utils.IngredientWithCount;
 import com.portingdeadmods.modjam.datagen.recipeBuilder.AquaticCatalystChannelingRecipeBuilder;
 import com.portingdeadmods.modjam.datagen.recipeBuilder.ItemEtchingRecipeBuilder;
 import com.portingdeadmods.modjam.datagen.recipeBuilder.ItemTransformationRecipeBuilder;
 import com.portingdeadmods.modjam.datagen.recipeBuilder.MixingRecipeBuilder;
-import com.portingdeadmods.modjam.registries.MJFluids;
 import com.portingdeadmods.modjam.registries.MJItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class RecipesProvider extends RecipeProvider {
@@ -51,8 +44,19 @@ public class RecipesProvider extends RecipeProvider {
 
         MixingRecipeBuilder.newRecipe(new ItemStack(MJItems.RUSTY_GEAR.get()))
                 .ingredients(IngredientWithCount.fromItemTag(ItemTags.ANVIL), IngredientWithCount.fromItemLike(MJItems.ATLANTIC_GOLD_NUGGET.get(), 3))
-                .fluidIngredient(new FluidStack(Fluids.WATER, 100))
-                .fluidResult(FluidStack.EMPTY)
+                .duration(60)
+                .save(pRecipeOutput);
+
+        MixingRecipeBuilder.newRecipe(new ItemStack(MJItems.ATLANTIC_GOLD_NUGGET.get(), 3))
+                .ingredients(IngredientWithCount.fromItemLike(MJItems.ATLANTIC_GOLD_INGOT.get(), 1))
+                .duration(60)
+                .save(pRecipeOutput);
+
+        MixingRecipeBuilder.newRecipe(new ItemStack(MJItems.CROWBAR.get(), 1))
+                .ingredients(IngredientWithCount.fromItemLike(MJItems.DIVING_HELMET.get(),1)
+                        , IngredientWithCount.fromItemLike(MJItems.DIVING_CHESTPLATE.get(),1)
+                        , IngredientWithCount.fromItemLike(MJItems.DIVING_LEGGINGS.get(),1)
+                        , IngredientWithCount.fromItemLike(MJItems.DIVING_BOOTS.get(),1))
                 .duration(60)
                 .save(pRecipeOutput);
         }
