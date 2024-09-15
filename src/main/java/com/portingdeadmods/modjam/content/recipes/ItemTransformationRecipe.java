@@ -3,6 +3,7 @@ package com.portingdeadmods.modjam.content.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.portingdeadmods.modjam.content.recipes.inputs.ItemTransformationRecipeInput;
 import com.portingdeadmods.modjam.content.recipes.utils.IngredientWithCount;
 import com.portingdeadmods.modjam.content.recipes.utils.RecipeUtils;
 import net.minecraft.core.HolderLookup;
@@ -15,16 +16,17 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public record ItemTransformationRecipe(IngredientWithCount ingredient, ItemStack result, int duration, float purity) implements Recipe<SingleRecipeInput> {
+public record ItemTransformationRecipe(IngredientWithCount ingredient, ItemStack result, int duration,
+                                       float purity) implements Recipe<ItemTransformationRecipeInput> {
     public static final String NAME = "item_transformation";
 
     @Override
-    public boolean matches(@NotNull SingleRecipeInput recipeInput, @NotNull Level level) {
-        return ingredient.test(recipeInput.item());
+    public boolean matches(@NotNull ItemTransformationRecipeInput recipeInput, @NotNull Level level) {
+        return ingredient.test(recipeInput.item()) && purity <= recipeInput.purity();
     }
 
     @Override
-    public @NotNull ItemStack assemble(@NotNull SingleRecipeInput input, HolderLookup.@NotNull Provider registries) {
+    public @NotNull ItemStack assemble(@NotNull ItemTransformationRecipeInput input, HolderLookup.@NotNull Provider registries) {
         return result.copy();
     }
 
@@ -51,10 +53,6 @@ public record ItemTransformationRecipe(IngredientWithCount ingredient, ItemStack
     @Override
     public @NotNull NonNullList<Ingredient> getIngredients() {
         return NonNullList.of(Ingredient.EMPTY, RecipeUtils.iWCToIngredientSaveCount(ingredient));
-    }
-
-    public @NotNull NonNullList<IngredientWithCount> getIngredientsWithCount() {
-        return NonNullList.of(IngredientWithCount.EMPTY, ingredient);
     }
 
     public static class Serializer implements RecipeSerializer<ItemTransformationRecipe> {

@@ -32,14 +32,18 @@ public class RecipesProvider extends RecipeProvider {
 
         ItemTransformationRecipeBuilder.newRecipe(new ItemStack(MJItems.AQUARINE_STEEL_INGOT.get(), 1))
                 .ingredient(new ItemStack(Items.IRON_INGOT))
+                .purity(3)
+                .duration(100)
                 .save(pRecipeOutput);
 
-        ItemTransformationRecipeBuilder.newRecipe(new ItemStack(Items.NETHERITE_INGOT, 1))
-                .ingredient(new ItemStack(Items.SNOWBALL))
+        ItemEtchingRecipeBuilder.newRecipe(MJItems.VALVE.toStack())
+                .ingredient(MJItems.ANCIENT_VALVE.toStack())
+                .duration(200)
                 .save(pRecipeOutput);
 
-        ItemEtchingRecipeBuilder.newRecipe(new ItemStack(Items.DIAMOND, 1))
-                .ingredient(new ItemStack(Items.EMERALD))
+        ItemEtchingRecipeBuilder.newRecipe(MJItems.GEAR.toStack())
+                .ingredient(MJItems.RUSTY_GEAR.toStack())
+                .duration(160)
                 .save(pRecipeOutput);
 
         MixingRecipeBuilder.newRecipe(new ItemStack(MJItems.RUSTY_GEAR.get()))

@@ -42,6 +42,5 @@ public class PrismarineLaserRelayBlockEntity extends LaserBlockEntity {
         super.commonTick();
 
         transmitPower(this.getPower());
-        this.setPower(0);
     }
 }

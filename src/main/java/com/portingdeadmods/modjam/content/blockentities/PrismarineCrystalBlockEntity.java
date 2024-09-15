@@ -60,4 +60,12 @@ public class PrismarineCrystalBlockEntity extends LaserBlockEntity {
         }
 
     }
+
+    @Override
+    public void commonTick() {
+        super.commonTick();
+
+        setPurity(3f);
+        transmitPower(this.getPower());
+    }
 }

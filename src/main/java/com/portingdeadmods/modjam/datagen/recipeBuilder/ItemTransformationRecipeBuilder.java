@@ -62,6 +62,11 @@ public class ItemTransformationRecipeBuilder implements MJRecipeBuilder {
         return this;
     }
 
+    public ItemTransformationRecipeBuilder duration(int duration) {
+        this.duration = duration;
+        return this;
+    }
+
     @Override
     public @NotNull ItemTransformationRecipeBuilder group(@Nullable String group) {
         return this;

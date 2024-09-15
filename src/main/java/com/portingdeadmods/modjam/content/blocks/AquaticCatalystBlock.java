@@ -84,7 +84,6 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
         ItemStack itemStack = player.getItemInHand(hand);
         if (!state.getValue(CORE_ACTIVE) && itemStack.is(MJTags.Items.AQUATIC_CATALYST)) {
             // TODO: serialize stored item
-            ModJam.LOGGER.debug("If");
             level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.FACING, direction).setValue(CORE_ACTIVE, true));
             level.playLocalSound(player, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1, 1);
             if (!player.hasInfiniteMaterials()) {

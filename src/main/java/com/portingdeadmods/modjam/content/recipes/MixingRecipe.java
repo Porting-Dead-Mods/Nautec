@@ -5,7 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.recipes.utils.IngredientWithCount;
-import com.portingdeadmods.modjam.content.recipes.utils.MixingRecipeInput;
+import com.portingdeadmods.modjam.content.recipes.inputs.MixingRecipeInput;
 import com.portingdeadmods.modjam.content.recipes.utils.RecipeUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -22,6 +22,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 public record MixingRecipe(List<IngredientWithCount> ingredients, FluidStack fluidIngredient, ItemStack result,
                            FluidStack fluidResult, int duration) implements Recipe<MixingRecipeInput> {
@@ -118,6 +119,18 @@ public record MixingRecipe(List<IngredientWithCount> ingredients, FluidStack flu
         public String toString() {
             return MixingRecipe.NAME;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MixingRecipe that)) return false;
+        return duration == that.duration && Objects.equals(result, that.result) && Objects.equals(fluidResult, that.fluidResult) && Objects.equals(fluidIngredient, that.fluidIngredient) && Objects.equals(ingredients, that.ingredients);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ingredients, fluidIngredient, result, fluidResult, duration);
     }
 }
 

@@ -57,7 +57,7 @@ public class DrainBlockEntity extends ContainerBlockEntity implements Multiblock
         level.playSound(null, worldPosition, SoundEvents.IRON_DOOR_CLOSE, SoundSource.BLOCKS, 1, 1f);
 
         // Set top blocks to open
-        setTop(true);
+        setTopOpen(true);
     }
 
     public void close() {
@@ -66,7 +66,11 @@ public class DrainBlockEntity extends ContainerBlockEntity implements Multiblock
         this.closing = true;
     }
 
-    private void setTop(boolean value) {
+    public boolean isClosing() {
+        return closing;
+    }
+
+    private void setTopOpen(boolean value) {
         BlockPos selfPos = worldPosition.above();
         BlockPos[] aroundSelf = BlockUtils.getBlocksAroundSelf3x3(selfPos);
         for (BlockPos blockPos : aroundSelf) {
@@ -130,7 +134,7 @@ public class DrainBlockEntity extends ContainerBlockEntity implements Multiblock
                     this.closing = false;
 
                     // Set top blocks to close
-                    setTop(false);
+                    setTopOpen(false);
                 }
             }
         }

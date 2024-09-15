@@ -1,4 +1,4 @@
-package com.portingdeadmods.modjam.content.recipes.utils;
+package com.portingdeadmods.modjam.content.recipes.inputs;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;

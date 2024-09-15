@@ -59,7 +59,7 @@ public class DrainTopModel extends Model {
     public void renderLid(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         {
-            poseStack.translate(1, 0, 1);
+            poseStack.translate(1, -1, 1);
             this.top.render(poseStack, buffer, packedLight, packedOverlay, -1);
         }
         poseStack.popPose();
@@ -68,7 +68,7 @@ public class DrainTopModel extends Model {
     public void renderValve(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         {
-            poseStack.translate(0.5, 1, 0.5);
+            poseStack.translate(0.5, 0, 0.5);
             this.valve.render(poseStack, buffer, packedLight, packedOverlay, -1);
         }
         poseStack.popPose();

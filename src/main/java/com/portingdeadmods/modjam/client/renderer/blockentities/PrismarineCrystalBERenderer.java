@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.AABB;
@@ -44,6 +45,8 @@ public class PrismarineCrystalBERenderer extends LaserBlockEntityRenderer<Prisma
 
     @Override
     public @NotNull AABB getRenderBoundingBox(PrismarineCrystalBlockEntity blockEntity) {
-        return new AABB(blockEntity.getBlockPos().below(3)).expandTowards(0, 6, 0);
+        return blockEntity.shouldRender(Direction.UP)
+                ? super.getRenderBoundingBox(blockEntity)
+                : new AABB(blockEntity.getBlockPos().below(3)).expandTowards(0, 6, 0);
     }
 }
