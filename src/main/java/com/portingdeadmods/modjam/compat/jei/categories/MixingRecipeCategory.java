@@ -115,7 +115,6 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
                     .addFluidStack(recipe.fluidResult().getFluid(), recipe.fluidResult().getAmount());
             slotPositions.add(Pair.of(0, 96)); // Store the fluid output slot position
         }
-
          */
         System.out.println(recipe.fluidResult().getFluid());
     }
