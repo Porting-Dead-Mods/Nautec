@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.content.recipes;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.modjam.content.recipes.utils.IngredientWithCount;
@@ -7,13 +8,15 @@ import com.portingdeadmods.modjam.content.recipes.utils.RecipeUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public record ItemEtchingRecipe(IngredientWithCount ingredient, ItemStack result) implements Recipe<SingleRecipeInput> {
+public record ItemEtchingRecipe(IngredientWithCount ingredient, ItemStack result, int duration) implements Recipe<SingleRecipeInput> {
     public static final String NAME = "item_etching";
 
     @Override
@@ -32,7 +35,7 @@ public record ItemEtchingRecipe(IngredientWithCount ingredient, ItemStack result
     }
 
     @Override
-    public @NotNull ItemStack getResultItem(HolderLookup.@NotNull Provider registries) {
+    public @NotNull ItemStack getResultItem(HolderLookup.@Nullable Provider registries) {
         return result.copy();
     }
 
@@ -59,13 +62,16 @@ public record ItemEtchingRecipe(IngredientWithCount ingredient, ItemStack result
         public static final ItemEtchingRecipe.Serializer INSTANCE = new ItemEtchingRecipe.Serializer();
         private static final MapCodec<ItemEtchingRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec((builder) -> builder.group(
                 IngredientWithCount.CODEC.fieldOf("ingredient").forGetter(ItemEtchingRecipe::ingredient),
-                ItemStack.OPTIONAL_CODEC.fieldOf("result").forGetter(ItemEtchingRecipe::result)
+                ItemStack.OPTIONAL_CODEC.fieldOf("result").forGetter(ItemEtchingRecipe::result),
+                Codec.INT.fieldOf("duration").forGetter(ItemEtchingRecipe::duration)
         ).apply(builder, ItemEtchingRecipe::new));
         private static final StreamCodec<RegistryFriendlyByteBuf, ItemEtchingRecipe> STREAM_CODEC = StreamCodec.composite(
                 IngredientWithCount.STREAM_CODEC,
                 ItemEtchingRecipe::ingredient,
                 ItemStack.OPTIONAL_STREAM_CODEC,
                 ItemEtchingRecipe::result,
+                ByteBufCodecs.INT,
+                ItemEtchingRecipe::duration,
                 ItemEtchingRecipe::new
         );
 

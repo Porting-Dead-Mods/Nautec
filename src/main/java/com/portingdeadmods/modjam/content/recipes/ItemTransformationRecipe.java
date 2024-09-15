@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.content.recipes;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.modjam.content.recipes.utils.IngredientWithCount;
@@ -7,13 +8,14 @@ import com.portingdeadmods.modjam.content.recipes.utils.RecipeUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public record ItemTransformationRecipe(IngredientWithCount ingredient, ItemStack result) implements Recipe<SingleRecipeInput> {
+public record ItemTransformationRecipe(IngredientWithCount ingredient, ItemStack result, int duration, float purity) implements Recipe<SingleRecipeInput> {
     public static final String NAME = "item_transformation";
 
     @Override
@@ -59,13 +61,19 @@ public record ItemTransformationRecipe(IngredientWithCount ingredient, ItemStack
         public static final ItemTransformationRecipe.Serializer INSTANCE = new ItemTransformationRecipe.Serializer();
         private static final MapCodec<ItemTransformationRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec((builder) -> builder.group(
                 IngredientWithCount.CODEC.fieldOf("ingredient").forGetter(ItemTransformationRecipe::ingredient),
-                ItemStack.OPTIONAL_CODEC.fieldOf("result").forGetter(ItemTransformationRecipe::result)
+                ItemStack.OPTIONAL_CODEC.fieldOf("result").forGetter(ItemTransformationRecipe::result),
+                Codec.INT.fieldOf("duration").forGetter(ItemTransformationRecipe::duration),
+                Codec.FLOAT.fieldOf("purity").forGetter(ItemTransformationRecipe::purity)
         ).apply(builder, ItemTransformationRecipe::new));
         private static final StreamCodec<RegistryFriendlyByteBuf, ItemTransformationRecipe> STREAM_CODEC = StreamCodec.composite(
                 IngredientWithCount.STREAM_CODEC,
                 ItemTransformationRecipe::ingredient,
                 ItemStack.OPTIONAL_STREAM_CODEC,
                 ItemTransformationRecipe::result,
+                ByteBufCodecs.INT,
+                ItemTransformationRecipe::duration,
+                ByteBufCodecs.FLOAT,
+                ItemTransformationRecipe::purity,
                 ItemTransformationRecipe::new
         );
 
