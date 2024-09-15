@@ -76,5 +76,7 @@ public class MJJeiPlugin implements IModPlugin {
                 AquaticCatalystChannelingRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(MJItems.ETCHING_ACID_BUCKET.get()),
                 ItemEtchingRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(MJBlocks.MIXER.get()),
+                MixingRecipeCategory.RECIPE_TYPE);
     }
 }
