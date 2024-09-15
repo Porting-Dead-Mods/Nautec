@@ -60,6 +60,10 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         this.powerToTransfer = amount;
     }
 
+    public void receivePower(int amount, Direction direction, BlockPos originPos) {
+        setPower(amount);
+    }
+
     public int getMaxLaserDistance() {
         return 16;
     }
@@ -90,7 +94,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
 
                 BlockPos targetPos = worldPosition.relative(direction, distance);
                 if (level.getBlockEntity(targetPos) instanceof LaserBlockEntity laserBE) {
-                    laserBE.setPower(powerToTransfer);
+                    laserBE.receivePower(powerToTransfer, direction, worldPosition);
                 }
             }
         }
