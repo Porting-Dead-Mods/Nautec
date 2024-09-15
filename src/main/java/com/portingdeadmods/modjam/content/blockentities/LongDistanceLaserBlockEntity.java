@@ -35,7 +35,7 @@ public class LongDistanceLaserBlockEntity extends LaserBlockEntity {
     }
 
     @Override
-    protected int checkConnectionsInterval() {
-        return 40;
+    public int getMaxLaserDistance() {
+        return 64;
     }
 }

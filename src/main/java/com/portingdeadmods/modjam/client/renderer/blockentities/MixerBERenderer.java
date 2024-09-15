@@ -53,7 +53,7 @@ public class MixerBERenderer extends LaserBlockEntityRenderer<MixerBlockEntity> 
             this.model.renderToBuffer(
                     poseStack,
                     WhiskModel.WHISK_LOCATION.buffer(bufferSource, RenderType::entityCutout),
-                    getLightLevel(blockEntity.getLevel(), blockEntity.getBlockPos().above()),
+                    packedLight,
                     packedOverlay
             );
         }
@@ -61,13 +61,13 @@ public class MixerBERenderer extends LaserBlockEntityRenderer<MixerBlockEntity> 
 
         IItemHandler handler = blockEntity.getItemHandler();
         for (int i = 0; i < handler.getSlots() - 1; i++) {
-            renderItem(handler.getStackInSlot(i), blockEntity, i, poseStack, bufferSource, packedOverlay);
+            renderItem(handler.getStackInSlot(i), blockEntity, i, poseStack, bufferSource, packedLight, packedOverlay);
         }
 
         renderFluid(blockEntity, poseStack, bufferSource, packedLight);
     }
 
-    private static void renderItem(ItemStack itemStack, MixerBlockEntity mixerBE, int index, PoseStack poseStack, MultiBufferSource bufferSource, int packedOverlay) {
+    private static void renderItem(ItemStack itemStack, MixerBlockEntity mixerBE, int index, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
         Direction direction = HorizontalDirection.values()[index].toRegularDirection();
@@ -82,7 +82,7 @@ public class MixerBERenderer extends LaserBlockEntityRenderer<MixerBlockEntity> 
             itemRenderer.renderStatic(
                     itemStack,
                     ItemDisplayContext.NONE,
-                    getLightLevel(mixerBE.getLevel(), mixerBE.getBlockPos().above()),
+                    packedLight,
                     packedOverlay,
                     poseStack,
                     bufferSource,

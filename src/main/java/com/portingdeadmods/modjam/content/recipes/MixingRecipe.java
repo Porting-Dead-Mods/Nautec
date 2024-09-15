@@ -3,6 +3,7 @@ package com.portingdeadmods.modjam.content.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.recipes.utils.IngredientWithCount;
 import com.portingdeadmods.modjam.content.recipes.utils.MixingRecipeInput;
 import com.portingdeadmods.modjam.content.recipes.utils.RecipeUtils;
@@ -28,9 +29,12 @@ public record MixingRecipe(List<IngredientWithCount> ingredients, FluidStack flu
 
     @Override
     public boolean matches(@NotNull MixingRecipeInput recipeInput, @NotNull Level level) {
-        return RecipeUtils.compareItems(recipeInput.items(), this.ingredients)
-                && recipeInput.fluidStack().is(fluidIngredient.getFluid())
+        boolean fluidMatches = recipeInput.fluidStack().is(fluidIngredient.getFluid())
                 && recipeInput.fluidStack().getAmount() >= fluidIngredient.getAmount();
+        ModJam.LOGGER.debug("input: {}, expected: {}", recipeInput.items(), this.ingredients);
+        boolean itemsMatch = RecipeUtils.compareItems(recipeInput.items(), this.ingredients);
+        return itemsMatch
+                && fluidMatches;
     }
 
     @Override
