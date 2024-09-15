@@ -1,5 +1,6 @@
 {
   "type": "modjam:item_etching",
+  "duration": 0,
   "ingredient": {
     "item": "minecraft:emerald"
   },
