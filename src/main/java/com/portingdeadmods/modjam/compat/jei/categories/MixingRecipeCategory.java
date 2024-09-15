@@ -21,6 +21,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
     private final IDrawable icon;
 
     public MixingRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createBlankDrawable(80, 55);
+        this.background = helper.createBlankDrawable(80, 66);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MJBlocks.MIXER.get()));
     }
 
@@ -101,22 +102,21 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
             slotPositions.add(Pair.of(outputX, 50)); // Store the output slot position
         }
 
-        /*
+
         // Check if there is a fluid input
-        if (recipe.fluidIngredient().getFluid() != null) {
+        if (recipe.fluidIngredient().getFluid() != Fluids.EMPTY) {
             builder.addSlot(RecipeIngredientRole.INPUT, 0, 64)
                     .addFluidStack(recipe.fluidIngredient().getFluid(), recipe.fluidIngredient().getAmount());
             slotPositions.add(Pair.of(0, 64)); // Store the fluid input slot position
         }
 
         // Check if there is a fluid output
-        if (recipe.fluidResult().getFluid() != null) {
+        if (recipe.fluidResult().getFluid() != Fluids.EMPTY) {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 0, 96)
                     .addFluidStack(recipe.fluidResult().getFluid(), recipe.fluidResult().getAmount());
             slotPositions.add(Pair.of(0, 96)); // Store the fluid output slot position
         }
-         */
-        System.out.println(recipe.fluidResult().getFluid());
+
     }
 
     @Override
