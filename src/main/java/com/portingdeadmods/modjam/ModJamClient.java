@@ -1,7 +1,11 @@
 package com.portingdeadmods.modjam;
 
+import com.portingdeadmods.modjam.client.renderer.augments.AugmentLayerRenderer;
 import com.portingdeadmods.modjam.client.renderer.curios.PrismMonocleCuriosRenderer;
 import com.portingdeadmods.modjam.registries.MJItems;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.world.entity.EntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -22,5 +26,10 @@ public final class ModJamClient {
 
     private static void clientSetup(final FMLClientSetupEvent evt) {
         CuriosRendererRegistry.register(MJItems.PRISM_MONOCLE.get(), PrismMonocleCuriosRenderer::new);
+        // EntityRenderers.register(EntityType.PLAYER, ctx -> {
+        //     PlayerRenderer renderer = new PlayerRenderer(ctx, false);
+        //     renderer.addLayer(new AugmentLayerRenderer(renderer));
+        //     return renderer;
+        // });
     }
 }
