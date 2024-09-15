@@ -1,0 +1,15 @@
+{
+  "type": "modjam:mixing",
+  "duration": 60,
+  "fluid_ingredient": {},
+  "fluid_result": {},
+  "ingredients": [
+    {
+      "item": "modjam:atlantic_gold_ingot"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "id": "modjam:atlantic_gold_nugget"
+  }
+}
