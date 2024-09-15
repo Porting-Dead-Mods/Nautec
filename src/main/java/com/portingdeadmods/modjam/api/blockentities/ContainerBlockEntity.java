@@ -248,7 +248,10 @@ public abstract class ContainerBlockEntity extends BlockEntity {
         int slots = itemStackHandler.getSlots();
         ObjectList<ItemStack> itemStacks = new ObjectArrayList<>(slots);
         for (int i = 0; i < slots; i++) {
-            itemStacks.add(itemStackHandler.getStackInSlot(i));
+            ItemStack stack = itemStackHandler.getStackInSlot(i);
+            if (!stack.isEmpty()) {
+                itemStacks.add(stack);
+            }
         }
         return itemStacks;
     }
