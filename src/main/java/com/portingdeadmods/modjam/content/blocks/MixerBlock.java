@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.content.blocks;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.MapCodec;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.ContainerBlockEntity;
@@ -8,12 +9,16 @@ import com.portingdeadmods.modjam.api.utils.HorizontalDirection;
 import com.portingdeadmods.modjam.content.blockentities.MixerBlockEntity;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import com.portingdeadmods.modjam.utils.ItemUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentContents;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.PlainTextContents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
@@ -37,8 +42,9 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class MixerBlock extends LaserBlock {
@@ -71,12 +77,12 @@ public class MixerBlock extends LaserBlock {
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    protected @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (level.getBlockEntity(pos) instanceof MixerBlockEntity mixerBE) {
             IItemHandler itemHandler = mixerBE.getItemHandler();
             IFluidHandler fluidHandler = mixerBE.getFluidHandler();
@@ -99,6 +105,30 @@ public class MixerBlock extends LaserBlock {
             }
         }
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
+
+    @Override
+    public List<Component> displayText(Level level, BlockPos blockPos, Player player) {
+        MixerBlockEntity mixerBE = (MixerBlockEntity) level.getBlockEntity(blockPos);
+        List<Component> list = new ArrayList<>(super.displayText(level, blockPos, player));
+        list.add(literal("Input:"));
+        StringBuilder builder = new StringBuilder();
+        IItemHandler handler = mixerBE.getItemHandler();
+        IFluidHandler fluidHandler = mixerBE.getFluidHandler();
+        IFluidHandler secondaryHandler = mixerBE.getSecondaryFluidHandler();
+        for (int i = 0; i < handler.getSlots()-1; i++) {
+            builder.append(handler.getStackInSlot(i)+"; ");
+        }
+        list.add(literal(builder.toString()));
+        list.add(literal(fluidHandler.getFluidInTank(0).toString()));
+        list.add(literal("Output:"));
+        list.add(literal(handler.getStackInSlot(MixerBlockEntity.OUTPUT_SLOT).toString()));
+        list.add(literal(secondaryHandler.getFluidInTank(0).toString()));
+        return list;
+    }
+
+    private static Component literal(String text) {
+        return Component.literal(text).withStyle(ChatFormatting.WHITE);
     }
 
     private static void insertFluid(Player player, Level level, InteractionHand interactionHand, IFluidHandler fluidHandler, IFluidHandler fluidHandlerItem) {
@@ -162,32 +192,6 @@ public class MixerBlock extends LaserBlock {
         return stackInSlot.isEmpty()
                 || (stackInSlot.is(stack.getItem())
                 && stack.getCount() + stackInSlot.getCount() <= Math.min(itemHandler.getSlotLimit(slot), stack.getMaxStackSize()));
-    }
-
-    private static @NotNull ItemInteractionResult insertItems(ItemStack stack, Player player, InteractionHand hand, IItemHandler itemHandler) {
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            ItemStack stackInSlot = itemHandler.getStackInSlot(i);
-
-            if (canInsert(stack, itemHandler, stackInSlot, i)) {
-                ItemStack itemStack = itemHandler.insertItem(i, stack, false);
-                player.setItemInHand(hand, itemStack);
-                return ItemInteractionResult.SUCCESS;
-            }
-        }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    }
-
-    private static @NotNull ItemInteractionResult extractItems(Player player, IItemHandler itemHandler) {
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            ItemStack stackInSlot = itemHandler.getStackInSlot(i);
-            ItemStack itemStack = itemHandler.extractItem(i, stackInSlot.getMaxStackSize(), false);
-            if (!itemStack.isEmpty()) {
-                ModJam.LOGGER.debug("item: {}", itemStack);
-                ItemHandlerHelper.giveItemToPlayer(player, itemStack);
-                return ItemInteractionResult.SUCCESS;
-            }
-        }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
 }
