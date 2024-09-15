@@ -18,9 +18,11 @@ import java.util.stream.Collectors;
 
 public class MixingRecipeBuilder implements MJRecipeBuilder {
     private List<IngredientWithCount> ingredients;
-    private FluidStack fluidIngredient;
+    @Nullable
+    private FluidStack fluidIngredient;  // Can now be null
     private ItemStack result;
-    private FluidStack resultFluid;
+    @Nullable
+    private FluidStack resultFluid;  // Can now be null
     private int duration;
 
     private MixingRecipeBuilder(ItemStack result) {
@@ -37,13 +39,13 @@ public class MixingRecipeBuilder implements MJRecipeBuilder {
         return this;
     }
 
-    public MixingRecipeBuilder fluidIngredient(FluidStack fluidIngredient) {
-        this.fluidIngredient = fluidIngredient;
+    public MixingRecipeBuilder fluidIngredient(@Nullable FluidStack fluidIngredient) {
+        this.fluidIngredient = fluidIngredient;  // Optional fluid ingredient
         return this;
     }
 
-    public MixingRecipeBuilder fluidResult(FluidStack resultFluid) {
-        this.resultFluid = resultFluid;
+    public MixingRecipeBuilder fluidResult(@Nullable FluidStack resultFluid) {
+        this.resultFluid = resultFluid;  // Optional fluid result
         return this;
     }
 
@@ -69,7 +71,14 @@ public class MixingRecipeBuilder implements MJRecipeBuilder {
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
-        MixingRecipe recipe = new MixingRecipe(ingredients, fluidIngredient, result, resultFluid, duration);
+        // Create the recipe, handling null fluidIngredient and resultFluid
+        MixingRecipe recipe = new MixingRecipe(
+                ingredients,
+                fluidIngredient != null ? fluidIngredient : FluidStack.EMPTY,  // Use FluidStack.EMPTY if null
+                result,
+                resultFluid != null ? resultFluid : FluidStack.EMPTY,  // Use FluidStack.EMPTY if null
+                duration
+        );
         recipeOutput.accept(resourceLocation, recipe, null);
     }
 

@@ -1,0 +1,24 @@
+{
+  "type": "modjam:mixing",
+  "duration": 60,
+  "fluid_ingredient": {},
+  "fluid_result": {},
+  "ingredients": [
+    {
+      "item": "modjam:diving_helmet"
+    },
+    {
+      "item": "modjam:diving_chestplate"
+    },
+    {
+      "item": "modjam:diving_leggings"
+    },
+    {
+      "item": "modjam:diving_boots"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "modjam:crowbar"
+  }
+}

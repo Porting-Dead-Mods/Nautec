@@ -39,7 +39,7 @@ public class DivingSuitArmorItem extends ArmorItem {
                     player.getItemBySlot(EquipmentSlot.LEGS).is(MJItems.DIVING_LEGGINGS) &&
                     player.getItemBySlot(EquipmentSlot.FEET).is(MJItems.DIVING_BOOTS)) {
 
-                if (player.isUnderWater()) {
+                if (player.isUnderWater() && !player.isCreative() && !player.isSpectator()) {
                     if (level.getGameTime() % 20 == 0) {
                         int currentOxygen = MJDataComponentsUtils.getOxygenLevels(stack);
                         if (currentOxygen > 0) {
