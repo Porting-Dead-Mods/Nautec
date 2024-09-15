@@ -9,10 +9,12 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MixingRecipeBuilder implements MJRecipeBuilder {
     private List<IngredientWithCount> ingredients;
@@ -78,5 +80,15 @@ public class MixingRecipeBuilder implements MJRecipeBuilder {
                 duration
         );
         recipeOutput.accept(resourceLocation, recipe, null);
+    }
+
+    @Override
+    public List<Ingredient> getIngredients() {
+        return ingredients.stream().map(IngredientWithCount::ingredient).toList();
+    }
+
+    @Override
+    public String getName() {
+        return MixingRecipe.NAME;
     }
 }

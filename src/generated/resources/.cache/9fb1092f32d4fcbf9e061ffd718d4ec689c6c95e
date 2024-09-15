@@ -1,8 +1,6 @@
-// 1.21.1	2024-09-15T13:53:10.911319	Recipes
-6a3498b9b03ea934405ac04d33c6714f372eeb3f data/modjam/recipe/aquarine_steel_ingot.json
-28cc0049f31980f965d83a5e61190c6d60ce6777 data/modjam/recipe/atlantic_gold_nugget.json
-eff68d65ada7c926e4f29eae840532b396b62af9 data/modjam/recipe/crowbar.json
-74069ed0dec9d6fe4262cea8462338d22dda9b2a data/modjam/recipe/diamond.json
-79c93eb45499c99c1d2f5b33a3d06eebae8ee3ae data/modjam/recipe/kelp.json
-212d75a5fccad42ec0cc51d1e1dfe77b53a8b988 data/modjam/recipe/netherite_ingot.json
-e5b9636f08954e5acaaf6832d72ecf4e9a717ffd data/modjam/recipe/rusty_gear.json
+// 1.21.1	2024-09-15T14:21:39.413901793	Recipes
+79c93eb45499c99c1d2f5b33a3d06eebae8ee3ae data/modjam/recipe/aquatic_catalyst_channeling/kelp_to_air.json
+fad1d5e9b634b83163fab8d4a08b49bfb9dddbde data/modjam/recipe/item_etching/emerald_to_diamond.json
+379e1941645d53b15794d6b89bee0896217b8b22 data/modjam/recipe/item_transformation/iron_ingot_to_aquarine_steel_ingot.json
+bbf30a82d2034849c4cbece3c51b3f6cc9f91bbc data/modjam/recipe/item_transformation/snowball_to_netherite_ingot.json
+1d0609c2df64ad98c4b74b9d41cbd0a4c85257be data/modjam/recipe/mixing/anvil_atlantic_gold_nugget_to_rusty_gear.json

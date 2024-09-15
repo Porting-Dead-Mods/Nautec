@@ -10,6 +10,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class AquaticCatalystChannelingRecipeBuilder implements MJRecipeBuilder {
     private final Ingredient ingredient;
     private int powerAmount;
@@ -51,12 +53,22 @@ public class AquaticCatalystChannelingRecipeBuilder implements MJRecipeBuilder {
 
     @Override
     public @NotNull Item getResult() {
-        return ingredient.getItems().length > 0 ? ingredient.getItems()[0].getItem() : Items.AIR;
+        return Items.AIR;
     }
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
         AquaticCatalystChannelingRecipe recipe = new AquaticCatalystChannelingRecipe(this.ingredient, this.powerAmount, this.purity, this.duration);
         recipeOutput.accept(resourceLocation, recipe, null);
+    }
+
+    @Override
+    public List<Ingredient> getIngredients() {
+        return List.of(this.ingredient);
+    }
+
+    @Override
+    public String getName() {
+        return AquaticCatalystChannelingRecipe.NAME;
     }
 }
