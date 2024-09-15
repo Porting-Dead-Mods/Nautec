@@ -11,6 +11,7 @@ import com.portingdeadmods.modjam.client.hud.PrismMonocleOverlay;
 import com.portingdeadmods.modjam.client.model.block.DrainTopModel;
 import com.portingdeadmods.modjam.client.model.block.PrismarineCrystalModel;
 import com.portingdeadmods.modjam.client.model.block.WhiskModel;
+import com.portingdeadmods.modjam.client.renderer.augments.AugmentLayerRenderer;
 import com.portingdeadmods.modjam.client.renderer.blockentities.DrainBERenderer;
 import com.portingdeadmods.modjam.client.renderer.blockentities.LongDistanceLaserBERenderer;
 import com.portingdeadmods.modjam.client.renderer.blockentities.MixerBERenderer;
@@ -28,6 +29,7 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.Entity;
@@ -168,6 +170,12 @@ public final class MJClientEvents {
                     event.setCanceled(true);
                 }
             }
+        }
+
+        @SubscribeEvent
+        public static void onRenderPlayer(RenderPlayerEvent.Post event) {
+            PlayerRenderer renderer = event.getRenderer();
+            renderer.addLayer(new AugmentLayerRenderer(renderer));
         }
     }
 }
