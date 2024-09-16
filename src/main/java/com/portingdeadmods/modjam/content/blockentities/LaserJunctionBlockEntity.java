@@ -31,6 +31,7 @@ public class LaserJunctionBlockEntity extends LaserBlockEntity {
         return getConnections(LaserJunctionBlock.ConnectionType.OUTPUT);
     }
 
+    // TODO: Cache this
     private ObjectSet<Direction> getConnections(LaserJunctionBlock.ConnectionType type) {
         ObjectSet<Direction> connections = new ObjectArraySet<>();
         for (Direction direction : Direction.values()) {
