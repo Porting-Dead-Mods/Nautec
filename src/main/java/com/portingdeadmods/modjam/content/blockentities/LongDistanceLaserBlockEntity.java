@@ -38,4 +38,11 @@ public class LongDistanceLaserBlockEntity extends LaserBlockEntity {
     public int getMaxLaserDistance() {
         return 64;
     }
+
+    @Override
+    public void commonTick() {
+        super.commonTick();
+
+        transmitPower(this.power);
+    }
 }

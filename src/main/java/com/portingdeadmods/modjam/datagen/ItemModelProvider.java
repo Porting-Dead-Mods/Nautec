@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam.datagen;
 
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.registries.MJBlocks;
 import com.portingdeadmods.modjam.registries.MJItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -49,6 +50,8 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(MJItems.SALT_WATER_BUCKET.get());
         basicItem(MJItems.EAS_BUCKET.get());
         basicItem(MJItems.ETCHING_ACID_BUCKET.get());
+
+        parentItemBlock(MJBlocks.LASER_JUNCTION.asItem(), "_base");
 
         blockItems();
     }

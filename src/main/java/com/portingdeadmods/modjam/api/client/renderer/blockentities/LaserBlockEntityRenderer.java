@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam.api.client.renderer.blockentities;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.modjam.utils.LaserRendererHelper;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -19,12 +20,13 @@ public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements Blo
 
     @Override
     public void render(T blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        BlockPos originPos = blockEntity.getBlockPos();
         Object2IntMap<Direction> laserDistances = blockEntity.getLaserDistances();
         for (Direction direction : blockEntity.getLaserOutputs()) {
             int laserDistance = laserDistances.getOrDefault(direction, 0);
+
+            BlockPos originPos = blockEntity.getBlockPos();
             BlockPos targetPos = originPos.relative(direction, laserDistance - 1);
-            if (laserDistance != 0 && blockEntity.shouldRender(direction)) {
+            if (laserDistance > 0 && blockEntity.shouldRender(direction)) {
                 LaserRendererHelper.renderOuterBeam(blockEntity, originPos, targetPos, direction, poseStack, bufferSource, partialTick);
 
                 poseStack.pushPose();
@@ -35,10 +37,26 @@ public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements Blo
                     switch (direction) {
                         case UP -> poseStack.translate(3.5f, 0, 3.5f);
                         case DOWN, SOUTH, WEST -> poseStack.translate(3.5f, 0, -4.5f);
-                        case NORTH, EAST -> poseStack.translate(-4.5f, 0, -4.5f);
+                        case EAST, NORTH -> poseStack.translate(-4.5f, 0, -4.5f);
                     }
+
+                    int offset = 0;
+                    int offset2 = 0;
+
+                    if (direction == Direction.EAST || direction == Direction.SOUTH) {
+                        offset = 1;
+                    }
+
+                    if (direction == Direction.NORTH || direction == Direction.WEST || direction == Direction.DOWN) {
+                        offset2 = 1;
+                    }
+
+                    if (direction == Direction.UP) {
+                        offset = 1;
+                    }
+
                     LaserRendererHelper.renderInnerBeam(poseStack, bufferSource, partialTick, blockEntity.getLevel().getGameTime(),
-                            0, laserDistance, FastColor.ARGB32.color(202, 214, 224));
+                            offset, laserDistance - offset - offset2, FastColor.ARGB32.color(202, 214, 224));
                 }
                 poseStack.popPose();
             }

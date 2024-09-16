@@ -3,19 +3,26 @@ package com.portingdeadmods.modjam.content.items;
 import com.portingdeadmods.modjam.MJRegistries;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.multiblocks.Multiblock;
+import com.portingdeadmods.modjam.content.blocks.LaserJunctionBlock;
+import com.portingdeadmods.modjam.registries.MJItems;
 import com.portingdeadmods.modjam.utils.BlockUtils;
 import com.portingdeadmods.modjam.utils.MultiblockHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 
 public class AquarineWrenchItem extends Item {
@@ -34,6 +41,22 @@ public class AquarineWrenchItem extends Item {
         BlockPos pos = useOnContext.getClickedPos();
         BlockState blockState = level.getBlockState(pos);
         BlockState controllerState = blockState;
+        Player player = useOnContext.getPlayer();
+
+        if (blockState.getBlock() instanceof LaserJunctionBlock && blockState.hasProperty(LaserJunctionBlock.CONNECTION[0])) {
+            Direction direction = getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE).getDirection();
+            LaserJunctionBlock.ConnectionType newType = switch (blockState.getValue(LaserJunctionBlock.CONNECTION[direction.ordinal()])) {
+                case INPUT ->
+                        player.isShiftKeyDown() ? LaserJunctionBlock.ConnectionType.OUTPUT : LaserJunctionBlock.ConnectionType.NONE;
+                case OUTPUT ->
+                        player.isShiftKeyDown() ? LaserJunctionBlock.ConnectionType.NONE : LaserJunctionBlock.ConnectionType.INPUT;
+                case NONE ->
+                        player.isShiftKeyDown() ? LaserJunctionBlock.ConnectionType.OUTPUT : LaserJunctionBlock.ConnectionType.INPUT;
+            };
+            level.setBlockAndUpdate(pos, blockState.setValue(LaserJunctionBlock.CONNECTION[direction.ordinal()], newType));
+            return InteractionResult.SUCCESS;
+        }
+
         if (!useOnContext.getPlayer().isCrouching()) {
             for (Multiblock multiblock : MJRegistries.MULTIBLOCK) {
                 if (controllerState.is(multiblock.getUnformedController())) {

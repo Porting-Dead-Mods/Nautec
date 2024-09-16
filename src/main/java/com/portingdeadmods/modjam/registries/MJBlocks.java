@@ -36,6 +36,8 @@ public final class MJBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS));
     public static final DeferredBlock<LongDistanceLaserBlock> LONG_DISTANCE_LASER = registerBlockAndItem("long_distance_laser", LongDistanceLaserBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
+    public static final DeferredBlock<LaserJunctionBlock> LASER_JUNCTION = registerBlockAndItem("laser_junction", props -> new LaserJunctionBlock(props, 8),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE), true, false);
 
     public static final DeferredBlock<PrismarineCrystalBlock> PRISMARINE_CRYSTAL = registerBlockAndItem("prismarine_crystal", PrismarineCrystalBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
@@ -60,14 +62,16 @@ public final class MJBlocks {
             () -> new LiquidBlock(MJFluids.ETCHING_ACID_SOURCE.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
 
     private static <T extends Block> DeferredBlock<T> registerBlockAndItem(String name, Function<BlockBehaviour.Properties, T> blockConstructor, BlockBehaviour.Properties properties) {
-        return registerBlockAndItem(name, blockConstructor, properties, true);
+        return registerBlockAndItem(name, blockConstructor, properties, true, true);
     }
 
     // NOTE: This also attempts to generate the item model for the block, when running datagen
-    private static <T extends Block> DeferredBlock<T> registerBlockAndItem(String name, Function<BlockBehaviour.Properties, T> blockConstructor, BlockBehaviour.Properties properties, boolean addToTab) {
+    private static <T extends Block> DeferredBlock<T> registerBlockAndItem(String name, Function<BlockBehaviour.Properties, T> blockConstructor, BlockBehaviour.Properties properties, boolean addToTab, boolean genItemModel) {
         DeferredBlock<T> block = BLOCKS.registerBlock(name, blockConstructor, properties);
         DeferredItem<BlockItem> blockItem = MJItems.registerItem(name, props -> new BlockItem(block.get(), props), new Item.Properties(), addToTab);
-        MJItems.BLOCK_ITEMS.add(blockItem);
+        if (genItemModel) {
+            MJItems.BLOCK_ITEMS.add(blockItem);
+        }
         return block;
     }
 }

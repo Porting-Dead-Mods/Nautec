@@ -34,27 +34,28 @@ public class DrainBERenderer extends LaserBlockEntityRenderer<DrainPartBlockEnti
     public void render(DrainPartBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         BlockState blockState = blockEntity.getBlockState();
         if (blockState.getValue(DrainMultiblock.DRAIN_PART) == 4 && blockState.getValue(DrainPartBlock.TOP)) {
-            DrainBlockEntity drainBE = (DrainBlockEntity) blockEntity.getLevel().getBlockEntity(blockEntity.getBlockPos().below());
             VertexConsumer consumer = DrainTopModel.DRAIN_TOP_LOCATION.buffer(bufferSource, RenderType::entityTranslucent);
             this.model.setupAnimation();
             poseStack.pushPose();
             {
-                float lidAngle = drainBE.getLidIndependentAngle(partialTick);
+                if (blockEntity.getLevel().getBlockEntity(blockEntity.getBlockPos().below()) instanceof DrainBlockEntity drainBE) {
+                    float lidAngle = drainBE.getLidIndependentAngle(partialTick);
 
-                poseStack.translate(-0.75, 0, -0.75);
-                poseStack.mulPose(Axis.YP.rotation(lidAngle));
-                poseStack.translate(0.75, 0, 0.75);
-                this.model.renderLid(poseStack, consumer, packedLight, packedOverlay);
-                poseStack.pushPose();
-                {
-                    float valveAngle = drainBE.getValveIndependentAngle(partialTick);
+                    poseStack.translate(-0.75, 0, -0.75);
+                    poseStack.mulPose(Axis.YP.rotation(lidAngle));
+                    poseStack.translate(0.75, 0, 0.75);
+                    this.model.renderLid(poseStack, consumer, packedLight, packedOverlay);
+                    poseStack.pushPose();
+                    {
+                        float valveAngle = drainBE.getValveIndependentAngle(partialTick);
 
-                    poseStack.translate(0.5, 0, 0.5);
-                    poseStack.mulPose(Axis.YP.rotation(valveAngle));
-                    poseStack.translate(-0.5, 0, -0.5);
-                    this.model.renderValve(poseStack, consumer, packedLight, packedOverlay);
+                        poseStack.translate(0.5, 0, 0.5);
+                        poseStack.mulPose(Axis.YP.rotation(valveAngle));
+                        poseStack.translate(-0.5, 0, -0.5);
+                        this.model.renderValve(poseStack, consumer, packedLight, packedOverlay);
+                    }
+                    poseStack.popPose();
                 }
-                poseStack.popPose();
             }
             poseStack.popPose();
         } else {

@@ -5,6 +5,7 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.multiblocks.Multiblock;
 import com.portingdeadmods.modjam.content.blocks.AquaticCatalystBlock;
 import com.portingdeadmods.modjam.content.blocks.CrateBlock;
+import com.portingdeadmods.modjam.content.blocks.LaserJunctionBlock;
 import com.portingdeadmods.modjam.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.modjam.content.multiblocks.DrainMultiblock;
 import com.portingdeadmods.modjam.registries.MJBlocks;
@@ -37,6 +38,25 @@ public class BlockModelProvider extends BlockStateProvider {
         existingFacingBlock(MJBlocks.PRISMARINE_RELAY.get());
         simpleBlock(MJBlocks.MIXER.get(), models().getExistingFile(existingModelFile(MJBlocks.MIXER.get())));
         longDistanceLaser(MJBlocks.LONG_DISTANCE_LASER.get());
+        laserJunction(MJBlocks.LASER_JUNCTION.get());
+    }
+
+    private void laserJunction(Block block) {
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
+        laserJunctionConnection(builder, block, Direction.DOWN, 0, 0);
+        laserJunctionConnection(builder, block, Direction.UP, 180, 0);
+        laserJunctionConnection(builder, block, Direction.NORTH, 90, 180);
+        laserJunctionConnection(builder, block, Direction.EAST, 90, 270);
+        laserJunctionConnection(builder, block, Direction.SOUTH, 90, 0);
+        laserJunctionConnection(builder, block, Direction.WEST, 90, 90);
+        builder.part().modelFile(models().getExistingFile(extend(existingModelFile(block), "_base"))).addModel().end();
+    }
+
+    private void laserJunctionConnection(MultiPartBlockStateBuilder builder, Block block, Direction direction, int x, int y) {
+        builder.part().modelFile(models().getExistingFile(extend(existingModelFile(block), "_connection_in"))).rotationX(x).rotationY(y).addModel()
+                .condition(LaserJunctionBlock.CONNECTION[direction.ordinal()], LaserJunctionBlock.ConnectionType.INPUT).end()
+                .part().modelFile(models().getExistingFile(extend(existingModelFile(block), "_connection_out"))).rotationX(x).rotationY(y).addModel()
+                .condition(LaserJunctionBlock.CONNECTION[direction.ordinal()], LaserJunctionBlock.ConnectionType.OUTPUT).end();
     }
 
     public void longDistanceLaser(Block block) {
@@ -69,7 +89,6 @@ public class BlockModelProvider extends BlockStateProvider {
                 .partialState().with(BlockStateProperties.FACING, Direction.WEST)
                 .modelForState().modelFile(model).rotationX(90).rotationY(270).addModel();
     }
-
 
     private void crateBlock(CrateBlock crateBlock) {
         VariantBlockStateBuilder builder = getVariantBuilder(crateBlock);
