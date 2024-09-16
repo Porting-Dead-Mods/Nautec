@@ -31,14 +31,23 @@ public final class LaserRendererHelper {
 
         poseStack.pushPose();
         {
-            if (direction == Direction.NORTH || direction == Direction.SOUTH) {
+            int offset = 0;
+            if (direction == Direction.NORTH) {
                 poseStack.translate(0.5F, f3, 0.0F);
-            } else if (direction == Direction.EAST || direction == Direction.WEST) {
+                offset = 1;
+            } else if (direction == Direction.SOUTH) {
+                poseStack.translate(0.5F, f3, 1.0F);
+                offset = 1;
+            } else if (direction == Direction.EAST) {
+                poseStack.translate(1.0F, f3, 0.5F);
+                offset = 1;
+            } else if (direction == Direction.WEST) {
                 poseStack.translate(0.0F, f3, 0.5F);
+                offset = 1;
             } else {
-                poseStack.translate(0.5F, 0, 0.5F);
+                poseStack.translate(0.5F, 1, 0.5F);
             }
-            Vec3 vec3 = targetPos.getCenter();
+            Vec3 vec3 = targetPos.relative(direction, -offset).getCenter();
             Vec3 vec31 = originPos.getCenter();
             Vec3 vec32 = vec3.subtract(vec31);
             float f4 = (float) (vec32.length() + 1.0);

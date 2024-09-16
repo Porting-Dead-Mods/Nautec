@@ -23,6 +23,9 @@ public final class MJBlockEntityTypes {
     public static final Supplier<BlockEntityType<LongDistanceLaserBlockEntity>> LONG_DISTANCE_LASER = BLOCK_ENTITIES.register("long_distance_laser",
             () -> BlockEntityType.Builder.of(LongDistanceLaserBlockEntity::new,
                     MJBlocks.LONG_DISTANCE_LASER.get()).build(null));
+    public static final Supplier<BlockEntityType<LaserJunctionBlockEntity>> LASER_JUNCTION = BLOCK_ENTITIES.register("laser_junction",
+            () -> BlockEntityType.Builder.of(LaserJunctionBlockEntity::new,
+                    MJBlocks.LASER_JUNCTION.get()).build(null));
     public static final Supplier<BlockEntityType<MixerBlockEntity>> MIXER = BLOCK_ENTITIES.register("mixer",
             () -> BlockEntityType.Builder.of(MixerBlockEntity::new,
                     MJBlocks.MIXER.get()).build(null));

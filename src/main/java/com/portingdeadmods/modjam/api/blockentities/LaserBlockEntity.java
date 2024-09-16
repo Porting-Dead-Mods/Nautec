@@ -26,7 +26,7 @@ import java.util.Optional;
 
 public abstract class LaserBlockEntity extends ContainerBlockEntity {
     protected final Object2IntMap<Direction> laserDistances;
-    private final Object2IntMap<ItemEntity> activeTransformations;
+    private final Object2ObjectMap<Direction, Object2IntMap<ItemEntity>> activeTransformations;
 
     private int powerToTransfer;
     protected int power;
@@ -42,7 +42,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     public LaserBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
         this.laserDistances = new Object2IntOpenHashMap<>();
-        this.activeTransformations = new Object2IntArrayMap<>();
+        this.activeTransformations = new Object2ObjectArrayMap<>();
         this.powerPerSide = new Object2IntArrayMap<>();
         this.purityPerSide = new Object2FloatArrayMap<>();
         this.purity = 0;
@@ -126,7 +126,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
 
                 damageLivingEntities(box);
 
-                processItemCrafting(box);
+                processItemCrafting(box, direction);
 
                 BlockPos targetPos = worldPosition.relative(direction, distance);
                 if (level.getBlockEntity(targetPos) instanceof LaserBlockEntity laserBE) {
@@ -164,46 +164,50 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         return this.level.getRecipeManager().getRecipeFor(ItemTransformationRecipe.Type.INSTANCE, recipeInput, level).map(RecipeHolder::value);
     }
 
-    // FIXME: If items are moved out of the aabb recipe still works
-    private void processItemCrafting(AABB box) {
+    private void processItemCrafting(AABB box, Direction direction) {
         // Get all item entities within the box
         List<ItemEntity> itemEntities = level.getEntitiesOfClass(ItemEntity.class, box);
 
         for (ItemEntity itemEntity : itemEntities) {
-            ModJam.LOGGER.debug("found item");
-            if (!activeTransformations.containsKey(itemEntity)) {
+            if (!activeTransformations.containsKey(direction) || !activeTransformations.get(direction).containsKey(itemEntity)) {
                 Optional<ItemTransformationRecipe> optionalRecipe = getCurrentRecipe(itemEntity.getItem());
                 if (optionalRecipe.isPresent()) {
-                    activeTransformations.put(itemEntity, 0);
+                    if (!activeTransformations.containsKey(direction)) {
+                        activeTransformations.put(direction, new Object2IntArrayMap<>());
+                    }
+                    activeTransformations.get(direction).put(itemEntity, 0);
                 }
             }
         }
 
-        ObjectIterator<Object2IntMap.Entry<ItemEntity>> iterator = activeTransformations.object2IntEntrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<ItemEntity, Integer> entry = iterator.next();
-            ItemEntity cookingItem = entry.getKey();
-            int cookTime = entry.getValue();
+        if (activeTransformations.containsKey(direction) && !activeTransformations.get(direction).isEmpty()) {
+            Object2IntMap<ItemEntity> activeTransformation = activeTransformations.get(direction);
+            ObjectIterator<Object2IntMap.Entry<ItemEntity>> iterator = activeTransformation.object2IntEntrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<ItemEntity, Integer> entry = iterator.next();
+                ItemEntity cookingItem = entry.getKey();
+                int cookTime = entry.getValue();
 
-            if (!cookingItem.isAlive()) {
-                iterator.remove();
-                continue;
-            }
-
-            Optional<ItemTransformationRecipe> optionalRecipe = getCurrentRecipe(cookingItem.getItem());
-            if (optionalRecipe.isPresent()) {
-                if (cookTime >= optionalRecipe.get().duration()) {
-                    ItemStack resultStack = optionalRecipe.get().getResultItem(null).copy();
-                    resultStack.setCount(cookingItem.getItem().getCount());
-
-                    ItemEntity resultEntity = new ItemEntity(level, cookingItem.getX(), cookingItem.getY(), cookingItem.getZ(), resultStack);
-                    level.addFreshEntity(resultEntity);
-
-                    cookingItem.discard();
+                if (!cookingItem.isAlive() || !box.contains(cookingItem.position())) {
                     iterator.remove();
-                } else {
-                    activeTransformations.put(cookingItem, cookTime + 1);
-                    ParticlesUtils.spawnParticles(cookingItem, level, ParticleTypes.END_ROD);
+                    continue;
+                }
+
+                Optional<ItemTransformationRecipe> optionalRecipe = getCurrentRecipe(cookingItem.getItem());
+                if (optionalRecipe.isPresent()) {
+                    if (cookTime >= optionalRecipe.get().duration()) {
+                        ItemStack resultStack = optionalRecipe.get().getResultItem(null).copy();
+                        resultStack.setCount(cookingItem.getItem().getCount());
+
+                        ItemEntity resultEntity = new ItemEntity(level, cookingItem.getX(), cookingItem.getY(), cookingItem.getZ(), resultStack);
+                        level.addFreshEntity(resultEntity);
+
+                        cookingItem.discard();
+                        iterator.remove();
+                    } else {
+                        activeTransformation.put(cookingItem, cookTime + 1);
+                        ParticlesUtils.spawnParticles(cookingItem, level, ParticleTypes.END_ROD);
+                    }
                 }
             }
         }

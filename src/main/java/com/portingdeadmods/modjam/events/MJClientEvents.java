@@ -134,6 +134,7 @@ public final class MJClientEvents {
             event.registerBlockEntityRenderer(MJBlockEntityTypes.AQUATIC_CATALYST.get(), LaserBlockEntityRenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.PRISMARINE_LASER_RELAY.get(), LaserBlockEntityRenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.CREATIVE_POWER_SOURCE.get(), LaserBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(MJBlockEntityTypes.LASER_JUNCTION.get(), LaserBlockEntityRenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.LONG_DISTANCE_LASER.get(), LongDistanceLaserBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.PRISMARINE_CRYSTAL.get(), PrismarineCrystalBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.MIXER.get(), MixerBERenderer::new);
