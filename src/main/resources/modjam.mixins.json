@@ -5,6 +5,7 @@
   "mixins": [
     "BucketItemMixin",
     "GrowingPlantHeadBlockMixin",
+    "ItemStorageProviderMixin",
     "StructurePieceMixin"
   ],
   "injectors": {
