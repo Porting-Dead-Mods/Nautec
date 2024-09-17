@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "modjam:block/deep_sea_drain_wall"
+  }
+}

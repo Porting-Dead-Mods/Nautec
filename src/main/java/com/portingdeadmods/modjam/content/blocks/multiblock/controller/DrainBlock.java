@@ -5,8 +5,11 @@ import com.portingdeadmods.modjam.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.modjam.api.blocks.blockentities.ContainerBlock;
 import com.portingdeadmods.modjam.api.multiblocks.Multiblock;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.DrainBlockEntity;
+import com.portingdeadmods.modjam.content.blockentities.multiblock.part.DrainPartBlockEntity;
 import com.portingdeadmods.modjam.content.multiblocks.DrainMultiblock;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
+import com.portingdeadmods.modjam.registries.MJMultiblocks;
+import com.portingdeadmods.modjam.utils.MultiblockHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -51,6 +54,16 @@ public class DrainBlock extends ContainerBlock {
             drainBlockEntity.close();
         }
         return super.useWithoutItem(p_60503_, level, pos, player, p_60508_);
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock())) {
+            MultiblockHelper.unform(MJMultiblocks.DRAIN.get(), pos, level, null);
+            level.removeBlock(pos.above(), false);
+        }
+
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
 }

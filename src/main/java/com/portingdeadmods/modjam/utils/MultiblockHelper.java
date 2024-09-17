@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam.utils;
 
 import com.mojang.datafixers.util.Pair;
+import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.multiblock.FakeBlockEntity;
 import com.portingdeadmods.modjam.api.blockentities.multiblock.MultiblockEntity;
 import com.portingdeadmods.modjam.api.blockentities.multiblock.SavesControllerPosBlockEntity;
@@ -372,6 +373,7 @@ public final class MultiblockHelper {
 
         if (level.getBlockEntity(controllerPos1) instanceof MultiblockEntity multiblockEntity) {
             data = multiblockEntity.getMultiblockData();
+            ModJam.LOGGER.debug("Data: {}", data);
         } else {
             throw new IllegalStateException(multiblock + " multiblock controller does not have a blockentity");
         }
@@ -380,6 +382,7 @@ public final class MultiblockHelper {
         HorizontalDirection direction = data.direction();
         // Calculate block pos of the first block in the multi (multiblock.getLayout().get(0))
         BlockPos firstBlockPos = getFirstBlockPos(direction, controllerPos, relativeControllerPos);
+        ModJam.LOGGER.debug("first: {}", firstBlockPos);
         MultiblockLayer[] layout = data.layers();
         Map<Integer, Block> def = multiblock.getDefinition();
 
