@@ -42,13 +42,4 @@ public record MultiblockLayer(boolean dynamic, IntegerRange range, int[] layer, 
     public IntIntPair getWidths() {
         return widths;
     }
-
-    @Override
-    public String toString() {
-        return "MultiblockLayer{" +
-                "dynamic=" + dynamic +
-                ", range=" + range +
-                ", layer=" + Arrays.toString(layer) +
-                '}';
-    }
 }

@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.portingdeadmods.modjam.api.client.renderer.blockentities.LaserBlockEntityRenderer;
 import com.portingdeadmods.modjam.client.model.block.PrismarineCrystalModel;
 import com.portingdeadmods.modjam.content.blockentities.PrismarineCrystalBlockEntity;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -38,9 +39,7 @@ public class PrismarineCrystalBERenderer extends LaserBlockEntityRenderer<Prisma
     }
 
     private int getLightLevel(Level level, BlockPos pos) {
-        int blockLight = level.getBrightness(LightLayer.BLOCK, pos);
-        int skyLight = level.getBrightness(LightLayer.SKY, pos);
-        return LightTexture.pack(skyLight, blockLight);
+        return LevelRenderer.getLightColor(level, pos);
     }
 
     @Override

@@ -16,7 +16,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -50,7 +49,7 @@ public class DrainMultiblock implements Multiblock {
     @Override
     public Int2ObjectMap<Block> getDefinition() {
         Int2ObjectMap<Block> def = new Int2ObjectOpenHashMap<>();
-        def.put(0, Blocks.IRON_BLOCK);
+        def.put(0, MJBlocks.DRAIN_WALL.get());
         def.put(1, getUnformedController());
         return def;
     }
@@ -62,15 +61,13 @@ public class DrainMultiblock implements Multiblock {
 
     @Override
     public @Nullable BlockState formBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, MultiblockData multiblockData, @Nullable Player player) {
-        BlockState blockState = level.getBlockState(blockPos);
-        if (blockState.is(Blocks.IRON_BLOCK)) {
+        if (layerIndex == 4) {
+            return getFormedController().defaultBlockState().setValue(FORMED, true);
+        } else {
             return MJBlocks.DRAIN_PART.get().defaultBlockState()
                     .setValue(FORMED, true)
                     .setValue(DRAIN_PART, layerIndex);
-        } else if (blockState.is(getUnformedController())) {
-            return getFormedController().defaultBlockState().setValue(FORMED, true);
         }
-        return null;
     }
 
     @Override
@@ -89,11 +86,15 @@ public class DrainMultiblock implements Multiblock {
     }
 
     @Override
+    public void afterUnformBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, HorizontalDirection direction, @Nullable Player player) {
+        Multiblock.super.afterUnformBlock(level, blockPos, controllerPos, layerIndex, layoutIndex, direction, player);
+        level.removeBlock(blockPos.above(), false);
+    }
+
+    @Override
     public boolean isFormed(Level level, BlockPos blockPos) {
         BlockState block = level.getBlockState(blockPos);
-        return (block.is(getFormedController()) || block.is(Blocks.IRON_BLOCK)) && block.hasProperty(FORMED)
-                ? block.getValue(FORMED)
-                : false;
+        return block.hasProperty(FORMED) && block.getValue(FORMED);
     }
 
     @Override

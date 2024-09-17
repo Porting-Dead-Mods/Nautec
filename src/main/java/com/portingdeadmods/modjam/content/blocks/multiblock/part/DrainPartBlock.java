@@ -1,6 +1,7 @@
 package com.portingdeadmods.modjam.content.blocks.multiblock.part;
 
 import com.mojang.serialization.MapCodec;
+import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.modjam.api.blocks.DisplayBlock;
 import com.portingdeadmods.modjam.api.blocks.blockentities.LaserBlock;
@@ -9,7 +10,9 @@ import com.portingdeadmods.modjam.content.blockentities.multiblock.part.DrainPar
 import com.portingdeadmods.modjam.content.items.AquarineWrenchItem;
 import com.portingdeadmods.modjam.content.multiblocks.DrainMultiblock;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
+import com.portingdeadmods.modjam.registries.MJMultiblocks;
 import com.portingdeadmods.modjam.utils.BlockUtils;
+import com.portingdeadmods.modjam.utils.MultiblockHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -176,6 +179,18 @@ public class DrainPartBlock extends LaserBlock implements SimpleWaterloggedBlock
             return BubbleColumnDirection.DOWNWARD;
         }
         return super.getBubbleColumnDirection(state);
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock())) {
+            DrainPartBlockEntity partBE = (DrainPartBlockEntity) level.getBlockEntity(pos);
+            BlockPos actualBlockEntityPos = partBE.getActualBlockEntityPos();
+            MultiblockHelper.unform(MJMultiblocks.DRAIN.get(), actualBlockEntityPos, level, null);
+            level.removeBlock(actualBlockEntityPos.above(), false);
+        }
+
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
     static {

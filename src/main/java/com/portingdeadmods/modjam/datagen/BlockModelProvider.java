@@ -8,6 +8,7 @@ import com.portingdeadmods.modjam.content.blocks.CrateBlock;
 import com.portingdeadmods.modjam.content.blocks.LaserJunctionBlock;
 import com.portingdeadmods.modjam.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.modjam.content.multiblocks.DrainMultiblock;
+import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import com.portingdeadmods.modjam.registries.MJBlocks;
 import com.portingdeadmods.modjam.registries.MJMultiblocks;
 import net.minecraft.core.Direction;
@@ -30,15 +31,25 @@ public class BlockModelProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         axisBlock(MJBlocks.DARK_PRISMARINE_PILLAR.get());
         simpleBlock(MJBlocks.CHISELED_DARK_PRISMARINE.get());
+        simpleBlock(MJBlocks.POLISHED_PRISMARINE.get());
         simpleBlock(MJBlocks.AQUARINE_STEEL_BLOCK.get());
+
+        // Laser Stuffs
+        simpleBlock(MJBlocks.CREATIVE_POWER_SOURCE.get());
         aquaticCatalyst(MJBlocks.AQUATIC_CATALYST.get());
-        drainPart(MJBlocks.DRAIN_PART.get(), IntegerRange.of(0, 8));
-        drainController(MJBlocks.DRAIN.get());
-        crateBlock(MJBlocks.CRATE.get());
         existingFacingBlock(MJBlocks.PRISMARINE_RELAY.get());
-        simpleBlock(MJBlocks.MIXER.get(), models().getExistingFile(existingModelFile(MJBlocks.MIXER.get())));
         longDistanceLaser(MJBlocks.LONG_DISTANCE_LASER.get());
         laserJunction(MJBlocks.LASER_JUNCTION.get());
+
+        // Stuff
+        simpleBlock(MJBlocks.MIXER.get(), models().getExistingFile(existingModelFile(MJBlocks.MIXER.get())));
+        crateBlock(MJBlocks.CRATE.get());
+
+        // Multiblock
+        drainController(MJBlocks.DRAIN.get());
+        drainPart(MJBlocks.DRAIN_PART.get(), IntegerRange.of(0, 8));
+        
+        simpleBlock(MJBlocks.DRAIN_WALL.get());
     }
 
     private void laserJunction(Block block) {
