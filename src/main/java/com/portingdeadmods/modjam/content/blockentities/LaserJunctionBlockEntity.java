@@ -16,6 +16,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
+import static org.codehaus.plexus.util.StringUtils.capitalizeFirstLetter;
+
 public class LaserJunctionBlockEntity extends LaserBlockEntity {
     public LaserJunctionBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(MJBlockEntityTypes.LASER_JUNCTION.get(), blockPos, blockState);
@@ -26,10 +28,36 @@ public class LaserJunctionBlockEntity extends LaserBlockEntity {
         return getConnections(LaserJunctionBlock.ConnectionType.INPUT);
     }
 
+    public String getLaserInputsAsString() {
+        ObjectSet<Direction> inputs = getLaserInputs();
+        if (inputs.isEmpty()) {
+            return "No inputs";
+        }
+
+        // Join the direction names into a readable string with first letter capitalized
+        return inputs.stream()
+                .map(direction -> capitalizeFirstLetter(direction.getName()))
+                .reduce((a, b) -> a + ", " + b)
+                .orElse("");
+    }
     @Override
     public ObjectSet<Direction> getLaserOutputs() {
         return getConnections(LaserJunctionBlock.ConnectionType.OUTPUT);
     }
+
+    public String getLaserOutputsAsString() {
+        ObjectSet<Direction> outputs = getLaserOutputs();
+        if (outputs.isEmpty()) {
+            return "No outputs";
+        }
+
+        // Join the direction names into a readable string with first letter capitalized
+        return outputs.stream()
+                .map(direction -> capitalizeFirstLetter(direction.getName()))
+                .reduce((a, b) -> a + ", " + b)
+                .orElse("");
+    }
+
 
     // TODO: Cache this
     private ObjectSet<Direction> getConnections(LaserJunctionBlock.ConnectionType type) {
