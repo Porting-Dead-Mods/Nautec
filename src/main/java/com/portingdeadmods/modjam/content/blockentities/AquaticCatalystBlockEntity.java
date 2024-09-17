@@ -26,6 +26,7 @@ import java.util.Optional;
 
 public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     private AquaticCatalystChannelingRecipe recipe;
+    private int amount;
     private int duration;
 
     public AquaticCatalystBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -45,6 +46,20 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     public int getDuration() {
         return duration;
     }
+
+    public int getRemainingDuration() {
+        return recipe != null ? recipe.duration() - duration : 0;
+    }
+
+    public ItemStack getProcessingItem() {
+        return getItemHandler().getStackInSlot(0);
+    }
+
+    public Optional<AquaticCatalystChannelingRecipe> getCurrentRecipe() {
+        return Optional.ofNullable(this.recipe);
+    }
+
+
 
     @Override
     public ObjectSet<Direction> getLaserOutputs() {
@@ -76,13 +91,17 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
                 getItemStackHandler().setStackInSlot(0, stack.copyWithCount(stack.getCount() - 1));
                 duration = 0;
             } else {
-                int amount = recipe.powerAmount() / recipe.duration();
+                amount = recipe.powerAmount() / recipe.duration();
                 transmitPower(amount);
                 duration++;
             }
         } else {
             this.recipe = null;
         }
+    }
+
+    public int getPower() {
+        return amount;
     }
 
     @Override
@@ -93,7 +112,7 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
         return Map.of();
     }
 
-    private boolean isActive() {
+    public boolean isActive() {
         return getBlockState().getValue(AquaticCatalystBlock.CORE_ACTIVE);
     }
 
