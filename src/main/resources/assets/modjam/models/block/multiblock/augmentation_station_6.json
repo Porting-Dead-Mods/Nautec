@@ -1,0 +1,63 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "modjam:block/multiblock/augmentation_station/bottom_side",
+		"1": "modjam:block/multiblock/augmentation_station/bottom_top",
+		"2": "modjam:block/multiblock/augmentation_station/middle_middle",
+		"3": "modjam:block/multiblock/augmentation_station/middle_pillar",
+		"4": "modjam:block/multiblock/augmentation_station/top",
+		"5": "modjam:block/multiblock/augmentation_station/top_bottom",
+		"6": "modjam:block/multiblock/augmentation_station/top_side",
+		"particle": "modjam:block/multiblock/augmentation_station/bottom_side"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 8],
+			"to": [8, 10, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 4, 16], "texture": "#0"},
+				"east": {"uv": [12, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#missing"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#missing"},
+				"up": {"uv": [12, 0, 16, 4], "texture": "#1"},
+				"down": {"uv": [51, -30, 19, 2], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [3, 10, 11],
+			"to": [5, 13, 13],
+			"faces": {
+				"north": {"uv": [16, 0, 0, 16], "texture": "#3"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#3"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#3"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#3"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#missing"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [0, 10, 13],
+			"to": [3, 13, 16],
+			"faces": {
+				"north": {"uv": [0, 16, 2.18182, 0], "texture": "#2"},
+				"east": {"uv": [13.81818, 16, 16, 0], "texture": "#2"},
+				"south": {"uv": [0, 16, 16, 0], "texture": "#missing"},
+				"west": {"uv": [0, 16, 16, 0], "texture": "#missing"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#missing"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [0, 13, 10],
+			"to": [6, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 4, 16], "texture": "#6"},
+				"east": {"uv": [12.57143, 0, 16, 16], "texture": "#6"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#missing"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#missing"},
+				"up": {"uv": [12, 0, 16, 4.57143], "texture": "#4"},
+				"down": {"uv": [3.42857, 12.57143, 0, 16], "texture": "#5"}
+			}
+		}
+	]
+}
