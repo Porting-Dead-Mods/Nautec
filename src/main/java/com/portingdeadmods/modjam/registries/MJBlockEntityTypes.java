@@ -2,9 +2,12 @@ package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.blockentities.*;
+import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.AugmentationStationBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.DrainBlockEntity;
+import com.portingdeadmods.modjam.content.blockentities.multiblock.part.AugmentationStationPartBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.part.DrainPartBlockEntity;
 import com.portingdeadmods.modjam.content.blocks.LongDistanceLaserBlock;
+import com.portingdeadmods.modjam.content.blocks.multiblock.controller.AugmentationStationBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -48,4 +51,11 @@ public final class MJBlockEntityTypes {
     public static final Supplier<BlockEntityType<DrainPartBlockEntity>> DRAIN_PART = BLOCK_ENTITIES.register("drain_part",
             () -> BlockEntityType.Builder.of(DrainPartBlockEntity::new,
                     MJBlocks.DRAIN_PART.get()).build(null));
+
+    public static final Supplier<BlockEntityType<AugmentationStationBlockEntity>> AUGMENTATION_STATION = BLOCK_ENTITIES.register("augmentation_station",
+            () -> BlockEntityType.Builder.of(AugmentationStationBlockEntity::new,
+                    MJBlocks.AUGMENTATION_STATION.get()).build(null));
+    public static final Supplier<BlockEntityType<AugmentationStationPartBlockEntity>> AUGMENTATION_STATION_PART = BLOCK_ENTITIES.register("augmentation_station_part",
+            () -> BlockEntityType.Builder.of(AugmentationStationPartBlockEntity::new,
+                    MJBlocks.AUGMENTATION_STATION_PART.get()).build(null));
 }

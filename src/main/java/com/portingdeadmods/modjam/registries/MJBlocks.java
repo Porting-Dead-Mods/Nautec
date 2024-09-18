@@ -2,7 +2,9 @@ package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.blocks.*;
+import com.portingdeadmods.modjam.content.blocks.multiblock.controller.AugmentationStationBlock;
 import com.portingdeadmods.modjam.content.blocks.multiblock.controller.DrainBlock;
+import com.portingdeadmods.modjam.content.blocks.multiblock.part.AugmentationStationPartBlock;
 import com.portingdeadmods.modjam.content.blocks.multiblock.part.DrainPartBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -51,6 +53,13 @@ public final class MJBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<DrainPartBlock> DRAIN_PART = BLOCKS.registerBlock("deep_sea_drain_part", DrainPartBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+
+    public static final DeferredBlock<AugmentationStationBlock> AUGMENTATION_STATION = registerBlockAndItem("augmentation_station",
+            AugmentationStationBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
+    public static final DeferredBlock<AugmentationStationPartBlock> AUGMENTATION_STATION_PART = BLOCKS.registerBlock("augmentation_station_part",
+            AugmentationStationPartBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
 
     // FLUIDS
     public static final DeferredBlock<LiquidBlock> SALT_WATER_FLUID_BLOCK = BLOCKS.register("salt_water_block",
