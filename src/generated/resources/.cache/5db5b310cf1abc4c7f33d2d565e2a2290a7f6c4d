@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-18T20:19:09.1827631	Item Models: modjam
+// 1.21.1	2024-09-18T22:50:45.679629547	Item Models: modjam
 2e5c757869c8a635de54e96f2c267632575d7f88 assets/modjam/models/item/aquarine_steel_axe.json
 51765874ad3111adf69684269ad9a422bfbaac4a assets/modjam/models/item/aquarine_steel_block.json
 9cd4fd3035913198bebfee10401997a85c0cdc6d assets/modjam/models/item/aquarine_steel_hoe.json
@@ -10,6 +10,7 @@ c034bf7af48030b58d7e60cf529b2f045f5d402d assets/modjam/models/item/aquarine_stee
 dd0c37deb1f33fb0844da4a540706681887fc3d4 assets/modjam/models/item/aquatic_catalyst.json
 66eb6899181dacf931e95e546a991d5e25dcc5da assets/modjam/models/item/atlantic_gold_ingot.json
 80866ffb60b1a950afe116cd410d50562a393643 assets/modjam/models/item/atlantic_gold_nugget.json
+b3d65624eabb671d1d849954a9631f5d195f999e assets/modjam/models/item/augmentation_station.json
 246cda7a0fca8b278dd6ed5392d0ce745d9fa097 assets/modjam/models/item/chiseled_dark_prismarine.json
 4d6b8c829a1afa42db37e92f67ddf057d763b124 assets/modjam/models/item/crate.json
 7a4903c03dbbe3c2ac471ebcbd75433c8ca345d3 assets/modjam/models/item/creative_power_source.json
@@ -32,9 +33,9 @@ f0f9891cd57b3a66f7440a71b925348bb8ea745b assets/modjam/models/item/glass_vial.js
 ded81f67ccb99458d5f971322bfe07b2bcf64129 assets/modjam/models/item/long_distance_laser.json
 70e7405579c5908091d6c50ab13bb62c8a3fea61 assets/modjam/models/item/mixer.json
 5a996e1e1c786709003dd8d0e59546e7239d27e4 assets/modjam/models/item/polished_prismarine.json
+dab337d602d93b0a4930b69e652b1155300c6502 assets/modjam/models/item/prism_monocle.json
 b1280404594f844671030bc27b7dccec112a81b6 assets/modjam/models/item/prismarine_crystal.json
 464cf572aa7c1258836ba7c5ae339f19aafe0333 assets/modjam/models/item/prismarine_crystal_shard.json
 0466424a99d558f8beb3c9944a82a36cabf4a2aa assets/modjam/models/item/prismarine_laser_relay.json
-dab337d602d93b0a4930b69e652b1155300c6502 assets/modjam/models/item/prism_monocle.json
 3a80dac2ed65f9c211115988d17e81af34d02e3d assets/modjam/models/item/rusty_gear.json
 47ad5045e52edd89cd66c703ffb5858768091bcf assets/modjam/models/item/salt_water_bucket.json
