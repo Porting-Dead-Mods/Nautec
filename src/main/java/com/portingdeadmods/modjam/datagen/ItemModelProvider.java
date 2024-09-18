@@ -51,6 +51,12 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(MJItems.EAS_BUCKET.get());
         basicItem(MJItems.ETCHING_ACID_BUCKET.get());
 
+        handHeldItem(MJItems.AQUARINE_AXE.get());
+        handHeldItem(MJItems.AQUARINE_HOE.get());
+        handHeldItem(MJItems.AQUARINE_PICKAXE.get());
+        handHeldItem(MJItems.AQUARINE_SHOVEL.get());
+        handHeldItem(MJItems.AQUARINE_SWORD.get());
+
         parentItemBlock(MJBlocks.LASER_JUNCTION.asItem(), "_base");
 
         blockItems();

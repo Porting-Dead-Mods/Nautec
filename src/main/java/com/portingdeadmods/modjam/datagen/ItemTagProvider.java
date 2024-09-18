@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.datagen;
 
+import com.portingdeadmods.modjam.registries.MJItems;
 import com.portingdeadmods.modjam.tags.MJTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -24,6 +25,7 @@ public class ItemTagProvider extends ItemTagsProvider{
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(MJTags.Items.AQUATIC_CATALYST, Items.HEART_OF_THE_SEA);
+        tag(MJTags.Items.AQUARINE_STEEL, MJItems.AQUARINE_STEEL_INGOT);
     }
 
 
