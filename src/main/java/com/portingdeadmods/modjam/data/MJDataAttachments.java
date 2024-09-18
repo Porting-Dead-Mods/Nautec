@@ -25,4 +25,7 @@ public final class MJDataAttachments {
             "augments_extra_data", () -> AttachmentType.<Map<AugmentSlot, CompoundTag>>builder(Collections::emptyMap)
                     .serialize(AugmentCodecs.AUGMENTS_EXTRA_DATA_CODEC).copyOnDeath().build()
     );
+    public static final Supplier<AttachmentType<Integer>> AUGMENT_DATA_CHANGED = ATTACHMENTS.register(
+            "augment_data_changed", () -> AttachmentType.builder(() -> -1).build()
+    );
 }

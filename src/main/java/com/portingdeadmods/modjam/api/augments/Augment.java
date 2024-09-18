@@ -1,5 +1,7 @@
 package com.portingdeadmods.modjam.api.augments;
 
+import com.portingdeadmods.modjam.MJRegistries;
+import com.portingdeadmods.modjam.data.MJDataAttachments;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
@@ -43,6 +45,7 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
 
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
+        setChanged();
     }
 
     public void breakBlock(BlockEvent.BreakEvent event) {
@@ -71,13 +74,20 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
         return getCooldown() > 0;
     }
 
+    // Call this, whenever NBT should be saved
+    protected final void setChanged() {
+        player.setData(MJDataAttachments.AUGMENT_DATA_CHANGED, MJRegistries.AUGMENT_SLOT.getId(augmentSlot));
+    }
+
     @Override
     public @UnknownNullability CompoundTag serializeNBT(HolderLookup.Provider provider) {
-        return new CompoundTag();
+        CompoundTag tag = new CompoundTag();
+        tag.putInt("cooldown", cooldown);
+        return tag;
     }
 
     @Override
     public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-
+        this.cooldown = nbt.getInt("cooldown");
     }
 }
