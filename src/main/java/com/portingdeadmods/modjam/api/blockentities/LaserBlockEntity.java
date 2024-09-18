@@ -206,7 +206,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
                         iterator.remove();
                     } else {
                         activeTransformation.put(cookingItem, cookTime + 1);
-                        ParticlesUtils.spawnParticles(cookingItem, level, ParticleTypes.END_ROD);
+                        ParticlesUtils.spawnParticlesAroundItem(cookingItem, level, ParticleTypes.END_ROD);
                     }
                 }
             }
