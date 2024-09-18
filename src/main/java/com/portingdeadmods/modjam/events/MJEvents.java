@@ -102,7 +102,7 @@ public final class MJEvents {
                 } else {
                     activeTransformations.put(itemEntity, etchingTime + 1);
                     // Optionally spawn particles while etching
-                    ParticlesUtils.spawnParticles(itemEntity, level, ParticleTypes.FLAME);
+                    ParticlesUtils.spawnParticlesAroundItem(itemEntity, level, ParticleTypes.FLAME);
                 }
             }
         }
