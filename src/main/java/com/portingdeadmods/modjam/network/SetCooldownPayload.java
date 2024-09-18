@@ -1,8 +1,9 @@
 package com.portingdeadmods.modjam.network;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
-import com.portingdeadmods.modjam.content.augments.AugmentHelper;
+import com.portingdeadmods.modjam.api.augments.Augment;
+import com.portingdeadmods.modjam.content.augments.AugmentSlots;
+import com.portingdeadmods.modjam.utils.AugmentHelper;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -27,8 +28,6 @@ public record SetCooldownPayload (int cooldown, int slot)implements CustomPacket
     }
 
     public static void setCooldownAction(SetCooldownPayload payload, IPayloadContext context){
-        context.enqueueWork(()->{
-            AugmentHelper.setCooldown(context.player(), Slot.GetValue(payload.slot()), payload.cooldown());
-        });
+//        context.enqueueWork(()-> AugmentHelper.setCooldown(context.player(), AugmentSlots.getValue(payload.slot()), payload.cooldown()));
     }
 }
