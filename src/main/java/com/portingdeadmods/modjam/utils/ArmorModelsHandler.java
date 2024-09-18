@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
-public class ArmorModelsHandler {
+public final class ArmorModelsHandler {
 
     private static final Map<ModelLayerLocation, Layer> LAYERS = new HashMap<>();
     private static final Map<Pair<ModelLayerLocation, EquipmentSlot>, MJArmorModel> CACHED_ARMORS = new HashMap<>();
