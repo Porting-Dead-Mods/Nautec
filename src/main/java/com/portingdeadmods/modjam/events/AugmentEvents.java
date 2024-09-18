@@ -1,14 +1,17 @@
 package com.portingdeadmods.modjam.events;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
-import com.portingdeadmods.modjam.content.augments.AugmentHelper;
-import com.portingdeadmods.modjam.content.augments.StaticAugment;
+import com.portingdeadmods.modjam.api.augments.Augment;
+import com.portingdeadmods.modjam.api.augments.AugmentSlot;
+import com.portingdeadmods.modjam.content.augments.AugmentSlots;
+import com.portingdeadmods.modjam.utils.AugmentHelper;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+
+import java.util.List;
 
 @SuppressWarnings("unused")
 @EventBusSubscriber(modid = ModJam.MODID)
@@ -16,10 +19,11 @@ public class AugmentEvents {
 
     @SubscribeEvent
     public static void breakEvent(BlockEvent.BreakEvent event){
-        StaticAugment[] augments = AugmentHelper.getAugments(event.getPlayer());
-        for (int i = 0; i < augments.length; i++) {
-            if (augments[i] != null){
-                augments[i].breakBlock(Slot.GetValue(i),event);
+        Iterable<Augment> augments = AugmentHelper.getAugments(event.getPlayer()).values();
+        for (Augment augment : augments) {
+            if (augment != null) {
+                //augments.get(i).breakBlock(AugmentSlot.GetValue(i),event);
+
             }
         }
     }
@@ -27,20 +31,20 @@ public class AugmentEvents {
 
     @SubscribeEvent
     public static void playerTick(PlayerTickEvent.Post event){
-        StaticAugment[] augments = AugmentHelper.getAugments(event.getEntity());
-        for (int i = 0; i < 5; i++) {
-            StaticAugment augment = augments[i];
+        Iterable<Augment> augments = AugmentHelper.getAugments(event.getEntity()).values();
+        for (Augment augment : augments) {
             if (augment != null) {
-                Slot slot = Slot.GetValue(i);
+                AugmentSlot slot = augment.getAugmentSlot();
                 Player player = event.getEntity();
 
                 if (player.level().isClientSide) {
-                    augment.clientTick(slot,event);
-                    if (AugmentHelper.getCooldown(player, slot) >= 0){
-                        AugmentHelper.setCooldownAndUpdate(player, slot, AugmentHelper.getCooldown(player, slot) - 1);
+                    augment.clientTick(event);
+                    // TODO: Move this to tick method of Augment class
+                    if (augment.getCooldown() >= 0){
+                        augment.setCooldown(augment.getCooldown() - 1);
                     }
                 } else {
-                    augment.serverTick(slot,event);
+                    augment.serverTick(event);
                 }
             }
         }

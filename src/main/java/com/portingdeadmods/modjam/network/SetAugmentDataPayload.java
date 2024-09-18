@@ -1,8 +1,10 @@
 package com.portingdeadmods.modjam.network;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
-import com.portingdeadmods.modjam.content.augments.AugmentHelper;
+import com.portingdeadmods.modjam.api.augments.Augment;
+import com.portingdeadmods.modjam.api.augments.AugmentSlot;
+import com.portingdeadmods.modjam.content.augments.AugmentSlots;
+import com.portingdeadmods.modjam.utils.AugmentHelper;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -27,8 +29,6 @@ public record SetAugmentDataPayload(int augmentId, int slot) implements CustomPa
         return TYPE;
     }
     public static void setAugmentDataAction(SetAugmentDataPayload payload, IPayloadContext context){
-        context.enqueueWork(()->{
-            AugmentHelper.setId(context.player(), Slot.GetValue(payload.slot()), payload.augmentId());
-        });
+//        context.enqueueWork(()-> AugmentHelper.setId(context.player(), AugmentSlots.getValue(payload.slot()), payload.augmentId()));
     }
 }

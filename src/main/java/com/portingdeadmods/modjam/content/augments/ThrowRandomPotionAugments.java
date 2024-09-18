@@ -1,12 +1,13 @@
 package com.portingdeadmods.modjam.content.augments;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.capabilities.augmentation.Slot;
+import com.portingdeadmods.modjam.api.augments.Augment;
+import com.portingdeadmods.modjam.api.augments.AugmentSlot;
 import com.portingdeadmods.modjam.network.KeyPressedPayload;
+import com.portingdeadmods.modjam.registries.MJAugments;
+import com.portingdeadmods.modjam.utils.AugmentHelper;
 import com.portingdeadmods.modjam.utils.InputUtils;
 import net.minecraft.core.Holder;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -19,20 +20,20 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThrowRandomPotionAugments extends Augment{
-    @Override
-    public int getId() {
-        return 4;
+public class ThrowRandomPotionAugments extends Augment {
+    public ThrowRandomPotionAugments(AugmentSlot augmentSlot) {
+        super(MJAugments.THROW_POTION_AUGMENT.get(), augmentSlot);
     }
+
     @Override
-    public void clientTick(Slot slot, PlayerTickEvent.Post event) {
-        if (InputUtils.isKeyDown(InputConstants.KEY_Y) && !onCooldown(slot, event.getEntity())) {
-            PacketDistributor.sendToServer(new KeyPressedPayload(getId(), slot.slotId));
+    public void clientTick(PlayerTickEvent.Post event) {
+        if (InputUtils.isKeyDown(InputConstants.KEY_Y) && !isOnCooldown()) {
+            PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot, augmentSlot.getSlotId()));
         }
     }
 
     @Override
-    public void handleKeybindPress(Slot slot, Player player) {
+    public void handleKeybindPress() {
         List<Holder<Potion>> potions = new ArrayList<>();
         potions.add(Potions.HEALING);
         potions.add(Potions.HARMING);
@@ -40,13 +41,13 @@ public class ThrowRandomPotionAugments extends Augment{
         potions.add(Potions.SWIFTNESS);
         potions.add(Potions.SLOWNESS);
 
-        Holder<Potion> randomPotion = potions.get(ModJam.random.nextInt(potions.size()));
+        Holder<Potion> randomPotion = potions.get(player.getRandom().nextInt(potions.size()));
         ItemStack stack = PotionContents.createItemStack(Items.SPLASH_POTION,randomPotion);
 
         ThrownPotion potion = new ThrownPotion(player.level(),player);
         potion.setItem(stack);
         potion.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
         player.level().addFreshEntity(potion);
-        AugmentHelper.setCooldownAndUpdate(player, slot, 20); // Set the cooldown, which decrements by 1 every tick
+        setCooldown(20); // Set the cooldown, which decrements by 1 every tick
     }
 }
