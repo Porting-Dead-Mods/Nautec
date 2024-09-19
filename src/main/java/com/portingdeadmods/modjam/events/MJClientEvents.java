@@ -10,12 +10,10 @@ import com.portingdeadmods.modjam.api.fluids.BaseFluidType;
 import com.portingdeadmods.modjam.client.hud.PrismMonocleOverlay;
 import com.portingdeadmods.modjam.client.model.block.DrainTopModel;
 import com.portingdeadmods.modjam.client.model.block.PrismarineCrystalModel;
+import com.portingdeadmods.modjam.client.model.block.RobotArmModel;
 import com.portingdeadmods.modjam.client.model.block.WhiskModel;
 import com.portingdeadmods.modjam.client.renderer.augments.AugmentLayerRenderer;
-import com.portingdeadmods.modjam.client.renderer.blockentities.DrainBERenderer;
-import com.portingdeadmods.modjam.client.renderer.blockentities.LongDistanceLaserBERenderer;
-import com.portingdeadmods.modjam.client.renderer.blockentities.MixerBERenderer;
-import com.portingdeadmods.modjam.client.renderer.blockentities.PrismarineCrystalBERenderer;
+import com.portingdeadmods.modjam.client.renderer.blockentities.*;
 import com.portingdeadmods.modjam.client.screen.CrateScreen;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import com.portingdeadmods.modjam.registries.MJBlocks;
@@ -139,6 +137,7 @@ public final class MJClientEvents {
             event.registerBlockEntityRenderer(MJBlockEntityTypes.PRISMARINE_CRYSTAL.get(), PrismarineCrystalBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.MIXER.get(), MixerBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.DRAIN_PART.get(), DrainBERenderer::new);
+            event.registerBlockEntityRenderer(MJBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), AugmentStationExtensionBERenderer::new);
         }
 
         @SubscribeEvent
@@ -146,6 +145,7 @@ public final class MJClientEvents {
             event.registerLayerDefinition(DrainTopModel.LAYER_LOCATION, DrainTopModel::createBodyLayer);
             event.registerLayerDefinition(PrismarineCrystalModel.LAYER_LOCATION, PrismarineCrystalModel::createBodyLayer);
             event.registerLayerDefinition(WhiskModel.LAYER_LOCATION, WhiskModel::createBodyLayer);
+            event.registerLayerDefinition(RobotArmModel.LAYER_LOCATION, RobotArmModel::createBodyLayer);
             ArmorModelsHandler.registerLayers(event);
         }
 

@@ -1,8 +1,9 @@
-// 1.21.1	2024-09-18T23:33:02.220469882	Block States: modjam
+// 1.21.1	2024-09-19T17:45:37.768340944	Block States: modjam
 af3ef9c17c60ced537516e8aa1215fcb76e3683e assets/modjam/blockstates/aquarine_steel_block.json
 865a45a4d022b56bc54dc32dae4b666af2df7d6f assets/modjam/blockstates/aquatic_catalyst.json
 96107cca7c14d771682aa632ac5bccf7bd0f0e8b assets/modjam/blockstates/augmentation_station.json
-cdbb7a3f21370342d8baaf0c8adcfb6730ad8074 assets/modjam/blockstates/augmentation_station_part.json
+052d44c61e2b852a06746b9933ee3a40e9827e1a assets/modjam/blockstates/augmentation_station_extension.json
+7ac8846fb1259eee1b1202e4d2bc103c9dc64297 assets/modjam/blockstates/augmentation_station_part.json
 6e42254717fc67a953282f50517eb06c02193129 assets/modjam/blockstates/chiseled_dark_prismarine.json
 3f474de85f7cf428f3ecd383cde71be56c940ecd assets/modjam/blockstates/crate.json
 7613fda72fb50e03c71052500994e2203dee6020 assets/modjam/blockstates/creative_power_source.json

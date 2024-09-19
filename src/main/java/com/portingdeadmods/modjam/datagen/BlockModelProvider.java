@@ -3,6 +3,7 @@ package com.portingdeadmods.modjam.datagen;
 import com.portingdeadmods.modjam.MJRegistries;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.multiblocks.Multiblock;
+import com.portingdeadmods.modjam.api.utils.HorizontalDirection;
 import com.portingdeadmods.modjam.content.blocks.AquaticCatalystBlock;
 import com.portingdeadmods.modjam.content.blocks.CrateBlock;
 import com.portingdeadmods.modjam.content.blocks.LaserJunctionBlock;
@@ -54,6 +55,7 @@ public class BlockModelProvider extends BlockStateProvider {
 
         augmentationStationController(MJBlocks.AUGMENTATION_STATION.get());
         augmentationStationPart(MJBlocks.AUGMENTATION_STATION_PART.get(), IntegerRange.of(0, 8));
+        horizontalBlock(MJBlocks.AUGMENTATION_STATION_EXTENSION.get(), models().getExistingFile(existingModelFile("multiblock/augmentation_station_extension")));
 
         simpleBlock(MJBlocks.DRAIN_WALL.get());
     }
@@ -69,8 +71,14 @@ public class BlockModelProvider extends BlockStateProvider {
         builder.partialState().with(Multiblock.FORMED, false)
                 .modelForState().modelFile(drainPartModel(augmentationStationPartBlock, 0, false)).addModel();
         for (int i = range.getMinimum(); i <= range.getMaximum(); i++) {
-            ModelFile formedModel = models().getExistingFile(existingModelFile("multiblock/augmentation_station_" + i));
-            builder.partialState().with(Multiblock.FORMED, true).with(AugmentationStationMultiblock.AS_PART, i)
+            ModelFile formedModel = models().getExistingFile(existingModelFile("multiblock/augmentation_station_" + (8 - i)));
+            int index = i;
+            if (i == 0 || i == 3 || i == 6) {
+                index += 2;
+            } else if (i == 2 || i == 5 || i == 8) {
+                index -= 2;
+            }
+            builder.partialState().with(Multiblock.FORMED, true).with(AugmentationStationMultiblock.AS_PART, index)
                     .modelForState().modelFile(formedModel).addModel();
         }
     }

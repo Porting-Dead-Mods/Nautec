@@ -301,6 +301,8 @@ public final class MultiblockHelper {
         BlockPos firstBlockPos = getFirstBlockPos(direction, controllerPos, relativeControllerPos);
         Int2ObjectMap<Block> def = multiblock.getDefinition();
 
+        multiblock.onStartForming(level, firstBlockPos, controllerPos);
+
         int index = 0;
         int yIndex = 0;
         for (MultiblockLayer layer : layout) {

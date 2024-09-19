@@ -176,6 +176,10 @@ public interface Multiblock {
      */
     boolean isFormed(Level level, BlockPos blockPos);
 
+    default void onStartForming(Level level, BlockPos firstPos, BlockPos controllerPos) {
+
+    }
+
     /**
      * This method can make the direction of this multiblock fixed. This only works,
      * if the multiblock cannot be rotated, like the crucible or firebox.
