@@ -19,6 +19,10 @@ repositories {
         url "https://cursemaven.com"
     }
     maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
+    maven {
         // location of the maven that hosts JEI files since January 2023
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
@@ -79,7 +83,11 @@ dependencies {
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
 
     localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
-    //runtimeOnly "curse.maven:embeddium-908741:5556146"
+
+    runtimeOnly "curse.maven:embeddium-908741:5556146"
+    //runtimeOnly "curse.maven:sinytra-connector-890127:5637280"
+    //runtimeOnly "curse.maven:forgified-fabric-api-889079:5620473"
+    //runtimeOnly "maven.modrinth:component-viewer:Xh1OCy7O"
 }
 
 tasks.withType(ProcessResources).configureEach {
