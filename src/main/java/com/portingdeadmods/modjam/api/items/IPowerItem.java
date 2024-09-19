@@ -7,4 +7,5 @@ public interface IPowerItem {
     int getMaxInput();
 
     int getMaxOutput();
+
 }
