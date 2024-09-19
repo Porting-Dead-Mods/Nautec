@@ -1,5 +1,7 @@
 package com.portingdeadmods.modjam.datagen;
 
+import com.portingdeadmods.modjam.capabilities.MJCapabilities;
+import com.portingdeadmods.modjam.capabilities.power.IPowerStorage;
 import com.portingdeadmods.modjam.content.recipes.utils.IngredientWithCount;
 import com.portingdeadmods.modjam.datagen.recipeBuilder.AquaticCatalystChannelingRecipeBuilder;
 import com.portingdeadmods.modjam.datagen.recipeBuilder.ItemEtchingRecipeBuilder;
@@ -57,11 +59,11 @@ public class RecipesProvider extends RecipeProvider {
                 .save(pRecipeOutput);
 
         MixingRecipeBuilder.newRecipe(new ItemStack(MJItems.CROWBAR.get(), 1))
-                .ingredients(IngredientWithCount.fromItemLike(MJItems.DIVING_HELMET.get(),1)
-                        , IngredientWithCount.fromItemLike(MJItems.DIVING_CHESTPLATE.get(),1)
-                        , IngredientWithCount.fromItemLike(MJItems.DIVING_LEGGINGS.get(),1)
-                        , IngredientWithCount.fromItemLike(MJItems.DIVING_BOOTS.get(),1))
+                .ingredients(IngredientWithCount.fromItemLike(MJItems.DIVING_HELMET.get(), 1)
+                        , IngredientWithCount.fromItemLike(MJItems.DIVING_CHESTPLATE.get(), 1)
+                        , IngredientWithCount.fromItemLike(MJItems.DIVING_LEGGINGS.get(), 1)
+                        , IngredientWithCount.fromItemLike(MJItems.DIVING_BOOTS.get(), 1))
                 .duration(60)
                 .save(pRecipeOutput);
-        }
+    }
 }

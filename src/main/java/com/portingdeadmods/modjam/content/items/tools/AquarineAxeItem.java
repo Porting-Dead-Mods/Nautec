@@ -7,12 +7,15 @@ import com.portingdeadmods.modjam.content.items.tiers.MJToolMaterials;
 import com.portingdeadmods.modjam.data.MJDataComponents;
 import com.portingdeadmods.modjam.data.components.ComponentPowerStorage;
 import com.portingdeadmods.modjam.utils.ItemUtils;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+
+import java.util.List;
 
 public class AquarineAxeItem extends AxeItem implements IPowerItem {
     public AquarineAxeItem() {
@@ -22,16 +25,17 @@ public class AquarineAxeItem extends AxeItem implements IPowerItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        if (!level.isClientSide) {
-            ItemStack stack = player.getItemInHand(usedHand);
-            IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
-            if(powerStorage.getPowerStored() <= 0) {
-                return InteractionResultHolder.fail(stack);
-            }
+    public InteractionResult useOn(UseOnContext context) {
+        ItemStack stack = context.getItemInHand();
+        IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
+        if(powerStorage.getPowerStored() <= 0) {
+            return InteractionResult.FAIL;
+        }else {
+            powerStorage.tryDrainPower(1, false);
         }
-        return InteractionResultHolder.success(player.getItemInHand(usedHand));
+        return InteractionResult.SUCCESS;
     }
+
 
     @Override
     public boolean isDamageable(ItemStack stack) {
@@ -66,5 +70,12 @@ public class AquarineAxeItem extends AxeItem implements IPowerItem {
     @Override
     public int getMaxOutput() {
         return 0;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
+        tooltipComponents.add(Component.literal("Power: " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity()).withStyle(ChatFormatting.DARK_AQUA));
     }
 }

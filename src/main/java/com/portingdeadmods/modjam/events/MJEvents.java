@@ -5,6 +5,9 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
 import com.portingdeadmods.modjam.api.augments.AugmentType;
+import com.portingdeadmods.modjam.api.items.IPowerItem;
+import com.portingdeadmods.modjam.capabilities.MJCapabilities;
+import com.portingdeadmods.modjam.capabilities.power.IPowerStorage;
 import com.portingdeadmods.modjam.content.commands.arguments.AugmentSlotArgumentType;
 import com.portingdeadmods.modjam.content.commands.arguments.AugmentTypeArgumentType;
 import com.portingdeadmods.modjam.content.recipes.ItemEtchingRecipe;
@@ -17,6 +20,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -27,6 +31,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
@@ -79,6 +84,31 @@ public final class MJEvents {
                 CompoundTag tag = augments.get(changedSlot).serializeNBT(player.level().registryAccess());
                 AugmentHelper.setAugmentExtraData(player, changedSlot, tag);
                 player.setData(MJDataAttachments.AUGMENT_DATA_CHANGED, -1);
+            }
+        }
+
+        @SubscribeEvent
+        public static void onBreakBlock(PlayerEvent.BreakSpeed event) {
+            Player player = event.getEntity();
+            ItemStack stack = player.getMainHandItem();
+            if (stack.getItem() instanceof IPowerItem powerItem) {
+                IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
+                if (powerStorage.getPowerStored() <= 0) {
+                    event.setCanceled(true);
+                }
+            }
+        }
+        //TODO remove this shit
+        @SubscribeEvent
+        public static void onPowerItemTick(EntityTickEvent.Post event) {
+            if (event.getEntity() instanceof ItemEntity itemEntity) {
+                ItemStack stack = itemEntity.getItem();
+                if (stack.getItem() instanceof IPowerItem powerItem) {
+                    IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
+                    if(powerStorage.getPowerStored() < powerStorage.getPowerCapacity()) {
+                        powerStorage.tryFillPower(1,false);
+                    }
+                }
             }
         }
 
