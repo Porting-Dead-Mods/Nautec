@@ -4,6 +4,7 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.blockentities.*;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.AugmentationStationBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.controller.DrainBlockEntity;
+import com.portingdeadmods.modjam.content.blockentities.multiblock.part.AugmentationStationExtensionBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.part.AugmentationStationPartBlockEntity;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.part.DrainPartBlockEntity;
 import com.portingdeadmods.modjam.content.blocks.LongDistanceLaserBlock;
@@ -58,4 +59,7 @@ public final class MJBlockEntityTypes {
     public static final Supplier<BlockEntityType<AugmentationStationPartBlockEntity>> AUGMENTATION_STATION_PART = BLOCK_ENTITIES.register("augmentation_station_part",
             () -> BlockEntityType.Builder.of(AugmentationStationPartBlockEntity::new,
                     MJBlocks.AUGMENTATION_STATION_PART.get()).build(null));
+    public static final Supplier<BlockEntityType<AugmentationStationExtensionBlockEntity>> AUGMENTATION_STATION_EXTENSION = BLOCK_ENTITIES.register("augmentation_station_extension",
+            () -> BlockEntityType.Builder.of(AugmentationStationExtensionBlockEntity::new,
+                    MJBlocks.AUGMENTATION_STATION_EXTENSION.get()).build(null));
 }

@@ -67,7 +67,7 @@ public final class MJItems {
                     .attributes(NeptunesTridentItem.createAttributes())
                     .component(DataComponents.TOOL, NeptunesTridentItem.createToolProperties()));
 
-    public static final DeferredItem<AquarineSwordItem> AQUARINE_SWORD = ITEMS.register("aquarine_steel_sword", AquarineSwordItem::new);
+    public static final DeferredItem<AquarineSwordItem> AQUARINE_SWORD = registerItem("aquarine_steel_sword", AquarineSwordItem::new);
     public static final DeferredItem<AquarineAxeItem> AQUARINE_AXE = registerItem("aquarine_steel_axe", AquarineAxeItem::new);
     public static final DeferredItem<AquarineHoeItem> AQUARINE_HOE = registerItem("aquarine_steel_hoe", AquarineHoeItem::new);
     public static final DeferredItem<AquarinePickaxeItem> AQUARINE_PICKAXE = registerItem("aquarine_steel_pickaxe", AquarinePickaxeItem::new);

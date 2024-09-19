@@ -4,6 +4,7 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.content.blocks.*;
 import com.portingdeadmods.modjam.content.blocks.multiblock.controller.AugmentationStationBlock;
 import com.portingdeadmods.modjam.content.blocks.multiblock.controller.DrainBlock;
+import com.portingdeadmods.modjam.content.blocks.multiblock.part.AugmentationStationExtensionBlock;
 import com.portingdeadmods.modjam.content.blocks.multiblock.part.AugmentationStationPartBlock;
 import com.portingdeadmods.modjam.content.blocks.multiblock.part.DrainPartBlock;
 import net.minecraft.world.item.BlockItem;
@@ -60,6 +61,10 @@ public final class MJBlocks {
     public static final DeferredBlock<AugmentationStationPartBlock> AUGMENTATION_STATION_PART = BLOCKS.registerBlock("augmentation_station_part",
             AugmentationStationPartBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
+    public static final DeferredBlock<AugmentationStationExtensionBlock> AUGMENTATION_STATION_EXTENSION = BLOCKS.registerBlock("augmentation_station_extension",
+            AugmentationStationExtensionBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
+
 
     // FLUIDS
     public static final DeferredBlock<LiquidBlock> SALT_WATER_FLUID_BLOCK = BLOCKS.register("salt_water_block",

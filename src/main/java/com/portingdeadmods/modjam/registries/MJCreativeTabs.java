@@ -24,11 +24,6 @@ public final class MJCreativeTabs {
                 output.accept(MJItems.SALT_WATER_BUCKET);
                 output.accept(MJItems.EAS_BUCKET);
                 output.accept(MJItems.ETCHING_ACID_BUCKET);
-                //output.accept(MJItems.AQUARINE_AXE.get());
-                //output.accept(MJItems.AQUARINE_HOE.get());
-                //output.accept(MJItems.AQUARINE_PICKAXE.get());
-                //output.accept(MJItems.AQUARINE_SHOVEL.get());
-                output.accept(MJItems.AQUARINE_SWORD.get());
             })
             .build());
 }
