@@ -5,31 +5,35 @@ import com.portingdeadmods.modjam.capabilities.MJCapabilities;
 import com.portingdeadmods.modjam.capabilities.power.IPowerStorage;
 import com.portingdeadmods.modjam.content.items.tiers.MJToolMaterials;
 import com.portingdeadmods.modjam.data.MJDataComponents;
+import com.portingdeadmods.modjam.data.MJDataComponentsUtils;
 import com.portingdeadmods.modjam.data.components.ComponentPowerStorage;
 import com.portingdeadmods.modjam.utils.ItemUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
+    private static final int POWER_PER_BLOCK = 2;
+
     public AquarinePickaxeItem() {
-        super(MJToolMaterials.AQUARINE,new Properties().stacksTo(1)
+        super(MJToolMaterials.AQUARINE, new Properties()
+                .stacksTo(1)
+                .component(MJDataComponents.ABILITY_ENABLED, false)
                 .component(MJDataComponents.POWER, ComponentPowerStorage.withCapacity(700)));
     }
 
@@ -37,17 +41,66 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
     public InteractionResult useOn(UseOnContext context) {
         ItemStack stack = context.getItemInHand();
         IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
-        if(powerStorage.getPowerStored() <= 0) {
+        if (powerStorage.getPowerStored() <= 0) {
             return InteractionResult.FAIL;
         }
-        return InteractionResult.SUCCESS;
+        return super.useOn(context);
     }
 
     @Override
     public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miningEntity) {
-        IPowerStorage powerStorage = miningEntity.getItemInHand(InteractionHand.MAIN_HAND).getCapability(MJCapabilities.PowerStorage.ITEM);
-        powerStorage.tryDrainPower(1, false);
+        if (miningEntity instanceof Player player) {
+            BlockHitResult hitResult = (BlockHitResult) player.pick(20.0D, 0.0F, false);
+            Direction hitFace = hitResult.getDirection();
+
+            if (MJDataComponentsUtils.isAbilityEnabled(stack)) {
+                mine3x3(level, pos, player, stack, hitFace);
+                return true;
+            }
+        }
         return super.mineBlock(stack, level, state, pos, miningEntity);
+    }
+
+    private void mine3x3(Level level, BlockPos pos, Player player, ItemStack stack, Direction hitFace) {
+        IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
+
+        if (powerStorage.getPowerStored() > 0) {
+            int blocksToBreak = powerStorage.getPowerStored() / POWER_PER_BLOCK; // Calculate how many blocks we can break
+
+            // Adjust the 3x3 mining area based on the hit face
+            Iterable<BlockPos> blocksToMine = get3x3MiningArea(pos, hitFace);
+
+            for (BlockPos targetPos : blocksToMine) {
+                if (blocksToBreak > 0 && canMine(level, targetPos, level.getBlockState(targetPos))) {
+                    blocksToBreak = breakBlock(level, targetPos, stack, player, powerStorage, blocksToBreak);
+                }
+            }
+        }
+    }
+
+    // Method to get the 3x3 mining area based on the face the player hit
+    private Iterable<BlockPos> get3x3MiningArea(BlockPos center, Direction hitFace) {
+        return switch (hitFace) {
+            case NORTH, SOUTH -> BlockPos.betweenClosed(center.offset(-1, -1, 0), center.offset(1, 1, 0));
+            case EAST, WEST -> BlockPos.betweenClosed(center.offset(0, -1, -1), center.offset(0, 1, 1));
+            default -> BlockPos.betweenClosed(center.offset(-1, 0, -1), center.offset(1, 0, 1));
+        };
+    }
+
+    private boolean canMine(Level level, BlockPos pos, BlockState state) {
+        return state.is(BlockTags.MINEABLE_WITH_PICKAXE) && level.getBlockEntity(pos) == null;
+    }
+
+    private int breakBlock(Level level, BlockPos pos, ItemStack stack, Player player, IPowerStorage powerStorage, int blocksToBreak) {
+        BlockState state = level.getBlockState(pos);
+
+        if (!canMine(level, pos, state) || blocksToBreak <= 0 || powerStorage.getPowerStored() < POWER_PER_BLOCK) {
+            return blocksToBreak;
+        }
+
+        level.destroyBlock(pos, true); // Break the block
+        powerStorage.tryDrainPower(POWER_PER_BLOCK, false); // Drain power for this block
+        return --blocksToBreak;
     }
 
     @Override
@@ -86,6 +139,7 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
     public int getMaxInput() {
         return ItemUtils.ITEM_POWER_INPUT;
     }
+
     @Override
     public int getMaxOutput() {
         return 0;
@@ -95,6 +149,8 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
-        tooltipComponents.add(Component.literal("Power: " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity()).withStyle(ChatFormatting.DARK_AQUA));
+        tooltipComponents.add(Component.literal("Ability: Mine in a 3x3 Area").withStyle(ChatFormatting.DARK_PURPLE));
+        tooltipComponents.add(Component.literal("Status: " + ((MJDataComponentsUtils.isAbilityEnabled(stack)) ? "Enabled" : "Shift + Right Click to Enable")).withStyle((MJDataComponentsUtils.isAbilityEnabled(stack)) ? ChatFormatting.GREEN : ChatFormatting.RED));
+        tooltipComponents.add(Component.literal("Power: " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity() + " AP").withStyle(ChatFormatting.DARK_AQUA));
     }
 }

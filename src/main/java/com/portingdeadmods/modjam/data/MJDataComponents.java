@@ -21,6 +21,9 @@ public final class MJDataComponents {
     public static final Supplier<DataComponentType<Boolean>> OPEN = registerDataComponentType("open",
             () -> builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
 
+    public static final Supplier<DataComponentType<Boolean>> ABILITY_ENABLED = registerDataComponentType("ability_enabled",
+            () -> builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
+
     public static final Supplier<DataComponentType<Integer>> OXYGEN = registerDataComponentType("oxygen",
             () -> builder -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT));
 
