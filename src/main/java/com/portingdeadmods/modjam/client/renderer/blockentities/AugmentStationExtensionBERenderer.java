@@ -43,13 +43,20 @@ public class AugmentStationExtensionBERenderer implements BlockEntityRenderer<Au
                 // Middle
                 poseStack.pushPose();
                 {
-                    poseStack.translate(0.5, 0, 0.5);
-                    poseStack.mulPose(Axis.ZP.rotationDegrees((float) rotation / 4));
-                    poseStack.translate(-0.5, 0, -0.5);
+                    poseStack.translate(0, 0.625, 0);
+
+                    poseStack.translate(0, -1.625, 0);
+                    poseStack.mulPose(Axis.ZP.rotationDegrees(rotation));
+                    poseStack.translate(0, 1.03125, 0);
                     model.renderPart(RobotArmModel.RobotArmParts.MIDDLE, poseStack, consumer, light, packedOverlay);
                     // Tip
                     poseStack.pushPose();
                     {
+                        poseStack.translate(0, 0.375 + 0.0625, 0);
+
+                        poseStack.translate(0, -2.375, 0);
+                        poseStack.mulPose(Axis.ZP.rotationDegrees(rotation));
+                        poseStack.translate(0, 1.875 + 0.0625, 0);
                         model.renderPart(RobotArmModel.RobotArmParts.TIP, poseStack, consumer, light, packedOverlay);
                     }
                     poseStack.popPose();
