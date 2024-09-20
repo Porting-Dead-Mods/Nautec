@@ -15,7 +15,7 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 @EventBusSubscriber(modid = ModJam.MODID)
-public class AugmentEvents {
+public final class AugmentEvents {
 
     @SubscribeEvent
     public static void breakEvent(BlockEvent.BreakEvent event){
@@ -33,6 +33,7 @@ public class AugmentEvents {
     public static void playerTick(PlayerTickEvent.Post event){
         Iterable<Augment> augments = AugmentHelper.getAugments(event.getEntity()).values();
         for (Augment augment : augments) {
+            ModJam.LOGGER.debug("Augment: {}", augment);
             if (augment != null) {
                 AugmentSlot slot = augment.getAugmentSlot();
                 Player player = event.getEntity();
