@@ -12,24 +12,33 @@ import com.portingdeadmods.modjam.content.commands.arguments.AugmentSlotArgument
 import com.portingdeadmods.modjam.content.commands.arguments.AugmentTypeArgumentType;
 import com.portingdeadmods.modjam.content.recipes.ItemEtchingRecipe;
 import com.portingdeadmods.modjam.data.MJDataAttachments;
+import com.portingdeadmods.modjam.data.MJDataComponents;
+import com.portingdeadmods.modjam.data.MJDataComponentsUtils;
 import com.portingdeadmods.modjam.registries.MJFluidTypes;
 import com.portingdeadmods.modjam.utils.AugmentHelper;
 import com.portingdeadmods.modjam.utils.ParticlesUtils;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
@@ -108,6 +117,39 @@ public final class MJEvents {
                     if(powerStorage.getPowerStored() < powerStorage.getPowerCapacity()) {
                         powerStorage.tryFillPower(1,false);
                     }
+                }
+            }
+        }
+
+        @SubscribeEvent
+        public static void onHitEntity(AttackEntityEvent event){
+            if(event.getEntity().getMainHandItem().getItem() instanceof IPowerItem powerItem){
+                IPowerStorage powerStorage = event.getEntity().getMainHandItem().getCapability(MJCapabilities.PowerStorage.ITEM);
+                if(powerStorage.getPowerStored() <= 0 && event.getTarget() instanceof LivingEntity){
+                    event.setCanceled(true);
+                    event.getEntity().displayClientMessage(Component.literal("Not Enough Power !"), true);
+                }
+            }
+        }
+
+        @SubscribeEvent
+        public static void onRightClick(PlayerInteractEvent.RightClickItem event){
+            if(event.getItemStack().getItem() instanceof IPowerItem powerItem){
+                ItemStack stack = event.getItemStack();
+                if(stack.has(MJDataComponents.ABILITY_ENABLED) && event.getEntity().isShiftKeyDown()){
+                    boolean enabled = MJDataComponentsUtils.isAbilityEnabled(stack);
+                    MJDataComponentsUtils.setAbilityStatus(stack, !enabled);
+                    event.getEntity().displayClientMessage(Component.literal("Ability " + (enabled ? "Disabled" : "Enabled")).withStyle((enabled ? ChatFormatting.RED : ChatFormatting.GREEN)), true);
+                    if(event.getLevel().isClientSide){
+                        Player player = event.getEntity();
+                        Level level = event.getLevel();
+                        if(enabled){
+                            level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.PLAYERS, 0.4f, 0.01f);
+                        }else{
+                            level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.PLAYERS, 0.4f, 0.09f);
+                        }
+                    }
+                    event.setCanceled(true);
                 }
             }
         }

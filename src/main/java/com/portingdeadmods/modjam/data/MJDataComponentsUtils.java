@@ -12,4 +12,12 @@ public class MJDataComponentsUtils {
         return stack.getOrDefault(MJDataComponents.OXYGEN, 0);
     }
 
+    public static void setAbilityStatus(ItemStack stack, Boolean value) {
+        stack.set(MJDataComponents.ABILITY_ENABLED, value);
+    }
+
+    public static Boolean isAbilityEnabled(ItemStack stack) {
+        return stack.getOrDefault(MJDataComponents.ABILITY_ENABLED, false);
+    }
+
 }
