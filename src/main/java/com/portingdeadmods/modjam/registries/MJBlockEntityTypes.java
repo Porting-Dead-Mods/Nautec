@@ -35,7 +35,7 @@ public final class MJBlockEntityTypes {
                     MJBlocks.MIXER.get()).build(null));
     public static final Supplier<BlockEntityType<CrateBlockEntity>> CRATE = BLOCK_ENTITIES.register("crate",
             () -> BlockEntityType.Builder.of(CrateBlockEntity::new,
-                    MJBlocks.CRATE.get()).build(null));
+                    MJBlocks.CRATE.get(), MJBlocks.RUSTY_CRATE.get()).build(null));
 
     public static final Supplier<BlockEntityType<PrismarineCrystalBlockEntity>> PRISMARINE_CRYSTAL = BLOCK_ENTITIES.register("prismarine_crystal",
             () -> BlockEntityType.Builder.of(PrismarineCrystalBlockEntity::new,

@@ -33,7 +33,6 @@ public final class AugmentEvents {
     public static void playerTick(PlayerTickEvent.Post event){
         Iterable<Augment> augments = AugmentHelper.getAugments(event.getEntity()).values();
         for (Augment augment : augments) {
-            ModJam.LOGGER.debug("Augment: {}", augment);
             if (augment != null) {
                 AugmentSlot slot = augment.getAugmentSlot();
                 Player player = event.getEntity();
