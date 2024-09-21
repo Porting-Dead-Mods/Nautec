@@ -28,4 +28,8 @@ public final class MJAugments {
             () -> AugmentType.of(ThrowBouncingTridentAugment::new));
     public static final Supplier<AugmentType<GuardianEyeAugment>> GUARDIAN_EYE_AUGMENT = AUGMENTS.register("guardian_eye",
             () -> AugmentType.of(GuardianEyeAugment::new));
+    public static final Supplier<AugmentType<LeapAugment>> LEAP_AUGMENT = AUGMENTS.register("leap",
+            () -> AugmentType.of(LeapAugment::new));
+    public static final Supplier<AugmentType<PreventFallDamageAugment>> PREVENT_FALL_DAMAGE_AUGMENT = AUGMENTS.register("prevent_fall_damage",
+            () -> AugmentType.of(PreventFallDamageAugment::new));
 }

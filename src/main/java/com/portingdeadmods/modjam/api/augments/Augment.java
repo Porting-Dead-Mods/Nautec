@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.common.util.INBTSerializable;
+import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.jetbrains.annotations.Nullable;
@@ -62,7 +63,7 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
 
     public void commonTick(PlayerTickEvent.Post event) {
         if (player == null) return;
-
+        if (isOnCooldown()) setCooldown(getCooldown() - 1);
         if (player.level().isClientSide) {
             clientTick(event);
         } else serverTick(event);
@@ -75,6 +76,10 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
 
     @Deprecated
     public void serverTick(PlayerTickEvent.Post event) {
+
+    }
+
+    public void fall(LivingFallEvent event) {
 
     }
 
