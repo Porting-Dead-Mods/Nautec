@@ -15,13 +15,11 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
-public record KeyPressedPayload(AugmentSlot augmentSlot, int slot) implements CustomPacketPayload {
+public record KeyPressedPayload(AugmentSlot augmentSlot) implements CustomPacketPayload {
     public static final Type<KeyPressedPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "key_pressesd_paylad"));
     public static final StreamCodec<RegistryFriendlyByteBuf, KeyPressedPayload> STREAM_CODEC = StreamCodec.composite(
             AugmentCodecs.AUGMENT_SLOT_STREAM_CODEC,
             KeyPressedPayload::augmentSlot,
-            ByteBufCodecs.INT,
-            KeyPressedPayload::slot,
             KeyPressedPayload::new
     );
 

@@ -15,6 +15,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -24,9 +25,14 @@ public class GuardianEyeAugment extends Augment {
     }
 
     @Override
+    public @Nullable AugmentSlot[] getCompatibleSlots() {
+        return new AugmentSlot[0];
+    }
+
+    @Override
     public void clientTick(PlayerTickEvent.Post event) {
         if (InputUtils.isKeyDown(InputConstants.KEY_LALT)){
-            PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot, augmentSlot.getSlotId()));
+            PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
         }
     }
 

@@ -1,42 +1,32 @@
 package com.portingdeadmods.modjam.content.augments;
 
-import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
+import com.portingdeadmods.modjam.api.client.renderer.entities.PartVisible;
 
 public enum AugmentSlots implements AugmentSlot {
-    HEAD("head", 0),
-    BODY("body", 1),
-    ARMS("arms", 2),
-    LEGS("legs",3),
-    HEART("heart", 4),
-    NONE("none", -1);
+    HEAD((renderer, visible) -> renderer.getModel().head.visible = visible),
+    EYES,
+    BODY((renderer, visible) -> renderer.getModel().body.visible = visible),
+    LUNG,
+    LEFT_ARM((renderer, visible) -> renderer.getModel().leftArm.visible = visible),
+    RIGHT_ARM((renderer, visible) -> renderer.getModel().rightArm.visible = visible),
+    LEFT_LEG((renderer, visible) -> renderer.getModel().leftLeg.visible = visible),
+    RIGHT_LEG((renderer, visible) -> renderer.getModel().rightLeg.visible = visible),
+    HEART((renderer, visible) -> renderer.getModel().head.visible = visible);
 
-    private final ResourceLocation name;
-    private final int slotId;
+    private final PartVisible partVisibleFunc;
 
-    AugmentSlots(String name, int id) {
-        this.name = ResourceLocation.fromNamespaceAndPath(ModJam.MODID, name);
-        this.slotId = id;
+    AugmentSlots(PartVisible partVisibleFunc) {
+        this.partVisibleFunc = partVisibleFunc;
     }
 
-    public static AugmentSlots getValue(int id) {
-        AugmentSlots[] Slots = AugmentSlots.values();
-        for (AugmentSlots slot : Slots) {
-            if (slot.slotId == id)
-                return slot;
-        }
-        return AugmentSlots.NONE;
+
+    AugmentSlots() {
+        this.partVisibleFunc = (ignored, ignored1) -> {
+        };
     }
 
-    @Override
-    public @NotNull ResourceLocation getLocation() {
-        return name;
-    }
-
-    @Override
-    public int getSlotId() {
-        return slotId;
+    public PartVisible getCancelRenderingFunc() {
+        return partVisibleFunc;
     }
 }

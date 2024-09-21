@@ -11,11 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public final class RecipeUtils {
-
-    public static boolean hasRecipe(ItemStack stack, Level level, RecipeType type) {
-        return level.getRecipeManager().getRecipeFor(type, new SingleRecipeInput(stack), level).isPresent();
-    }
-
     public static List<IngredientWithCount> ingredientsToIWC(List<Ingredient> ingredients) {
         return ingredients.stream().map(ingredient -> new IngredientWithCount(ingredient, 1)).toList();
     }

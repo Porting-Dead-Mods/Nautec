@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 
 public abstract class Augment implements INBTSerializable<CompoundTag> {
@@ -22,6 +23,13 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
         this.augmentType = augmentType;
         this.augmentSlot = augmentSlot;
     }
+
+    public boolean replaceBodyPart() {
+        return false;
+    }
+
+    // Return null if all slots are compatible
+    public abstract @Nullable AugmentSlot[] getCompatibleSlots();
 
     public void setPlayer(Player player) {
         this.player = player;
