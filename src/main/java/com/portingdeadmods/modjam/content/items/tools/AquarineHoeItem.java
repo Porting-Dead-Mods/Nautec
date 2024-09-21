@@ -44,7 +44,7 @@ public class AquarineHoeItem extends HoeItem implements IPowerItem {
             return InteractionResult.FAIL;
         }
 
-        if (context.getPlayer() != null && MJDataComponentsUtils.isAbilityEnabled(stack)) {
+        if (context.getPlayer() != null && MJDataComponentsUtils.isAbilityEnabled(stack) && canTill(context.getLevel(), context.getClickedPos(), context.getLevel().getBlockState(context.getClickedPos()))) {
             createFarmland3x3(context.getLevel(), context.getClickedPos(), context.getPlayer(), stack);
             return InteractionResult.SUCCESS;
         }
