@@ -1,11 +1,16 @@
-// 1.21.1	2024-09-20T22:52:49.700157485	Item Models: modjam
-2e5c757869c8a635de54e96f2c267632575d7f88 assets/modjam/models/item/aquarine_steel_axe.json
+// 1.21.1	2024-09-21T17:45:52.452849613	Item Models: modjam
+a94d042befdb0b07687e8780d93b12b87c46b2a1 assets/modjam/models/item/aquarine_steel_axe.json
+78fc833245a9706000288da1ba5f1161d9096b8b assets/modjam/models/item/aquarine_steel_axe_enabled.json
 51765874ad3111adf69684269ad9a422bfbaac4a assets/modjam/models/item/aquarine_steel_block.json
-9cd4fd3035913198bebfee10401997a85c0cdc6d assets/modjam/models/item/aquarine_steel_hoe.json
+dfddb2f37a6da335fb3ed051177f75dc1a40e4fd assets/modjam/models/item/aquarine_steel_hoe.json
+715d32fa875bf841a76a867a2be587e317510698 assets/modjam/models/item/aquarine_steel_hoe_enabled.json
 e674d6859446f65b4ee805ed6e9f47d6cde82515 assets/modjam/models/item/aquarine_steel_ingot.json
-37f176b86c6012b6b9bc65bd972c720e294f9844 assets/modjam/models/item/aquarine_steel_pickaxe.json
-7621bf9cc6417af323762219c19a2639ae17bb72 assets/modjam/models/item/aquarine_steel_shovel.json
-c034bf7af48030b58d7e60cf529b2f045f5d402d assets/modjam/models/item/aquarine_steel_sword.json
+925b69eb2b8f05a1e1ec8803976e844d074945f8 assets/modjam/models/item/aquarine_steel_pickaxe.json
+b8f49b5662934b30e9ae6f3eb204464d74ecc680 assets/modjam/models/item/aquarine_steel_pickaxe_enabled.json
+66ebd3bc63994ee240d94a1e5942b12a4ffb6438 assets/modjam/models/item/aquarine_steel_shovel.json
+dda536a9cfc81f45e5c817e205639027c8dd5ff8 assets/modjam/models/item/aquarine_steel_shovel_enabled.json
+e9548e9b4cc741a2e3f6624d768914eeb34b14c8 assets/modjam/models/item/aquarine_steel_sword.json
+6e8c1f3a22c524f671457fb9315f8b118fc892af assets/modjam/models/item/aquarine_steel_sword_enabled.json
 098a336dd0b210f2b650174de2346a665b921edd assets/modjam/models/item/aquarine_steel_wrench.json
 dd0c37deb1f33fb0844da4a540706681887fc3d4 assets/modjam/models/item/aquatic_catalyst.json
 66eb6899181dacf931e95e546a991d5e25dcc5da assets/modjam/models/item/atlantic_gold_ingot.json
