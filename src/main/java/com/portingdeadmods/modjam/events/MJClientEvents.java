@@ -7,6 +7,7 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.client.renderer.blockentities.LaserBlockEntityRenderer;
 import com.portingdeadmods.modjam.api.client.renderer.items.PrismarineCrystalItemRenderer;
 import com.portingdeadmods.modjam.api.fluids.BaseFluidType;
+import com.portingdeadmods.modjam.client.hud.DivingSuitOverlay;
 import com.portingdeadmods.modjam.client.hud.PrismMonocleOverlay;
 import com.portingdeadmods.modjam.client.model.block.DrainTopModel;
 import com.portingdeadmods.modjam.client.model.block.PrismarineCrystalModel;
@@ -62,7 +63,7 @@ public final class MJClientEvents {
         public static final PrismarineCrystalItemRenderer PRISMARINE_CRYSTAL_RENDERER = new PrismarineCrystalItemRenderer();
 
         public static final Lazy<KeyMapping> GIVE_DIAMOND_KEYMAP = Lazy.of(() -> new KeyMapping(
-                "Test", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_N, "ModJam"));
+                "Give Diamond", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_N, "ModJam"));
 
         @SubscribeEvent
         public static void registerBindings(RegisterKeyMappingsEvent event) {
@@ -72,6 +73,7 @@ public final class MJClientEvents {
         @SubscribeEvent
         public static void registerGuiOverlays(RegisterGuiLayersEvent event) {
             event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "scanner_info_overlay"), PrismMonocleOverlay.HUD);
+            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "diving_suit_overlay"), DivingSuitOverlay.HUD);
         }
 
         @SubscribeEvent
@@ -179,10 +181,6 @@ public final class MJClientEvents {
 
     @EventBusSubscriber(modid = ModJam.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
     public static final class ClientInGameBus {
-
-        private static final ResourceLocation OXYGEN_SPRITE = ResourceLocation.fromNamespaceAndPath(ModJam.MODID,"hud/oxygen");
-        private static final ResourceLocation OXYGEN_BURSTING_SPRITE = ResourceLocation.fromNamespaceAndPath(ModJam.MODID,"hud/oxygen_bursting");
-        private static final ResourceLocation OXYGEN_EMPTY_SPRITE = ResourceLocation.fromNamespaceAndPath(ModJam.MODID,"hud/oxygen_empty");
         @SubscribeEvent
         public static void onRenderFog(ViewportEvent.RenderFog event) {
             Entity cameraEntity = Minecraft.getInstance().cameraEntity;
@@ -200,63 +198,6 @@ public final class MJClientEvents {
         public static void onRenderPlayer(RenderPlayerEvent.Post event) {
             PlayerRenderer renderer = event.getRenderer();
             renderer.addLayer(new AugmentLayerRenderer(renderer));
-        }
-
-        // A static variable to keep track of ticks for the bursting sprite
-        private static int burstingTicks = 0;
-
-        @SubscribeEvent
-        public static void renderDivingOxygenBar(RenderGuiEvent.Post event) {
-            Player player = Minecraft.getInstance().player;
-            if (player == null || !player.isUnderWater() || !isWearingFullDivingSuit(player) || MJDataComponentsUtils.getOxygenLevels(player.getItemBySlot(EquipmentSlot.CHEST)) <= 0) {
-                return;
-            }
-
-            GuiGraphics guiGraphics = event.getGuiGraphics();
-            int screenWidth = guiGraphics.guiWidth();
-            int screenHeight = guiGraphics.guiHeight();
-            int rightHeight = 39;
-
-            // Oxygen bar values
-            ItemStack chestPiece = player.getItemBySlot(EquipmentSlot.CHEST);
-            int maxOxygen = 300;
-            int currentOxygen = MJDataComponentsUtils.getOxygenLevels(chestPiece);
-
-            // Bar position
-            int xStart = screenWidth / 2 + 91;
-            int yStart = screenHeight - rightHeight - 20;
-
-            int barLength = Mth.ceil((double) currentOxygen * 10.0 / (double) maxOxygen);
-            RenderSystem.enableBlend();
-
-            // Draw oxygen bar
-            for (int i = 0; i < 10; i++) {
-                if (i < barLength) {
-                    guiGraphics.blitSprite(OXYGEN_SPRITE, xStart - i * 8 - 9, yStart, 9, 9); // Oxygen-filled sprite
-                } else {
-                    // Only render the bursting sprite for the first 5 ticks
-                    if (burstingTicks < 5) {
-                        guiGraphics.blitSprite(OXYGEN_BURSTING_SPRITE, xStart - i * 8 - 9, yStart, 9, 9); // Bursting oxygen sprite
-                    } else {
-                        guiGraphics.blitSprite(OXYGEN_EMPTY_SPRITE, xStart - i * 8 - 9, yStart, 9, 9); // After 5 ticks, show the empty oxygen sprite
-                    }
-                }
-            }
-
-            // Increment bursting ticks and reset after 5
-            burstingTicks++;
-            if (burstingTicks >= 5) {
-                burstingTicks = 0;
-            }
-
-            RenderSystem.disableBlend();
-        }
-
-        private static boolean isWearingFullDivingSuit(Player player) {
-            return player.getItemBySlot(EquipmentSlot.HEAD).is(MJItems.DIVING_HELMET) &&
-                    player.getItemBySlot(EquipmentSlot.CHEST).is(MJItems.DIVING_CHESTPLATE) &&
-                    player.getItemBySlot(EquipmentSlot.LEGS).is(MJItems.DIVING_LEGGINGS) &&
-                    player.getItemBySlot(EquipmentSlot.FEET).is(MJItems.DIVING_BOOTS);
         }
     }
 }

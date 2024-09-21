@@ -35,12 +35,10 @@ public final class AugmentEvents {
         Iterable<Augment> augments = AugmentHelper.getAugments(event.getPlayer()).values();
         for (Augment augment : augments) {
             if (augment != null) {
-                //augments.get(i).breakBlock(AugmentSlot.GetValue(i),event);
-
+                augment.breakBlock(event);
             }
         }
     }
-
 
     @SubscribeEvent
     public static void playerTick(PlayerTickEvent.Post event) {

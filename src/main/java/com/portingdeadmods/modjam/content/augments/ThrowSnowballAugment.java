@@ -12,6 +12,7 @@ import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.Nullable;
 
 public class ThrowSnowballAugment extends Augment {
     public ThrowSnowballAugment(AugmentSlot augmentSlot) {
@@ -19,9 +20,14 @@ public class ThrowSnowballAugment extends Augment {
     }
 
     @Override
+    public @Nullable AugmentSlot[] getCompatibleSlots() {
+        return new AugmentSlot[0];
+    }
+
+    @Override
     public void clientTick(PlayerTickEvent.Post event) {
         if (InputUtils.isKeyDown(InputConstants.KEY_Y) && !isOnCooldown()) {
-            PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot, augmentSlot.getSlotId()));
+            PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
         }
     }
 

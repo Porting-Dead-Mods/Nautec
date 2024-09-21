@@ -21,9 +21,11 @@ import java.util.Map;
 public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity implements MultiblockPartEntity {
     private float middleIndependentAngle;
     public float tipIndependentAngle;
-    private int animationTime;
+
     private int robotArmSpeed;
 
+    private int animationTime;
+    private int animationInterval;
     private Animation animation;
 
     private boolean hasRobotArm;
@@ -39,6 +41,7 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
     public void equipAugment() {
         this.animationTime = 50;
         this.robotArmSpeed = 7;
+        this.animation = Animation.FORWARD;
     }
 
     public void resetAnim() {
@@ -48,14 +51,41 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
         this.tipIndependentAngle = 0;
     }
 
+    public Animation getAnimation() {
+        return animation;
+    }
+
     @Override
     public void commonTick() {
         super.commonTick();
-        if (animationTime > 0) {
-            animationTime--;
-            float oldMiddleAngle = middleIndependentAngle;
-            middleIndependentAngle += (robotArmSpeed * 10 / 3f) * 0.25f;
-            tipIndependentAngle += (middleIndependentAngle - oldMiddleAngle) * 1.5f;
+        if (animationInterval > 0) {
+            animationInterval--;
+            if (animation == Animation.BACKWARD && animationInterval == 35) {
+                level.playSound(null, worldPosition, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS);
+            }
+        } else {
+            if (animationTime > 0) {
+                animationTime--;
+                float oldMiddleAngle = middleIndependentAngle;
+                middleIndependentAngle += (robotArmSpeed * 10 / 3f) * 0.25f;
+                tipIndependentAngle += (middleIndependentAngle - oldMiddleAngle) * 1.5f;
+
+                if (animation == Animation.FORWARD) {
+                    if (animationTime == 0) {
+                        this.animationInterval = 40;
+
+                        this.animationTime = 50;
+                        this.robotArmSpeed = -7;
+                        this.animation = Animation.BACKWARD;
+                    }
+                }
+
+                if (animation == Animation.BACKWARD) {
+                    if (animationTime == 0) {
+                        this.animation = Animation.IDLE;
+                    }
+                }
+            }
         }
     }
 

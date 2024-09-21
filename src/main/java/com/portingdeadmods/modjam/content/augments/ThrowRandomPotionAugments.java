@@ -16,6 +16,7 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +27,14 @@ public class ThrowRandomPotionAugments extends Augment {
     }
 
     @Override
+    public @Nullable AugmentSlot[] getCompatibleSlots() {
+        return new AugmentSlot[0];
+    }
+
+    @Override
     public void clientTick(PlayerTickEvent.Post event) {
         if (InputUtils.isKeyDown(InputConstants.KEY_Y) && !isOnCooldown()) {
-            PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot, augmentSlot.getSlotId()));
+            PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
         }
     }
 
