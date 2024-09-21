@@ -1,5 +1,19 @@
 {
   "parent": "minecraft:item/handheld",
+  "overrides": [
+    {
+      "model": "modjam:item/aquarine_steel_shovel",
+      "predicate": {
+        "modjam:enabled": 0.0
+      }
+    },
+    {
+      "model": "modjam:item/aquarine_steel_shovel_enabled",
+      "predicate": {
+        "modjam:enabled": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "modjam:item/aquarine_steel_shovel"
   }

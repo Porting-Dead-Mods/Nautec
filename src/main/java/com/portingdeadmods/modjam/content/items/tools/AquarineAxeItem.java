@@ -124,7 +124,6 @@ public class AquarineAxeItem extends AxeItem implements IPowerItem {
         return state.is(BlockTags.LOGS) && level.getBlockEntity(pos) == null;
     }
 
-
     // Recursive function to break the tree
     private int breakTree(Level level, BlockPos pos, ItemStack stack, LivingEntity player, IPowerStorage powerStorage, int blocksToBreak) {
         BlockState state = level.getBlockState(pos);

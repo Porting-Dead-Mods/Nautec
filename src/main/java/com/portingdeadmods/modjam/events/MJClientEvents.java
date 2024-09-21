@@ -30,6 +30,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
@@ -41,6 +42,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -155,6 +157,22 @@ public final class MJClientEvents {
         @SubscribeEvent
         public static void registerMenus(RegisterMenuScreensEvent event) {
             event.register(MJMenuTypes.CRATE.get(), CrateScreen::new);
+        }
+
+        @SubscribeEvent
+        public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
+            event.enqueueWork(() -> {
+                ItemProperties.register(MJItems.AQUARINE_SWORD.get(), ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "enabled"),
+                        (stack, level, living, id) -> MJDataComponentsUtils.isAbilityEnabledNBT(stack));
+                ItemProperties.register(MJItems.AQUARINE_PICKAXE.get(), ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "enabled"),
+                        (stack, level, living, id) -> MJDataComponentsUtils.isAbilityEnabledNBT(stack));
+                ItemProperties.register(MJItems.AQUARINE_AXE.get(), ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "enabled"),
+                        (stack, level, living, id) -> MJDataComponentsUtils.isAbilityEnabledNBT(stack));
+                ItemProperties.register(MJItems.AQUARINE_SHOVEL.get(), ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "enabled"),
+                        (stack, level, living, id) -> MJDataComponentsUtils.isAbilityEnabledNBT(stack));
+                ItemProperties.register(MJItems.AQUARINE_HOE.get(), ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "enabled"),
+                        (stack, level, living, id) -> MJDataComponentsUtils.isAbilityEnabledNBT(stack));
+            });
         }
     }
 
