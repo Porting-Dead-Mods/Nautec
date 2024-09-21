@@ -3,7 +3,6 @@ package com.portingdeadmods.modjam.events;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
-import com.portingdeadmods.modjam.content.augments.AugmentSlots;
 import com.portingdeadmods.modjam.network.SyncAugmentPayload;
 import com.portingdeadmods.modjam.utils.AugmentHelper;
 import net.minecraft.nbt.CompoundTag;
@@ -17,7 +16,6 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("unused")
