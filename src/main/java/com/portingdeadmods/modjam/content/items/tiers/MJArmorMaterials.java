@@ -1,5 +1,6 @@
 package com.portingdeadmods.modjam.content.items.tiers;
 
+import com.portingdeadmods.modjam.registries.MJItems;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -31,6 +32,13 @@ public final class MJArmorMaterials {
         map.put(ArmorItem.Type.HELMET, 3);
         map.put(ArmorItem.Type.BODY, 4);
     }), 10, SoundEvents.ARMOR_EQUIP_LEATHER, 1, 0.05f, () -> Ingredient.of(Items.COPPER_INGOT));
+    public static final Holder<ArmorMaterial> AQUARINE_STEEL = register("aquarine_steel", Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+        map.put(ArmorItem.Type.BOOTS, 3);
+        map.put(ArmorItem.Type.LEGGINGS, 6);
+        map.put(ArmorItem.Type.CHESTPLATE, 7);
+        map.put(ArmorItem.Type.HELMET, 3);
+        map.put(ArmorItem.Type.BODY, 4);
+    }), 10, SoundEvents.ARMOR_EQUIP_IRON, 1, 0.05f, () -> Ingredient.of(MJItems.AQUARINE_STEEL_INGOT));
 
     private static Holder<ArmorMaterial> register(
             String name,
