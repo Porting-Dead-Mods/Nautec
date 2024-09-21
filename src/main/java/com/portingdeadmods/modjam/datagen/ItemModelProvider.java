@@ -51,11 +51,11 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(MJItems.EAS_BUCKET.get());
         basicItem(MJItems.ETCHING_ACID_BUCKET.get());
 
-        handHeldItem(MJItems.AQUARINE_AXE.get());
-        handHeldItem(MJItems.AQUARINE_HOE.get());
-        handHeldItem(MJItems.AQUARINE_PICKAXE.get());
-        handHeldItem(MJItems.AQUARINE_SHOVEL.get());
-        handHeldItem(MJItems.AQUARINE_SWORD.get());
+        aquarineSteelTool(MJItems.AQUARINE_AXE.get());
+        aquarineSteelTool(MJItems.AQUARINE_HOE.get());
+        aquarineSteelTool(MJItems.AQUARINE_PICKAXE.get());
+        aquarineSteelTool(MJItems.AQUARINE_SHOVEL.get());
+        aquarineSteelTool(MJItems.AQUARINE_SWORD.get());
 
         parentItemBlock(MJBlocks.LASER_JUNCTION.asItem(), "_base");
 
@@ -78,10 +78,30 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
                 .parent(new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(name.getNamespace(), "block/" + name.getPath() + suffix)));
     }
 
-    public ItemModelBuilder handHeldItem(Item item) {
+    public void aquarineSteelTool(Item item) {
         ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
-        return getBuilder(location.toString())
+        ResourceLocation enabled = ResourceLocation.fromNamespaceAndPath(ModJam.MODID, "enabled");
+        getBuilder(location.toString())
                 .parent(new ModelFile.UncheckedModelFile("item/handheld"))
+                .override()
+                .model(handHeldItem(item))
+                .predicate(enabled, 0)
+                .end()
+                .override()
+                .model(handHeldItem(item, "_enabled"))
+                .predicate(enabled, 1)
+                .end()
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath()));
+    }
+
+    public ItemModelBuilder handHeldItem(Item item) {
+        return handHeldItem(item, "");
+    }
+
+    public ItemModelBuilder handHeldItem(Item item, String suffix) {
+        ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
+        return getBuilder(location +suffix)
+                .parent(new ModelFile.UncheckedModelFile("item/handheld"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath()+suffix));
     }
 }

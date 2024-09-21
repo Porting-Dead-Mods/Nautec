@@ -1,10 +1,9 @@
-package com.portingdeadmods.modjam.content.items;
+package com.portingdeadmods.modjam.content.items.tools;
 
 import com.portingdeadmods.modjam.MJRegistries;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.multiblocks.Multiblock;
 import com.portingdeadmods.modjam.content.blocks.LaserJunctionBlock;
-import com.portingdeadmods.modjam.registries.MJItems;
 import com.portingdeadmods.modjam.utils.BlockUtils;
 import com.portingdeadmods.modjam.utils.MultiblockHelper;
 import net.minecraft.core.BlockPos;
@@ -12,7 +11,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 
 public class AquarineWrenchItem extends Item {
