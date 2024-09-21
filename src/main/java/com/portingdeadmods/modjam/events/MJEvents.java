@@ -14,6 +14,7 @@ import com.portingdeadmods.modjam.content.recipes.ItemEtchingRecipe;
 import com.portingdeadmods.modjam.data.MJDataAttachments;
 import com.portingdeadmods.modjam.data.MJDataComponents;
 import com.portingdeadmods.modjam.data.MJDataComponentsUtils;
+import com.portingdeadmods.modjam.network.SyncAugmentPayload;
 import com.portingdeadmods.modjam.registries.MJFluidTypes;
 import com.portingdeadmods.modjam.utils.AugmentHelper;
 import com.portingdeadmods.modjam.utils.ParticlesUtils;
@@ -25,6 +26,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -43,6 +45,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 import java.util.Map;
@@ -79,6 +82,7 @@ public final class MJEvents {
                 if (nbt != null) {
                     augment.deserializeNBT(player.level().registryAccess(), nbt);
                 }
+                PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncAugmentPayload(augment, nbt != null ? nbt : new CompoundTag()));
             }
         }
 
