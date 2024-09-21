@@ -2,7 +2,6 @@ package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.MJRegistries;
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentType;
 import com.portingdeadmods.modjam.content.augments.*;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -22,8 +21,8 @@ public final class MJAugments {
             () -> AugmentType.of(ThrowRandomPotionAugments::new));
     public static final Supplier<AugmentType<PreventPlayerLoseAirAugment>> PREVENT_PLAYER_LOSE_AIR_AUGMENT = AUGMENTS.register("prevent_player_lose_air_supply",
             () -> AugmentType.of(PreventPlayerLoseAirAugment::new));
-    public static final Supplier<AugmentType<UnderwaterMovementSpeedAugment>> UNDERWATER_MOVEMENT_SPEED_AUGMENT = AUGMENTS.register("underwater_movement_speed",
-            () -> AugmentType.of(UnderwaterMovementSpeedAugment::new));
+    public static final Supplier<AugmentType<DolphinFinAugment>> UNDERWATER_MOVEMENT_SPEED_AUGMENT = AUGMENTS.register("underwater_movement_speed",
+            () -> AugmentType.of(DolphinFinAugment::new));
     public static final Supplier<AugmentType<ThrowBouncingTridentAugment>> THROWN_BOUNCING_TRIDENT_AUGMENT = AUGMENTS.register("throw_bouncing_trident",
             () -> AugmentType.of(ThrowBouncingTridentAugment::new));
     public static final Supplier<AugmentType<GuardianEyeAugment>> GUARDIAN_EYE_AUGMENT = AUGMENTS.register("guardian_eye",

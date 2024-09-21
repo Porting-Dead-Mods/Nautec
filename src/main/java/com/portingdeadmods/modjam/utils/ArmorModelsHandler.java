@@ -7,7 +7,7 @@
 package com.portingdeadmods.modjam.utils;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.api.client.model.MJArmorModel;
+import com.portingdeadmods.modjam.api.client.model.armor.MJArmorModel;
 import com.portingdeadmods.modjam.client.model.armor.DivingArmorModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;

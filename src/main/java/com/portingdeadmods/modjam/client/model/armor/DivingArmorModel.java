@@ -1,6 +1,6 @@
 package com.portingdeadmods.modjam.client.model.armor;
 
-import com.portingdeadmods.modjam.api.client.model.MJArmorModel;
+import com.portingdeadmods.modjam.api.client.model.armor.MJArmorModel;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
