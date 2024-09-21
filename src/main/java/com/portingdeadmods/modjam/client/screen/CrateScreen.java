@@ -11,7 +11,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class CrateScreen extends AbstractContainerScreen<CrateMenu> {
-    private static final ResourceLocation CONTAINER_TEXTURE = ResourceLocation.withDefaultNamespace("textures/gui/container/shulker_box.png");
+    private static final ResourceLocation CONTAINER_TEXTURE = ResourceLocation.withDefaultNamespace("textures/hud/container/shulker_box.png");
 
     public CrateScreen(CrateMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

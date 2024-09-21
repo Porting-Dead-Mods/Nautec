@@ -54,7 +54,7 @@ public class AugmentationStationExtensionBlock extends LaserBlock {
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
         if (stack.is(MJItems.AQUARINE_WRENCH.get())) {
-            be.equipAugment();
+            //be.equipAugment();
         } else {
             be.setHasRobotArm(!be.hasRobotArm());
             ModJam.LOGGER.debug("AAA");
