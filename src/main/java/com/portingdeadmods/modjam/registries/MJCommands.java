@@ -2,10 +2,7 @@ package com.portingdeadmods.modjam.registries;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.content.commands.GetAugmentCooldownCommand;
-import com.portingdeadmods.modjam.content.commands.SetAugmentCommand;
-import com.portingdeadmods.modjam.content.commands.GetAugmentCommand;
-import com.portingdeadmods.modjam.content.commands.SetAugmentCooldownCommand;
+import com.portingdeadmods.modjam.content.commands.*;
 import net.minecraft.commands.CommandSourceStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -19,6 +16,7 @@ public final class MJCommands {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
         GetAugmentCommand.register(dispatcher);
         SetAugmentCommand.register(dispatcher);
+        ClearAugmentsCommand.register(dispatcher);
         GetAugmentCooldownCommand.register(dispatcher);
         SetAugmentCooldownCommand.register(dispatcher);
         ConfigCommand.register(dispatcher);

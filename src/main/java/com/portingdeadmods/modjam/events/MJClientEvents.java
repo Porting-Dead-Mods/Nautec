@@ -1,6 +1,5 @@
 package com.portingdeadmods.modjam.events;
 
-import com.klikli_dev.modonomicon.platform.services.GuiHelper;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -8,9 +7,6 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.client.renderer.blockentities.LaserBlockEntityRenderer;
 import com.portingdeadmods.modjam.api.client.renderer.items.PrismarineCrystalItemRenderer;
 import com.portingdeadmods.modjam.api.fluids.BaseFluidType;
-import com.portingdeadmods.modjam.api.items.IPowerItem;
-import com.portingdeadmods.modjam.capabilities.MJCapabilities;
-import com.portingdeadmods.modjam.capabilities.power.IPowerStorage;
 import com.portingdeadmods.modjam.client.hud.PrismMonocleOverlay;
 import com.portingdeadmods.modjam.client.model.block.DrainTopModel;
 import com.portingdeadmods.modjam.client.model.block.PrismarineCrystalModel;
@@ -28,7 +24,6 @@ import com.portingdeadmods.modjam.utils.ArmorModelsHandler;
 import net.minecraft.client.Camera;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -64,12 +59,12 @@ public final class MJClientEvents {
     public static final class ClientBus {
         public static final PrismarineCrystalItemRenderer PRISMARINE_CRYSTAL_RENDERER = new PrismarineCrystalItemRenderer();
 
-        public static final Lazy<KeyMapping> AUGMENT_TEST_KEYMAP = Lazy.of(() -> new KeyMapping(
+        public static final Lazy<KeyMapping> GIVE_DIAMOND_KEYMAP = Lazy.of(() -> new KeyMapping(
                 "Test", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_N, "ModJam"));
 
         @SubscribeEvent
         public static void registerBindings(RegisterKeyMappingsEvent event) {
-            event.register(AUGMENT_TEST_KEYMAP.get());
+            event.register(GIVE_DIAMOND_KEYMAP.get());
         }
 
         @SubscribeEvent

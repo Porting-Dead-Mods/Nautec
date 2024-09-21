@@ -28,4 +28,13 @@ public final class AugmentCodecs {
 
     public static final StreamCodec<ByteBuf, AugmentSlot> AUGMENT_SLOT_STREAM_CODEC =
             ByteBufCodecs.INT.map(MJRegistries.AUGMENT_SLOT::byId, MJRegistries.AUGMENT_SLOT::getId);
+    public static final StreamCodec<ByteBuf, AugmentType<?>> AUGMENT_TYPE_STREAM_CODEC =
+            ByteBufCodecs.INT.map(MJRegistries.AUGMENT_TYPE::byId, MJRegistries.AUGMENT_TYPE::getId);
+    public static final StreamCodec<ByteBuf, Augment> AUGMENT_STREAM_CODEC = StreamCodec.composite(
+            AUGMENT_TYPE_STREAM_CODEC,
+            Augment::getAugmentType,
+            AUGMENT_SLOT_STREAM_CODEC,
+            Augment::getAugmentSlot,
+            AugmentType::create
+    );
 }
