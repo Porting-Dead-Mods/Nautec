@@ -20,4 +20,7 @@ public class MJDataComponentsUtils {
         return stack.getOrDefault(MJDataComponents.ABILITY_ENABLED, false);
     }
 
+    public static float isAbilityEnabledNBT(ItemStack stack) {
+        return stack.getOrDefault(MJDataComponents.ABILITY_ENABLED, false) ? 1 : 0;
+    }
 }
