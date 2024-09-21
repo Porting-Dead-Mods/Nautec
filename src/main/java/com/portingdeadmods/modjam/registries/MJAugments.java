@@ -26,4 +26,6 @@ public final class MJAugments {
             () -> AugmentType.of(UnderwaterMovementSpeedAugment::new));
     public static final Supplier<AugmentType<ThrowBouncingTridentAugment>> THROWN_BOUNCING_TRIDENT_AUGMENT = AUGMENTS.register("throw_bouncing_trident",
             () -> AugmentType.of(ThrowBouncingTridentAugment::new));
+    public static final Supplier<AugmentType<GuardianEyeAugment>> GUARDIAN_EYE_AUGMENT = AUGMENTS.register("guardian_eye",
+            () -> AugmentType.of(GuardianEyeAugment::new));
 }

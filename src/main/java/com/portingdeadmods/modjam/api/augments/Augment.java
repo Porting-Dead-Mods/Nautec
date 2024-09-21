@@ -53,8 +53,11 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
     }
 
     public void commonTick(PlayerTickEvent.Post event) {
-        if (player.level().isClientSide) clientTick(event);
-        else serverTick(event);
+        if (player == null) return;
+
+        if (player.level().isClientSide) {
+            clientTick(event);
+        } else serverTick(event);
     }
 
     @Deprecated
