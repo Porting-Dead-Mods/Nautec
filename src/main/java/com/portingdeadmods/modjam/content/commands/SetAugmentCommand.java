@@ -8,11 +8,15 @@ import com.portingdeadmods.modjam.api.augments.AugmentSlot;
 import com.portingdeadmods.modjam.api.augments.AugmentType;
 import com.portingdeadmods.modjam.content.commands.arguments.AugmentSlotArgumentType;
 import com.portingdeadmods.modjam.content.commands.arguments.AugmentTypeArgumentType;
+import com.portingdeadmods.modjam.network.SyncAugmentPayload;
 import com.portingdeadmods.modjam.utils.AugmentHelper;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 // /modjam augments set <slot> <augment>
 
@@ -28,12 +32,13 @@ public class SetAugmentCommand {
     }
 
     private static int execute(CommandContext<CommandSourceStack> ctx) {
-        Player player = ctx.getSource().getPlayer();
+        ServerPlayer player = ctx.getSource().getPlayer();
         AugmentSlot slot = ctx.getArgument("slot", AugmentSlot.class);
         AugmentType<?> type = ctx.getArgument("augment", AugmentType.class);
         Augment augment = type.create(slot);
         augment.setPlayer(player);
         AugmentHelper.setAugment(player, slot, augment);
+        PacketDistributor.sendToPlayer(player, new SyncAugmentPayload(augment, new CompoundTag()));
         player.sendSystemMessage(Component.literal("Set augment in slot '" + slot.getName() + "' to: " + type));
         return 1;
     }

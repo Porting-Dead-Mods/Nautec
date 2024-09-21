@@ -36,16 +36,7 @@ public final class AugmentEvents {
             if (augment != null) {
                 AugmentSlot slot = augment.getAugmentSlot();
                 Player player = event.getEntity();
-
-                if (player.level().isClientSide) {
-                    augment.clientTick(event);
-                    // TODO: Move this to tick method of Augment class
-                    if (augment.getCooldown() >= 0){
-                        augment.setCooldown(augment.getCooldown() - 1);
-                    }
-                } else {
-                    augment.serverTick(event);
-                }
+                augment.commonTick(event);
             }
         }
     }

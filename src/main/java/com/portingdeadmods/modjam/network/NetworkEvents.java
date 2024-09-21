@@ -17,9 +17,9 @@ public class NetworkEvents {
                 KeyPressedPayload::keyPressedAction
         );
         registrar.playBidirectional(
-                SetAugmentDataPayload.TYPE,
-                SetAugmentDataPayload.STREAM_CODEC,
-                SetAugmentDataPayload::setAugmentDataAction
+                SyncAugmentPayload.TYPE,
+                SyncAugmentPayload.STREAM_CODEC,
+                SyncAugmentPayload::setAugmentDataAction
         );
         registrar.playBidirectional(
                 SetCooldownPayload.TYPE,
