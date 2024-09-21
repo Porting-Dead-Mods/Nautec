@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-18T22:50:45.679629547	Item Models: modjam
+// 1.21.1	2024-09-20T22:52:49.700157485	Item Models: modjam
 2e5c757869c8a635de54e96f2c267632575d7f88 assets/modjam/models/item/aquarine_steel_axe.json
 51765874ad3111adf69684269ad9a422bfbaac4a assets/modjam/models/item/aquarine_steel_block.json
 9cd4fd3035913198bebfee10401997a85c0cdc6d assets/modjam/models/item/aquarine_steel_hoe.json
@@ -37,5 +37,6 @@ dab337d602d93b0a4930b69e652b1155300c6502 assets/modjam/models/item/prism_monocle
 b1280404594f844671030bc27b7dccec112a81b6 assets/modjam/models/item/prismarine_crystal.json
 464cf572aa7c1258836ba7c5ae339f19aafe0333 assets/modjam/models/item/prismarine_crystal_shard.json
 0466424a99d558f8beb3c9944a82a36cabf4a2aa assets/modjam/models/item/prismarine_laser_relay.json
+2aab92e14b60b2657fe4688a36ad78a3c831a083 assets/modjam/models/item/rusty_crate.json
 3a80dac2ed65f9c211115988d17e81af34d02e3d assets/modjam/models/item/rusty_gear.json
 47ad5045e52edd89cd66c703ffb5858768091bcf assets/modjam/models/item/salt_water_bucket.json

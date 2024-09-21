@@ -48,6 +48,7 @@ public class BlockModelProvider extends BlockStateProvider {
         // Stuff
         simpleBlock(MJBlocks.MIXER.get(), models().getExistingFile(existingModelFile(MJBlocks.MIXER.get())));
         crateBlock(MJBlocks.CRATE.get());
+        rustyCrateBlock(MJBlocks.RUSTY_CRATE.get());
 
         // Multiblock
         drainController(MJBlocks.DRAIN.get());
@@ -197,18 +198,22 @@ public class BlockModelProvider extends BlockStateProvider {
 
     private void crateBlock(CrateBlock crateBlock) {
         VariantBlockStateBuilder builder = getVariantBuilder(crateBlock);
-        builder.partialState().with(CrateBlock.RUSTY, false).with(BlockStateProperties.OPEN, false)
+        builder.partialState().with(BlockStateProperties.OPEN, false)
                 .modelForState().modelFile(models().getExistingFile(existingModelFile(crateBlock))).addModel();
-        builder.partialState().with(CrateBlock.RUSTY, true).with(BlockStateProperties.OPEN, false)
-                .modelForState().modelFile(rustedCrateModel(crateBlock, false)).addModel();
-        builder.partialState().with(CrateBlock.RUSTY, false).with(BlockStateProperties.OPEN, true)
+        builder.partialState().with(BlockStateProperties.OPEN, true)
                 .modelForState().modelFile(models().getExistingFile(extend(existingModelFile(crateBlock), "_open"))).addModel();
-        builder.partialState().with(CrateBlock.RUSTY, true).with(BlockStateProperties.OPEN, true)
+    }
+
+    private void rustyCrateBlock(CrateBlock crateBlock) {
+        VariantBlockStateBuilder builder = getVariantBuilder(crateBlock);
+        builder.partialState().with(BlockStateProperties.OPEN, true)
                 .modelForState().modelFile(rustedCrateModel(crateBlock, true)).addModel();
+        builder.partialState().with(BlockStateProperties.OPEN, false)
+                .modelForState().modelFile(rustedCrateModel(crateBlock, false)).addModel();
     }
 
     private ModelFile rustedCrateModel(CrateBlock block, boolean open) {
-        return models().withExistingParent("rusty_" + name(block) + (open ? "_open" : ""), extend(existingModelFile(block), open ? "_open" : ""))
+        return models().withExistingParent(name(block) + (open ? "_open" : ""), extend(existingModelFile(MJBlocks.CRATE.get()), open ? "_open" : ""))
                 .texture("2", "modjam:block/crate/rusty_top_inner")
                 .texture("4", "modjam:block/crate/rusty")
                 .texture("5", "modjam:block/crate/rusty_top")

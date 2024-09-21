@@ -42,20 +42,16 @@ import java.util.List;
 import static net.minecraft.world.level.block.ShulkerBoxBlock.CONTENTS;
 
 public class CrateBlock extends BaseEntityBlock {
-
-    public static final BooleanProperty RUSTY = BooleanProperty.create("rusty");
-
     public CrateBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState()
-                .setValue(RUSTY, false)
                 .setValue(BlockStateProperties.OPEN, false)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder.add(RUSTY, BlockStateProperties.OPEN));
+        super.createBlockStateDefinition(builder.add(BlockStateProperties.OPEN));
     }
 
     @Override
