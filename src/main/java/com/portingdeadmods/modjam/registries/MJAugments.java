@@ -2,7 +2,6 @@ package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.MJRegistries;
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentType;
 import com.portingdeadmods.modjam.content.augments.*;
 import net.neoforged.neoforge.registries.DeferredRegister;

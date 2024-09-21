@@ -2,7 +2,6 @@ package com.portingdeadmods.modjam.content.augments;
 
 import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
-import com.portingdeadmods.modjam.api.augments.AugmentType;
 import com.portingdeadmods.modjam.registries.MJAugments;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import org.jetbrains.annotations.Nullable;

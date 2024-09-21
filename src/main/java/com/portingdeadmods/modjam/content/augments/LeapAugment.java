@@ -1,18 +1,13 @@
 package com.portingdeadmods.modjam.content.augments;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
-import com.portingdeadmods.modjam.api.augments.AugmentType;
-import com.portingdeadmods.modjam.network.KeyPressedPayload;
 import com.portingdeadmods.modjam.registries.MJAugments;
 import com.portingdeadmods.modjam.utils.InputUtils;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 public class LeapAugment extends Augment {
