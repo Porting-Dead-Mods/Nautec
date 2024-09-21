@@ -1,4 +1,4 @@
-package com.portingdeadmods.modjam.client.renderer.curios;
+package com.portingdeadmods.modjam.compat.curio;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -26,7 +26,7 @@ import top.theillusivec4.curios.api.client.ICurioRenderer;
 
 import java.util.List;
 
-public class PrismMonocleCuriosRenderer implements ICurioRenderer {
+public class PrismMonocleCurioRenderer implements ICurioRenderer {
 
     @Override
     public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack itemStack,

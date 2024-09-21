@@ -4,28 +4,27 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.portingdeadmods.modjam.ModJam;
+import com.portingdeadmods.modjam.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.modjam.api.client.renderer.blockentities.LaserBlockEntityRenderer;
 import com.portingdeadmods.modjam.api.client.renderer.items.PrismarineCrystalItemRenderer;
 import com.portingdeadmods.modjam.api.fluids.BaseFluidType;
 import com.portingdeadmods.modjam.client.hud.DivingSuitOverlay;
 import com.portingdeadmods.modjam.client.hud.PrismMonocleOverlay;
+import com.portingdeadmods.modjam.client.model.augment.DolphinFinModel;
 import com.portingdeadmods.modjam.client.model.block.DrainTopModel;
 import com.portingdeadmods.modjam.client.model.block.PrismarineCrystalModel;
 import com.portingdeadmods.modjam.client.model.block.RobotArmModel;
 import com.portingdeadmods.modjam.client.model.block.WhiskModel;
-import com.portingdeadmods.modjam.client.renderer.augments.AugmentLayerRenderer;
+import com.portingdeadmods.modjam.client.renderer.augments.SimpleAugmentRenderer;
+import com.portingdeadmods.modjam.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.modjam.client.renderer.blockentities.*;
 import com.portingdeadmods.modjam.client.screen.CrateScreen;
 import com.portingdeadmods.modjam.data.MJDataComponentsUtils;
-import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
-import com.portingdeadmods.modjam.registries.MJBlocks;
-import com.portingdeadmods.modjam.registries.MJItems;
-import com.portingdeadmods.modjam.registries.MJMenuTypes;
+import com.portingdeadmods.modjam.registries.*;
 import com.portingdeadmods.modjam.utils.ArmorModelsHandler;
 import net.minecraft.client.Camera;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -33,8 +32,11 @@ import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.util.FastColor;
-import net.minecraft.util.Mth;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -56,6 +58,9 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import org.joml.Vector4i;
 import org.lwjgl.glfw.GLFW;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 public final class MJClientEvents {
     @EventBusSubscriber(modid = ModJam.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
@@ -145,6 +150,15 @@ public final class MJClientEvents {
             event.registerBlockEntityRenderer(MJBlockEntityTypes.MIXER.get(), MixerBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.DRAIN_PART.get(), DrainBERenderer::new);
             event.registerBlockEntityRenderer(MJBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), AugmentStationExtensionBERenderer::new);
+            AugmentLayerRenderer.registerRenderer(MJAugments.UNDERWATER_MOVEMENT_SPEED_AUGMENT.get(),
+                    ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.MATERIAL, ctx));
+        }
+
+        @SubscribeEvent
+        public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event) {
+            event.registerReloadListener((ResourceManagerReloadListener) resourceManager -> {
+                AugmentLayerRenderer.createRenderers();
+            });
         }
 
         @SubscribeEvent
@@ -153,6 +167,7 @@ public final class MJClientEvents {
             event.registerLayerDefinition(PrismarineCrystalModel.LAYER_LOCATION, PrismarineCrystalModel::createBodyLayer);
             event.registerLayerDefinition(WhiskModel.LAYER_LOCATION, WhiskModel::createBodyLayer);
             event.registerLayerDefinition(RobotArmModel.LAYER_LOCATION, RobotArmModel::createBodyLayer);
+            event.registerLayerDefinition(DolphinFinModel.LAYER_LOCATION, DolphinFinModel::createBodyLayer);
             ArmorModelsHandler.registerLayers(event);
         }
 

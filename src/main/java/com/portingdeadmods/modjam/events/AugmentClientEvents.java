@@ -14,6 +14,5 @@ import net.neoforged.neoforge.client.event.RenderPlayerEvent;
 public final class AugmentClientEvents {
     @SubscribeEvent
     public static void renderPlayerLegs(RenderPlayerEvent.Pre event) {
-        event.getRenderer().getModel().body.visible = false;
     }
 }

@@ -5,13 +5,11 @@ import com.portingdeadmods.modjam.api.augments.AugmentSlot;
 import com.portingdeadmods.modjam.registries.MJAugments;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.Slot;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.jetbrains.annotations.Nullable;
 
-public class UnderwaterMovementSpeedAugment extends Augment {
-    public UnderwaterMovementSpeedAugment(AugmentSlot augmentSlot) {
+public class DolphinFinAugment extends Augment {
+    public DolphinFinAugment(AugmentSlot augmentSlot) {
         super(MJAugments.UNDERWATER_MOVEMENT_SPEED_AUGMENT.get(), augmentSlot);
     }
 

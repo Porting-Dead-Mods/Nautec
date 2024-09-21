@@ -20,6 +20,11 @@
       "type": "directory",
       "source": "fluid",
       "prefix": "fluid/"
+    },
+    {
+      "type": "directory",
+      "source": "augments",
+      "prefix": "augments/"
     }
   ]
 }
