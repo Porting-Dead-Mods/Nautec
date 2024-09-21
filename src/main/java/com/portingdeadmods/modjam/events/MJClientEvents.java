@@ -208,7 +208,7 @@ public final class MJClientEvents {
         @SubscribeEvent
         public static void renderDivingOxygenBar(RenderGuiEvent.Post event) {
             Player player = Minecraft.getInstance().player;
-            if (player == null || !player.isUnderWater() || !isWearingFullDivingSuit(player) || MJDataComponentsUtils.getOxygenLevels(player.getItemBySlot(EquipmentSlot.CHEST)) <= 0) {
+            if (player == null || !player.isUnderWater() || !isWearingFullDivingSuit(player) || MJDataComponentsUtils.getOxygenLevels(player.getItemBySlot(EquipmentSlot.CHEST)) <= 0 || player.isCreative()) {
                 return;
             }
 

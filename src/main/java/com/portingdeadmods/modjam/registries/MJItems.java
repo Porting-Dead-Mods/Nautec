@@ -61,6 +61,12 @@ public final class MJItems {
     public static final DeferredItem<DivingSuitArmorItem> DIVING_LEGGINGS = registerItem("diving_leggings", () -> new DivingSuitArmorItem(MJArmorMaterials.DIVING_SUIT, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final DeferredItem<DivingSuitArmorItem> DIVING_BOOTS = registerItem("diving_boots", () -> new DivingSuitArmorItem(MJArmorMaterials.DIVING_SUIT, ArmorItem.Type.BOOTS, new Item.Properties()));
 
+    public static DeferredItem<ArmorItem> AQUARINE_HELMET = registerItem("aquarine_helmet", () -> new ArmorItem(MJArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.HELMET,new Item.Properties()));
+    public static DeferredItem<ArmorItem> AQUARINE_CHESTPLATE = registerItem("aquarine_chestplate", () -> new ArmorItem(MJArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.CHESTPLATE,new Item.Properties()));
+    public static DeferredItem<ArmorItem> AQUARINE_LEGGINGS = registerItem("aquarine_leggings", () -> new ArmorItem(MJArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.LEGGINGS,new Item.Properties()));
+    public static DeferredItem<ArmorItem> AQUARINE_BOOTS = registerItem("aquarine_boots", () -> new ArmorItem(MJArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.BOOTS,new Item.Properties()));
+
+
     // TOOLS 'N WEAPONS
     public static final DeferredItem<NeptunesTridentItem> NEPTUNES_TRIDENT = registerItem("neptunes_trident",
             NeptunesTridentItem::new, new Item.Properties()
