@@ -1,7 +1,11 @@
 {
   "structures": [
     {
-      "structure": "modjam:crystal_geode",
+      "structure": "modjam:stone_crystal_geode",
+      "weight": 1
+    },
+    {
+      "structure": "modjam:deepslate_crystal_geode",
       "weight": 1
     }
   ],
