@@ -38,6 +38,7 @@ public class ThrowRandomPotionAugments extends Augment {
     public void clientTick(PlayerTickEvent.Post event) {
         if (InputUtils.isKeyDown(InputConstants.KEY_Y) && !isOnCooldown()) {
             PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
+            handleKeybindPress();
         }
     }
 
