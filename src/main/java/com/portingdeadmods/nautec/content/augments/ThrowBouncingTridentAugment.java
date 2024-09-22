@@ -46,7 +46,7 @@ public class ThrowBouncingTridentAugment extends Augment {
     @Override
     public void handleKeybindPress() {
         if (!player.level().isClientSide()) {
-            ThrownBouncingTrident trident = new ThrownBouncingTrident(player.level(), player, Items.TRIDENT.getDefaultInstance());
+            ThrownBouncingTrident trident = new ThrownBouncingTrident(player.level(), player, Items.TRIDENT.getDefaultInstance(), 1);
             trident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 1.5f, 0.0f);
             player.level().addFreshEntity(trident);
         }

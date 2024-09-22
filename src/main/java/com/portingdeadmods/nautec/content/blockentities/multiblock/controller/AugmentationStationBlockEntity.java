@@ -10,18 +10,58 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
-public class AugmentationStationBlockEntity extends ContainerBlockEntity implements MultiblockEntity {
+public class AugmentationStationBlockEntity extends ContainerBlockEntity implements MultiblockEntity, MenuProvider {
     private MultiblockData multiblockData;
+    private UUID playerUUID;
+    private int playerOpenMenuInterval;
 
     public AugmentationStationBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.AUGMENTATION_STATION.get(), blockPos, blockState);
         this.multiblockData = MultiblockData.EMPTY;
+    }
+
+    @Override
+    public void commonTick() {
+        super.commonTick();
+        List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(worldPosition));
+        if (players.isEmpty()) {
+            this.playerUUID = null;
+            return;
+        }
+
+        Player player = players.getFirst();
+        UUID uuid = player.getUUID();
+
+        if (playerUUID == null){
+            this.playerUUID = uuid;
+            this.playerOpenMenuInterval = 50;
+        }
+
+        if (playerUUID.equals(uuid)) {
+            if (playerOpenMenuInterval > 0) {
+                playerOpenMenuInterval--;
+                if (playerOpenMenuInterval == 0) {
+                    player.openMenu(null, worldPosition);
+                }
+            }
+        } else {
+            this.playerUUID = null;
+        }
     }
 
     @Override
@@ -49,5 +89,15 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
     protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
         super.saveData(tag, provider);
         tag.put("multiblockData", saveMBData());
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return Component.literal("Augmentation Station");
+    }
+
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+        return null;
     }
 }

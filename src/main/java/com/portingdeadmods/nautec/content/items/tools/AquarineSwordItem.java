@@ -91,7 +91,7 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
 
     @Override
     public int getMaxOutput() {
-        return 0;
+        return 100;
     }
 
     @Override

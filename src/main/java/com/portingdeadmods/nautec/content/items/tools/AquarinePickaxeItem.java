@@ -51,6 +51,9 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
     @Override
     public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miningEntity) {
         if (miningEntity instanceof Player player) {
+            IPowerStorage powerStorage = miningEntity.getItemInHand(InteractionHand.MAIN_HAND).getCapability(NTCapabilities.PowerStorage.ITEM);
+            powerStorage.tryDrainPower(1, false);
+
             BlockHitResult hitResult = (BlockHitResult) player.pick(20.0D, 0.0F, false);
             Direction hitFace = hitResult.getDirection();
 
@@ -143,7 +146,7 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
 
     @Override
     public int getMaxOutput() {
-        return 0;
+        return 100;
     }
 
     @Override
