@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-22T14:49:29.49072308	Item Models: nautec
+// 1.21.1	2024-09-22T15:53:28.503727053	Item Models: nautec
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
 f031500271b315d13a5f3ca96fc3a73ea8d47054 assets/nautec/models/item/aquarine_steel_axe_enabled.json
 597ea4ecad0b0a10ad86d8dac724222f83aab903 assets/nautec/models/item/aquarine_steel_block.json
@@ -46,3 +46,4 @@ e8d19ed0a058c92c28efb20a5f8887ff0b78770f assets/nautec/models/item/polished_pris
 0441fb5aafacad25af44cc70caad7de17d4d7762 assets/nautec/models/item/rusty_crate.json
 546756658cb53a34f117de278d075cbdd09c70ba assets/nautec/models/item/rusty_gear.json
 8af43812b6a13031c60720373e6e2aa8b3aa3367 assets/nautec/models/item/salt_water_bucket.json
+d96e7cb7aefd55470be2d129d9b6ae6f5ed3bf36 assets/nautec/models/item/syringe_robot_arm.json

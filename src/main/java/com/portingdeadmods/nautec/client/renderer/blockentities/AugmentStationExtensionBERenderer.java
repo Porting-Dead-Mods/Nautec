@@ -24,7 +24,10 @@ public class AugmentStationExtensionBERenderer implements BlockEntityRenderer<Au
     @Override
     public void render(AugmentationStationExtensionBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         if (blockEntity.getItemHandler().getStackInSlot(1).getItem() instanceof RobotArmItem robotArmItem) {
-            RENDERERS.get(robotArmItem).render(blockEntity, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
+            RobotArmRenderer robotArmRenderer = RENDERERS.get(robotArmItem);
+            if (robotArmRenderer != null) {
+                robotArmRenderer.render(blockEntity, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
+            }
         }
     }
 

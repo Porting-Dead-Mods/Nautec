@@ -134,7 +134,6 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     }
 
     protected final void addItemHandler(int slots, int slotLimit, BiPredicate<Integer, ItemStack> validation) {
-        Nautec.LOGGER.debug("itemhandler slots: {}", slots);
         this.itemHandler = new ItemStackHandler(slots) {
             @Override
             protected void onContentsChanged(int slot) {

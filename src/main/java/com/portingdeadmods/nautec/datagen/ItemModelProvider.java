@@ -32,6 +32,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(NTItems.DOLPHIN_FIN.get());
 
         basicItem(NTItems.CLAW_ROBOT_ARM.get());
+        basicItem(NTItems.SYRINGE_ROBOT_ARM.get());
 
         basicItem(NTItems.RUSTY_GEAR.get());
         basicItem(NTItems.GEAR.get());
