@@ -11,12 +11,6 @@ import java.util.function.Supplier;
 public final class NTAugments {
     public static final DeferredRegister<AugmentType<?>> AUGMENTS = DeferredRegister.create(NTRegistries.AUGMENT_TYPE, Nautec.MODID);
 
-    public static final Supplier<AugmentType<DisallowBreakingAugment>> DISALLOW_BREAKING = AUGMENTS.register("disallow_breaking",
-            () -> AugmentType.of(DisallowBreakingAugment::new));
-    public static final Supplier<AugmentType<GiveDiamondAugment>> GIVE_DIAMOND = AUGMENTS.register("give_diamond",
-            () -> AugmentType.of(GiveDiamondAugment::new));
-    public static final Supplier<AugmentType<ThrowSnowballAugment>> THROW_SNOWBALL = AUGMENTS.register("throw_snowball",
-            () -> AugmentType.of(ThrowSnowballAugment::new));
     public static final Supplier<AugmentType<ThrowRandomPotionAugments>> THROW_POTION_AUGMENT = AUGMENTS.register("throw_random_potion",
             () -> AugmentType.of(ThrowRandomPotionAugments::new));
     public static final Supplier<AugmentType<DrownedLungAugment>> PREVENT_PLAYER_LOSE_AIR_AUGMENT = AUGMENTS.register("prevent_player_lose_air_supply",

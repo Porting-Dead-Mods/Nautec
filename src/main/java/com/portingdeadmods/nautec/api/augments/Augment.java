@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.api.augments;
 
 import com.portingdeadmods.nautec.NTRegistries;
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -64,7 +65,10 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
 
     public void commonTick(PlayerTickEvent.Post event) {
         if (player == null) return;
-        if (isOnCooldown()) setCooldown(getCooldown() - 1);
+        if (isOnCooldown()) {
+            Nautec.LOGGER.debug("cooldown Client: {}", event.getEntity().level().isClientSide);
+            setCooldown(getCooldown() - 1);
+        }
         if (player.level().isClientSide) {
             clientTick(event);
         } else serverTick(event);

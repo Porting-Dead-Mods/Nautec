@@ -16,19 +16,27 @@ public final class NTKeybinds {
             "Open the Augmentation Screen",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_B,
-            "ModJam"
+            "NauTec"
     ));
 
     public static final Lazy<KeyMapping> GIVE_DIAMOND_KEYBIND = Lazy.of(() -> new KeyMapping(
             "Give Diamond",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_N,
-            "ModJam")
+            "NauTec")
+    );
+
+    public static final Lazy<KeyMapping> THROW_TRIDENT_KEYBIND = Lazy.of(() -> new KeyMapping(
+            "Throw Trident",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_Y,
+            "NauTec")
     );
 
     @SubscribeEvent
     public static void registerBindings(RegisterKeyMappingsEvent event) {
         event.register(AUGMENT_SCREEN_KEYBIND.get());
         event.register(GIVE_DIAMOND_KEYBIND.get());
+        event.register(THROW_TRIDENT_KEYBIND.get());
     }
 }
