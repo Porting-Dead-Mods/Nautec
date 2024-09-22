@@ -53,7 +53,7 @@ public class PrismarineCrystalBlockEntity extends LaserBlockEntity {
                 }
 
                 if (!state.canBeReplaced() || i == maxLaserDistance -1) {
-                    laserDistances.put(direction, i - (direction == Direction.DOWN ? 1 : 0));
+                    laserDistances.put(direction, i);
                     break;
                 }
             }

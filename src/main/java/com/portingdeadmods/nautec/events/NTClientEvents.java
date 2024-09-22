@@ -1,6 +1,5 @@
 package com.portingdeadmods.nautec.events;
 
-import com.mojang.authlib.minecraft.client.MinecraftClient;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.portingdeadmods.nautec.Nautec;
@@ -21,7 +20,6 @@ import com.portingdeadmods.nautec.client.screen.AugmentScreen;
 import com.portingdeadmods.nautec.client.screen.AugmentationStationExtensionScreen;
 import com.portingdeadmods.nautec.client.screen.AugmentationStationScreen;
 import com.portingdeadmods.nautec.content.augments.GuardianEyeAugment;
-import com.portingdeadmods.nautec.content.menus.AugmentationStationMenu;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;
 import com.portingdeadmods.nautec.client.screen.CrateScreen;
@@ -40,7 +38,6 @@ import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.Entity;
@@ -171,7 +168,6 @@ public final class NTClientEvents {
         @SubscribeEvent
         public static void registerMenus(RegisterMenuScreensEvent event) {
             event.register(NTMenuTypes.CRATE.get(), CrateScreen::new);
-            event.register(NTMenuTypes.AUGMENT_STATION.get(), AugmentationStationScreen::new);
             event.register(NTMenuTypes.AUGMENT_STATION_EXTENSION.get(), AugmentationStationExtensionScreen::new);
             event.register(NTMenuTypes.AUGMENTS.get(), AugmentScreen::new);
         }

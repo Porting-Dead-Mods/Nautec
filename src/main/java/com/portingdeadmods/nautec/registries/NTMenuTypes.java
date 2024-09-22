@@ -3,7 +3,6 @@ package com.portingdeadmods.nautec.registries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.menus.AugmentMenu;
 import com.portingdeadmods.nautec.content.menus.AugmentationStationExtensionMenu;
-import com.portingdeadmods.nautec.content.menus.AugmentationStationMenu;
 import com.portingdeadmods.nautec.content.menus.CrateMenu;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -18,7 +17,6 @@ public final class NTMenuTypes {
 
     public static final DeferredHolder<MenuType<?>,MenuType<CrateMenu>> CRATE = registerMenuType(CrateMenu::new,"crate");
     public static final DeferredHolder<MenuType<?>,MenuType<AugmentMenu>> AUGMENTS = registerMenuType(AugmentMenu::new,"augments");
-    public static final DeferredHolder<MenuType<?>,MenuType<AugmentationStationMenu>> AUGMENT_STATION = registerMenuType(AugmentationStationMenu::new,"augment_station");
     public static final DeferredHolder<MenuType<?>,MenuType<AugmentationStationExtensionMenu>> AUGMENT_STATION_EXTENSION = registerMenuType(AugmentationStationExtensionMenu::new,"augment_station_extension");
 
     private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>,MenuType<T>> registerMenuType(IContainerFactory<T> factory,

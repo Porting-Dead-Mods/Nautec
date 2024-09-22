@@ -59,8 +59,6 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
         return Optional.ofNullable(this.recipe);
     }
 
-
-
     @Override
     public ObjectSet<Direction> getLaserOutputs() {
         Direction direction = getBlockState().getValue(BlockStateProperties.FACING);
