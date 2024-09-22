@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.events;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.portingdeadmods.nautec.Nautec;
@@ -23,6 +24,7 @@ import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;
 import com.portingdeadmods.nautec.client.screen.CrateScreen;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
+import com.portingdeadmods.nautec.network.AugmentationScreenPayload;
 import com.portingdeadmods.nautec.registries.*;
 import com.portingdeadmods.nautec.utils.ArmorModelsHandler;
 import net.minecraft.client.Camera;
@@ -36,6 +38,7 @@ import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.Entity;
@@ -52,6 +55,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -206,6 +210,13 @@ public final class NTClientEvents {
         public static void onRenderPlayer(RenderPlayerEvent.Post event) {
             PlayerRenderer renderer = event.getRenderer();
             renderer.addLayer(new AugmentLayerRenderer(renderer));
+        }
+
+        @SubscribeEvent
+        public static void onClientTick(ClientTickEvent.Post event) {
+            while (NTKeybinds.AUGMENT_SCREEN_KEYBIND.get().consumeClick()) {
+                PacketDistributor.sendToServer(new AugmentationScreenPayload((byte) 0));
+            }
         }
 
         @SubscribeEvent

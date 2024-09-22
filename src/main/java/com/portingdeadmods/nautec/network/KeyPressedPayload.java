@@ -4,6 +4,7 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.utils.AugmentCodecs;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
