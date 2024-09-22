@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 public class AugmentMenu extends AbstractContainerMenu {
 
     public AugmentMenu(Player player, int containerId) {
-        super(MJMenuTypes.AUGMENT.get(), containerId);
+        super(MJMenuTypes.AUGMENTS.get(), containerId);
     }
 
     public AugmentMenu(int id, Inventory inventory, RegistryFriendlyByteBuf data) {
