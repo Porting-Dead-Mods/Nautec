@@ -42,6 +42,9 @@ public final class NTItems {
     public static final DeferredItem<Item> VALVE = registerItem("valve",
             Item::new, new Item.Properties());
 
+    public static final DeferredItem<BatteryItem> BATTERY = registerItem("battery",
+            BatteryItem::new, new Item.Properties().stacksTo(1));
+
     // MOB DROPS
     public static final DeferredItem<Item> DROWNED_LUNGS = registerItem("drowned_lungs",
             Item::new, new Item.Properties());
