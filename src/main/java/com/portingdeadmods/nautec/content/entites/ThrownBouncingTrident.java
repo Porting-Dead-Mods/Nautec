@@ -13,18 +13,18 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class ThrownBouncingTrident extends ThrownTrident {
-    boolean hasBounced = false;
+    int bouncesLeft = 0;
     public ThrownBouncingTrident(EntityType<? extends ThrownTrident> entityType, Level level) {
         super(entityType, level);
     }
-    public ThrownBouncingTrident(Level world, LivingEntity owner, ItemStack stack) {
+    public ThrownBouncingTrident(Level world, LivingEntity owner, ItemStack stack, int bouncesLeft) {
         super(world, owner, stack);
+        this.bouncesLeft = bouncesLeft;
     }
-    public ThrownBouncingTrident createBouncingTrident(Level level, LivingEntity thrower) {
+    public ThrownBouncingTrident createBouncingTrident(Level level, LivingEntity thrower, int bouncesLeft) {
         if (thrower == null)
             return null;
-        ThrownBouncingTrident trident = new ThrownBouncingTrident(level, thrower, ItemStack.EMPTY);
-        trident.hasBounced = true;
+        ThrownBouncingTrident trident = new ThrownBouncingTrident(level, thrower, ItemStack.EMPTY, bouncesLeft);
         return trident;
     }
 
@@ -32,9 +32,9 @@ public class ThrownBouncingTrident extends ThrownTrident {
     protected void onHit(HitResult result) {
         super.onHit(result);
         this.pickup = Pickup.DISALLOWED;
-        if (result instanceof BlockHitResult && !hasBounced) {
+        if (result instanceof BlockHitResult && bouncesLeft>0) {
+            bouncesLeft--;
             bounce(((BlockHitResult) result));
-            hasBounced = true;
             remove(RemovalReason.DISCARDED);
         }
     }
@@ -52,7 +52,7 @@ public class ThrownBouncingTrident extends ThrownTrident {
         double forwardDamping = 0.5D;
         reflect = reflect.multiply(new Vec3(forwardDamping, 1.0D, forwardDamping));
 
-        ThrownBouncingTrident trident = createBouncingTrident(this.level(), (LivingEntity) getOwner());
+        ThrownBouncingTrident trident = createBouncingTrident(this.level(), (LivingEntity) getOwner(), bouncesLeft);
         trident.setPos(
                 result.getLocation().x() + reflect.x() / 5.0D,
                 result.getLocation().y() + reflect.y() / 5.0D,
@@ -85,9 +85,7 @@ public class ThrownBouncingTrident extends ThrownTrident {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        if (!hasBounced) {
-            hasBounced = true;
-        }
+        bouncesLeft = 0;
     }
 
     @Override
