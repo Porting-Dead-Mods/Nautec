@@ -7,7 +7,7 @@ import com.portingdeadmods.nautec.api.blockentities.multiblock.FakeBlockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.SavesControllerPosBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.DrainBlockEntity;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
@@ -23,7 +23,7 @@ public class DrainPartBlockEntity extends LaserBlockEntity implements FakeBlockE
     private Direction laserPort;
 
     public DrainPartBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(MJBlockEntityTypes.DRAIN_PART.get(), blockPos, blockState);
+        super(NTBlockEntityTypes.DRAIN_PART.get(), blockPos, blockState);
     }
 
     public void setLaserPort(Direction laserPort) {

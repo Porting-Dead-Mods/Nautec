@@ -5,7 +5,7 @@ import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.blockentities.ContainerBlock;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.content.multiblocks.AugmentationStationMultiblock;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -27,7 +27,7 @@ public class AugmentationStationBlock extends ContainerBlock {
 
     @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
-        return MJBlockEntityTypes.AUGMENTATION_STATION.get();
+        return NTBlockEntityTypes.AUGMENTATION_STATION.get();
     }
 
     @Override

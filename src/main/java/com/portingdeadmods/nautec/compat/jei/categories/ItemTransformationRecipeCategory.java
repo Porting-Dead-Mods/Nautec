@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.compat.jei.categories;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.nautec.content.recipes.utils.RecipeUtils;
-import com.portingdeadmods.nautec.registries.MJBlocks;
+import com.portingdeadmods.nautec.registries.NTBlocks;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -33,7 +33,7 @@ public class ItemTransformationRecipeCategory implements IRecipeCategory<ItemTra
 
     public ItemTransformationRecipeCategory(IGuiHelper helper) {
         this.background = helper.createBlankDrawable(80, 28);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MJBlocks.PRISMARINE_RELAY.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(NTBlocks.PRISMARINE_RELAY.get()));
     }
 
     @Override

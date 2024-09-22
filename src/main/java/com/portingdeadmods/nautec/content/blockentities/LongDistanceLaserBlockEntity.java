@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.content.blockentities;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.blocks.LongDistanceLaserBlock;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class LongDistanceLaserBlockEntity extends LaserBlockEntity {
     public LongDistanceLaserBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(MJBlockEntityTypes.LONG_DISTANCE_LASER.get(), blockPos, blockState);
+        super(NTBlockEntityTypes.LONG_DISTANCE_LASER.get(), blockPos, blockState);
     }
 
     @Override

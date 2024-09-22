@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.client.hud;
 import com.portingdeadmods.nautec.api.blocks.DisplayBlock;
 import com.portingdeadmods.nautec.compat.curio.CurioCompat;
 import com.portingdeadmods.nautec.content.items.PrismMonocleItem;
-import com.portingdeadmods.nautec.registries.MJItems;
+import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.core.BlockPos;
@@ -24,7 +24,7 @@ public final class PrismMonocleOverlay {
         Player player = mc.player;
         ItemStack item = player.getItemBySlot(EquipmentSlot.HEAD);
 
-        ItemStack slotResult = CurioCompat.getStackInSlot(player, MJItems.PRISM_MONOCLE.get());
+        ItemStack slotResult = CurioCompat.getStackInSlot(player, NTItems.PRISM_MONOCLE.get());
 
         if ((item.getItem() instanceof PrismMonocleItem || !slotResult.isEmpty()) && mc.hitResult instanceof BlockHitResult blockHitResult) {
             BlockPos blockPos = blockHitResult.getBlockPos();

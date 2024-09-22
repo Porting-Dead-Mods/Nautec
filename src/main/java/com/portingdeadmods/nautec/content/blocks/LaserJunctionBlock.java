@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.content.blocks;
 import com.mojang.serialization.MapCodec;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
@@ -114,7 +114,7 @@ public class LaserJunctionBlock extends LaserBlock {
 
     @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
-        return MJBlockEntityTypes.LASER_JUNCTION.get();
+        return NTBlockEntityTypes.LASER_JUNCTION.get();
     }
 
     @Override

@@ -1,10 +1,10 @@
 package com.portingdeadmods.nautec.content.items.tools;
 
 import com.portingdeadmods.nautec.api.items.IPowerItem;
-import com.portingdeadmods.nautec.capabilities.MJCapabilities;
+import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
-import com.portingdeadmods.nautec.content.items.tiers.MJToolMaterials;
-import com.portingdeadmods.nautec.data.MJDataComponents;
+import com.portingdeadmods.nautec.content.items.tiers.NTToolMaterials;
+import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
 import com.portingdeadmods.nautec.utils.ItemUtils;
 import net.minecraft.ChatFormatting;
@@ -24,20 +24,20 @@ import java.util.List;
 
 public class AquarineSwordItem extends SwordItem implements IPowerItem {
     public AquarineSwordItem() {
-        super(MJToolMaterials.AQUARINE,
+        super(NTToolMaterials.AQUARINE,
                 new Properties().attributes(
                         SwordItem.createAttributes(
-                                MJToolMaterials.AQUARINE,
+                                NTToolMaterials.AQUARINE,
                                 3,
                                 -2.4f
                         )
-                ).component(MJDataComponents.IS_INFUSED,false).component(MJDataComponents.ABILITY_ENABLED,false).component(MJDataComponents.POWER, ComponentPowerStorage.withCapacity(700)));
+                ).component(NTDataComponents.IS_INFUSED,false).component(NTDataComponents.ABILITY_ENABLED,false).component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(700)));
     }
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
         ItemStack stack = context.getItemInHand();
-        IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
+        IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
         if(powerStorage.getPowerStored() <= 0) {
             return InteractionResult.FAIL;
         }
@@ -46,14 +46,14 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
 
     @Override
     public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miningEntity) {
-        IPowerStorage powerStorage = miningEntity.getItemInHand(InteractionHand.MAIN_HAND).getCapability(MJCapabilities.PowerStorage.ITEM);
+        IPowerStorage powerStorage = miningEntity.getItemInHand(InteractionHand.MAIN_HAND).getCapability(NTCapabilities.PowerStorage.ITEM);
         powerStorage.tryDrainPower(1, false);
         return super.mineBlock(stack, level, state, pos, miningEntity);
     }
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        IPowerStorage powerStorage = attacker.getItemInHand(InteractionHand.MAIN_HAND).getCapability(MJCapabilities.PowerStorage.ITEM);
+        IPowerStorage powerStorage = attacker.getItemInHand(InteractionHand.MAIN_HAND).getCapability(NTCapabilities.PowerStorage.ITEM);
         powerStorage.tryDrainPower(1, false);
         return super.hurtEnemy(stack, target, attacker);
     }
@@ -97,7 +97,7 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
+        IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
         tooltipComponents.add(Component.literal("Power: " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity() + " AP").withStyle(ChatFormatting.DARK_AQUA));
     }
 }

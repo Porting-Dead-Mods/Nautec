@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.content.structures;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.nautec.registries.MJStructures;
+import com.portingdeadmods.nautec.registries.NTStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -114,6 +114,6 @@ public class Stone_crystal_geode extends Structure {
 
     @Override
     public StructureType<?> type() {
-        return MJStructures.STONE_CRYSTAL_GEODE.get();
+        return NTStructures.STONE_CRYSTAL_GEODE.get();
     }
 }

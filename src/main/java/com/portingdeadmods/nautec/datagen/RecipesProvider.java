@@ -5,7 +5,7 @@ import com.portingdeadmods.nautec.datagen.recipeBuilder.AquaticCatalystChannelin
 import com.portingdeadmods.nautec.datagen.recipeBuilder.ItemEtchingRecipeBuilder;
 import com.portingdeadmods.nautec.datagen.recipeBuilder.ItemTransformationRecipeBuilder;
 import com.portingdeadmods.nautec.datagen.recipeBuilder.MixingRecipeBuilder;
-import com.portingdeadmods.nautec.registries.MJItems;
+import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -30,41 +30,41 @@ public class RecipesProvider extends RecipeProvider {
                 .duration(100)
                 .save(pRecipeOutput);
 
-        ItemTransformationRecipeBuilder.newRecipe(new ItemStack(MJItems.AQUARINE_STEEL_INGOT.get(), 1))
+        ItemTransformationRecipeBuilder.newRecipe(new ItemStack(NTItems.AQUARINE_STEEL_INGOT.get(), 1))
                 .ingredient(new ItemStack(Items.IRON_INGOT))
                 .purity(3)
                 .duration(100)
                 .save(pRecipeOutput);
 
-        ItemEtchingRecipeBuilder.newRecipe(MJItems.VALVE.toStack())
-                .ingredient(MJItems.ANCIENT_VALVE.toStack())
+        ItemEtchingRecipeBuilder.newRecipe(NTItems.VALVE.toStack())
+                .ingredient(NTItems.ANCIENT_VALVE.toStack())
                 .duration(200)
                 .save(pRecipeOutput);
 
-        ItemEtchingRecipeBuilder.newRecipe(MJItems.GEAR.toStack())
-                .ingredient(MJItems.RUSTY_GEAR.toStack())
+        ItemEtchingRecipeBuilder.newRecipe(NTItems.GEAR.toStack())
+                .ingredient(NTItems.RUSTY_GEAR.toStack())
                 .duration(160)
                 .save(pRecipeOutput);
 
-        MixingRecipeBuilder.newRecipe(new ItemStack(MJItems.RUSTY_GEAR.get()))
-                .ingredients(IngredientWithCount.fromItemTag(ItemTags.ANVIL), IngredientWithCount.fromItemLike(MJItems.ATLANTIC_GOLD_NUGGET.get(), 3))
+        MixingRecipeBuilder.newRecipe(new ItemStack(NTItems.RUSTY_GEAR.get()))
+                .ingredients(IngredientWithCount.fromItemTag(ItemTags.ANVIL), IngredientWithCount.fromItemLike(NTItems.ATLANTIC_GOLD_NUGGET.get(), 3))
                 .duration(60)
                 .save(pRecipeOutput);
 
-        MixingRecipeBuilder.newRecipe(new ItemStack(MJItems.ATLANTIC_GOLD_NUGGET.get(), 3))
-                .ingredients(IngredientWithCount.fromItemLike(MJItems.ATLANTIC_GOLD_INGOT.get(), 1))
+        MixingRecipeBuilder.newRecipe(new ItemStack(NTItems.ATLANTIC_GOLD_NUGGET.get(), 3))
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.ATLANTIC_GOLD_INGOT.get(), 1))
                 .duration(60)
                 .save(pRecipeOutput);
 
-        MixingRecipeBuilder.newRecipe(new ItemStack(MJItems.CROWBAR.get(), 1))
-                .ingredients(IngredientWithCount.fromItemLike(MJItems.DIVING_HELMET.get(), 1)
-                        , IngredientWithCount.fromItemLike(MJItems.DIVING_CHESTPLATE.get(), 1)
-                        , IngredientWithCount.fromItemLike(MJItems.DIVING_LEGGINGS.get(), 1)
-                        , IngredientWithCount.fromItemLike(MJItems.DIVING_BOOTS.get(), 1))
+        MixingRecipeBuilder.newRecipe(new ItemStack(NTItems.CROWBAR.get(), 1))
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.DIVING_HELMET.get(), 1)
+                        , IngredientWithCount.fromItemLike(NTItems.DIVING_CHESTPLATE.get(), 1)
+                        , IngredientWithCount.fromItemLike(NTItems.DIVING_LEGGINGS.get(), 1)
+                        , IngredientWithCount.fromItemLike(NTItems.DIVING_BOOTS.get(), 1))
                 .duration(60)
                 .save(pRecipeOutput);
 
-        MixingRecipeBuilder.newRecipe(new ItemStack(MJItems.EAS_BUCKET.get(), 1))
+        MixingRecipeBuilder.newRecipe(new ItemStack(NTItems.EAS_BUCKET.get(), 1))
                 .ingredients(IngredientWithCount.fromItemLike(Items.DRIED_KELP, 4)
                         , IngredientWithCount.fromItemLike(Items.SLIME_BALL, 2)
                         , IngredientWithCount.fromItemLike(Items.PRISMARINE_CRYSTALS, 1)

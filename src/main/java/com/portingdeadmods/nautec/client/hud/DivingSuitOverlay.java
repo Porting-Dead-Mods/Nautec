@@ -2,8 +2,8 @@ package com.portingdeadmods.nautec.client.hud;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.data.MJDataComponentsUtils;
-import com.portingdeadmods.nautec.registries.MJItems;
+import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
+import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +21,7 @@ public final class DivingSuitOverlay {
 
     public static final LayeredDraw.Layer HUD = ((guiGraphics, deltaTracker) -> {
         Player player = Minecraft.getInstance().player;
-        if (player == null || !player.isUnderWater() || !isWearingFullDivingSuit(player) || MJDataComponentsUtils.getOxygenLevels(player.getItemBySlot(EquipmentSlot.CHEST)) <= 0) {
+        if (player == null || !player.isUnderWater() || !isWearingFullDivingSuit(player) || NTDataComponentsUtils.getOxygenLevels(player.getItemBySlot(EquipmentSlot.CHEST)) <= 0) {
             return;
         }
 
@@ -32,7 +32,7 @@ public final class DivingSuitOverlay {
         // Oxygen bar values
         ItemStack chestPiece = player.getItemBySlot(EquipmentSlot.CHEST);
         int maxOxygen = 300;
-        int currentOxygen = MJDataComponentsUtils.getOxygenLevels(chestPiece);
+        int currentOxygen = NTDataComponentsUtils.getOxygenLevels(chestPiece);
 
         // Bar position
         int xStart = screenWidth / 2 + 91;
@@ -65,9 +65,9 @@ public final class DivingSuitOverlay {
     });
 
     private static boolean isWearingFullDivingSuit(Player player) {
-        return player.getItemBySlot(EquipmentSlot.HEAD).is(MJItems.DIVING_HELMET) &&
-                player.getItemBySlot(EquipmentSlot.CHEST).is(MJItems.DIVING_CHESTPLATE) &&
-                player.getItemBySlot(EquipmentSlot.LEGS).is(MJItems.DIVING_LEGGINGS) &&
-                player.getItemBySlot(EquipmentSlot.FEET).is(MJItems.DIVING_BOOTS);
+        return player.getItemBySlot(EquipmentSlot.HEAD).is(NTItems.DIVING_HELMET) &&
+                player.getItemBySlot(EquipmentSlot.CHEST).is(NTItems.DIVING_CHESTPLATE) &&
+                player.getItemBySlot(EquipmentSlot.LEGS).is(NTItems.DIVING_LEGGINGS) &&
+                player.getItemBySlot(EquipmentSlot.FEET).is(NTItems.DIVING_BOOTS);
     }
 }

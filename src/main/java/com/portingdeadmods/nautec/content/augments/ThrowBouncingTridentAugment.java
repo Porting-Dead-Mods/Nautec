@@ -5,8 +5,8 @@ import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.content.entites.ThrownBouncingTrident;
 import com.portingdeadmods.nautec.network.KeyPressedPayload;
-import com.portingdeadmods.nautec.registries.MJAugmentSlots;
-import com.portingdeadmods.nautec.registries.MJAugments;
+import com.portingdeadmods.nautec.registries.NTAugmentSlots;
+import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.utils.InputUtils;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -15,14 +15,14 @@ import org.jetbrains.annotations.Nullable;
 
 public class ThrowBouncingTridentAugment extends Augment {
     public ThrowBouncingTridentAugment(AugmentSlot augmentSlot) {
-        super(MJAugments.THROWN_BOUNCING_TRIDENT_AUGMENT.get(), augmentSlot);
+        super(NTAugments.THROWN_BOUNCING_TRIDENT_AUGMENT.get(), augmentSlot);
     }
 
     @Override
     public @Nullable AugmentSlot[] getCompatibleSlots() {
         return new AugmentSlot[] {
-                MJAugmentSlots.LEFT_ARM.get(),
-                MJAugmentSlots.RIGHT_ARM.get(),
+                NTAugmentSlots.LEFT_ARM.get(),
+                NTAugmentSlots.RIGHT_ARM.get(),
         };
     }
 

@@ -7,8 +7,8 @@ import com.portingdeadmods.nautec.api.multiblocks.MultiblockData;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.content.multiblocks.DrainMultiblock;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
-import com.portingdeadmods.nautec.registries.MJFluids;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.utils.BlockUtils;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.BlockPos;
@@ -46,7 +46,7 @@ public class DrainBlockEntity extends ContainerBlockEntity implements Multiblock
     private int valveLidInterval;
 
     public DrainBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(MJBlockEntityTypes.DRAIN.get(), blockPos, blockState);
+        super(NTBlockEntityTypes.DRAIN.get(), blockPos, blockState);
         addFluidTank(128_000);
         this.multiblockData = MultiblockData.EMPTY;
     }
@@ -109,7 +109,7 @@ public class DrainBlockEntity extends ContainerBlockEntity implements Multiblock
             if (hasWater()) {
                 if (openAndFormed()) {
                     if (level.getBiome(worldPosition).is(BiomeTags.IS_OCEAN)) {
-                        getFluidHandler().fill(new FluidStack(MJFluids.SALT_WATER_SOURCE.get(), 500), IFluidHandler.FluidAction.EXECUTE);
+                        getFluidHandler().fill(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), 500), IFluidHandler.FluidAction.EXECUTE);
                     }
                 }
             }

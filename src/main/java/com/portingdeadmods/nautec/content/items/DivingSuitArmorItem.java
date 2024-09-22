@@ -1,8 +1,8 @@
 package com.portingdeadmods.nautec.content.items;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.data.MJDataComponentsUtils;
-import com.portingdeadmods.nautec.registries.MJItems;
+import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
+import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -35,15 +35,15 @@ public class DivingSuitArmorItem extends ArmorItem {
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (entity instanceof Player player) {
             if (stack == player.getItemBySlot(EquipmentSlot.CHEST) &&
-                    player.getItemBySlot(EquipmentSlot.HEAD).is(MJItems.DIVING_HELMET) &&
-                    player.getItemBySlot(EquipmentSlot.LEGS).is(MJItems.DIVING_LEGGINGS) &&
-                    player.getItemBySlot(EquipmentSlot.FEET).is(MJItems.DIVING_BOOTS)) {
+                    player.getItemBySlot(EquipmentSlot.HEAD).is(NTItems.DIVING_HELMET) &&
+                    player.getItemBySlot(EquipmentSlot.LEGS).is(NTItems.DIVING_LEGGINGS) &&
+                    player.getItemBySlot(EquipmentSlot.FEET).is(NTItems.DIVING_BOOTS)) {
 
                 if (player.isUnderWater() && !player.isCreative() && !player.isSpectator()) {
                     if (level.getGameTime() % 20 == 0) {
-                        int currentOxygen = MJDataComponentsUtils.getOxygenLevels(stack);
+                        int currentOxygen = NTDataComponentsUtils.getOxygenLevels(stack);
                         if (currentOxygen > 0) {
-                            MJDataComponentsUtils.setOxygenLevels(stack, currentOxygen - 1);
+                            NTDataComponentsUtils.setOxygenLevels(stack, currentOxygen - 1);
                             player.setAirSupply(player.getMaxAirSupply());
                         }
                     }
@@ -54,12 +54,12 @@ public class DivingSuitArmorItem extends ArmorItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        if(stack.is(MJItems.DIVING_HELMET.get())) {
+        if(stack.is(NTItems.DIVING_HELMET.get())) {
             tooltipComponents.add(Component.literal("Allows you to see better underwater.").withStyle(ChatFormatting.GRAY));
         }
 
-        if (stack.is(MJItems.DIVING_CHESTPLATE.get())) {
-            int oxygen = MJDataComponentsUtils.getOxygenLevels(stack);
+        if (stack.is(NTItems.DIVING_CHESTPLATE.get())) {
+            int oxygen = NTDataComponentsUtils.getOxygenLevels(stack);
             int minutesRemaining = oxygen / 60;
             int secondsRemaining = oxygen % 60;
 
@@ -75,6 +75,6 @@ public class DivingSuitArmorItem extends ArmorItem {
 
     @Override
     public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
-        return stack.is(MJItems.DIVING_HELMET.get()) ? ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"textures/example/diving_suit.png") : super.getArmorTexture(stack, entity, slot, layer, innerModel);
+        return stack.is(NTItems.DIVING_HELMET.get()) ? ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"textures/example/diving_suit.png") : super.getArmorTexture(stack, entity, slot, layer, innerModel);
     }
 }

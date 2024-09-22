@@ -8,8 +8,8 @@ import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.part.DrainPartBlockEntity;
 import com.portingdeadmods.nautec.content.items.tools.AquarineWrenchItem;
 import com.portingdeadmods.nautec.content.multiblocks.DrainMultiblock;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
-import com.portingdeadmods.nautec.registries.MJMultiblocks;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTMultiblocks;
 import com.portingdeadmods.nautec.utils.BlockUtils;
 import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import net.minecraft.ChatFormatting;
@@ -113,7 +113,7 @@ public class DrainPartBlock extends LaserBlock implements SimpleWaterloggedBlock
 
     @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
-        return MJBlockEntityTypes.DRAIN_PART.get();
+        return NTBlockEntityTypes.DRAIN_PART.get();
     }
 
     @Override
@@ -185,7 +185,7 @@ public class DrainPartBlock extends LaserBlock implements SimpleWaterloggedBlock
         if (!state.is(newState.getBlock())) {
             DrainPartBlockEntity partBE = (DrainPartBlockEntity) level.getBlockEntity(pos);
             BlockPos actualBlockEntityPos = partBE.getActualBlockEntityPos();
-            MultiblockHelper.unform(MJMultiblocks.DRAIN.get(), actualBlockEntityPos, level, null);
+            MultiblockHelper.unform(NTMultiblocks.DRAIN.get(), actualBlockEntityPos, level, null);
             level.removeBlock(actualBlockEntityPos.above(), false);
         }
 

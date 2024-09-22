@@ -1,7 +1,7 @@
 package com.portingdeadmods.nautec.datagen;
 
-import com.portingdeadmods.nautec.registries.MJItems;
-import com.portingdeadmods.nautec.tags.MJTags;
+import com.portingdeadmods.nautec.registries.NTItems;
+import com.portingdeadmods.nautec.tags.NTTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -24,8 +24,8 @@ public class ItemTagProvider extends ItemTagsProvider{
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(MJTags.Items.AQUATIC_CATALYST, Items.HEART_OF_THE_SEA);
-        tag(MJTags.Items.AQUARINE_STEEL, MJItems.AQUARINE_STEEL_INGOT);
+        tag(NTTags.Items.AQUATIC_CATALYST, Items.HEART_OF_THE_SEA);
+        tag(NTTags.Items.AQUARINE_STEEL, NTItems.AQUARINE_STEEL_INGOT);
     }
 
 

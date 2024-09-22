@@ -2,7 +2,7 @@ package com.portingdeadmods.nautec.utils;
 
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.data.MJDataAttachments;
+import com.portingdeadmods.nautec.data.NTDataAttachments;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 
@@ -15,22 +15,22 @@ public final class AugmentHelper {
     }
 
     public static Map<AugmentSlot, Augment> getAugments(Player player) {
-        return player.getData(MJDataAttachments.AUGMENTS);
+        return player.getData(NTDataAttachments.AUGMENTS);
     }
 
     public static Map<AugmentSlot, CompoundTag> getAugmentsData(Player player) {
-        return player.getData(MJDataAttachments.AUGMENTS_EXTRA_DATA);
+        return player.getData(NTDataAttachments.AUGMENTS_EXTRA_DATA);
     }
 
     public static void setAugment(Player player, AugmentSlot augmentSlot, Augment augment) {
         Map<AugmentSlot, Augment> augments = new HashMap<>(getAugments(player));
         augments.put(augmentSlot, augment);
-        player.setData(MJDataAttachments.AUGMENTS, augments);
+        player.setData(NTDataAttachments.AUGMENTS, augments);
     }
 
     public static void setAugmentExtraData(Player player, AugmentSlot augmentSlot, CompoundTag tag) {
         Map<AugmentSlot, CompoundTag> augments = new HashMap<>(getAugmentsData(player));
         augments.put(augmentSlot, tag);
-        player.setData(MJDataAttachments.AUGMENTS_EXTRA_DATA, augments);
+        player.setData(NTDataAttachments.AUGMENTS_EXTRA_DATA, augments);
     }
 }

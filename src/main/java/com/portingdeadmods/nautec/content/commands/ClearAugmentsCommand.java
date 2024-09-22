@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.content.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.data.MJDataAttachments;
+import com.portingdeadmods.nautec.data.NTDataAttachments;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -21,8 +21,8 @@ public class ClearAugmentsCommand {
 
     private static int execute(CommandContext<CommandSourceStack> ctx) {
         Player player = ctx.getSource().getPlayer();
-        player.setData(MJDataAttachments.AUGMENTS, new HashMap<>());
-        player.setData(MJDataAttachments.AUGMENTS_EXTRA_DATA, new HashMap<>());
+        player.setData(NTDataAttachments.AUGMENTS, new HashMap<>());
+        player.setData(NTDataAttachments.AUGMENTS_EXTRA_DATA, new HashMap<>());
         player.sendSystemMessage(Component.literal("Cleared all player augments"));
         return 1;
     }

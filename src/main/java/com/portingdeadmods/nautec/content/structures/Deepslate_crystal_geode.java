@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.content.structures;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.nautec.registries.MJStructures;
+import com.portingdeadmods.nautec.registries.NTStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -114,6 +114,6 @@ public class Deepslate_crystal_geode extends Structure {
 
     @Override
     public StructureType<?> type() {
-        return MJStructures.DEEPSLATE_CRYSTAL_GEODE.get();
+        return NTStructures.DEEPSLATE_CRYSTAL_GEODE.get();
     }
 }

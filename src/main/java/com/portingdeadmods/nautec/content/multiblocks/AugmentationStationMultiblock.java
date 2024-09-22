@@ -5,8 +5,8 @@ import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.api.multiblocks.MultiblockData;
 import com.portingdeadmods.nautec.api.multiblocks.MultiblockLayer;
 import com.portingdeadmods.nautec.api.utils.HorizontalDirection;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
-import com.portingdeadmods.nautec.registries.MJBlocks;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlocks;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.core.BlockPos;
@@ -29,12 +29,12 @@ public class AugmentationStationMultiblock implements Multiblock {
 
     @Override
     public Block getUnformedController() {
-        return MJBlocks.AUGMENTATION_STATION.get();
+        return NTBlocks.AUGMENTATION_STATION.get();
     }
 
     @Override
     public Block getFormedController() {
-        return MJBlocks.AUGMENTATION_STATION.get();
+        return NTBlocks.AUGMENTATION_STATION.get();
     }
 
     @Override
@@ -62,7 +62,7 @@ public class AugmentationStationMultiblock implements Multiblock {
 
     @Override
     public BlockEntityType<? extends MultiblockEntity> getMultiBlockEntityType() {
-        return MJBlockEntityTypes.AUGMENTATION_STATION.get();
+        return NTBlockEntityTypes.AUGMENTATION_STATION.get();
     }
 
     @Override
@@ -79,12 +79,12 @@ public class AugmentationStationMultiblock implements Multiblock {
             if (actualIndex == 5) {
                 return getFormedController().defaultBlockState().setValue(FORMED, true).setValue(AS_PART, actualIndex - 1);
             }
-            return MJBlocks.AUGMENTATION_STATION_PART.get().defaultBlockState().setValue(FORMED, true).setValue(AS_PART, actualIndex - 1);
+            return NTBlocks.AUGMENTATION_STATION_PART.get().defaultBlockState().setValue(FORMED, true).setValue(AS_PART, actualIndex - 1);
 
         }
 
         if (layerIndex == 2 || layerIndex == 10 || layerIndex == 14 || layerIndex == 22) {
-            return MJBlocks.AUGMENTATION_STATION_EXTENSION.get().defaultBlockState().setValue(FORMED, true).setValue(BlockStateProperties.HORIZONTAL_FACING, indexToDir(layerIndex));
+            return NTBlocks.AUGMENTATION_STATION_EXTENSION.get().defaultBlockState().setValue(FORMED, true).setValue(BlockStateProperties.HORIZONTAL_FACING, indexToDir(layerIndex));
         }
 
         return null;

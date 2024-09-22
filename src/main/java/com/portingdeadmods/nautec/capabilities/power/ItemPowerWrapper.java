@@ -1,24 +1,24 @@
 package com.portingdeadmods.nautec.capabilities.power;
 
 import com.portingdeadmods.nautec.api.items.IPowerItem;
-import com.portingdeadmods.nautec.data.MJDataComponents;
+import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Range;
 
 public record ItemPowerWrapper(ItemStack itemStack, IPowerItem powerItem) implements IPowerStorage {
     public ItemPowerWrapper {
-        if (!itemStack.has(MJDataComponents.POWER)) {
+        if (!itemStack.has(NTDataComponents.POWER)) {
             throw new IllegalStateException("The item: " + itemStack.getItem() + " is missing the Power Datacomponent");
         }
     }
 
     private ComponentPowerStorage getComponent() {
-        return itemStack.getOrDefault(MJDataComponents.POWER, ComponentPowerStorage.EMPTY);
+        return itemStack.getOrDefault(NTDataComponents.POWER, ComponentPowerStorage.EMPTY);
     }
 
     private void setComponent(ComponentPowerStorage powerStorage) {
-        this.itemStack.set(MJDataComponents.POWER, powerStorage);
+        this.itemStack.set(NTDataComponents.POWER, powerStorage);
     }
 
     @Override

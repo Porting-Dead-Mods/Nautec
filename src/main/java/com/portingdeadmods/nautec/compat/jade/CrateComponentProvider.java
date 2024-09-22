@@ -2,8 +2,8 @@ package com.portingdeadmods.nautec.compat.jade;
 
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.blockentities.CrateBlockEntity;
-import com.portingdeadmods.nautec.data.MJDataComponents;
-import com.portingdeadmods.nautec.registries.MJItems;
+import com.portingdeadmods.nautec.data.NTDataComponents;
+import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -20,9 +20,9 @@ public enum CrateComponentProvider implements IBlockComponentProvider {
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
         if(blockAccessor.getBlockEntity() instanceof CrateBlockEntity blockEntity) {
-            if(!blockEntity.components().has(MJDataComponents.OPEN.get())) {
+            if(!blockEntity.components().has(NTDataComponents.OPEN.get())) {
                 IElementHelper helper = IElementHelper.get();
-                iTooltip.append(helper.item(new ItemStack(MJItems.CROWBAR.get())));
+                iTooltip.append(helper.item(new ItemStack(NTItems.CROWBAR.get())));
                 iTooltip.add(Component.literal("Locked"));
             }
         }

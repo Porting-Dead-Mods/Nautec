@@ -6,8 +6,8 @@ import com.portingdeadmods.nautec.api.blocks.blockentities.ContainerBlock;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.DrainBlockEntity;
 import com.portingdeadmods.nautec.content.multiblocks.DrainMultiblock;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
-import com.portingdeadmods.nautec.registries.MJMultiblocks;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTMultiblocks;
 import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -39,7 +39,7 @@ public class DrainBlock extends ContainerBlock {
 
     @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
-        return MJBlockEntityTypes.DRAIN.get();
+        return NTBlockEntityTypes.DRAIN.get();
     }
 
     @Override
@@ -58,7 +58,7 @@ public class DrainBlock extends ContainerBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock())) {
-            MultiblockHelper.unform(MJMultiblocks.DRAIN.get(), pos, level, null);
+            MultiblockHelper.unform(NTMultiblocks.DRAIN.get(), pos, level, null);
             level.removeBlock(pos.above(), false);
         }
 

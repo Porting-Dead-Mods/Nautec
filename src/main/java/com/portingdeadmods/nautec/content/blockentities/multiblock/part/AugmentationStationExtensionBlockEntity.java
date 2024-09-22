@@ -6,7 +6,7 @@ import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockPartEnt
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.items.RobotArmItem;
 import com.portingdeadmods.nautec.content.menus.AugmentationStationExtensionMenu;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
@@ -41,7 +41,7 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
     private BlockPos controllerPos;
 
     public AugmentationStationExtensionBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(MJBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), blockPos, blockState);
+        super(NTBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), blockPos, blockState);
         // Augment:0, Robot arm:1
         addItemHandler(2, 1, (slot, stack) -> (slot == 1 && stack.getItem() instanceof RobotArmItem) || (slot == 0));
         this.animation = Animation.IDLE;

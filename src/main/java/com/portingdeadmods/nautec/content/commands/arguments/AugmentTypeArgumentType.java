@@ -7,7 +7,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import com.portingdeadmods.nautec.MJRegistries;
+import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
@@ -39,7 +39,7 @@ public class AugmentTypeArgumentType implements ArgumentType<AugmentType<?>> {
     @Override
     public AugmentType<?> parse(StringReader reader) throws CommandSyntaxException {
         ResourceLocation read = ResourceLocation.read(reader);
-        AugmentType<?> augmentType = MJRegistries.AUGMENT_TYPE.get(read);
+        AugmentType<?> augmentType = NTRegistries.AUGMENT_TYPE.get(read);
         if (augmentType != null) {
             return augmentType;
         }

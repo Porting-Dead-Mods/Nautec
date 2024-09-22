@@ -4,7 +4,7 @@ import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.blocks.AquaticCatalystBlock;
 import com.portingdeadmods.nautec.content.recipes.AquaticCatalystChannelingRecipe;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.utils.SidedCapUtils;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
@@ -30,7 +30,7 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     private int duration;
 
     public AquaticCatalystBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(MJBlockEntityTypes.AQUATIC_CATALYST.get(), blockPos, blockState);
+        super(NTBlockEntityTypes.AQUATIC_CATALYST.get(), blockPos, blockState);
         addItemHandler(1, (slot, stack) -> hasRecipe(stack));
     }
 

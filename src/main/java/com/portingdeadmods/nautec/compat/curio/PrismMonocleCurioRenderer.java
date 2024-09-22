@@ -2,7 +2,7 @@ package com.portingdeadmods.nautec.compat.curio;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.portingdeadmods.nautec.content.items.tiers.MJArmorMaterials;
+import com.portingdeadmods.nautec.content.items.tiers.NTArmorMaterials;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
@@ -41,7 +41,7 @@ public class PrismMonocleCurioRenderer implements ICurioRenderer {
         ModelPart part = entityModels.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR);
         HumanoidModel<LivingEntity> playerHumanoidModel = new HumanoidModel<>(part);
         Model armorModel = ClientHooks.getArmorModel(entity, itemStack, EquipmentSlot.HEAD, playerHumanoidModel);
-        List<ArmorMaterial.Layer> layers = MJArmorMaterials.PRISMARINE.value().layers();
+        List<ArmorMaterial.Layer> layers = NTArmorMaterials.PRISMARINE.value().layers();
         for (int i = 0; i < layers.size(); i++) {
             ArmorMaterial.Layer layer = layers.get(i);
             ResourceLocation armorTexture = ClientHooks.getArmorTexture(entity, itemStack, layer, false, EquipmentSlot.HEAD);
