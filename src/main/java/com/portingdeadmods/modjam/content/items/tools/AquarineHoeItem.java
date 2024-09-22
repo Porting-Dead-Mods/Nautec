@@ -33,7 +33,7 @@ public class AquarineHoeItem extends HoeItem implements IPowerItem {
 
     public AquarineHoeItem() {
         super(MJToolMaterials.AQUARINE, new Properties().stacksTo(1).component(MJDataComponents.ABILITY_ENABLED, false)
-                .component(MJDataComponents.POWER, ComponentPowerStorage.withCapacity(700)));
+                .component(MJDataComponents.IS_INFUSED,false).component(MJDataComponents.POWER, ComponentPowerStorage.withCapacity(700)));
     }
 
     @Override
@@ -138,7 +138,11 @@ public class AquarineHoeItem extends HoeItem implements IPowerItem {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
         tooltipComponents.add(Component.literal("Ability: Till 3x3 Farmland").withStyle(ChatFormatting.DARK_PURPLE));
-        tooltipComponents.add(Component.literal("Status: " + ((MJDataComponentsUtils.isAbilityEnabled(stack)) ? "Enabled" : "Shift + Right Click to Enable")).withStyle((MJDataComponentsUtils.isAbilityEnabled(stack)) ? ChatFormatting.GREEN : ChatFormatting.RED));
+        if(!MJDataComponentsUtils.isInfused(stack)){
+            tooltipComponents.add(Component.literal("Infuse in Algae Serum to unlock Abilities").withStyle(ChatFormatting.DARK_GREEN));
+        }else{
+            tooltipComponents.add(Component.literal("Status: " + ((MJDataComponentsUtils.isAbilityEnabled(stack)) ? "Enabled" : "Shift + Right Click to Enable")).withStyle((MJDataComponentsUtils.isAbilityEnabled(stack)) ? ChatFormatting.GREEN : ChatFormatting.RED));
+        }
         tooltipComponents.add(Component.literal("Power: " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity() + " AP").withStyle(ChatFormatting.DARK_AQUA));
     }
 }

@@ -9,16 +9,16 @@ import com.portingdeadmods.modjam.content.blocks.multiblock.part.AugmentationSta
 import com.portingdeadmods.modjam.content.blocks.multiblock.part.DrainPartBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Function;
+
+import static net.minecraft.world.level.block.Blocks.CAULDRON;
+import static net.minecraft.world.level.block.Blocks.register;
 
 public final class MJBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(ModJam.MODID);

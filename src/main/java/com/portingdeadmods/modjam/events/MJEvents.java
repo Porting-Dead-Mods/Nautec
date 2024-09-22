@@ -14,17 +14,19 @@ import com.portingdeadmods.modjam.content.recipes.ItemEtchingRecipe;
 import com.portingdeadmods.modjam.data.MJDataAttachments;
 import com.portingdeadmods.modjam.data.MJDataComponents;
 import com.portingdeadmods.modjam.data.MJDataComponentsUtils;
+import com.portingdeadmods.modjam.events.helper.ItemInfusion;
 import com.portingdeadmods.modjam.network.SyncAugmentPayload;
 import com.portingdeadmods.modjam.registries.MJFluidTypes;
+import com.portingdeadmods.modjam.registries.MJFluids;
 import com.portingdeadmods.modjam.utils.AugmentHelper;
 import com.portingdeadmods.modjam.utils.ParticlesUtils;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -36,7 +38,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -66,6 +68,10 @@ public final class MJEvents {
 
                 if (itemEntity.isInFluidType(MJFluidTypes.ETCHING_ACID_FLUID_TYPE.get())) {
                     processItemEtching(itemEntity, level);
+                }
+
+                if (itemEntity.isInFluidType(MJFluidTypes.EAS_FLUID_TYPE.get()) || level.getBlockState(itemEntity.blockPosition().below()).getFluidState().is(MJFluids.EAS_SOURCE.get())) {
+                    ItemInfusion.processPowerItemInfusion(itemEntity, level);
                 }
             }
         }
@@ -141,17 +147,21 @@ public final class MJEvents {
             if(event.getItemStack().getItem() instanceof IPowerItem powerItem){
                 ItemStack stack = event.getItemStack();
                 if(stack.has(MJDataComponents.ABILITY_ENABLED) && event.getEntity().isShiftKeyDown()){
-                    boolean enabled = MJDataComponentsUtils.isAbilityEnabled(stack);
-                    MJDataComponentsUtils.setAbilityStatus(stack, !enabled);
-                    event.getEntity().displayClientMessage(Component.literal("Ability " + (enabled ? "Disabled" : "Enabled")).withStyle((enabled ? ChatFormatting.RED : ChatFormatting.GREEN)), true);
-                    if(event.getLevel().isClientSide){
-                        Player player = event.getEntity();
-                        Level level = event.getLevel();
-                        if(enabled){
-                            level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.PLAYERS, 0.4f, 0.01f);
-                        }else{
-                            level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.PLAYERS, 0.4f, 0.09f);
+                    if(MJDataComponentsUtils.isInfused(stack)){
+                        boolean enabled = MJDataComponentsUtils.isAbilityEnabled(stack);
+                        MJDataComponentsUtils.setAbilityStatus(stack, !enabled);
+                        event.getEntity().displayClientMessage(Component.literal("Ability " + (enabled ? "Disabled" : "Enabled")).withStyle((enabled ? ChatFormatting.RED : ChatFormatting.GREEN)), true);
+                        if(event.getLevel().isClientSide){
+                            Player player = event.getEntity();
+                            Level level = event.getLevel();
+                            if(enabled){
+                                level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.PLAYERS, 0.4f, 0.01f);
+                            }else{
+                                level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.PLAYERS, 0.4f, 0.09f);
+                            }
                         }
+                    }else{
+                        event.getEntity().sendSystemMessage(Component.literal("Infuse in Algae Serum to unlock Abilities").withStyle(ChatFormatting.RED));
                     }
                     event.setCanceled(true);
                 }
@@ -200,6 +210,7 @@ public final class MJEvents {
             ItemEntity newItemEntity = new ItemEntity(level, position.x, position.y, position.z, resultStack);
             level.addFreshEntity(newItemEntity);
         }
+
     }
 
     @EventBusSubscriber(modid = ModJam.MODID, bus = EventBusSubscriber.Bus.MOD)
@@ -217,4 +228,5 @@ public final class MJEvents {
             }
         }
     }
+
 }

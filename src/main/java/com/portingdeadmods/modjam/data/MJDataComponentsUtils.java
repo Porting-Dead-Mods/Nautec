@@ -23,4 +23,12 @@ public class MJDataComponentsUtils {
     public static float isAbilityEnabledNBT(ItemStack stack) {
         return stack.getOrDefault(MJDataComponents.ABILITY_ENABLED, false) ? 1 : 0;
     }
+
+    public static void setInfusedStatus(ItemStack stack, Boolean value) {
+        stack.set(MJDataComponents.IS_INFUSED, value);
+    }
+
+    public static Boolean isInfused(ItemStack stack) {
+        return stack.getOrDefault(MJDataComponents.IS_INFUSED, false);
+    }
 }
