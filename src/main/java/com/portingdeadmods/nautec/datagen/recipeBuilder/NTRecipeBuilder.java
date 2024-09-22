@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.List;
@@ -30,7 +31,10 @@ public interface NTRecipeBuilder extends RecipeBuilder {
                 }
             }
         }
-        builder.append("to_").append(BuiltInRegistries.ITEM.getKey(getResult()).getPath());
+        Item result = getResult();
+        if (result != Items.AIR) {
+            builder.append("to_").append(BuiltInRegistries.ITEM.getKey(result).getPath());
+        }
         save(recipeOutput, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, getName() + "/" + builder));
     }
 }
