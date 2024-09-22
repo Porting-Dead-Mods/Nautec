@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec;
 
 import com.mojang.logging.LogUtils;
+import com.portingdeadmods.nautec.content.items.BatteryItem;
 import com.portingdeadmods.nautec.content.items.PrismMonocleItem;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
 import com.portingdeadmods.nautec.data.NTDataComponents;
@@ -43,6 +44,7 @@ public final class Nautec {
         NTLootModifier.LOOT_MODIFIERS.register(modEventBus);
 
         modEventBus.addListener(PrismMonocleItem::registerCapabilities);
+        modEventBus.addListener(BatteryItem::registerCapabilities);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, NTConfig.SPEC);
     }
