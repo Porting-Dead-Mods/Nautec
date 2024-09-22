@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.portingdeadmods.nautec.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BucketItemMixin",
+    "GrowingPlantHeadBlockMixin",
+    "ItemStorageProviderMixin",
+    "StructurePieceMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

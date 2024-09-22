@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=false": {
+      "model": "nautec:block/crate"
+    },
+    "open=true": {
+      "model": "nautec:block/crate_open"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "nautec:item_transformation",
+  "duration": 100,
+  "ingredient": {
+    "item": "minecraft:iron_ingot"
+  },
+  "purity": 3.0,
+  "result": {
+    "count": 1,
+    "id": "nautec:aquarine_steel_ingot"
+  }
+}

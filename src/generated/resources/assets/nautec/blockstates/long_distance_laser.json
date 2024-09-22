@@ -1,0 +1,29 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "nautec:block/long_distance_laser"
+    },
+    "facing=east": {
+      "model": "nautec:block/long_distance_laser",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nautec:block/long_distance_laser",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "nautec:block/long_distance_laser",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "nautec:block/long_distance_laser"
+    },
+    "facing=west": {
+      "model": "nautec:block/long_distance_laser",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

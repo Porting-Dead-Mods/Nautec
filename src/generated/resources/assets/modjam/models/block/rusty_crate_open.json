@@ -1,9 +1,0 @@
-{
-  "parent": "modjam:block/crate_open",
-  "textures": {
-    "2": "modjam:block/crate/rusty_top_inner",
-    "4": "modjam:block/crate/rusty",
-    "5": "modjam:block/crate/rusty_top",
-    "particle": "modjam:block/crate/rusty"
-  }
-}

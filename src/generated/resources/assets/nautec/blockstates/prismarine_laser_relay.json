@@ -1,0 +1,29 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "nautec:block/prismarine_laser_relay"
+    },
+    "facing=east": {
+      "model": "nautec:block/prismarine_laser_relay",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nautec:block/prismarine_laser_relay",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "nautec:block/prismarine_laser_relay",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "nautec:block/prismarine_laser_relay"
+    },
+    "facing=west": {
+      "model": "nautec:block/prismarine_laser_relay",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

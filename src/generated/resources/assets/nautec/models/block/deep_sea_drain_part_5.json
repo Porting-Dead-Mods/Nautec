@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "nautec:block/multiblock/drain/bottom_5",
+    "east": "nautec:block/multiblock/drain/side_1",
+    "north": "nautec:block/multiblock/drain/side_1",
+    "south": "nautec:block/multiblock/drain/side_1",
+    "up": "nautec:block/multiblock/drain/top_5",
+    "west": "nautec:block/multiblock/drain/side_1"
+  }
+}

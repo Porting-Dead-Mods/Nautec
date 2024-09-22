@@ -1,0 +1,27 @@
+{
+  "type": "nautec:mixing",
+  "duration": 200,
+  "fluid_ingredient": {},
+  "fluid_result": {},
+  "ingredients": [
+    {
+      "count": 4,
+      "item": "minecraft:dried_kelp"
+    },
+    {
+      "count": 2,
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:prismarine_crystals"
+    },
+    {
+      "count": 5,
+      "item": "minecraft:seagrass"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:eas_bucket"
+  }
+}

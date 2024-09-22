@@ -1,0 +1,22 @@
+{
+  "type": "nautec:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:archaeology/ocean_ruin_warm"
+    },
+    {
+      "chance": 0.05,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": {
+    "components": {
+      "minecraft:container_loot": {
+        "loot_table": "nautec:chests/crate"
+      }
+    },
+    "count": 1,
+    "id": "nautec:crate"
+  }
+}

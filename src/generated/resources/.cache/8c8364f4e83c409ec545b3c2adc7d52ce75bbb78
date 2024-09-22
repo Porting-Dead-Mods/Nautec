@@ -1,3 +1,3 @@
-// 1.21.1	2024-09-18T20:19:09.1847635	Tags for minecraft:item mod id vanilla
-e182dc27e1c6dd339f7a16ac80d49d97f86b51aa data/modjam/tags/item/aquarine_steel.json
-e1102ee826d5ec0d457c55612bc006b93dfc1ed5 data/modjam/tags/item/aquatic_catalyst.json
+// 1.21.1	2024-09-22T14:49:29.490159755	Tags for minecraft:item mod id vanilla
+255db1048249ab333a1f41009c18cbcd639e3ae4 data/nautec/tags/item/aquarine_steel.json
+e1102ee826d5ec0d457c55612bc006b93dfc1ed5 data/nautec/tags/item/aquatic_catalyst.json

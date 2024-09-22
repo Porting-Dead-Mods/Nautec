@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "nautec:block/deep_sea_drain_wall"
+  }
+}
