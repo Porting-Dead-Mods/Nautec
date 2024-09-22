@@ -5,10 +5,11 @@ import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
 import com.portingdeadmods.modjam.registries.MJAugments;
 import com.portingdeadmods.modjam.utils.InputUtils;
-import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.jetbrains.annotations.Nullable;
+
+import static com.portingdeadmods.modjam.utils.MathUtils.*;
 
 public class LeapAugment extends Augment {
     public LeapAugment(AugmentSlot augmentSlot) {
@@ -60,21 +61,4 @@ public class LeapAugment extends Augment {
         setCooldown(25);
         // Look at the sick graph omg
     }
-
-    public Vec3 rotateYaw(Vec3 vec, float yaw) {
-        float fc = Mth.cos(yaw);
-        float fs = Mth.sin(yaw);
-        return new Vec3(vec.x * fc + vec.z * fs, vec.y, vec.z * fc - vec.x * fs);
-    }
-
-    public Vec3 rotateRoll(Vec3 vec, float roll) {
-        float fc = Mth.cos(roll);
-        float fs = Mth.sin(roll);
-        return new Vec3(vec.x * fc + vec.y * fs, vec.y * fc - vec.x * fs, vec.z);
-    }
-
-    public double map(double val, double inMin, double inMax, double desMin, double desMax) {
-        return desMin + (desMax - desMin) * (val - inMin) / (inMax - inMin);
-    }
 }
-// Wow this class is full of maths, I guess the person who did it, is just good at maths :shrug:

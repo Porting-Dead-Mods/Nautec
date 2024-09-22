@@ -42,7 +42,6 @@ public class ThrownBouncingTrident extends ThrownTrident {
         Direction face = result.getDirection();
 
         Vec3 normal = new Vec3(face.getNormal().getX(), face.getNormal().getY(), face.getNormal().getZ());
-
         Vec3 motion = getDeltaMovement();
         double dot = motion.dot(normal) * 2.0D;
         Vec3 reflect = motion.subtract(normal.scale(dot));
@@ -63,8 +62,15 @@ public class ThrownBouncingTrident extends ThrownTrident {
         trident.setDeltaMovement(reflect);
 
         double speed = reflect.length();
+
+        /*
+            // Can just use Math.toDegrees, big dumdum but the decimal is approx 180 / PI , i guess using toDegrees removes the "magic" number from the function
         trident.setXRot((float)(Mth.atan2(reflect.y(), speed) * 57.2957763671875D));  // Convert radians to degrees for pitch (x rotation)
         trident.setYRot((float)(Mth.atan2(reflect.x(), reflect.z()) * 57.2957763671875D));  // Convert for yaw (y rotation)
+        */
+
+        trident.setXRot((float) Math.toDegrees(Mth.atan2(reflect.y, speed)));
+        trident.setYRot((float) Math.toDegrees(Mth.atan2(reflect.x, reflect.z)));
 
         trident.reapplyPosition();
         trident.pickup = Pickup.DISALLOWED;
