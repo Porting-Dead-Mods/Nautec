@@ -6,6 +6,7 @@ import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.registries.NTAugmentSlots;
 import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.utils.InputUtils;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.jetbrains.annotations.Nullable;
@@ -63,6 +64,10 @@ public class LeapAugment extends Augment {
         // ModJam.LOGGER.info(player.getDeltaMovement().toString());
         player.hasImpulse = true;
         setCooldown(25);
+        player.playSound(SoundEvents.UI_TOAST_IN, 2.0f, 1.0f);
+        player.playSound(SoundEvents.UI_TOAST_IN, 1.5f, .8f);
+        //player.playSound(SoundEvents.ELYTRA_FLYING);
+        // player.playSound(SoundEvents.HORSE_AMBIENT, 2.0f,1.0f);
         // Look at the sick graph omg
     }
 }
