@@ -4,18 +4,23 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
 import com.portingdeadmods.modjam.network.SyncAugmentPayload;
+import com.portingdeadmods.modjam.client.screen.AugmentScreen;
+import com.portingdeadmods.modjam.content.augments.AugmentSlots;
+import com.portingdeadmods.modjam.registries.MJMenuTypes;
 import com.portingdeadmods.modjam.utils.AugmentHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
+import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("unused")
@@ -34,14 +39,16 @@ public final class AugmentEvents {
     }
 
     @SubscribeEvent
-    public static void breakEvent(BlockEvent.BreakEvent event) {
+    public static void breakEvent(BlockEvent.BreakEvent event){
         Iterable<Augment> augments = AugmentHelper.getAugments(event.getPlayer()).values();
         for (Augment augment : augments) {
             if (augment != null) {
-                augment.breakBlock(event);
+                //augments.get(i).breakBlock(AugmentSlot.GetValue(i),event);
+
             }
         }
     }
+
 
     @SubscribeEvent
     public static void playerTick(PlayerTickEvent.Post event) {
@@ -67,6 +74,14 @@ public final class AugmentEvents {
                 CompoundTag nbt = data.get(slot);
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncAugmentPayload(augment, nbt != null ? nbt : new CompoundTag()));
             }
+        }
+    }
+
+    @EventBusSubscriber(modid = ModJam.MODID, bus = EventBusSubscriber.Bus.MOD)
+    public static class ModEvents {
+        @SubscribeEvent
+        public static void onClientSetup(RegisterMenuScreensEvent event) {
+            event.register(MJMenuTypes.AUGMENT.get(), AugmentScreen::new);
         }
     }
 }
