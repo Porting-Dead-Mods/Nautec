@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.content.entites;
 
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,7 +14,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class ThrownBouncingTrident extends ThrownTrident {
-    int bouncesLeft = 0;
+    int bouncesLeft = 1;
     public ThrownBouncingTrident(EntityType<? extends ThrownTrident> entityType, Level level) {
         super(entityType, level);
     }
@@ -21,6 +22,7 @@ public class ThrownBouncingTrident extends ThrownTrident {
         super(world, owner, stack);
         this.bouncesLeft = bouncesLeft;
     }
+
     public ThrownBouncingTrident createBouncingTrident(Level level, LivingEntity thrower, int bouncesLeft) {
         if (thrower == null)
             return null;
@@ -53,6 +55,7 @@ public class ThrownBouncingTrident extends ThrownTrident {
         reflect = reflect.multiply(new Vec3(forwardDamping, 1.0D, forwardDamping));
 
         ThrownBouncingTrident trident = createBouncingTrident(this.level(), (LivingEntity) getOwner(), bouncesLeft);
+        if (trident == null ) return;
         trident.setPos(
                 result.getLocation().x() + reflect.x() / 5.0D,
                 result.getLocation().y() + reflect.y() / 5.0D,
