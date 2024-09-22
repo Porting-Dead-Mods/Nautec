@@ -14,6 +14,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
+@Deprecated
 public class ThrowSnowballAugment extends Augment {
     public ThrowSnowballAugment(AugmentSlot augmentSlot) {
         super(MJAugments.THROW_SNOWBALL.get(), augmentSlot);

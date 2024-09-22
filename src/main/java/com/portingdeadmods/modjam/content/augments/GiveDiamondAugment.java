@@ -11,6 +11,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
+@Deprecated
 public class GiveDiamondAugment extends Augment {
     public GiveDiamondAugment(AugmentSlot augmentSlot) {
         super(MJAugments.GIVE_DIAMOND.get(), augmentSlot);

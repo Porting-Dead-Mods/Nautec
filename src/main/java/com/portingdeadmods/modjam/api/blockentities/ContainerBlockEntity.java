@@ -134,6 +134,7 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     }
 
     protected final void addItemHandler(int slots, int slotLimit, BiPredicate<Integer, ItemStack> validation) {
+        ModJam.LOGGER.debug("itemhandler slots: {}", slots);
         this.itemHandler = new ItemStackHandler(slots) {
             @Override
             protected void onContentsChanged(int slot) {
@@ -151,6 +152,11 @@ public abstract class ContainerBlockEntity extends BlockEntity {
             @Override
             public int getSlotLimit(int slot) {
                 return slotLimit;
+            }
+
+            @Override
+            public int getSlots() {
+                return slots;
             }
         };
     }

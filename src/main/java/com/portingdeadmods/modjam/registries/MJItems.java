@@ -48,6 +48,10 @@ public final class MJItems {
     public static final DeferredItem<Item> DOLPHIN_FIN = registerItem("dolphin_fin",
             Item::new, new Item.Properties());
 
+    // Robot Arms
+    public static final DeferredItem<RobotArmItem> CLAW_ROBOT_ARM = registerItem("claw_robot_arm",
+            RobotArmItem::new, new Item.Properties());
+
     // VIALS
     public static final DeferredItem<Item> GLASS_VIAL = registerItem("glass_vial", Item::new, new Item.Properties());
     public static final DeferredItem<Item> ELECTROLYTE_ALGAE_SERUM_VIAL = registerItem("eas_vial", Item::new, new Item.Properties());

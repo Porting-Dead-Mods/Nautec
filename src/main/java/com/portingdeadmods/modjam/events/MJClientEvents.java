@@ -16,6 +16,9 @@ import com.portingdeadmods.modjam.client.model.block.PrismarineCrystalModel;
 import com.portingdeadmods.modjam.client.model.block.RobotArmModel;
 import com.portingdeadmods.modjam.client.model.block.WhiskModel;
 import com.portingdeadmods.modjam.client.renderer.augments.SimpleAugmentRenderer;
+import com.portingdeadmods.modjam.client.renderer.robotArms.ClawRobotArmRenderer;
+import com.portingdeadmods.modjam.client.screen.AugmentationStationExtensionScreen;
+import com.portingdeadmods.modjam.content.menus.AugmentationStationExtensionMenu;
 import com.portingdeadmods.modjam.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.modjam.client.renderer.blockentities.*;
 import com.portingdeadmods.modjam.client.screen.CrateScreen;
@@ -46,6 +49,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -152,12 +156,14 @@ public final class MJClientEvents {
             event.registerBlockEntityRenderer(MJBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), AugmentStationExtensionBERenderer::new);
             AugmentLayerRenderer.registerRenderer(MJAugments.UNDERWATER_MOVEMENT_SPEED_AUGMENT.get(),
                     ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.MATERIAL, ctx));
+            AugmentStationExtensionBERenderer.registerRenderer(MJItems.CLAW_ROBOT_ARM.get(), ClawRobotArmRenderer::new);
         }
 
         @SubscribeEvent
         public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event) {
             event.registerReloadListener((ResourceManagerReloadListener) resourceManager -> {
                 AugmentLayerRenderer.createRenderers();
+                AugmentStationExtensionBERenderer.createRenderers();
             });
         }
 
@@ -174,6 +180,7 @@ public final class MJClientEvents {
         @SubscribeEvent
         public static void registerMenus(RegisterMenuScreensEvent event) {
             event.register(MJMenuTypes.CRATE.get(), CrateScreen::new);
+            event.register(MJMenuTypes.AUGMENT_STATION_EXTENSION.get(), AugmentationStationExtensionScreen::new);
         }
 
         @SubscribeEvent

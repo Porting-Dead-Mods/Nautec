@@ -5,6 +5,7 @@ import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
 import com.portingdeadmods.modjam.content.entites.ThrownBouncingTrident;
 import com.portingdeadmods.modjam.network.KeyPressedPayload;
+import com.portingdeadmods.modjam.registries.MJAugmentSlots;
 import com.portingdeadmods.modjam.registries.MJAugments;
 import com.portingdeadmods.modjam.utils.AugmentHelper;
 import com.portingdeadmods.modjam.utils.InputUtils;
@@ -20,7 +21,15 @@ public class ThrowBouncingTridentAugment extends Augment {
 
     @Override
     public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
+        return new AugmentSlot[] {
+                MJAugmentSlots.LEFT_ARM.get(),
+                MJAugmentSlots.RIGHT_ARM.get(),
+        };
+    }
+
+    @Override
+    public boolean replaceBodyPart() {
+        return true;
     }
 
     @Override

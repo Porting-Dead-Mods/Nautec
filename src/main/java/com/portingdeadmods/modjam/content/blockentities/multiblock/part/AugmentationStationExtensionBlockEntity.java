@@ -1,8 +1,11 @@
 package com.portingdeadmods.modjam.content.blockentities.multiblock.part;
 
+import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.modjam.api.blockentities.multiblock.MultiblockPartEntity;
 import com.portingdeadmods.modjam.capabilities.IOActions;
+import com.portingdeadmods.modjam.content.items.RobotArmItem;
+import com.portingdeadmods.modjam.content.menus.AugmentationStationExtensionMenu;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
@@ -10,15 +13,22 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.neoforged.neoforge.fluids.RegisterCauldronFluidContentEvent;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity implements MultiblockPartEntity {
+public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity implements MultiblockPartEntity, MenuProvider {
     private float middleIndependentAngle;
     public float tipIndependentAngle;
 
@@ -33,8 +43,8 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
 
     public AugmentationStationExtensionBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(MJBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), blockPos, blockState);
-        // Robot arm
-        addItemHandler(1);
+        // Augment:0, Robot arm:1
+        addItemHandler(2, 1, (slot, stack) -> (slot == 1 && stack.getItem() instanceof RobotArmItem) || (slot == 0));
         this.animation = Animation.IDLE;
     }
 
@@ -58,6 +68,7 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
     @Override
     public void commonTick() {
         super.commonTick();
+        ModJam.LOGGER.debug("Slots: {}", getItemHandler().getSlots());
         if (animationInterval > 0) {
             animationInterval--;
             if (animation == Animation.BACKWARD && animationInterval == 35) {
@@ -142,6 +153,16 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
         super.saveData(tag, provider);
         tag.putLong("controllerPos", controllerPos.asLong());
         tag.putBoolean("hasRobotArm", hasRobotArm);
+    }
+
+    @Override
+    public @NotNull Component getDisplayName() {
+        return Component.literal("Augmentation Station Extension");
+    }
+
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+        return new AugmentationStationExtensionMenu(containerId, playerInventory, this);
     }
 
     public enum Animation {
