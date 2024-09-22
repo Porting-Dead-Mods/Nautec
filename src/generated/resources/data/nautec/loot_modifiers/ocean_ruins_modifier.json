@@ -1,0 +1,31 @@
+{
+  "type": "nautec:add_item",
+  "conditions": [
+    {
+      "condition": "minecraft:any_of",
+      "terms": [
+        {
+          "condition": "neoforge:loot_table_id",
+          "loot_table_id": "minecraft:chests/underwater_ruin_big"
+        },
+        {
+          "condition": "neoforge:loot_table_id",
+          "loot_table_id": "minecraft:chests/underwater_ruin_small"
+        }
+      ]
+    },
+    {
+      "chance": 0.33,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": {
+    "components": {
+      "minecraft:container_loot": {
+        "loot_table": "nautec:chests/crate"
+      }
+    },
+    "count": 1,
+    "id": "nautec:crate"
+  }
+}

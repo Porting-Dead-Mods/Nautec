@@ -1,0 +1,24 @@
+{
+  "type": "nautec:mixing",
+  "duration": 60,
+  "fluid_ingredient": {},
+  "fluid_result": {},
+  "ingredients": [
+    {
+      "item": "nautec:diving_helmet"
+    },
+    {
+      "item": "nautec:diving_chestplate"
+    },
+    {
+      "item": "nautec:diving_leggings"
+    },
+    {
+      "item": "nautec:diving_boots"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:crowbar"
+  }
+}

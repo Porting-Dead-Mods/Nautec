@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "nautec:block/dark_prismarine_pillar_end",
+    "side": "nautec:block/dark_prismarine_pillar_side"
+  }
+}

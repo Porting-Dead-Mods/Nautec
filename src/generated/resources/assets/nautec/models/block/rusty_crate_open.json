@@ -1,0 +1,9 @@
+{
+  "parent": "nautec:block/crate_open",
+  "textures": {
+    "2": "nautec:block/crate/rusty_top_inner",
+    "4": "nautec:block/crate/rusty",
+    "5": "nautec:block/crate/rusty_top",
+    "particle": "nautec:block/crate/rusty"
+  }
+}

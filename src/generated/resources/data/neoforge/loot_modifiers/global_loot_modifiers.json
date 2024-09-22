@@ -1,10 +1,10 @@
 {
   "entries": [
-    "modjam:ocean_ruins_modifier",
-    "modjam:guardian_modifier",
-    "modjam:elder_guardian_modifier",
-    "modjam:suspicious_ruins_sand_modifier",
-    "modjam:shipwreck_modifier"
+    "nautec:ocean_ruins_modifier",
+    "nautec:guardian_modifier",
+    "nautec:elder_guardian_modifier",
+    "nautec:suspicious_ruins_sand_modifier",
+    "nautec:shipwreck_modifier"
   ],
   "replace": false
 }

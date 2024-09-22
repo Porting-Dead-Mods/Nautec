@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "modjam:item/aquarine_steel_ingot"
-  }
-}

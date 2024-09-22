@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "nautec:item/aquarine_steel_shovel_enabled"
+  }
+}

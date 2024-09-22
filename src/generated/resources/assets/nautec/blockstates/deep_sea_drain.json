@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "formed=false": {
+      "model": "nautec:block/deep_sea_drain"
+    },
+    "formed=true": {
+      "model": "nautec:block/deep_sea_drain_formed"
+    }
+  }
+}

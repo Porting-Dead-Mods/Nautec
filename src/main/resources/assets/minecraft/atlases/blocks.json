@@ -2,19 +2,19 @@
   "sources": [
     {
       "type": "single",
-      "resource": "modjam:entity/drain_top"
+      "resource": "nautec:entity/drain_top"
     },
     {
       "type": "single",
-      "resource": "modjam:entity/prismarine_crystal"
+      "resource": "nautec:entity/prismarine_crystal"
     },
     {
       "type": "single",
-      "resource": "modjam:entity/whisk"
+      "resource": "nautec:entity/whisk"
     },
     {
       "type": "single",
-      "resource": "modjam:entity/robot_arm"
+      "resource": "nautec:entity/robot_arm"
     },
     {
       "type": "directory",
