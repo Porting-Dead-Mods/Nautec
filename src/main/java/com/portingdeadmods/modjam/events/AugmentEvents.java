@@ -4,12 +4,16 @@ import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
 import com.portingdeadmods.modjam.network.SyncAugmentPayload;
+import com.portingdeadmods.modjam.client.screen.AugmentScreen;
+import com.portingdeadmods.modjam.content.augments.AugmentSlots;
+import com.portingdeadmods.modjam.registries.MJMenuTypes;
 import com.portingdeadmods.modjam.utils.AugmentHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -31,6 +35,11 @@ public final class AugmentEvents {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onClientSetup(RegisterMenuScreensEvent event) {
+        event.register(MJMenuTypes.AUGMENT.get(), AugmentScreen::new);
     }
 
     @SubscribeEvent
