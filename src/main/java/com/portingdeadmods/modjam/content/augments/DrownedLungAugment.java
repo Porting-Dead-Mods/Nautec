@@ -2,19 +2,22 @@ package com.portingdeadmods.modjam.content.augments;
 
 import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
+import com.portingdeadmods.modjam.registries.MJAugmentSlots;
 import com.portingdeadmods.modjam.registries.MJAugments;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.jetbrains.annotations.Nullable;
 
-public class PreventPlayerLoseAirAugment extends Augment {
-    public PreventPlayerLoseAirAugment(AugmentSlot augmentSlot) {
+public class DrownedLungAugment extends Augment {
+    public DrownedLungAugment(AugmentSlot augmentSlot) {
         super(MJAugments.PREVENT_PLAYER_LOSE_AIR_AUGMENT.get(), augmentSlot);
     }
 
     @Override
     public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
+        return new AugmentSlot[] {
+                MJAugmentSlots.LUNG.get()
+        };
     }
 
     @Override

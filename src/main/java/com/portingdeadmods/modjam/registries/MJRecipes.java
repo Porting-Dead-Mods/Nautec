@@ -1,10 +1,7 @@
 package com.portingdeadmods.modjam.registries;
 
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.content.recipes.AquaticCatalystChannelingRecipe;
-import com.portingdeadmods.modjam.content.recipes.ItemEtchingRecipe;
-import com.portingdeadmods.modjam.content.recipes.ItemTransformationRecipe;
-import com.portingdeadmods.modjam.content.recipes.MixingRecipe;
+import com.portingdeadmods.modjam.content.recipes.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -18,6 +15,7 @@ public final class MJRecipes {
         SERIALIZERS.register(ItemTransformationRecipe.NAME, () -> ItemTransformationRecipe.Serializer.INSTANCE);
         SERIALIZERS.register(ItemEtchingRecipe.NAME, () -> ItemEtchingRecipe.Serializer.INSTANCE);
         SERIALIZERS.register(MixingRecipe.NAME, () -> MixingRecipe.Serializer.INSTANCE);
+        SERIALIZERS.register(AugmentationRecipe.NAME, () -> AugmentationRecipe.Serializer.INSTANCE);
     }
 
 }

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import org.jetbrains.annotations.Nullable;
 
+@Deprecated
 public class DisallowBreakingAugment extends Augment {
     public DisallowBreakingAugment(AugmentSlot augmentSlot) {
         super(MJAugments.DISALLOW_BREAKING.get(), augmentSlot);

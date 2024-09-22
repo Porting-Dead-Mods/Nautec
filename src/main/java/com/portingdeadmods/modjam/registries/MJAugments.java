@@ -19,8 +19,8 @@ public final class MJAugments {
             () -> AugmentType.of(ThrowSnowballAugment::new));
     public static final Supplier<AugmentType<ThrowRandomPotionAugments>> THROW_POTION_AUGMENT = AUGMENTS.register("throw_random_potion",
             () -> AugmentType.of(ThrowRandomPotionAugments::new));
-    public static final Supplier<AugmentType<PreventPlayerLoseAirAugment>> PREVENT_PLAYER_LOSE_AIR_AUGMENT = AUGMENTS.register("prevent_player_lose_air_supply",
-            () -> AugmentType.of(PreventPlayerLoseAirAugment::new));
+    public static final Supplier<AugmentType<DrownedLungAugment>> PREVENT_PLAYER_LOSE_AIR_AUGMENT = AUGMENTS.register("prevent_player_lose_air_supply",
+            () -> AugmentType.of(DrownedLungAugment::new));
     public static final Supplier<AugmentType<DolphinFinAugment>> UNDERWATER_MOVEMENT_SPEED_AUGMENT = AUGMENTS.register("underwater_movement_speed",
             () -> AugmentType.of(DolphinFinAugment::new));
     public static final Supplier<AugmentType<ThrowBouncingTridentAugment>> THROWN_BOUNCING_TRIDENT_AUGMENT = AUGMENTS.register("throw_bouncing_trident",

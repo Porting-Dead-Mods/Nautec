@@ -3,6 +3,7 @@ package com.portingdeadmods.modjam.content.augments;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
+import com.portingdeadmods.modjam.registries.MJAugmentSlots;
 import com.portingdeadmods.modjam.registries.MJAugments;
 import com.portingdeadmods.modjam.utils.InputUtils;
 import net.minecraft.util.Mth;
@@ -17,7 +18,10 @@ public class LeapAugment extends Augment {
 
     @Override
     public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
+        return new AugmentSlot[] {
+                MJAugmentSlots.RIGHT_LEG.get(),
+                MJAugmentSlots.LEFT_LEG.get()
+        };
     }
 
     @Override

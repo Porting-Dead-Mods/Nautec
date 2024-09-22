@@ -34,11 +34,13 @@ public record SyncAugmentPayload(Augment augment, CompoundTag extraData) impleme
     public static void setAugmentDataAction(SyncAugmentPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
             Augment augment = payload.augment();
+            CompoundTag tag = payload.extraData();
             Player player = context.player();
             augment.setPlayer(player);
+            augment.deserializeNBT(player.level().registryAccess(), tag);
             AugmentSlot augmentSlot = augment.getAugmentSlot();
             AugmentHelper.setAugment(player, augmentSlot, augment);
-            AugmentHelper.setAugmentExtraData(player, augmentSlot, payload.extraData());
+            AugmentHelper.setAugmentExtraData(player, augmentSlot, tag);
         });
     }
 }

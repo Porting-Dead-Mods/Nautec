@@ -6,6 +6,7 @@ import com.portingdeadmods.modjam.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.modjam.api.blocks.blockentities.LaserBlock;
 import com.portingdeadmods.modjam.api.multiblocks.Multiblock;
 import com.portingdeadmods.modjam.content.blockentities.multiblock.part.AugmentationStationExtensionBlockEntity;
+import com.portingdeadmods.modjam.content.menus.AugmentationStationExtensionMenu;
 import com.portingdeadmods.modjam.registries.MJBlockEntityTypes;
 import com.portingdeadmods.modjam.registries.MJItems;
 import net.minecraft.core.BlockPos;
@@ -41,28 +42,13 @@ public class AugmentationStationExtensionBlock extends LaserBlock {
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
         return simpleCodec(AugmentationStationExtensionBlock::new);
     }
 
     @Override
     protected @NotNull InteractionResult useWithoutItem(BlockState p_60503_, Level p_60504_, BlockPos p_60505_, Player p_60506_, BlockHitResult p_60508_) {
+        p_60506_.openMenu((AugmentationStationExtensionBlockEntity) p_60504_.getBlockEntity(p_60505_), p_60505_);
         return InteractionResult.SUCCESS;
-    }
-
-    @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
-        if (stack.is(MJItems.AQUARINE_WRENCH.get())) {
-            if (be.getAnimation() == AugmentationStationExtensionBlockEntity.Animation.IDLE) {
-                be.equipAugment();
-            }
-        } else if (stack.is(MJItems.AQUARINE_SWORD.get())) {
-            be.resetAnim();
-        } else {
-            be.setHasRobotArm(!be.hasRobotArm());
-            ModJam.LOGGER.debug("AAA");
-        }
-        return ItemInteractionResult.SUCCESS;
     }
 }

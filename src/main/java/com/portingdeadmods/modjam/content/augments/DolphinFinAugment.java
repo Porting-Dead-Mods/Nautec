@@ -2,6 +2,7 @@ package com.portingdeadmods.modjam.content.augments;
 
 import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
+import com.portingdeadmods.modjam.registries.MJAugmentSlots;
 import com.portingdeadmods.modjam.registries.MJAugments;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -15,7 +16,9 @@ public class DolphinFinAugment extends Augment {
 
     @Override
     public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
+        return new AugmentSlot[] {
+                MJAugmentSlots.BODY.get()
+        };
     }
 
     @Override
