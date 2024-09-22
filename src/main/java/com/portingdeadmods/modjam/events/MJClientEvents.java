@@ -15,6 +15,7 @@ import com.portingdeadmods.modjam.client.model.block.RobotArmModel;
 import com.portingdeadmods.modjam.client.model.block.WhiskModel;
 import com.portingdeadmods.modjam.client.renderer.augments.SimpleAugmentRenderer;
 import com.portingdeadmods.modjam.client.renderer.robotArms.ClawRobotArmRenderer;
+import com.portingdeadmods.modjam.client.screen.AugmentScreen;
 import com.portingdeadmods.modjam.client.screen.AugmentationStationExtensionScreen;
 import com.portingdeadmods.modjam.content.menus.AugmentationStationExtensionMenu;
 import com.portingdeadmods.modjam.events.helper.AugmentLayerRenderer;
@@ -162,6 +163,7 @@ public final class MJClientEvents {
         public static void registerMenus(RegisterMenuScreensEvent event) {
             event.register(MJMenuTypes.CRATE.get(), CrateScreen::new);
             event.register(MJMenuTypes.AUGMENT_STATION_EXTENSION.get(), AugmentationStationExtensionScreen::new);
+            event.register(MJMenuTypes.AUGMENTS.get(), AugmentScreen::new);
         }
 
         @SubscribeEvent

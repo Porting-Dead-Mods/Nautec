@@ -76,12 +76,4 @@ public final class AugmentEvents {
             }
         }
     }
-
-    @EventBusSubscriber(modid = ModJam.MODID, bus = EventBusSubscriber.Bus.MOD)
-    public static class ModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(RegisterMenuScreensEvent event) {
-            event.register(MJMenuTypes.AUGMENT.get(), AugmentScreen::new);
-        }
-    }
 }
