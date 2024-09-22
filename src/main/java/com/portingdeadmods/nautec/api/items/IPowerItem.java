@@ -6,6 +6,7 @@ package com.portingdeadmods.nautec.api.items;
 public interface IPowerItem {
     int getMaxInput();
 
-    int getMaxOutput();
-
+    default int getMaxOutput() {
+        return 100;
+    }
 }

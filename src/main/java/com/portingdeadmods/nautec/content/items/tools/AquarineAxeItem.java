@@ -98,7 +98,7 @@ public class AquarineAxeItem extends AxeItem implements IPowerItem {
 
     @Override
     public int getMaxOutput() {
-        return 0;
+        return 100;
     }
 
     @Override

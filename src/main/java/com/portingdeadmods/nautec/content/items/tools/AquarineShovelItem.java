@@ -105,7 +105,7 @@ public class AquarineShovelItem extends ShovelItem implements IPowerItem {
 
     @Override
     public int getMaxOutput() {
-        return 0;
+        return 100;
     }
 
     @Override

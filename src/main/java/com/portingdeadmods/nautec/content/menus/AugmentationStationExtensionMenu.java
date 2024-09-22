@@ -22,4 +22,9 @@ public class AugmentationStationExtensionMenu extends NTAbstractContainerMenu<Au
         addPlayerInventory(inv, 84);
         addPlayerHotbar(inv, 142);
     }
+
+    @Override
+    protected int getMergeableSlotCount() {
+        return 2;
+    }
 }

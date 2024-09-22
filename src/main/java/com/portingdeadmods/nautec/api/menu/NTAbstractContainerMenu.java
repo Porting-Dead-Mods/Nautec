@@ -76,9 +76,7 @@ public abstract class NTAbstractContainerMenu<T extends ContainerBlockEntity> ex
         return true;
     }
 
-    protected int getMergeableSlotCount() {
-        return 2;
-    }
+    protected abstract int getMergeableSlotCount();
 
     @Override
     public ItemStack quickMoveStack(Player player, int index) {

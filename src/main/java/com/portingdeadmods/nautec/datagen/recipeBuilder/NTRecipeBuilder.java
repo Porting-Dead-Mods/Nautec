@@ -34,6 +34,8 @@ public interface NTRecipeBuilder extends RecipeBuilder {
         Item result = getResult();
         if (result != Items.AIR) {
             builder.append("to_").append(BuiltInRegistries.ITEM.getKey(result).getPath());
+        } else {
+            builder.deleteCharAt(builder.length() - 1);
         }
         save(recipeOutput, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, getName() + "/" + builder));
     }

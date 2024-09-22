@@ -19,7 +19,9 @@ import com.portingdeadmods.nautec.client.renderer.augments.SimpleAugmentRenderer
 import com.portingdeadmods.nautec.client.renderer.robotArms.ClawRobotArmRenderer;
 import com.portingdeadmods.nautec.client.screen.AugmentScreen;
 import com.portingdeadmods.nautec.client.screen.AugmentationStationExtensionScreen;
+import com.portingdeadmods.nautec.client.screen.AugmentationStationScreen;
 import com.portingdeadmods.nautec.content.augments.GuardianEyeAugment;
+import com.portingdeadmods.nautec.content.menus.AugmentationStationMenu;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;
 import com.portingdeadmods.nautec.client.screen.CrateScreen;
@@ -169,6 +171,7 @@ public final class NTClientEvents {
         @SubscribeEvent
         public static void registerMenus(RegisterMenuScreensEvent event) {
             event.register(NTMenuTypes.CRATE.get(), CrateScreen::new);
+            event.register(NTMenuTypes.AUGMENT_STATION.get(), AugmentationStationScreen::new);
             event.register(NTMenuTypes.AUGMENT_STATION_EXTENSION.get(), AugmentationStationExtensionScreen::new);
             event.register(NTMenuTypes.AUGMENTS.get(), AugmentScreen::new);
         }

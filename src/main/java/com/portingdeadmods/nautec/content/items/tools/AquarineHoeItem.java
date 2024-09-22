@@ -130,7 +130,7 @@ public class AquarineHoeItem extends HoeItem implements IPowerItem {
 
     @Override
     public int getMaxOutput() {
-        return 0;
+        return 100;
     }
 
     @Override
