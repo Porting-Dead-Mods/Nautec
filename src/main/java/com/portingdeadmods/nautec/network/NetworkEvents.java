@@ -26,5 +26,10 @@ public class NetworkEvents {
                 SetCooldownPayload.STREAM_CODEC,
                 SetCooldownPayload::setCooldownAction
         );
+        registrar.playBidirectional(
+                AugmentationScreenPayload.TYPE,
+                AugmentationScreenPayload.STREAM_CODEC,
+                AugmentationScreenPayload::AugmentationScreenAction
+        );
     }
 }

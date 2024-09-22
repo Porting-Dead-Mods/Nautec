@@ -28,6 +28,17 @@ public class AugmentScreen extends AbstractContainerScreen<AugmentMenu> {
     }
 
     @Override
+    protected void containerTick() {
+        super.containerTick();
+    }
+
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+    }
+
+    @Override
     protected void init() {
         super.init();
         this.titleLabelX = 4;
