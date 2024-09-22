@@ -18,6 +18,7 @@ import com.portingdeadmods.nautec.events.helper.ItemInfusion;
 import com.portingdeadmods.nautec.network.SyncAugmentPayload;
 import com.portingdeadmods.nautec.registries.NTFluidTypes;
 import com.portingdeadmods.nautec.registries.NTFluids;
+import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
 import com.portingdeadmods.nautec.utils.ParticlesUtils;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -145,6 +146,10 @@ public final class NTEvents {
             if(event.getItemStack().getItem() instanceof IPowerItem powerItem){
                 ItemStack stack = event.getItemStack();
                 if(stack.has(NTDataComponents.ABILITY_ENABLED) && event.getEntity().isShiftKeyDown()){
+                    if(stack.is(NTItems.BATTERY)){
+                        NTDataComponentsUtils.setAbilityStatus(stack, !NTDataComponentsUtils.isAbilityEnabled(stack));
+                        return;
+                    }
                     if(NTDataComponentsUtils.isInfused(stack)){
                         boolean enabled = NTDataComponentsUtils.isAbilityEnabled(stack);
                         NTDataComponentsUtils.setAbilityStatus(stack, !enabled);
@@ -159,7 +164,9 @@ public final class NTEvents {
                             }
                         }
                     }else{
-                        event.getEntity().sendSystemMessage(Component.literal("Infuse in Algae Serum to unlock Abilities").withStyle(ChatFormatting.RED));
+                        if(event.getLevel().isClientSide){
+                            event.getEntity().sendSystemMessage(Component.literal("Infuse in Algae Serum to unlock Abilities").withStyle(ChatFormatting.RED));
+                        }
                     }
                     event.setCanceled(true);
                 }

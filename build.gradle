@@ -84,7 +84,7 @@ dependencies {
 
     localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
-    runtimeOnly "curse.maven:embeddium-908741:5556146"
+    //runtimeOnly "curse.maven:embeddium-908741:5556146"
     //runtimeOnly "curse.maven:sinytra-connector-890127:5637280"
     //runtimeOnly "curse.maven:forgified-fabric-api-889079:5620473"
     //runtimeOnly "maven.modrinth:component-viewer:Xh1OCy7O"
