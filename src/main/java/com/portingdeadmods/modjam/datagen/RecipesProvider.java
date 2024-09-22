@@ -12,6 +12,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -65,5 +66,14 @@ public class RecipesProvider extends RecipeProvider {
                         , IngredientWithCount.fromItemLike(MJItems.DIVING_BOOTS.get(), 1))
                 .duration(60)
                 .save(pRecipeOutput);
+
+        MixingRecipeBuilder.newRecipe(new ItemStack(MJItems.EAS_BUCKET.get(), 1))
+                .ingredients(IngredientWithCount.fromItemLike(Items.DRIED_KELP, 4)
+                        , IngredientWithCount.fromItemLike(Items.SLIME_BALL, 2)
+                        , IngredientWithCount.fromItemLike(Items.PRISMARINE_CRYSTALS, 1)
+                        , IngredientWithCount.fromItemLike(Items.SEAGRASS, 5))
+                .duration(200)
+                .save(pRecipeOutput);
+
     }
 }

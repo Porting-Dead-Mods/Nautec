@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-15T15:39:41.605977044	Recipes
+// 1.21.1	2024-09-22T11:08:48.9369455	Recipes
 79c93eb45499c99c1d2f5b33a3d06eebae8ee3ae data/modjam/recipe/aquatic_catalyst_channeling/kelp_to_air.json
 c881b91075f7c1b1a7d5304014654ffbee72abd7 data/modjam/recipe/item_etching/ancient_valve_to_valve.json
 587380e04c3446a407d79703130d7b73e7bcec53 data/modjam/recipe/item_etching/rusty_gear_to_gear.json
@@ -6,3 +6,4 @@ c881b91075f7c1b1a7d5304014654ffbee72abd7 data/modjam/recipe/item_etching/ancient
 e5b9636f08954e5acaaf6832d72ecf4e9a717ffd data/modjam/recipe/mixing/anvil_atlantic_gold_nugget_to_rusty_gear.json
 28cc0049f31980f965d83a5e61190c6d60ce6777 data/modjam/recipe/mixing/atlantic_gold_ingot_to_atlantic_gold_nugget.json
 eff68d65ada7c926e4f29eae840532b396b62af9 data/modjam/recipe/mixing/diving_helmet_diving_chestplate_diving_leggings_diving_boots_to_crowbar.json
+246cc6b7d89f4f03716409594de45a0b1f7aee32 data/modjam/recipe/mixing/dried_kelp_slime_ball_prismarine_crystals_seagrass_to_eas_bucket.json

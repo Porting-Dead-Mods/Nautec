@@ -33,7 +33,7 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
                                 3,
                                 -2.4f
                         )
-                ).component(MJDataComponents.ABILITY_ENABLED,false).component(MJDataComponents.POWER, ComponentPowerStorage.withCapacity(700)));
+                ).component(MJDataComponents.IS_INFUSED,false).component(MJDataComponents.ABILITY_ENABLED,false).component(MJDataComponents.POWER, ComponentPowerStorage.withCapacity(700)));
     }
 
     @Override
