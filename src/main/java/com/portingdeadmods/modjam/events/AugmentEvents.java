@@ -3,11 +3,14 @@ package com.portingdeadmods.modjam.events;
 import com.portingdeadmods.modjam.ModJam;
 import com.portingdeadmods.modjam.api.augments.Augment;
 import com.portingdeadmods.modjam.api.augments.AugmentSlot;
+import com.portingdeadmods.modjam.client.screen.AugmentScreen;
 import com.portingdeadmods.modjam.content.augments.AugmentSlots;
+import com.portingdeadmods.modjam.registries.MJMenuTypes;
 import com.portingdeadmods.modjam.utils.AugmentHelper;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -16,6 +19,11 @@ import java.util.List;
 @SuppressWarnings("unused")
 @EventBusSubscriber(modid = ModJam.MODID)
 public final class AugmentEvents {
+
+    @SubscribeEvent
+    public static void onClientSetup(RegisterMenuScreensEvent event) {
+        event.register(MJMenuTypes.AUGMENT.get(), AugmentScreen::new);
+    }
 
     @SubscribeEvent
     public static void breakEvent(BlockEvent.BreakEvent event){
