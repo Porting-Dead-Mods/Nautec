@@ -1,10 +1,8 @@
 package com.portingdeadmods.modjam.events;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.portingdeadmods.modjam.ModJam;
-import com.portingdeadmods.modjam.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.modjam.api.client.renderer.blockentities.LaserBlockEntityRenderer;
 import com.portingdeadmods.modjam.api.client.renderer.items.PrismarineCrystalItemRenderer;
 import com.portingdeadmods.modjam.api.fluids.BaseFluidType;
@@ -26,7 +24,6 @@ import com.portingdeadmods.modjam.data.MJDataComponentsUtils;
 import com.portingdeadmods.modjam.registries.*;
 import com.portingdeadmods.modjam.utils.ArmorModelsHandler;
 import net.minecraft.client.Camera;
-import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -35,11 +32,8 @@ import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.PreparableReloadListener;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.util.FastColor;
-import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -54,30 +48,17 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import org.joml.Vector4i;
-import org.lwjgl.glfw.GLFW;
-
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 
 public final class MJClientEvents {
     @EventBusSubscriber(modid = ModJam.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
     public static final class ClientBus {
         public static final PrismarineCrystalItemRenderer PRISMARINE_CRYSTAL_RENDERER = new PrismarineCrystalItemRenderer();
-
-        public static final Lazy<KeyMapping> GIVE_DIAMOND_KEYMAP = Lazy.of(() -> new KeyMapping(
-                "Give Diamond", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_N, "ModJam"));
-
-        @SubscribeEvent
-        public static void registerBindings(RegisterKeyMappingsEvent event) {
-            event.register(GIVE_DIAMOND_KEYMAP.get());
-        }
 
         @SubscribeEvent
         public static void registerGuiOverlays(RegisterGuiLayersEvent event) {
