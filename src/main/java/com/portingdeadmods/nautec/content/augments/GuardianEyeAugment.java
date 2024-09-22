@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
+import com.portingdeadmods.nautec.client.renderer.augments.GuardianEyeLaserRenderer;
 import com.portingdeadmods.nautec.network.KeyPressedPayload;
 import com.portingdeadmods.nautec.registries.NTAugmentSlots;
 import com.portingdeadmods.nautec.registries.NTAugments;
@@ -19,6 +20,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class GuardianEyeAugment extends Augment {
+    public static Vec3 laserFiredPos = null;
+    public static int timeLeft = 0;
     public GuardianEyeAugment(AugmentSlot augmentSlot) {
         super(NTAugments.GUARDIAN_EYE_AUGMENT.get(), augmentSlot);
     }
@@ -49,8 +52,12 @@ public class GuardianEyeAugment extends Augment {
             for (Entity entity : entities) {
                 if (entity != player && !(entity instanceof ItemEntity)) {
                     Nautec.LOGGER.info("Hit entity in line: {}", entity.getName().getString());
-                    entity.hurt(entity.damageSources().magic(), 1f);
-                    entity.setRemainingFireTicks(10);
+                    if (!player.level().isClientSide){
+                        entity.hurt(entity.damageSources().magic(), 1f);
+                        entity.setRemainingFireTicks(10);
+                        timeLeft = 1000;
+                        laserFiredPos = entity.getEyePosition();
+                    }
                     return;
                 }
             }

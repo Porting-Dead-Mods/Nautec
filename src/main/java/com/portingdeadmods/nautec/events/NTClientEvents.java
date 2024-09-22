@@ -13,10 +13,12 @@ import com.portingdeadmods.nautec.client.model.block.DrainTopModel;
 import com.portingdeadmods.nautec.client.model.block.PrismarineCrystalModel;
 import com.portingdeadmods.nautec.client.model.block.RobotArmModel;
 import com.portingdeadmods.nautec.client.model.block.WhiskModel;
+import com.portingdeadmods.nautec.client.renderer.augments.GuardianEyeLaserRenderer;
 import com.portingdeadmods.nautec.client.renderer.augments.SimpleAugmentRenderer;
 import com.portingdeadmods.nautec.client.renderer.robotArms.ClawRobotArmRenderer;
 import com.portingdeadmods.nautec.client.screen.AugmentScreen;
 import com.portingdeadmods.nautec.client.screen.AugmentationStationExtensionScreen;
+import com.portingdeadmods.nautec.content.augments.GuardianEyeAugment;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;
 import com.portingdeadmods.nautec.client.screen.CrateScreen;
@@ -29,6 +31,7 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -201,6 +204,17 @@ public final class NTClientEvents {
         public static void onRenderPlayer(RenderPlayerEvent.Post event) {
             PlayerRenderer renderer = event.getRenderer();
             renderer.addLayer(new AugmentLayerRenderer(renderer));
+        }
+
+        @SubscribeEvent
+        public static void renderGuardianEye(RenderLevelStageEvent event){
+            // Nautec.LOGGER.info("render");
+            MultiBufferSource buf = Minecraft.getInstance().renderBuffers().bufferSource();
+            if (GuardianEyeAugment.laserFiredPos != null && GuardianEyeAugment.timeLeft > 0) {
+                GuardianEyeAugment.timeLeft --;
+                Nautec.LOGGER.info("RENDER LASER");
+                GuardianEyeLaserRenderer.renderLaser(Minecraft.getInstance().player.position(), GuardianEyeAugment.laserFiredPos, event.getPoseStack(), buf);
+            }
         }
     }
 }
