@@ -1,6 +1,6 @@
 package com.portingdeadmods.nautec.utils;
 
-import com.portingdeadmods.nautec.capabilities.MJCapabilities;
+import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -18,7 +18,7 @@ public final class ItemUtils {
     public static final int POWER_BAR_COLOR = FastColor.ARGB32.color(94, 133, 164);
 
     public static int powerForDurabilityBar(ItemStack itemStack) {
-        IPowerStorage powerStorage = itemStack.getCapability(MJCapabilities.PowerStorage.ITEM);
+        IPowerStorage powerStorage = itemStack.getCapability(NTCapabilities.PowerStorage.ITEM);
         if (powerStorage != null) {
             int powerStored = powerStorage.getPowerStored();
             int powerCapacity = powerStorage.getPowerCapacity();

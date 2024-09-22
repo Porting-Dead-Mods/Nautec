@@ -3,8 +3,8 @@ package com.portingdeadmods.nautec.content.augments;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.registries.MJAugmentSlots;
-import com.portingdeadmods.nautec.registries.MJAugments;
+import com.portingdeadmods.nautec.registries.NTAugmentSlots;
+import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.utils.InputUtils;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -14,14 +14,14 @@ import static com.portingdeadmods.nautec.utils.MathUtils.*;
 
 public class LeapAugment extends Augment {
     public LeapAugment(AugmentSlot augmentSlot) {
-        super(MJAugments.LEAP_AUGMENT.get(), augmentSlot);
+        super(NTAugments.LEAP_AUGMENT.get(), augmentSlot);
     }
 
     @Override
     public @Nullable AugmentSlot[] getCompatibleSlots() {
         return new AugmentSlot[] {
-                MJAugmentSlots.RIGHT_LEG.get(),
-                MJAugmentSlots.LEFT_LEG.get()
+                NTAugmentSlots.RIGHT_LEG.get(),
+                NTAugmentSlots.LEFT_LEG.get()
         };
     }
 

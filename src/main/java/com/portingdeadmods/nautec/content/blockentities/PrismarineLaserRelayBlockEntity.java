@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.blocks.PrismarineLaserRelayBlock;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PrismarineLaserRelayBlockEntity extends LaserBlockEntity {
     public PrismarineLaserRelayBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(MJBlockEntityTypes.PRISMARINE_LASER_RELAY.get(), blockPos, blockState);
+        super(NTBlockEntityTypes.PRISMARINE_LASER_RELAY.get(), blockPos, blockState);
     }
 
     @Override

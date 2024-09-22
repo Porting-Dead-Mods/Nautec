@@ -1,6 +1,6 @@
 package com.portingdeadmods.nautec.mixin;
 
-import com.portingdeadmods.nautec.registries.MJItems;
+import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -48,7 +48,7 @@ public abstract class BucketItemMixin {
                     ItemStack filledBucket = bucketPickup.pickupBlock(player, level, blockPos, blockState);
                     if (!filledBucket.isEmpty()) {
 
-                        filledBucket = new ItemStack(MJItems.SALT_WATER_BUCKET.asItem());
+                        filledBucket = new ItemStack(NTItems.SALT_WATER_BUCKET.asItem());
                         player.awardStat(Stats.ITEM_USED.get(Items.BUCKET));
 
                         bucketPickup.getPickupSound(blockState).ifPresent(soundEvent ->

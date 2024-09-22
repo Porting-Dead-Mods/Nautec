@@ -1,6 +1,6 @@
 package com.portingdeadmods.nautec.datagen;
 
-import com.portingdeadmods.nautec.MJRegistries;
+import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.content.blocks.AquaticCatalystBlock;
@@ -11,8 +11,8 @@ import com.portingdeadmods.nautec.content.blocks.multiblock.part.AugmentationSta
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.content.multiblocks.AugmentationStationMultiblock;
 import com.portingdeadmods.nautec.content.multiblocks.DrainMultiblock;
-import com.portingdeadmods.nautec.registries.MJBlocks;
-import com.portingdeadmods.nautec.registries.MJMultiblocks;
+import com.portingdeadmods.nautec.registries.NTBlocks;
+import com.portingdeadmods.nautec.registries.NTMultiblocks;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -31,32 +31,32 @@ public class BlockModelProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        axisBlock(MJBlocks.DARK_PRISMARINE_PILLAR.get());
-        simpleBlock(MJBlocks.CHISELED_DARK_PRISMARINE.get());
-        simpleBlock(MJBlocks.POLISHED_PRISMARINE.get());
-        simpleBlock(MJBlocks.AQUARINE_STEEL_BLOCK.get());
+        axisBlock(NTBlocks.DARK_PRISMARINE_PILLAR.get());
+        simpleBlock(NTBlocks.CHISELED_DARK_PRISMARINE.get());
+        simpleBlock(NTBlocks.POLISHED_PRISMARINE.get());
+        simpleBlock(NTBlocks.AQUARINE_STEEL_BLOCK.get());
 
         // Laser Stuffs
-        simpleBlock(MJBlocks.CREATIVE_POWER_SOURCE.get());
-        aquaticCatalyst(MJBlocks.AQUATIC_CATALYST.get());
-        existingFacingBlock(MJBlocks.PRISMARINE_RELAY.get());
-        longDistanceLaser(MJBlocks.LONG_DISTANCE_LASER.get());
-        laserJunction(MJBlocks.LASER_JUNCTION.get());
+        simpleBlock(NTBlocks.CREATIVE_POWER_SOURCE.get());
+        aquaticCatalyst(NTBlocks.AQUATIC_CATALYST.get());
+        existingFacingBlock(NTBlocks.PRISMARINE_RELAY.get());
+        longDistanceLaser(NTBlocks.LONG_DISTANCE_LASER.get());
+        laserJunction(NTBlocks.LASER_JUNCTION.get());
 
         // Stuff
-        simpleBlock(MJBlocks.MIXER.get(), models().getExistingFile(existingModelFile(MJBlocks.MIXER.get())));
-        crateBlock(MJBlocks.CRATE.get());
-        rustyCrateBlock(MJBlocks.RUSTY_CRATE.get());
+        simpleBlock(NTBlocks.MIXER.get(), models().getExistingFile(existingModelFile(NTBlocks.MIXER.get())));
+        crateBlock(NTBlocks.CRATE.get());
+        rustyCrateBlock(NTBlocks.RUSTY_CRATE.get());
 
         // Multiblock
-        drainController(MJBlocks.DRAIN.get());
-        drainPart(MJBlocks.DRAIN_PART.get(), IntegerRange.of(0, 8));
+        drainController(NTBlocks.DRAIN.get());
+        drainPart(NTBlocks.DRAIN_PART.get(), IntegerRange.of(0, 8));
 
-        augmentationStationController(MJBlocks.AUGMENTATION_STATION.get());
-        augmentationStationPart(MJBlocks.AUGMENTATION_STATION_PART.get(), IntegerRange.of(0, 8));
-        horizontalBlock(MJBlocks.AUGMENTATION_STATION_EXTENSION.get(), models().getExistingFile(existingModelFile("multiblock/augmentation_station_extension")));
+        augmentationStationController(NTBlocks.AUGMENTATION_STATION.get());
+        augmentationStationPart(NTBlocks.AUGMENTATION_STATION_PART.get(), IntegerRange.of(0, 8));
+        horizontalBlock(NTBlocks.AUGMENTATION_STATION_EXTENSION.get(), models().getExistingFile(existingModelFile("multiblock/augmentation_station_extension")));
 
-        simpleBlock(MJBlocks.DRAIN_WALL.get());
+        simpleBlock(NTBlocks.DRAIN_WALL.get());
     }
 
     private void augmentationStationController(AugmentationStationBlock augmentationStationBlock) {
@@ -83,7 +83,7 @@ public class BlockModelProvider extends BlockStateProvider {
     }
 
     private void drainController(Block drainController) {
-        Multiblock multiblock = MJMultiblocks.DRAIN.get();
+        Multiblock multiblock = NTMultiblocks.DRAIN.get();
         ModelFile unformedModel = drainControllerModel(drainController, multiblock, false);
         getVariantBuilder(drainController).partialState().with(DrainMultiblock.FORMED, false)
                 .modelForState().modelFile(unformedModel).addModel();
@@ -118,7 +118,7 @@ public class BlockModelProvider extends BlockStateProvider {
     private ModelFile drainPartModel(Block drainPartBlock, int index, boolean laserPort) {
         String postfix = laserPort ? "_open" : "";
         BlockModelBuilder builder = models().withExistingParent(name(drainPartBlock) + "_" + index + postfix, "cube");
-        Multiblock multiblock = MJMultiblocks.DRAIN.get();
+        Multiblock multiblock = NTMultiblocks.DRAIN.get();
         // TODO: Clean up
         if (index % 2 != 0) {
             builder.texture("up", multiblockTexture(multiblock, "top_" + index))
@@ -175,7 +175,7 @@ public class BlockModelProvider extends BlockStateProvider {
     }
 
     public void existingFacingBlock(Block block) {
-        facingBlock(block, models().getExistingFile(existingModelFile(MJBlocks.PRISMARINE_RELAY.get())));
+        facingBlock(block, models().getExistingFile(existingModelFile(NTBlocks.PRISMARINE_RELAY.get())));
     }
 
     public void facingBlock(Block block, ModelFile model) {
@@ -211,7 +211,7 @@ public class BlockModelProvider extends BlockStateProvider {
     }
 
     private ModelFile rustedCrateModel(CrateBlock block, boolean open) {
-        return models().withExistingParent(name(block) + (open ? "_open" : ""), extend(existingModelFile(MJBlocks.CRATE.get()), open ? "_open" : ""))
+        return models().withExistingParent(name(block) + (open ? "_open" : ""), extend(existingModelFile(NTBlocks.CRATE.get()), open ? "_open" : ""))
                 .texture("2", Nautec.MODID + ":block/crate/rusty_top_inner")
                 .texture("4", Nautec.MODID + ":block/crate/rusty")
                 .texture("5", Nautec.MODID + ":block/crate/rusty_top")
@@ -219,7 +219,7 @@ public class BlockModelProvider extends BlockStateProvider {
     }
 
     public ResourceLocation multiblockTexture(Multiblock multiblock, String name) {
-        return modLoc(ModelProvider.BLOCK_FOLDER + "/multiblock/" + MJRegistries.MULTIBLOCK.getKey(multiblock).getPath() + "/" + name);
+        return modLoc(ModelProvider.BLOCK_FOLDER + "/multiblock/" + NTRegistries.MULTIBLOCK.getKey(multiblock).getPath() + "/" + name);
     }
 
     private void aquaticCatalyst(AquaticCatalystBlock block) {

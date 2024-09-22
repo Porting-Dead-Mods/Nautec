@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class AquaticCatalystChannelingRecipeBuilder implements MJRecipeBuilder {
+public class AquaticCatalystChannelingRecipeBuilder implements NTRecipeBuilder {
     private final Ingredient ingredient;
     private int powerAmount;
     private float purity;

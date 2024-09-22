@@ -1,8 +1,8 @@
 package com.portingdeadmods.nautec.datagen;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.registries.MJBlocks;
-import com.portingdeadmods.nautec.registries.MJItems;
+import com.portingdeadmods.nautec.registries.NTBlocks;
+import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -23,49 +23,49 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
     @Override
     protected void registerModels() {
         // Register item models here
-        basicItem(MJItems.AQUARINE_STEEL_INGOT.get());
-        basicItem(MJItems.ATLANTIC_GOLD_INGOT.get());
-        basicItem(MJItems.ATLANTIC_GOLD_NUGGET.get());
-        basicItem(MJItems.PRISMARINE_CRYSTAL_SHARD.get());
+        basicItem(NTItems.AQUARINE_STEEL_INGOT.get());
+        basicItem(NTItems.ATLANTIC_GOLD_INGOT.get());
+        basicItem(NTItems.ATLANTIC_GOLD_NUGGET.get());
+        basicItem(NTItems.PRISMARINE_CRYSTAL_SHARD.get());
 
-        basicItem(MJItems.DROWNED_LUNGS.get());
-        basicItem(MJItems.DOLPHIN_FIN.get());
+        basicItem(NTItems.DROWNED_LUNGS.get());
+        basicItem(NTItems.DOLPHIN_FIN.get());
 
-        basicItem(MJItems.CLAW_ROBOT_ARM.get());
+        basicItem(NTItems.CLAW_ROBOT_ARM.get());
 
-        basicItem(MJItems.RUSTY_GEAR.get());
-        basicItem(MJItems.GEAR.get());
+        basicItem(NTItems.RUSTY_GEAR.get());
+        basicItem(NTItems.GEAR.get());
 
-        basicItem(MJItems.GLASS_VIAL.get());
-        basicItem(MJItems.ELECTROLYTE_ALGAE_SERUM_VIAL.get());
+        basicItem(NTItems.GLASS_VIAL.get());
+        basicItem(NTItems.ELECTROLYTE_ALGAE_SERUM_VIAL.get());
 
-        basicItem(MJItems.PRISM_MONOCLE.get());
+        basicItem(NTItems.PRISM_MONOCLE.get());
 
-        basicItem(MJItems.DIVING_HELMET.get());
-        basicItem(MJItems.DIVING_CHESTPLATE.get());
-        basicItem(MJItems.DIVING_LEGGINGS.get());
-        basicItem(MJItems.DIVING_BOOTS.get());
+        basicItem(NTItems.DIVING_HELMET.get());
+        basicItem(NTItems.DIVING_CHESTPLATE.get());
+        basicItem(NTItems.DIVING_LEGGINGS.get());
+        basicItem(NTItems.DIVING_BOOTS.get());
 
-        handHeldItem(MJItems.AQUARINE_WRENCH.get());
-        handHeldItem(MJItems.CROWBAR.get());
+        handHeldItem(NTItems.AQUARINE_WRENCH.get());
+        handHeldItem(NTItems.CROWBAR.get());
 
-        basicItem(MJItems.SALT_WATER_BUCKET.get());
-        basicItem(MJItems.EAS_BUCKET.get());
-        basicItem(MJItems.ETCHING_ACID_BUCKET.get());
+        basicItem(NTItems.SALT_WATER_BUCKET.get());
+        basicItem(NTItems.EAS_BUCKET.get());
+        basicItem(NTItems.ETCHING_ACID_BUCKET.get());
 
-        aquarineSteelTool(MJItems.AQUARINE_AXE.get());
-        aquarineSteelTool(MJItems.AQUARINE_HOE.get());
-        aquarineSteelTool(MJItems.AQUARINE_PICKAXE.get());
-        aquarineSteelTool(MJItems.AQUARINE_SHOVEL.get());
-        aquarineSteelTool(MJItems.AQUARINE_SWORD.get());
+        aquarineSteelTool(NTItems.AQUARINE_AXE.get());
+        aquarineSteelTool(NTItems.AQUARINE_HOE.get());
+        aquarineSteelTool(NTItems.AQUARINE_PICKAXE.get());
+        aquarineSteelTool(NTItems.AQUARINE_SHOVEL.get());
+        aquarineSteelTool(NTItems.AQUARINE_SWORD.get());
 
-        parentItemBlock(MJBlocks.LASER_JUNCTION.asItem(), "_base");
+        parentItemBlock(NTBlocks.LASER_JUNCTION.asItem(), "_base");
 
         blockItems();
     }
 
     private void blockItems() {
-        for (Supplier<BlockItem> blockItem : MJItems.BLOCK_ITEMS) {
+        for (Supplier<BlockItem> blockItem : NTItems.BLOCK_ITEMS) {
             parentItemBlock(blockItem.get());
         }
     }

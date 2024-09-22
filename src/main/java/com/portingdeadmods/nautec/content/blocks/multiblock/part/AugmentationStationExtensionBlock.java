@@ -5,7 +5,7 @@ import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.part.AugmentationStationExtensionBlockEntity;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -27,7 +27,7 @@ public class AugmentationStationExtensionBlock extends LaserBlock {
 
     @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
-        return MJBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get();
+        return NTBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get();
     }
 
     @Override

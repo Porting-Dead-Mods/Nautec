@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ItemEtchingRecipeBuilder implements MJRecipeBuilder {
+public class ItemEtchingRecipeBuilder implements NTRecipeBuilder {
     @NotNull
     private final ItemStack result;
     @NotNull

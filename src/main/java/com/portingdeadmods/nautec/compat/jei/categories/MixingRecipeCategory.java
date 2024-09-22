@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.compat.jei.categories;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.recipes.MixingRecipe;
 import com.portingdeadmods.nautec.content.recipes.utils.RecipeUtils;
-import com.portingdeadmods.nautec.registries.MJBlocks;
+import com.portingdeadmods.nautec.registries.NTBlocks;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mezz.jei.api.constants.VanillaTypes;
@@ -36,7 +36,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
 
     public MixingRecipeCategory(IGuiHelper helper) {
         this.background = helper.createBlankDrawable(80, 66);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MJBlocks.MIXER.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(NTBlocks.MIXER.get()));
     }
 
     @Override

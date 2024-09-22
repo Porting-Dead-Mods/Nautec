@@ -5,8 +5,8 @@ import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.DisplayBlock;
 import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
 import com.portingdeadmods.nautec.content.blockentities.AquaticCatalystBlockEntity;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
-import com.portingdeadmods.nautec.tags.MJTags;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.tags.NTTags;
 import com.portingdeadmods.nautec.utils.ItemUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -51,7 +51,7 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
 
     @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
-        return MJBlockEntityTypes.AQUATIC_CATALYST.get();
+        return NTBlockEntityTypes.AQUATIC_CATALYST.get();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
     protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         Direction direction = hitResult.getDirection();
         ItemStack itemStack = player.getItemInHand(hand);
-        if (!state.getValue(CORE_ACTIVE) && itemStack.is(MJTags.Items.AQUATIC_CATALYST)) {
+        if (!state.getValue(CORE_ACTIVE) && itemStack.is(NTTags.Items.AQUATIC_CATALYST)) {
             // TODO: serialize stored item
             level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.FACING, direction).setValue(CORE_ACTIVE, true));
             level.playLocalSound(player, SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1, 1);

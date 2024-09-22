@@ -1,6 +1,6 @@
 package com.portingdeadmods.nautec.api.augments;
 
-import com.portingdeadmods.nautec.MJRegistries;
+import com.portingdeadmods.nautec.NTRegistries;
 
 public class AugmentType<T extends Augment> {
     private final AugmentConstructor<T> augmentConstructor;
@@ -19,7 +19,7 @@ public class AugmentType<T extends Augment> {
 
     @Override
     public String toString() {
-        return MJRegistries.AUGMENT_TYPE.getKey(this).toString();
+        return NTRegistries.AUGMENT_TYPE.getKey(this).toString();
     }
 
     @FunctionalInterface

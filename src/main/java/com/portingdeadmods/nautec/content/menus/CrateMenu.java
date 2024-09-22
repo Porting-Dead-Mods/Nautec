@@ -1,6 +1,6 @@
 package com.portingdeadmods.nautec.content.menus;
 
-import com.portingdeadmods.nautec.registries.MJMenuTypes;
+import com.portingdeadmods.nautec.registries.NTMenuTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -19,7 +19,7 @@ public class CrateMenu extends AbstractContainerMenu {
     }
 
     public CrateMenu(int containerId, Inventory playerInventory, Container container) {
-        super(MJMenuTypes.CRATE.get(), containerId);
+        super(NTMenuTypes.CRATE.get(), containerId);
         checkContainerSize(container, 27);
         this.container = container;
         container.startOpen(playerInventory.player);

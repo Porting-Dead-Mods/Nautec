@@ -1,10 +1,10 @@
 package com.portingdeadmods.nautec.content.items;
 
 import com.portingdeadmods.nautec.api.items.IPowerItem;
-import com.portingdeadmods.nautec.content.items.tiers.MJArmorMaterials;
-import com.portingdeadmods.nautec.data.MJDataComponents;
+import com.portingdeadmods.nautec.content.items.tiers.NTArmorMaterials;
+import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
-import com.portingdeadmods.nautec.registries.MJItems;
+import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.ItemUtils;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
@@ -15,7 +15,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class PrismMonocleItem extends ArmorItem implements IPowerItem {
     public PrismMonocleItem(Properties properties) {
-        super(MJArmorMaterials.PRISMARINE, Type.HELMET, properties.component(MJDataComponents.POWER, ComponentPowerStorage.withCapacity(100))
+        super(NTArmorMaterials.PRISMARINE, Type.HELMET, properties.component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(100))
                 .durability(0)
                 .stacksTo(1)
         );
@@ -28,14 +28,14 @@ public class PrismMonocleItem extends ArmorItem implements IPowerItem {
 
                     @Override
                     public ItemStack getStack() {
-                        return MJItems.PRISM_MONOCLE.toStack();
+                        return NTItems.PRISM_MONOCLE.toStack();
                     }
 
                     @Override
                     public void curioTick(SlotContext slotContext) {
                         // ticking logic here
                     }
-                }, MJItems.PRISM_MONOCLE.get());
+                }, NTItems.PRISM_MONOCLE.get());
     }
 
 

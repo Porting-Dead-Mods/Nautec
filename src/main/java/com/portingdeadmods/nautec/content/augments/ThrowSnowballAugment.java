@@ -4,7 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.network.KeyPressedPayload;
-import com.portingdeadmods.nautec.registries.MJAugments;
+import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.utils.InputUtils;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.Items;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 @Deprecated
 public class ThrowSnowballAugment extends Augment {
     public ThrowSnowballAugment(AugmentSlot augmentSlot) {
-        super(MJAugments.THROW_SNOWBALL.get(), augmentSlot);
+        super(NTAugments.THROW_SNOWBALL.get(), augmentSlot);
     }
 
     @Override

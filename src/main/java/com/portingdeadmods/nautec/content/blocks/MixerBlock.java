@@ -5,7 +5,7 @@ import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
 import com.portingdeadmods.nautec.api.utils.HorizontalDirection;
 import com.portingdeadmods.nautec.content.blockentities.MixerBlockEntity;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.utils.ItemUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -63,7 +63,7 @@ public class MixerBlock extends LaserBlock {
 
     @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
-        return MJBlockEntityTypes.MIXER.get();
+        return NTBlockEntityTypes.MIXER.get();
     }
 
     @Override

@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ItemTransformationRecipeBuilder implements MJRecipeBuilder {
+public class ItemTransformationRecipeBuilder implements NTRecipeBuilder {
     @NotNull
     private final ItemStack result;
     @NotNull

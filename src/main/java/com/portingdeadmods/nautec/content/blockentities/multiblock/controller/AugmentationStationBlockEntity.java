@@ -4,7 +4,7 @@ import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockEntity;
 import com.portingdeadmods.nautec.api.multiblocks.MultiblockData;
 import com.portingdeadmods.nautec.capabilities.IOActions;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +20,7 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
     private MultiblockData multiblockData;
 
     public AugmentationStationBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(MJBlockEntityTypes.AUGMENTATION_STATION.get(), blockPos, blockState);
+        super(NTBlockEntityTypes.AUGMENTATION_STATION.get(), blockPos, blockState);
         this.multiblockData = MultiblockData.EMPTY;
     }
 

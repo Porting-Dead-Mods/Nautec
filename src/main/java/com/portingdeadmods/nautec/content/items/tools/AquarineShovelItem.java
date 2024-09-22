@@ -1,11 +1,11 @@
 package com.portingdeadmods.nautec.content.items.tools;
 
 import com.portingdeadmods.nautec.api.items.IPowerItem;
-import com.portingdeadmods.nautec.capabilities.MJCapabilities;
+import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
-import com.portingdeadmods.nautec.content.items.tiers.MJToolMaterials;
-import com.portingdeadmods.nautec.data.MJDataComponents;
-import com.portingdeadmods.nautec.data.MJDataComponentsUtils;
+import com.portingdeadmods.nautec.content.items.tiers.NTToolMaterials;
+import com.portingdeadmods.nautec.data.NTDataComponents;
+import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
 import com.portingdeadmods.nautec.utils.ItemUtils;
 import net.minecraft.ChatFormatting;
@@ -31,17 +31,17 @@ public class AquarineShovelItem extends ShovelItem implements IPowerItem {
     private static final int POWER_PER_BLOCK = 2;
 
     public AquarineShovelItem() {
-        super(MJToolMaterials.AQUARINE, new Properties()
+        super(NTToolMaterials.AQUARINE, new Properties()
                 .stacksTo(1)
-                .component(MJDataComponents.IS_INFUSED,false)
-                .component(MJDataComponents.ABILITY_ENABLED, false)
-                .component(MJDataComponents.POWER, ComponentPowerStorage.withCapacity(700)));
+                .component(NTDataComponents.IS_INFUSED,false)
+                .component(NTDataComponents.ABILITY_ENABLED, false)
+                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(700)));
     }
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
         ItemStack stack = context.getItemInHand();
-        IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
+        IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
         if (powerStorage.getPowerStored() <= 0) {
             return InteractionResult.FAIL;
         }
@@ -57,7 +57,7 @@ public class AquarineShovelItem extends ShovelItem implements IPowerItem {
             for (BlockPos targetPos : get3x3MiningArea(pos, hitFace)) {
                 BlockState targetState = level.getBlockState(targetPos);
 
-                if (canMine(level, targetPos, targetState) && MJDataComponentsUtils.isAbilityEnabled(stack)) {
+                if (canMine(level, targetPos, targetState) && NTDataComponentsUtils.isAbilityEnabled(stack)) {
                     level.destroyBlock(targetPos, true);
                 }
             }
@@ -68,7 +68,7 @@ public class AquarineShovelItem extends ShovelItem implements IPowerItem {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        IPowerStorage powerStorage = attacker.getItemInHand(InteractionHand.MAIN_HAND).getCapability(MJCapabilities.PowerStorage.ITEM);
+        IPowerStorage powerStorage = attacker.getItemInHand(InteractionHand.MAIN_HAND).getCapability(NTCapabilities.PowerStorage.ITEM);
         powerStorage.tryDrainPower(1, false);
         return super.hurtEnemy(stack, target, attacker);
     }
@@ -112,17 +112,17 @@ public class AquarineShovelItem extends ShovelItem implements IPowerItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.literal("Ability: Mine in a 3x3 Area").withStyle(ChatFormatting.DARK_PURPLE));
-        if(!MJDataComponentsUtils.isInfused(stack)){
+        if(!NTDataComponentsUtils.isInfused(stack)){
             tooltipComponents.add(Component.literal("Infuse in Algae Serum to unlock Abilities").withStyle(ChatFormatting.DARK_GREEN));
         }else{
-            tooltipComponents.add(Component.literal("Status: " + ((MJDataComponentsUtils.isAbilityEnabled(stack)) ? "Enabled" : "Shift + Right Click to Enable")).withStyle((MJDataComponentsUtils.isAbilityEnabled(stack)) ? ChatFormatting.GREEN : ChatFormatting.RED));
+            tooltipComponents.add(Component.literal("Status: " + ((NTDataComponentsUtils.isAbilityEnabled(stack)) ? "Enabled" : "Shift + Right Click to Enable")).withStyle((NTDataComponentsUtils.isAbilityEnabled(stack)) ? ChatFormatting.GREEN : ChatFormatting.RED));
         }
-        IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
+        IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
         tooltipComponents.add(Component.literal("Power: " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity() + " AP").withStyle(ChatFormatting.DARK_AQUA));
     }
 
     private void mine3x3(Level level, BlockPos pos, LivingEntity player, ItemStack stack) {
-        IPowerStorage powerStorage = stack.getCapability(MJCapabilities.PowerStorage.ITEM);
+        IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
 
         if (powerStorage.getPowerStored() > 0) {
             int blocksToBreak = powerStorage.getPowerStored() / POWER_PER_BLOCK; // Calculate how many blocks we can break

@@ -1,7 +1,7 @@
 package com.portingdeadmods.nautec.events.helper;
 
 import com.portingdeadmods.nautec.api.items.IPowerItem;
-import com.portingdeadmods.nautec.data.MJDataComponentsUtils;
+import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.utils.ParticlesUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -55,7 +55,7 @@ public class ItemInfusion {
         }
 
         // Only start infusion if the item is NOT already infused
-        if (MJDataComponentsUtils.isInfused(stack)) {
+        if (NTDataComponentsUtils.isInfused(stack)) {
             return;
         }
 
@@ -69,7 +69,7 @@ public class ItemInfusion {
 
             // Check if the infusion is complete
             if (infusionData.getInfusionProgress() >= MAX_INFUSION_TIME) {
-                MJDataComponentsUtils.setInfusedStatus(stack, true);
+                NTDataComponentsUtils.setInfusedStatus(stack, true);
 
                 // Play final effects and sound
                 spawnCompletionEffects(itemEntity, level);

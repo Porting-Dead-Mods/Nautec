@@ -5,8 +5,8 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.network.KeyPressedPayload;
-import com.portingdeadmods.nautec.registries.MJAugmentSlots;
-import com.portingdeadmods.nautec.registries.MJAugments;
+import com.portingdeadmods.nautec.registries.NTAugmentSlots;
+import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.utils.InputUtils;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -20,13 +20,13 @@ import java.util.List;
 
 public class GuardianEyeAugment extends Augment {
     public GuardianEyeAugment(AugmentSlot augmentSlot) {
-        super(MJAugments.GUARDIAN_EYE_AUGMENT.get(), augmentSlot);
+        super(NTAugments.GUARDIAN_EYE_AUGMENT.get(), augmentSlot);
     }
 
     @Override
     public @Nullable AugmentSlot[] getCompatibleSlots() {
         return new AugmentSlot[] {
-                MJAugmentSlots.EYES.get()
+                NTAugmentSlots.EYES.get()
         };
     }
 

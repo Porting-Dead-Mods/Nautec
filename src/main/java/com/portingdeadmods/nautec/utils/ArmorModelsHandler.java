@@ -7,7 +7,7 @@
 package com.portingdeadmods.nautec.utils;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.api.client.model.armor.MJArmorModel;
+import com.portingdeadmods.nautec.api.client.model.armor.NTArmorModel;
 import com.portingdeadmods.nautec.client.model.armor.DivingArmorModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 public final class ArmorModelsHandler {
 
     private static final Map<ModelLayerLocation, Layer> LAYERS = new HashMap<>();
-    private static final Map<Pair<ModelLayerLocation, EquipmentSlot>, MJArmorModel> CACHED_ARMORS = new HashMap<>();
+    private static final Map<Pair<ModelLayerLocation, EquipmentSlot>, NTArmorModel> CACHED_ARMORS = new HashMap<>();
 
     public static ModelLayerLocation divingSuit;
 
@@ -42,7 +42,7 @@ public final class ArmorModelsHandler {
     }
 
     private static ModelLayerLocation addArmorModel(String name, Supplier<LayerDefinition> supplier) {
-        return addLayer(name, new Layer(supplier, MJArmorModel::new));
+        return addLayer(name, new Layer(supplier, NTArmorModel::new));
     }
 
     private static ModelLayerLocation addLayer(String name, Layer layer) {
@@ -56,7 +56,7 @@ public final class ArmorModelsHandler {
         LAYERS.forEach((loc, layer) -> event.registerLayerDefinition(loc, layer.definition));
     }
 
-    public static MJArmorModel armorModel(ModelLayerLocation location, EquipmentSlot slot) {
+    public static NTArmorModel armorModel(ModelLayerLocation location, EquipmentSlot slot) {
         Pair<ModelLayerLocation, EquipmentSlot> key = Pair.of(location, slot);
         if (CACHED_ARMORS.containsKey(key))
             return CACHED_ARMORS.get(key);
@@ -65,14 +65,14 @@ public final class ArmorModelsHandler {
 
         Layer layer = LAYERS.get(location);
         Minecraft mc = Minecraft.getInstance();
-        MJArmorModel model = layer.armorModelConstructor.apply(mc.getEntityModels().bakeLayer(location), slot);
+        NTArmorModel model = layer.armorModelConstructor.apply(mc.getEntityModels().bakeLayer(location), slot);
         CACHED_ARMORS.put(key, model);
 
         return model;
     }
 
     private record Layer(Supplier<LayerDefinition> definition,
-                         BiFunction<ModelPart, EquipmentSlot, MJArmorModel> armorModelConstructor) {
+                         BiFunction<ModelPart, EquipmentSlot, NTArmorModel> armorModelConstructor) {
     }
 
 }

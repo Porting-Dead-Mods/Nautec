@@ -1,7 +1,7 @@
 package com.portingdeadmods.nautec.api.augments;
 
-import com.portingdeadmods.nautec.MJRegistries;
-import com.portingdeadmods.nautec.data.MJDataAttachments;
+import com.portingdeadmods.nautec.NTRegistries;
+import com.portingdeadmods.nautec.data.NTDataAttachments;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
@@ -93,7 +93,7 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
 
     // Call this, whenever NBT should be saved
     protected final void setChanged() {
-        player.setData(MJDataAttachments.AUGMENT_DATA_CHANGED, MJRegistries.AUGMENT_SLOT.getId(augmentSlot));
+        player.setData(NTDataAttachments.AUGMENT_DATA_CHANGED, NTRegistries.AUGMENT_SLOT.getId(augmentSlot));
     }
 
     @Override

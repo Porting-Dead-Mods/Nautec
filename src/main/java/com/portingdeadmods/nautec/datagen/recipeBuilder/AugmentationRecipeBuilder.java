@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class AugmentationRecipeBuilder implements MJRecipeBuilder {
+public class AugmentationRecipeBuilder implements NTRecipeBuilder {
     private Ingredient augmentItem;
     private List<Ingredient> robotArms;
 

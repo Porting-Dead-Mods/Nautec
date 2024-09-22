@@ -1,7 +1,7 @@
 package com.portingdeadmods.nautec.content.blockentities.multiblock.part;
 
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockPartEntity;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -12,7 +12,7 @@ public class AugmentationStationPartBlockEntity extends BlockEntity implements M
     private BlockPos controllerPos;
 
     public AugmentationStationPartBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(MJBlockEntityTypes.AUGMENTATION_STATION_PART.get(), blockPos, blockState);
+        super(NTBlockEntityTypes.AUGMENTATION_STATION_PART.get(), blockPos, blockState);
     }
 
     @Override

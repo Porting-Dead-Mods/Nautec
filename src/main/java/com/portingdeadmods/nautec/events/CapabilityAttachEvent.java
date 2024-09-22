@@ -4,10 +4,10 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.items.IFluidItem;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
-import com.portingdeadmods.nautec.capabilities.MJCapabilities;
+import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.ItemPowerWrapper;
-import com.portingdeadmods.nautec.data.MJDataComponents;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.data.NTDataComponents;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
@@ -37,22 +37,22 @@ public final class CapabilityAttachEvent {
     private static void registerItemCaps(RegisterCapabilitiesEvent event) {
         for (Item item : BuiltInRegistries.ITEM) {
             if (item instanceof IPowerItem powerItem) {
-                event.registerItem(MJCapabilities.PowerStorage.ITEM, (stack, ctx) -> new ItemPowerWrapper(stack, powerItem), item);
+                event.registerItem(NTCapabilities.PowerStorage.ITEM, (stack, ctx) -> new ItemPowerWrapper(stack, powerItem), item);
             }
 
             if (item instanceof IFluidItem fluidItem) {
-                event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidHandlerItemStack(MJDataComponents.FLUID, stack, fluidItem.getFluidCapacity()), item);
+                event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidHandlerItemStack(NTDataComponents.FLUID, stack, fluidItem.getFluidCapacity()), item);
             }
         }
     }
 
     private static void registerBECaps(RegisterCapabilitiesEvent event) {
-        for (DeferredHolder<BlockEntityType<?>, ? extends BlockEntityType<?>> be : MJBlockEntityTypes.BLOCK_ENTITIES.getEntries()) {
+        for (DeferredHolder<BlockEntityType<?>, ? extends BlockEntityType<?>> be : NTBlockEntityTypes.BLOCK_ENTITIES.getEntries()) {
             Block validBlock = be.get().getValidBlocks().stream().iterator().next();
             BlockEntity testBE = be.get().create(BlockPos.ZERO, validBlock.defaultBlockState());
             if (testBE instanceof ContainerBlockEntity containerBE) {
                 if (containerBE.getPowerStorage() != null) {
-                    event.registerBlockEntity(MJCapabilities.PowerStorage.BLOCK, be.get(), (blockEntity, dir) -> ((ContainerBlockEntity) blockEntity).getPowerStorage());
+                    event.registerBlockEntity(NTCapabilities.PowerStorage.BLOCK, be.get(), (blockEntity, dir) -> ((ContainerBlockEntity) blockEntity).getPowerStorage());
                 }
 
                 if (containerBE.getItemHandler() != null) {

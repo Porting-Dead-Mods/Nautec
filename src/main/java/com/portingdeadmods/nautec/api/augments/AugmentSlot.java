@@ -1,9 +1,9 @@
 package com.portingdeadmods.nautec.api.augments;
 
-import com.portingdeadmods.nautec.MJRegistries;
+import com.portingdeadmods.nautec.NTRegistries;
 
 public interface AugmentSlot {
     default String getName() {
-        return MJRegistries.AUGMENT_SLOT.getKey(this).getPath();
+        return NTRegistries.AUGMENT_SLOT.getKey(this).getPath();
     }
 }

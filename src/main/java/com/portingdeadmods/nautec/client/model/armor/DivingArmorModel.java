@@ -1,12 +1,12 @@
 package com.portingdeadmods.nautec.client.model.armor;
 
-import com.portingdeadmods.nautec.api.client.model.armor.MJArmorModel;
+import com.portingdeadmods.nautec.api.client.model.armor.NTArmorModel;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
 public class DivingArmorModel {
     public static LayerDefinition createBodyLayer() {
-        return MJArmorModel.createLayer(64, 64, parts -> parts.getHead()
+        return NTArmorModel.createLayer(64, 64, parts -> parts.getHead()
                 .addOrReplaceChild("head", CubeListBuilder.create().texOffs(22, 15).addBox(-5.0F, -11.0F, -5.0F, 9.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
                                 .texOffs(26, 2).addBox(2.0F, -11.0F, -3.0F, 2.0F, 1.0F, 5.0F, new CubeDeformation(0.0F))
                                 .texOffs(24, 21).addBox(-5.0F, -11.0F, -3.0F, 2.0F, 1.0F, 5.0F, new CubeDeformation(0.0F))

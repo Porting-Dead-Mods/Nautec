@@ -2,8 +2,8 @@ package com.portingdeadmods.nautec.content.blocks;
 
 import com.mojang.serialization.MapCodec;
 import com.portingdeadmods.nautec.content.blockentities.CrateBlockEntity;
-import com.portingdeadmods.nautec.registries.MJBlocks;
-import com.portingdeadmods.nautec.registries.MJItems;
+import com.portingdeadmods.nautec.registries.NTBlocks;
+import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -68,7 +68,7 @@ public class CrateBlock extends BaseEntityBlock {
         if (level.isClientSide) return ItemInteractionResult.sidedSuccess(true);
 
         if (!(level.getBlockEntity(pos) instanceof CrateBlockEntity be)
-                || !stack.is(MJItems.CROWBAR)
+                || !stack.is(NTItems.CROWBAR)
                 || state.getValue(BlockStateProperties.OPEN))
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
@@ -142,7 +142,7 @@ public class CrateBlock extends BaseEntityBlock {
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof CrateBlockEntity be) {
             if (be.isEmpty() && !state.getValue(BlockStateProperties.OPEN)) {
-                ItemStack itemstack = MJBlocks.CRATE.toStack();
+                ItemStack itemstack = NTBlocks.CRATE.toStack();
                 itemstack.applyComponents(blockentity.collectComponents());
                 ItemEntity itementity = new ItemEntity(
                         level, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, itemstack

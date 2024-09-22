@@ -2,7 +2,7 @@ package com.portingdeadmods.nautec.compat.jei.categories;
 
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.recipes.AquaticCatalystChannelingRecipe;
-import com.portingdeadmods.nautec.registries.MJBlocks;
+import com.portingdeadmods.nautec.registries.NTBlocks;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -31,7 +31,7 @@ public class AquaticCatalystChannelingRecipeCategory implements IRecipeCategory<
     public AquaticCatalystChannelingRecipeCategory(IGuiHelper helper) {
         Font font = Minecraft.getInstance().font;
         this.background = helper.createBlankDrawable(136, 24 + 4 * font.lineHeight);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MJBlocks.AQUATIC_CATALYST.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(NTBlocks.AQUATIC_CATALYST.get()));
     }
 
     @Override

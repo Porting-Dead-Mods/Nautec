@@ -5,7 +5,7 @@ import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.recipes.MixingRecipe;
 import com.portingdeadmods.nautec.content.recipes.inputs.MixingRecipeInput;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
@@ -39,7 +39,7 @@ public class MixerBlockEntity extends LaserBlockEntity {
     private int duration;
 
     public MixerBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(MJBlockEntityTypes.MIXER.get(), blockPos, blockState);
+        super(NTBlockEntityTypes.MIXER.get(), blockPos, blockState);
         addItemHandler(5, (slot, stack) -> slot != 4);
         // in
         addFluidTank(1000);

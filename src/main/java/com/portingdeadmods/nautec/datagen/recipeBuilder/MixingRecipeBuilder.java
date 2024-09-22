@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MixingRecipeBuilder implements MJRecipeBuilder {
+public class MixingRecipeBuilder implements NTRecipeBuilder {
     private List<IngredientWithCount> ingredients;
     @Nullable
     private FluidStack fluidIngredient;  // Can now be null

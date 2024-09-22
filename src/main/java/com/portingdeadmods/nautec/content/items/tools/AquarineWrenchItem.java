@@ -1,6 +1,6 @@
 package com.portingdeadmods.nautec.content.items.tools;
 
-import com.portingdeadmods.nautec.MJRegistries;
+import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.content.blocks.LaserJunctionBlock;
@@ -55,7 +55,7 @@ public class AquarineWrenchItem extends Item {
         }
 
         if (!useOnContext.getPlayer().isCrouching()) {
-            for (Multiblock multiblock : MJRegistries.MULTIBLOCK) {
+            for (Multiblock multiblock : NTRegistries.MULTIBLOCK) {
                 if (controllerState.is(multiblock.getUnformedController())) {
                     try {
                         if (MultiblockHelper.form(multiblock, pos, level, useOnContext.getPlayer())) {

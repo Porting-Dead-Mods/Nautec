@@ -2,14 +2,14 @@ package com.portingdeadmods.nautec.content.augments;
 
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.registries.MJAugments;
+import com.portingdeadmods.nautec.registries.NTAugments;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import org.jetbrains.annotations.Nullable;
 
 @Deprecated
 public class DisallowBreakingAugment extends Augment {
     public DisallowBreakingAugment(AugmentSlot augmentSlot) {
-        super(MJAugments.DISALLOW_BREAKING.get(), augmentSlot);
+        super(NTAugments.DISALLOW_BREAKING.get(), augmentSlot);
     }
 
     @Override

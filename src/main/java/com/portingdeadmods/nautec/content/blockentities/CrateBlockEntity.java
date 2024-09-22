@@ -1,8 +1,8 @@
 package com.portingdeadmods.nautec.content.blockentities;
 
 import com.portingdeadmods.nautec.content.menus.CrateMenu;
-import com.portingdeadmods.nautec.data.MJDataComponents;
-import com.portingdeadmods.nautec.registries.MJBlockEntityTypes;
+import com.portingdeadmods.nautec.data.NTDataComponents;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -55,7 +55,7 @@ public class CrateBlockEntity extends RandomizableContainerBlockEntity {
 
 
     public CrateBlockEntity( BlockPos blockPos, BlockState blockState) {
-        super(MJBlockEntityTypes.CRATE.get(), blockPos, blockState);
+        super(NTBlockEntityTypes.CRATE.get(), blockPos, blockState);
     }
 
     @Override
@@ -78,13 +78,13 @@ public class CrateBlockEntity extends RandomizableContainerBlockEntity {
     @Override
     protected void collectImplicitComponents(DataComponentMap.Builder components) {
         super.collectImplicitComponents(components);
-        components.set(MJDataComponents.OPEN.get(),getBlockState().getValue(BlockStateProperties.OPEN));
+        components.set(NTDataComponents.OPEN.get(),getBlockState().getValue(BlockStateProperties.OPEN));
     }
 
     @Override
     protected void applyImplicitComponents(DataComponentInput componentInput) {
         super.applyImplicitComponents(componentInput);
-        level.setBlockAndUpdate(getBlockPos(),getBlockState().setValue(BlockStateProperties.OPEN,componentInput.getOrDefault(MJDataComponents.OPEN,false)));
+        level.setBlockAndUpdate(getBlockPos(),getBlockState().setValue(BlockStateProperties.OPEN,componentInput.getOrDefault(NTDataComponents.OPEN,false)));
     }
 
     @Override

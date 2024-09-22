@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.content.structures;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.nautec.registries.MJStructures;
+import com.portingdeadmods.nautec.registries.NTStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -114,7 +114,7 @@ public class Ruins1 extends Structure {
 
     @Override
     public StructureType<?> type() {
-        return MJStructures.RUINS_1.get();
+        return NTStructures.RUINS_1.get();
     }
 }
 

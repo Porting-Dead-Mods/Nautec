@@ -3,8 +3,8 @@ package com.portingdeadmods.nautec.content.augments;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.network.KeyPressedPayload;
-import com.portingdeadmods.nautec.registries.MJAugments;
-import com.portingdeadmods.nautec.registries.MJKeybinds;
+import com.portingdeadmods.nautec.registries.NTAugments;
+import com.portingdeadmods.nautec.registries.NTKeybinds;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 @Deprecated
 public class GiveDiamondAugment extends Augment {
     public GiveDiamondAugment(AugmentSlot augmentSlot) {
-        super(MJAugments.GIVE_DIAMOND.get(), augmentSlot);
+        super(NTAugments.GIVE_DIAMOND.get(), augmentSlot);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class GiveDiamondAugment extends Augment {
 
     @Override
     public void clientTick(PlayerTickEvent.Post event) {
-        if (MJKeybinds.GIVE_DIAMOND_KEYBIND.get().consumeClick()) {
+        if (NTKeybinds.GIVE_DIAMOND_KEYBIND.get().consumeClick()) {
             PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
         }
     }
