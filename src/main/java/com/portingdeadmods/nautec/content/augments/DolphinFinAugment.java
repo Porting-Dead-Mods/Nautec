@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class DolphinFinAugment extends Augment {
     public DolphinFinAugment(AugmentSlot augmentSlot) {
-        super(NTAugments.UNDERWATER_MOVEMENT_SPEED_AUGMENT.get(), augmentSlot);
+        super(NTAugments.DOLPHIN_FIN.get(), augmentSlot);
     }
 
     @Override

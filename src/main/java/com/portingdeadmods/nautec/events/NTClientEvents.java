@@ -134,7 +134,7 @@ public final class NTClientEvents {
             event.registerBlockEntityRenderer(NTBlockEntityTypes.MIXER.get(), MixerBERenderer::new);
             event.registerBlockEntityRenderer(NTBlockEntityTypes.DRAIN_PART.get(), DrainBERenderer::new);
             event.registerBlockEntityRenderer(NTBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), AugmentStationExtensionBERenderer::new);
-            AugmentLayerRenderer.registerRenderer(NTAugments.UNDERWATER_MOVEMENT_SPEED_AUGMENT.get(),
+            AugmentLayerRenderer.registerRenderer(NTAugments.DOLPHIN_FIN.get(),
                     ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.MATERIAL, ctx));
             AugmentStationExtensionBERenderer.registerRenderer(NTItems.CLAW_ROBOT_ARM.get(), ClawRobotArmRenderer::new);
         }

@@ -1,10 +1,8 @@
 package com.portingdeadmods.nautec.datagen;
 
 import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
-import com.portingdeadmods.nautec.datagen.recipeBuilder.AquaticCatalystChannelingRecipeBuilder;
-import com.portingdeadmods.nautec.datagen.recipeBuilder.ItemEtchingRecipeBuilder;
-import com.portingdeadmods.nautec.datagen.recipeBuilder.ItemTransformationRecipeBuilder;
-import com.portingdeadmods.nautec.datagen.recipeBuilder.MixingRecipeBuilder;
+import com.portingdeadmods.nautec.datagen.recipeBuilder.*;
+import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -72,5 +70,9 @@ public class RecipesProvider extends RecipeProvider {
                 .duration(200)
                 .save(pRecipeOutput);
 
+        AugmentationRecipeBuilder.newRecipe(NTAugments.DOLPHIN_FIN.get())
+                .robotArms(NTItems.CLAW_ROBOT_ARM.get())
+                .augmentItem(NTItems.DOLPHIN_FIN.get())
+                .save(pRecipeOutput);
     }
 }
