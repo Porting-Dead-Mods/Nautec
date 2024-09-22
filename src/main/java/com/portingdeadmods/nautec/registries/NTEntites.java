@@ -13,5 +13,6 @@ public class NTEntites {
     public static DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, Nautec.MODID);
 
     public static final Supplier<EntityType<ThrownBouncingTrident>> THROWN_BOUNCING_TRIDENT = ENTITIES.register("bouncing_trident",
-            ()->EntityType.Builder.<ThrownBouncingTrident>of(ThrownBouncingTrident::new, MobCategory.MISC).sized(0.5f,0.5f).build(Nautec.MODID+"bouncing_trident"));
+            ()->EntityType.Builder.<ThrownBouncingTrident>of(ThrownBouncingTrident::new, MobCategory.MISC)
+                    .sized(0.5f,0.5f).build(Nautec.MODID+"bouncing_trident"));
 }
