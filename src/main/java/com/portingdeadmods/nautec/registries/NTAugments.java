@@ -25,4 +25,6 @@ public final class NTAugments {
             () -> AugmentType.of(LeapAugment::new));
     public static final Supplier<AugmentType<PreventFallDamageAugment>> PREVENT_FALL_DAMAGE_AUGMENT = AUGMENTS.register("prevent_fall_damage",
             () -> AugmentType.of(PreventFallDamageAugment::new));
+    public static final Supplier<AugmentType<StepUpAugment>> STEP_UP_AUGMENT = AUGMENTS.register("step_up",
+            () -> AugmentType.of(StepUpAugment::new));
 }
