@@ -66,7 +66,7 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
     public void commonTick(PlayerTickEvent.Post event) {
         if (player == null) return;
         if (isOnCooldown()) {
-            Nautec.LOGGER.debug("cooldown Client: {}", event.getEntity().level().isClientSide);
+            // Nautec.LOGGER.debug("cooldown Client: {}", event.getEntity().level().isClientSide);
             setCooldown(getCooldown() - 1);
         }
         if (player.level().isClientSide) {

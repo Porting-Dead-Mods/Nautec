@@ -37,7 +37,7 @@ public class ThrowBouncingTridentAugment extends Augment {
     @Override
     public void clientTick(PlayerTickEvent.Post event) {
         if (NTKeybinds.THROW_TRIDENT_KEYBIND.get().consumeClick() && !isOnCooldown()) {
-            Nautec.LOGGER.debug("KEy PRESSED");
+            // Nautec.LOGGER.debug("KEy PRESSED");
             PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
             handleKeybindPress();
         }

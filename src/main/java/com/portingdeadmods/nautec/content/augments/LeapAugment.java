@@ -5,6 +5,7 @@ import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.registries.NTAugmentSlots;
 import com.portingdeadmods.nautec.registries.NTAugments;
+import com.portingdeadmods.nautec.registries.NTKeybinds;
 import com.portingdeadmods.nautec.utils.InputUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec3;
@@ -28,7 +29,7 @@ public class LeapAugment extends Augment {
 
     @Override
     public void clientTick(PlayerTickEvent.Post event) {
-        if (InputUtils.isKeyDown(InputConstants.KEY_LALT) && !isOnCooldown() && event.getEntity().onGround()) {
+        if (NTKeybinds.LEAP_KEYBIND.get().consumeClick() && !isOnCooldown() && event.getEntity().onGround()) {
             // Not to be sent to server, movement is on the client apparently
             // PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot, augmentSlot.getSlotId()));
             handleKeybindPress();
