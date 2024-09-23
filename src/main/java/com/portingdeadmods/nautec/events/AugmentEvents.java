@@ -73,6 +73,13 @@ public final class AugmentEvents {
                 } else {
                     underwater_mining_speed.setBaseValue(0.1f);
                 }
+
+                AttributeInstance max_health = player.getAttribute(Attributes.MAX_HEALTH);
+                if (augment.getAugmentType() == NTAugments.BONUS_HEART_AUGMENT.get()) {
+                    max_health.setBaseValue(40);
+                } else {
+                    max_health.setBaseValue(20);
+                }
             }
         }
     }

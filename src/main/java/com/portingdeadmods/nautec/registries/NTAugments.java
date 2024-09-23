@@ -30,4 +30,6 @@ public final class NTAugments {
             () -> AugmentType.of(StepUpAugment::new));
     public static final Supplier<AugmentType<UnderwaterMiningSpeed>> UNDERWATER_MINING_SPEED_AUGMENT = AUGMENTS.register("underwater_mining_speed",
             () -> AugmentType.of(UnderwaterMiningSpeed::new));
+    public static final Supplier<AugmentType<BonusHeartsAugment>> BONUS_HEART_AUGMENT = AUGMENTS.register("bonus_hearts",
+            () -> AugmentType.of(BonusHeartsAugment::new));
 }
