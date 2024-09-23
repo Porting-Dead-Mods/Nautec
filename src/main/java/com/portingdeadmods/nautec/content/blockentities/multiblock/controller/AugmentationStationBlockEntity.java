@@ -1,6 +1,5 @@
 package com.portingdeadmods.nautec.content.blockentities.multiblock.controller;
 
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
@@ -21,7 +20,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -40,15 +38,16 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
     private int playerOpenMenuInterval;
 
     private final Map<BlockPos, ItemStack> augmentItems;
+
+    // Recipe dependent
     private boolean isRunning;
+    private int duration;
     private Player player;
     private AugmentationRecipe recipe;
     private AugmentSlot slot;
 
-    private int duration;
-
     private double prevSpeed;
-    private double jumpStrength;
+    private double prevJumpStrength;
 
     public AugmentationStationBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.AUGMENTATION_STATION.get(), blockPos, blockState);
@@ -62,7 +61,6 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
     }
 
     public void startAugmentation(Player player, AugmentSlot augmentSlot) {
-        Nautec.LOGGER.debug("items: {}", augmentItems);
         if (!isRunning) {
             for (BlockPos augmentationExtensionPos : this.augmentItems.keySet()) {
                 ItemStack augmentationItem = this.augmentItems.get(augmentationExtensionPos);
@@ -71,7 +69,6 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
                         .map(RecipeHolder::value);
 
                 if (recipe.isPresent()) {
-                    this.isRunning = true;
                     AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(augmentationExtensionPos);
 
                     if (level.isClientSide()) {
@@ -79,17 +76,26 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
                     }
                     AttributeMap attributes = player.getAttributes();
                     this.prevSpeed = attributes.getBaseValue(Attributes.MOVEMENT_SPEED);
-                    this.jumpStrength = attributes.getBaseValue(Attributes.JUMP_STRENGTH);
+                    this.prevJumpStrength = attributes.getBaseValue(Attributes.JUMP_STRENGTH);
                     attributes.getInstance(Attributes.MOVEMENT_SPEED).setBaseValue(0);
                     attributes.getInstance(Attributes.JUMP_STRENGTH).setBaseValue(0);
-                    this.player = player;
+
+                    this.isRunning = true;
                     this.duration = 80;
+                    this.player = player;
                     this.recipe = recipe.get();
                     this.slot = augmentSlot;
+
                     return;
                 }
             }
         }
+    }
+
+    public void restorePlayerAttributes() {
+        AttributeMap attributes = player.getAttributes();
+        attributes.getInstance(Attributes.MOVEMENT_SPEED).setBaseValue(prevSpeed);
+        attributes.getInstance(Attributes.JUMP_STRENGTH).setBaseValue(prevJumpStrength);
     }
 
     @Override
@@ -132,9 +138,7 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
                     augment.setPlayer(player);
                     AugmentHelper.setAugment(player, slot, augment);
 
-                    AttributeMap attributes = player.getAttributes();
-                    attributes.getInstance(Attributes.MOVEMENT_SPEED).setBaseValue(prevSpeed);
-                    attributes.getInstance(Attributes.JUMP_STRENGTH).setBaseValue(jumpStrength);
+                    restorePlayerAttributes();
                 }
             }
         }

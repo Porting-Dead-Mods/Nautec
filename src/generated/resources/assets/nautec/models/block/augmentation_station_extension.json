@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "nautec:block/multiblock/augmentation_station/unformed/extension_bottom",
+    "east": "nautec:block/multiblock/augmentation_station/unformed/extension_side",
+    "north": "nautec:block/multiblock/augmentation_station/unformed/extension_side",
+    "south": "nautec:block/multiblock/augmentation_station/unformed/extension_side",
+    "up": "nautec:block/multiblock/augmentation_station/unformed/extension_top",
+    "west": "nautec:block/multiblock/augmentation_station/unformed/extension_side"
+  }
+}
