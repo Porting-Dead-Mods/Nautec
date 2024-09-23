@@ -5,6 +5,7 @@ import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
 import com.portingdeadmods.nautec.content.items.tiers.NTToolMaterials;
 import com.portingdeadmods.nautec.data.NTDataComponents;
+import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
 import com.portingdeadmods.nautec.utils.ItemUtils;
 import net.minecraft.ChatFormatting;
@@ -58,6 +59,10 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
         return super.hurtEnemy(stack, target, attacker);
     }
 
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return NTDataComponentsUtils.isAbilityEnabled(stack);
+    }
 
     @Override
     public boolean isDamageable(ItemStack stack) {
