@@ -67,6 +67,11 @@ public class AquarineAxeItem extends AxeItem implements IPowerItem {
     }
 
     @Override
+    public boolean isFoil(ItemStack stack) {
+        return NTDataComponentsUtils.isAbilityEnabled(stack);
+    }
+
+    @Override
     public boolean isDamageable(ItemStack stack) {
         return false;
     }

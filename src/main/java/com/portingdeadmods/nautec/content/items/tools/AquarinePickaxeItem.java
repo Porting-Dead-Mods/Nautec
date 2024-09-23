@@ -150,6 +150,11 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
     }
 
     @Override
+    public boolean isFoil(ItemStack stack) {
+        return NTDataComponentsUtils.isAbilityEnabled(stack);
+    }
+
+    @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);

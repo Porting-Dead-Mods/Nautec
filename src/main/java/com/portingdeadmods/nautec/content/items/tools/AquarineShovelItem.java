@@ -109,6 +109,11 @@ public class AquarineShovelItem extends ShovelItem implements IPowerItem {
     }
 
     @Override
+    public boolean isFoil(ItemStack stack) {
+        return NTDataComponentsUtils.isAbilityEnabled(stack);
+    }
+
+    @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.literal("Ability: Mine in a 3x3 Area").withStyle(ChatFormatting.DARK_PURPLE));

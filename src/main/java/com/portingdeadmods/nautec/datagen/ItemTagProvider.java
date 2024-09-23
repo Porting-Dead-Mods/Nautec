@@ -26,7 +26,7 @@ public class ItemTagProvider extends ItemTagsProvider{
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(NTTags.Items.AQUATIC_CATALYST, Items.HEART_OF_THE_SEA);
-        tag(NTTags.Items.AQUARINE_STEEL, NTItems.AQUARINE_STEEL_INGOT);
+        tag(NTTags.Items.AQUARINE_STEEL, NTItems.AQUARINE_STEEL_INGOT);;
     }
 
 
