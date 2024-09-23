@@ -8,6 +8,7 @@ import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -56,12 +57,21 @@ public final class AugmentEvents {
             if (augment != null) {
                 AugmentSlot slot = augment.getAugmentSlot();
                 augment.commonTick(event);
+
+                // Step-up
+                AttributeInstance step_height = player.getAttribute(Attributes.STEP_HEIGHT);
                 if (augment.getAugmentType() == NTAugments.STEP_UP_AUGMENT.get()) {
-                    AttributeInstance attribute = player.getAttribute(Attributes.STEP_HEIGHT);
-                    attribute.setBaseValue(1.0);
+                    step_height.setBaseValue(1.0);
                 } else {
-                    AttributeInstance attribute = player.getAttribute(Attributes.STEP_HEIGHT);
-                    attribute.setBaseValue(0.6f);
+                    step_height.setBaseValue(0.6f);
+                }
+
+                // Underwater Mining Speed
+                AttributeInstance underwater_mining_speed = player.getAttribute(Attributes.SUBMERGED_MINING_SPEED);
+                if (augment.getAugmentType() == NTAugments.UNDERWATER_MINING_SPEED_AUGMENT.get()) {
+                    underwater_mining_speed.setBaseValue(1f);
+                } else {
+                    underwater_mining_speed.setBaseValue(0.1f);
                 }
             }
         }
