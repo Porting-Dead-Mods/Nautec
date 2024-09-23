@@ -4,9 +4,12 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.network.SyncAugmentPayload;
+import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -53,6 +56,13 @@ public final class AugmentEvents {
             if (augment != null) {
                 AugmentSlot slot = augment.getAugmentSlot();
                 augment.commonTick(event);
+                if (augment.getAugmentType() == NTAugments.STEP_UP_AUGMENT.get()) {
+                    AttributeInstance attribute = player.getAttribute(Attributes.STEP_HEIGHT);
+                    attribute.setBaseValue(1.0);
+                } else {
+                    AttributeInstance attribute = player.getAttribute(Attributes.STEP_HEIGHT);
+                    attribute.setBaseValue(0.6f);
+                }
             }
         }
     }
