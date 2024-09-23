@@ -31,7 +31,7 @@ public final class DivingSuitOverlay {
 
         // Oxygen bar values
         ItemStack chestPiece = player.getItemBySlot(EquipmentSlot.CHEST);
-        int maxOxygen = 300;
+        int maxOxygen = 600;
         int currentOxygen = NTDataComponentsUtils.getOxygenLevels(chestPiece);
 
         // Bar position

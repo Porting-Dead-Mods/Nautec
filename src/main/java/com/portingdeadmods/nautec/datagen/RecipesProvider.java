@@ -1,6 +1,8 @@
 package com.portingdeadmods.nautec.datagen;
 
 import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
+import com.portingdeadmods.nautec.data.NTDataComponents;
+import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.datagen.recipeBuilder.*;
 import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.registries.NTItems;
@@ -11,6 +13,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -73,6 +76,17 @@ public class RecipesProvider extends RecipeProvider {
         AugmentationRecipeBuilder.newRecipe(NTAugments.DOLPHIN_FIN.get())
                 .robotArms(NTItems.CLAW_ROBOT_ARM.get())
                 .augmentItem(NTItems.DOLPHIN_FIN.get())
+                .save(pRecipeOutput);
+
+        ItemStack divingChestplate = NTItems.DIVING_CHESTPLATE.get().getDefaultInstance();
+        divingChestplate.set(NTDataComponents.OXYGEN,600);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,divingChestplate)
+                .pattern("GGG")
+                .pattern("GDG")
+                .pattern("GGG")
+                .unlockedBy("has_item",has(NTItems.DIVING_CHESTPLATE.get()))
+                .define('G',NTItems.AIR_BOTTLE.get())
+                .define('D',NTItems.DIVING_CHESTPLATE.get())
                 .save(pRecipeOutput);
     }
 }

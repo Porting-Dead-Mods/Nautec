@@ -6,6 +6,7 @@ import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.network.KeyPressedPayload;
 import com.portingdeadmods.nautec.registries.NTAugmentSlots;
 import com.portingdeadmods.nautec.registries.NTAugments;
+import com.portingdeadmods.nautec.registries.NTKeybinds;
 import com.portingdeadmods.nautec.utils.InputUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.projectile.ThrownPotion;
@@ -36,7 +37,7 @@ public class ThrowRandomPotionAugments extends Augment {
 
     @Override
     public void clientTick(PlayerTickEvent.Post event) {
-        if (InputUtils.isKeyDown(InputConstants.KEY_Y) && !isOnCooldown()) {
+        if (NTKeybinds.THROW_POTION_KEYBIND.get().consumeClick() && !isOnCooldown()) {
             PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
             handleKeybindPress();
         }

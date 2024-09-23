@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -25,7 +26,7 @@ public class ItemTagProvider extends ItemTagsProvider{
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(NTTags.Items.AQUATIC_CATALYST, Items.HEART_OF_THE_SEA);
-        tag(NTTags.Items.AQUARINE_STEEL, NTItems.AQUARINE_STEEL_INGOT);
+        tag(NTTags.Items.AQUARINE_STEEL, NTItems.AQUARINE_STEEL_INGOT);;
     }
 
 
