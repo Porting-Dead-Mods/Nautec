@@ -12,7 +12,7 @@ public final class NTAugmentSlots {
     public static final DeferredRegister<AugmentSlot> AUGMENT_SLOTS = DeferredRegister.create(NTRegistries.AUGMENT_SLOT, Nautec.MODID);
 
     public static final Supplier<AugmentSlot> HEAD = AUGMENT_SLOTS.register("head", () -> AugmentSlots.HEAD);
-    public static final Supplier<AugmentSlot> EYES = AUGMENT_SLOTS.register("eyes", () -> AugmentSlots.HEAD);
+    public static final Supplier<AugmentSlot> EYES = AUGMENT_SLOTS.register("eyes", () -> AugmentSlots.EYES);
     public static final Supplier<AugmentSlot> BODY = AUGMENT_SLOTS.register("body", () -> AugmentSlots.BODY);
     public static final Supplier<AugmentSlot> LUNG = AUGMENT_SLOTS.register("lung", () -> AugmentSlots.LUNG);
     public static final Supplier<AugmentSlot> LEFT_ARM = AUGMENT_SLOTS.register("left_arm", () -> AugmentSlots.LEFT_ARM);

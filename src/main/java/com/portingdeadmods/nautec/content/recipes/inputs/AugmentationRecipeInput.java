@@ -5,14 +5,14 @@ import net.minecraft.world.item.crafting.RecipeInput;
 
 import java.util.List;
 
-public record AugmentationRecipeInput(ItemStack ingredient, List<ItemStack> robotArms) implements RecipeInput {
+public record AugmentationRecipeInput(ItemStack ingredient, int robotArms) implements RecipeInput {
     @Override
     public ItemStack getItem(int index) {
-        return index == 0 ? ingredient : robotArms.get(index - 1);
+        return index == 0 ? ingredient : ItemStack.EMPTY;
     }
 
     @Override
     public int size() {
-        return robotArms().size() + 1;
+        return 1;
     }
 }

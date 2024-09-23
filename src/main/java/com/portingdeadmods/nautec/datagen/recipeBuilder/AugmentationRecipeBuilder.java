@@ -67,6 +67,6 @@ public class AugmentationRecipeBuilder implements NTRecipeBuilder {
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        recipeOutput.accept(id, new AugmentationRecipe(augmentItem, robotArms, augmentType), null);
+        recipeOutput.accept(id, new AugmentationRecipe(augmentItem, 1, augmentType), null);
     }
 }

@@ -36,6 +36,8 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
         basicItem(NTItems.RUSTY_GEAR.get());
         basicItem(NTItems.GEAR.get());
+        basicItem(NTItems.BROKEN_WHISK.get());
+        basicItem(NTItems.WHISK.get());
 
         basicItem(NTItems.GLASS_VIAL.get());
         basicItem(NTItems.ELECTROLYTE_ALGAE_SERUM_VIAL.get());
@@ -59,6 +61,12 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         aquarineSteelTool(NTItems.AQUARINE_PICKAXE.get());
         aquarineSteelTool(NTItems.AQUARINE_SHOVEL.get());
         aquarineSteelTool(NTItems.AQUARINE_SWORD.get());
+        basicItem(NTItems.PRISMATIC_BATTERY.get());
+
+        basicItem(NTItems.AQUARINE_HELMET.get());
+        basicItem(NTItems.AQUARINE_CHESTPLATE.get());
+        basicItem(NTItems.AQUARINE_LEGGINGS.get());
+        basicItem(NTItems.AQUARINE_BOOTS.get());
 
         parentItemBlock(NTBlocks.LASER_JUNCTION.asItem(), "_base");
 

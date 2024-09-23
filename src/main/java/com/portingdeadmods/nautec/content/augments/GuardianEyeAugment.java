@@ -22,6 +22,7 @@ import java.util.List;
 public class GuardianEyeAugment extends Augment {
     public static Vec3 laserFiredPos = null;
     public static int timeLeft = 0;
+
     public GuardianEyeAugment(AugmentSlot augmentSlot) {
         super(NTAugments.GUARDIAN_EYE_AUGMENT.get(), augmentSlot);
     }

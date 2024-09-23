@@ -116,6 +116,7 @@ public final class NTEvents {
                 }
             }
         }
+
         //TODO remove this shit
         @SubscribeEvent
         public static void onPowerItemTick(EntityTickEvent.Post event) {
@@ -123,18 +124,18 @@ public final class NTEvents {
                 ItemStack stack = itemEntity.getItem();
                 if (stack.getItem() instanceof IPowerItem powerItem) {
                     IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
-                    if(powerStorage.getPowerStored() < powerStorage.getPowerCapacity()) {
-                        powerStorage.tryFillPower(1,false);
+                    if (powerStorage.getPowerStored() < powerStorage.getPowerCapacity()) {
+                        powerStorage.tryFillPower(1, false);
                     }
                 }
             }
         }
 
         @SubscribeEvent
-        public static void onHitEntity(AttackEntityEvent event){
-            if(event.getEntity().getMainHandItem().getItem() instanceof IPowerItem powerItem){
+        public static void onHitEntity(AttackEntityEvent event) {
+            if (event.getEntity().getMainHandItem().getItem() instanceof IPowerItem powerItem) {
                 IPowerStorage powerStorage = event.getEntity().getMainHandItem().getCapability(NTCapabilities.PowerStorage.ITEM);
-                if(powerStorage.getPowerStored() <= 0 && event.getTarget() instanceof LivingEntity){
+                if (powerStorage.getPowerStored() <= 0 && event.getTarget() instanceof LivingEntity) {
                     event.setCanceled(true);
                     event.getEntity().displayClientMessage(Component.literal("Not Enough Power !"), true);
                 }
@@ -142,29 +143,29 @@ public final class NTEvents {
         }
 
         @SubscribeEvent
-        public static void onRightClick(PlayerInteractEvent.RightClickItem event){
-            if(event.getItemStack().getItem() instanceof IPowerItem powerItem){
+        public static void onRightClick(PlayerInteractEvent.RightClickItem event) {
+            if (event.getItemStack().getItem() instanceof IPowerItem powerItem) {
                 ItemStack stack = event.getItemStack();
-                if(stack.has(NTDataComponents.ABILITY_ENABLED) && event.getEntity().isShiftKeyDown()){
-                    if(stack.is(NTItems.BATTERY)){
+                if (stack.has(NTDataComponents.ABILITY_ENABLED) && event.getEntity().isShiftKeyDown()) {
+                    if (stack.is(NTItems.PRISMATIC_BATTERY)) {
                         NTDataComponentsUtils.setAbilityStatus(stack, !NTDataComponentsUtils.isAbilityEnabled(stack));
                         return;
                     }
-                    if(NTDataComponentsUtils.isInfused(stack)){
+                    if (NTDataComponentsUtils.isInfused(stack)) {
                         boolean enabled = NTDataComponentsUtils.isAbilityEnabled(stack);
                         NTDataComponentsUtils.setAbilityStatus(stack, !enabled);
                         event.getEntity().displayClientMessage(Component.literal("Ability " + (enabled ? "Disabled" : "Enabled")).withStyle((enabled ? ChatFormatting.RED : ChatFormatting.GREEN)), true);
-                        if(event.getLevel().isClientSide){
+                        if (event.getLevel().isClientSide) {
                             Player player = event.getEntity();
                             Level level = event.getLevel();
-                            if(enabled){
+                            if (enabled) {
                                 level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.PLAYERS, 0.4f, 0.01f);
-                            }else{
+                            } else {
                                 level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.PLAYERS, 0.4f, 0.09f);
                             }
                         }
-                    }else{
-                        if(event.getLevel().isClientSide){
+                    } else {
+                        if (event.getLevel().isClientSide) {
                             event.getEntity().sendSystemMessage(Component.literal("Infuse in Algae Serum to unlock Abilities").withStyle(ChatFormatting.RED));
                         }
                     }
