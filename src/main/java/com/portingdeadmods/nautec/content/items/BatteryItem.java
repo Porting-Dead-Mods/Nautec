@@ -53,7 +53,7 @@ public class BatteryItem extends Item implements IPowerItem {
                             }
                         }
                     }
-                }, NTItems.BATTERY.get());
+                }, NTItems.PRISMATIC_BATTERY.get());
     }
 
     @Override

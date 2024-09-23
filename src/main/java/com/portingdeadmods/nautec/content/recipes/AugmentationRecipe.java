@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.recipes;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
@@ -20,12 +21,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public record AugmentationRecipe(Ingredient augmentItem, List<Ingredient> robotArms, AugmentType<?> resultAugment) implements Recipe<AugmentationRecipeInput> {
+public record AugmentationRecipe(Ingredient augmentItem, int robotArms, AugmentType<?> resultAugment) implements Recipe<AugmentationRecipeInput> {
     public static final String NAME = "augmentation";
 
     @Override
     public boolean matches(@NotNull AugmentationRecipeInput recipeInput, @NotNull Level level) {
-        return augmentItem.test(recipeInput.ingredient()) && RecipeUtils.compareItems(recipeInput.robotArms(), RecipeUtils.ingredientsToIWC(robotArms));
+        return augmentItem.test(recipeInput.ingredient()) && recipeInput.robotArms() >= this.robotArms;
     }
 
     @Override
@@ -55,22 +56,20 @@ public record AugmentationRecipe(Ingredient augmentItem, List<Ingredient> robotA
 
     @Override
     public @NotNull NonNullList<Ingredient> getIngredients() {
-        ArrayList<Ingredient> ingredients = new ArrayList<>(robotArms);
-        ingredients.addFirst(augmentItem);
-        return RecipeUtils.listToNonNullList(ingredients);
+        return NonNullList.of(Ingredient.EMPTY, this.augmentItem);
     }
 
     public static class Serializer implements RecipeSerializer<AugmentationRecipe> {
         public static final AugmentationRecipe.Serializer INSTANCE = new AugmentationRecipe.Serializer();
         private static final MapCodec<AugmentationRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec((builder) -> builder.group(
                 Ingredient.CODEC.fieldOf("augmentItem").forGetter(AugmentationRecipe::augmentItem),
-                Ingredient.CODEC.listOf().fieldOf("robotArms").forGetter(AugmentationRecipe::robotArms),
+                Codec.INT.fieldOf("robotArms").forGetter(AugmentationRecipe::robotArms),
                 AugmentCodecs.AUGMENT_TYPE_CODEC.fieldOf("resultAugment").forGetter(AugmentationRecipe::resultAugment)
         ).apply(builder, AugmentationRecipe::new));
         private static final StreamCodec<RegistryFriendlyByteBuf, AugmentationRecipe> STREAM_CODEC = StreamCodec.composite(
                 Ingredient.CONTENTS_STREAM_CODEC,
                 AugmentationRecipe::augmentItem,
-                Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()),
+                ByteBufCodecs.INT,
                 AugmentationRecipe::robotArms,
                 AugmentCodecs.AUGMENT_TYPE_STREAM_CODEC,
                 AugmentationRecipe::resultAugment,

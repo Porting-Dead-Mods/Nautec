@@ -1,10 +1,14 @@
-// 1.21.1	2024-09-22T15:53:28.503727053	Item Models: nautec
+// 1.21.1	2024-09-23T21:31:02.921344905	Item Models: nautec
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
 f031500271b315d13a5f3ca96fc3a73ea8d47054 assets/nautec/models/item/aquarine_steel_axe_enabled.json
 597ea4ecad0b0a10ad86d8dac724222f83aab903 assets/nautec/models/item/aquarine_steel_block.json
+6245b7ccf35e7c45a45655169c514954d555767d assets/nautec/models/item/aquarine_steel_boots.json
+9beb43ea47b23d5881797907b71dfaced9e9e5a6 assets/nautec/models/item/aquarine_steel_chestplate.json
+fb60a6f737e442e6a50600cab761c0d3bfd8c12b assets/nautec/models/item/aquarine_steel_helmet.json
 13842b6fba9a4cb2eaa3bc0d71ea0e7f89c47de6 assets/nautec/models/item/aquarine_steel_hoe.json
 3bf12608fd7916da3e40eaeb611fa507460addf4 assets/nautec/models/item/aquarine_steel_hoe_enabled.json
 7199ffd7d9bfd4d5c2f5d5b4f2bc02dd9c219bf1 assets/nautec/models/item/aquarine_steel_ingot.json
+784b8ef3d9790ebe29a1906e4b28c1f7d5d9579d assets/nautec/models/item/aquarine_steel_leggings.json
 88aa876dd14cdee335b8c54bfaa92abd1bec1203 assets/nautec/models/item/aquarine_steel_pickaxe.json
 71237d09b3b0a6eae719c897084aca9a884e556d assets/nautec/models/item/aquarine_steel_pickaxe_enabled.json
 34bda5f4021d3c7d026d03623b4b66aac33a1e32 assets/nautec/models/item/aquarine_steel_shovel.json
@@ -16,6 +20,7 @@ a954d63cd95737320daab374524aea4394230de9 assets/nautec/models/item/aquatic_catal
 f60b23b8ca6d44e339c9c415f53102833b4ff633 assets/nautec/models/item/atlantic_gold_ingot.json
 a95dff0d56139e74443ee5069394ccbe31bc875a assets/nautec/models/item/atlantic_gold_nugget.json
 6338d151fe16332a6bd885776f58d9c9a4ffad62 assets/nautec/models/item/augmentation_station.json
+b1e3c9080ae5a0f78b06fa90f3c5da5b3805f842 assets/nautec/models/item/broken_whisk.json
 204c2b87988bae0f1d52f4bdbf783705a53f0187 assets/nautec/models/item/chiseled_dark_prismarine.json
 9c2eb8e87b6da76b41d01bbbe9d6dc72fa5a7479 assets/nautec/models/item/claw_robot_arm.json
 480b14b512773eff106e41db280b20b18ff623f8 assets/nautec/models/item/crate.json
@@ -43,7 +48,9 @@ e8d19ed0a058c92c28efb20a5f8887ff0b78770f assets/nautec/models/item/polished_pris
 8e22e42d27bc66bc91cc76fd66d0ff5457b585b1 assets/nautec/models/item/prismarine_crystal.json
 8b90a03798a28c038b1c16da2f723e90694d182b assets/nautec/models/item/prismarine_crystal_shard.json
 09882392c9745a728907f265dd968977ca0f171b assets/nautec/models/item/prismarine_laser_relay.json
+e0209c5f64b38c19f4b8cc62dc90d23fd5f3bad0 assets/nautec/models/item/prismatic_battery.json
 0441fb5aafacad25af44cc70caad7de17d4d7762 assets/nautec/models/item/rusty_crate.json
 546756658cb53a34f117de278d075cbdd09c70ba assets/nautec/models/item/rusty_gear.json
 8af43812b6a13031c60720373e6e2aa8b3aa3367 assets/nautec/models/item/salt_water_bucket.json
 d96e7cb7aefd55470be2d129d9b6ae6f5ed3bf36 assets/nautec/models/item/syringe_robot_arm.json
+5d79cd8fb5d6550d2d8a61aa19dbf6f13ceecb72 assets/nautec/models/item/whisk.json

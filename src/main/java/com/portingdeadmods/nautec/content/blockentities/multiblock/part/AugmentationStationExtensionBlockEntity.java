@@ -4,6 +4,7 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockPartEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.AugmentationStationBlockEntity;
 import com.portingdeadmods.nautec.content.items.RobotArmItem;
 import com.portingdeadmods.nautec.content.menus.AugmentationStationExtensionMenu;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,13 +53,6 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
         this.animationTime = 50;
         this.robotArmSpeed = 7;
         this.animation = Animation.FORWARD;
-    }
-
-    public void resetAnim() {
-        this.animationTime = 0;
-        this.robotArmSpeed = 0;
-        this.middleIndependentAngle = 0;
-        this.tipIndependentAngle = 0;
     }
 
     public Animation getAnimation() {
@@ -95,6 +90,16 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
                     }
                 }
             }
+        }
+    }
+
+    @Override
+    protected void onItemsChanged(int slot) {
+        super.onItemsChanged(slot);
+        IItemHandler handler = getItemHandler();
+        if (!handler.getStackInSlot(1).isEmpty()) {
+            AugmentationStationBlockEntity be = (AugmentationStationBlockEntity) level.getBlockEntity(getControllerPos());
+            be.getAugmentItems().put(worldPosition, handler.getStackInSlot(0));
         }
     }
 
@@ -137,6 +142,12 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
     @Override
     public void setControllerPos(BlockPos blockPos) {
         this.controllerPos = blockPos;
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        onItemsChanged(0);
     }
 
     @Override
