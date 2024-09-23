@@ -1,6 +1,8 @@
-// 1.21.1	2024-09-22T18:49:18.779324132	Recipes
+// 1.21.1	2024-09-23T17:41:53.3127091	Recipes
+55ee1a8c8240974dc253a1672f47579ef8a7aa2c data/nautec/advancement/recipes/misc/diving_chestplate.json
 a60abd473ea054db8b2b484be6948f74ef64abd7 data/nautec/recipe/aquatic_catalyst_channeling/kelp.json
 9a09e2cfb595b41f7011ed2969268e139b10799f data/nautec/recipe/augmentation/dolphin_fin_claw_robot_arm.json
+d9bd5ed8d761638f07ac753459c333be5e11032b data/nautec/recipe/diving_chestplate.json
 0e781b8c85808d8ee2691a5c39404da2b6a8f061 data/nautec/recipe/item_etching/ancient_valve_to_valve.json
 26b45ba49569a3744a9e7685f679a7da10b08d93 data/nautec/recipe/item_etching/rusty_gear_to_gear.json
 f0aa61e7f48538efe07a23e1688b069a3299b815 data/nautec/recipe/item_transformation/iron_ingot_to_aquarine_steel_ingot.json

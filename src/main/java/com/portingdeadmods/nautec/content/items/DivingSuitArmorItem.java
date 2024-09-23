@@ -63,8 +63,8 @@ public class DivingSuitArmorItem extends ArmorItem {
             int minutesRemaining = oxygen / 60;
             int secondsRemaining = oxygen % 60;
 
-            int red = (int) (255 * (1 - (oxygen / 300.0)));
-            int green = (int) (255 * (oxygen / 300.0));
+            int red = (int) (255 * (1 - (oxygen / 600.0)));
+            int green = (int) (255 * (oxygen / 600.0));
 
             int colorHex = (red << 16) | (green << 8);
 
