@@ -1,9 +1,15 @@
 package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.api.items.IPowerItem;
+import com.portingdeadmods.nautec.data.NTDataAttachments;
+import com.portingdeadmods.nautec.data.NTDataComponents;
+import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -19,6 +25,9 @@ public final class NTCreativeTabs {
             .displayItems((params, output) -> {
                 for (ItemLike item : NTItems.CREATIVE_TAB_ITEMS) {
                     output.accept(item);
+                    if (item instanceof IPowerItem) {
+                        addPowered(output, item.asItem());
+                    }
                 }
 
                 output.accept(NTItems.SALT_WATER_BUCKET);
@@ -26,4 +35,11 @@ public final class NTCreativeTabs {
                 output.accept(NTItems.ETCHING_ACID_BUCKET);
             })
             .build());
+
+    public static void addPowered(CreativeModeTab.Output output, Item item) {
+        ItemStack itemStack = new ItemStack(item);
+        ComponentPowerStorage powerStorage = itemStack.getOrDefault(NTDataComponents.POWER, ComponentPowerStorage.EMPTY);
+        itemStack.set(NTDataComponents.POWER, new ComponentPowerStorage(powerStorage.powerCapacity(), powerStorage.powerCapacity(), 0));
+        output.accept(itemStack);
+    }
 }

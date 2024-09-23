@@ -54,18 +54,32 @@ public class BlockModelProvider extends BlockStateProvider {
 
         augmentationStationController(NTBlocks.AUGMENTATION_STATION.get());
         augmentationStationPart(NTBlocks.AUGMENTATION_STATION_PART.get(), IntegerRange.of(0, 8));
-        horizontalBlock(NTBlocks.AUGMENTATION_STATION_EXTENSION.get(), models().getExistingFile(existingModelFile("multiblock/augmentation_station_extension")));
+        augmentationStationExtension(NTBlocks.AUGMENTATION_STATION_EXTENSION.get());
 
         simpleBlock(NTBlocks.DRAIN_WALL.get());
     }
 
     private void augmentationStationController(AugmentationStationBlock augmentationStationBlock) {
         ModelFile formedModel = models().getExistingFile(existingModelFile("multiblock/augmentation_station_4"));
-        getVariantBuilder(augmentationStationBlock).partialState()
-                .modelForState().modelFile(formedModel).addModel();
+        getVariantBuilder(augmentationStationBlock).partialState().with(Multiblock.FORMED, true)
+                .modelForState().modelFile(formedModel).addModel()
+                .partialState().with(Multiblock.FORMED, false)
+                .modelForState().modelFile(unformedAugmentationStationPart(augmentationStationBlock, "controller")).addModel();
     }
 
-    private void augmentationStationPart(AugmentationStationPartBlock augmentationStationPartBlock, IntegerRange range) {
+    private void augmentationStationExtension(Block augmentationStationExtensionBlock) {
+        VariantBlockStateBuilder builder = getVariantBuilder(augmentationStationExtensionBlock);
+        builder
+                .partialState().with(Multiblock.FORMED, false)
+                .modelForState().modelFile(unformedAugmentationStationPart(augmentationStationExtensionBlock, "extension")).addModel();
+        for (Direction dir : BlockStateProperties.HORIZONTAL_FACING.getPossibleValues()) {
+            builder.partialState().with(Multiblock.FORMED, true).with(BlockStateProperties.HORIZONTAL_FACING, dir)
+                    .modelForState().modelFile(models().getExistingFile(existingModelFile("multiblock/augmentation_station_extension")))
+                    .rotationY(((int) dir.toYRot() + 180) % 360).addModel();
+        }
+    }
+
+    private void augmentationStationPart(Block augmentationStationPartBlock, IntegerRange range) {
         VariantBlockStateBuilder builder = getVariantBuilder(augmentationStationPartBlock);
         builder.partialState().with(Multiblock.FORMED, false)
                 .modelForState().modelFile(drainPartModel(augmentationStationPartBlock, 0, false)).addModel();
@@ -80,6 +94,18 @@ public class BlockModelProvider extends BlockStateProvider {
             builder.partialState().with(Multiblock.FORMED, true).with(AugmentationStationMultiblock.AS_PART, index)
                     .modelForState().modelFile(formedModel).addModel();
         }
+    }
+
+    private @NotNull BlockModelBuilder unformedAugmentationStationPart(Block augmentationStationController, String part) {
+        Multiblock multiblock = NTMultiblocks.AUGMENTATION_STATION.get();
+        BlockModelBuilder builder = models().withExistingParent(name(augmentationStationController), "cube");
+        builder.texture("up", multiblockTexture(multiblock, "unformed/" + part + "_top"))
+                .texture("down", multiblockTexture(multiblock, "unformed/" + part + "_bottom"))
+                .texture("north", multiblockTexture(multiblock, "unformed/" + part + "_side"))
+                .texture("east", multiblockTexture(multiblock, "unformed/" + part + "_side"))
+                .texture("south", multiblockTexture(multiblock, "unformed/" + part + "_side"))
+                .texture("west", multiblockTexture(multiblock, "unformed/" + part + "_side"));
+        return builder;
     }
 
     private void drainController(Block drainController) {

@@ -80,6 +80,12 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         }
     }
 
+    public ItemModelBuilder parentItemBlock(Item item, ResourceLocation loc) {
+        ResourceLocation name = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item));
+        return getBuilder(name.toString())
+                .parent(new ModelFile.UncheckedModelFile(loc));
+    }
+
     public ItemModelBuilder parentItemBlock(Item item) {
         return parentItemBlock(item, "");
     }

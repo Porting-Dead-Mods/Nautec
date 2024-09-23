@@ -160,7 +160,9 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
     @Override
     protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
         super.saveData(tag, provider);
-        tag.putLong("controllerPos", controllerPos.asLong());
+        if (controllerPos != null) {
+            tag.putLong("controllerPos", controllerPos.asLong());
+        }
         tag.putBoolean("hasRobotArm", hasRobotArm);
     }
 
