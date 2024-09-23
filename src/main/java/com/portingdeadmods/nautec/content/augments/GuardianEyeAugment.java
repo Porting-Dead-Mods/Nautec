@@ -51,7 +51,7 @@ public class GuardianEyeAugment extends Augment {
             List<Entity> entities = player.level().getEntities(player, new AABB(checkPos.add(-0.5, -0.5, -0.5), checkPos.add(0.5, 0.5, 0.5)));
             for (Entity entity : entities) {
                 if (entity != player && !(entity instanceof ItemEntity)) {
-                    Nautec.LOGGER.info("Hit entity in line: {}", entity.getName().getString());
+                    // Nautec.LOGGER.info("Hit entity in line: {}", entity.getName().getString());
                     if (!player.level().isClientSide){
                         entity.hurt(entity.damageSources().magic(), 1f);
                         entity.setRemainingFireTicks(10);

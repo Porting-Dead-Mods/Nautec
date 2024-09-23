@@ -224,7 +224,7 @@ public final class NTClientEvents {
             MultiBufferSource buf = Minecraft.getInstance().renderBuffers().bufferSource();
             if (GuardianEyeAugment.laserFiredPos != null && GuardianEyeAugment.timeLeft > 0) {
                 GuardianEyeAugment.timeLeft --;
-                Nautec.LOGGER.info("RENDER LASER");
+                // Nautec.LOGGER.info("RENDER LASER");
                 GuardianEyeLaserRenderer.renderLaser(Minecraft.getInstance().player.position(), GuardianEyeAugment.laserFiredPos, event.getPoseStack(), buf);
             }
         }

@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 public final class Nautec {
     public static final Minecraft instance = Minecraft.getInstance();
     public static final String MODID = "nautec";
+    public static final String MODNAME = "NauTec";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public Nautec(IEventBus modEventBus, ModContainer modContainer) {
