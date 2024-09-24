@@ -9,6 +9,7 @@ import com.portingdeadmods.nautec.api.fluids.BaseFluidType;
 import com.portingdeadmods.nautec.client.hud.DivingSuitOverlay;
 import com.portingdeadmods.nautec.client.hud.PrismMonocleOverlay;
 import com.portingdeadmods.nautec.client.model.augment.DolphinFinModel;
+import com.portingdeadmods.nautec.client.model.augment.GuardianEyeModel;
 import com.portingdeadmods.nautec.client.model.block.DrainTopModel;
 import com.portingdeadmods.nautec.client.model.block.PrismarineCrystalModel;
 import com.portingdeadmods.nautec.client.model.block.RobotArmModel;
@@ -144,6 +145,8 @@ public final class NTClientEvents {
             event.registerBlockEntityRenderer(NTBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), AugmentStationExtensionBERenderer::new);
             AugmentLayerRenderer.registerRenderer(NTAugments.DOLPHIN_FIN.get(),
                     ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.MATERIAL, true, ctx));
+            AugmentLayerRenderer.registerRenderer(NTAugments.GUARDIAN_EYE_AUGMENT.get(),
+                    ctx -> new SimpleAugmentRenderer<>(GuardianEyeModel::new, GuardianEyeModel.LAYER_LOCATION, GuardianEyeModel.MATERIAL, true, ctx));
             AugmentStationExtensionBERenderer.registerRenderer(NTItems.CLAW_ROBOT_ARM.get(), ClawRobotArmRenderer::new);
         }
 
@@ -162,6 +165,7 @@ public final class NTClientEvents {
             event.registerLayerDefinition(WhiskModel.LAYER_LOCATION, WhiskModel::createBodyLayer);
             event.registerLayerDefinition(RobotArmModel.LAYER_LOCATION, RobotArmModel::createBodyLayer);
             event.registerLayerDefinition(DolphinFinModel.LAYER_LOCATION, DolphinFinModel::createBodyLayer);
+            event.registerLayerDefinition(GuardianEyeModel.LAYER_LOCATION, GuardianEyeModel::createBodyLayer);
             ArmorModelsHandler.registerLayers(event);
         }
 
