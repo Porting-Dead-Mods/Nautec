@@ -32,4 +32,8 @@ public final class NTAugments {
             () -> AugmentType.of(UnderwaterMiningSpeed::new));
     public static final Supplier<AugmentType<BonusHeartsAugment>> BONUS_HEART_AUGMENT = AUGMENTS.register("bonus_hearts",
             () -> AugmentType.of(BonusHeartsAugment::new));
+    public static final Supplier<AugmentType<CreativeFlightAugment>> CREATIVE_FLIGHT_AUGMENT = AUGMENTS.register("creative_flight",
+            () -> AugmentType.of(CreativeFlightAugment::new));
+    public static final Supplier<AugmentType<MagnetAugment>> MAGNET_AUGMENT = AUGMENTS.register("magnet",
+            () -> AugmentType.of(MagnetAugment::new));
 }
