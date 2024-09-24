@@ -30,8 +30,8 @@ public class AugmentationStationScreen extends Screen {
 
     public AugmentationStationScreen(AugmentationStationBlockEntity blockEntity, Player player, Component title) {
         super(title);
-        this.imageWidth = 176;
-        this.imageHeight = 113;
+        this.imageWidth = 202;
+        this.imageHeight = 160;
         this.player = player;
         this.blockEntity = blockEntity;
     }
@@ -45,7 +45,7 @@ public class AugmentationStationScreen extends Screen {
         int width = (x + imageWidth - 4) - (x + 4);
         int height = (y + imageHeight - 6) - (y + 16);
 
-        this.dataPanel = new AugmentationStationDataPanel(Minecraft.getInstance(), width / 3 - 2, height, y + 16, x + imageWidth - 60);
+        this.dataPanel = new AugmentationStationDataPanel(Minecraft.getInstance(), width / 3 - 10, height - 50, y + 18, x + imageWidth - 58);
         addRenderableWidget(this.dataPanel);
     }
 
@@ -80,13 +80,13 @@ public class AugmentationStationScreen extends Screen {
 
         guiGraphics.renderFakeItem(NTItems.DOLPHIN_FIN.toStack(), augmentX, augmentY);
 
-        guiGraphics.blit(SELECTED_SLOT, augmentX - 4, augmentY - 4, 0, 0, 24, 24, 24, 24);
+        //guiGraphics.blit(SELECTED_SLOT, augmentX - 4, augmentY - 4, 0, 0, 24, 24, 24, 24);
 
         addRenderableWidget(Button.builder(Component.literal("Apply"), btn -> {
             ((AugmentationStationBlockEntity) blockEntity).startAugmentation(player, dataPanel.getSelectedSlot());
             PacketDistributor.sendToServer(new StartAugmentationPayload(blockEntity.getBlockPos(), dataPanel.getSelectedSlot(), player.getUUID()));
             Minecraft.getInstance().setScreen(null);
-        }).bounds(x + imageWidth / 2 - 26, y + imageHeight - 20, 50, 15).build());
+        }).bounds(x + imageWidth / 2 - 40, y + imageHeight - 55, 50, 15).build());
 
         int xOffset = 60;
         int yOffset = 20;
@@ -96,7 +96,7 @@ public class AugmentationStationScreen extends Screen {
 
         MutableComponent text = Component.literal("Augmentation Station");
         int textWidth = minecraft.font.width(text);
-        guiGraphics.drawString(minecraft.font, text, x + (imageWidth / 2) - (textWidth / 2), y + 4, 4210752, false);
+        guiGraphics.drawString(minecraft.font, text, x + (imageWidth / 2) - (textWidth / 2) - 14, y + 2, 4210752, false);
     }
 
     private void renderRect(GuiGraphics guiGraphics) {
@@ -105,10 +105,13 @@ public class AugmentationStationScreen extends Screen {
 
         int width = (x + imageWidth - 4) - (x + 4);
         int height = (y + imageHeight - 6) - (y + 16);
-        int minX = x + imageWidth - 60;
+        int minX = x + imageWidth - 58;
         int lineHeight = minecraft.font.lineHeight;
-        int minY = y + 16 + 2 + dataPanel.getSelectedSlotIndex() * lineHeight;
-        guiGraphics.fill(minX, minY + 5, minX + width / 3 - 2, minY + lineHeight + 4, FastColor.ARGB32.color(150, 150, 150));
+        int slotIndex = dataPanel.getSelectedSlotIndex();
+        int minY = y + 16 + slotIndex * lineHeight;
+        if (slotIndex != -1) {
+            guiGraphics.fill(minX, minY + 5, minX + width / 3 - 10, minY + lineHeight + 4, FastColor.ARGB32.color(150, 150, 150));
+        }
     }
 
     @Override

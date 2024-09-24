@@ -8,6 +8,7 @@ import com.portingdeadmods.nautec.content.items.RobotArmItem;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -15,7 +16,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import java.util.function.Function;
 
 public class AugmentStationExtensionBERenderer implements BlockEntityRenderer<AugmentationStationExtensionBlockEntity> {
-    private static final Object2ObjectMap<RobotArmItem, Function<AugmentRenderer.Context, ? extends RobotArmRenderer>> RENDERER_PROVIDERS = new Object2ObjectOpenHashMap<>();
+    private static final Object2ObjectMap<RobotArmItem, Function<EntityModelSet, ? extends RobotArmRenderer>> RENDERER_PROVIDERS = new Object2ObjectOpenHashMap<>();
     private static final Object2ObjectMap<RobotArmItem, RobotArmRenderer> RENDERERS = new Object2ObjectOpenHashMap<>();
 
     public AugmentStationExtensionBERenderer(BlockEntityRendererProvider.Context ctx) {
@@ -33,13 +34,13 @@ public class AugmentStationExtensionBERenderer implements BlockEntityRenderer<Au
 
     public static void createRenderers() {
         Iterable<RobotArmItem> items = RENDERER_PROVIDERS.keySet();
-        AugmentRenderer.Context ctx = new AugmentRenderer.Context(Minecraft.getInstance().getEntityModels());
+        EntityModelSet ctx = Minecraft.getInstance().getEntityModels();
         for (RobotArmItem item : items) {
             RENDERERS.put(item, RENDERER_PROVIDERS.get(item).apply(ctx));
         }
     }
 
-    public static void registerRenderer(RobotArmItem item, Function<AugmentRenderer.Context, ? extends RobotArmRenderer> rendererConstructor) {
+    public static void registerRenderer(RobotArmItem item, Function<EntityModelSet, ? extends RobotArmRenderer> rendererConstructor) {
         RENDERER_PROVIDERS.put(item, rendererConstructor);
     }
 }

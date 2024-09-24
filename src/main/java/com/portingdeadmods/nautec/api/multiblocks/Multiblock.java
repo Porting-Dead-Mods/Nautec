@@ -92,6 +92,9 @@ public interface Multiblock {
      */
     BlockEntityType<? extends MultiblockEntity> getMultiBlockEntityType();
 
+    default void iterBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, MultiblockData data, boolean forming) {
+    }
+
     /**
      * This method provides a list of widths for every layer
      * of your multiblock.
@@ -177,6 +180,10 @@ public interface Multiblock {
     boolean isFormed(Level level, BlockPos blockPos);
 
     default void onStartForming(Level level, BlockPos firstPos, BlockPos controllerPos) {
+
+    }
+
+    default void onStartUnforming(Level level, BlockPos firstPos, BlockPos controllerPos) {
 
     }
 

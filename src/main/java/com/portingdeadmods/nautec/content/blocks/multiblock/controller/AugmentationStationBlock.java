@@ -1,11 +1,16 @@
 package com.portingdeadmods.nautec.content.blocks.multiblock.controller;
 
 import com.mojang.serialization.MapCodec;
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.blockentities.ContainerBlock;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.part.AugmentationStationPartBlockEntity;
 import com.portingdeadmods.nautec.content.multiblocks.AugmentationStationMultiblock;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTBlocks;
+import com.portingdeadmods.nautec.registries.NTMultiblocks;
+import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -44,6 +49,15 @@ public class AugmentationStationBlock extends ContainerBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder.add(Multiblock.FORMED, AugmentationStationMultiblock.AS_PART));
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock())) {
+            Nautec.LOGGER.debug("unformingc");
+            MultiblockHelper.unform(NTMultiblocks.AUGMENTATION_STATION.get(), pos, level);
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
     @Override

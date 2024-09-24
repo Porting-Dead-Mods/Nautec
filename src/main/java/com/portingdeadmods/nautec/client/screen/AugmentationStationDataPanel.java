@@ -23,6 +23,28 @@ public class AugmentationStationDataPanel extends ScrollPanel {
         super(client, width, height, top, left);
         this.client = client;
         this.augmentSlots = NTRegistries.AUGMENT_SLOT.stream().toList();
+
+        applyScrollLimits();
+    }
+
+    private int getMaxScroll() {
+        return this.getContentHeight() - (this.height - this.border);
+    }
+
+    private void applyScrollLimits() {
+        int max = getMaxScroll();
+
+        if (max < 0) {
+            max /= 2;
+        }
+
+        if (this.scrollDistance < 0.0F) {
+            this.scrollDistance = 0.0F;
+        }
+
+        if (this.scrollDistance > max) {
+            this.scrollDistance = max;
+        }
     }
 
     @Override
@@ -34,8 +56,8 @@ public class AugmentationStationDataPanel extends ScrollPanel {
     protected void drawPanel(GuiGraphics guiGraphics, int entryRight, int relativeY, Tesselator tess, int mouseX, int mouseY) {
         for (int i = 0; i < this.augmentSlots.size(); i++) {
             AugmentSlot augmentSlot = this.augmentSlots.get(i);
-            int x = left + 6;
-            int y = relativeY + i * client.font.lineHeight;
+            int x = left + 2;
+            int y = relativeY - 2 + i * client.font.lineHeight;
             guiGraphics.drawString(client.font, Component.literal(augmentSlot.getName()),
                     x, y, FastColor.ARGB32.color(255, 255, 255));
             if (augmentSlot == selectedSlot) {

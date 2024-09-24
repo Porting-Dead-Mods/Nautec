@@ -21,6 +21,8 @@ public class GuardianEyeLaserRenderer {
         float targetY = (float) targetPos.y;
         float targetZ = (float) targetPos.z;
 
+
+
         BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR);
         buffer.addVertex(poseStack.last().pose(),playerX,playerY,playerZ);
         buffer.setColor(1, 0,1,1);
