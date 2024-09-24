@@ -24,7 +24,7 @@ public class ClearAugmentsCommand {
     private static int execute(CommandContext<CommandSourceStack> ctx) {
         Player player = ctx.getSource().getPlayer();
         for (Augment augment : AugmentHelper.getAugments(player).values()) {
-            augment.onRemoved();
+            augment.onRemoved(ctx.getSource().getPlayer());
         }
         player.setData(NTDataAttachments.AUGMENTS, new HashMap<>());
         player.setData(NTDataAttachments.AUGMENTS_EXTRA_DATA, new HashMap<>());

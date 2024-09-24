@@ -59,10 +59,10 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
         setChanged();
     }
 
-    public void onAdded() {
+    public void onAdded(Player player) {
     }
 
-    public void onRemoved() {
+    public void onRemoved(Player player) {
     }
 
     public void breakBlock(BlockEvent.BreakEvent event) {
