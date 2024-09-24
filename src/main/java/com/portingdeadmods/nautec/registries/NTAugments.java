@@ -36,4 +36,6 @@ public final class NTAugments {
             () -> AugmentType.of(CreativeFlightAugment::new));
     public static final Supplier<AugmentType<MagnetAugment>> MAGNET_AUGMENT = AUGMENTS.register("magnet",
             () -> AugmentType.of(MagnetAugment::new));
+    public static final Supplier<AugmentType<WaterRegenAugment>> WATER_REGEN_AUGMENT = AUGMENTS.register("water_regen",
+            () -> AugmentType.of(WaterRegenAugment::new));
 }
