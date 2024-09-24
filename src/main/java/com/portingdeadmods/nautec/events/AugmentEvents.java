@@ -4,9 +4,12 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.network.SyncAugmentPayload;
+import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -38,8 +41,7 @@ public final class AugmentEvents {
         Iterable<Augment> augments = AugmentHelper.getAugments(event.getPlayer()).values();
         for (Augment augment : augments) {
             if (augment != null) {
-                //augments.get(i).breakBlock(AugmentSlot.GetValue(i),event);
-
+                augment.breakBlock(event);
             }
         }
     }
@@ -53,6 +55,38 @@ public final class AugmentEvents {
             if (augment != null) {
                 AugmentSlot slot = augment.getAugmentSlot();
                 augment.commonTick(event);
+
+                // Step-up
+                AttributeInstance step_height = player.getAttribute(Attributes.STEP_HEIGHT);
+                if (augment.getAugmentType() == NTAugments.STEP_UP_AUGMENT.get()) {
+                    step_height.setBaseValue(1.0);
+                } else {
+                    step_height.setBaseValue(0.6f);
+                }
+
+                // Underwater Mining Speed
+                AttributeInstance underwater_mining_speed = player.getAttribute(Attributes.SUBMERGED_MINING_SPEED);
+                if (augment.getAugmentType() == NTAugments.UNDERWATER_MINING_SPEED_AUGMENT.get()) {
+                    underwater_mining_speed.setBaseValue(1f);
+                } else {
+                    underwater_mining_speed.setBaseValue(0.1f);
+                }
+
+                // Bonus Hearts
+                AttributeInstance max_health = player.getAttribute(Attributes.MAX_HEALTH);
+                if (augment.getAugmentType() == NTAugments.BONUS_HEART_AUGMENT.get()) {
+                    max_health.setBaseValue(40);
+                } else {
+                    max_health.setBaseValue(20);
+                }
+
+                // Fall Damage
+                AttributeInstance fall_damage_multiply = player.getAttribute(Attributes.FALL_DAMAGE_MULTIPLIER);
+                if (augment.getAugmentType() == NTAugments.PREVENT_FALL_DAMAGE_AUGMENT.get()) {
+                    fall_damage_multiply.setBaseValue(0);
+                } else {
+                    fall_damage_multiply.setBaseValue(1);
+                }
             }
         }
     }

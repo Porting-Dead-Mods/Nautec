@@ -5,6 +5,7 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.content.augments.*;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.function.Supplier;
 
@@ -25,4 +26,10 @@ public final class NTAugments {
             () -> AugmentType.of(LeapAugment::new));
     public static final Supplier<AugmentType<PreventFallDamageAugment>> PREVENT_FALL_DAMAGE_AUGMENT = AUGMENTS.register("prevent_fall_damage",
             () -> AugmentType.of(PreventFallDamageAugment::new));
+    public static final Supplier<AugmentType<StepUpAugment>> STEP_UP_AUGMENT = AUGMENTS.register("step_up",
+            () -> AugmentType.of(StepUpAugment::new));
+    public static final Supplier<AugmentType<UnderwaterMiningSpeed>> UNDERWATER_MINING_SPEED_AUGMENT = AUGMENTS.register("underwater_mining_speed",
+            () -> AugmentType.of(UnderwaterMiningSpeed::new));
+    public static final Supplier<AugmentType<BonusHeartsAugment>> BONUS_HEART_AUGMENT = AUGMENTS.register("bonus_hearts",
+            () -> AugmentType.of(BonusHeartsAugment::new));
 }

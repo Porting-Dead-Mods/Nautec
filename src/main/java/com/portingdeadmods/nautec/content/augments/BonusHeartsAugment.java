@@ -2,13 +2,13 @@ package com.portingdeadmods.nautec.content.augments;
 
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
+import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.registries.NTAugments;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import org.jetbrains.annotations.Nullable;
 
-public class PreventFallDamageAugment extends Augment {
-    public PreventFallDamageAugment(AugmentSlot augmentSlot) {
-        super(NTAugments.PREVENT_FALL_DAMAGE_AUGMENT.get(), augmentSlot);
+public class BonusHeartsAugment extends Augment {
+    public BonusHeartsAugment(AugmentSlot augmentSlot) {
+        super(NTAugments.BONUS_HEART_AUGMENT.get(), augmentSlot);
     }
 
     @Override
