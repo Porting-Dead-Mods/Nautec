@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec.utils;
 
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
+import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
@@ -32,5 +33,24 @@ public final class AugmentHelper {
         Map<AugmentSlot, CompoundTag> augments = new HashMap<>(getAugmentsData(player));
         augments.put(augmentSlot, tag);
         player.setData(NTDataAttachments.AUGMENTS_EXTRA_DATA, augments);
+    }
+
+    public static Augment createAugment(AugmentType<?> augmentType, Player player, AugmentSlot augmentSlot) {
+        Augment augment = augmentType.create(augmentSlot);
+        augment.setPlayer(player);
+        augment.onAdded();
+        AugmentHelper.setAugment(player, augmentSlot, augment);
+        return augment;
+    }
+
+    public static void removeAugment(Player player, AugmentSlot augmentSlot) {
+        Augment augment = getAugmentBySlot(player, augmentSlot);
+        augment.onRemoved();
+        Map<AugmentSlot, Augment> augments = new HashMap<>(getAugments(player));
+        Map<AugmentSlot, CompoundTag> augmentsData = new HashMap<>(getAugmentsData(player));
+        augments.remove(augmentSlot);
+        augmentsData.remove(augmentSlot);
+        player.setData(NTDataAttachments.AUGMENTS.get(), augments);
+        player.setData(NTDataAttachments.AUGMENTS_EXTRA_DATA.get(), augmentsData);
     }
 }

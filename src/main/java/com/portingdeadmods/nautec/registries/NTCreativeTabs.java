@@ -36,6 +36,7 @@ public final class NTCreativeTabs {
             })
             .build());
 
+    // FIXME: Not working :sob:
     public static void addPowered(CreativeModeTab.Output output, Item item) {
         ItemStack itemStack = new ItemStack(item);
         ComponentPowerStorage powerStorage = itemStack.getOrDefault(NTDataComponents.POWER, ComponentPowerStorage.EMPTY);
