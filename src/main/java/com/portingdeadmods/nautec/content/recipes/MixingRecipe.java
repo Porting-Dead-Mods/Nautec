@@ -77,7 +77,7 @@ public record MixingRecipe(List<IngredientWithCount> ingredients, FluidStack flu
         private static final MapCodec<MixingRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec((builder) -> builder.group(
                 IngredientWithCount.CODEC.listOf().fieldOf("ingredients").forGetter(MixingRecipe::ingredients),
                 FluidStack.OPTIONAL_CODEC.fieldOf("fluid_ingredient").forGetter(MixingRecipe::fluidIngredient),
-                ItemStack.CODEC.fieldOf("result").forGetter(MixingRecipe::result),
+                ItemStack.OPTIONAL_CODEC.fieldOf("result").forGetter(MixingRecipe::result),
                 FluidStack.OPTIONAL_CODEC.fieldOf("fluid_result").forGetter(MixingRecipe::fluidResult),
                 Codec.INT.fieldOf("duration").forGetter(MixingRecipe::duration)
         ).apply(builder, MixingRecipe::new));
@@ -86,7 +86,7 @@ public record MixingRecipe(List<IngredientWithCount> ingredients, FluidStack flu
                 MixingRecipe::ingredients,
                 FluidStack.OPTIONAL_STREAM_CODEC,
                 MixingRecipe::fluidIngredient,
-                ItemStack.STREAM_CODEC,
+                ItemStack.OPTIONAL_STREAM_CODEC,
                 MixingRecipe::result,
                 FluidStack.OPTIONAL_STREAM_CODEC,
                 MixingRecipe::fluidResult,

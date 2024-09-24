@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-23T22:12:55.221447005	Recipes
+// 1.21.1	2024-09-24T23:22:43.762244306	Recipes
 55ee1a8c8240974dc253a1672f47579ef8a7aa2c data/nautec/advancement/recipes/misc/diving_chestplate.json
 a60abd473ea054db8b2b484be6948f74ef64abd7 data/nautec/recipe/aquatic_catalyst_channeling/kelp.json
 5691c77b6fb29c63cd377613dfc7442764e05944 data/nautec/recipe/augmentation/dolphin_fin_claw_robot_arm.json
@@ -9,4 +9,4 @@ f0aa61e7f48538efe07a23e1688b069a3299b815 data/nautec/recipe/item_transformation/
 4e9e5e1160be92363d4bfab4982245fdfe5bf46e data/nautec/recipe/mixing/anvil_atlantic_gold_nugget_to_rusty_gear.json
 ce27e28ab952f1a17a3547905665b7d05a993eec data/nautec/recipe/mixing/atlantic_gold_ingot_to_atlantic_gold_nugget.json
 3a7b4c271bbd7d4e75f51a0c7caed4898587458b data/nautec/recipe/mixing/diving_helmet_diving_chestplate_diving_leggings_diving_boots_to_crowbar.json
-5a1faafdad71828e4060683b01a3ede8a29ad465 data/nautec/recipe/mixing/dried_kelp_slime_ball_prismarine_crystals_seagrass_to_eas_bucket.json
+0480f5c8d22f83f3f2682f54e08363bf7025fae3 data/nautec/recipe/mixing/dried_kelp_slime_ball_prismarine_crystals_seagrass.json

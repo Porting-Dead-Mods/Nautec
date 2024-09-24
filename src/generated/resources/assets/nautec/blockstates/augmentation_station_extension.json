@@ -1,31 +1,22 @@
 {
   "variants": {
-    "facing=east,formed=false": {
-      "model": "nautec:block/augmentation_station_extension"
-    },
     "facing=east,formed=true": {
       "model": "nautec:block/multiblock/augmentation_station_extension",
       "y": 90
     },
-    "facing=north,formed=false": {
-      "model": "nautec:block/augmentation_station_extension"
-    },
     "facing=north,formed=true": {
       "model": "nautec:block/multiblock/augmentation_station_extension"
-    },
-    "facing=south,formed=false": {
-      "model": "nautec:block/augmentation_station_extension"
     },
     "facing=south,formed=true": {
       "model": "nautec:block/multiblock/augmentation_station_extension",
       "y": 180
     },
-    "facing=west,formed=false": {
-      "model": "nautec:block/augmentation_station_extension"
-    },
     "facing=west,formed=true": {
       "model": "nautec:block/multiblock/augmentation_station_extension",
       "y": 270
+    },
+    "formed=false": {
+      "model": "nautec:block/augmentation_station_extension"
     }
   }
 }

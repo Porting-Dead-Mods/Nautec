@@ -5,6 +5,7 @@ import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.datagen.recipeBuilder.*;
 import com.portingdeadmods.nautec.registries.NTAugments;
+import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
+import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -65,12 +67,14 @@ public class RecipesProvider extends RecipeProvider {
                 .duration(60)
                 .save(pRecipeOutput);
 
-        MixingRecipeBuilder.newRecipe(new ItemStack(NTItems.EAS_BUCKET.get(), 1))
+        MixingRecipeBuilder.newRecipe(ItemStack.EMPTY)
                 .ingredients(IngredientWithCount.fromItemLike(Items.DRIED_KELP, 4)
                         , IngredientWithCount.fromItemLike(Items.SLIME_BALL, 2)
                         , IngredientWithCount.fromItemLike(Items.PRISMARINE_CRYSTALS, 1)
                         , IngredientWithCount.fromItemLike(Items.SEAGRASS, 5))
                 .duration(200)
+                .fluidIngredient(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), 500))
+                .fluidResult(new FluidStack(NTFluids.EAS_SOURCE.get(), 500))
                 .save(pRecipeOutput);
 
         AugmentationRecipeBuilder.newRecipe(NTAugments.DOLPHIN_FIN.get())
