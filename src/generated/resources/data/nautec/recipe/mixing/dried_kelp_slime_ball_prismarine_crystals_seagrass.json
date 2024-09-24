@@ -1,8 +1,14 @@
 {
   "type": "nautec:mixing",
   "duration": 200,
-  "fluid_ingredient": {},
-  "fluid_result": {},
+  "fluid_ingredient": {
+    "amount": 500,
+    "id": "nautec:salt_water"
+  },
+  "fluid_result": {
+    "amount": 500,
+    "id": "nautec:electrolyte_algae_serum"
+  },
   "ingredients": [
     {
       "count": 4,
@@ -20,8 +26,5 @@
       "item": "minecraft:seagrass"
     }
   ],
-  "result": {
-    "count": 1,
-    "id": "nautec:eas_bucket"
-  }
+  "result": {}
 }

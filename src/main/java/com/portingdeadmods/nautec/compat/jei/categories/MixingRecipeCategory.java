@@ -35,7 +35,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
     private final IDrawable icon;
 
     public MixingRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createBlankDrawable(80, 66);
+        this.background = helper.createBlankDrawable(106, 66);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(NTBlocks.MIXER.get()));
     }
 
@@ -102,13 +102,13 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
 
         // Check if there is a fluid input
         if (recipe.fluidIngredient().getFluid() != Fluids.EMPTY) {
-            builder.addSlot(RecipeIngredientRole.INPUT, 0, 64)
+            builder.addSlot(RecipeIngredientRole.INPUT, 88, 0)
                     .addFluidStack(recipe.fluidIngredient().getFluid(), recipe.fluidIngredient().getAmount());
         }
 
         // Check if there is a fluid output
         if (recipe.fluidResult().getFluid() != Fluids.EMPTY) {
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 0, 96)
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 88, 48)
                     .addFluidStack(recipe.fluidResult().getFluid(), recipe.fluidResult().getAmount());
         }
 
@@ -127,7 +127,11 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
             guiGraphics.blitSprite(SINGLE_SLOT_SPRITE, x - 1, y - 1, 18, 18);
         }
 
-        guiGraphics.blitSprite(DOWN_ARROW_SPRITE, 32, 22, 15, 23); // Adjust position as needed
+        guiGraphics.blitSprite(SINGLE_SLOT_SPRITE, 87, -1, 18, 18);
+        guiGraphics.blitSprite(SINGLE_SLOT_SPRITE, 87, 47, 18, 18);
+
+        guiGraphics.blitSprite(DOWN_ARROW_SPRITE, 32, 22, 15, 23);
+        guiGraphics.blitSprite(DOWN_ARROW_SPRITE, 88, 22, 15, 23);
 
     }
 }
