@@ -38,14 +38,14 @@ public final class AugmentHelper {
     public static Augment createAugment(AugmentType<?> augmentType, Player player, AugmentSlot augmentSlot) {
         Augment augment = augmentType.create(augmentSlot);
         augment.setPlayer(player);
-        augment.onAdded();
+        augment.onAdded(player);
         AugmentHelper.setAugment(player, augmentSlot, augment);
         return augment;
     }
 
     public static void removeAugment(Player player, AugmentSlot augmentSlot) {
         Augment augment = getAugmentBySlot(player, augmentSlot);
-        augment.onRemoved();
+        augment.onRemoved(player);
         Map<AugmentSlot, Augment> augments = new HashMap<>(getAugments(player));
         Map<AugmentSlot, CompoundTag> augmentsData = new HashMap<>(getAugmentsData(player));
         augments.remove(augmentSlot);

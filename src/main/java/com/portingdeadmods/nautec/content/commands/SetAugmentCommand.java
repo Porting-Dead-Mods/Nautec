@@ -33,6 +33,10 @@ public class SetAugmentCommand {
     private static int execute(CommandContext<CommandSourceStack> ctx) {
         ServerPlayer player = ctx.getSource().getPlayer();
         AugmentSlot slot = ctx.getArgument("slot", AugmentSlot.class);
+        Augment currentAug = AugmentHelper.getAugmentBySlot(player, slot);
+        if (currentAug != null) {
+            currentAug.onRemoved(player);
+        }
         Augment augment = AugmentHelper.createAugment(ctx.getArgument("augment", AugmentType.class), player, slot);
         PacketDistributor.sendToPlayer(player, new SyncAugmentPayload(augment, new CompoundTag()));
         player.sendSystemMessage(Component.literal("Set augment in slot '" + slot.getName() + "' to: " + augment.getAugmentType()));
