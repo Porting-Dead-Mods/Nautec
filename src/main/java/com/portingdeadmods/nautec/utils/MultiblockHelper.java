@@ -300,6 +300,7 @@ public final class MultiblockHelper {
         // Calculate block pos of the first block in the multi (multiblock.getLayout().get(0))
         BlockPos firstBlockPos = getFirstBlockPos(direction, controllerPos, relativeControllerPos);
         Int2ObjectMap<Block> def = multiblock.getDefinition();
+        Nautec.LOGGER.debug("first: {}", firstBlockPos);
 
         multiblock.onStartForming(level, firstBlockPos, controllerPos);
 
@@ -334,6 +335,8 @@ public final class MultiblockHelper {
                         entity.setMultiblockData(multiblockData);
                     }
                 }
+
+                multiblock.iterBlock(level, curBlockPos, controllerPos, index, yIndex, multiblockData, true);
 
                 if (x + 1 < width) {
                     x++;
@@ -375,7 +378,6 @@ public final class MultiblockHelper {
 
         if (level.getBlockEntity(controllerPos1) instanceof MultiblockEntity multiblockEntity) {
             data = multiblockEntity.getMultiblockData();
-            Nautec.LOGGER.debug("Data: {}", data);
         } else {
             throw new IllegalStateException(multiblock + " multiblock controller does not have a blockentity");
         }
@@ -384,9 +386,12 @@ public final class MultiblockHelper {
         HorizontalDirection direction = data.direction();
         // Calculate block pos of the first block in the multi (multiblock.getLayout().get(0))
         BlockPos firstBlockPos = getFirstBlockPos(direction, controllerPos, relativeControllerPos);
-        Nautec.LOGGER.debug("first: {}", firstBlockPos);
         MultiblockLayer[] layout = data.layers();
         Map<Integer, Block> def = multiblock.getDefinition();
+
+        multiblock.onStartUnforming(level, firstBlockPos, controllerPos);
+
+        int test = 0;
 
         int yIndex = 0;
         int xIndex = 0;
@@ -400,6 +405,10 @@ public final class MultiblockHelper {
                 Block definedBlock = def.get(blockIndex);
                 BlockPos curBlockPos = getCurPos(firstBlockPos, new Vec3i(x, yIndex, z), direction);
 
+                if (test < 2) {
+                    test++;
+                }
+
                 BlockState blockState = level.getBlockState(curBlockPos);
                 if (!level.getBlockState(curBlockPos).isEmpty()) {
                     BlockState expectedState = multiblock.formBlock(level, curBlockPos, controllerPos, xIndex, yIndex, data, player);
@@ -412,6 +421,8 @@ public final class MultiblockHelper {
                         }
                     }
                 }
+
+                multiblock.iterBlock(level, curBlockPos, controllerPos, xIndex, yIndex, data, false);
 
                 if (x + 1 < width) {
                     x++;

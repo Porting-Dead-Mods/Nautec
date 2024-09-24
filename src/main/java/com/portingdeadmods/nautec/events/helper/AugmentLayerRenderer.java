@@ -14,6 +14,8 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 
 public class AugmentLayerRenderer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
@@ -29,7 +31,11 @@ public class AugmentLayerRenderer extends RenderLayer<AbstractClientPlayer, Play
         Iterable<Augment> augments = getAugments(player);
         for (Augment augment : augments) {
             if (augment != null) {
-                renderAugmentModel(poseStack, bufferSource, packedLight, augment);
+                poseStack.pushPose();
+                {
+                    renderAugmentModel(poseStack, bufferSource, packedLight, augment);
+                }
+                poseStack.popPose();
             }
         }
     }
@@ -37,7 +43,7 @@ public class AugmentLayerRenderer extends RenderLayer<AbstractClientPlayer, Play
     private void renderAugmentModel(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, Augment augment) {
         AugmentRenderer<Augment> renderer = getRenderer(augment);
         if (renderer != null) {
-            renderer.render(augment, poseStack, bufferSource, packedLight);
+            renderer.render(augment, this, poseStack, bufferSource, packedLight);
         }
     }
 

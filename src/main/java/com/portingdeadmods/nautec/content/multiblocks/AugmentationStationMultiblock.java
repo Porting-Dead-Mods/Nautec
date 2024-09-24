@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.multiblocks;
 
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockEntity;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.api.multiblocks.MultiblockData;
@@ -42,9 +43,9 @@ public class AugmentationStationMultiblock implements Multiblock {
         return new MultiblockLayer[]{
                 layer(
                         0, 0, 3, 0, 0,
-                        0, 2, 2, 2, 0,
+                        0, 4, 2, 4, 0,
                         3, 2, 1, 2, 3,
-                        0, 2, 2, 2, 0,
+                        0, 4, 2, 4, 0,
                         0, 0, 3, 0, 0
                 )
         };
@@ -55,8 +56,9 @@ public class AugmentationStationMultiblock implements Multiblock {
         Int2ObjectMap<Block> def = new Int2ObjectOpenHashMap<>();
         def.put(0, null);
         def.put(1, getUnformedController());
-        def.put(2, Blocks.DARK_PRISMARINE);
-        def.put(3, Blocks.PRISMARINE_BRICKS);
+        def.put(2, NTBlocks.POLISHED_PRISMARINE.get());
+        def.put(3, NTBlocks.AUGMENTATION_STATION_EXTENSION.get());
+        def.put(4, NTBlocks.AQUARINE_STEEL_BLOCK.get());
         return def;
     }
 
@@ -71,15 +73,35 @@ public class AugmentationStationMultiblock implements Multiblock {
     }
 
     @Override
+    public void onStartUnforming(Level level, BlockPos firstPos, BlockPos controllerPos) {
+        this.actualIndex = 0;
+    }
+
+    @Override
+    public void iterBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, MultiblockData data, boolean forming) {
+        Int2ObjectMap<Block> def = getDefinition();
+        int[] curLayer = getLayout()[0].layer();
+        Block block = def.get(curLayer[layerIndex]);
+        if (block == getUnformedController()
+                || block == NTBlocks.POLISHED_PRISMARINE.get()
+                || block == NTBlocks.AQUARINE_STEEL_BLOCK.get()) {
+            actualIndex++;
+        }
+    }
+
+    // FIXME: Actual index system is flawed :p
+    @Override
     public @Nullable BlockState formBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, MultiblockData multiblockData, @Nullable Player player) {
         Int2ObjectMap<Block> def = getDefinition();
         int[] curLayer = getLayout()[0].layer();
-        if (def.get(curLayer[layerIndex]) == getUnformedController() || def.get(curLayer[layerIndex]) == Blocks.DARK_PRISMARINE) {
-            actualIndex++;
-            if (actualIndex == 5) {
-                return getFormedController().defaultBlockState().setValue(FORMED, true).setValue(AS_PART, actualIndex - 1);
+        Block block = def.get(curLayer[layerIndex]);
+        if (block == getUnformedController()
+                || block == NTBlocks.POLISHED_PRISMARINE.get()
+                || block == NTBlocks.AQUARINE_STEEL_BLOCK.get()) {
+            if (actualIndex == 4) {
+                return getFormedController().defaultBlockState().setValue(FORMED, true).setValue(AS_PART, actualIndex);
             }
-            return NTBlocks.AUGMENTATION_STATION_PART.get().defaultBlockState().setValue(FORMED, true).setValue(AS_PART, actualIndex - 1);
+            return NTBlocks.AUGMENTATION_STATION_PART.get().defaultBlockState().trySetValue(FORMED, true).trySetValue(AS_PART, actualIndex);
 
         }
 

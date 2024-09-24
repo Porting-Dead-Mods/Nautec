@@ -1,32 +1,31 @@
 package com.portingdeadmods.nautec.content.augments;
 
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.api.client.renderer.entities.PartVisible;
+import com.portingdeadmods.nautec.api.client.renderer.augments.ModelPartGetter;
 
 public enum AugmentSlots implements AugmentSlot {
-    HEAD((renderer, visible) -> renderer.getModel().head.visible = visible),
+    HEAD(model -> model.head),
     EYES,
-    BODY((renderer, visible) -> renderer.getModel().body.visible = visible),
+    BODY(model -> model.body),
     LUNG,
-    LEFT_ARM((renderer, visible) -> renderer.getModel().leftArm.visible = visible),
-    RIGHT_ARM((renderer, visible) -> renderer.getModel().rightArm.visible = visible),
-    LEFT_LEG((renderer, visible) -> renderer.getModel().leftLeg.visible = visible),
-    RIGHT_LEG((renderer, visible) -> renderer.getModel().rightLeg.visible = visible),
-    HEART((renderer, visible) -> renderer.getModel().head.visible = visible);
+    LEFT_ARM(model -> model.leftArm),
+    RIGHT_ARM(model -> model.rightArm),
+    LEFT_LEG(model -> model.leftLeg),
+    RIGHT_LEG(model -> model.rightLeg),
+    HEART(model -> model.head);
 
-    private final PartVisible partVisibleFunc;
+    private final ModelPartGetter modelPartGetterFunc;
 
-    AugmentSlots(PartVisible partVisibleFunc) {
-        this.partVisibleFunc = partVisibleFunc;
+    AugmentSlots(ModelPartGetter modelPartGetterFunc) {
+        this.modelPartGetterFunc = modelPartGetterFunc;
     }
-
 
     AugmentSlots() {
-        this.partVisibleFunc = (ignored, ignored1) -> {
-        };
+        this.modelPartGetterFunc = $ -> null;
     }
 
-    public PartVisible getCancelRenderingFunc() {
-        return partVisibleFunc;
+    @Override
+    public ModelPartGetter getModelPart() {
+        return modelPartGetterFunc;
     }
 }

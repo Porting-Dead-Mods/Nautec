@@ -143,7 +143,7 @@ public final class NTClientEvents {
             event.registerBlockEntityRenderer(NTBlockEntityTypes.DRAIN_PART.get(), DrainBERenderer::new);
             event.registerBlockEntityRenderer(NTBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), AugmentStationExtensionBERenderer::new);
             AugmentLayerRenderer.registerRenderer(NTAugments.DOLPHIN_FIN.get(),
-                    ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.MATERIAL, ctx));
+                    ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.MATERIAL, true, ctx));
             AugmentStationExtensionBERenderer.registerRenderer(NTItems.CLAW_ROBOT_ARM.get(), ClawRobotArmRenderer::new);
         }
 
@@ -203,12 +203,6 @@ public final class NTClientEvents {
                     event.setCanceled(true);
                 }
             }
-        }
-
-        @SubscribeEvent
-        public static void onRenderPlayer(RenderPlayerEvent.Post event) {
-            PlayerRenderer renderer = event.getRenderer();
-            renderer.addLayer(new AugmentLayerRenderer(renderer));
         }
 
         @SubscribeEvent

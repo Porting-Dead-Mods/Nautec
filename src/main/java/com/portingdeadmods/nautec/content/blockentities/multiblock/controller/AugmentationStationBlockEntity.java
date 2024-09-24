@@ -5,6 +5,7 @@ import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockEntity;
+import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.api.multiblocks.MultiblockData;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.client.screen.AugmentationStationScreen;
@@ -28,6 +29,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.capabilities.BlockCapability;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -101,47 +103,53 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
     @Override
     public void commonTick() {
         super.commonTick();
-        if (!isRunning) {
-            List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(worldPosition.above()));
-            if (players.isEmpty()) {
-                this.playerUUID = null;
-                return;
-            }
+        if (isFormed()) {
+            if (!isRunning) {
+                List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(worldPosition.above()));
+                if (players.isEmpty()) {
+                    this.playerUUID = null;
+                    return;
+                }
 
-            Player player = players.getFirst();
-            UUID uuid = player.getUUID();
+                Player player = players.getFirst();
+                UUID uuid = player.getUUID();
 
-            if (playerUUID == null) {
-                this.playerUUID = uuid;
-                this.playerOpenMenuInterval = 10;
-            }
+                if (playerUUID == null) {
+                    this.playerUUID = uuid;
+                    this.playerOpenMenuInterval = 10;
+                }
 
-            if (playerUUID.equals(uuid)) {
-                if (playerOpenMenuInterval > 0) {
-                    playerOpenMenuInterval--;
-                    if (playerOpenMenuInterval == 0) {
-                        PlayerUtils.openScreen(player, new AugmentationStationScreen(this, player, Component.literal("Augmentation Station")));
+                if (playerUUID.equals(uuid)) {
+                    if (playerOpenMenuInterval > 0) {
+                        playerOpenMenuInterval--;
+                        if (playerOpenMenuInterval == 0) {
+                            PlayerUtils.openScreen(player, new AugmentationStationScreen(this, player, Component.literal("Augmentation Station")));
+                        }
                     }
+                } else {
+                    this.playerUUID = null;
                 }
             } else {
-                this.playerUUID = null;
-            }
-        } else {
-            if (duration > 0) {
-                duration--;
+                if (duration > 0) {
+                    duration--;
 
-                if (duration == 0) {
-                    this.isRunning = false;
+                    if (duration == 0) {
+                        this.isRunning = false;
 
-                    AugmentType<?> type = recipe.resultAugment();
-                    Augment augment = type.create(slot);
-                    augment.setPlayer(player);
-                    AugmentHelper.setAugment(player, slot, augment);
+                        AugmentType<?> type = recipe.resultAugment();
+                        Augment augment = type.create(slot);
+                        augment.setPlayer(player);
+                        AugmentHelper.setAugment(player, slot, augment);
 
-                    restorePlayerAttributes();
+                        restorePlayerAttributes();
+                    }
                 }
             }
         }
+    }
+
+    private @NotNull Boolean isFormed() {
+        return getBlockState().getValue(Multiblock.FORMED);
     }
 
     @Override

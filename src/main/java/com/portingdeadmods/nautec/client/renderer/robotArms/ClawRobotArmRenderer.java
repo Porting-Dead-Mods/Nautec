@@ -7,6 +7,7 @@ import com.portingdeadmods.nautec.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.nautec.api.client.renderer.robotArms.RobotArmRenderer;
 import com.portingdeadmods.nautec.client.model.block.RobotArmModel;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.part.AugmentationStationExtensionBlockEntity;
+import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -16,9 +17,9 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 public class ClawRobotArmRenderer extends RobotArmRenderer {
     private final RobotArmModel model;
 
-    public ClawRobotArmRenderer(AugmentRenderer.Context ctx) {
+    public ClawRobotArmRenderer(EntityModelSet ctx) {
         super(ctx);
-        this.model = new RobotArmModel(ctx.entityModelSet().bakeLayer(RobotArmModel.LAYER_LOCATION));
+        this.model = new RobotArmModel(ctx.bakeLayer(RobotArmModel.LAYER_LOCATION));
     }
 
     @Override
