@@ -7,6 +7,7 @@ import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
@@ -36,34 +37,9 @@ public class PrismarineCrystalBlockEntity extends LaserBlockEntity {
     }
 
     @Override
-    protected void checkConnections() {
-        for (Direction direction : getLaserOutputs()) {
-            int maxLaserDistance = getMaxLaserDistance();
-            for (int i = 1; i < maxLaserDistance; i++) {
-                BlockPos pos = worldPosition.relative(direction, i);
-                BlockState state = level.getBlockState(pos);
-
-                if (level.getBlockEntity(pos) instanceof LaserBlockEntity laserBlockEntity) {
-                    if (laserBlockEntity.getLaserInputs().contains(direction.getOpposite())) {
-                        laserDistances.put(direction, i);
-                        break;
-                    }
-                }
-
-                if (!state.canBeReplaced() || i == maxLaserDistance -1) {
-                    laserDistances.put(direction, i);
-                    break;
-                }
-            }
-        }
-
-    }
-
-    @Override
     public void commonTick() {
         super.commonTick();
 
         setPurity(3f);
-        transmitPower(this.getPower());
     }
 }

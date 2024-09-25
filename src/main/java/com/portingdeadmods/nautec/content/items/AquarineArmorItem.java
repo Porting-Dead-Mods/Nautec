@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.items;
 
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
@@ -27,7 +28,7 @@ import java.util.function.Consumer;
 
 public class AquarineArmorItem extends ArmorItem implements IPowerItem{
     public AquarineArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
-        super(NTArmorMaterials.AQUARINE_STEEL, type, properties.component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(512)));;
+        super(NTArmorMaterials.AQUARINE_STEEL, type, properties.durability(100).component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(512)));
     }
 
     @Override
@@ -38,6 +39,7 @@ public class AquarineArmorItem extends ArmorItem implements IPowerItem{
 
     @Override
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, @Nullable T entity, Consumer<Item> onBroken) {
+        Nautec.LOGGER.debug("AAAA");
         if (stack.getItem() instanceof IPowerItem poweredTool) {
             IPowerStorage energyStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
             if (energyStorage == null) return amount;
