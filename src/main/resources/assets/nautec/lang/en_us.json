@@ -1,9 +1,11 @@
 {
   "curios.identifier.prism_monocle": "Monocle",
+  "curios.identifier.battery": "Battery",
   "nautec.creative_tab.main": "NauTec",
 
-  "fluid_type.nautec.soap_water": "Soap Water",
+  "fluid_type.nautec.soap_water": "Salt Water",
   "fluid_type.nautec.electrolyte_algae_serum": "Electrolyte Algae Serum",
+  "fluid_type.nautec.etching_acid": "Etching Acid",
 
   "item.nautec.prism_monocle": "Prism Monocle",
   "item.nautec.aquarine_steel_ingot": "Aquarine Steel Ingot",
@@ -30,12 +32,24 @@
   "item.nautec.aquarine_steel_axe": "Aquarine Steel Axe",
   "item.nautec.aquarine_steel_shovel": "Aquarine Steel Shovel",
   "item.nautec.aquarine_steel_hoe": "Aquarine Steel Hoe",
-  "item.nautec.netpunes_trident": "Netpune's Trident",
+  "item.nautec.neptunes_trident": "Netpune's Trident",
   "item.nautec.aquarine_helmet": "Aquarine Steel Helmet",
   "item.nautec.aquarine_chestplate": "Aquarine Steel Chestplate",
   "item.nautec.aquarine_leggings": "Aquarine Steel Leggings",
   "item.nautec.aquarine_boots": "Aquarine Steel Boots",
   "item.nautec.dolphin_fin": "Dolphin Fin",
+  "item.nautec.aquarine_steel_helmet": "Aquarine Steel Helmet",
+  "item.nautec.aquarine_steel_chestplate": "Aquarine Steel Chestplate",
+  "item.nautec.aquarine_steel_leggings": "Aquarine Steel Leggings",
+  "item.nautec.aquarine_steel_boots": "Aquarine Steel Boots",
+  "item.nautec.broken_whisk": "Broken Whisk",
+  "item.nautec.whisk": "Whisk",
+  "item.nautec.prismatic_battery": "Prismatic Battery",
+  "item.nautec.air_bottle": "Pressurized Air Bottle",
+  "item.nautec.aquarine_steel_compound": "Aquarine Steel Compound",
+  "item.nautec.prismarine_crystal_shard": "Prismarine Crystal Shard",
+  "item.nautec.claw_robot_arm": "Claw Robot Arm",
+  "item.nautec.syringe_robot_arm": "Syringe Robot Arm",
 
   "block.nautec.rusty_crate": "Rusty Crate",
   "block.nautec.polished_prismarine": "Polished Prismarine",
@@ -52,9 +66,21 @@
   "block.nautec.crate": "Crate",
   "block.nautec.prismarine_laser_relay": "Prismarine Laser Relay",
   "block.nautec.deep_sea_drain": "Deep Sea Drain",
+  "block.nautec.augmentation_station_part": "Augmentation Station",
+  "block.nautec.augmentation_station_extentsion": "Augmentation Station Extension",
 
   "multiblock.info.failed_to_construct": "Missing or invalid block",
   "multiblock.info.actual_block": "Block: %s",
   "multiblock.info.expected_block": "Expected: %s",
-  "multiblock.info.block_pos": "Coordinates: %d, %d, %d"
+  "multiblock.info.block_pos": "Coordinates: %d, %d, %d",
+
+  "augment_slot.nautec.head": "Head",
+  "augment_slot.nautec.eyes": "Eyes",
+  "augment_slot.nautec.body": "Body",
+  "augment_slot.nautec.lung": "Lungs",
+  "augment_slot.nautec.left_leg": "Left Leg",
+  "augment_slot.nautec.right_leg": "Right Leg",
+  "augment_slot.nautec.left_arm": "Left Arm",
+  "augment_slot.nautec.right_arm": "Right Arm",
+  "augment_slot.nautec.heart": "Heart"
 }
