@@ -13,11 +13,11 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 
-// /modjam augments clear
+// /modjam ingredients clear
 public class ClearAugmentsCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal(Nautec.MODID)
-                .then(Commands.literal("augments")
+                .then(Commands.literal("ingredients")
                         .then(Commands.literal("clear").executes(ClearAugmentsCommand::execute))));
     }
 
@@ -28,7 +28,7 @@ public class ClearAugmentsCommand {
         }
         player.setData(NTDataAttachments.AUGMENTS, new HashMap<>());
         player.setData(NTDataAttachments.AUGMENTS_EXTRA_DATA, new HashMap<>());
-        player.sendSystemMessage(Component.literal("Cleared all player augments"));
+        player.sendSystemMessage(Component.literal("Cleared all player ingredients"));
         return 1;
     }
 }

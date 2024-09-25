@@ -20,7 +20,7 @@ import java.util.function.Function;
 public class GuardianEyeModel extends AugmentModel<GuardianEyeAugment> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "guardian_eye"), "main");
     public static final Material MATERIAL = new Material(
-            InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "augments/guardian_eye")
+            InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "ingredients/guardian_eye")
     );;
     private final ModelPart main;
 

@@ -42,7 +42,7 @@ public final class AugmentEvents {
         Iterable<Augment> augments = AugmentHelper.getAugments(event.getPlayer()).values();
         for (Augment augment : augments) {
             if (augment != null) {
-                //augments.get(i).breakBlock(AugmentSlot.GetValue(i),event);
+                //ingredients.get(i).breakBlock(AugmentSlot.GetValue(i),event);
             }
         }
     }
