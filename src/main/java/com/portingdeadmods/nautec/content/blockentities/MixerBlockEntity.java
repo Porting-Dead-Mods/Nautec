@@ -1,10 +1,12 @@
 package com.portingdeadmods.nautec.content.blockentities;
 
+import com.google.common.collect.ImmutableList;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.recipes.MixingRecipe;
 import com.portingdeadmods.nautec.content.recipes.inputs.MixingRecipeInput;
+import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
@@ -13,8 +15,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -83,6 +87,7 @@ public class MixerBlockEntity extends LaserBlockEntity {
     @Override
     public void commonTick() {
         super.commonTick();
+
         float actualSpeed = getSpeed();
         chasingVelocity += ((actualSpeed * 10 / 3f) - chasingVelocity) * .25f;
         independentAngle += chasingVelocity;
@@ -91,9 +96,50 @@ public class MixerBlockEntity extends LaserBlockEntity {
     }
 
     private void performRecipe() {
+        Optional<MixingRecipe> recipe = getRecipe();
+        if (recipe.isPresent()) {
+            MixingRecipe mixingRecipe = recipe.get();
+            if (duration >= mixingRecipe.duration()) {
+                setOutputs(mixingRecipe);
+                removeInputs(mixingRecipe);
+                duration = 0;
+            } else {
+                duration++;
+            }
+        }
+    }
+
+    private void removeInputs(MixingRecipe mixingRecipe) {
+        IItemHandler itemHandler = getItemHandler();
+        List<IngredientWithCount> ingredients = new ArrayList<>(mixingRecipe.ingredients());
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            ItemStack item = itemHandler.getStackInSlot(i);
+            for (IngredientWithCount ingredient : ingredients) {
+                if (ingredient.test(item)) {
+                    itemHandler.extractItem(i, ingredient.count(), false);
+                    ingredients.remove(ingredient);
+                    break;
+                }
+            }
+        }
+    }
+
+    private void setOutputs(MixingRecipe mixingRecipe) {
+        ItemStackHandler handler = getItemStackHandler();
+        int prevCount = handler.getStackInSlot(OUTPUT_SLOT).getCount();
+        int newCount = mixingRecipe.result().getCount() + prevCount;
+        handler.setStackInSlot(OUTPUT_SLOT, mixingRecipe.result().copyWithCount(newCount));
+        FluidTank tank = getSecondaryFluidTank();
+        int prevAmount = tank.getFluidAmount();
+        int newAmount = mixingRecipe.fluidResult().getAmount() + prevAmount;
+        tank.setFluid(mixingRecipe.fluidResult().copyWithAmount(newAmount));
+    }
+
+    private Optional<MixingRecipe> getRecipe() {
         IItemHandler itemHandler = getItemHandler();
         int slots = itemHandler.getSlots();
         List<ItemStack> itemHandlerStacksList = new ArrayList<>(slots);
+        // Adding output slot?
         for (int i = 0; i < slots - 1; i++) {
             ItemStack stack = itemHandler.getStackInSlot(i);
             if (!stack.isEmpty()) {
@@ -101,33 +147,12 @@ public class MixerBlockEntity extends LaserBlockEntity {
             }
         }
         MixingRecipeInput input = new MixingRecipeInput(itemHandlerStacksList, getFluidTank().getFluid());
-        if (level.getGameTime() % 200 == 0) {
-            Nautec.LOGGER.debug("List: {}", itemHandlerStacksList);
-            Nautec.LOGGER.debug("input: {}", input);
-        }
         Optional<MixingRecipe> recipe = level.getRecipeManager()
                 .getRecipeFor(MixingRecipe.Type.INSTANCE, input, level).map(RecipeHolder::value);
-        if (recipe.isPresent()) {
-            Nautec.LOGGER.debug("has recipe");
-            if (canInsertFluid(recipe.get().fluidResult())
-                    && canInsertItem(recipe.get().result())) {
-                Nautec.LOGGER.debug("AAAAA");
-                MixingRecipe mixingRecipe = recipe.get();
-                if (duration >= mixingRecipe.duration()) {
-                    ItemStackHandler handler = getItemStackHandler();
-                    int prevCount = handler.getStackInSlot(OUTPUT_SLOT).getCount();
-                    int newCount = recipe.get().result().getCount() + prevCount;
-                    handler.setStackInSlot(OUTPUT_SLOT, mixingRecipe.result().copyWithCount(newCount));
-                    FluidTank tank = getFluidTank();
-                    int prevAmount = tank.getFluidAmount();
-                    int newAmount = recipe.get().fluidResult().getAmount() + prevAmount;
-                    tank.setFluid(mixingRecipe.fluidResult().copyWithAmount(newAmount));
-                    duration = 0;
-                } else {
-                    duration++;
-                }
-            }
+        if (recipe.isPresent() && canInsertItem(recipe.get().result()) && canInsertFluid(recipe.get().fluidResult())) {
+            return recipe;
         }
+        return Optional.empty();
     }
 
     private boolean canInsertItem(ItemStack result) {
