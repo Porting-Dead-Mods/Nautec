@@ -78,8 +78,7 @@ public class RecipesProvider extends RecipeProvider {
                 .save(pRecipeOutput);
 
         AugmentationRecipeBuilder.newRecipe(NTAugments.DOLPHIN_FIN.get())
-                .robotArms(NTItems.CLAW_ROBOT_ARM.get())
-                .augmentItem(NTItems.DOLPHIN_FIN.get())
+                .ingredients(NTItems.DOLPHIN_FIN.get(), IngredientWithCount.fromItemLike(NTItems.DOLPHIN_FIN.get()))
                 .save(pRecipeOutput);
 
         ItemStack divingChestplate = NTItems.DIVING_CHESTPLATE.get().getDefaultInstance();

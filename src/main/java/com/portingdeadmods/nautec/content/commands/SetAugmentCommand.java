@@ -17,13 +17,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-// /modjam ingredients set <slot> <augment>
+// /modjam augments set <slot> <augment>
 
 // TODO: Only set ingredients for slots that support them
 public class SetAugmentCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal(Nautec.MODID)
-                .then(Commands.literal("ingredients")
+                .then(Commands.literal("augments")
                         .then(Commands.literal("set")
                                 .then(Commands.argument("slot", AugmentSlotArgumentType.getInstance())
                                         .then(Commands.argument("augment", AugmentTypeArgumentType.getInstance())

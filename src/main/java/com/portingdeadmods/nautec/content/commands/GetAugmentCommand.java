@@ -13,11 +13,11 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
-// /modjam ingredients get <slot>
+// /modjam augments get <slot>
 public class GetAugmentCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal(Nautec.MODID)
-                .then(Commands.literal("ingredients")
+                .then(Commands.literal("augments")
                         .then(Commands.literal("get")
                                 .then(Commands.argument("slot", AugmentSlotArgumentType.getInstance())
                                         .executes(GetAugmentCommand::execute)))));

@@ -17,7 +17,7 @@ public final class NTDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, Nautec.MODID);
 
     public static final Supplier<AttachmentType<Map<AugmentSlot, Augment>>> AUGMENTS = ATTACHMENTS.register(
-            "ingredients", () -> AttachmentType.<Map<AugmentSlot, Augment>>builder(Collections::emptyMap)
+            "augments", () -> AttachmentType.<Map<AugmentSlot, Augment>>builder(Collections::emptyMap)
                     .serialize(AugmentCodecs.AUGMENTS_CODEC).copyOnDeath().build()
     );
     public static final Supplier<AttachmentType<Map<AugmentSlot, CompoundTag>>> AUGMENTS_EXTRA_DATA = ATTACHMENTS.register(

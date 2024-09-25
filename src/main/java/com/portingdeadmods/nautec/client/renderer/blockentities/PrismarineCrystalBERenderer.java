@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.portingdeadmods.nautec.api.client.renderer.blockentities.LaserBlockEntityRenderer;
 import com.portingdeadmods.nautec.client.model.block.PrismarineCrystalModel;
-import com.portingdeadmods.nautec.content.blockentities.PrismarineCrystalBlockEntity;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.semi.PrismarineCrystalBlockEntity;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;

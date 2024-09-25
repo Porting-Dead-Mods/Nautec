@@ -1,8 +1,0 @@
-{
-  "type": "nautec:augmentation",
-  "augmentItem": {
-    "item": "nautec:dolphin_fin"
-  },
-  "resultAugment": "nautec:dolphin_fin",
-  "robotArms": 1
-}

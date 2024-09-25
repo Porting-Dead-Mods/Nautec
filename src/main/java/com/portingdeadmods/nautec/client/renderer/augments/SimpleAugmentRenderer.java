@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec.client.renderer.augments;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.portingdeadmods.nautec.api.augments.Augment;
+import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.client.model.augments.AugmentModel;
 import com.portingdeadmods.nautec.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
@@ -30,9 +31,12 @@ public class SimpleAugmentRenderer<T extends Augment> extends AugmentRenderer<T>
     public void render(T augment, AugmentLayerRenderer superRenderer, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
         {
-            ModelPart modelPart = augment.getAugmentSlot().getModelPart().getModelPart(superRenderer.getParentModel());
-            if (modelPart != null && moveWithBody) {
-                modelPart.translateAndRotate(poseStack);
+            AugmentSlot augmentSlot = augment.getAugmentSlot();
+            if (augmentSlot != null) {
+                ModelPart modelPart = augmentSlot.getModelPart().getModelPart(superRenderer.getParentModel());
+                if (modelPart != null && moveWithBody) {
+                    modelPart.translateAndRotate(poseStack);
+                }
             }
             this.model.renderToBuffer(poseStack, material.buffer(bufferSource, model::renderType), packedLight, OverlayTexture.NO_OVERLAY);
         }

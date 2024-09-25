@@ -3,6 +3,8 @@ package com.portingdeadmods.nautec.datagen.recipeBuilder;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.content.items.RobotArmItem;
 import com.portingdeadmods.nautec.content.recipes.AugmentationRecipe;
+import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
+import com.portingdeadmods.nautec.content.recipes.utils.RecipeUtils;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -18,8 +20,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class AugmentationRecipeBuilder implements NTRecipeBuilder {
-    private Ingredient augmentItem;
-    private List<Ingredient> robotArms;
+    private Item augmentItem;
+    private List<IngredientWithCount> ingredients;
     private AugmentType<?> augmentType;
 
     public static AugmentationRecipeBuilder newRecipe(AugmentType<?> augmentType) {
@@ -28,21 +30,15 @@ public class AugmentationRecipeBuilder implements NTRecipeBuilder {
         return builder;
     }
 
-    public AugmentationRecipeBuilder robotArms(RobotArmItem ...items) {
-        this.robotArms = Stream.of(items).map(Ingredient::of).toList();
-        return this;
-    }
-
-    public AugmentationRecipeBuilder augmentItem(Item item) {
-        this.augmentItem = Ingredient.of(item);
+    public AugmentationRecipeBuilder ingredients(Item augmentItem, IngredientWithCount... items) {
+        this.augmentItem = augmentItem;
+        this.ingredients = List.of(items);
         return this;
     }
 
     @Override
     public List<Ingredient> getIngredients() {
-        List<Ingredient> ingredients = new ArrayList<>(robotArms);
-        ingredients.addFirst(augmentItem);
-        return ingredients;
+        return RecipeUtils.iWCToIngredients(ingredients);
     }
 
     @Override
@@ -67,6 +63,6 @@ public class AugmentationRecipeBuilder implements NTRecipeBuilder {
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        recipeOutput.accept(id, new AugmentationRecipe(augmentItem, 1, augmentType), null);
+        recipeOutput.accept(id, new AugmentationRecipe(augmentItem, ingredients, augmentType), null);
     }
 }

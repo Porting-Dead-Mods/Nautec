@@ -60,9 +60,6 @@ public class AugmentationStationDataPanel extends ScrollPanel {
             int y = relativeY - 2 + i * client.font.lineHeight;
             guiGraphics.drawString(client.font, Component.literal(augmentSlot.getName()),
                     x, y, FastColor.ARGB32.color(255, 255, 255));
-            if (augmentSlot == selectedSlot) {
-                Nautec.LOGGER.debug("selected: {}", augmentSlot);
-            }
         }
     }
 

@@ -1,12 +1,15 @@
 package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.content.items.blocks.PrismarineCrystalItem;
 import com.portingdeadmods.nautec.content.blocks.*;
 import com.portingdeadmods.nautec.content.blocks.multiblock.controller.AugmentationStationBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.controller.DrainBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.AugmentationStationExtensionBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.AugmentationStationPartBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
+import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalBlock;
+import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalPartBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -15,6 +18,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static net.minecraft.world.level.block.Blocks.register;
@@ -46,7 +50,9 @@ public final class NTBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE), true, false);
 
     public static final DeferredBlock<PrismarineCrystalBlock> PRISMARINE_CRYSTAL = registerBlockAndItem("prismarine_crystal", PrismarineCrystalBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN), PrismarineCrystalItem::new);
+    public static final DeferredBlock<PrismarineCrystalPartBlock> PRISMARINE_CRYSTAL_PART = BLOCKS.registerBlock("prismarine_crystal_part", PrismarineCrystalPartBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN));
 
     // MULTIBLOCKS
     public static final DeferredBlock<DrainBlock> DRAIN = registerBlockAndItem("deep_sea_drain", DrainBlock::new,
@@ -91,6 +97,13 @@ public final class NTBlocks {
         if (genItemModel) {
             NTItems.BLOCK_ITEMS.add(blockItem);
         }
+        return block;
+    }
+
+    private static <T extends Block> DeferredBlock<T> registerBlockAndItem(String name, Function<BlockBehaviour.Properties, T> blockConstructor, BlockBehaviour.Properties properties, BiFunction<T, Item.Properties, BlockItem> blockItemConstructor) {
+        DeferredBlock<T> block = BLOCKS.registerBlock(name, blockConstructor, properties);
+        DeferredItem<BlockItem> blockItem = NTItems.registerItem(name, props -> blockItemConstructor.apply(block.get(), props), new Item.Properties());
+        NTItems.BLOCK_ITEMS.add(blockItem);
         return block;
     }
 }

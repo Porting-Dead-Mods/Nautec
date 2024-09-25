@@ -1,11 +1,8 @@
 package com.portingdeadmods.nautec.content.recipes;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
-import com.portingdeadmods.nautec.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.nautec.content.recipes.inputs.AugmentationRecipeInput;
 import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
 import com.portingdeadmods.nautec.content.recipes.utils.RecipeUtils;
@@ -23,7 +20,6 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public record AugmentationRecipe(Item augmentItem, List<IngredientWithCount> ingredients, AugmentType<?> resultAugment) implements Recipe<AugmentationRecipeInput> {
