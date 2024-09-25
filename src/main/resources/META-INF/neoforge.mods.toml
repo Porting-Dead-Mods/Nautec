@@ -26,6 +26,22 @@ versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
+[[dependencies.${ mod_id }]]
+modId = "modonomicon"
+type = "required"
+versionRange = "[1.106.0,]"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "curios"
+type = "required"
+versionRange = "[9.0.9,]"
+ordering = "NONE"
+side = "BOTH"
+
+
+
 [[accessTransformers]]
 file = "META-INF/accesstransformer.cfg"
 
