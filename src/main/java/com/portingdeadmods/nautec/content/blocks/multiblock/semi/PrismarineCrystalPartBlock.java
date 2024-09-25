@@ -3,33 +3,32 @@ package com.portingdeadmods.nautec.content.blocks.multiblock.semi;
 import com.mojang.serialization.MapCodec;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.semi.PrismarineCrystalBlockEntity;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class PrismarineCrystalPartBlock extends LaserBlock {
-    public static final BooleanProperty END = BooleanProperty.create("end");
+    public static final IntegerProperty INDEX = IntegerProperty.create("index", 0, 5);
 
     public PrismarineCrystalPartBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(END, false));
+        registerDefaultState(defaultBlockState().setValue(INDEX, 0));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder.add(END));
+        super.createBlockStateDefinition(builder.add(INDEX));
     }
 
     @Override
@@ -48,8 +47,13 @@ public class PrismarineCrystalPartBlock extends LaserBlock {
     }
 
     @Override
-    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
-        super.playerDestroy(level, player, pos, state, blockEntity, tool);
-
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+        for (int i = -2; i < 4; i++) {
+            BlockPos blockPos = pos.above(i);
+            if (level.getBlockEntity(blockPos) instanceof PrismarineCrystalBlockEntity){
+                PrismarineCrystalBlock.removeCrystal(level, blockPos);
+            }
+        }
+        return true;
     }
 }
