@@ -40,4 +40,6 @@ public final class NTAugments {
             () -> AugmentType.of(WaterRegenAugment::new));
     public static final Supplier<AugmentType<WalkingSpeedAugment>> WALKING_SPEED_AUGMENT = AUGMENTS.register("walking_speed",
             () -> AugmentType.of(WalkingSpeedAugment::new));
+    public static final Supplier<AugmentType<ThrowSpreadingTrident>> SPREADING_TRIDENT_AUGMENT = AUGMENTS.register("spreading_trident",
+            () -> AugmentType.of(ThrowSpreadingTrident::new));
 }
