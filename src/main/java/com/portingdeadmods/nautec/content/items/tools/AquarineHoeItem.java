@@ -136,7 +136,7 @@ public class AquarineHoeItem extends HoeItem implements IPowerItem {
 
     @Override
     public boolean isFoil(ItemStack stack) {
-        return NTDataComponentsUtils.isAbilityEnabled(stack);
+        return NTDataComponentsUtils.isAbilityEnabled(stack) || stack.isEnchanted();
     }
 
     @Override

@@ -1,3 +1,12 @@
-// 1.21.1	2024-09-22T14:49:29.490159755	Tags for minecraft:item mod id vanilla
+// 1.21.1	2024-09-25T20:43:57.0831263	Tags for minecraft:item mod id vanilla
+7de3b52dcf805e01385dac0a127c581667cfb6a3 data/minecraft/tags/item/axes.json
+c66bf155ebc054231fc94de1993fec77011e34bf data/minecraft/tags/item/enchantable/chest_armor.json
+ef042778aecaf44c97c28a4854a3979b6ef42e55 data/minecraft/tags/item/enchantable/foot_armor.json
+e26dacd054eac6331f5116bbf1785952b7c89ed1 data/minecraft/tags/item/enchantable/head_armor.json
+b7270432e5bfe4bf1c7cf2dc7ce50a4cfb280061 data/minecraft/tags/item/enchantable/leg_armor.json
+78cb8cfdb17b39437d56a9286a0d0bc268965050 data/minecraft/tags/item/hoes.json
+fa5a2dc47abd8cf1a20218b427781b0772371859 data/minecraft/tags/item/pickaxes.json
+996b31515c5baecf8e7d795095d7ab8e9f934a3f data/minecraft/tags/item/shovels.json
+3c067495112d7424b2f3d1ce992db724c21b06f9 data/minecraft/tags/item/swords.json
 255db1048249ab333a1f41009c18cbcd639e3ae4 data/nautec/tags/item/aquarine_steel.json
 e1102ee826d5ec0d457c55612bc006b93dfc1ed5 data/nautec/tags/item/aquatic_catalyst.json

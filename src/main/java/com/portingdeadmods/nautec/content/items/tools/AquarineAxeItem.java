@@ -31,7 +31,7 @@ public class AquarineAxeItem extends AxeItem implements IPowerItem {
         super(NTToolMaterials.AQUARINE, new Properties()
                 .stacksTo(1)
                 .component(NTDataComponents.IS_INFUSED,false)
-                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(700))
+                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200))
                 .component(NTDataComponents.ABILITY_ENABLED,false)
         );
     }
@@ -68,7 +68,7 @@ public class AquarineAxeItem extends AxeItem implements IPowerItem {
 
     @Override
     public boolean isFoil(ItemStack stack) {
-        return NTDataComponentsUtils.isAbilityEnabled(stack);
+        return NTDataComponentsUtils.isAbilityEnabled(stack) || stack.isEnchanted();
     }
 
     @Override

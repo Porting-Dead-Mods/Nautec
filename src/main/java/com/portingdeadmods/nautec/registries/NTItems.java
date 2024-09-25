@@ -32,6 +32,8 @@ public final class NTItems {
             Item::new, new Item.Properties());
     public static final DeferredItem<AirBottleItem> AIR_BOTTLE = registerItem("air_bottle",
             AirBottleItem::new, new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> AQUARINE_STEEL_COMPOUND = registerItem("aquarine_steel_compound",
+            Item::new, new Item.Properties());
 
 
     // MACHINE PARTS

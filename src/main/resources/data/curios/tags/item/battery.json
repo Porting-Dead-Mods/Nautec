@@ -1,6 +1,6 @@
 {
   "replace": true,
   "values": [
-    "nautec:battery"
+    "nautec:prismatic_battery"
   ]
 }
