@@ -20,6 +20,8 @@ import com.portingdeadmods.nautec.client.renderer.robotArms.ClawRobotArmRenderer
 import com.portingdeadmods.nautec.client.screen.AugmentScreen;
 import com.portingdeadmods.nautec.client.screen.AugmentationStationExtensionScreen;
 import com.portingdeadmods.nautec.content.augments.GuardianEyeAugment;
+import com.portingdeadmods.nautec.content.menus.AugmentMenu;
+import com.portingdeadmods.nautec.content.menus.AugmentationViewerScreen;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;
 import com.portingdeadmods.nautec.client.screen.CrateScreen;
@@ -36,6 +38,7 @@ import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.util.FastColor;
@@ -208,8 +211,13 @@ public final class NTClientEvents {
 
         @SubscribeEvent
         public static void onClientTick(ClientTickEvent.Post event) {
-            while (NTKeybinds.AUGMENT_SCREEN_KEYBIND.get().consumeClick()) {
-                PacketDistributor.sendToServer(new AugmentationScreenPayload((byte) 0));
+            // while (NTKeybinds.AUGMENT_SCREEN_KEYBIND.get().consumeClick()) {
+            //     PacketDistributor.sendToServer(new AugmentationScreenPayload((byte) 0));
+            // }
+            if (NTKeybinds.AUGMENT_SCREEN_KEYBIND.get().consumeClick()) {
+                if (Minecraft.getInstance().screen == null) {
+                    Minecraft.getInstance().setScreen(new AugmentationViewerScreen(Component.literal("test"), Minecraft.getInstance().player));
+                }
             }
         }
     }
