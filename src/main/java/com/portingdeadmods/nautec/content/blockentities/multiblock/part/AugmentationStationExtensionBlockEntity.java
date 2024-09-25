@@ -64,7 +64,6 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
 
     @Override
     public void commonTick() {
-        Nautec.LOGGER.debug("AnimInterval: {}, AnimationTime: {}, independentAngle: {}", animationInterval, animationTime, middleIndependentAngle);
         super.commonTick();
         if (animationInterval > 0) {
             animationInterval--;

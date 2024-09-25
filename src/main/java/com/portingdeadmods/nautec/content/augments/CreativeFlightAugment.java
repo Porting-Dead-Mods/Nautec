@@ -24,6 +24,7 @@ public class CreativeFlightAugment extends Augment {
         player.onUpdateAbilities();
     }
 
+
     @Override
     public void onRemoved(Player player) {
         player.getAbilities().mayfly = false;
