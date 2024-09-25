@@ -16,7 +16,7 @@ public final class NTMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(BuiltInRegistries.MENU, Nautec.MODID);
 
     public static final DeferredHolder<MenuType<?>,MenuType<CrateMenu>> CRATE = registerMenuType(CrateMenu::new,"crate");
-    public static final DeferredHolder<MenuType<?>,MenuType<AugmentMenu>> AUGMENTS = registerMenuType(AugmentMenu::new,"augments");
+    public static final DeferredHolder<MenuType<?>,MenuType<AugmentMenu>> AUGMENTS = registerMenuType(AugmentMenu::new,"ingredients");
     public static final DeferredHolder<MenuType<?>,MenuType<AugmentationStationExtensionMenu>> AUGMENT_STATION_EXTENSION = registerMenuType(AugmentationStationExtensionMenu::new,"augment_station_extension");
 
     private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>,MenuType<T>> registerMenuType(IContainerFactory<T> factory,

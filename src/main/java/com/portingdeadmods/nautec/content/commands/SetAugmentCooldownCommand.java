@@ -13,13 +13,13 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
-// /modjam augments set <slot> <augment>
+// /modjam ingredients set <slot> <augment>
 
-// TODO: Only set augments for slots that support them
+// TODO: Only set ingredients for slots that support them
 public class SetAugmentCooldownCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal(Nautec.MODID)
-                .then(Commands.literal("augments")
+                .then(Commands.literal("ingredients")
                         .then(Commands.literal("cooldown")
                                 .then(Commands.literal("set")
                                         .then(Commands.argument("slot", AugmentSlotArgumentType.getInstance())

@@ -3,15 +3,20 @@ package com.portingdeadmods.nautec.content.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
+import com.portingdeadmods.nautec.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.nautec.content.recipes.inputs.AugmentationRecipeInput;
+import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
 import com.portingdeadmods.nautec.content.recipes.utils.RecipeUtils;
 import com.portingdeadmods.nautec.utils.AugmentCodecs;
+import com.portingdeadmods.nautec.utils.CodecUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -21,12 +26,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public record AugmentationRecipe(Ingredient augmentItem, int robotArms, AugmentType<?> resultAugment) implements Recipe<AugmentationRecipeInput> {
+public record AugmentationRecipe(Item augmentItem, List<IngredientWithCount> ingredients, AugmentType<?> resultAugment) implements Recipe<AugmentationRecipeInput> {
     public static final String NAME = "augmentation";
 
     @Override
     public boolean matches(@NotNull AugmentationRecipeInput recipeInput, @NotNull Level level) {
-        return augmentItem.test(recipeInput.ingredient()) && recipeInput.robotArms() >= this.robotArms;
+        return RecipeUtils.compareItems(recipeInput.ingredients(), ingredients);
     }
 
     @Override
@@ -56,21 +61,21 @@ public record AugmentationRecipe(Ingredient augmentItem, int robotArms, AugmentT
 
     @Override
     public @NotNull NonNullList<Ingredient> getIngredients() {
-        return NonNullList.of(Ingredient.EMPTY, this.augmentItem);
+        return RecipeUtils.listToNonNullList(RecipeUtils.iWCToIngredientsSaveCount(ingredients));
     }
 
     public static class Serializer implements RecipeSerializer<AugmentationRecipe> {
         public static final AugmentationRecipe.Serializer INSTANCE = new AugmentationRecipe.Serializer();
         private static final MapCodec<AugmentationRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec((builder) -> builder.group(
-                Ingredient.CODEC.fieldOf("augmentItem").forGetter(AugmentationRecipe::augmentItem),
-                Codec.INT.fieldOf("robotArms").forGetter(AugmentationRecipe::robotArms),
+                CodecUtils.ITEM_CODEC.fieldOf("augmentItem").forGetter(AugmentationRecipe::augmentItem),
+                IngredientWithCount.CODEC.listOf().fieldOf("ingredients").forGetter(AugmentationRecipe::ingredients),
                 AugmentCodecs.AUGMENT_TYPE_CODEC.fieldOf("resultAugment").forGetter(AugmentationRecipe::resultAugment)
         ).apply(builder, AugmentationRecipe::new));
         private static final StreamCodec<RegistryFriendlyByteBuf, AugmentationRecipe> STREAM_CODEC = StreamCodec.composite(
-                Ingredient.CONTENTS_STREAM_CODEC,
+                CodecUtils.ITEM_STREAM_CODEC,
                 AugmentationRecipe::augmentItem,
-                ByteBufCodecs.INT,
-                AugmentationRecipe::robotArms,
+                IngredientWithCount.STREAM_CODEC.apply(ByteBufCodecs.list()),
+                AugmentationRecipe::ingredients,
                 AugmentCodecs.AUGMENT_TYPE_STREAM_CODEC,
                 AugmentationRecipe::resultAugment,
                 AugmentationRecipe::new
