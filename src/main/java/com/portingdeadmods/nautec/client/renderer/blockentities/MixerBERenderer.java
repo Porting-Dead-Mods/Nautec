@@ -30,7 +30,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 public class MixerBERenderer extends LaserBlockEntityRenderer<MixerBlockEntity> {
-    private static final float SIDE_MARGIN = (float) MixerBlock.SHAPE.min(Direction.Axis.X) + 0.125f;
+    private static final float SIDE_MARGIN = (float) MixerBlock.SHAPE.min(Direction.Axis.X) + 0.075f;
     private static final float MIN_Y = 2 / 16f;
     private static final float MAX_Y = 1 - MIN_Y;
     private final WhiskModel model;

@@ -8,8 +8,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.neoforged.neoforge.client.gui.widget.ScrollPanel;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -58,7 +60,8 @@ public class AugmentationStationDataPanel extends ScrollPanel {
             AugmentSlot augmentSlot = this.augmentSlots.get(i);
             int x = left + 2;
             int y = relativeY - 2 + i * client.font.lineHeight;
-            guiGraphics.drawString(client.font, Component.literal(augmentSlot.getName()),
+            ResourceLocation loc = NTRegistries.AUGMENT_SLOT.getKey(augmentSlot);
+            guiGraphics.drawString(client.font, Component.translatable("augment_slot."+loc.getNamespace()+"."+loc.getPath()),
                     x, y, FastColor.ARGB32.color(255, 255, 255));
         }
     }
@@ -72,7 +75,7 @@ public class AugmentationStationDataPanel extends ScrollPanel {
     }
 
     @Override
-    public NarrationPriority narrationPriority() {
+    public @NotNull NarrationPriority narrationPriority() {
         return NarrationPriority.NONE;
     }
 

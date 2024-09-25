@@ -77,7 +77,7 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     }
 
     protected FluidTank getSecondaryFluidTank() {
-        return fluidTank;
+        return secondaryFluidTank;
     }
 
     protected PowerStorage getEnergyStorageImpl() {
@@ -88,7 +88,7 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     protected final void loadAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
         super.loadAdditional(nbt, provider);
         if (this.getFluidTank() != null)
-            this.getFluidTank().readFromNBT(provider, nbt);
+            this.getFluidTank().readFromNBT(provider, nbt.getCompound("fluid_tank"));
         if (this.getSecondaryFluidTank() != null)
             this.getSecondaryFluidTank().readFromNBT(provider, nbt.getCompound("secondary_fluid"));
         if (this.getItemStackHandler() != null)
@@ -101,8 +101,11 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     @Override
     protected final void saveAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider provider) {
         super.saveAdditional(nbt, provider);
-        if (getFluidTank() != null)
-            getFluidTank().writeToNBT(provider, nbt);
+        if (getFluidTank() != null) {
+            CompoundTag tag = new CompoundTag();
+            getFluidTank().writeToNBT(provider, tag);
+            nbt.put("fluid_tank", tag);
+        }
         if (getSecondaryFluidTank() != null) {
             CompoundTag tag = new CompoundTag();
             getSecondaryFluidTank().writeToNBT(provider, tag);

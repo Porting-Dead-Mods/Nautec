@@ -32,7 +32,6 @@ public record MixingRecipe(List<IngredientWithCount> ingredients, FluidStack flu
     public boolean matches(@NotNull MixingRecipeInput recipeInput, @NotNull Level level) {
         boolean fluidMatches = recipeInput.fluidStack().is(fluidIngredient.getFluid())
                 && recipeInput.fluidStack().getAmount() >= fluidIngredient.getAmount();
-        Nautec.LOGGER.debug("input: {}, expected: {}", recipeInput.items(), this.ingredients);
         boolean itemsMatch = RecipeUtils.compareItems(recipeInput.items(), this.ingredients);
         return itemsMatch
                 && fluidMatches;
