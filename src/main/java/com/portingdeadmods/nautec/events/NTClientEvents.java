@@ -14,12 +14,11 @@ import com.portingdeadmods.nautec.client.model.block.DrainTopModel;
 import com.portingdeadmods.nautec.client.model.block.PrismarineCrystalModel;
 import com.portingdeadmods.nautec.client.model.block.RobotArmModel;
 import com.portingdeadmods.nautec.client.model.block.WhiskModel;
-import com.portingdeadmods.nautec.client.renderer.augments.GuardianEyeLaserRenderer;
+import com.portingdeadmods.nautec.client.renderer.augments.GuardianEyeRenderer;
 import com.portingdeadmods.nautec.client.renderer.augments.SimpleAugmentRenderer;
 import com.portingdeadmods.nautec.client.renderer.robotArms.ClawRobotArmRenderer;
 import com.portingdeadmods.nautec.client.screen.AugmentScreen;
 import com.portingdeadmods.nautec.client.screen.AugmentationStationExtensionScreen;
-import com.portingdeadmods.nautec.client.screen.AugmentationStationScreen;
 import com.portingdeadmods.nautec.content.augments.GuardianEyeAugment;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;
@@ -36,7 +35,6 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
@@ -145,8 +143,7 @@ public final class NTClientEvents {
             event.registerBlockEntityRenderer(NTBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), AugmentStationExtensionBERenderer::new);
             AugmentLayerRenderer.registerRenderer(NTAugments.DOLPHIN_FIN.get(),
                     ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.MATERIAL, true, ctx));
-            AugmentLayerRenderer.registerRenderer(NTAugments.GUARDIAN_EYE_AUGMENT.get(),
-                    ctx -> new SimpleAugmentRenderer<>(GuardianEyeModel::new, GuardianEyeModel.LAYER_LOCATION, GuardianEyeModel.MATERIAL, true, ctx));
+            AugmentLayerRenderer.registerRenderer(NTAugments.GUARDIAN_EYE_AUGMENT.get(), GuardianEyeRenderer::new);
             AugmentStationExtensionBERenderer.registerRenderer(NTItems.CLAW_ROBOT_ARM.get(), ClawRobotArmRenderer::new);
         }
 
@@ -213,17 +210,6 @@ public final class NTClientEvents {
         public static void onClientTick(ClientTickEvent.Post event) {
             while (NTKeybinds.AUGMENT_SCREEN_KEYBIND.get().consumeClick()) {
                 PacketDistributor.sendToServer(new AugmentationScreenPayload((byte) 0));
-            }
-        }
-
-        @SubscribeEvent
-        public static void renderGuardianEye(RenderLevelStageEvent event){
-            // Nautec.LOGGER.info("render");
-            MultiBufferSource buf = Minecraft.getInstance().renderBuffers().bufferSource();
-            if (GuardianEyeAugment.laserFiredPos != null && GuardianEyeAugment.timeLeft > 0) {
-                GuardianEyeAugment.timeLeft --;
-                // Nautec.LOGGER.info("RENDER LASER");
-                GuardianEyeLaserRenderer.renderLaser(Minecraft.getInstance().player.position(), GuardianEyeAugment.laserFiredPos, event.getPoseStack(), buf);
             }
         }
     }

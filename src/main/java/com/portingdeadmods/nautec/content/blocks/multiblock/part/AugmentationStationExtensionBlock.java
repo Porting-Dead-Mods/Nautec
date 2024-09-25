@@ -50,14 +50,16 @@ public class AugmentationStationExtensionBlock extends LaserBlock {
 
     @Override
     protected @NotNull InteractionResult useWithoutItem(BlockState p_60503_, Level p_60504_, BlockPos p_60505_, Player p_60506_, BlockHitResult p_60508_) {
-        p_60506_.openMenu((AugmentationStationExtensionBlockEntity) p_60504_.getBlockEntity(p_60505_), p_60505_);
-        return InteractionResult.SUCCESS;
+        if (p_60503_.getValue(Multiblock.FORMED)) {
+            p_60506_.openMenu((AugmentationStationExtensionBlockEntity) p_60504_.getBlockEntity(p_60505_), p_60505_);
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.FAIL;
     }
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock())) {
-            Nautec.LOGGER.debug("unforminge");
+        if (!state.is(newState.getBlock()) && state.getValue(Multiblock.FORMED)) {
             AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
             MultiblockHelper.unform(NTMultiblocks.AUGMENTATION_STATION.get(), be.getControllerPos(), level);
         }

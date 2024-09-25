@@ -1,4 +1,4 @@
-package com.portingdeadmods.nautec.content.blockentities;
+package com.portingdeadmods.nautec.content.blockentities.multiblock.semi;
 
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
@@ -27,9 +27,7 @@ public class PrismarineCrystalBlockEntity extends LaserBlockEntity {
 
     @Override
     public ObjectSet<Direction> getLaserOutputs() {
-        return ObjectSet.of(
-                Direction.UP, Direction.DOWN
-        );
+        return ObjectSet.of();
     }
 
     @Override

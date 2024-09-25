@@ -3,11 +3,13 @@ package com.portingdeadmods.nautec.content.blockentities.multiblock.part;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockPartEntity;
+import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.AugmentationStationBlockEntity;
 import com.portingdeadmods.nautec.content.items.RobotArmItem;
 import com.portingdeadmods.nautec.content.menus.AugmentationStationExtensionMenu;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTItems;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
@@ -21,6 +23,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -61,6 +64,7 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
 
     @Override
     public void commonTick() {
+        Nautec.LOGGER.debug("AnimInterval: {}, AnimationTime: {}, independentAngle: {}", animationInterval, animationTime, middleIndependentAngle);
         super.commonTick();
         if (animationInterval > 0) {
             animationInterval--;
@@ -97,10 +101,27 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
     protected void onItemsChanged(int slot) {
         super.onItemsChanged(slot);
         IItemHandler handler = getItemHandler();
-        if (!handler.getStackInSlot(1).isEmpty()) {
-            AugmentationStationBlockEntity be = (AugmentationStationBlockEntity) level.getBlockEntity(getControllerPos());
-            be.getAugmentItems().put(worldPosition, handler.getStackInSlot(0));
+        if (isFormed()) {
+            BlockPos controllerPos1 = getControllerPos();
+            if (level.getBlockEntity(controllerPos1) instanceof AugmentationStationBlockEntity be) {
+                if (!handler.getStackInSlot(1).isEmpty()) {
+                    be.getAugmentItems().put(worldPosition, handler.getStackInSlot(0));
+                } else if (be.getAugmentItems().containsKey(worldPosition)) {
+                    be.getAugmentItems().remove(worldPosition);
+                }
+            }
         }
+    }
+
+    private @NotNull Boolean isFormed() {
+        return getBlockState().getValue(Multiblock.FORMED);
+    }
+
+    public ItemStack getAugmentItem() {
+        if (getItemHandler().getStackInSlot(1).is(NTItems.CLAW_ROBOT_ARM)) {
+            return getItemHandler().getStackInSlot(0);
+        }
+        return ItemStack.EMPTY;
     }
 
     public float getMiddleIndependentAngle(float partialTicks) {

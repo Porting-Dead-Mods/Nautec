@@ -7,6 +7,9 @@ import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.Dr
 import com.portingdeadmods.nautec.content.blockentities.multiblock.part.AugmentationStationExtensionBlockEntity;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.part.AugmentationStationPartBlockEntity;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.part.DrainPartBlockEntity;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.semi.PrismarineCrystalBlockEntity;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.semi.PrismarineCrystalPartBlockEntity;
+import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalPartBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -35,10 +38,6 @@ public final class NTBlockEntityTypes {
             () -> BlockEntityType.Builder.of(CrateBlockEntity::new,
                     NTBlocks.CRATE.get(), NTBlocks.RUSTY_CRATE.get()).build(null));
 
-    public static final Supplier<BlockEntityType<PrismarineCrystalBlockEntity>> PRISMARINE_CRYSTAL = BLOCK_ENTITIES.register("prismarine_crystal",
-            () -> BlockEntityType.Builder.of(PrismarineCrystalBlockEntity::new,
-                    NTBlocks.PRISMARINE_CRYSTAL.get()).build(null));
-
     public static final Supplier<BlockEntityType<CreativePowerSourceBlockEntity>> CREATIVE_POWER_SOURCE = BLOCK_ENTITIES.register("creative_power_source",
             () -> BlockEntityType.Builder.of(CreativePowerSourceBlockEntity::new,
                     NTBlocks.CREATIVE_POWER_SOURCE.get()).build(null));
@@ -50,6 +49,13 @@ public final class NTBlockEntityTypes {
     public static final Supplier<BlockEntityType<DrainPartBlockEntity>> DRAIN_PART = BLOCK_ENTITIES.register("drain_part",
             () -> BlockEntityType.Builder.of(DrainPartBlockEntity::new,
                     NTBlocks.DRAIN_PART.get()).build(null));
+
+    public static final Supplier<BlockEntityType<PrismarineCrystalBlockEntity>> PRISMARINE_CRYSTAL = BLOCK_ENTITIES.register("prismarine_crystal",
+            () -> BlockEntityType.Builder.of(PrismarineCrystalBlockEntity::new,
+                    NTBlocks.PRISMARINE_CRYSTAL.get()).build(null));
+    public static final Supplier<BlockEntityType<PrismarineCrystalPartBlockEntity>> PRISMARINE_CRYSTAL_PART = BLOCK_ENTITIES.register("prismarine_crystal_part",
+            () -> BlockEntityType.Builder.of(PrismarineCrystalPartBlockEntity::new,
+                    NTBlocks.PRISMARINE_CRYSTAL_PART.get()).build(null));
 
     public static final Supplier<BlockEntityType<AugmentationStationBlockEntity>> AUGMENTATION_STATION = BLOCK_ENTITIES.register("augmentation_station",
             () -> BlockEntityType.Builder.of(AugmentationStationBlockEntity::new,

@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.client.screen;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.AugmentationStationBlockEntity;
+import com.portingdeadmods.nautec.content.recipes.AugmentationRecipe;
 import com.portingdeadmods.nautec.network.StartAugmentationPayload;
 import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.client.Minecraft;
@@ -15,8 +16,12 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.Optional;
 
 public class AugmentationStationScreen extends Screen {
     public static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/augment_station.png");
@@ -25,7 +30,7 @@ public class AugmentationStationScreen extends Screen {
     private final int imageWidth;
     private final int imageHeight;
     private final Player player;
-    private final BlockEntity blockEntity;
+    private final AugmentationStationBlockEntity blockEntity;
     private AugmentationStationDataPanel dataPanel;
 
     public AugmentationStationScreen(AugmentationStationBlockEntity blockEntity, Player player, Component title) {
@@ -59,7 +64,8 @@ public class AugmentationStationScreen extends Screen {
         int augmentY = y + 48;
 
         if (mouseX > augmentX && mouseX < augmentX + 16 && mouseY > augmentY && mouseY < augmentY + 16) {
-            guiGraphics.renderTooltip(this.font, Component.literal(NTItems.DOLPHIN_FIN.getRegisteredName()), mouseX, mouseY);
+            Item augmentItem = getAugmentItem();
+            guiGraphics.renderTooltip(this.font, Component.literal(augmentItem.getName(augmentItem.getDefaultInstance()).toString()), mouseX, mouseY);
         }
     }
 
@@ -78,12 +84,13 @@ public class AugmentationStationScreen extends Screen {
         int augmentX = x + 24;
         int augmentY = y + 48;
 
-        guiGraphics.renderFakeItem(NTItems.DOLPHIN_FIN.toStack(), augmentX, augmentY);
+        Item augmentItem = getAugmentItem();
+        guiGraphics.renderFakeItem(augmentItem.getDefaultInstance(), augmentX, augmentY);
 
         //guiGraphics.blit(SELECTED_SLOT, augmentX - 4, augmentY - 4, 0, 0, 24, 24, 24, 24);
 
         addRenderableWidget(Button.builder(Component.literal("Apply"), btn -> {
-            ((AugmentationStationBlockEntity) blockEntity).startAugmentation(player, dataPanel.getSelectedSlot());
+            blockEntity.startAugmentation(player, dataPanel.getSelectedSlot());
             PacketDistributor.sendToServer(new StartAugmentationPayload(blockEntity.getBlockPos(), dataPanel.getSelectedSlot(), player.getUUID()));
             Minecraft.getInstance().setScreen(null);
         }).bounds(x + imageWidth / 2 - 40, y + imageHeight - 55, 50, 15).build());
@@ -112,6 +119,11 @@ public class AugmentationStationScreen extends Screen {
         if (slotIndex != -1) {
             guiGraphics.fill(minX, minY + 5, minX + width / 3 - 10, minY + lineHeight + 4, FastColor.ARGB32.color(150, 150, 150));
         }
+    }
+
+    private Item getAugmentItem() {
+        Optional<AugmentationRecipe> recipe = blockEntity.getRecipe();
+        return recipe.map(AugmentationRecipe::augmentItem).orElse(ItemStack.EMPTY.getItem());
     }
 
     @Override

@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class AugmentScreen extends AbstractContainerScreen<AugmentMenu> {
 
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/ingredients.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/augments.png");
 
     private int imageWidth;
     private int imageHeight;

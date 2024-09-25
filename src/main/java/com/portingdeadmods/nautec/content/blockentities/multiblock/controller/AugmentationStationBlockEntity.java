@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.blockentities.multiblock.controller;
 
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
@@ -27,6 +28,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.NotNull;
@@ -64,34 +66,35 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
 
     public void startAugmentation(Player player, AugmentSlot augmentSlot) {
         if (!isRunning) {
-            for (BlockPos augmentationExtensionPos : this.augmentItems.keySet()) {
-                ItemStack augmentationItem = this.augmentItems.get(augmentationExtensionPos);
-                Optional<AugmentationRecipe> recipe = level.getRecipeManager()
-                        .getRecipeFor(AugmentationRecipe.Type.INSTANCE, new AugmentationRecipeInput(augmentationItem, 100), level)
-                        .map(RecipeHolder::value);
+            Optional<AugmentationRecipe> recipe = getRecipe();
 
-                if (recipe.isPresent()) {
-                    AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(augmentationExtensionPos);
+            if (recipe.isPresent()) {
+                for (BlockPos pos : augmentItems.keySet()) {
+                    AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
 
-                    if (level.isClientSide()) {
-                        be.equipAugment();
-                    }
-                    AttributeMap attributes = player.getAttributes();
-                    this.prevSpeed = attributes.getBaseValue(Attributes.MOVEMENT_SPEED);
-                    this.prevJumpStrength = attributes.getBaseValue(Attributes.JUMP_STRENGTH);
-                    attributes.getInstance(Attributes.MOVEMENT_SPEED).setBaseValue(0);
-                    attributes.getInstance(Attributes.JUMP_STRENGTH).setBaseValue(0);
-
-                    this.isRunning = true;
-                    this.duration = 80;
-                    this.player = player;
-                    this.recipe = recipe.get();
-                    this.slot = augmentSlot;
-
-                    return;
+                    be.equipAugment();
                 }
+
+                AttributeMap attributes = player.getAttributes();
+                this.prevSpeed = attributes.getBaseValue(Attributes.MOVEMENT_SPEED);
+                this.prevJumpStrength = attributes.getBaseValue(Attributes.JUMP_STRENGTH);
+                attributes.getInstance(Attributes.MOVEMENT_SPEED).setBaseValue(0);
+                attributes.getInstance(Attributes.JUMP_STRENGTH).setBaseValue(0);
+
+                this.isRunning = true;
+                this.duration = 80;
+                this.player = player;
+                this.recipe = recipe.get();
+                this.slot = augmentSlot;
             }
         }
+    }
+
+    public @NotNull Optional<AugmentationRecipe> getRecipe() {
+        List<ItemStack> ingredients = collectInputItems();
+        return level.getRecipeManager()
+                .getRecipeFor(AugmentationRecipe.Type.INSTANCE, new AugmentationRecipeInput(ingredients, 100), level)
+                .map(RecipeHolder::value);
     }
 
     public void restorePlayerAttributes() {
@@ -141,11 +144,31 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
                         augment.setPlayer(player);
                         AugmentHelper.setAugment(player, slot, augment);
 
+                        for (BlockPos pos : augmentItems.keySet()) {
+                            AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
+
+                            be.getItemHandler().extractItem(0, 1, false);
+                        }
+
                         restorePlayerAttributes();
                     }
                 }
             }
         }
+    }
+
+    private List<ItemStack> collectInputItems() {
+        List<ItemStack> items = new ArrayList<>();
+        for (Direction direction : BlockStateProperties.HORIZONTAL_FACING.getPossibleValues()) {
+            BlockPos pos = worldPosition.relative(direction, 2);
+            AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
+            ItemStack augmentItem = be.getAugmentItem();
+            if (!augmentItem.isEmpty()) {
+                augmentItems.put(pos, augmentItem);
+                items.add(augmentItem);
+            }
+        }
+        return items;
     }
 
     private @NotNull Boolean isFormed() {

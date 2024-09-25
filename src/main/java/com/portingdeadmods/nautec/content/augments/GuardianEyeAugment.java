@@ -1,10 +1,8 @@
 package com.portingdeadmods.nautec.content.augments;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.client.renderer.augments.GuardianEyeLaserRenderer;
 import com.portingdeadmods.nautec.network.KeyPressedPayload;
 import com.portingdeadmods.nautec.registries.NTAugmentSlots;
 import com.portingdeadmods.nautec.registries.NTAugments;
