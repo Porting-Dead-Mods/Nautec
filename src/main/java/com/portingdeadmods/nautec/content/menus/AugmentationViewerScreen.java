@@ -25,38 +25,50 @@ import static com.portingdeadmods.nautec.client.screen.AugmentationStationScreen
 
 public class AugmentationViewerScreen extends Screen {
 
+    private final int imageWidth;
+    private final int imageHeight;
+    private int leftPos;
+    private int topPos;
     private final Player player;
+    public static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/augments.png");
 
     public AugmentationViewerScreen(Component title, Player player) {
         super(title);
         this.player = player;
+        this.imageWidth = 202;
+        this.imageHeight = 160;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        this.leftPos = (this.width - this.imageWidth) / 2;
+        this.topPos = (this.height - this.imageHeight) / 2;
     }
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         int scale = 30;
 
-        int x1 = 115;
-        int y1 = 75;
+        int x1 = leftPos + 10;
+        int y1 = topPos + 40;
 
-        int x2 = 165;
-        int y2 = 175;
+        int x2 = x1 + 75;
+        int y2 = y1 + 75;
 
 
         InventoryScreen.renderEntityInInventoryFollowsMouse(
                 guiGraphics, x1, y1, x2, y2, scale, 0.0625F, mouseX, mouseY, player
         );
         Map<AugmentSlot, Augment> augments = AugmentHelper.getAugments(player);
-        int y = 50;
+        int y = y1 - 40;
         List<AugmentSlot> emptySlots = new ArrayList<>();
         List<AugmentSlot> fullSlots = new ArrayList<>();
 
         for (AugmentSlot augmentSlot : augments.keySet()) {
             Augment augment = augments.get(augmentSlot);
-            //Nautec.LOGGER.info(augment.getAugmentType().toString());
             if (augment == null) {
                 // TODO : Switch from the getAugments because that doesn't contain the null augments in empty slots
-                //Nautec.LOGGER.info("null augment");
                 emptySlots.add(augmentSlot);
             } else {
                 fullSlots.add(augmentSlot);
@@ -64,10 +76,10 @@ public class AugmentationViewerScreen extends Screen {
         }
 
         for (AugmentSlot slot : fullSlots) {
-            displayAugment(guiGraphics, slot, augments.get(slot), 200, y += 20);
+            displayAugment(guiGraphics, slot, augments.get(slot), x2, y += 20);
         }
         for (AugmentSlot slot : emptySlots) {
-            displayAugment(guiGraphics, slot, augments.get(slot), 200, y += 20);
+            displayAugment(guiGraphics, slot, augments.get(slot), x2, y += 20);
         }
 
         super.render(guiGraphics, mouseX, mouseY, partialTick);
@@ -76,18 +88,8 @@ public class AugmentationViewerScreen extends Screen {
     // TODO: Display a short description for the augments too, aswell as a proper name and not the registry name for the augment
 
     public void displayAugment(GuiGraphics graphics, AugmentSlot slot, Augment aug, int x, int y) {
-        graphics.drawString(this.font, slot.getName() + ":", x, y, 0);
-        graphics.drawString(this.font, aug == null ? "    No Augment in slot" : "    " + aug.getAugmentType().toString(), x, y + 10, 0);
-    }
-
-    public void displayAugment(GuiGraphics graphics, Supplier<AugmentSlot> augmSupplier, Map<AugmentSlot, Augment> augments, int x, int y) {
-        graphics.drawString(this.font, augmSupplier.get().getName() + ":", x, y, 0);
-        graphics.drawString(this.font, augments.get(augmSupplier.get()) == null ? "    No Augment in slot" : "    " + augments.get(augmSupplier.get()).getAugmentType().toString(), x, y + 10, 0);
-    }
-
-    public void displayAugmentB(GuiGraphics graphics, Supplier<AugmentSlot> augmSupplier, Map<AugmentSlot, Augment> augments, int x, int y) {
-        graphics.drawString(this.font, augmSupplier.get().getName() + ": " + ((augments.get(augmSupplier.get()) == null) ? "None" : augments.get(augmSupplier.get()).getAugmentType().toString()), x, y, 0);
-        // graphics.drawString(this.font, augments.get(augmSupplier.get())==null?"    No Augment in slot":"    "+augments.get(augmSupplier.get()).getAugmentType().toString(), x, y+10, 0);
+        graphics.drawString(this.font, Component.translatable("augment_slot.nautec." + slot.getName()).append(Component.literal(":")), x, y, 0);
+        graphics.drawString(this.font, aug == null ? Component.literal("    No Augment in slot") : Component.literal("    ").append(Component.translatable("augment." + aug.getAugmentType().toString())), x, y + 10, 0);
     }
 
     @Override
@@ -97,9 +99,6 @@ public class AugmentationViewerScreen extends Screen {
 
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        int x = (width - 256) / 2;
-        int y = (height - 135) / 2;
-        guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/augments.png"), x, y, 0, 0, 256, 135, 256, 256);
-
+        guiGraphics.blit(BACKGROUND, leftPos, topPos, 0, 0, imageWidth, imageHeight);
     }
 }
