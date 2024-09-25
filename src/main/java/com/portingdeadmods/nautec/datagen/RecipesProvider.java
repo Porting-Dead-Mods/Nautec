@@ -34,7 +34,7 @@ public class RecipesProvider extends RecipeProvider {
                 .save(pRecipeOutput);
 
         ItemTransformationRecipeBuilder.newRecipe(new ItemStack(NTItems.AQUARINE_STEEL_INGOT.get(), 1))
-                .ingredient(new ItemStack(Items.IRON_INGOT))
+                .ingredient(new ItemStack(NTItems.AQUARINE_STEEL_COMPOUND.get()))
                 .purity(3)
                 .duration(100)
                 .save(pRecipeOutput);
@@ -90,6 +90,13 @@ public class RecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item",has(NTItems.DIVING_CHESTPLATE.get()))
                 .define('G',NTItems.AIR_BOTTLE.get())
                 .define('D',NTItems.DIVING_CHESTPLATE.get())
+                .save(pRecipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,NTItems.AQUARINE_STEEL_COMPOUND.get()
+                ,2)
+                .requires(Items.IRON_INGOT)
+                .requires(Items.PRISMARINE_CRYSTALS)
+                .unlockedBy("has_item",has(Items.IRON_INGOT))
                 .save(pRecipeOutput);
     }
 }

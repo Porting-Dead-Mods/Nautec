@@ -5,6 +5,7 @@ import com.portingdeadmods.nautec.tags.NTTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -27,6 +28,15 @@ public class ItemTagProvider extends ItemTagsProvider{
     protected void addTags(HolderLookup.Provider provider) {
         tag(NTTags.Items.AQUATIC_CATALYST, Items.HEART_OF_THE_SEA);
         tag(NTTags.Items.AQUARINE_STEEL, NTItems.AQUARINE_STEEL_INGOT);;
+        tag(ItemTags.AXES,NTItems.AQUARINE_AXE);
+        tag(ItemTags.PICKAXES,NTItems.AQUARINE_PICKAXE);
+        tag(ItemTags.SWORDS,NTItems.AQUARINE_SWORD);
+        tag(ItemTags.SHOVELS,NTItems.AQUARINE_SHOVEL);
+        tag(ItemTags.HOES,NTItems.AQUARINE_HOE);
+        tag(ItemTags.HEAD_ARMOR_ENCHANTABLE,NTItems.AQUARINE_HELMET);
+        tag(ItemTags.CHEST_ARMOR_ENCHANTABLE,NTItems.AQUARINE_CHESTPLATE);
+        tag(ItemTags.LEG_ARMOR_ENCHANTABLE,NTItems.AQUARINE_LEGGINGS);
+        tag(ItemTags.FOOT_ARMOR_ENCHANTABLE,NTItems.AQUARINE_BOOTS);
     }
 
 

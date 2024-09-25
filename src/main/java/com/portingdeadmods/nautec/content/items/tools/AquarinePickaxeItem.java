@@ -35,7 +35,7 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
                 .stacksTo(1)
                 .component(NTDataComponents.IS_INFUSED,false)
                 .component(NTDataComponents.ABILITY_ENABLED, false)
-                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(700)));
+                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200)));
     }
 
     @Override
@@ -151,7 +151,7 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
 
     @Override
     public boolean isFoil(ItemStack stack) {
-        return NTDataComponentsUtils.isAbilityEnabled(stack);
+        return NTDataComponentsUtils.isAbilityEnabled(stack) || stack.isEnchanted();
     }
 
     @Override

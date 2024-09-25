@@ -10,13 +10,20 @@ import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
 import com.portingdeadmods.nautec.utils.ItemUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -32,7 +39,7 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
                                 3,
                                 -2.4f
                         )
-                ).component(NTDataComponents.IS_INFUSED,false).component(NTDataComponents.ABILITY_ENABLED,false).component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(700)));
+                ).component(NTDataComponents.IS_INFUSED,false).component(NTDataComponents.ABILITY_ENABLED,false).component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200)));
     }
 
     @Override
@@ -55,13 +62,24 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         IPowerStorage powerStorage = attacker.getItemInHand(InteractionHand.MAIN_HAND).getCapability(NTCapabilities.PowerStorage.ITEM);
-        powerStorage.tryDrainPower(1, false);
+        if(NTDataComponentsUtils.isAbilityEnabled(stack)){
+            powerStorage.tryDrainPower(3, false);
+        }else{
+            powerStorage.tryDrainPower(1, false);
+        }
         return super.hurtEnemy(stack, target, attacker);
     }
 
     @Override
+    public ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
+        if(NTDataComponentsUtils.isAbilityEnabled(stack)){
+        }
+        return super.getDefaultAttributeModifiers(stack);
+    }
+
+    @Override
     public boolean isFoil(ItemStack stack) {
-        return NTDataComponentsUtils.isAbilityEnabled(stack);
+        return NTDataComponentsUtils.isAbilityEnabled(stack) || stack.isEnchanted();
     }
 
     @Override
@@ -103,6 +121,12 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
+        tooltipComponents.add(Component.literal("Ability: Deal 70% more damage").withStyle(ChatFormatting.DARK_PURPLE));
+        if(!NTDataComponentsUtils.isInfused(stack)){
+            tooltipComponents.add(Component.literal("Infuse in Algae Serum to unlock Abilities").withStyle(ChatFormatting.DARK_GREEN));
+        }else{
+            tooltipComponents.add(Component.literal("Status: " + ((NTDataComponentsUtils.isAbilityEnabled(stack)) ? "Enabled" : "Shift + Right Click to Enable")).withStyle((NTDataComponentsUtils.isAbilityEnabled(stack)) ? ChatFormatting.GREEN : ChatFormatting.RED));
+        }
         tooltipComponents.add(Component.literal("Power: " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity() + " AP").withStyle(ChatFormatting.DARK_AQUA));
     }
 }
