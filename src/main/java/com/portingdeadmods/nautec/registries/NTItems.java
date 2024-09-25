@@ -77,10 +77,10 @@ public final class NTItems {
     public static final DeferredItem<DivingSuitArmorItem> DIVING_LEGGINGS = registerItem("diving_leggings", () -> new DivingSuitArmorItem(NTArmorMaterials.DIVING_SUIT, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final DeferredItem<DivingSuitArmorItem> DIVING_BOOTS = registerItem("diving_boots", () -> new DivingSuitArmorItem(NTArmorMaterials.DIVING_SUIT, ArmorItem.Type.BOOTS, new Item.Properties()));
 
-    public static final DeferredItem<ArmorItem> AQUARINE_HELMET = registerItem("aquarine_steel_helmet", () -> new ArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.HELMET,new Item.Properties()));
-    public static final DeferredItem<ArmorItem> AQUARINE_CHESTPLATE = registerItem("aquarine_steel_chestplate", () -> new ArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.CHESTPLATE,new Item.Properties()));
-    public static final DeferredItem<ArmorItem> AQUARINE_LEGGINGS = registerItem("aquarine_steel_leggings", () -> new ArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.LEGGINGS,new Item.Properties()));
-    public static final DeferredItem<ArmorItem> AQUARINE_BOOTS = registerItem("aquarine_steel_boots", () -> new ArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.BOOTS,new Item.Properties()));
+    public static final DeferredItem<AquarineArmorItem> AQUARINE_HELMET = registerItem("aquarine_steel_helmet", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.HELMET,new Item.Properties()));
+    public static final DeferredItem<AquarineArmorItem> AQUARINE_CHESTPLATE = registerItem("aquarine_steel_chestplate", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.CHESTPLATE,new Item.Properties()));
+    public static final DeferredItem<AquarineArmorItem> AQUARINE_LEGGINGS = registerItem("aquarine_steel_leggings", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.LEGGINGS,new Item.Properties()));
+    public static final DeferredItem<AquarineArmorItem> AQUARINE_BOOTS = registerItem("aquarine_steel_boots", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.BOOTS,new Item.Properties()));
 
 
     // TOOLS 'N WEAPONS
