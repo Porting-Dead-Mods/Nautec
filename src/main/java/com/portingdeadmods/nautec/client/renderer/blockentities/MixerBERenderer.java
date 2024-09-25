@@ -8,6 +8,7 @@ import com.portingdeadmods.nautec.api.utils.HorizontalDirection;
 import com.portingdeadmods.nautec.client.model.block.WhiskModel;
 import com.portingdeadmods.nautec.content.blockentities.MixerBlockEntity;
 import com.portingdeadmods.nautec.content.blocks.MixerBlock;
+import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -64,6 +65,15 @@ public class MixerBERenderer extends LaserBlockEntityRenderer<MixerBlockEntity> 
             renderItem(handler.getStackInSlot(i), blockEntity, i, poseStack, bufferSource, packedLight, packedOverlay);
         }
 
+        poseStack.pushPose();
+        {
+            poseStack.translate(0.5, 0.25, 0.5);
+            poseStack.mulPose(Axis.XP.rotationDegrees(90));
+            poseStack.scale(0.75f, 0.75f, 0.75f);
+            Minecraft.getInstance().getItemRenderer().renderStatic(handler.getStackInSlot(handler.getSlots()-1), ItemDisplayContext.NONE, packedLight, packedOverlay, poseStack, bufferSource, blockEntity.getLevel(), 1);
+        }
+        poseStack.popPose();
+
         renderFluid(blockEntity, poseStack, bufferSource, packedLight);
     }
 
@@ -103,17 +113,23 @@ public class MixerBERenderer extends LaserBlockEntityRenderer<MixerBlockEntity> 
         IFluidHandler fluidHandler = blockEntity.getFluidHandler();
         FluidStack fluidStack = fluidHandler.getFluidInTank(0);
         int fluidCapacity = fluidHandler.getTankCapacity(0);
-        if (fluidStack.isEmpty())
-            return;
 
         float fillPercentage = Math.min(1, (float) fluidStack.getAmount() / fluidCapacity) / 2;
-        if (fluidStack.getFluid().getFluidType().isLighterThanAir())
-            renderFluid(poseStack, pBufferSource, fluidStack, fillPercentage, 1, combinedLight);
-        else
-            renderFluid(poseStack, pBufferSource, fluidStack, 1, fillPercentage, combinedLight);
+        if (!fluidStack.isEmpty()) {
+            if (fluidStack.getFluid().getFluidType().isLighterThanAir())
+                renderFluid(poseStack, pBufferSource, fluidStack, fillPercentage, 1, combinedLight, MIN_Y, MAX_Y / 2);
+            else
+                renderFluid(poseStack, pBufferSource, fluidStack, 1, fillPercentage, combinedLight, MIN_Y, MAX_Y / 2);
+        }
+
+        FluidStack fluidInTank = blockEntity.getSecondaryFluidHandler().getFluidInTank(0);
+        float fillPercentage1 = Math.min(1, (float) fluidInTank.getAmount() / fluidCapacity) / 2;
+        if (!fluidInTank.isEmpty()) {
+            renderFluid(poseStack, pBufferSource, fluidInTank, 1, fillPercentage1, combinedLight, MIN_Y + (MAX_Y / 2 - MIN_Y) * fillPercentage, MAX_Y);
+        }
     }
 
-    private static void renderFluid(PoseStack poseStack, MultiBufferSource bufferSource, FluidStack fluidStack, float alpha, float heightPercentage, int combinedLight) {
+    private static void renderFluid(PoseStack poseStack, MultiBufferSource bufferSource, FluidStack fluidStack, float alpha, float heightPercentage, int combinedLight, float minY, float maxY) {
         VertexConsumer vertexBuilder = bufferSource.getBuffer(RenderType.translucent());
         IClientFluidTypeExtensions fluidTypeExtensions = IClientFluidTypeExtensions.of(fluidStack.getFluid());
         TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidTypeExtensions.getStillTexture(fluidStack));
@@ -123,33 +139,33 @@ public class MixerBERenderer extends LaserBlockEntityRenderer<MixerBlockEntity> 
         float green = (color >> 8 & 255) / 255f;
         float blue = (color & 255) / 255f;
 
-        renderQuads(poseStack.last().pose(), vertexBuilder, sprite, red, green, blue, alpha, heightPercentage, combinedLight);
+        renderQuads(poseStack.last().pose(), vertexBuilder, sprite, red, green, blue, alpha, heightPercentage, combinedLight, minY, maxY);
     }
 
-    private static void renderQuads(Matrix4f matrix, VertexConsumer buffer, TextureAtlasSprite sprite, float r, float g, float b, float alpha, float heightPercentage, int light) {
-        float height = MIN_Y + (MAX_Y - MIN_Y) * heightPercentage;
+    private static void renderQuads(Matrix4f matrix, VertexConsumer buffer, TextureAtlasSprite sprite, float r, float g, float b, float alpha, float heightPercentage, int light, float minY, float maxY) {
+        float height = minY + (maxY - minY) * heightPercentage;
         float minU = sprite.getU(SIDE_MARGIN), maxU = sprite.getU((1 - SIDE_MARGIN));
-        float minV = sprite.getV(MIN_Y), maxV = sprite.getV(height);
+        float minV = sprite.getV(minY), maxV = sprite.getV(height);
         // min z
-        buffer.addVertex(matrix, SIDE_MARGIN, MIN_Y, SIDE_MARGIN).setColor(r, g, b, alpha).setUv(minU, minV).setLight(light).setNormal(0, 0, -1);
+        buffer.addVertex(matrix, SIDE_MARGIN, minY, SIDE_MARGIN).setColor(r, g, b, alpha).setUv(minU, minV).setLight(light).setNormal(0, 0, -1);
         buffer.addVertex(matrix, SIDE_MARGIN, height, SIDE_MARGIN).setColor(r, g, b, alpha).setUv(minU, maxV).setLight(light).setNormal(0, 0, -1);
         buffer.addVertex(matrix, 1 - SIDE_MARGIN, height, SIDE_MARGIN).setColor(r, g, b, alpha).setUv(maxU, maxV).setLight(light).setNormal(0, 0, -1);
-        buffer.addVertex(matrix, 1 - SIDE_MARGIN, MIN_Y, SIDE_MARGIN).setColor(r, g, b, alpha).setUv(maxU, minV).setLight(light).setNormal(0, 0, -1);
+        buffer.addVertex(matrix, 1 - SIDE_MARGIN, minY, SIDE_MARGIN).setColor(r, g, b, alpha).setUv(maxU, minV).setLight(light).setNormal(0, 0, -1);
         // max z
-        buffer.addVertex(matrix, SIDE_MARGIN, MIN_Y, 1 - SIDE_MARGIN).setColor(r, g, b, alpha).setUv(minU, minV).setLight(light).setNormal(0, 0, 1);
-        buffer.addVertex(matrix, 1 - SIDE_MARGIN, MIN_Y, 1 - SIDE_MARGIN).setColor(r, g, b, alpha).setUv(maxU, minV).setLight(light).setNormal(0, 0, 1);
+        buffer.addVertex(matrix, SIDE_MARGIN, minY, 1 - SIDE_MARGIN).setColor(r, g, b, alpha).setUv(minU, minV).setLight(light).setNormal(0, 0, 1);
+        buffer.addVertex(matrix, 1 - SIDE_MARGIN, minY, 1 - SIDE_MARGIN).setColor(r, g, b, alpha).setUv(maxU, minV).setLight(light).setNormal(0, 0, 1);
         buffer.addVertex(matrix, 1 - SIDE_MARGIN, height, 1 - SIDE_MARGIN).setColor(r, g, b, alpha).setUv(maxU, maxV).setLight(light).setNormal(0, 0, 1);
         buffer.addVertex(matrix, SIDE_MARGIN, height, 1 - SIDE_MARGIN).setColor(r, g, b, alpha).setUv(minU, maxV).setLight(light).setNormal(0, 0, 1);
         // min x
-        buffer.addVertex(matrix, SIDE_MARGIN, MIN_Y, SIDE_MARGIN).setColor(r, g, b, alpha).setUv(minU, minV).setLight(light).setNormal(-1, 0, 0);
-        buffer.addVertex(matrix, SIDE_MARGIN, MIN_Y, 1 - SIDE_MARGIN).setColor(r, g, b, alpha).setUv(maxU, minV).setLight(light).setNormal(-1, 0, 0);
+        buffer.addVertex(matrix, SIDE_MARGIN, minY, SIDE_MARGIN).setColor(r, g, b, alpha).setUv(minU, minV).setLight(light).setNormal(-1, 0, 0);
+        buffer.addVertex(matrix, SIDE_MARGIN, minY, 1 - SIDE_MARGIN).setColor(r, g, b, alpha).setUv(maxU, minV).setLight(light).setNormal(-1, 0, 0);
         buffer.addVertex(matrix, SIDE_MARGIN, height, 1 - SIDE_MARGIN).setColor(r, g, b, alpha).setUv(maxU, maxV).setLight(light).setNormal(-1, 0, 0);
         buffer.addVertex(matrix, SIDE_MARGIN, height, SIDE_MARGIN).setColor(r, g, b, alpha).setUv(minU, maxV).setLight(light).setNormal(-1, 0, 0);
         // max x
-        buffer.addVertex(matrix, 1 - SIDE_MARGIN, MIN_Y, SIDE_MARGIN).setColor(r, g, b, alpha).setUv(minU, minV).setLight(light).setNormal(1, 0, 0);
+        buffer.addVertex(matrix, 1 - SIDE_MARGIN, minY, SIDE_MARGIN).setColor(r, g, b, alpha).setUv(minU, minV).setLight(light).setNormal(1, 0, 0);
         buffer.addVertex(matrix, 1 - SIDE_MARGIN, height, SIDE_MARGIN).setColor(r, g, b, alpha).setUv(minU, maxV).setLight(light).setNormal(1, 0, 0);
         buffer.addVertex(matrix, 1 - SIDE_MARGIN, height, 1 - SIDE_MARGIN).setColor(r, g, b, alpha).setUv(maxU, maxV).setLight(light).setNormal(1, 0, 0);
-        buffer.addVertex(matrix, 1 - SIDE_MARGIN, MIN_Y, 1 - SIDE_MARGIN).setColor(r, g, b, alpha).setUv(maxU, minV).setLight(light).setNormal(1, 0, 0);
+        buffer.addVertex(matrix, 1 - SIDE_MARGIN, minY, 1 - SIDE_MARGIN).setColor(r, g, b, alpha).setUv(maxU, minV).setLight(light).setNormal(1, 0, 0);
         // top
         if (heightPercentage < 1) {
             minV = sprite.getV(SIDE_MARGIN);

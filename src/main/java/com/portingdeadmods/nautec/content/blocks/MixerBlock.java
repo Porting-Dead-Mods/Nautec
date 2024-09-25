@@ -81,15 +81,16 @@ public class MixerBlock extends LaserBlock {
         if (level.getBlockEntity(pos) instanceof MixerBlockEntity mixerBE) {
             IItemHandler itemHandler = mixerBE.getItemHandler();
             IFluidHandler fluidHandler = mixerBE.getFluidHandler();
+            IFluidHandler secondaryFluidHandler = mixerBE.getSecondaryFluidHandler();
 
             Direction clickedFace = player.getDirection();
             if (stack.isEmpty()) {
                 return extractItemsSided(player, itemHandler, clickedFace);
             } else if (stack.getCapability(Capabilities.FluidHandler.ITEM) != null) {
                 IFluidHandler itemFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
-                if (mixerBE.getFluidHandler() instanceof FluidTank fluidTank) {
+                if (mixerBE.getFluidHandler() instanceof FluidTank fluidTank && mixerBE.getSecondaryFluidHandler() instanceof FluidTank secFluidTank) {
                     if (itemFluidHandler.getFluidInTank(0).isEmpty() && !fluidHandler.getFluidInTank(0).isEmpty()) {
-                        extractFluid(player, level, hand, fluidTank, itemFluidHandler);
+                        extractFluid(player, level, hand, fluidTank, secFluidTank, itemFluidHandler);
                     } else {
                         insertFluid(player, level, hand, fluidHandler, itemFluidHandler);
                     }
@@ -129,7 +130,7 @@ public class MixerBlock extends LaserBlock {
     private static void insertFluid(Player player, Level level, InteractionHand interactionHand, IFluidHandler fluidHandler, IFluidHandler fluidHandlerItem) {
         int filled = fluidHandler.fill(fluidHandlerItem.getFluidInTank(0).copy(), IFluidHandler.FluidAction.EXECUTE);
         FluidStack drained = fluidHandlerItem.drain(filled, IFluidHandler.FluidAction.EXECUTE);
-        if (player.getItemInHand(interactionHand).getItem() instanceof BucketItem bucketItem && !drained.isEmpty()) {
+        if (player.getItemInHand(interactionHand).getItem() instanceof BucketItem bucketItem && !drained.isEmpty() && drained.getAmount() >= 1000) {
             player.getItemInHand(interactionHand).shrink(1);
             ItemUtils.giveItemToPlayerNoSound(player, Items.BUCKET.getDefaultInstance());
             if (bucketItem.content.isSame(Fluids.WATER)) {
@@ -140,8 +141,9 @@ public class MixerBlock extends LaserBlock {
         }
     }
 
-    private static void extractFluid(Player player, Level level, InteractionHand interactionHand, FluidTank fluidHandler, IFluidHandler fluidHandlerItem) {
-        FluidStack fluidInTank = fluidHandler.getFluidInTank(0);
+    private static void extractFluid(Player player, Level level, InteractionHand interactionHand, FluidTank fluidHandler, FluidTank secondaryFluidHandler, IFluidHandler fluidHandlerItem) {
+        FluidTank curHandler = secondaryFluidHandler.getFluidInTank(0).isEmpty() ? fluidHandler : secondaryFluidHandler;
+        FluidStack fluidInTank = curHandler.getFluidInTank(0);
         if (player.getItemInHand(interactionHand).is(Items.BUCKET)) {
             player.getItemInHand(interactionHand).shrink(1);
             ItemUtils.giveItemToPlayerNoSound(player, fluidInTank.getFluid().getBucket().getDefaultInstance());
@@ -150,13 +152,13 @@ public class MixerBlock extends LaserBlock {
             } else if (fluidInTank.is(Fluids.LAVA)) {
                 level.playSound(null, player.getX(), player.getY() + 0.5, player.getZ(), SoundEvents.BUCKET_FILL_LAVA, SoundSource.PLAYERS, 0.8F, 1.0F);
             }
-            fluidHandler.drain(1000, IFluidHandler.FluidAction.EXECUTE);
+            curHandler.drain(1000, IFluidHandler.FluidAction.EXECUTE);
         } else {
-            FluidStack fluidStack = fluidHandler.drain(fluidHandler.getFluidInTank(0).getAmount(), IFluidHandler.FluidAction.EXECUTE);
+            FluidStack fluidStack = curHandler.drain(curHandler.getFluidInTank(0).getAmount(), IFluidHandler.FluidAction.EXECUTE);
             int remainderAmount = fluidHandlerItem.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
             FluidStack newFluidStack = fluidStack.copy();
             newFluidStack.setAmount(remainderAmount);
-            fluidHandler.setFluid(newFluidStack);
+            curHandler.setFluid(newFluidStack);
         }
     }
 
