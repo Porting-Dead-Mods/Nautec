@@ -33,6 +33,7 @@ public class AquarineAxeItem extends AxeItem implements IPowerItem {
                 .component(NTDataComponents.IS_INFUSED,false)
                 .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200))
                 .component(NTDataComponents.ABILITY_ENABLED,false)
+                .attributes(AxeItem.createAttributes(NTToolMaterials.AQUARINE, 3.0f, -3.0f))
         );
     }
 
