@@ -5,6 +5,7 @@ import com.portingdeadmods.nautec.content.items.*;
 import com.portingdeadmods.nautec.content.items.tiers.NTArmorMaterials;
 import com.portingdeadmods.nautec.content.items.tools.*;
 import com.portingdeadmods.nautec.data.NTDataComponents;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
@@ -52,6 +53,12 @@ public final class NTItems {
     public static final DeferredItem<Item> WHISK = registerItem("whisk",
             Item::new, new Item.Properties());
 
+
+    public static final DeferredItem<Item> CAST_IRON_INGOT = registerItem("cast_iron_ingot",
+            Item::new, new Item.Properties());
+
+    public static final DeferredItem<Item> CAST_IRON_ROD = registerItem("cast_iron_rod", Item::new, new Item.Properties());
+
     // MOB DROPS
     public static final DeferredItem<Item> DROWNED_LUNGS = registerItem("drowned_lungs",
             Item::new, new Item.Properties());
@@ -82,10 +89,10 @@ public final class NTItems {
     public static final DeferredItem<DivingSuitArmorItem> DIVING_LEGGINGS = registerItem("diving_leggings", () -> new DivingSuitArmorItem(NTArmorMaterials.DIVING_SUIT, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final DeferredItem<DivingSuitArmorItem> DIVING_BOOTS = registerItem("diving_boots", () -> new DivingSuitArmorItem(NTArmorMaterials.DIVING_SUIT, ArmorItem.Type.BOOTS, new Item.Properties()));
 
-    public static final DeferredItem<AquarineArmorItem> AQUARINE_HELMET = registerItem("aquarine_steel_helmet", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.HELMET,new Item.Properties()));
-    public static final DeferredItem<AquarineArmorItem> AQUARINE_CHESTPLATE = registerItem("aquarine_steel_chestplate", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.CHESTPLATE,new Item.Properties()));
-    public static final DeferredItem<AquarineArmorItem> AQUARINE_LEGGINGS = registerItem("aquarine_steel_leggings", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.LEGGINGS,new Item.Properties()));
-    public static final DeferredItem<AquarineArmorItem> AQUARINE_BOOTS = registerItem("aquarine_steel_boots", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.BOOTS,new Item.Properties()));
+    public static final DeferredItem<AquarineArmorItem> AQUARINE_HELMET = registerItem("aquarine_steel_helmet", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final DeferredItem<AquarineArmorItem> AQUARINE_CHESTPLATE = registerItem("aquarine_steel_chestplate", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final DeferredItem<AquarineArmorItem> AQUARINE_LEGGINGS = registerItem("aquarine_steel_leggings", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final DeferredItem<AquarineArmorItem> AQUARINE_BOOTS = registerItem("aquarine_steel_boots", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.BOOTS, new Item.Properties()));
 
 
     // TOOLS 'N WEAPONS
