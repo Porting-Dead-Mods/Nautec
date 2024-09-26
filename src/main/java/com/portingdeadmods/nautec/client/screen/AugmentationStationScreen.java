@@ -1,11 +1,9 @@
 package com.portingdeadmods.nautec.client.screen;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.AugmentationStationBlockEntity;
 import com.portingdeadmods.nautec.content.recipes.AugmentationRecipe;
 import com.portingdeadmods.nautec.network.StartAugmentationPayload;
-import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -18,14 +16,15 @@ import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Optional;
 
 public class AugmentationStationScreen extends Screen {
     public static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/augment_station.png");
-    public static final ResourceLocation SELECTED_SLOT = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/selected_slot.png");
+    public static final ResourceLocation SELECTED_SLOT_IN = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/selected_slot_in.png");
+    public static final ResourceLocation SELECTED_SLOT_OUT = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/selected_slot_out.png");
 
     private final int imageWidth;
     private final int imageHeight;
@@ -65,7 +64,9 @@ public class AugmentationStationScreen extends Screen {
 
         if (mouseX > augmentX && mouseX < augmentX + 16 && mouseY > augmentY && mouseY < augmentY + 16) {
             Item augmentItem = getAugmentItem();
-            guiGraphics.renderTooltip(this.font, Component.literal(augmentItem.getName(augmentItem.getDefaultInstance()).toString()), mouseX, mouseY);
+            if (augmentItem != Items.AIR) {
+                guiGraphics.renderTooltip(this.font, augmentItem.getName(augmentItem.getDefaultInstance()), mouseX, mouseY);
+            }
         }
     }
 
@@ -85,9 +86,13 @@ public class AugmentationStationScreen extends Screen {
         int augmentY = y + 48;
 
         Item augmentItem = getAugmentItem();
-        guiGraphics.renderFakeItem(augmentItem.getDefaultInstance(), augmentX, augmentY);
 
-        //guiGraphics.blit(SELECTED_SLOT, augmentX - 4, augmentY - 4, 0, 0, 24, 24, 24, 24);
+        if (augmentItem != Items.AIR) {
+            guiGraphics.renderFakeItem(augmentItem.getDefaultInstance(), augmentX, augmentY);
+            guiGraphics.blit(SELECTED_SLOT_IN, augmentX - 4, augmentY - 4, 0, 0, 24, 24, 24, 24);
+        } else {
+            guiGraphics.blit(SELECTED_SLOT_OUT, augmentX - 4, augmentY - 4, 0, 0, 24, 24, 24, 24);
+        }
 
         addRenderableWidget(Button.builder(Component.literal("Apply"), btn -> {
             blockEntity.startAugmentation(player, dataPanel.getSelectedSlot());
@@ -121,6 +126,7 @@ public class AugmentationStationScreen extends Screen {
         }
     }
 
+    // TODO: WE NEED TO CACHE THIS!!!
     private Item getAugmentItem() {
         Optional<AugmentationRecipe> recipe = blockEntity.getRecipe();
         return recipe.map(AugmentationRecipe::augmentItem).orElse(ItemStack.EMPTY.getItem());
