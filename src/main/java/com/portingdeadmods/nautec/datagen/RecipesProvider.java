@@ -81,6 +81,14 @@ public class RecipesProvider extends RecipeProvider {
                 .ingredients(NTItems.DOLPHIN_FIN.get(), IngredientWithCount.fromItemLike(NTItems.DOLPHIN_FIN.get()))
                 .save(pRecipeOutput);
 
+        AugmentationRecipeBuilder.newRecipe(NTAugments.DROWNED_LUNG.get())
+                .ingredients(NTItems.DROWNED_LUNGS.get(), IngredientWithCount.fromItemLike(NTItems.DROWNED_LUNGS.get()))
+                .save(pRecipeOutput);
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.GUARDIAN_EYE_AUGMENT.get())
+                .ingredients(NTItems.GUARDIAN_EYE.get(), IngredientWithCount.fromItemLike(NTItems.GUARDIAN_EYE.get()))
+                .save(pRecipeOutput);
+
         ItemStack divingChestplate = NTItems.DIVING_CHESTPLATE.get().getDefaultInstance();
         divingChestplate.set(NTDataComponents.OXYGEN,600);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,divingChestplate)
@@ -96,7 +104,7 @@ public class RecipesProvider extends RecipeProvider {
                 ,2)
                 .requires(Items.RAW_IRON)
                 .requires(Items.PRISMARINE_CRYSTALS)
-                .unlockedBy("has_item",has(Items.IRON_INGOT))
+                .unlockedBy("has_item",has(Items.PRISMARINE_CRYSTALS))
                 .save(pRecipeOutput);
     }
 }

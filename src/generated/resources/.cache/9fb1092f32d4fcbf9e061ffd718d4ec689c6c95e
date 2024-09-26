@@ -1,9 +1,11 @@
-// 1.21.1	2024-09-26T19:20:00.5281576	Recipes
-441325abfd5f4c2f8bbd18ebac3d9d3502a19078 data/nautec/advancement/recipes/misc/aquarine_steel_compound.json
+// 1.21.1	2024-09-26T20:03:32.201573904	Recipes
+8f2aba847de10d1a879ff6e4a156fe2390120df5 data/nautec/advancement/recipes/misc/aquarine_steel_compound.json
 55ee1a8c8240974dc253a1672f47579ef8a7aa2c data/nautec/advancement/recipes/misc/diving_chestplate.json
 c4fdc4aa2913699bef2463d5c929bc4724d180ae data/nautec/recipe/aquarine_steel_compound.json
 a60abd473ea054db8b2b484be6948f74ef64abd7 data/nautec/recipe/aquatic_catalyst_channeling/kelp.json
 c7348703fd53e4c7fbf6e63417dbe24f18433d88 data/nautec/recipe/augmentation/dolphin_fin.json
+30a66da29a8a710d91f148e413e2c98f8da3c8b0 data/nautec/recipe/augmentation/drowned_lungs.json
+3a73351dd5f6ba46e82a08ea3bebcaceb4b0c3dc data/nautec/recipe/augmentation/guardian_eye.json
 d9bd5ed8d761638f07ac753459c333be5e11032b data/nautec/recipe/diving_chestplate.json
 0e781b8c85808d8ee2691a5c39404da2b6a8f061 data/nautec/recipe/item_etching/ancient_valve_to_valve.json
 26b45ba49569a3744a9e7685f679a7da10b08d93 data/nautec/recipe/item_etching/rusty_gear_to_gear.json

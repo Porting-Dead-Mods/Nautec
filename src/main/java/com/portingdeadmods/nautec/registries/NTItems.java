@@ -55,6 +55,8 @@ public final class NTItems {
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> DOLPHIN_FIN = registerItem("dolphin_fin",
             Item::new, new Item.Properties());
+    public static final DeferredItem<Item> GUARDIAN_EYE = registerItem("guardian_eye",
+            Item::new, new Item.Properties());
 
     // Robot Arms
     public static final DeferredItem<RobotArmItem> CLAW_ROBOT_ARM = registerItem("claw_robot_arm",

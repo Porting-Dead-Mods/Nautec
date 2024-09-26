@@ -1,0 +1,10 @@
+{
+  "type": "nautec:augmentation",
+  "augmentItem": "nautec:drowned_lungs",
+  "ingredients": [
+    {
+      "item": "nautec:drowned_lungs"
+    }
+  ],
+  "resultAugment": "nautec:drowned_lung"
+}
