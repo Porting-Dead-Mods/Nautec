@@ -65,6 +65,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         aquarineSteelTool(NTItems.AQUARINE_SHOVEL.get());
         aquarineSteelTool(NTItems.AQUARINE_SWORD.get());
         basicItem(NTItems.PRISMATIC_BATTERY.get());
+        basicItem(NTItems.DEEPSLATE_ROD.get());
 
         basicItem(NTItems.AQUARINE_HELMET.get());
         basicItem(NTItems.AQUARINE_CHESTPLATE.get());

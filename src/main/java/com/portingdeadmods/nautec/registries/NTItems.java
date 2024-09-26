@@ -22,6 +22,8 @@ public final class NTItems {
     public static final List<Supplier<BlockItem>> BLOCK_ITEMS = new ArrayList<>();
 
     // MATERIALS
+    public static final DeferredItem<Item> DEEPSLATE_ROD = registerItem("deepslate_rod",
+            Item::new, new Item.Properties());
     public static final DeferredItem<Item> AQUARINE_STEEL_INGOT = registerItem("aquarine_steel_ingot",
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> ATLANTIC_GOLD_INGOT = registerItem("atlantic_gold_ingot",

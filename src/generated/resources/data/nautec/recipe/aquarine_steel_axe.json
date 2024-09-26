@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    "R": {
+      "item": "nautec:deepslate_rod"
+    }
+  },
+  "pattern": [
+    "AA ",
+    "AR ",
+    " R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:aquarine_steel_axe"
+  }
+}
