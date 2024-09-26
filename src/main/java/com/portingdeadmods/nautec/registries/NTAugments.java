@@ -42,4 +42,6 @@ public final class NTAugments {
             () -> AugmentType.of(WalkingSpeedAugment::new));
     public static final Supplier<AugmentType<ThrowSpreadingTrident>> SPREADING_TRIDENT_AUGMENT = AUGMENTS.register("spreading_trident",
             () -> AugmentType.of(ThrowSpreadingTrident::new));
+    public static final Supplier<AugmentType<EnderMagnetAugment>> ENDER_MAGNET_AUGMENT = AUGMENTS.register("ender_magnet",
+            () -> AugmentType.of(EnderMagnetAugment::new));
 }
