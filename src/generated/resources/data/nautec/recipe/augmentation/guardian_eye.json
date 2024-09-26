@@ -1,0 +1,10 @@
+{
+  "type": "nautec:augmentation",
+  "augmentItem": "nautec:guardian_eye",
+  "ingredients": [
+    {
+      "item": "nautec:guardian_eye"
+    }
+  ],
+  "resultAugment": "nautec:guardian_eye"
+}
