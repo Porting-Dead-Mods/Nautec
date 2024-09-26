@@ -1,10 +1,11 @@
-// 1.21.1	2024-09-23T23:09:50.963122434	Item Models: nautec
+// 1.21.1	2024-09-26T17:51:47.420788663	Item Models: nautec
 53692692f57914fc54eb6ebf416ce1cb7789e57b assets/nautec/models/item/air_bottle.json
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
 f031500271b315d13a5f3ca96fc3a73ea8d47054 assets/nautec/models/item/aquarine_steel_axe_enabled.json
 597ea4ecad0b0a10ad86d8dac724222f83aab903 assets/nautec/models/item/aquarine_steel_block.json
 6245b7ccf35e7c45a45655169c514954d555767d assets/nautec/models/item/aquarine_steel_boots.json
 9beb43ea47b23d5881797907b71dfaced9e9e5a6 assets/nautec/models/item/aquarine_steel_chestplate.json
+fcb3c464ded94e1afef83540804a3a9a51e35da3 assets/nautec/models/item/aquarine_steel_compound.json
 fb60a6f737e442e6a50600cab761c0d3bfd8c12b assets/nautec/models/item/aquarine_steel_helmet.json
 13842b6fba9a4cb2eaa3bc0d71ea0e7f89c47de6 assets/nautec/models/item/aquarine_steel_hoe.json
 3bf12608fd7916da3e40eaeb611fa507460addf4 assets/nautec/models/item/aquarine_steel_hoe_enabled.json
