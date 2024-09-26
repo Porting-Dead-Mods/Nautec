@@ -50,10 +50,6 @@ public final class NTItems {
     public static final DeferredItem<Item> WHISK = registerItem("whisk",
             Item::new, new Item.Properties());
 
-
-    public static final DeferredItem<BatteryItem> PRISMATIC_BATTERY = registerItem("prismatic_battery",
-            BatteryItem::new, new Item.Properties().stacksTo(1));
-
     // MOB DROPS
     public static final DeferredItem<Item> DROWNED_LUNGS = registerItem("drowned_lungs",
             Item::new, new Item.Properties());
@@ -63,16 +59,19 @@ public final class NTItems {
     // Robot Arms
     public static final DeferredItem<RobotArmItem> CLAW_ROBOT_ARM = registerItem("claw_robot_arm",
             RobotArmItem::new, new Item.Properties());
-    public static final DeferredItem<RobotArmItem> SYRINGE_ROBOT_ARM = registerItem("syringe_robot_arm",
-            RobotArmItem::new, new Item.Properties());
+//    public static final DeferredItem<RobotArmItem> SYRINGE_ROBOT_ARM = registerItem("syringe_robot_arm",
+//            RobotArmItem::new, new Item.Properties());
 
     // VIALS
     public static final DeferredItem<Item> GLASS_VIAL = registerItem("glass_vial", Item::new, new Item.Properties());
     public static final DeferredItem<Item> ELECTROLYTE_ALGAE_SERUM_VIAL = registerItem("eas_vial", Item::new, new Item.Properties());
 
     // ARMOR
+    // CURIO ITEMS
+    public static final DeferredItem<BatteryItem> PRISMATIC_BATTERY = registerItem("prismatic_battery",
+            BatteryItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredItem<PrismMonocleItem> PRISM_MONOCLE = registerItem("prism_monocle",
-            PrismMonocleItem::new, new Item.Properties());
+            PrismMonocleItem::new, new Item.Properties().stacksTo(1));
 
     public static final DeferredItem<DivingSuitArmorItem> DIVING_HELMET = registerItem("diving_helmet", () -> new DivingSuitArmorItem(NTArmorMaterials.DIVING_SUIT, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final DeferredItem<DivingSuitArmorItem> DIVING_CHESTPLATE = registerItem("diving_chestplate", () -> new DivingSuitArmorItem(NTArmorMaterials.DIVING_SUIT, ArmorItem.Type.CHESTPLATE, new Item.Properties().component(NTDataComponents.OXYGEN, 0)));

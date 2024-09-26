@@ -15,10 +15,7 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class PrismMonocleItem extends ArmorItem implements IPowerItem {
     public PrismMonocleItem(Properties properties) {
-        super(NTArmorMaterials.PRISMARINE, Type.HELMET, properties.component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(100))
-                .durability(0)
-                .stacksTo(1)
-        );
+        super(NTArmorMaterials.PRISMARINE, Type.HELMET, properties.component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(100)));
     }
 
     public static void registerCapabilities(final RegisterCapabilitiesEvent evt) {
