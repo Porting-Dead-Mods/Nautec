@@ -26,5 +26,16 @@ public class MathUtils {
     public static double map(double val, double inMin, double inMax, double desMin, double desMax) {
         return desMin + (desMax - desMin) * (val - inMin) / (inMax - inMin);
     }
+
+    public static Vec3 rotateYawDegrees(Vec3 direction, double angleDegrees) {
+        double radians = Math.toRadians(angleDegrees);
+        double cos = Math.cos(radians);
+        double sin = Math.sin(radians);
+
+        double newX = direction.x * cos - direction.z * sin;
+        double newZ = direction.x * sin + direction.z * cos;
+
+        return new Vec3(newX, direction.y, newZ);
+    }
 }
 // Wow this class is full of maths, I guess the person who did it, is just good at maths :shrug:
