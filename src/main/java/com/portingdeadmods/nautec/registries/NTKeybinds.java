@@ -27,6 +27,9 @@ public final class NTKeybinds {
     public static final Lazy<KeyMapping> THROW_POTION_KEYBIND = keyBind(
             "Throw Potion", GLFW.GLFW_KEY_G);
 
+    public static final Lazy<KeyMapping> THROW_SPREADING_KEYBIND = keyBind(
+            "Throw Spreading Trident", GLFW.GLFW_KEY_Y);
+
 
     public static Lazy<KeyMapping> keyBind(String name, int key) {
         return Lazy.of(() -> new KeyMapping(name, InputConstants.Type.KEYSYM, key, Nautec.MODNAME));
@@ -38,5 +41,6 @@ public final class NTKeybinds {
         event.register(THROW_TRIDENT_KEYBIND.get());
         event.register(LEAP_KEYBIND.get());
         event.register(THROW_POTION_KEYBIND.get());
+        event.register(THROW_SPREADING_KEYBIND.get());
     }
 }
