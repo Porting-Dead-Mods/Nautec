@@ -5,7 +5,6 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.content.augments.*;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.function.Supplier;
 
@@ -14,7 +13,7 @@ public final class NTAugments {
 
     public static final Supplier<AugmentType<ThrowRandomPotionAugments>> THROW_POTION_AUGMENT = AUGMENTS.register("throw_random_potion",
             () -> AugmentType.of(ThrowRandomPotionAugments::new));
-    public static final Supplier<AugmentType<DrownedLungAugment>> PREVENT_PLAYER_LOSE_AIR_AUGMENT = AUGMENTS.register("prevent_player_lose_air_supply",
+    public static final Supplier<AugmentType<DrownedLungAugment>> DROWNED_LUNG = AUGMENTS.register("drowned_lung",
             () -> AugmentType.of(DrownedLungAugment::new));
     public static final Supplier<AugmentType<DolphinFinAugment>> DOLPHIN_FIN = AUGMENTS.register("dolphin_fin",
             () -> AugmentType.of(DolphinFinAugment::new));

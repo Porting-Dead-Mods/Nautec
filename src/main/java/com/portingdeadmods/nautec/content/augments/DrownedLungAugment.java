@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class DrownedLungAugment extends Augment {
     public DrownedLungAugment(AugmentSlot augmentSlot) {
-        super(NTAugments.PREVENT_PLAYER_LOSE_AIR_AUGMENT.get(), augmentSlot);
+        super(NTAugments.DROWNED_LUNG.get(), augmentSlot);
     }
 
     @Override
