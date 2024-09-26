@@ -35,7 +35,9 @@ public class AquarineShovelItem extends ShovelItem implements IPowerItem {
                 .stacksTo(1)
                 .component(NTDataComponents.IS_INFUSED,false)
                 .component(NTDataComponents.ABILITY_ENABLED, false)
-                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200)));
+                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200))
+                .attributes(ShovelItem.createAttributes(NTToolMaterials.AQUARINE, 1.5f, -3.0f))
+        );
     }
 
     @Override

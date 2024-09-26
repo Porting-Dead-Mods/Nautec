@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.items.tools;
 
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
@@ -13,11 +14,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
@@ -59,22 +59,42 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
         return super.mineBlock(stack, level, state, pos, miningEntity);
     }
 
+    public static final AttributeModifier ENABLED_DAMAGE = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"damage"),0.7,AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+    public static final AttributeModifier DISABLED_DAMAGE = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"damage"),0,AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if(NTDataComponentsUtils.isAbilityEnabled(stack)){
+            IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
+            ItemAttributeModifiers attributes = stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
+            boolean hasEnergy = powerStorage.getPowerStored() > 0;
+            attributes = attributes.withModifierAdded(Attributes.ATTACK_DAMAGE, hasEnergy ? ENABLED_DAMAGE : DISABLED_DAMAGE, EquipmentSlotGroup.MAINHAND);
+            stack.set(DataComponents.ATTRIBUTE_MODIFIERS, attributes);
+        } else {
+            ItemAttributeModifiers attributes = stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
+            attributes = attributes.withModifierAdded(Attributes.ATTACK_DAMAGE, DISABLED_DAMAGE, EquipmentSlotGroup.MAINHAND);
+            stack.set(DataComponents.ATTRIBUTE_MODIFIERS, attributes);
+        }
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
+    }
+
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         IPowerStorage powerStorage = attacker.getItemInHand(InteractionHand.MAIN_HAND).getCapability(NTCapabilities.PowerStorage.ITEM);
         if(NTDataComponentsUtils.isAbilityEnabled(stack)){
-            powerStorage.tryDrainPower(3, false);
+            powerStorage.tryDrainPower(10, false);
+            if (!target.level().isClientSide) {
+                LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(target.level());
+                if (lightningBolt != null) {
+                    lightningBolt.moveTo(target.getX(), target.getY(), target.getZ());
+                    target.level().addFreshEntity(lightningBolt);
+                    target.level().playSound(null, target.blockPosition(), net.minecraft.sounds.SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.HOSTILE, 0.3F, 1.0F);
+                }
+            }
         }else{
             powerStorage.tryDrainPower(1, false);
         }
         return super.hurtEnemy(stack, target, attacker);
-    }
-
-    @Override
-    public ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
-        if(NTDataComponentsUtils.isAbilityEnabled(stack)){
-        }
-        return super.getDefaultAttributeModifiers(stack);
     }
 
     @Override
@@ -121,7 +141,7 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
-        tooltipComponents.add(Component.literal("Ability: Deal 70% more damage").withStyle(ChatFormatting.DARK_PURPLE));
+        tooltipComponents.add(Component.literal("Ability: Deal 70% more damage and spawn lightnings at targets").withStyle(ChatFormatting.DARK_PURPLE));
         if(!NTDataComponentsUtils.isInfused(stack)){
             tooltipComponents.add(Component.literal("Infuse in Algae Serum to unlock Abilities").withStyle(ChatFormatting.DARK_GREEN));
         }else{

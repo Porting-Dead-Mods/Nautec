@@ -94,7 +94,7 @@ public class RecipesProvider extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,NTItems.AQUARINE_STEEL_COMPOUND.get()
                 ,2)
-                .requires(Items.IRON_INGOT)
+                .requires(Items.RAW_IRON)
                 .requires(Items.PRISMARINE_CRYSTALS)
                 .unlockedBy("has_item",has(Items.IRON_INGOT))
                 .save(pRecipeOutput);
