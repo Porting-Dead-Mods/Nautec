@@ -100,6 +100,73 @@ public class RecipesProvider extends RecipeProvider {
                 .define('D',NTItems.DIVING_CHESTPLATE.get())
                 .save(pRecipeOutput);
 
+        ItemStack aquarine_pickaxe = NTItems.AQUARINE_PICKAXE.get().getDefaultInstance();
+        ItemStack aquarine_shovel = NTItems.AQUARINE_SHOVEL.get().getDefaultInstance();
+        ItemStack aquarine_axe = NTItems.AQUARINE_AXE.get().getDefaultInstance();
+        ItemStack aquarine_hoe = NTItems.AQUARINE_HOE.get().getDefaultInstance();
+        ItemStack aquarine_sword = NTItems.AQUARINE_SWORD.get().getDefaultInstance();
+        ItemStack aquarine_wrench = NTItems.AQUARINE_WRENCH.get().getDefaultInstance();
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, aquarine_pickaxe)
+                .pattern("AAA")
+                .pattern(" R ")
+                .pattern(" R ")
+                .unlockedBy("has_item",has(NTItems.AQUARINE_STEEL_INGOT.get()))
+                .define('A',NTItems.AQUARINE_STEEL_INGOT.get())
+                .define('R',NTItems.DEEPSLATE_ROD.get())
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, aquarine_shovel)
+                .pattern(" A ")
+                .pattern(" R ")
+                .pattern(" R ")
+                .unlockedBy("has_item",has(NTItems.AQUARINE_STEEL_INGOT.get()))
+                .define('A',NTItems.AQUARINE_STEEL_INGOT.get())
+                .define('R',NTItems.DEEPSLATE_ROD.get())
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, aquarine_axe)
+                .pattern("AA ")
+                .pattern("AR ")
+                .pattern(" R ")
+                .unlockedBy("has_item",has(NTItems.AQUARINE_STEEL_INGOT.get()))
+                .define('A',NTItems.AQUARINE_STEEL_INGOT.get())
+                .define('R',NTItems.DEEPSLATE_ROD.get())
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, aquarine_hoe)
+                .pattern("AA ")
+                .pattern(" R ")
+                .pattern(" R ")
+                .unlockedBy("has_item",has(NTItems.AQUARINE_STEEL_INGOT.get()))
+                .define('A',NTItems.AQUARINE_STEEL_INGOT.get())
+                .define('R',NTItems.DEEPSLATE_ROD.get())
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, aquarine_sword)
+                .pattern(" A ")
+                .pattern(" A ")
+                .pattern(" R ")
+                .unlockedBy("has_item",has(NTItems.AQUARINE_STEEL_INGOT.get()))
+                .define('A',NTItems.AQUARINE_STEEL_INGOT.get())
+                .define('R',NTItems.DEEPSLATE_ROD.get())
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, aquarine_wrench)
+                .pattern("A A")
+                .pattern(" A ")
+                .pattern(" A ")
+                .unlockedBy("has_item",has(NTItems.AQUARINE_STEEL_INGOT.get()))
+                .define('A',NTItems.AQUARINE_STEEL_INGOT.get())
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.DEEPSLATE_ROD.get(), 2)
+                .pattern("D")
+                .pattern("D")
+                .define('D', Items.DEEPSLATE.asItem())
+                .unlockedBy("has_item", has(Items.DEEPSLATE))
+                .save(pRecipeOutput);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,NTItems.AQUARINE_STEEL_COMPOUND.get()
                 ,2)
                 .requires(Items.RAW_IRON)
