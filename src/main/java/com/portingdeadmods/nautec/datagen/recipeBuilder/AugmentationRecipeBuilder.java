@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.datagen.recipeBuilder;
 
+import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.content.items.RobotArmItem;
 import com.portingdeadmods.nautec.content.recipes.AugmentationRecipe;
@@ -21,6 +22,7 @@ import java.util.stream.Stream;
 
 public class AugmentationRecipeBuilder implements NTRecipeBuilder {
     private Item augmentItem;
+    private String description;
     private List<IngredientWithCount> ingredients;
     private AugmentType<?> augmentType;
 
@@ -30,9 +32,14 @@ public class AugmentationRecipeBuilder implements NTRecipeBuilder {
         return builder;
     }
 
-    public AugmentationRecipeBuilder ingredients(Item augmentItem, IngredientWithCount... items) {
-        this.augmentItem = augmentItem;
+    public AugmentationRecipeBuilder ingredients(IngredientWithCount... items) {
         this.ingredients = List.of(items);
+        return this;
+    }
+
+    public AugmentationRecipeBuilder augmentItem(Item augmentItem, String description) {
+        this.augmentItem = augmentItem;
+        this.description = description;
         return this;
     }
 
@@ -63,6 +70,6 @@ public class AugmentationRecipeBuilder implements NTRecipeBuilder {
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        recipeOutput.accept(id, new AugmentationRecipe(augmentItem, ingredients, augmentType), null);
+        recipeOutput.accept(id, new AugmentationRecipe(augmentItem, description, ingredients, augmentType), null);
     }
 }

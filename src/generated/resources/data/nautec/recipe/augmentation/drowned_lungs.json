@@ -1,6 +1,7 @@
 {
   "type": "nautec:augmentation",
   "augmentItem": "nautec:drowned_lungs",
+  "desc": "Under water breathing",
   "ingredients": [
     {
       "item": "nautec:drowned_lungs"

@@ -190,7 +190,7 @@ public final class NTEvents {
                     if (optionalRecipe.isPresent()) {
                         transformItem(itemEntity, optionalRecipe.get(), level);
                     }
-                    activeTransformations.remove(itemEntity);
+                    activeTransformations.removeInt(itemEntity);
                 } else {
                     activeTransformations.put(itemEntity, etchingTime + 1);
                     // Optionally spawn particles while etching

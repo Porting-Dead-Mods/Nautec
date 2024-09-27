@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.recipes;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public record AugmentationRecipe(Item augmentItem, List<IngredientWithCount> ingredients, AugmentType<?> resultAugment) implements Recipe<AugmentationRecipeInput> {
+public record AugmentationRecipe(Item augmentItem, String desc, List<IngredientWithCount> ingredients, AugmentType<?> resultAugment) implements Recipe<AugmentationRecipeInput> {
     public static final String NAME = "augmentation";
 
     @Override
@@ -64,12 +65,15 @@ public record AugmentationRecipe(Item augmentItem, List<IngredientWithCount> ing
         public static final AugmentationRecipe.Serializer INSTANCE = new AugmentationRecipe.Serializer();
         private static final MapCodec<AugmentationRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec((builder) -> builder.group(
                 CodecUtils.ITEM_CODEC.fieldOf("augmentItem").forGetter(AugmentationRecipe::augmentItem),
+                Codec.STRING.fieldOf("desc").orElse("").forGetter(AugmentationRecipe::desc),
                 IngredientWithCount.CODEC.listOf().fieldOf("ingredients").forGetter(AugmentationRecipe::ingredients),
                 AugmentCodecs.AUGMENT_TYPE_CODEC.fieldOf("resultAugment").forGetter(AugmentationRecipe::resultAugment)
         ).apply(builder, AugmentationRecipe::new));
         private static final StreamCodec<RegistryFriendlyByteBuf, AugmentationRecipe> STREAM_CODEC = StreamCodec.composite(
                 CodecUtils.ITEM_STREAM_CODEC,
                 AugmentationRecipe::augmentItem,
+                ByteBufCodecs.STRING_UTF8,
+                AugmentationRecipe::desc,
                 IngredientWithCount.STREAM_CODEC.apply(ByteBufCodecs.list()),
                 AugmentationRecipe::ingredients,
                 AugmentCodecs.AUGMENT_TYPE_STREAM_CODEC,

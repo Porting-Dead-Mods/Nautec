@@ -1,6 +1,7 @@
 {
   "type": "nautec:augmentation",
   "augmentItem": "nautec:dolphin_fin",
+  "desc": "Swim Speed",
   "ingredients": [
     {
       "item": "nautec:dolphin_fin"
