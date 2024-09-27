@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-27T14:37:15.0287968	Item Models: nautec
+// 1.21.1	2024-09-27T15:33:06.7885061	Item Models: nautec
 53692692f57914fc54eb6ebf416ce1cb7789e57b assets/nautec/models/item/air_bottle.json
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
 f031500271b315d13a5f3ca96fc3a73ea8d47054 assets/nautec/models/item/aquarine_steel_axe_enabled.json
@@ -26,6 +26,7 @@ f616877025b33a5d417689bd59cba3385b11e5c9 assets/nautec/models/item/augmentation_
 b1e3c9080ae5a0f78b06fa90f3c5da5b3805f842 assets/nautec/models/item/broken_whisk.json
 cf1524c962ddbbf1cb5e8782d764e71888a03eb1 assets/nautec/models/item/brown_polymer.json
 3765b1b45adbf0ee91fcc48de00bb0df37617481 assets/nautec/models/item/cast_iron_ingot.json
+14accf57cadcd851d3cd53c5717728f60d7de51f assets/nautec/models/item/cast_iron_nugget.json
 5de4846acf03f0957b6d3755f41a839830053cc1 assets/nautec/models/item/cast_iron_rod.json
 61c8f04594dd011c2be9898440c407224720b895 assets/nautec/models/item/charger.json
 204c2b87988bae0f1d52f4bdbf783705a53f0187 assets/nautec/models/item/chiseled_dark_prismarine.json
