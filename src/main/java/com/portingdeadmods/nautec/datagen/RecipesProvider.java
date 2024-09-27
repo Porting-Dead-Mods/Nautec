@@ -182,7 +182,7 @@ public class RecipesProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.CAST_IRON_ROD.get(), 2)
                 .pattern("C")
                 .pattern("C")
-                .define('C', NTItems.CAST_IRON_ROD.asItem())
+                .define('C', NTItems.CAST_IRON_INGOT.asItem())
                 .unlockedBy("has_item", has(Items.DEEPSLATE))
                 .save(pRecipeOutput);
 
