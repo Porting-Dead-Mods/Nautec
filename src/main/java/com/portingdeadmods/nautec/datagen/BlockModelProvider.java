@@ -45,6 +45,7 @@ public class BlockModelProvider extends BlockStateProvider {
 
         // Stuff
         simpleBlock(NTBlocks.MIXER.get(), models().getExistingFile(existingModelFile(NTBlocks.MIXER.get())));
+        simpleBlock(NTBlocks.CHARGER.get(), models().getExistingFile(existingModelFile(NTBlocks.CHARGER.get())));
         crateBlock(NTBlocks.CRATE.get());
         rustyCrateBlock(NTBlocks.RUSTY_CRATE.get());
 
@@ -209,7 +210,7 @@ public class BlockModelProvider extends BlockStateProvider {
                 .partialState().with(BlockStateProperties.FACING, Direction.UP)
                 .modelForState().modelFile(model).addModel()
                 .partialState().with(BlockStateProperties.FACING, Direction.DOWN)
-                .modelForState().modelFile(model).addModel()
+                .modelForState().modelFile(model).rotationX(180).addModel()
                 .partialState().with(BlockStateProperties.FACING, Direction.NORTH)
                 .modelForState().modelFile(model).rotationX(90).addModel()
                 .partialState().with(BlockStateProperties.FACING, Direction.SOUTH)

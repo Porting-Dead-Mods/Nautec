@@ -1,7 +1,8 @@
 {
   "variants": {
     "facing=down": {
-      "model": "nautec:block/long_distance_laser"
+      "model": "nautec:block/long_distance_laser",
+      "x": 180
     },
     "facing=east": {
       "model": "nautec:block/long_distance_laser",

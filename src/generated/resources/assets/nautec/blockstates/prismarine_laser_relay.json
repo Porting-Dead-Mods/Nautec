@@ -1,7 +1,8 @@
 {
   "variants": {
     "facing=down": {
-      "model": "nautec:block/prismarine_laser_relay"
+      "model": "nautec:block/prismarine_laser_relay",
+      "x": 180
     },
     "facing=east": {
       "model": "nautec:block/prismarine_laser_relay",
