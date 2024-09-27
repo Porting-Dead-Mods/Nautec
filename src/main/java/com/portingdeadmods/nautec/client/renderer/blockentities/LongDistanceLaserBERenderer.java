@@ -25,7 +25,7 @@ public class LongDistanceLaserBERenderer implements BlockEntityRenderer<LongDist
             int laserDistance = laserDistances.getOrDefault(direction, 0);
             BlockPos targetPos = originPos.relative(direction, laserDistance - 1);
             if (laserDistance != 0 && blockEntity.shouldRender(direction)) {
-                LaserRendererHelper.renderOuterBeam(blockEntity, originPos, targetPos, direction, poseStack, bufferSource, partialTick);
+                LaserRendererHelper.renderOuterBeam(blockEntity, originPos, targetPos, 0, direction, poseStack, bufferSource, partialTick);
 
                 poseStack.pushPose();
                 {

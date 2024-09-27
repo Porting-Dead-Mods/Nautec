@@ -17,6 +17,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -194,10 +195,11 @@ public class RecipesProvider extends RecipeProvider {
                 .save(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, diving_chestplate)
-                .pattern("B B")
-                .pattern("BBB")
+                .pattern("C C")
+                .pattern("BCB")
                 .pattern("BBB")
                 .define('B', brown_polymer)
+                .define('C', Tags.Items.INGOTS_COPPER)
                 .unlockedBy("has_item", has(NTItems.BROWN_POLYMER))
                 .save(pRecipeOutput, "diving_chestplate");
 
@@ -217,33 +219,39 @@ public class RecipesProvider extends RecipeProvider {
                 .save(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, aquarine_helmet)
-                .pattern("CCC")
-                .pattern("C C")
-                .define('C', NTItems.AQUARINE_STEEL_INGOT.get())
-                .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT.get()))
+                .pattern("ICI")
+                .pattern("I I")
+                .define('I', NTItems.AQUARINE_STEEL_INGOT.get())
+                .define('C', NTItems.PRISMARINE_CRYSTAL_SHARD.get())
+                .unlockedBy("has_item", has(NTItems.PRISMARINE_CRYSTAL_SHARD.get()))
                 .save(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, aquarine_chestplate)
-                .pattern("B B")
-                .pattern("BBB")
-                .pattern("BBB")
-                .define('B', NTItems.AQUARINE_STEEL_INGOT.get())
-                .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT.get()))
+                .pattern("I I")
+                .pattern("ICI")
+                .pattern("IVI")
+                .define('I', NTItems.AQUARINE_STEEL_INGOT.get())
+                .define('C', NTItems.PRISMARINE_CRYSTAL_SHARD.get())
+                .define('V', NTItems.VALVE.get())
+                .unlockedBy("has_item", has(NTItems.PRISMARINE_CRYSTAL_SHARD.get()))
                 .save(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, aquarine_leggings)
-                .pattern("BBB")
-                .pattern("B B")
-                .pattern("B B")
-                .define('B', NTItems.AQUARINE_STEEL_INGOT.get())
-                .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT.get()))
+                .pattern("IVI")
+                .pattern("C C")
+                .pattern("I I")
+                .define('I', NTItems.AQUARINE_STEEL_INGOT.get())
+                .define('C', NTItems.PRISMARINE_CRYSTAL_SHARD.get())
+                .define('V', NTItems.VALVE.get())
+                .unlockedBy("has_item", has(NTItems.PRISMARINE_CRYSTAL_SHARD.get()))
                 .save(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, aquarine_boots)
-                .pattern("B B")
-                .pattern("B B")
-                .define('B', NTItems.AQUARINE_STEEL_INGOT.get())
-                .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT.get()))
+                .pattern("C C")
+                .pattern("I I")
+                .define('I', NTItems.AQUARINE_STEEL_INGOT.get())
+                .define('C', NTItems.PRISMARINE_CRYSTAL_SHARD.get())
+                .unlockedBy("has_item", has(NTItems.PRISMARINE_CRYSTAL_SHARD.get()))
                 .save(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.CHISELED_DARK_PRISMARINE.asItem(), 4)
@@ -301,7 +309,7 @@ public class RecipesProvider extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.WHISK.get(), 1)
                 .requires(NTItems.BROKEN_WHISK.get())
-                .requires(NTItems.CAST_IRON_NUGGET.get())
+                .requires(NTItems.CAST_IRON_NUGGET.get(), 4)
                 .unlockedBy("has_item", has(NTItems.BROKEN_WHISK.get()))
                 .save(pRecipeOutput);
 
@@ -315,7 +323,6 @@ public class RecipesProvider extends RecipeProvider {
                 .requires(Items.BROWN_DYE)
                 .unlockedBy("has_item", has(Items.DRIED_KELP))
                 .save(pRecipeOutput);
-
 
     }
 

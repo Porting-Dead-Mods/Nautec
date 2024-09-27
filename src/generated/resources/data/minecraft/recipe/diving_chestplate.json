@@ -4,11 +4,14 @@
   "key": {
     "B": {
       "item": "nautec:brown_polymer"
+    },
+    "C": {
+      "tag": "c:ingots/copper"
     }
   },
   "pattern": [
-    "B B",
-    "BBB",
+    "C C",
+    "BCB",
     "BBB"
   ],
   "result": {
