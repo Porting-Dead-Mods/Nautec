@@ -37,8 +37,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(NTItems.CLAW_ROBOT_ARM.get());
 //        basicItem(NTItems.SYRINGE_ROBOT_ARM.get());
 
-        basicItem(NTItems.CAST_IRON_INGOT.get());
-        basicItem(NTItems.CAST_IRON_ROD.get());
+        basicItem(NTItems.CAST_.get());
 
         basicItem(NTItems.RUSTY_GEAR.get());
         basicItem(NTItems.GEAR.get());
@@ -68,6 +67,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         aquarineSteelTool(NTItems.AQUARINE_SHOVEL.get());
         aquarineSteelTool(NTItems.AQUARINE_SWORD.get());
         basicItem(NTItems.PRISMATIC_BATTERY.get());
+        basicItem(NTItems.DEEPSLATE_ROD.get());
 
         basicItem(NTItems.AQUARINE_HELMET.get());
         basicItem(NTItems.AQUARINE_CHESTPLATE.get());

@@ -2,13 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-      "item": "nautec:cast_iron_ingot"
+    "D": {
+      "item": "minecraft:prismarine"
     }
   },
   "pattern": [
+    "DD",
+    "DD"
   ],
   "result": {
-    "count": 2,
-    "id": "nautec:cast_iron_rod"
+    "count": 4,
+    "id": "nautec:polished_prismarine"
   }
 }
