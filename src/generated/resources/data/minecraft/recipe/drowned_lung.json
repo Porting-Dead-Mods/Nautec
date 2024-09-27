@@ -4,8 +4,18 @@
   "desc": "Unlimited underwater breathing",
   "ingredients": [
     {
+      "item": "nautec:guardian_eye"
+    },
+    {
       "count": 2,
       "item": "minecraft:seagrass"
+    },
+    {
+      "count": 2,
+      "item": "minecraft:prismarine_shard"
+    },
+    {
+      "item": "minecraft:prismarine_crystals"
     }
   ],
   "resultAugment": "nautec:drowned_lung"

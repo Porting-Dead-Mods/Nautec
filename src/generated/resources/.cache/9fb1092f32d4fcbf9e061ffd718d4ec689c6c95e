@@ -1,8 +1,11 @@
-// 1.21.1	2024-09-27T16:10:02.441077773	Recipes
+// 1.21.1	2024-09-27T18:01:53.126268623	Recipes
 c01db9d69b288d37c769cf605b945ebf60a08e21 data/minecraft/advancement/recipes/misc/diving_chestplate.json
 36b0d6b627495be6eaf8d6e567f9c95bdb744f14 data/minecraft/advancement/recipes/misc/diving_chestplate_oxygen.json
 83753bf5ab777551fde11d26262c5f2b947f4a64 data/minecraft/recipe/diving_chestplate.json
 d9bd5ed8d761638f07ac753459c333be5e11032b data/minecraft/recipe/diving_chestplate_oxygen.json
+c68d7b579439b675e5e6de99bea55fcdbb11d03a data/minecraft/recipe/dolphin_fin.json
+8f7ecc2b5e1a7ef82be4705e3739c3f27e6a19ef data/minecraft/recipe/drowned_lung.json
+1d38c3a62fce2dee3ef9386c8eb307d084093c2d data/minecraft/recipe/guardian_eye_augment.json
 95a4e3198eb7336208d8b7154d8cc815b49ab307 data/nautec/advancement/recipes/misc/aquarine_steel_axe.json
 258ad51beb8603bf4731f299aba3d55537bad429 data/nautec/advancement/recipes/misc/aquarine_steel_boots.json
 e20dff21299a723c25fe2e3350808d40529d7f21 data/nautec/advancement/recipes/misc/aquarine_steel_chestplate.json
@@ -39,9 +42,6 @@ d049fd8d89899cc0acf35826d38877b6f5f96b52 data/nautec/recipe/aquarine_steel_hoe.j
 926024e7a8d5a04b41c23abb433648dc81ccf699 data/nautec/recipe/aquarine_steel_sword.json
 78c4da26cb8c9f272043276502bbd017b1c163ea data/nautec/recipe/aquarine_steel_wrench.json
 a60abd473ea054db8b2b484be6948f74ef64abd7 data/nautec/recipe/aquatic_catalyst_channeling/kelp.json
-84fc882174ab56073c10a87a5e12657a4fb46433 data/nautec/recipe/augmentation/dolphin_fin.json
-a54ade7e84062b0044ec20b914bf4a2a1cdfeeb7 data/nautec/recipe/augmentation/drowned_lungs.json
-2d466b4f2cbb2b45902eb3f205c591f9fef7e15d data/nautec/recipe/augmentation/guardian_eye.json
 b2cb1d73b9e1e2104af451250ff4464197c45531 data/nautec/recipe/brown_polymer.json
 5d8fdeabdc238a5b557a2a159a9ccb30e723703b data/nautec/recipe/cast_iron_ingot.json
 0e7ac319099e484ba772e18754213fe7009a42cd data/nautec/recipe/cast_iron_nugget.json
