@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -91,6 +92,7 @@ public class RecipesProvider extends RecipeProvider {
 
         ItemStack divingChestplate = NTItems.DIVING_CHESTPLATE.get().getDefaultInstance();
         divingChestplate.set(NTDataComponents.OXYGEN,600);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,divingChestplate)
                 .pattern("GGG")
                 .pattern("GDG")
@@ -98,7 +100,7 @@ public class RecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item",has(NTItems.DIVING_CHESTPLATE.get()))
                 .define('G',NTItems.AIR_BOTTLE.get())
                 .define('D',NTItems.DIVING_CHESTPLATE.get())
-                .save(pRecipeOutput);
+                .save(pRecipeOutput, "diving_chestplate_oxygen");
 
         ItemStack aquarine_pickaxe = NTItems.AQUARINE_PICKAXE.get().getDefaultInstance();
         ItemStack aquarine_shovel = NTItems.AQUARINE_SHOVEL.get().getDefaultInstance();
@@ -106,6 +108,12 @@ public class RecipesProvider extends RecipeProvider {
         ItemStack aquarine_hoe = NTItems.AQUARINE_HOE.get().getDefaultInstance();
         ItemStack aquarine_sword = NTItems.AQUARINE_SWORD.get().getDefaultInstance();
         ItemStack aquarine_wrench = NTItems.AQUARINE_WRENCH.get().getDefaultInstance();
+
+        ItemLike brown_polymer = NTItems.BROWN_POLYMER.get();
+        ItemStack diving_helmet = NTItems.DIVING_HELMET.get().getDefaultInstance();
+        ItemStack diving_chestplate = NTItems.DIVING_CHESTPLATE.get().getDefaultInstance();
+        ItemStack diving_leggings = NTItems.DIVING_LEGGINGS.get().getDefaultInstance();
+        ItemStack diving_boots = NTItems.DIVING_BOOTS.get().getDefaultInstance();
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, aquarine_pickaxe)
                 .pattern("AAA")
@@ -167,11 +175,50 @@ public class RecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(Items.DEEPSLATE))
                 .save(pRecipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, diving_helmet)
+                .pattern("CCC")
+                .pattern("CGC")
+                .define('C', Items.COPPER_INGOT.asItem())
+                .define('G', Items.GLASS_PANE.asItem())
+                .unlockedBy("has_item", has(Items.COPPER_INGOT))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, diving_chestplate)
+                .pattern("B B")
+                .pattern("BBB")
+                .pattern("BBB")
+                .define('B', brown_polymer)
+                .unlockedBy("has_item", has(NTItems.BROWN_POLYMER))
+                .save(pRecipeOutput, "diving_chestplate");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, diving_leggings)
+                .pattern("BBB")
+                .pattern("B B")
+                .pattern("B B")
+                .define('B', brown_polymer)
+                .unlockedBy("has_item", has(NTItems.BROWN_POLYMER))
+                .save(pRecipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, diving_boots)
+                .pattern("B B")
+                .pattern("B B")
+                .define('B', brown_polymer)
+                .unlockedBy("has_item", has(NTItems.BROWN_POLYMER))
+                .save(pRecipeOutput);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,NTItems.AQUARINE_STEEL_COMPOUND.get()
                 ,2)
                 .requires(Items.RAW_IRON)
                 .requires(Items.PRISMARINE_CRYSTALS)
                 .unlockedBy("has_item",has(Items.PRISMARINE_CRYSTALS))
                 .save(pRecipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, brown_polymer
+                        ,1)
+                .requires(Items.DRIED_KELP)
+                .requires(Items.BROWN_DYE)
+                .unlockedBy("has_item",has(Items.DRIED_KELP))
+                .save(pRecipeOutput);
+
+
     }
 }
