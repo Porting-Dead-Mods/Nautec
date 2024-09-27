@@ -2,13 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-      "item": "nautec:cast_iron_ingot"
+    "B": {
+      "item": "nautec:brown_polymer"
     }
   },
   "pattern": [
+    "B B",
+    "B B"
   ],
   "result": {
-    "count": 2,
-    "id": "nautec:cast_iron_rod"
+    "count": 1,
+    "id": "nautec:diving_boots"
   }
 }

@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "nautec:diving_chestplate"
+            "items": "minecraft:dark_prismarine"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "nautec:diving_chestplate"
+        "recipe": "nautec:chiseled_dark_prismarine"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "nautec:diving_chestplate"
+      "nautec:chiseled_dark_prismarine"
     ]
   }
 }

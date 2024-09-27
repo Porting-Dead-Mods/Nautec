@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-26T21:40:00.1057248	Item Models: nautec
+// 1.21.1	2024-09-27T15:33:06.7885061	Item Models: nautec
 53692692f57914fc54eb6ebf416ce1cb7789e57b assets/nautec/models/item/air_bottle.json
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
 f031500271b315d13a5f3ca96fc3a73ea8d47054 assets/nautec/models/item/aquarine_steel_axe_enabled.json
@@ -24,6 +24,11 @@ a95dff0d56139e74443ee5069394ccbe31bc875a assets/nautec/models/item/atlantic_gold
 6338d151fe16332a6bd885776f58d9c9a4ffad62 assets/nautec/models/item/augmentation_station.json
 f616877025b33a5d417689bd59cba3385b11e5c9 assets/nautec/models/item/augmentation_station_extension.json
 b1e3c9080ae5a0f78b06fa90f3c5da5b3805f842 assets/nautec/models/item/broken_whisk.json
+cf1524c962ddbbf1cb5e8782d764e71888a03eb1 assets/nautec/models/item/brown_polymer.json
+3765b1b45adbf0ee91fcc48de00bb0df37617481 assets/nautec/models/item/cast_iron_ingot.json
+14accf57cadcd851d3cd53c5717728f60d7de51f assets/nautec/models/item/cast_iron_nugget.json
+5de4846acf03f0957b6d3755f41a839830053cc1 assets/nautec/models/item/cast_iron_rod.json
+61c8f04594dd011c2be9898440c407224720b895 assets/nautec/models/item/charger.json
 204c2b87988bae0f1d52f4bdbf783705a53f0187 assets/nautec/models/item/chiseled_dark_prismarine.json
 9c2eb8e87b6da76b41d01bbbe9d6dc72fa5a7479 assets/nautec/models/item/claw_robot_arm.json
 480b14b512773eff106e41db280b20b18ff623f8 assets/nautec/models/item/crate.json
@@ -44,6 +49,7 @@ c085f601646336ad76e9a613649bcffc3a304c9a assets/nautec/models/item/dolphin_fin.j
 d26c5a9588cd86145f6c2e03e5fd5eabc4ed0f07 assets/nautec/models/item/etching_acid_bucket.json
 490588573d27c343b055c02b137c221a71866aa8 assets/nautec/models/item/gear.json
 2b617afc38ea0b797aeba3ca00dfb25f33be4bd3 assets/nautec/models/item/glass_vial.json
+1f8f85fa3cfb3f9fada3af0abc3f67b91ee70b81 assets/nautec/models/item/guardian_eye.json
 644f1395dba609cfe064a66a028001e76dd20ab7 assets/nautec/models/item/laser_junction.json
 e2a54f360d7c345a624bfd88678359ffce2af94d assets/nautec/models/item/long_distance_laser.json
 2a5b3ee493a3b20a37c3f391ebd960de088f2b7c assets/nautec/models/item/mixer.json
