@@ -1,10 +1,10 @@
 {
   "type": "nautec:augmentation",
   "augmentItem": "nautec:dolphin_fin",
-  "desc": "Swim Speed",
+  "desc": "Greatly improved swimming speed",
   "ingredients": [
     {
-      "item": "nautec:dolphin_fin"
+      "item": "minecraft:prismarine_shard"
     }
   ],
   "resultAugment": "nautec:dolphin_fin"

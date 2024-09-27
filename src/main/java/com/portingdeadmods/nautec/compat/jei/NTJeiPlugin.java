@@ -1,18 +1,14 @@
 package com.portingdeadmods.nautec.compat.jei;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.compat.jei.categories.AquaticCatalystChannelingRecipeCategory;
-import com.portingdeadmods.nautec.compat.jei.categories.ItemEtchingRecipeCategory;
-import com.portingdeadmods.nautec.compat.jei.categories.ItemTransformationRecipeCategory;
-import com.portingdeadmods.nautec.compat.jei.categories.MixingRecipeCategory;
-import com.portingdeadmods.nautec.content.recipes.AquaticCatalystChannelingRecipe;
-import com.portingdeadmods.nautec.content.recipes.ItemEtchingRecipe;
-import com.portingdeadmods.nautec.content.recipes.ItemTransformationRecipe;
-import com.portingdeadmods.nautec.content.recipes.MixingRecipe;
+import com.portingdeadmods.nautec.compat.jei.categories.*;
+import com.portingdeadmods.nautec.content.recipes.*;
+import com.portingdeadmods.nautec.datagen.recipeBuilder.AugmentationRecipeBuilder;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -24,6 +20,8 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import static com.portingdeadmods.nautec.compat.jei.categories.AugmentationRecipeCategory.UID;
 
 @JeiPlugin
 public class NTJeiPlugin implements IModPlugin {
@@ -46,6 +44,9 @@ public class NTJeiPlugin implements IModPlugin {
 
         registration.addRecipeCategories(new MixingRecipeCategory(
                 registration.getJeiHelpers().getGuiHelper()));
+
+        registration.addRecipeCategories(new AugmentationRecipeCategory(
+                registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -64,6 +65,10 @@ public class NTJeiPlugin implements IModPlugin {
         List<MixingRecipe> mixingRecipes = recipeManager.getAllRecipesFor(MixingRecipe.Type.INSTANCE)
                 .stream().map(RecipeHolder::value).toList();
 
+        List<AugmentationRecipe> augmentationRecipes = recipeManager.getAllRecipesFor(AugmentationRecipe.Type.INSTANCE)
+                .stream().map(RecipeHolder::value).toList();
+
+        registration.addRecipes(AugmentationRecipeCategory.RECIPE_TYPE, augmentationRecipes);
         registration.addRecipes(ItemTransformationRecipeCategory.RECIPE_TYPE, transformationRecipes);
         registration.addRecipes(AquaticCatalystChannelingRecipeCategory.RECIPE_TYPE, channelingRecipes);
         registration.addRecipes(ItemEtchingRecipeCategory.RECIPE_TYPE, etchingRecipes);
@@ -78,5 +83,7 @@ public class NTJeiPlugin implements IModPlugin {
                 ItemEtchingRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(NTBlocks.MIXER.get()),
                 MixingRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(NTBlocks.AUGMENTATION_STATION.get()),
+                AugmentationRecipeCategory.RECIPE_TYPE);
     }
 }

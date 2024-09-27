@@ -72,19 +72,28 @@ public class RecipesProvider extends RecipeProvider {
                 .save(pRecipeOutput);
 
         AugmentationRecipeBuilder.newRecipe(NTAugments.DOLPHIN_FIN.get())
-                .augmentItem(NTItems.DOLPHIN_FIN.get(), "Swim Speed")
+                .augmentItem(NTItems.DOLPHIN_FIN.get(), "Greatly improved swimming speed")
                 .ingredients(IngredientWithCount.fromItemLike(NTItems.DOLPHIN_FIN.get()))
-                .save(pRecipeOutput);
+                .ingredients(IngredientWithCount.fromItemLike(Items.SEAGRASS, 2))
+                .ingredients(IngredientWithCount.fromItemLike(Items.PRISMARINE_CRYSTALS, 1))
+                .ingredients(IngredientWithCount.fromItemLike(Items.PRISMARINE_SHARD, 1))
+                .save(pRecipeOutput, "dolphin_fin");
 
         AugmentationRecipeBuilder.newRecipe(NTAugments.DROWNED_LUNG.get())
-                .augmentItem(NTItems.DROWNED_LUNGS.get(), "Under water breathing")
+                .augmentItem(NTItems.DROWNED_LUNGS.get(), "Unlimited underwater breathing")
                 .ingredients(IngredientWithCount.fromItemLike(NTItems.DROWNED_LUNGS.get()))
-                .save(pRecipeOutput);
+                .ingredients(IngredientWithCount.fromItemLike(Items.PRISMARINE_SHARD, 2))
+                .ingredients(IngredientWithCount.fromItemLike(Items.PRISMARINE_CRYSTALS, 1))
+                .ingredients(IngredientWithCount.fromItemLike(Items.SEAGRASS, 2))
+                .save(pRecipeOutput, "drowned_lung");
 
         AugmentationRecipeBuilder.newRecipe(NTAugments.GUARDIAN_EYE_AUGMENT.get())
-                .augmentItem(NTItems.GUARDIAN_EYE.get(), "Shoot lasers")
+                .augmentItem(NTItems.GUARDIAN_EYE.get(), "Shoots lasers at enemies you are looking at")
                 .ingredients(IngredientWithCount.fromItemLike(NTItems.GUARDIAN_EYE.get()))
-                .save(pRecipeOutput);
+                .ingredients(IngredientWithCount.fromItemLike(Items.PRISMARINE_SHARD, 2))
+                .ingredients(IngredientWithCount.fromItemLike(Items.PRISMARINE_CRYSTALS, 1))
+                .ingredients(IngredientWithCount.fromItemLike(Items.SEAGRASS, 2))
+                .save(pRecipeOutput, "guardian_eye_augment");
 
         ItemStack divingChestplate = NTItems.DIVING_CHESTPLATE.get().getDefaultInstance();
         divingChestplate.set(NTDataComponents.OXYGEN, 600);

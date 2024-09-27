@@ -1,10 +1,11 @@
 {
   "type": "nautec:augmentation",
   "augmentItem": "nautec:drowned_lungs",
-  "desc": "Under water breathing",
+  "desc": "Unlimited underwater breathing",
   "ingredients": [
     {
-      "item": "nautec:drowned_lungs"
+      "count": 2,
+      "item": "minecraft:seagrass"
     }
   ],
   "resultAugment": "nautec:drowned_lung"
