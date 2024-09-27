@@ -26,9 +26,11 @@ public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements Blo
         Object2IntMap<Direction> laserDistances = blockEntity.getLaserDistances();
         for (Direction direction : blockEntity.getLaserOutputs()) {
             int laserDistance = laserDistances.getOrDefault(direction, 0);
+            Nautec.LOGGER.debug("Distance: {}", laserDistance);
 
             BlockPos originPos = blockEntity.getBlockPos();
-            BlockPos targetPos = originPos.relative(direction, laserDistance - 1);
+            BlockPos targetPos = originPos.relative(direction, laserDistance > 1 ? laserDistance + 2 : laserDistance);
+            Nautec.LOGGER.debug("origin: {}, target: {}", originPos, targetPos);
             BlockState state = blockEntity.getLevel().getBlockState(targetPos.relative(direction));
             if (laserDistance > 0 && blockEntity.shouldRender(direction)) {
                 VoxelShape shape = state.getShape(blockEntity.getLevel(), targetPos.relative(direction), CollisionContext.empty());
@@ -64,6 +66,7 @@ public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements Blo
 
                     if (direction == Direction.UP) {
                         offset = 1;
+                        offset2 = 1;
                     }
 
                     LaserRendererHelper.renderInnerBeam(poseStack, bufferSource, partialTick, blockEntity.getLevel().getGameTime(),

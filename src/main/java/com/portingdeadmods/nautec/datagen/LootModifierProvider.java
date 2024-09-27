@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.SeededContainerLoot;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
@@ -27,12 +28,12 @@ public class LootModifierProvider extends GlobalLootModifierProvider {
     @Override
     protected void start() {
         ItemStack crate = NTBlocks.CRATE.toStack();
-        crate.set(DataComponents.CONTAINER_LOOT,new SeededContainerLoot(NTLootTables.CRATE,0));
+        crate.set(DataComponents.CONTAINER_LOOT, new SeededContainerLoot(NTLootTables.CRATE, 0));
         add("elder_guardian_modifier",
                 new AddItemModifier(new LootItemCondition[]{
                         LootTableIdCondition.builder(ResourceLocation.parse("entities/elder_guardian")).build(),
                         LootItemRandomChanceCondition.randomChance(1.0f).build()}
-                        ,crate));
+                        , crate));
         add("guardian_modifier",
                 new AddTableLootModifier(new LootItemCondition[]{
                         LootTableIdCondition.builder(ResourceLocation.parse("entities/guardian")).build(),
@@ -41,18 +42,23 @@ public class LootModifierProvider extends GlobalLootModifierProvider {
         add("shipwreck_modifier",
                 new AddItemModifier(new LootItemCondition[]{
                         LootTableIdCondition.builder(ResourceLocation.parse("chests/shipwreck_treasure")).build(),
-                        LootItemRandomChanceCondition.randomChance(0.33f).build()}
-                        ,crate));
+                        LootItemRandomChanceCondition.randomChance(0.66f).build()}
+                        , crate));
         add("ocean_ruins_modifier",
                 new AddItemModifier(new LootItemCondition[]{
                         LootTableIdCondition.builder(ResourceLocation.parse("chests/underwater_ruin_big")).or(LootTableIdCondition.builder(ResourceLocation.parse("chests/underwater_ruin_small"))).build(),
-                        LootItemRandomChanceCondition.randomChance(0.33f).build()}
-                        ,crate));
+                        LootItemRandomChanceCondition.randomChance(0.66f).build()}
+                        , crate));
         add("suspicious_ruins_sand_modifier",
                 new AddItemModifier(new LootItemCondition[]{
                         LootTableIdCondition.builder(ResourceLocation.parse("archaeology/ocean_ruin_warm")).build(),
                         LootItemRandomChanceCondition.randomChance(0.05f).build()}
-                        ,crate));
+                        , crate));
+        add("drowned_modifier",
+                new AddItemModifier(new LootItemCondition[]{
+                        LootTableIdCondition.builder(ResourceLocation.parse("entities/drowned")).build(),
+                        LootItemRandomChanceCondition.randomChance(0.20f).build()},
+                        crate));
 
     }
 }

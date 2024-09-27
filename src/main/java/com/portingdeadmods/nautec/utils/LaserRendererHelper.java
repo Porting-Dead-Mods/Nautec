@@ -31,7 +31,8 @@ public final class LaserRendererHelper {
 
         poseStack.pushPose();
         {
-            int offset = 0;
+            int offset;
+            int offset2 = 0;
             if (direction == Direction.NORTH) {
                 poseStack.translate(0.5F, f3, 0.0F);
                 offset = 1;
@@ -44,11 +45,15 @@ public final class LaserRendererHelper {
             } else if (direction == Direction.WEST) {
                 poseStack.translate(0.0F, f3, 0.5F);
                 offset = 1;
+            } else if (direction == Direction.DOWN) {
+                poseStack.translate(0.5F, 0, 0.5F);
+                offset = 1;
             } else {
                 poseStack.translate(0.5F, 1, 0.5F);
+                offset = 2;
             }
             Vec3 vec3 = vec3Relative(targetPos.relative(direction, -offset).getCenter(), direction, targetOffset);
-            Vec3 vec31 = originPos.getCenter();
+            Vec3 vec31 = originPos.relative(direction, offset2).getCenter();
             Vec3 vec32 = vec3.subtract(vec31);
             float f4 = (float) (vec32.length() + 1.0);
             vec32 = vec32.normalize();
