@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "nautec:prismarine_laser_relay"
+    },
+    "C": {
+      "item": "nautec:prismarine_crystal_shard"
+    }
+  },
+  "pattern": [
+    " A ",
+    "ACA",
+    " A "
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:laser_junction"
+  }
+}

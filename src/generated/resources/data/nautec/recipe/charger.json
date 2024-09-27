@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "nautec:polished_prismarine"
+    },
+    "S": {
+      "item": "nautec:prismarine_crystal_shard"
+    }
+  },
+  "pattern": [
+    "P P",
+    "PSP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:charger"
+  }
+}
