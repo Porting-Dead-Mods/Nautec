@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.network;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.AugmentationStationBlockEntity;
-import com.portingdeadmods.nautec.utils.AugmentCodecs;
+import com.portingdeadmods.nautec.utils.codec.AugmentCodecs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
