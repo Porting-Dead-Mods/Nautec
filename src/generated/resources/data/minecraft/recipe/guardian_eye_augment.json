@@ -1,10 +1,11 @@
 {
   "type": "nautec:augmentation",
   "augmentItem": "nautec:guardian_eye",
-  "desc": "Shoot lasers",
+  "desc": "Shoots lasers at enemies you are looking at",
   "ingredients": [
     {
-      "item": "nautec:guardian_eye"
+      "count": 2,
+      "item": "minecraft:seagrass"
     }
   ],
   "resultAugment": "nautec:guardian_eye"
