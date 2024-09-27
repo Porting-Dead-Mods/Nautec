@@ -1,4 +1,4 @@
-package com.portingdeadmods.nautec.utils;
+package com.portingdeadmods.nautec.utils.codec;
 
 import com.mojang.datafixers.util.Pair;
 import com.mojang.datafixers.util.Unit;

@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.network;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.utils.AugmentCodecs;
+import com.portingdeadmods.nautec.utils.codec.AugmentCodecs;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;

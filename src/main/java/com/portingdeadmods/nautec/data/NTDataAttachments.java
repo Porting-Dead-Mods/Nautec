@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.data;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.utils.AugmentCodecs;
+import com.portingdeadmods.nautec.utils.codec.AugmentCodecs;
 import net.minecraft.nbt.CompoundTag;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;

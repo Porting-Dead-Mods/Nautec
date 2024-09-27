@@ -1,4 +1,4 @@
-package com.portingdeadmods.nautec.utils;
+package com.portingdeadmods.nautec.utils.codec;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

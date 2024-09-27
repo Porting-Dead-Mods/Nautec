@@ -1,4 +1,4 @@
-package com.portingdeadmods.nautec.utils;
+package com.portingdeadmods.nautec.utils.codec;
 
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.DataResult;
