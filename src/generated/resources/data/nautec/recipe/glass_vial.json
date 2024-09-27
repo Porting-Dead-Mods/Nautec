@@ -2,16 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "C": {
-      "item": "nautec:cast_iron_ingot"
+    "G": {
+      "item": "minecraft:glass"
     }
   },
   "pattern": [
-    "C",
-    "C"
+    "G G",
+    "G G",
+    " G "
   ],
   "result": {
-    "count": 2,
-    "id": "nautec:cast_iron_rod"
+    "count": 3,
+    "id": "nautec:glass_vial"
   }
 }

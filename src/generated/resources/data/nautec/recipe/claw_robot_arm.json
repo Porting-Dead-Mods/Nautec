@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    "B": {
+      "item": "nautec:cast_iron_rod"
+    }
+  },
+  "pattern": [
+    "AB ",
+    " AB",
+    "  A"
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:claw_robot_arm"
+  }
+}

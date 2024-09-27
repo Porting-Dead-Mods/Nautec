@@ -60,6 +60,102 @@ public class RecipesProvider extends RecipeProvider {
 
         miscItemsRecipes(pRecipeOutput);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTBlocks.AQUARINE_STEEL_BLOCK.asItem(), 1)
+                .requires(NTItems.AQUARINE_STEEL_INGOT, 9)
+                .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.GLASS_VIAL.asItem(), 3)
+                .pattern("G G").pattern("G G").pattern(" G ")
+                .define('G', Items.GLASS)
+                .unlockedBy("has_item", has(Items.GLASS))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.MIXER.asItem(), 1)
+                .pattern("P P").pattern("PWP").pattern("PSP")
+                .define('P', NTBlocks.POLISHED_PRISMARINE)
+                .define('W', NTItems.WHISK)
+                .define('S', NTItems.PRISMARINE_CRYSTAL_SHARD)
+                .unlockedBy("has_item", has(NTItems.PRISMARINE_CRYSTAL_SHARD))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.CHARGER.asItem(), 1)
+                .pattern("P P").pattern("PSP")
+                .define('P', NTBlocks.POLISHED_PRISMARINE)
+                .define('S', NTItems.PRISMARINE_CRYSTAL_SHARD)
+                .unlockedBy("has_item", has(NTItems.PRISMARINE_CRYSTAL_SHARD))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.CLAW_ROBOT_ARM.asItem(), 1)
+                .pattern("AB ").pattern(" AB").pattern("  A")
+                .define('A', NTItems.AQUARINE_STEEL_INGOT)
+                .define('B', NTItems.CAST_IRON_ROD)
+                .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.PRISM_MONOCLE.asItem(), 1)
+                .pattern("AAA").pattern("ACA").pattern("AAA")
+                .define('A', NTItems.AQUARINE_STEEL_INGOT)
+                .define('C', NTItems.PRISMARINE_CRYSTAL_SHARD)
+                .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.PRISMARINE_RELAY.asItem(), 6)
+                .pattern("AAA").pattern("   ").pattern("AAA")
+                .define('A', NTBlocks.POLISHED_PRISMARINE)
+                .unlockedBy("has_item", has(NTBlocks.POLISHED_PRISMARINE))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.LASER_JUNCTION.asItem(), 1)
+                .pattern(" A ").pattern("ACA").pattern(" A ")
+                .define('A', NTBlocks.PRISMARINE_RELAY)
+                .define('C', NTItems.PRISMARINE_CRYSTAL_SHARD)
+                .unlockedBy("has_item", has(NTBlocks.PRISMARINE_RELAY))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.LONG_DISTANCE_LASER.asItem(), 1)
+                .pattern("DJD").pattern("DPD").pattern("PPP")
+                .define('D', NTBlocks.DARK_PRISMARINE_PILLAR)
+                .define('J', NTBlocks.LASER_JUNCTION)
+                .define('P', NTBlocks.POLISHED_PRISMARINE)
+                .unlockedBy("has_item", has(NTBlocks.LASER_JUNCTION))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.AQUATIC_CATALYST.asItem(), 1)
+                .pattern("PDP").pattern("DPD").pattern("PDP")
+                .define('D', NTBlocks.DARK_PRISMARINE_PILLAR)
+                .define('P', NTBlocks.POLISHED_PRISMARINE)
+                .unlockedBy("has_item", has(NTBlocks.POLISHED_PRISMARINE))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.DRAIN.asItem(), 1)
+                .pattern("C C").pattern("C C").pattern("CCC")
+                .define('C', NTItems.CAST_IRON_INGOT)
+                .unlockedBy("has_item", has(NTItems.CAST_IRON_INGOT))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.DRAIN_WALL.asItem(), 1)
+                .pattern("CCC").pattern("C C").pattern("CCC")
+                .define('C', NTItems.CAST_IRON_INGOT)
+                .unlockedBy("has_item", has(NTItems.CAST_IRON_INGOT))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.AUGMENTATION_STATION.asItem(), 1)
+                .pattern("APA").pattern("PCP").pattern("PPP")
+                .define('A', NTItems.AQUARINE_STEEL_INGOT)
+                .define('P', NTBlocks.POLISHED_PRISMARINE)
+                .define('C', NTItems.PRISMARINE_CRYSTAL_SHARD)
+                .unlockedBy("has_item", has(NTItems.PRISMARINE_CRYSTAL_SHARD))
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.AUGMENTATION_STATION_EXTENSION.asItem(), 2)
+                .pattern("PAP").pattern("PCP").pattern("PPP")
+                .define('A', NTItems.AQUARINE_STEEL_INGOT)
+                .define('P', NTBlocks.POLISHED_PRISMARINE)
+                .define('C', NTItems.PRISMARINE_CRYSTAL_SHARD)
+                .unlockedBy("has_item", has(NTItems.PRISMARINE_CRYSTAL_SHARD))
+                .save(pRecipeOutput);
+
     }
 
     private static void ancientItemsRecipes(@NotNull RecipeOutput pRecipeOutput) {

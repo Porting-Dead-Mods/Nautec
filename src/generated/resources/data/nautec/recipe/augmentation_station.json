@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    "C": {
+      "item": "nautec:prismarine_crystal_shard"
+    },
+    "P": {
+      "item": "nautec:polished_prismarine"
+    }
+  },
+  "pattern": [
+    "APA",
+    "PCP",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:augmentation_station"
+  }
+}

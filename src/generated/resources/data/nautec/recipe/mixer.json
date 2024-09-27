@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "nautec:polished_prismarine"
+    },
+    "S": {
+      "item": "nautec:prismarine_crystal_shard"
+    },
+    "W": {
+      "item": "nautec:whisk"
+    }
+  },
+  "pattern": [
+    "P P",
+    "PWP",
+    "PSP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:mixer"
+  }
+}

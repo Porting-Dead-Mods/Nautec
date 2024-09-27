@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "nautec:polished_prismarine"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "   ",
+    "AAA"
+  ],
+  "result": {
+    "count": 6,
+    "id": "nautec:prismarine_laser_relay"
+  }
+}
