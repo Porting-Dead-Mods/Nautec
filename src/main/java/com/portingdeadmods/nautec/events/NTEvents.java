@@ -117,20 +117,6 @@ public final class NTEvents {
             }
         }
 
-        //TODO remove this shit
-        @SubscribeEvent
-        public static void onPowerItemTick(EntityTickEvent.Post event) {
-            if (event.getEntity() instanceof ItemEntity itemEntity) {
-                ItemStack stack = itemEntity.getItem();
-                if (stack.getItem() instanceof IPowerItem powerItem) {
-                    IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
-                    if (powerStorage.getPowerStored() < powerStorage.getPowerCapacity()) {
-                        powerStorage.tryFillPower(1, false);
-                    }
-                }
-            }
-        }
-
         @SubscribeEvent
         public static void onHitEntity(AttackEntityEvent event) {
             if (event.getEntity().getMainHandItem().getItem() instanceof IPowerItem powerItem) {
