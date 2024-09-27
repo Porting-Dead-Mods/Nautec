@@ -58,9 +58,7 @@ public class ChargerBlockEntity extends LaserBlockEntity {
                 IPowerStorage powerStorage = itemHandler.getStackInSlot(0).getCapability(NTCapabilities.PowerStorage.ITEM);
                 if(powerStorage.getPowerStored() < powerStorage.getPowerCapacity()) {
                     powerStorage.tryFillPower(4, false);
-                    if(level.getGameTime() % 1 == 0){
-                        ParticlesUtils.spawnParticlesAroundBlock(getBlockPos(), getLevel(), ParticleTypes.ELECTRIC_SPARK);
-                    }
+                    ParticlesUtils.spawnParticlesAroundBlock(getBlockPos(), getLevel(), ParticleTypes.ELECTRIC_SPARK);
                 }
             }
         }
