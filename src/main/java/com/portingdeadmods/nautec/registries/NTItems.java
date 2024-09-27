@@ -56,6 +56,9 @@ public final class NTItems {
     public static final DeferredItem<Item> WHISK = registerItem("whisk",
             Item::new, new Item.Properties());
 
+    // CAST IRON
+    public static final DeferredItem<Item> CAST_IRON_NUGGET = registerItem("cast_iron_nugget",
+            Item::new, new Item.Properties());
 
     public static final DeferredItem<Item> CAST_IRON_INGOT = registerItem("cast_iron_ingot",
             Item::new, new Item.Properties());
