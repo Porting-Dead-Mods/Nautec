@@ -23,8 +23,6 @@ public final class NTItems {
     public static final List<Supplier<BlockItem>> BLOCK_ITEMS = new ArrayList<>();
 
     // MATERIALS
-    public static final DeferredItem<Item> DEEPSLATE_ROD = registerItem("deepslate_rod",
-            Item::new, new Item.Properties());
     public static final DeferredItem<Item> AQUARINE_STEEL_INGOT = registerItem("aquarine_steel_ingot",
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> ATLANTIC_GOLD_INGOT = registerItem("atlantic_gold_ingot",
@@ -37,7 +35,6 @@ public final class NTItems {
             AirBottleItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> AQUARINE_STEEL_COMPOUND = registerItem("aquarine_steel_compound",
             Item::new, new Item.Properties());
-
 
     // MACHINE PARTS
     public static final DeferredItem<Item> RUSTY_GEAR = registerItem("rusty_gear",
@@ -54,10 +51,10 @@ public final class NTItems {
             Item::new, new Item.Properties());
 
 
-    public static final DeferredItem<Item> CAST_IRON_INGOT = registerItem("cast_iron_ingot",
-            Item::new, new Item.Properties());
-
+    public static final DeferredItem<Item> CAST_IRON_INGOT = registerItem("cast_iron_ingot", Item::new, new Item.Properties());
+    public static final DeferredItem<Item> CAST_IRON_NUGGET = registerItem("cast_iron_nugget", Item::new, new Item.Properties());
     public static final DeferredItem<Item> CAST_IRON_ROD = registerItem("cast_iron_rod", Item::new, new Item.Properties());
+    public static final DeferredItem<Item> BROWN_POLYMER = registerItem("brown_polymer", Item::new, new Item.Properties());
 
     // MOB DROPS
     public static final DeferredItem<Item> DROWNED_LUNGS = registerItem("drowned_lungs",
