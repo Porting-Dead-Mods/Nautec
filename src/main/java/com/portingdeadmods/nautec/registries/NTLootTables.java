@@ -16,6 +16,7 @@ public class NTLootTables {
     private static final Set<ResourceKey<LootTable>> IMMUTABLE_LOCATIONS = Collections.unmodifiableSet(LOCATIONS);
 
     public static final ResourceKey<LootTable> CRATE = register("chests/crate");
+    public static final ResourceKey<LootTable> RUSTY_CRATE = register("chests/rusty_crate");
     public static final ResourceKey<LootTable> GUARDIAN = register("entities/guardian");
 
     private static ResourceKey<LootTable> register(String name) {

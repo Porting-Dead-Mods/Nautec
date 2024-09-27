@@ -33,7 +33,7 @@ public class BatteryItem extends Item implements IPowerItem {
 
                     @Override
                     public ItemStack getStack() {
-                        return NTItems.PRISM_MONOCLE.toStack();
+                        return NTItems.PRISMATIC_BATTERY.toStack();
                     }
 
                     @Override
