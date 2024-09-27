@@ -3,12 +3,15 @@
   "category": "misc",
   "key": {
     "C": {
+      "item": "nautec:prismarine_crystal_shard"
+    },
+    "I": {
       "item": "nautec:aquarine_steel_ingot"
     }
   },
   "pattern": [
-    "CCC",
-    "C C"
+    "ICI",
+    "I I"
   ],
   "result": {
     "count": 1,

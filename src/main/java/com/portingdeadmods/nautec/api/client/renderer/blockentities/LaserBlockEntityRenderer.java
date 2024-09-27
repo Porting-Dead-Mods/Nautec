@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.api.client.renderer.blockentities;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.utils.LaserRendererHelper;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -10,7 +11,10 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements BlockEntityRenderer<T> {
@@ -25,8 +29,16 @@ public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements Blo
 
             BlockPos originPos = blockEntity.getBlockPos();
             BlockPos targetPos = originPos.relative(direction, laserDistance - 1);
+            BlockState state = blockEntity.getLevel().getBlockState(targetPos.relative(direction));
             if (laserDistance > 0 && blockEntity.shouldRender(direction)) {
-                LaserRendererHelper.renderOuterBeam(blockEntity, originPos, targetPos, direction, poseStack, bufferSource, partialTick);
+                VoxelShape shape = state.getShape(blockEntity.getLevel(), targetPos.relative(direction), CollisionContext.empty());
+
+                float shapeIndent = (float) switch (direction.getAxisDirection()) {
+                    case POSITIVE -> shape.min(direction.getAxis());
+                    case NEGATIVE -> shape.max(direction.getAxis());
+                };
+
+                LaserRendererHelper.renderOuterBeam(blockEntity, originPos, targetPos, 1 - shapeIndent, direction, poseStack, bufferSource, partialTick);
 
                 poseStack.pushPose();
                 {
@@ -55,7 +67,7 @@ public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements Blo
                     }
 
                     LaserRendererHelper.renderInnerBeam(poseStack, bufferSource, partialTick, blockEntity.getLevel().getGameTime(),
-                            offset, laserDistance - offset - offset2, FastColor.ARGB32.color(202, 214, 224));
+                            offset, (laserDistance - offset - offset2 + (1 - shapeIndent)), FastColor.ARGB32.color(202, 214, 224));
                 }
                 poseStack.popPose();
             }

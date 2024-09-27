@@ -19,7 +19,7 @@ public final class LaserRendererHelper {
     private static final ResourceLocation GUARDIAN_BEAM_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/guardian_beam.png");
     private static final RenderType BEAM_RENDER_TYPE = RenderType.entityCutoutNoCull(GUARDIAN_BEAM_LOCATION);
 
-    public static <T extends LaserBlockEntity> void renderOuterBeam(T blockEntity, BlockPos originPos, BlockPos targetPos, Direction direction, PoseStack poseStack, MultiBufferSource bufferSource, float partialTicks) {
+    public static <T extends LaserBlockEntity> void renderOuterBeam(T blockEntity, BlockPos originPos, BlockPos targetPos, float targetOffset, Direction direction, PoseStack poseStack, MultiBufferSource bufferSource, float partialTicks) {
         float f = blockEntity.getLaserScale(partialTicks);
         float f1 = blockEntity.getClientLaserTime() + (partialTicks * 24);
         float f2 = f1 * 0.5F % 1.0F;
@@ -47,7 +47,7 @@ public final class LaserRendererHelper {
             } else {
                 poseStack.translate(0.5F, 1, 0.5F);
             }
-            Vec3 vec3 = targetPos.relative(direction, -offset).getCenter();
+            Vec3 vec3 = vec3Relative(targetPos.relative(direction, -offset).getCenter(), direction, targetOffset);
             Vec3 vec31 = originPos.getCenter();
             Vec3 vec32 = vec3.subtract(vec31);
             float f4 = (float) (vec32.length() + 1.0);
@@ -122,7 +122,7 @@ public final class LaserRendererHelper {
     }
 
     public static void renderInnerBeam(
-            PoseStack poseStack, MultiBufferSource bufferSource, float partialTick, long gameTime, int yOffset, int height, int color
+            PoseStack poseStack, MultiBufferSource bufferSource, float partialTick, long gameTime, float yOffset, float height, int color
     ) {
         renderInnerBeam(poseStack, bufferSource, BEAM_LOCATION, partialTick, 1.0F, gameTime, yOffset, height, color, 0.2F, 0.25F);
     }
@@ -134,13 +134,13 @@ public final class LaserRendererHelper {
             float partialTick,
             float textureScale,
             long gameTime,
-            int yOffset,
-            int height,
+            float yOffset,
+            float height,
             int color,
             float beamRadius,
             float glowRadius
     ) {
-        int i = yOffset + height;
+        float i = yOffset + height;
         poseStack.pushPose();
         poseStack.translate(0.5, 0.0, 0.5);
         float f = (float) Math.floorMod(gameTime, 40) + partialTick;
@@ -206,8 +206,8 @@ public final class LaserRendererHelper {
             PoseStack poseStack,
             VertexConsumer consumer,
             int color,
-            int minY,
-            int maxY,
+            float minY,
+            float maxY,
             float x1,
             float z1,
             float x2,
@@ -240,8 +240,8 @@ public final class LaserRendererHelper {
             PoseStack.Pose pose,
             VertexConsumer consumer,
             int color,
-            int minY,
-            int maxY,
+            float minY,
+            float maxY,
             float minX,
             float minZ,
             float maxX,
@@ -258,13 +258,21 @@ public final class LaserRendererHelper {
     }
 
     private static void addVertex(
-            PoseStack.Pose pose, VertexConsumer consumer, int color, int y, float x, float z, float u, float v
+            PoseStack.Pose pose, VertexConsumer consumer, int color, float y, float x, float z, float u, float v
     ) {
-        consumer.addVertex(pose, x, (float) y, z)
+        consumer.addVertex(pose, x, y, z)
                 .setColor(color)
                 .setUv(u, v)
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(15728880)
                 .setNormal(pose, 0.0F, 1.0F, 0.0F);
+    }
+
+    public static Vec3 vec3Relative(Vec3 self, Direction direction, double distance) {
+        return distance == 0
+                ? self
+                : new Vec3(
+                self.x() + direction.getStepX() * distance, self.y() + direction.getStepY() * distance, self.z() + direction.getStepZ() * distance
+        );
     }
 }

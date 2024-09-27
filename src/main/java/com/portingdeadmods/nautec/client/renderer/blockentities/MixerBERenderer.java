@@ -13,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -30,20 +31,18 @@ import net.neoforged.neoforge.items.IItemHandler;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
-public class MixerBERenderer extends LaserBlockEntityRenderer<MixerBlockEntity> {
+public class MixerBERenderer implements BlockEntityRenderer<MixerBlockEntity> {
     private static final float SIDE_MARGIN = (float) MixerBlock.SHAPE.min(Direction.Axis.X) + 0.075f;
     private static final float MIN_Y = 2 / 16f;
     private static final float MAX_Y = 1 - MIN_Y;
     private final WhiskModel model;
 
     public MixerBERenderer(BlockEntityRendererProvider.Context ctx) {
-        super(ctx);
         this.model = new WhiskModel(ctx.bakeLayer(WhiskModel.LAYER_LOCATION));
     }
 
     @Override
     public void render(MixerBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        super.render(blockEntity, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
         this.model.setupAnim();
         poseStack.pushPose();
         {

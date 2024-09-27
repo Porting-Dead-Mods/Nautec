@@ -2,14 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
+    "C": {
+      "item": "nautec:prismarine_crystal_shard"
+    },
+    "I": {
       "item": "nautec:aquarine_steel_ingot"
+    },
+    "V": {
+      "item": "nautec:valve"
     }
   },
   "pattern": [
-    "BBB",
-    "B B",
-    "B B"
+    "IVI",
+    "C C",
+    "I I"
   ],
   "result": {
     "count": 1,
