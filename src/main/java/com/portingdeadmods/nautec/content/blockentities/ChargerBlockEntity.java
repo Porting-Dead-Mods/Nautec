@@ -7,10 +7,13 @@ import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.utils.ParticlesUtils;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -51,10 +54,14 @@ public class ChargerBlockEntity extends LaserBlockEntity {
         super.commonTick();
         if (getPower() > 0) {
             IItemHandler itemHandler = getItemHandler();
-            if (itemHandler.getStackInSlot(0).getItem() instanceof IPowerItem) {
+            if (itemHandler.getStackInSlot(0).getItem() instanceof IPowerItem powerItem) {
                 IPowerStorage powerStorage = itemHandler.getStackInSlot(0).getCapability(NTCapabilities.PowerStorage.ITEM);
-                powerStorage.tryFillPower(4, false);
-
+                if(powerStorage.getPowerStored() < powerStorage.getPowerCapacity()) {
+                    powerStorage.tryFillPower(4, false);
+                    if(level.getGameTime() % 1 == 0){
+                        ParticlesUtils.spawnParticlesAroundBlock(getBlockPos(), getLevel(), ParticleTypes.ELECTRIC_SPARK);
+                    }
+                }
             }
         }
     }
