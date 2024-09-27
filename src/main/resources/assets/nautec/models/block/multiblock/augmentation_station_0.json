@@ -8,6 +8,7 @@
 		"4": "nautec:block/multiblock/augmentation_station/top",
 		"5": "nautec:block/multiblock/augmentation_station/top_bottom",
 		"6": "nautec:block/multiblock/augmentation_station/top_side",
+		"7": "nautec:block/multiblock/augmentation_station/bottom_0",
 		"particle": "nautec:block/multiblock/augmentation_station/bottom_side"
 	},
 	"elements": [
@@ -20,7 +21,7 @@
 				"south": {"uv": [0, 0, 16, 16], "texture": "#missing"},
 				"west": {"uv": [0, 0, 4, 16], "texture": "#0"},
 				"up": {"uv": [0, 0, 4, 4], "texture": "#1"},
-				"down": {"uv": [51, -30, 19, 2], "texture": "#missing"}
+				"down": {"uv": [8, 16, 16, 8], "texture": "#7"}
 			}
 		},
 		{
