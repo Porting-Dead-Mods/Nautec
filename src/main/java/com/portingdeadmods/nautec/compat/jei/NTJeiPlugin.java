@@ -8,13 +8,16 @@ import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import org.jetbrains.annotations.NotNull;
@@ -47,6 +50,8 @@ public class NTJeiPlugin implements IModPlugin {
 
         registration.addRecipeCategories(new AugmentationRecipeCategory(
                 registration.getJeiHelpers().getGuiHelper()));
+
+        registration.addRecipeCategories();
     }
 
     @Override
@@ -73,6 +78,10 @@ public class NTJeiPlugin implements IModPlugin {
         registration.addRecipes(AquaticCatalystChannelingRecipeCategory.RECIPE_TYPE, channelingRecipes);
         registration.addRecipes(ItemEtchingRecipeCategory.RECIPE_TYPE, etchingRecipes);
         registration.addRecipes(MixingRecipeCategory.RECIPE_TYPE, mixingRecipes);
+
+        for (AugmentationRecipe recipe : augmentationRecipes) {
+            registration.addIngredientInfo(recipe.augmentItem().getDefaultInstance(), VanillaTypes.ITEM_STACK, Component.translatable(recipe.desc()));
+        }
     }
 
     @Override
