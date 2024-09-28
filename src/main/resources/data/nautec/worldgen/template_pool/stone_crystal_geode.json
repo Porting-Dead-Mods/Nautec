@@ -6,7 +6,7 @@
       "weight": 1,
       "element": {
         "location": "nautec:stone_crystal_geode",
-        "processors": "nautec:replace_with_suspicious_gravel",
+        "processors": "nautec:rustify_crates",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
