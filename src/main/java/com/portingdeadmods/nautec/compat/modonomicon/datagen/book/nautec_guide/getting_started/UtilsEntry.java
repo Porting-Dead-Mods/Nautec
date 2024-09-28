@@ -6,31 +6,30 @@ import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import com.mojang.datafixers.util.Pair;
-import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTItems;
 
-public class LaserPowerEntry extends EntryProvider {
-    public LaserPowerEntry(CategoryProviderBase parent) {
+public class UtilsEntry extends EntryProvider {
+    public UtilsEntry(CategoryProviderBase parent) {
         super(parent);
     }
 
     @Override
     protected void generatePages() {
-        this.page("intro", () -> BookTextPageModel.create()
+        this.page("utils", () -> BookTextPageModel.create()
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
-        this.pageTitle("Laser Power");
-        this.pageText("LAZZAAAA POWAH");
+        this.pageTitle("Utility Item");
+        this.pageText("Wrench, Crowbar, Diving Suit...");
     }
 
     @Override
     protected String entryName() {
-        return "Laser Power";
+        return "Utility Items";
     }
 
     @Override
     protected String entryDescription() {
-        return "Whoooooooosh";
+        return "Useful, trust me";
     }
 
     @Override
@@ -40,11 +39,11 @@ public class LaserPowerEntry extends EntryProvider {
 
     @Override
     protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTBlocks.AQUATIC_CATALYST);
+        return BookIconModel.create(NTItems.DIVING_HELMET.get());
     }
 
     @Override
     protected String entryId() {
-        return "laser_power";
+        return "utils";
     }
 }
