@@ -29,6 +29,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(NTItems.PRISMARINE_CRYSTAL_SHARD.get());
         basicItem(NTItems.AQUARINE_STEEL_COMPOUND.get());
         basicItem(NTItems.AIR_BOTTLE.get());
+        basicItem(NTItems.ELDRITCH_ARTIFACT.get());
 
         basicItem(NTItems.DROWNED_LUNGS.get());
         basicItem(NTItems.GUARDIAN_EYE.get());
@@ -46,6 +47,8 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(NTItems.GEAR.get());
         basicItem(NTItems.BROKEN_WHISK.get());
         basicItem(NTItems.WHISK.get());
+        basicItem(NTItems.BURNT_COIL.get());
+        basicItem(NTItems.LASER_CHANNELING_COIL.get());
 
         basicItem(NTItems.GLASS_VIAL.get());
         basicItem(NTItems.ELECTROLYTE_ALGAE_SERUM_VIAL.get());

@@ -49,8 +49,14 @@ public final class NTItems {
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> WHISK = registerItem("whisk",
             Item::new, new Item.Properties());
+    public static final DeferredItem<Item> BURNT_COIL = registerItem("burnt_coil",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> LASER_CHANNELING_COIL = registerItem("laser_channeling_coil",
+            Item::new, new Item.Properties());
 
 
+    public static final DeferredItem<Item> ELDRITCH_ARTIFACT = registerItem("eldritch_artifact",
+            Item::new, new Item.Properties());
     public static final DeferredItem<Item> CAST_IRON_INGOT = registerItem("cast_iron_ingot", Item::new, new Item.Properties());
     public static final DeferredItem<Item> CAST_IRON_NUGGET = registerItem("cast_iron_nugget", Item::new, new Item.Properties());
     public static final DeferredItem<Item> CAST_IRON_ROD = registerItem("cast_iron_rod", Item::new, new Item.Properties());
