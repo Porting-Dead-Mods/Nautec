@@ -72,6 +72,10 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
                 for (BlockPos pos : augmentItems.keySet()) {
                     AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
 
+                    if (be.getPower() < 15) {
+                        return;
+                    }
+
                     be.equipAugment();
                 }
 
@@ -135,6 +139,17 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
             } else {
                 if (duration > 0) {
                     duration--;
+
+                    for (BlockPos pos : augmentItems.keySet()) {
+                        AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
+
+                        if (be.getPower() < 15) {
+                            this.duration = 0;
+                            this.isRunning = false;
+                            restorePlayerAttributes();
+                            return;
+                        }
+                    }
 
                     if (duration == 0) {
                         this.isRunning = false;

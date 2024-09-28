@@ -43,7 +43,6 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
     private int animationInterval;
     private Animation animation;
 
-    private boolean hasRobotArm;
     private BlockPos controllerPos;
 
     public AugmentationStationExtensionBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -134,17 +133,9 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
         return animationRunning ? (tipIndependentAngle + partialTicks) / 360 : 0;
     }
 
-    public boolean hasRobotArm() {
-        return hasRobotArm;
-    }
-
-    public void setHasRobotArm(boolean hasRobotArm) {
-        this.hasRobotArm = hasRobotArm;
-    }
-
     @Override
     public ObjectSet<Direction> getLaserInputs() {
-        return ObjectSet.of();
+        return ObjectSet.of(Direction.DOWN);
     }
 
     @Override
@@ -177,7 +168,6 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
     protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
         super.loadData(tag, provider);
         this.controllerPos = BlockPos.of(tag.getLong("controllerPos"));
-        this.hasRobotArm = tag.getBoolean("hasRobotArm");
     }
 
     @Override
@@ -186,7 +176,6 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
         if (controllerPos != null) {
             tag.putLong("controllerPos", controllerPos.asLong());
         }
-        tag.putBoolean("hasRobotArm", hasRobotArm);
     }
 
     @Override
