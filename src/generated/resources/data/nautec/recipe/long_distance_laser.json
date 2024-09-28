@@ -3,19 +3,22 @@
   "category": "misc",
   "key": {
     "D": {
-      "item": "nautec:dark_prismarine_pillar"
-    },
-    "J": {
-      "item": "nautec:laser_junction"
+      "item": "minecraft:dark_prismarine"
     },
     "P": {
       "item": "nautec:polished_prismarine"
+    },
+    "R": {
+      "item": "nautec:prismarine_laser_relay"
+    },
+    "S": {
+      "item": "nautec:prismarine_crystal_shard"
     }
   },
   "pattern": [
-    "DJD",
-    "DPD",
-    "PPP"
+    "DRD",
+    "PSP",
+    "PRP"
   ],
   "result": {
     "count": 1,
