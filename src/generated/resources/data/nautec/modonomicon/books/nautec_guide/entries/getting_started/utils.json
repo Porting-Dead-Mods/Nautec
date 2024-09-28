@@ -5,7 +5,7 @@
   "description": "book.nautec.nautec_guide.getting_started.utils.description",
   "hide_while_locked": false,
   "icon": {
-    "item": "nautec:diving_helmet"
+    "item": "nautec:aquarine_steel_wrench"
   },
   "name": "book.nautec.nautec_guide.getting_started.utils.name",
   "pages": [

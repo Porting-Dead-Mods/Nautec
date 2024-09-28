@@ -19,6 +19,20 @@
       "text": "book.nautec.nautec_guide.getting_started.item_transformation.item_transformation.text",
       "title": "book.nautec.nautec_guide.getting_started.item_transformation.item_transformation.title",
       "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:image",
+      "anchor": "",
+      "border": true,
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "images": [
+        "modonomicon:textures/gui/book/recipe/transformation_recipes.png"
+      ],
+      "text": "",
+      "title": "Recipe Exemples",
+      "use_legacy_rendering": false
     }
   ],
   "show_when_any_parent_unlocked": false,

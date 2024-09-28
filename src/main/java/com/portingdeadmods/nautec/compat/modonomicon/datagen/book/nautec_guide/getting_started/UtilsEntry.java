@@ -19,7 +19,7 @@ public class UtilsEntry extends EntryProvider {
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
         this.pageTitle("Utility Item");
-        this.pageText("Wrench, Crowbar, Diving Suit...");
+        this.pageText("Wrench, Crowbar, and more!");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class UtilsEntry extends EntryProvider {
 
     @Override
     protected String entryDescription() {
-        return "Useful, trust me";
+        return "Useful, Trust me.";
     }
 
     @Override
@@ -39,7 +39,7 @@ public class UtilsEntry extends EntryProvider {
 
     @Override
     protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTItems.DIVING_HELMET.get());
+        return BookIconModel.create(NTItems.AQUARINE_WRENCH.get());
     }
 
     @Override

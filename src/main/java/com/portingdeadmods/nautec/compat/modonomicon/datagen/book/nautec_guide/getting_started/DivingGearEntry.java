@@ -7,41 +7,43 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookRecipePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
+import com.klikli_dev.modonomicon.book.page.BookRecipePage;
 import com.mojang.datafixers.util.Pair;
-import com.portingdeadmods.nautec.content.items.NeptunesTridentItem;
 import com.portingdeadmods.nautec.registries.NTItems;
 
-public class MonocleEntry extends EntryProvider {
-    public MonocleEntry(CategoryProviderBase parent) {
+public class DivingGearEntry extends EntryProvider {
+    public DivingGearEntry(CategoryProviderBase parent) {
         super(parent);
     }
 
     @Override
     protected void generatePages() {
-        this.page("monocle", () -> BookTextPageModel.create()
+        this.page("diving", () -> BookTextPageModel.create()
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
-        this.pageTitle("Prism Monocle");
+        this.pageTitle("Diving Gear");
         this.pageText("""
-                        The Prism Monocle is a useful tool that allows you to display informations about the block you are looking at.
-                        \\
-                        \\
-                        It is particularly useful to know how pure is a laser beam.
-                        \\
-                        \\
-                        If some informations are missing, we recommend using the Jade mod as it has a more extensive support for Nautec.
-                        """);
-        this.page("monocle_recipe", () -> BookCraftingRecipePageModel.create().withTitle1("Recipe").withRecipeId1("nautec:prism_monocle"));
+                The Diving Suit is a special suit that allows you to explore the depths of the ocean.
+                \\
+                Crafted from a special Polymer material, the Diving Suit is must-have for any underwater explorer.
+                \\
+                The Helmet will clear your vision underwater while the chestplate will provide you with 10min of oxygen.
+                """);
+        this.page("oxygen_recipe", () -> BookCraftingRecipePageModel.create()
+                .withTitle2("Filling the tanks")
+                .withRecipeId2("minecraft:diving_chestplate_oxygen")
+                .withTitle1("Brown Polymer")
+                .withRecipeId1("nautec:brown_polymer"));
     }
 
     @Override
     protected String entryName() {
-        return "Prismarine Monocle";
+        return "Diving Suit and Oxygen";
     }
 
     @Override
     protected String entryDescription() {
-        return "The Third Eye of the Sea";
+        return "Explore the depths of the ocean";
     }
 
     @Override
@@ -51,11 +53,11 @@ public class MonocleEntry extends EntryProvider {
 
     @Override
     protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTItems.PRISM_MONOCLE);
+        return BookIconModel.create(NTItems.DIVING_HELMET.get());
     }
 
     @Override
     protected String entryId() {
-        return "monocle";
+        return "diving_gear";
     }
 }

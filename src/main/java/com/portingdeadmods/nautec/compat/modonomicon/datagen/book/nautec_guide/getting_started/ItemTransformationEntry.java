@@ -1,12 +1,19 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.getting_started;
 
+import com.klikli_dev.modonomicon.Modonomicon;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
 import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
 import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel;
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookImagePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
+import com.klikli_dev.modonomicon.book.page.BookProcessingRecipePage;
+import com.klikli_dev.modonomicon.client.render.page.BookRecipePageRenderer;
 import com.mojang.datafixers.util.Pair;
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.registries.NTItems;
+import net.minecraft.resources.ResourceLocation;
 
 public class ItemTransformationEntry extends EntryProvider {
     public ItemTransformationEntry(CategoryProviderBase parent) {
@@ -19,7 +26,16 @@ public class ItemTransformationEntry extends EntryProvider {
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
         this.pageTitle("Item Transformation");
-        this.pageText("Item transformation stuffs");
+        this.pageText("""
+                Item transformation works by shooting lasers at items to transform them into other items.
+                \\
+                \\
+                Some recipes may require a specific laser color or purity so be sure to check before crafting.
+                """);
+        this.page("transformation_recipe", () -> BookImagePageModel.create()
+                .withTitle("Recipe Exemples")
+                .withImages(ResourceLocation.fromNamespaceAndPath(Modonomicon.MOD_ID, "textures/gui/book/recipe/transformation_recipes.png")));
+
     }
 
     @Override
