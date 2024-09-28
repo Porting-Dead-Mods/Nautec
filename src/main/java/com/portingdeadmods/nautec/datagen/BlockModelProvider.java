@@ -45,7 +45,7 @@ public class BlockModelProvider extends BlockStateProvider {
         laserJunction(NTBlocks.LASER_JUNCTION.get());
 
         // Stuff
-        simpleBlock(NTBlocks.PRISMARINE_SAND.get());
+        //simpleBlock(NTBlocks.PRISMARINE_SAND.get()); Ya didnt commit the texture
         simpleBlock(NTBlocks.MIXER.get(), models().getExistingFile(existingModelFile(NTBlocks.MIXER.get())));
         simpleBlock(NTBlocks.CHARGER.get(), models().getExistingFile(existingModelFile(NTBlocks.CHARGER.get())));
         crateBlock(NTBlocks.CRATE.get());
