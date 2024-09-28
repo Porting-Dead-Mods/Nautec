@@ -464,6 +464,7 @@ public class RecipesProvider extends RecipeProvider {
                 .ingredient(inputCrate)
                 .duration(200)
                 .save(pRecipeOutput);
+
     }
 
     private static void chemistryRecipes(@NotNull RecipeOutput pRecipeOutput) {
