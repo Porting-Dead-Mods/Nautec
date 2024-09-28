@@ -29,7 +29,7 @@ public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements Blo
             Nautec.LOGGER.debug("Distance: {}", laserDistance);
 
             BlockPos originPos = blockEntity.getBlockPos();
-            BlockPos targetPos = originPos.relative(direction, laserDistance > 1 ? laserDistance + 2 : laserDistance);
+            BlockPos targetPos = originPos.relative(direction, laserDistance - 1);
             Nautec.LOGGER.debug("origin: {}, target: {}", originPos, targetPos);
             BlockState state = blockEntity.getLevel().getBlockState(targetPos.relative(direction));
             if (laserDistance > 0 && blockEntity.shouldRender(direction)) {
@@ -57,15 +57,19 @@ public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements Blo
                     int offset2 = 0;
 
                     if (direction == Direction.EAST || direction == Direction.SOUTH) {
-                        offset = 1;
+                        offset2 = 1;
                     }
 
-                    if (direction == Direction.NORTH || direction == Direction.WEST || direction == Direction.DOWN) {
+                    if (direction == Direction.NORTH || direction == Direction.WEST) {
+                        offset2 = 1;
+                    }
+
+
+                    if (direction == Direction.DOWN) {
                         offset2 = 1;
                     }
 
                     if (direction == Direction.UP) {
-                        offset = 1;
                         offset2 = 1;
                     }
 

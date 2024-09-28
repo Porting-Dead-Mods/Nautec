@@ -20,7 +20,6 @@ public class IntroductionEntry extends EntryProvider {
         this.page("intro", () -> BookTextPageModel.create()
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
-
         this.pageTitle("Intro Title");
         this.pageText("TEEEEEEXT");
     }
