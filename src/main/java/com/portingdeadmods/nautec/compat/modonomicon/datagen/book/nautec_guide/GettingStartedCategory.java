@@ -6,7 +6,6 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.getting_started.*;
 import com.portingdeadmods.nautec.registries.NTBlocks;
-import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.world.phys.Vec2;
 
 public class GettingStartedCategory extends CategoryProvider {
