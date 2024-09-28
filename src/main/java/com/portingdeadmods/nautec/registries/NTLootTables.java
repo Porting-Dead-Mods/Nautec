@@ -18,6 +18,9 @@ public class NTLootTables {
     public static final ResourceKey<LootTable> CRATE = register("chests/crate");
     public static final ResourceKey<LootTable> RUSTY_CRATE = register("chests/rusty_crate");
     public static final ResourceKey<LootTable> GUARDIAN = register("entities/guardian");
+    public static final ResourceKey<LootTable> ELDER_GUARDIAN = register("entities/elder_guardian");
+    public static final ResourceKey<LootTable> DROWNED = register("entities/drowned");
+    public static final ResourceKey<LootTable> DOLPHIN = register("entities/dolphin");
 
     private static ResourceKey<LootTable> register(String name) {
         return register(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(Nautec.MODID,name)));

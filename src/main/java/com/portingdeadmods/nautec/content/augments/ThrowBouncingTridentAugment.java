@@ -16,17 +16,10 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
+// TODO: Implement this
 public class ThrowBouncingTridentAugment extends Augment {
     public ThrowBouncingTridentAugment(AugmentSlot augmentSlot) {
         super(NTAugments.THROWN_BOUNCING_TRIDENT_AUGMENT.get(), augmentSlot);
-    }
-
-    @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[] {
-                NTAugmentSlots.LEFT_ARM.get(),
-                NTAugmentSlots.RIGHT_ARM.get(),
-        };
     }
 
     @Override
@@ -37,7 +30,6 @@ public class ThrowBouncingTridentAugment extends Augment {
     @Override
     public void clientTick(PlayerTickEvent.Post event) {
         if (NTKeybinds.THROW_TRIDENT_KEYBIND.get().consumeClick() && !isOnCooldown()) {
-            // Nautec.LOGGER.debug("KEy PRESSED");
             PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
             handleKeybindPress();
         }

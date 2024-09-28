@@ -79,7 +79,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "nautec:rusty_gear",
+          "name": "nautec:broken_whisk",
           "weight": 4,
           "functions": [
             {
@@ -93,7 +93,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "nautec:ancient_valve",
+          "name": "nautec:burnt_coil",
           "weight": 4,
           "functions": [
             {

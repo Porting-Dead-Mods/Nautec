@@ -34,13 +34,6 @@ public class GuardianEyeAugment extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[]{
-                NTAugmentSlots.EYES.get()
-        };
-    }
-
-    @Override
     public void clientTick(PlayerTickEvent.Post event) {
         if (NTKeybinds.ACTIVATE_LASER_KEYBIND.get().consumeClick()) {
             PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));

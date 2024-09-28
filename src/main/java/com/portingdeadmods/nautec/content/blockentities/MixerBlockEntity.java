@@ -1,7 +1,5 @@
 package com.portingdeadmods.nautec.content.blockentities;
 
-import com.google.common.collect.ImmutableList;
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.recipes.MixingRecipe;
@@ -14,14 +12,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -34,13 +32,15 @@ import java.util.Optional;
 
 public class MixerBlockEntity extends LaserBlockEntity {
     public static final int OUTPUT_SLOT = 4;
-    private boolean active;
+    private boolean running;
 
     private float independentAngle;
     private float chasingVelocity;
     private int speed;
 
     private int duration;
+
+    private MixingRecipe recipe;
 
     public MixerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.MIXER.get(), blockPos, blockState);
@@ -93,23 +93,31 @@ public class MixerBlockEntity extends LaserBlockEntity {
         independentAngle += chasingVelocity;
 
         performRecipe();
+
+        if (running) {
+            this.speed = 20;
+        } else {
+            this.speed = 0;
+        }
     }
 
     private void performRecipe() {
-        Optional<MixingRecipe> recipe = getRecipe();
-        if (recipe.isPresent()) {
-            MixingRecipe mixingRecipe = recipe.get();
-            if (duration >= mixingRecipe.duration()) {
-                setOutputs(mixingRecipe);
-                removeInputs(mixingRecipe);
+        if (recipe != null) {
+            this.running = true;
+            if (duration >= recipe.duration()) {
+                setOutputs(recipe);
+                removeInputs(recipe);
                 duration = 0;
             } else {
                 duration++;
             }
+        } else {
+            this.running = false;
         }
     }
 
     private void removeInputs(MixingRecipe mixingRecipe) {
+        IFluidHandler fluidHandler = getFluidHandler();
         IItemHandler itemHandler = getItemHandler();
         List<IngredientWithCount> ingredients = new ArrayList<>(mixingRecipe.ingredients());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -122,6 +130,7 @@ public class MixerBlockEntity extends LaserBlockEntity {
                 }
             }
         }
+        fluidHandler.drain(mixingRecipe.fluidIngredient().getAmount(), IFluidHandler.FluidAction.EXECUTE);
     }
 
     private void setOutputs(MixingRecipe mixingRecipe) {
@@ -139,7 +148,6 @@ public class MixerBlockEntity extends LaserBlockEntity {
         IItemHandler itemHandler = getItemHandler();
         int slots = itemHandler.getSlots();
         List<ItemStack> itemHandlerStacksList = new ArrayList<>(slots);
-        // Adding output slot?
         for (int i = 0; i < slots - 1; i++) {
             ItemStack stack = itemHandler.getStackInSlot(i);
             if (!stack.isEmpty()) {
@@ -168,6 +176,24 @@ public class MixerBlockEntity extends LaserBlockEntity {
         int fluidAmount = getSecondaryFluidTank().getFluidAmount();
         boolean amountMatches = fluidAmount + fluidStack.getAmount() <= getSecondaryFluidTank().getCapacity();
         return fluidMatches && amountMatches;
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        this.recipe = getRecipe().orElse(null);
+    }
+
+    @Override
+    protected void onItemsChanged(int slot) {
+        super.onItemsChanged(slot);
+        this.recipe = getRecipe().orElse(null);
+    }
+
+    @Override
+    protected void onFluidChanged() {
+        super.onFluidChanged();
+        this.recipe = getRecipe().orElse(null);
     }
 
     public int getSpeed() {

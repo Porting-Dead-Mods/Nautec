@@ -14,13 +14,6 @@ public class DrownedLungAugment extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[] {
-                NTAugmentSlots.LUNG.get()
-        };
-    }
-
-    @Override
     public void serverTick(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
         if(player.isUnderWater()){

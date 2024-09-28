@@ -15,11 +15,6 @@ public class BonusHeartsAugment extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
-    }
-
-    @Override
     public void onAdded(Player player) {
         AttributeInstance attribute = player.getAttribute(Attributes.MAX_HEALTH);
         attribute.setBaseValue(40);

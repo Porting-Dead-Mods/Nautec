@@ -20,14 +20,6 @@ public class LeapAugment extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[] {
-                NTAugmentSlots.RIGHT_LEG.get(),
-                NTAugmentSlots.LEFT_LEG.get()
-        };
-    }
-
-    @Override
     public void clientTick(PlayerTickEvent.Post event) {
         if (NTKeybinds.LEAP_KEYBIND.get().consumeClick() && !isOnCooldown() && event.getEntity().onGround()) {
             // Not to be sent to server, movement is on the client apparently

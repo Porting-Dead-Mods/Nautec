@@ -15,13 +15,6 @@ public class DolphinFinAugment extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[] {
-                NTAugmentSlots.BODY.get()
-        };
-    }
-
-    @Override
     public void serverTick(PlayerTickEvent.Post event) {
         if (event.getEntity().isUnderWater()){
             event.getEntity().addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE,20,1));

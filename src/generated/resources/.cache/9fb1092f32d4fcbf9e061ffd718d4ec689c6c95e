@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-28T14:34:11.01641758	Recipes
+// 1.21.1	2024-09-28T18:03:32.117685297	Recipes
 c01db9d69b288d37c769cf605b945ebf60a08e21 data/minecraft/advancement/recipes/misc/diving_chestplate.json
 36b0d6b627495be6eaf8d6e567f9c95bdb744f14 data/minecraft/advancement/recipes/misc/diving_chestplate_oxygen.json
 83753bf5ab777551fde11d26262c5f2b947f4a64 data/minecraft/recipe/diving_chestplate.json
@@ -84,7 +84,7 @@ a4bdb97abe0834d405f7584452f78242585e02ff data/nautec/recipe/item_transformation/
 3c72510dc295062631bc9b6634d4a009e2b8f952 data/nautec/recipe/mixer.json
 35a2d38352317596d0e56958db954ee65944fd30 data/nautec/recipe/mixing/dried_kelp_slime_ball_prismarine_crystals_seagrass.json
 cd9bfbdf0f0468399cc4700d0c360b8283253c96 data/nautec/recipe/polished_prismarine.json
-0f827fa77c72eac02b8f554f934196ddb21a1742 data/nautec/recipe/prism_monocle.json
+4fe8f6115c759c654e132afedec76d846f0a89d5 data/nautec/recipe/prism_monocle.json
 ac628b97c097227e3af94f13cbe35a2cf3ee3124 data/nautec/recipe/prismarine_laser_relay.json
 4745c9855337a311cb5b7211168927a61645d193 data/nautec/recipe/prismatic_battery.json
 266c89a0698de108847ad3b60be50d230822cee4 data/nautec/recipe/whisk.json

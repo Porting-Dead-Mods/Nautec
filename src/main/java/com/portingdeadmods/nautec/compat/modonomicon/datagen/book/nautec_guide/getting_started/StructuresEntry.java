@@ -8,31 +8,30 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTItems;
-import net.minecraft.world.item.Items;
 
-public class IntroductionEntry extends EntryProvider {
-    public IntroductionEntry(CategoryProviderBase parent) {
+public class StructuresEntry extends EntryProvider {
+    public StructuresEntry(CategoryProviderBase parent) {
         super(parent);
     }
 
     @Override
     protected void generatePages() {
-        this.page("intro", () -> BookTextPageModel.create()
+        this.page("structures", () -> BookTextPageModel.create()
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
 
-        this.pageTitle("Intro Title");
-        this.pageText("TEEEEEEXT");
+        this.pageTitle("Structures in the abyss");
+        this.pageText("On your journey you will find a variety of structures located in the ocean...");
     }
 
     @Override
     protected String entryName() {
-        return "Introduction";
+        return "Structures";
     }
 
     @Override
     protected String entryDescription() {
-        return "Intro desc";
+        return "Structures that you will come across on your journey through the oceans";
     }
 
     @Override
@@ -42,11 +41,11 @@ public class IntroductionEntry extends EntryProvider {
 
     @Override
     protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTBlocks.PRISMARINE_SAND.get());
+        return BookIconModel.create(NTBlocks.PRISMARINE_CRYSTAL);
     }
 
     @Override
     protected String entryId() {
-        return "introduction";
+        return "structures";
     }
 }
