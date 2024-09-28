@@ -104,26 +104,6 @@ public class MixerBlock extends LaserBlock {
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
-    @Override
-    public List<Component> displayText(Level level, BlockPos blockPos, Player player) {
-        MixerBlockEntity mixerBE = (MixerBlockEntity) level.getBlockEntity(blockPos);
-        List<Component> list = new ArrayList<>(super.displayText(level, blockPos, player));
-        list.add(literal("Input:"));
-        StringBuilder builder = new StringBuilder();
-        IItemHandler handler = mixerBE.getItemHandler();
-        IFluidHandler fluidHandler = mixerBE.getFluidHandler();
-        IFluidHandler secondaryHandler = mixerBE.getSecondaryFluidHandler();
-        for (int i = 0; i < handler.getSlots()-1; i++) {
-            builder.append(handler.getStackInSlot(i)+"; ");
-        }
-        list.add(literal(builder.toString()));
-        list.add(literal(fluidHandler.getFluidInTank(0).toString()));
-        list.add(literal("Output:"));
-        list.add(literal(handler.getStackInSlot(MixerBlockEntity.OUTPUT_SLOT).toString()));
-        list.add(literal(secondaryHandler.getFluidInTank(0).toString()));
-        return list;
-    }
-
     private static Component literal(String text) {
         return Component.literal(text).withStyle(ChatFormatting.WHITE);
     }

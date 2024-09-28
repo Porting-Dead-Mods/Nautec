@@ -14,6 +14,12 @@ public final class NTConfig {
     private static final ModConfigSpec.IntValue KELP_HEIGHT = BUILDER
             .comment("The height of kelp to be able to grow.")
             .defineInRange("kelpHeight", 40, 25, Integer.MAX_VALUE);
+    private static final ModConfigSpec.IntValue MIXER_POWER_REQUIREMENT = BUILDER
+            .comment("The amount of power required by the mixer each tick.")
+            .defineInRange("mixerPowerRequirement", 15, 0, Integer.MAX_VALUE);
+    private static final ModConfigSpec.IntValue AUGMENTATION_STATION_REQUIREMENT = BUILDER
+            .comment("The amount of power required by the Augmentation Station each tick.")
+            .defineInRange("mixerPowerRequirement", 50, 0, Integer.MAX_VALUE);
 
 
     static final ModConfigSpec SPEC = BUILDER.build();

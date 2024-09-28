@@ -102,17 +102,21 @@ public class MixerBlockEntity extends LaserBlockEntity {
     }
 
     private void performRecipe() {
-        if (recipe != null) {
+        if (recipe != null && getPower() > 20) {
             this.running = true;
             if (duration >= recipe.duration()) {
+                duration = 0;
+                this.running = false;
                 setOutputs(recipe);
                 removeInputs(recipe);
-                duration = 0;
+                this.recipe = getRecipe().orElse(null);
             } else {
                 duration++;
             }
         } else {
             this.running = false;
+            duration = 0;
+            this.recipe = null;
         }
     }
 
@@ -208,12 +212,14 @@ public class MixerBlockEntity extends LaserBlockEntity {
     protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
         super.loadData(tag, provider);
         this.duration = tag.getInt("duration");
+        this.independentAngle = tag.getFloat("independentAngle");
     }
 
     @Override
     protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
         super.saveData(tag, provider);
         tag.putInt("duration", this.duration);
+        tag.putFloat("independentAngle", this.independentAngle);
     }
 
     public FluidStack getInputFluid() {

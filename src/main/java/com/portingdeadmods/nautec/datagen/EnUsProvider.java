@@ -111,6 +111,10 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         add("augment_slot.nautec.left_arm", "Left Arm");
         add("augment_slot.nautec.right_arm", "Right Arm");
         add("augment_slot.nautec.heart", "Heart");
+
+        add("augment_type.nautec.drowned_lung", "Drowned Lung");
+        add("augment_type.nautec.guardian_eye", "Guardian Eye");
+        add("augment_type.nautec.dolphin_fin", "Dolphin Fin");
     }
 
     private void addFluidType(Supplier<? extends FluidType> fluidType, String val) {
