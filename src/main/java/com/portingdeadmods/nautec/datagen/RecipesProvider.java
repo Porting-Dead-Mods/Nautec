@@ -464,8 +464,8 @@ public class RecipesProvider extends RecipeProvider {
                         iwcFromItemLike(Items.PRISMARINE_CRYSTALS, 1),
                         iwcFromItemLike(Items.SEAGRASS, 5))
                 .duration(200)
-                .fluidIngredient(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), 500))
-                .fluidResult(new FluidStack(NTFluids.EAS_SOURCE.get(), 500))
+                .fluidIngredient(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), 1000))
+                .fluidResult(new FluidStack(NTFluids.EAS_SOURCE.get(), 1000))
                 .save(pRecipeOutput);
     }
 

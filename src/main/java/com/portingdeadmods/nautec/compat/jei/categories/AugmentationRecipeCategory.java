@@ -2,19 +2,15 @@ package com.portingdeadmods.nautec.compat.jei.categories;
 
 import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.content.recipes.AquaticCatalystChannelingRecipe;
 import com.portingdeadmods.nautec.content.recipes.AugmentationRecipe;
 import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
 import com.portingdeadmods.nautec.content.recipes.utils.RecipeUtils;
-import com.portingdeadmods.nautec.datagen.recipeBuilder.AugmentationRecipeBuilder;
-import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.Utils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
-import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -71,7 +67,7 @@ public class AugmentationRecipeCategory implements IRecipeCategory<AugmentationR
 
         for (int i = 0; i < ingredients.size(); i++) {
             IngredientWithCount ingredient = ingredients.get(i);
-            builder.addSlot(RecipeIngredientRole.INPUT, width + i * 20, 32)
+            builder.addSlot(RecipeIngredientRole.INPUT, width + i * 20+1, 32)
                     .addIngredients(RecipeUtils.iWCToIngredientSaveCount(ingredient));
         }
     }
@@ -81,7 +77,7 @@ public class AugmentationRecipeCategory implements IRecipeCategory<AugmentationR
         Font font = Minecraft.getInstance().font;
 
         guiGraphics.drawCenteredString(font, Utils.registryTranslation(NTRegistries.AUGMENT_TYPE, recipe.resultAugment()), getWidth() / 2, 0, 0xFFFFFF);
-        guiGraphics.renderFakeItem(recipe.augmentItem().getDefaultInstance(), getWidth() / 2 - 8, 12);
+        guiGraphics.renderFakeItem(recipe.augmentItem().getDefaultInstance(), getWidth() / 2 - 8-1, 12);
 
         List<IngredientWithCount> ingredients = recipe.ingredients();
         int width = getWidth() / 2 - (ingredients.size() * 10);
