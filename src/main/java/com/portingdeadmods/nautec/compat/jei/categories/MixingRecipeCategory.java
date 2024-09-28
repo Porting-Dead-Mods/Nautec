@@ -8,6 +8,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -103,13 +104,16 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
         // Check if there is a fluid input
         if (recipe.fluidIngredient().getFluid() != Fluids.EMPTY) {
             builder.addSlot(RecipeIngredientRole.INPUT, 88, 0)
-                    .addFluidStack(recipe.fluidIngredient().getFluid(), recipe.fluidIngredient().getAmount());
+                    .addFluidStack(recipe.fluidIngredient().getFluid(), recipe.fluidIngredient().getAmount())
+                    .setFluidRenderer(recipe.fluidIngredient().getAmount(), true, 16, 16);
+
         }
 
         // Check if there is a fluid output
         if (recipe.fluidResult().getFluid() != Fluids.EMPTY) {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 88, 48)
-                    .addFluidStack(recipe.fluidResult().getFluid(), recipe.fluidResult().getAmount());
+                    .addFluidStack(recipe.fluidResult().getFluid(), recipe.fluidResult().getAmount())
+                    .setFluidRenderer(recipe.fluidResult().getAmount(), true, 16, 16);;
         }
 
         slotPositions.put(recipe, slots);
@@ -134,4 +138,6 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
         guiGraphics.blitSprite(DOWN_ARROW_SPRITE, 88, 22, 15, 23);
 
     }
+
+
 }
