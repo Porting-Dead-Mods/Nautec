@@ -458,7 +458,6 @@ public class RecipesProvider extends RecipeProvider {
 
         ItemStack inputCrate = NTBlocks.RUSTY_CRATE.toStack();
         ItemStack outputCrate = NTBlocks.CRATE.toStack();
-        outputCrate.set(DataComponents.BLOCK_ENTITY_DATA,inputCrate.get(DataComponents.BLOCK_ENTITY_DATA));
 
         ItemEtchingRecipeBuilder.newRecipe(outputCrate)
                 .ingredient(inputCrate)
