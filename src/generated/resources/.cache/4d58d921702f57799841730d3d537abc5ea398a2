@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-27T16:29:26.590123094	Item Models: nautec
+// 1.21.1	2024-09-28T10:40:49.230352165	Item Models: nautec
 53692692f57914fc54eb6ebf416ce1cb7789e57b assets/nautec/models/item/air_bottle.json
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
 f031500271b315d13a5f3ca96fc3a73ea8d47054 assets/nautec/models/item/aquarine_steel_axe_enabled.json
@@ -57,6 +57,7 @@ e8d19ed0a058c92c28efb20a5f8887ff0b78770f assets/nautec/models/item/polished_pris
 8e22e42d27bc66bc91cc76fd66d0ff5457b585b1 assets/nautec/models/item/prismarine_crystal.json
 8b90a03798a28c038b1c16da2f723e90694d182b assets/nautec/models/item/prismarine_crystal_shard.json
 09882392c9745a728907f265dd968977ca0f171b assets/nautec/models/item/prismarine_laser_relay.json
+b01055cbe0dd02e958fe1063758658a9be6b753a assets/nautec/models/item/prismarine_sand.json
 e0209c5f64b38c19f4b8cc62dc90d23fd5f3bad0 assets/nautec/models/item/prismatic_battery.json
 0441fb5aafacad25af44cc70caad7de17d4d7762 assets/nautec/models/item/rusty_crate.json
 546756658cb53a34f117de278d075cbdd09c70ba assets/nautec/models/item/rusty_gear.json

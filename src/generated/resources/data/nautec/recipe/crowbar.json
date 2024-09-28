@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "L": {
-      "item": "minecraft:lapis_lazuli"
+      "tag": "c:dyed/blue"
     },
     "R": {
       "item": "nautec:cast_iron_rod"
