@@ -2,6 +2,8 @@ package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
+import com.portingdeadmods.nautec.capabilities.NTCapabilities;
+import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
 import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
 import com.portingdeadmods.nautec.data.NTDataComponents;
@@ -27,7 +29,7 @@ public final class NTCreativeTabs {
             .displayItems((params, output) -> {
                 for (ItemLike item : NTItems.CREATIVE_TAB_ITEMS) {
                     output.accept(item);
-                    if (item instanceof IPowerItem) {
+                    if (item.asItem() instanceof IPowerItem) {
                         addPowered(output, item.asItem());
                     }
                 }
@@ -41,11 +43,10 @@ public final class NTCreativeTabs {
             })
             .build());
 
-    // FIXME: Not working :sob:
     public static void addPowered(CreativeModeTab.Output output, Item item) {
         ItemStack itemStack = new ItemStack(item);
-        ComponentPowerStorage powerStorage = itemStack.getOrDefault(NTDataComponents.POWER, ComponentPowerStorage.EMPTY);
-        itemStack.set(NTDataComponents.POWER, new ComponentPowerStorage(powerStorage.powerCapacity(), powerStorage.powerCapacity(), 0));
+        IPowerStorage storage = itemStack.getCapability(NTCapabilities.PowerStorage.ITEM);
+        storage.setPowerStored(storage.getPowerCapacity());
         output.accept(itemStack);
     }
 }

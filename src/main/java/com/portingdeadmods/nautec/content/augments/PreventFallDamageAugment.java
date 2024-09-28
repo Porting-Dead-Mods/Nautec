@@ -12,11 +12,6 @@ public class PreventFallDamageAugment extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
-    }
-
-    @Override
     public void fall(LivingFallEvent event) {
         event.setDamageMultiplier(0.0f);
         event.setCanceled(true);

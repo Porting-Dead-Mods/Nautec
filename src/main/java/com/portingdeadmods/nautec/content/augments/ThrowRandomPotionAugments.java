@@ -28,14 +28,6 @@ public class ThrowRandomPotionAugments extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[] {
-                NTAugmentSlots.LEFT_ARM.get(),
-                NTAugmentSlots.RIGHT_ARM.get(),
-        };
-    }
-
-    @Override
     public void clientTick(PlayerTickEvent.Post event) {
         if (NTKeybinds.THROW_POTION_KEYBIND.get().consumeClick() && !isOnCooldown()) {
             PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));

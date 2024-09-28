@@ -5,14 +5,13 @@
     "A": {
       "item": "nautec:aquarine_steel_ingot"
     },
-    "C": {
-      "item": "nautec:prismarine_crystal_shard"
+    "P": {
+      "item": "minecraft:prismarine_crystals"
     }
   },
   "pattern": [
     "AAA",
-    "ACA",
-    "AAA"
+    "AP "
   ],
   "result": {
     "count": 1,

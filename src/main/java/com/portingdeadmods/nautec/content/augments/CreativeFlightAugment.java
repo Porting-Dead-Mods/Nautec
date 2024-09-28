@@ -14,11 +14,6 @@ public class CreativeFlightAugment extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
-    }
-
-    @Override
     public void onAdded(Player player) {
         player.getAbilities().mayfly = true;
         player.onUpdateAbilities();

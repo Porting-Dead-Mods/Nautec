@@ -77,10 +77,9 @@ public class RecipesProvider extends RecipeProvider {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.PRISM_MONOCLE.asItem(), 1)
                 .pattern("AAA")
-                .pattern("ACA")
-                .pattern("AAA")
+                .pattern("AP ")
                 .define('A', NTItems.AQUARINE_STEEL_INGOT)
-                .define('C', NTItems.PRISMARINE_CRYSTAL_SHARD)
+                .define('P', Items.PRISMARINE_CRYSTALS)
                 .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT))
                 .save(pRecipeOutput);
 

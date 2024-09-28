@@ -14,13 +14,13 @@ public final class NTAugments {
     public static final Supplier<AugmentType<ThrowRandomPotionAugments>> THROW_POTION_AUGMENT = AUGMENTS.register("throw_random_potion",
             () -> AugmentType.of(ThrowRandomPotionAugments::new));
     public static final Supplier<AugmentType<DrownedLungAugment>> DROWNED_LUNG = AUGMENTS.register("drowned_lung",
-            () -> AugmentType.of(DrownedLungAugment::new));
+            () -> AugmentType.of(DrownedLungAugment::new, NTAugmentSlots.LUNG.get()));
     public static final Supplier<AugmentType<DolphinFinAugment>> DOLPHIN_FIN = AUGMENTS.register("dolphin_fin",
-            () -> AugmentType.of(DolphinFinAugment::new));
+            () -> AugmentType.of(DolphinFinAugment::new, NTAugmentSlots.BODY.get()));
     public static final Supplier<AugmentType<ThrowBouncingTridentAugment>> THROWN_BOUNCING_TRIDENT_AUGMENT = AUGMENTS.register("throw_bouncing_trident",
             () -> AugmentType.of(ThrowBouncingTridentAugment::new));
     public static final Supplier<AugmentType<GuardianEyeAugment>> GUARDIAN_EYE_AUGMENT = AUGMENTS.register("guardian_eye",
-            () -> AugmentType.of(GuardianEyeAugment::new));
+            () -> AugmentType.of(GuardianEyeAugment::new, NTAugmentSlots.EYES.get()));
     public static final Supplier<AugmentType<LeapAugment>> LEAP_AUGMENT = AUGMENTS.register("leap",
             () -> AugmentType.of(LeapAugment::new));
     public static final Supplier<AugmentType<PreventFallDamageAugment>> PREVENT_FALL_DAMAGE_AUGMENT = AUGMENTS.register("prevent_fall_damage",

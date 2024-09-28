@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.capabilities.power;
 
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
@@ -22,6 +23,12 @@ public record ItemPowerWrapper(ItemStack itemStack, IPowerItem powerItem) implem
     }
 
     @Override
+    public void onEnergyChanged() {
+        IPowerStorage.super.onEnergyChanged();
+        powerItem.onEnergyChanged(itemStack);
+    }
+
+    @Override
     public int getPowerStored() {
         return getComponent().powerStored();
     }
@@ -38,7 +45,10 @@ public record ItemPowerWrapper(ItemStack itemStack, IPowerItem powerItem) implem
 
     @Override
     public void setPowerStored(int powerStored) {
-        setComponent(new ComponentPowerStorage(powerStored, getComponent().powerCapacity(), getComponent().purity()));
+        if (getPowerStored() != powerStored) {
+            onEnergyChanged();
+            setComponent(new ComponentPowerStorage(powerStored, getComponent().powerCapacity(), getComponent().purity()));
+        }
     }
 
     @Override

@@ -1,4 +1,5 @@
-// 1.21.1	2024-09-28T15:16:36.179219052	Books: nautec
+// 1.21.1	2024-09-28T18:40:32.307924829	Books: nautec
 6d944fd1b3f4f8d8baf18317dbdea1e50476ed05 data/nautec/modonomicon/books/nautec_guide/book.json
 ea5fe754ad19a1903e7a9d19f39e3b1488e59cfe data/nautec/modonomicon/books/nautec_guide/categories/getting_started.json
-594642f606f96d109d91887a8d7b48e69361e3a2 data/nautec/modonomicon/books/nautec_guide/entries/getting_started/introduction.json
+3025c1f954bcbae17b5500c8814af26ccda6cf0a data/nautec/modonomicon/books/nautec_guide/entries/getting_started/introduction.json
+db2ab142f12aa3741438aa2df9832c327a5aedf9 data/nautec/modonomicon/books/nautec_guide/entries/getting_started/structures.json

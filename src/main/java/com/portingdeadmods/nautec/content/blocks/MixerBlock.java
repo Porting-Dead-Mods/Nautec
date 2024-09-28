@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.content.blocks;
 
 import com.mojang.serialization.MapCodec;
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
 import com.portingdeadmods.nautec.api.utils.HorizontalDirection;
@@ -89,7 +90,7 @@ public class MixerBlock extends LaserBlock {
             } else if (stack.getCapability(Capabilities.FluidHandler.ITEM) != null) {
                 IFluidHandler itemFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
                 if (mixerBE.getFluidHandler() instanceof FluidTank fluidTank && mixerBE.getSecondaryFluidHandler() instanceof FluidTank secFluidTank) {
-                    if (itemFluidHandler.getFluidInTank(0).isEmpty() && !fluidHandler.getFluidInTank(0).isEmpty()) {
+                    if (itemFluidHandler.getFluidInTank(0).isEmpty()) {
                         extractFluid(player, level, hand, fluidTank, secFluidTank, itemFluidHandler);
                     } else {
                         insertFluid(player, level, hand, fluidHandler, itemFluidHandler);
@@ -141,8 +142,10 @@ public class MixerBlock extends LaserBlock {
         }
     }
 
+    // Secondary handler extraction doesn't work
     private static void extractFluid(Player player, Level level, InteractionHand interactionHand, FluidTank fluidHandler, FluidTank secondaryFluidHandler, IFluidHandler fluidHandlerItem) {
         FluidTank curHandler = secondaryFluidHandler.getFluidInTank(0).isEmpty() ? fluidHandler : secondaryFluidHandler;
+        Nautec.LOGGER.debug("Extracting secondary: {}", curHandler == secondaryFluidHandler);
         FluidStack fluidInTank = curHandler.getFluidInTank(0);
         if (player.getItemInHand(interactionHand).is(Items.BUCKET)) {
             player.getItemInHand(interactionHand).shrink(1);

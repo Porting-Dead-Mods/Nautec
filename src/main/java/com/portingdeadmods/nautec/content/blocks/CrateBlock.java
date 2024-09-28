@@ -94,7 +94,7 @@ public class CrateBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         } else if (player.isSpectator()) {
             return InteractionResult.CONSUME;
-        } else if (level.getBlockEntity(pos) instanceof CrateBlockEntity be) {
+        } else if (level.getBlockEntity(pos) instanceof CrateBlockEntity be && state.is(NTBlocks.CRATE.get())) {
             if (state.getValue(BlockStateProperties.OPEN)) {
                 player.openMenu(be);
                 player.awardStat(Stats.OPEN_BARREL);

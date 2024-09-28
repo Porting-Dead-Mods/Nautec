@@ -16,11 +16,6 @@ public class StepUpAugment extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
-    }
-
-    @Override
     public void onAdded(Player player) {
         AttributeInstance attribute = player.getAttribute(Attributes.STEP_HEIGHT);
         attribute.setBaseValue(1.0f);

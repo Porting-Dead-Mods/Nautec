@@ -38,6 +38,7 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
 
     private int robotArmSpeed;
 
+    private boolean animationRunning;
     private int animationTime;
     private int animationInterval;
     private Animation animation;
@@ -56,6 +57,7 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
         this.animationTime = 50;
         this.robotArmSpeed = 7;
         this.animation = Animation.FORWARD;
+        this.animationRunning = true;
     }
 
     public Animation getAnimation() {
@@ -90,6 +92,7 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
                 if (animation == Animation.BACKWARD) {
                     if (animationTime == 0) {
                         this.animation = Animation.IDLE;
+                        this.animationRunning = false;
                     }
                 }
             }
@@ -124,11 +127,11 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
     }
 
     public float getMiddleIndependentAngle(float partialTicks) {
-        return (middleIndependentAngle + partialTicks) / 360;
+        return animationRunning ? (middleIndependentAngle + partialTicks) / 360 : 0;
     }
 
     public float getTipIndependentAngle(float partialTicks) {
-        return (tipIndependentAngle + partialTicks) / 360;
+        return animationRunning ? (tipIndependentAngle + partialTicks) / 360 : 0;
     }
 
     public boolean hasRobotArm() {

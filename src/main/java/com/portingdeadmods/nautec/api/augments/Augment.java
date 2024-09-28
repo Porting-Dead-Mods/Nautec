@@ -31,9 +31,6 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
         return false;
     }
 
-    // Return null if all slots are compatible
-    public abstract @Nullable AugmentSlot[] getCompatibleSlots();
-
     public void setPlayer(Player player) {
         this.player = player;
     }

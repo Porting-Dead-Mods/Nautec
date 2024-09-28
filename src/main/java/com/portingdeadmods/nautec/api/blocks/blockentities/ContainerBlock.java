@@ -48,7 +48,12 @@ public abstract class ContainerBlock extends BaseEntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         super.onRemove(state, level, pos, newState, movedByPiston);
-        // TODO: Drop contents
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof ContainerBlockEntity containerBE) {
+            if (!state.is(newState.getBlock())) {
+                containerBE.drop();
+            }
+        }
     }
 
     @Override

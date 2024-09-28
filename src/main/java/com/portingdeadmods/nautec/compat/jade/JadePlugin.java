@@ -12,13 +12,11 @@ public class JadePlugin implements IWailaPlugin {
 
     @Override
     public void register(IWailaCommonRegistration registration) {
-        //TODO register data providers
     }
 
     @Override
     public void registerClient(IWailaClientRegistration registration) {
         registration.registerBlockComponent(AquaticCatalystComponentProvider.INSTANCE, AquaticCatalystBlock.class);
         registration.registerBlockComponent(LaserJunctionComponentProvider.INSTANCE, LaserJunctionBlock.class);
-
     }
 }
