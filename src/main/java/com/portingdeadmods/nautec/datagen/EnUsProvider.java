@@ -13,6 +13,8 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.function.Supplier;
 
+import static com.portingdeadmods.nautec.registries.NTItems.*;
+
 public class EnUsProvider extends AbstractModonomiconLanguageProvider {
     public EnUsProvider(PackOutput output, ModonomiconLanguageProvider cacheProvider) {
         super(output, Nautec.MODID, "en_us", cacheProvider);
@@ -25,12 +27,22 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
 
         add("nautec.creative_tab.main", "NauTec");
 
+        addFluidType(NTFluidTypes.SALT_WATER_FLUID_TYPE, "Salt Water");
         addFluidType(NTFluidTypes.EAS_FLUID_TYPE, "Electrolyte Algae Serum");
         addFluidType(NTFluidTypes.ETCHING_ACID_FLUID_TYPE, "Etching Acid");
 
-        addItem(NTItems.PRISM_MONOCLE, "Prism Monocle");
-        addItem(NTItems.AQUARINE_STEEL_INGOT, "Aquarine Steel Ingot");
-        addItem(NTItems.ATLANTIC_GOLD_INGOT, "Atlantic Gold Ingot");
+        addItem(PRISM_MONOCLE, "Prism Monocle");
+        addItem(AQUARINE_STEEL_INGOT, "Aquarine Steel Ingot");
+        addItem(ATLANTIC_GOLD_INGOT, "Atlantic Gold Ingot");
+        addItem(ATLANTIC_GOLD_NUGGET, "Atlantic Gold Nugget");
+        addItem(SALT_WATER_BUCKET, "Salt Water Bucket");
+        addItem(EAS_BUCKET, "Electrolyte Algae Serum (EAS) Bucket");
+        addItem(GLASS_VIAL, "Glass Vial");
+        addItem(ELECTROLYTE_ALGAE_SERUM_VIAL, "Electrolyte Algae Serum (EAS) Vial");
+        addItem(CROWBAR, "Crowbar");
+        addItem(RUSTY_GEAR, "Rusty Gear");
+        addItem(GEAR, "Gear");
+        addItem(ANCIENT_VALVE, "Ancient Valve");
     }
 
     private void addFluidType(Supplier<? extends FluidType> fluidType, String val) {
