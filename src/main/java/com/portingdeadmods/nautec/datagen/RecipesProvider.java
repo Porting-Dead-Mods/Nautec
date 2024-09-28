@@ -455,6 +455,11 @@ public class RecipesProvider extends RecipeProvider {
                 .define('G', NTItems.AIR_BOTTLE.get())
                 .define('D', NTItems.DIVING_CHESTPLATE.get())
                 .save(pRecipeOutput, "diving_chestplate_oxygen");
+
+        ItemEtchingRecipeBuilder.newRecipe(NTBlocks.CRATE.toStack())
+                .ingredient(NTBlocks.RUSTY_CRATE.toStack())
+                .duration(200)
+                .save(pRecipeOutput);
     }
 
     private static void chemistryRecipes(@NotNull RecipeOutput pRecipeOutput) {
