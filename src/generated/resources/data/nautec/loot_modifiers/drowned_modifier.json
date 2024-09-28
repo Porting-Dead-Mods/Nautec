@@ -1,5 +1,5 @@
 {
-  "type": "nautec:add_item",
+  "type": "neoforge:add_table",
   "conditions": [
     {
       "condition": "neoforge:loot_table_id",
@@ -10,13 +10,5 @@
       "condition": "minecraft:random_chance"
     }
   ],
-  "item": {
-    "components": {
-      "minecraft:container_loot": {
-        "loot_table": "nautec:chests/crate"
-      }
-    },
-    "count": 1,
-    "id": "nautec:crate"
-  }
+  "table": "nautec:entities/drowned"
 }

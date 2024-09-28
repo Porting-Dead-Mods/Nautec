@@ -13,10 +13,11 @@ import net.minecraft.util.FastColor;
 import net.neoforged.neoforge.client.gui.widget.ScrollPanel;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 
 public class AugmentationStationDataPanel extends ScrollPanel {
-    private final List<AugmentSlot> augmentSlots;
+    private List<AugmentSlot> augmentSlots;
     private final Minecraft client;
 
     private AugmentSlot selectedSlot;
@@ -24,13 +25,15 @@ public class AugmentationStationDataPanel extends ScrollPanel {
     public AugmentationStationDataPanel(Minecraft client, int width, int height, int top, int left) {
         super(client, width, height, top, left);
         this.client = client;
-        this.augmentSlots = NTRegistries.AUGMENT_SLOT.stream().toList();
+        this.augmentSlots = Collections.emptyList();
 
         applyScrollLimits();
+
     }
 
     private int getMaxScroll() {
-        return this.getContentHeight() - (this.height - this.border);
+        int contentHeight = this.getContentHeight();
+        return Math.max(contentHeight - (this.height - this.border), 0);
     }
 
     private void applyScrollLimits() {
@@ -56,6 +59,7 @@ public class AugmentationStationDataPanel extends ScrollPanel {
 
     @Override
     protected void drawPanel(GuiGraphics guiGraphics, int entryRight, int relativeY, Tesselator tess, int mouseX, int mouseY) {
+        Nautec.LOGGER.debug("relative y: {}", relativeY);
         for (int i = 0; i < this.augmentSlots.size(); i++) {
             AugmentSlot augmentSlot = this.augmentSlots.get(i);
             int x = left + 2;
@@ -66,12 +70,17 @@ public class AugmentationStationDataPanel extends ScrollPanel {
         }
     }
 
+    public void setAugmentSlots(List<AugmentSlot> augmentSlots) {
+        applyScrollLimits();
+        this.augmentSlots = augmentSlots;
+    }
+
     public AugmentSlot getSelectedSlot() {
         return selectedSlot;
     }
 
     public int getSelectedSlotIndex() {
-        return this.augmentSlots.indexOf(selectedSlot);
+        return selectedSlot != null ? this.augmentSlots.indexOf(selectedSlot) : -1;
     }
 
     @Override

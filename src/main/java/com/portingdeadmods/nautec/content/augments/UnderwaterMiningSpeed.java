@@ -15,11 +15,6 @@ public class UnderwaterMiningSpeed extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
-    }
-
-    @Override
     public void onAdded(Player player) {
         AttributeInstance attribute = player.getAttribute(Attributes.SUBMERGED_MINING_SPEED);
         attribute.setBaseValue(1.0f);

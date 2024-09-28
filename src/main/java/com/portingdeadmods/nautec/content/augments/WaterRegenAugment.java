@@ -8,14 +8,10 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.Nullable;
 
+// TODO: implement this
 public class WaterRegenAugment extends Augment {
     public WaterRegenAugment(AugmentSlot augmentSlot) {
         super(NTAugments.WATER_REGEN_AUGMENT.get(), augmentSlot);
-    }
-
-    @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
     }
 
     @Override

@@ -35,26 +35,27 @@ import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class AquarineArmorItem extends ArmorItem implements IPowerItem{
+public class AquarineArmorItem extends ArmorItem implements IPowerItem {
     public AquarineArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
-        super(NTArmorMaterials.AQUARINE_STEEL, type, properties.durability(100).component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(512)));
+        super(NTArmorMaterials.AQUARINE_STEEL, type, properties
+                .durability(100)
+                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(512)));
     }
+    public static final AttributeModifier ENABLED_ARMOR_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"armor"),10,AttributeModifier.Operation.ADD_VALUE);
+    public static final AttributeModifier DISABLED_ARMOR_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"armor"),0,AttributeModifier.Operation.ADD_VALUE);
 
-    public static final AttributeModifier ENABLED_ARMOR_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"armor"),12,AttributeModifier.Operation.ADD_VALUE);
-    public static final AttributeModifier DISABLED_ARMOR_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"armor"),-10,AttributeModifier.Operation.ADD_VALUE);
+    public static final AttributeModifier ENABLED_TOUGHNESS_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"toughness"),5,AttributeModifier.Operation.ADD_VALUE);
+    public static final AttributeModifier DISABLED_TOUGHNESS_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"toughness"),0,AttributeModifier.Operation.ADD_VALUE);
 
-    public static final AttributeModifier ENABLED_TOUGHNESS_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"toughness"),6,AttributeModifier.Operation.ADD_VALUE);
-    public static final AttributeModifier DISABLED_TOUGHNESS_MODIFIER = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"toughness"),-10,AttributeModifier.Operation.ADD_VALUE);
     @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+    public ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
         ItemAttributeModifiers attributes = stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
         boolean hasEnergy = powerStorage.getPowerStored() > 0;
         EquipmentSlot slotType = this.getEquipmentSlot();
         attributes = attributes.withModifierAdded(Attributes.ARMOR, hasEnergy ? ENABLED_ARMOR_MODIFIER : DISABLED_ARMOR_MODIFIER, EquipmentSlotGroup.bySlot(slotType));
         attributes = attributes.withModifierAdded(Attributes.ARMOR_TOUGHNESS, hasEnergy ? ENABLED_TOUGHNESS_MODIFIER : DISABLED_TOUGHNESS_MODIFIER, EquipmentSlotGroup.bySlot(slotType));
-        stack.set(DataComponents.ATTRIBUTE_MODIFIERS, attributes);
-        super.inventoryTick(stack, level, entity, slotId, isSelected);
+        return attributes;
     }
 
     @Override
