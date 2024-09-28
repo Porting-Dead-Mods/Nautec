@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.getting_started;
 
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
+import com.klikli_dev.modonomicon.api.datagen.ConditionHelper;
 import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
 import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
