@@ -246,7 +246,7 @@ public class RecipesProvider extends RecipeProvider {
                 .pattern("LRL")
                 .pattern("RL ")
                 .define('R', NTItems.CAST_IRON_ROD.get())
-                .define('L', Tags.Items.DYED_BLUE)
+                .define('L', Tags.Items.DYES_BLUE)
                 .unlockedBy("has_item", has(NTItems.CAST_IRON_ROD))
                 .save(pRecipeOutput);
     }
