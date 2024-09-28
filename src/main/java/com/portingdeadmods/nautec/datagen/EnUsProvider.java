@@ -7,7 +7,6 @@ import com.portingdeadmods.nautec.registries.NTFluidTypes;
 import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.Utils;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
@@ -44,38 +43,57 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem(GEAR, "Gear");
         addItem(ANCIENT_VALVE, "Ancient Valve");
 
-        // Adding missing language keys
-        addItem("nautec.drowned_lungs", "Drowned Lungs");
-        addItem("nautec.diving_helmet", "Diving Helmet");
-        addItem("nautec.diving_chestplate", "Diving Chestplate");
-        addItem("nautec.diving_leggings", "Diving Leggings");
-        addItem("nautec.diving_boots", "Diving Boots");
-        addItem("nautec.aquarine_steel_wrench", "Aquarine Steel Wrench");
-        addItem("nautec.etching_acid_bucket", "Etching Acid Bucket");
-        addItem("nautec.aquarine_steel_sword", "Aquarine Steel Sword");
-        addItem("nautec.aquarine_steel_pickaxe", "Aquarine Steel Pickaxe");
-        addItem("nautec.aquarine_steel_axe", "Aquarine Steel Axe");
-        addItem("nautec.aquarine_steel_shovel", "Aquarine Steel Shovel");
-        addItem("nautec.aquarine_steel_hoe", "Aquarine Steel Hoe");
-        addItem("nautec.neptunes_trident", "Neptune's Trident");
-        addItem("nautec.aquarine_steel_helmet", "Aquarine Steel Helmet");
-        addItem("nautec.aquarine_steel_chestplate", "Aquarine Steel Chestplate");
-        addItem("nautec.aquarine_steel_leggings", "Aquarine Steel Leggings");
-        addItem("nautec.aquarine_steel_boots", "Aquarine Steel Boots");
-        addItem("nautec.dolphin_fin", "Dolphin Fin");
-        addItem("nautec.broken_whisk", "Broken Whisk");
-        addItem("nautec.whisk", "Whisk");
-        addItem("nautec.prismatic_battery", "Prismatic Battery");
-        addItem("nautec.air_bottle", "Pressurized Air Bottle");
-        addItem("nautec.aquarine_steel_compound", "Aquarine Steel Compound");
-        addItem("nautec.prismarine_crystal_shard", "Prismarine Crystal Shard");
-        addItem("nautec.claw_robot_arm", "Claw Robot Arm");
-        addItem("nautec.syringe_robot_arm", "Syringe Robot Arm");
-        addItem("nautec.deepslate_rod", "Deepslate Rod");
-        addItem("nautec.brown_polymer", "Brown Polymer");
-        addItem("nautec.cast_iron_ingot", "Cast Iron Ingot");
-        addItem("nautec.cast_iron_rod", "Cast Iron Rod");
-        addItem("nautec.cast_iron_nugget", "Cast Iron Nugget");
+        // Adding missing items
+        addItem("drowned_lungs", "Drowned Lungs");
+        addItem("diving_helmet", "Diving Helmet");
+        addItem("diving_chestplate", "Diving Chestplate");
+        addItem("diving_leggings", "Diving Leggings");
+        addItem("diving_boots", "Diving Boots");
+        addItem("aquarine_steel_wrench", "Aquarine Steel Wrench");
+        addItem("etching_acid_bucket", "Etching Acid Bucket");
+        addItem("aquarine_steel_sword", "Aquarine Steel Sword");
+        addItem("aquarine_steel_pickaxe", "Aquarine Steel Pickaxe");
+        addItem("aquarine_steel_axe", "Aquarine Steel Axe");
+        addItem("aquarine_steel_shovel", "Aquarine Steel Shovel");
+        addItem("aquarine_steel_hoe", "Aquarine Steel Hoe");
+        addItem("neptunes_trident", "Neptune's Trident");
+        addItem("aquarine_steel_helmet", "Aquarine Steel Helmet");
+        addItem("aquarine_steel_chestplate", "Aquarine Steel Chestplate");
+        addItem("aquarine_steel_leggings", "Aquarine Steel Leggings");
+        addItem("aquarine_steel_boots", "Aquarine Steel Boots");
+        addItem("dolphin_fin", "Dolphin Fin");
+        addItem("broken_whisk", "Broken Whisk");
+        addItem("whisk", "Whisk");
+        addItem("prismatic_battery", "Prismatic Battery");
+        addItem("air_bottle", "Pressurized Air Bottle");
+        addItem("aquarine_steel_compound", "Aquarine Steel Compound");
+        addItem("prismarine_crystal_shard", "Prismarine Crystal Shard");
+        addItem("claw_robot_arm", "Claw Robot Arm");
+        addItem("syringe_robot_arm", "Syringe Robot Arm");
+        addItem("deepslate_rod", "Deepslate Rod");
+        addItem("brown_polymer", "Brown Polymer");
+        addItem("cast_iron_ingot", "Cast Iron Ingot");
+        addItem("cast_iron_rod", "Cast Iron Rod");
+        addItem("cast_iron_nugget", "Cast Iron Nugget");
+
+        // Adding missing block translations
+        addBlock("rusty_crate", "Rusty Crate");
+        addBlock("polished_prismarine", "Polished Prismarine");
+        addBlock("mixer", "Mixer");
+        addBlock("long_distance_laser", "Long Distance Laser");
+        addBlock("laser_junction", "Laser Junction");
+        addBlock("prismarine_crystal", "Prismarine Crystal");
+        addBlock("deep_sea_drain_wall", "Deep Sea Drain Wall");
+        addBlock("augmentation_station", "Augmentation Station");
+        addBlock("aquarine_steel_block", "Aquarine Steel Block");
+        addBlock("aquatic_catalyst", "Aquatic Catalyst");
+        addBlock("dark_prismarine_pillar", "Dark Prismarine Pillar");
+        addBlock("chiseled_dark_prismarine", "Chiseled Dark Prismarine");
+        addBlock("crate", "Crate");
+        addBlock("prismarine_laser_relay", "Prismarine Laser Relay");
+        addBlock("deep_sea_drain", "Deep Sea Drain");
+        addBlock("augmentation_station_part", "Augmentation Station");
+        addBlock("augmentation_station_extentsion", "Augmentation Station Extension");
 
         // Multiblock information
         add("multiblock.info.failed_to_construct", "Missing or invalid block");
@@ -105,5 +123,9 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
 
     private void addItem(String key, String val) {
         add("item.nautec." + key, val);
+    }
+
+    private void addBlock(String key, String val) {
+        add("block.nautec." + key, val);
     }
 }
