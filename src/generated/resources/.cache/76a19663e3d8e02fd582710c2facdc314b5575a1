@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-28T13:41:35.0951549	Block States: nautec
+// 1.21.1	2024-09-28T13:18:28.198733764	Block States: nautec
 3f3049296b6ec6590b05af441a717618bb232b69 assets/nautec/blockstates/aquarine_steel_block.json
 414381329d7663eb1d1db8c3f42df8d9932d2cfe assets/nautec/blockstates/aquatic_catalyst.json
 920d567f0ae8731bc428c8970aac5400741ea87d assets/nautec/blockstates/augmentation_station.json
@@ -17,6 +17,7 @@ ad55c3b07839453f1153e1bb0eafcfd55cd2f9e1 assets/nautec/blockstates/long_distance
 64a25cd06f6d770e7408fbde89cfb1413550aeb5 assets/nautec/blockstates/mixer.json
 bc5914e8ef7efce89c87e7320a64f1f02348ac6c assets/nautec/blockstates/polished_prismarine.json
 60fb5b3f304282655d6b248eeea7e227ec8055bd assets/nautec/blockstates/prismarine_laser_relay.json
+7930832874f271dd9739dd2fd92a54954d014df8 assets/nautec/blockstates/prismarine_sand.json
 7e786093d68ed9637eb1485a21647c9f133d68dc assets/nautec/blockstates/rusty_crate.json
 ae0bbb4f270da32fa2d11ba493fd0e9bd19fcc75 assets/nautec/models/block/aquarine_steel_block.json
 79882d37910f538e419295b7f4660e5af1721ee3 assets/nautec/models/block/aquatic_catalyst.json
@@ -56,5 +57,6 @@ bc44096b66b26bf80656c02a0e512fa19c975f52 assets/nautec/models/block/deep_sea_dra
 e7497701db027ba0deb6bc9e037e68ab2daac886 assets/nautec/models/block/deep_sea_drain_wall.json
 b37caee681c78c96ef2e66c6a0d4584a47d5b1e3 assets/nautec/models/block/long_distance_laser.json
 670931d9593810682e11609b5c7ed2a908ef9b39 assets/nautec/models/block/polished_prismarine.json
+f5f0d62affc876c65918c16c43280cb89f629648 assets/nautec/models/block/prismarine_sand.json
 f0941592f6b903fd57c9c8b95ec434d91d1f69f2 assets/nautec/models/block/rusty_crate.json
 bd53127cb76298c6d5c7033ad9d91bf02595bdbf assets/nautec/models/block/rusty_crate_open.json

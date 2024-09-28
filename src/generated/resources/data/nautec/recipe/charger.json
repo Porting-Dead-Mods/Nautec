@@ -2,16 +2,22 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
+    "A": {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    "C": {
+      "item": "nautec:laser_channeling_coil"
+    },
+    "D": {
+      "item": "minecraft:dark_prismarine"
+    },
     "P": {
       "item": "nautec:polished_prismarine"
-    },
-    "S": {
-      "item": "nautec:prismarine_crystal_shard"
     }
   },
   "pattern": [
-    "P P",
-    "PSP"
+    "PAP",
+    "DCD"
   ],
   "result": {
     "count": 1,

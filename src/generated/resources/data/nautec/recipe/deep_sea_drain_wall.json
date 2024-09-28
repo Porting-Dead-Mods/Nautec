@@ -4,15 +4,18 @@
   "key": {
     "C": {
       "item": "nautec:cast_iron_ingot"
+    },
+    "R": {
+      "item": "nautec:cast_iron_rod"
     }
   },
   "pattern": [
     "CCC",
-    "C C",
+    "R R",
     "CCC"
   ],
   "result": {
-    "count": 1,
+    "count": 2,
     "id": "nautec:deep_sea_drain_wall"
   }
 }

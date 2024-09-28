@@ -2,20 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "P": {
+    "A": {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    "D": {
       "item": "nautec:polished_prismarine"
     },
-    "S": {
-      "item": "nautec:prismarine_crystal_shard"
+    "P": {
+      "item": "nautec:polished_prismarine"
     },
     "W": {
       "item": "nautec:whisk"
     }
   },
   "pattern": [
-    "P P",
+    "D D",
     "PWP",
-    "PSP"
+    "PAP"
   ],
   "result": {
     "count": 1,

@@ -2,13 +2,22 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
+    "A": {
+      "item": "nautec:aquarine_steel_ingot"
+    },
     "C": {
       "item": "nautec:cast_iron_ingot"
+    },
+    "G": {
+      "item": "nautec:gear"
+    },
+    "V": {
+      "item": "nautec:valve"
     }
   },
   "pattern": [
-    "C C",
-    "C C",
+    "CVC",
+    "AGA",
     "CCC"
   ],
   "result": {
