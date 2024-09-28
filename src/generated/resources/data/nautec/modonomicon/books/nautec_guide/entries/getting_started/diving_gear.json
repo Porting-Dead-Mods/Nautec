@@ -2,12 +2,12 @@
   "background_u_index": 0,
   "background_v_index": 0,
   "category": "getting_started",
-  "description": "book.nautec.nautec_guide.getting_started.monocle.description",
+  "description": "book.nautec.nautec_guide.getting_started.diving_gear.description",
   "hide_while_locked": false,
   "icon": {
-    "item": "nautec:prism_monocle"
+    "item": "nautec:diving_helmet"
   },
-  "name": "book.nautec.nautec_guide.getting_started.monocle.name",
+  "name": "book.nautec.nautec_guide.getting_started.diving_gear.name",
   "pages": [
     {
       "type": "modonomicon:text",
@@ -16,8 +16,8 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.getting_started.monocle.monocle.text",
-      "title": "book.nautec.nautec_guide.getting_started.monocle.monocle.title",
+      "text": "book.nautec.nautec_guide.getting_started.diving_gear.diving.text",
+      "title": "book.nautec.nautec_guide.getting_started.diving_gear.diving.title",
       "use_markdown_in_title": false
     },
     {
@@ -26,14 +26,15 @@
       "condition": {
         "type": "modonomicon:none"
       },
-      "recipe_id_1": "nautec:prism_monocle",
+      "recipe_id_1": "nautec:brown_polymer",
+      "recipe_id_2": "minecraft:diving_chestplate_oxygen",
       "text": "",
-      "title1": "Recipe",
-      "title2": ""
+      "title1": "Brown Polymer",
+      "title2": "Filling the tanks"
     }
   ],
   "show_when_any_parent_unlocked": false,
-  "sort_number": 5,
-  "x": 4,
+  "sort_number": 6,
+  "x": 2,
   "y": 2
 }

@@ -25,7 +25,8 @@ public class GettingStartedCategory extends CategoryProvider {
         add(new LaserPowerEntry(this).generate(new Vec2(0, 2)));
         add(new ItemTransformationEntry(this).generate(new Vec2(4, 0)));
         add(new UtilsEntry(this).generate(new Vec2(6, 0)));
-        add(new MonocleEntry(this).generate(new Vec2(6, -2)));
+        add(new MonocleEntry(this).generate(new Vec2(4, 2)));
+        add(new DivingGearEntry(this).generate(new Vec2(2, 2)));
     }
 
     @Override
