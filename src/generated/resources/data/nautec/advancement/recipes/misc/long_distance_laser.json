@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "nautec:laser_junction"
+            "items": "nautec:prismarine_laser_relay"
           }
         ]
       },

@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
+import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -28,6 +30,9 @@ public final class NTCreativeTabs {
                     if (item instanceof IPowerItem) {
                         addPowered(output, item.asItem());
                     }
+                }
+                if (ModList.get().isLoaded("modonomicon")) {
+                    output.accept(ModonomiconCompat.getItemStack());
                 }
 
                 output.accept(NTItems.SALT_WATER_BUCKET);

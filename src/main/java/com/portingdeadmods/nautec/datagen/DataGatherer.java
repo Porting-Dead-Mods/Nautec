@@ -1,11 +1,13 @@
 package com.portingdeadmods.nautec.datagen;
 
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.ModonomiconDatagen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -36,5 +38,9 @@ public class DataGatherer {
         generator.addProvider(event.includeClient(), blockTagProvider);
         generator.addProvider(event.includeClient(), new ItemTagProvider(output, lookupProvider, blockTagProvider.contentsGetter()));
         generator.addProvider(event.includeServer(),new LootModifierProvider(output,lookupProvider));
+
+        if (ModList.get().isLoaded("modonomicon")) {
+            ModonomiconDatagen.register(event);
+        }
     }
 }

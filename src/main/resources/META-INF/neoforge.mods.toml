@@ -40,8 +40,6 @@ versionRange = "[9.0.9,]"
 ordering = "NONE"
 side = "BOTH"
 
-
-
 [[accessTransformers]]
 file = "META-INF/accesstransformer.cfg"
 

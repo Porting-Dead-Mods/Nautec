@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
 import com.portingdeadmods.nautec.content.items.*;
 import com.portingdeadmods.nautec.content.items.tiers.NTArmorMaterials;
 import com.portingdeadmods.nautec.content.items.tools.*;
@@ -9,6 +10,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -21,6 +23,8 @@ public final class NTItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Nautec.MODID);
     public static final List<ItemLike> CREATIVE_TAB_ITEMS = new ArrayList<>();
     public static final List<Supplier<BlockItem>> BLOCK_ITEMS = new ArrayList<>();
+
+    public static final Supplier<Item> NAUTEC_GUIDE;
 
     // MATERIALS
     public static final DeferredItem<Item> AQUARINE_STEEL_INGOT = registerItem("aquarine_steel_ingot",
@@ -146,4 +150,11 @@ public final class NTItems {
         return toReturn;
     }
 
+    static {
+        if (ModList.get().isLoaded("modonomicon")) {
+            NAUTEC_GUIDE = ModonomiconCompat.registerItem();
+        } else {
+            NAUTEC_GUIDE = null;
+        }
+    }
 }

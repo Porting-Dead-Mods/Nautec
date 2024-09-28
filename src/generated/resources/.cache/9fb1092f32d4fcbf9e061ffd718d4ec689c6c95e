@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-28T13:29:01.381716092	Recipes
+// 1.21.1	2024-09-28T14:34:11.01641758	Recipes
 c01db9d69b288d37c769cf605b945ebf60a08e21 data/minecraft/advancement/recipes/misc/diving_chestplate.json
 36b0d6b627495be6eaf8d6e567f9c95bdb744f14 data/minecraft/advancement/recipes/misc/diving_chestplate_oxygen.json
 83753bf5ab777551fde11d26262c5f2b947f4a64 data/minecraft/recipe/diving_chestplate.json
@@ -37,7 +37,7 @@ f453783b629e6901fe593efb42e4a537f9a615fd data/nautec/advancement/recipes/misc/di
 45f2ce9aa457103af0b898a510b7e5a279870619 data/nautec/advancement/recipes/misc/diving_leggings.json
 2e227620c2d867bc1e46276896b5281bb34d7eb0 data/nautec/advancement/recipes/misc/glass_vial.json
 e8c7d011fc8d7584ae12c127a368e794c349cc43 data/nautec/advancement/recipes/misc/laser_junction.json
-c19000b45278ca9604ddb80fa649c1e61bfd4ccc data/nautec/advancement/recipes/misc/long_distance_laser.json
+5a63e821107905c4834ef94b9dda1d99041e5cc0 data/nautec/advancement/recipes/misc/long_distance_laser.json
 fa6493a3ef0380850872951ce297171d1708ce63 data/nautec/advancement/recipes/misc/mixer.json
 8c227a8c475e21c750c907230ff6420791f780d6 data/nautec/advancement/recipes/misc/polished_prismarine.json
 8b0963164bc58a64ef675d369ac6f4221b8cbebb data/nautec/advancement/recipes/misc/prism_monocle.json
@@ -80,9 +80,9 @@ fe30c6078bd52f68fa02455d52d2eb51b8718c16 data/nautec/recipe/glass_vial.json
 bfb697fd87f2fb761866405c2a58df7aef434ae2 data/nautec/recipe/item_transformation/aquarine_steel_compound_to_aquarine_steel_ingot.json
 a4bdb97abe0834d405f7584452f78242585e02ff data/nautec/recipe/item_transformation/burnt_coil_to_laser_channeling_coil.json
 3ff56013c9c1926be24f71bdb57c93527ef7ee28 data/nautec/recipe/laser_junction.json
-fcd352087c4a209d8df8a3b644a89332797392c2 data/nautec/recipe/long_distance_laser.json
+11d23344db3f6e98c1520328fd6c883bccd8ca57 data/nautec/recipe/long_distance_laser.json
 3c72510dc295062631bc9b6634d4a009e2b8f952 data/nautec/recipe/mixer.json
-0480f5c8d22f83f3f2682f54e08363bf7025fae3 data/nautec/recipe/mixing/dried_kelp_slime_ball_prismarine_crystals_seagrass.json
+35a2d38352317596d0e56958db954ee65944fd30 data/nautec/recipe/mixing/dried_kelp_slime_ball_prismarine_crystals_seagrass.json
 cd9bfbdf0f0468399cc4700d0c360b8283253c96 data/nautec/recipe/polished_prismarine.json
 0f827fa77c72eac02b8f554f934196ddb21a1742 data/nautec/recipe/prism_monocle.json
 ac628b97c097227e3af94f13cbe35a2cf3ee3124 data/nautec/recipe/prismarine_laser_relay.json

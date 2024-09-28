@@ -2,11 +2,11 @@
   "type": "nautec:mixing",
   "duration": 200,
   "fluid_ingredient": {
-    "amount": 500,
+    "amount": 1000,
     "id": "nautec:salt_water"
   },
   "fluid_result": {
-    "amount": 500,
+    "amount": 1000,
     "id": "nautec:electrolyte_algae_serum"
   },
   "ingredients": [
