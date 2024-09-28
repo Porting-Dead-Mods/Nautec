@@ -1,0 +1,12 @@
+{
+  "type": "nautec:item_transformation",
+  "duration": 200,
+  "ingredient": {
+    "item": "nautec:burnt_coil"
+  },
+  "purity": 1.5,
+  "result": {
+    "count": 1,
+    "id": "nautec:laser_channeling_coil"
+  }
+}
