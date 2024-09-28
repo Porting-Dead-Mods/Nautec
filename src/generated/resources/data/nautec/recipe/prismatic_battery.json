@@ -6,15 +6,18 @@
       "item": "nautec:aquarine_steel_ingot"
     },
     "C": {
-      "item": "nautec:prismarine_crystal_shard"
+      "item": "nautec:laser_channeling_coil"
     },
     "R": {
       "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "nautec:prismarine_crystal_shard"
     }
   },
   "pattern": [
-    "CRC",
-    "AAA"
+    "SRS",
+    "ACA"
   ],
   "result": {
     "count": 1,

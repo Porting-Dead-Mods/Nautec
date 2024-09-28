@@ -34,6 +34,7 @@ public class BlockModelProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         axisBlock(NTBlocks.DARK_PRISMARINE_PILLAR.get());
         simpleBlock(NTBlocks.CHISELED_DARK_PRISMARINE.get());
+        simpleBlock(NTBlocks.PRISMARINE_SAND.get());
         simpleBlock(NTBlocks.POLISHED_PRISMARINE.get());
         simpleBlock(NTBlocks.AQUARINE_STEEL_BLOCK.get());
 

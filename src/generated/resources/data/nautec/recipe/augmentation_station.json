@@ -8,14 +8,17 @@
     "C": {
       "item": "nautec:prismarine_crystal_shard"
     },
+    "E": {
+      "item": "nautec:eldritch_artifact"
+    },
     "P": {
       "item": "nautec:polished_prismarine"
     }
   },
   "pattern": [
-    "APA",
-    "PCP",
-    "PPP"
+    "ACA",
+    "PEP",
+    "AAA"
   ],
   "result": {
     "count": 1,

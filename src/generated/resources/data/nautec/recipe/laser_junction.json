@@ -3,19 +3,22 @@
   "category": "misc",
   "key": {
     "A": {
-      "item": "nautec:prismarine_laser_relay"
+      "item": "nautec:aquarine_steel_ingot"
     },
-    "C": {
-      "item": "nautec:prismarine_crystal_shard"
+    "H": {
+      "item": "minecraft:heart_of_the_sea"
+    },
+    "R": {
+      "item": "nautec:prismarine_laser_relay"
     }
   },
   "pattern": [
-    " A ",
-    "ACA",
-    " A "
+    "ARA",
+    "RHR",
+    "ARA"
   ],
   "result": {
-    "count": 1,
+    "count": 2,
     "id": "nautec:laser_junction"
   }
 }
