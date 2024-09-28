@@ -25,6 +25,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -174,7 +175,15 @@ public final class NTEvents {
                 if (etchingTime >= 100) {
                     Optional<ItemEtchingRecipe> optionalRecipe = getEtchingRecipe(stack, level);
                     if (optionalRecipe.isPresent()) {
-                        transformItem(itemEntity, optionalRecipe.get(), level);
+                        ItemEtchingRecipe recipe = optionalRecipe.get();
+
+                        ItemStack outputStack = recipe.getResultItem(level.registryAccess());
+
+                        if (stack.has(DataComponents.BLOCK_ENTITY_DATA)) {
+                            outputStack.set(DataComponents.BLOCK_ENTITY_DATA,stack.get(DataComponents.BLOCK_ENTITY_DATA));
+                        }
+
+                        itemEntity.setItem(outputStack);
                     }
                     activeTransformations.removeInt(itemEntity);
                 } else {
@@ -184,6 +193,7 @@ public final class NTEvents {
                 }
             }
         }
+
 
         private static Optional<ItemEtchingRecipe> getEtchingRecipe(ItemStack stack, Level level) {
             return level.getRecipeManager()
