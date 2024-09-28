@@ -1,0 +1,19 @@
+{
+  "structures": [
+    {
+      "structure": "nautec:prismarine_sand_vein",
+      "weight": 1
+    }
+  ],
+
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 123456789,
+    "spacing": 6,
+    "separation": 2,
+    "exclusion_zone": {
+      "chunk_count": 4,
+      "other_set": "minecraft:ocean_monuments"
+    }
+  }
+}
