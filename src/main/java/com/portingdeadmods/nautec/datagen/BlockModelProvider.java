@@ -11,6 +11,7 @@ import com.portingdeadmods.nautec.content.blocks.multiblock.part.AugmentationSta
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.content.multiblocks.AugmentationStationMultiblock;
 import com.portingdeadmods.nautec.content.multiblocks.DrainMultiblock;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTMultiblocks;
 import net.minecraft.core.Direction;
@@ -44,6 +45,7 @@ public class BlockModelProvider extends BlockStateProvider {
         laserJunction(NTBlocks.LASER_JUNCTION.get());
 
         // Stuff
+        simpleBlock(NTBlocks.PRISMARINE_SAND.get());
         simpleBlock(NTBlocks.MIXER.get(), models().getExistingFile(existingModelFile(NTBlocks.MIXER.get())));
         simpleBlock(NTBlocks.CHARGER.get(), models().getExistingFile(existingModelFile(NTBlocks.CHARGER.get())));
         crateBlock(NTBlocks.CRATE.get());

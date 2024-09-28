@@ -4,6 +4,7 @@
     "nautec:guardian_modifier",
     "nautec:elder_guardian_modifier",
     "nautec:suspicious_ruins_sand_modifier",
+    "nautec:drowned_modifier",
     "nautec:shipwreck_modifier"
   ],
   "replace": false

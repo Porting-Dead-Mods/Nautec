@@ -4,18 +4,7 @@
   "desc": "Greatly improved swimming speed",
   "ingredients": [
     {
-      "item": "nautec:guardian_eye"
-    },
-    {
-      "count": 2,
-      "item": "minecraft:seagrass"
-    },
-    {
-      "count": 2,
-      "item": "minecraft:prismarine_shard"
-    },
-    {
-      "item": "minecraft:prismarine_crystals"
+      "item": "nautec:dolphin_fin"
     }
   ],
   "resultAugment": "nautec:dolphin_fin"

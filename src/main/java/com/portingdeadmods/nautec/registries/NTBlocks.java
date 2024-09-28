@@ -10,6 +10,8 @@ import com.portingdeadmods.nautec.content.blocks.multiblock.part.AugmentationSta
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalPartBlock;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -26,6 +28,8 @@ import static net.minecraft.world.level.block.Blocks.register;
 public final class NTBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Nautec.MODID);
 
+    public static final DeferredBlock<PrismarineSandBlock> PRISMARINE_SAND = registerBlockAndItem("prismarine_sand", props -> new PrismarineSandBlock(UniformInt.of(4, 6), props),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SAND));
     public static final DeferredBlock<CrateBlock> CRATE = registerBlockAndItem("crate", CrateBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL));
     public static final DeferredBlock<CrateBlock> RUSTY_CRATE = registerBlockAndItem("rusty_crate", CrateBlock::new,
