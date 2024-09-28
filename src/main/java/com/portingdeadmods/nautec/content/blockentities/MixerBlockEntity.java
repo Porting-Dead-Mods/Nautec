@@ -216,4 +216,33 @@ public class MixerBlockEntity extends LaserBlockEntity {
         tag.putInt("duration", this.duration);
     }
 
+    public FluidStack getInputFluid() {
+        return getFluidTank().getFluid();
+    }
+
+    public int getInputFluidAmount() {
+        return getFluidTank().getFluidAmount();
+    }
+
+    public FluidStack getOutputFluid() {
+        return getSecondaryFluidTank().getFluid();
+    }
+
+    public int getOutputFluidAmount() {
+        return getSecondaryFluidTank().getFluidAmount();
+    }
+
+    public int getDuration() {
+        return this.duration;
+    }
+
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public int getMaxDuration() {
+        return getRecipe().map(MixingRecipe::duration).orElse(0);
+    }
+
+
 }
