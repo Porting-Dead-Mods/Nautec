@@ -68,6 +68,7 @@ public abstract class ContainerBlockEntity extends BlockEntity {
         return powerStorage;
     }
 
+
     protected ItemStackHandler getItemStackHandler() {
         return itemHandler;
     }
