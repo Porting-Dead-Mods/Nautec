@@ -6,16 +6,19 @@
       "item": "nautec:aquarine_steel_ingot"
     },
     "C": {
-      "item": "nautec:prismarine_crystal_shard"
+      "item": "nautec:laser_channeling_coil"
     },
     "P": {
       "item": "nautec:polished_prismarine"
+    },
+    "S": {
+      "item": "nautec:prismarine_crystal_shard"
     }
   },
   "pattern": [
-    "PAP",
-    "PCP",
-    "PPP"
+    "ASA",
+    "APA",
+    "ACA"
   ],
   "result": {
     "count": 2,
