@@ -1,0 +1,28 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "getting_started",
+  "description": "book.nautec.nautec_guide.getting_started.monocle.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "nautec:prism_monocle"
+  },
+  "name": "book.nautec.nautec_guide.getting_started.monocle.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.nautec.nautec_guide.getting_started.monocle.monocle.text",
+      "title": "book.nautec.nautec_guide.getting_started.monocle.monocle.title",
+      "use_markdown_in_title": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 5,
+  "x": 6,
+  "y": -2
+}
