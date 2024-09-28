@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 public class AugmentationStationMultiblock implements Multiblock {
     public static final IntegerProperty AS_PART = IntegerProperty.create("as_part", 0, 8);
 
-    // FIXME: Problematic on multiplayer
+    // FIXME: Problematic on multiplaye
     private int actualIndex = 0;
 
     @Override
@@ -89,7 +89,6 @@ public class AugmentationStationMultiblock implements Multiblock {
         }
     }
 
-    // FIXME: Actual index system is flawed :p
     @Override
     public @Nullable BlockState formBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, MultiblockData multiblockData, @Nullable Player player) {
         Int2ObjectMap<Block> def = getDefinition();

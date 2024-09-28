@@ -26,11 +26,6 @@ public class EnderMagnetAugment extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
-    }
-
-    @Override
     public void serverTick(PlayerTickEvent.Post event) {
         if (!player.isCrouching()) {
             List<ItemEntity> nearbyItems = player.level().getEntitiesOfClass(ItemEntity.class, player.getBoundingBox().inflate(MAGNET_RADIUS));

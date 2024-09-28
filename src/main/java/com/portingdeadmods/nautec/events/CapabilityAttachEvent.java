@@ -27,11 +27,6 @@ public final class CapabilityAttachEvent {
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         registerItemCaps(event);
         registerBECaps(event);
-        registerEntityCaps(event);
-    }
-
-    private static void registerEntityCaps(RegisterCapabilitiesEvent event){
-        // TODO: Register Player Augmentation Capability
     }
 
     private static void registerItemCaps(RegisterCapabilitiesEvent event) {

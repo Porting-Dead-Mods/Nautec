@@ -23,11 +23,6 @@ public class ThrowSpreadingTrident extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
-    }
-
-    @Override
     public void clientTick(PlayerTickEvent.Post event) {
         if (NTKeybinds.THROW_SPREADING_KEYBIND.get().consumeClick() && !isOnCooldown()) {
             PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));

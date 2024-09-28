@@ -3,12 +3,12 @@
   "conditions": [
     {
       "condition": "neoforge:loot_table_id",
-      "loot_table_id": "minecraft:entities/elder_guardian"
+      "loot_table_id": "minecraft:entities/dolphin"
     },
     {
-      "chance": 1.0,
+      "chance": 0.2,
       "condition": "minecraft:random_chance"
     }
   ],
-  "table": "nautec:entities/elder_guardian"
+  "table": "nautec:entities/dolphin"
 }

@@ -5,14 +5,14 @@ import com.portingdeadmods.nautec.api.client.renderer.augments.ModelPartGetter;
 
 public enum AugmentSlots implements AugmentSlot {
     HEAD(model -> model.head),
-    EYES,
+    EYES(model -> model.head),
     BODY(model -> model.body),
     LUNG,
     LEFT_ARM(model -> model.leftArm),
     RIGHT_ARM(model -> model.rightArm),
     LEFT_LEG(model -> model.leftLeg),
     RIGHT_LEG(model -> model.rightLeg),
-    HEART(model -> model.head);
+    HEART;
 
     private final ModelPartGetter modelPartGetterFunc;
 

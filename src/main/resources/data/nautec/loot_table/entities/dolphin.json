@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "nautec:broken_whisk",
+          "name": "nautec:dolphin_fin",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -14,17 +14,6 @@
             }
           ],
           "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "nautec:drowned_lungs",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 1
-            }
-          ],
-          "weight": 1
         }
       ]
     }

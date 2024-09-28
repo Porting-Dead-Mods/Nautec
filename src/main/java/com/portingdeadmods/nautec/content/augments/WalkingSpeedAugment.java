@@ -13,11 +13,6 @@ public class WalkingSpeedAugment extends Augment {
     }
 
     @Override
-    public @Nullable AugmentSlot[] getCompatibleSlots() {
-        return new AugmentSlot[0];
-    }
-
-    @Override
     public void onAdded(Player player) {
         player.getAbilities().setWalkingSpeed(0.25f);
     }
