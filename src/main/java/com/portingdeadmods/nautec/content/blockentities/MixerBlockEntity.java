@@ -236,10 +236,6 @@ public class MixerBlockEntity extends LaserBlockEntity {
         return this.duration;
     }
 
-    public boolean isActive() {
-        return this.active;
-    }
-
     public int getMaxDuration() {
         return getRecipe().map(MixingRecipe::duration).orElse(0);
     }

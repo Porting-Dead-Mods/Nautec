@@ -8,6 +8,7 @@ import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
@@ -455,8 +456,12 @@ public class RecipesProvider extends RecipeProvider {
                 .define('D', NTItems.DIVING_CHESTPLATE.get())
                 .save(pRecipeOutput, "diving_chestplate_oxygen");
 
-        ItemEtchingRecipeBuilder.newRecipe(NTBlocks.CRATE.toStack())
-                .ingredient(NTBlocks.RUSTY_CRATE.toStack())
+        ItemStack inputCrate = NTBlocks.RUSTY_CRATE.toStack();
+        ItemStack outputCrate = NTBlocks.CRATE.toStack();
+        outputCrate.set(DataComponents.BLOCK_ENTITY_DATA,inputCrate.get(DataComponents.BLOCK_ENTITY_DATA));
+
+        ItemEtchingRecipeBuilder.newRecipe(outputCrate)
+                .ingredient(inputCrate)
                 .duration(200)
                 .save(pRecipeOutput);
     }

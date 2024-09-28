@@ -16,6 +16,7 @@ import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.events.helper.ItemInfusion;
 import com.portingdeadmods.nautec.network.SyncAugmentPayload;
+import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTFluidTypes;
 import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
@@ -25,6 +26,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -193,9 +195,13 @@ public final class NTEvents {
 
         private static void transformItem(ItemEntity itemEntity, ItemEtchingRecipe recipe, Level level) {
             Vec3 position = itemEntity.position();
-
+            ItemStack inputStack = itemEntity.getItem();
             ItemStack resultStack = recipe.getResultItem(level.registryAccess()).copy();
             resultStack.setCount(itemEntity.getItem().getCount());
+
+            if(inputStack.is(NTBlocks.RUSTY_CRATE.asItem()) && resultStack.is(NTBlocks.CRATE.asItem())) {
+                resultStack.set(DataComponents.BLOCK_ENTITY_DATA, itemEntity.getItem().get(DataComponents.BLOCK_ENTITY_DATA));
+            }
 
             itemEntity.discard();
 
