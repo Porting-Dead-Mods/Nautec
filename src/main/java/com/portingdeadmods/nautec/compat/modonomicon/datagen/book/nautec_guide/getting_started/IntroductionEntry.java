@@ -20,8 +20,19 @@ public class IntroductionEntry extends EntryProvider {
         this.page("intro", () -> BookTextPageModel.create()
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
-        this.pageTitle("Intro Title");
-        this.pageText("TEEEEEEXT");
+        this.pageTitle("Introduction");
+        this.pageText("""
+                Greetings Traveller,
+                \\
+                it seems like you have obtained
+                my book. I hope to explain my discoveries
+                about the vast underwater world and how to leverage them in it.
+                \\
+                \\
+                To make this easier to follow along I have decided to structure
+                it in a way that allows for easy understanding and
+                replication of my steps.
+                """);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class ItemTransformationEntry extends EntryProvider {
                 Item transformation works by shooting lasers at items to transform them into other items.
                 \\
                 \\
-                Some recipes may require a specific laser color or purity so be sure to check before crafting.
+                Some recipes may require a certain level of purity so be sure to check before crafting.
                 """);
         this.page("transformation_recipe", () -> BookImagePageModel.create()
                 .withTitle("Recipe Exemples")

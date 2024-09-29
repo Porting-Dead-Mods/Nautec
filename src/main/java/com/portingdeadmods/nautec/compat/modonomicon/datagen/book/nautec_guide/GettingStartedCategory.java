@@ -33,13 +33,10 @@ public class GettingStartedCategory extends CategoryProvider {
         BookEntryModel itemTransformationEntry = new ItemTransformationEntry(this)
                 .generate(new Vec2(6, 0));
         add(itemTransformationEntry.withParent(laserPowerEntry));
-        BookEntryModel utilsEntry = new UtilsEntry(this)
-                .generate(new Vec2(0, -2));
-        add(utilsEntry.withParent(introductionEntry));
         BookEntryModel monocleEntry = new MonocleEntry(this)
                 .generate(new Vec2(4, 2));
         add(monocleEntry.withParent(itemTransformationEntry));
-        BookEntryModel divingGear = new DivingGearEntry(this).generate(new Vec2(2, 2));
+        BookEntryModel divingGear = new DivingGearEntry(this).generate(new Vec2(2, -2));
         add(divingGear.withParent(introductionEntry));
     }
 

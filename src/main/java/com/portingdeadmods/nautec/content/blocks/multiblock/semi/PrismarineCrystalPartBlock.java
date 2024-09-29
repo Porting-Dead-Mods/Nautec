@@ -51,7 +51,7 @@ public class PrismarineCrystalPartBlock extends LaserBlock {
         for (int i = -2; i < 4; i++) {
             BlockPos blockPos = pos.above(i);
             if (level.getBlockEntity(blockPos) instanceof PrismarineCrystalBlockEntity){
-                PrismarineCrystalBlock.removeCrystal(level, blockPos);
+                PrismarineCrystalBlock.removeCrystal(level, player, blockPos);
             }
         }
         return true;

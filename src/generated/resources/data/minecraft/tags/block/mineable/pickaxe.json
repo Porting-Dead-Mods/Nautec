@@ -1,5 +1,22 @@
 {
   "values": [
-    "nautec:crate"
+    "nautec:crate",
+    "nautec:rusty_crate",
+    "nautec:dark_prismarine_pillar",
+    "nautec:chiseled_dark_prismarine",
+    "nautec:polished_prismarine",
+    "nautec:aquarine_steel_block",
+    "nautec:aquatic_catalyst",
+    "nautec:prismarine_laser_relay",
+    "nautec:mixer",
+    "nautec:charger",
+    "nautec:long_distance_laser",
+    "nautec:laser_junction",
+    "nautec:deep_sea_drain",
+    "nautec:deep_sea_drain_wall",
+    "nautec:deep_sea_drain_part",
+    "nautec:augmentation_station",
+    "nautec:augmentation_station_extension",
+    "nautec:augmentation_station_part"
   ]
 }

@@ -82,6 +82,9 @@ public class NTJeiPlugin implements IModPlugin {
         for (AugmentationRecipe recipe : augmentationRecipes) {
             registration.addIngredientInfo(recipe.augmentItem().getDefaultInstance(), VanillaTypes.ITEM_STACK, Component.translatable(recipe.desc()));
         }
+
+        registration.addIngredientInfo(NTItems.PRISMARINE_CRYSTAL_SHARD.toStack(), VanillaTypes.ITEM_STACK,
+                Component.literal("Prismarine Crystal Shards are pristine crystals, capable of channeling power like no other material. They can be obtained by breaking a prismarine crystal using an Aquarine Steel Pickaxe with its ability enabled."));
     }
 
     @Override

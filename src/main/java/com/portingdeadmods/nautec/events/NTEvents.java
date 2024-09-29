@@ -26,8 +26,10 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,6 +39,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.component.SeededContainerLoot;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
@@ -200,7 +205,13 @@ public final class NTEvents {
             resultStack.setCount(itemEntity.getItem().getCount());
 
             if(inputStack.is(NTBlocks.RUSTY_CRATE.asItem()) && resultStack.is(NTBlocks.CRATE.asItem())) {
-                resultStack.set(DataComponents.BLOCK_ENTITY_DATA, itemEntity.getItem().get(DataComponents.BLOCK_ENTITY_DATA));
+               for (DataComponentType<?> type : itemEntity.getItem().getComponents().keySet()) {
+                   Nautec.LOGGER.debug("Type: {}", BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(type));
+               }
+                ItemContainerContents value = itemEntity.getItem().copy().get(DataComponents.CONTAINER);
+                resultStack.set(DataComponents.CONTAINER, value);
+                SeededContainerLoot value1 = itemEntity.getItem().copy().get(DataComponents.CONTAINER_LOOT);
+                resultStack.set(DataComponents.CONTAINER_LOOT, value1);
             }
 
             itemEntity.discard();

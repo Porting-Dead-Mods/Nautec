@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.multiblocks;
 
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.SavesControllerPosBlockEntity;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
@@ -88,6 +89,7 @@ public class DrainMultiblock implements Multiblock {
     @Override
     public void afterUnformBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, HorizontalDirection direction, @Nullable Player player) {
         Multiblock.super.afterUnformBlock(level, blockPos, controllerPos, layerIndex, layoutIndex, direction, player);
+        Nautec.LOGGER.debug("unforming");
         level.removeBlock(blockPos.above(), false);
     }
 

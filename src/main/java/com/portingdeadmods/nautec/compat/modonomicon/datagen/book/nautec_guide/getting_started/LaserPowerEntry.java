@@ -4,6 +4,7 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
 import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
 import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTBlocks;
@@ -19,8 +20,25 @@ public class LaserPowerEntry extends EntryProvider {
         this.page("intro", () -> BookTextPageModel.create()
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
-        this.pageTitle("Laser Power");
-        this.pageText("LAZZAAAA POWAH");
+        this.pageTitle("An Introduction to Laser Power");
+        this.pageText("""
+                Lasers are a mysterious technology. Nobody really knows
+                exactly how to create them. However using some prismarine
+                both dark and light, one is able to create an Aquatic Catalyst.
+                \\
+                While this block itself does not possesses the ability to channel
+                energy into a laser.
+                """);
+        this.page("aquatic_catalyst_recipe", () -> BookCraftingRecipePageModel.create()
+                .withTitle1("Aquatic Catalyst")
+                .withRecipeId1("nautec:aquatic_catalyst")
+                .withText("""
+                        It can be accomplished by supplying the catalyst with fuel, like for
+                        example Kelp and activating it with a Heart Of the Sea.
+                        \\
+                        After right-clicking the item on the catalyst, a laser beam will shoot
+                        out of the opposite side as long as it has a target.
+                        """));
     }
 
     @Override

@@ -20,8 +20,27 @@ public class StructuresEntry extends EntryProvider {
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
 
-        this.pageTitle("Structures in the abyss");
-        this.pageText("On your journey you will find a variety of structures located in the ocean...");
+        this.pageTitle("Deep Sea Structures");
+        this.pageText("""
+                The first step to unlocking Aquatic Power is to locate an ocean and to search for a small and unlikely structure.
+                \\
+                The structure is mainly built out of dark prismarine with a mysterious device in the middle of the "arch"
+                However, this structure should not be your main point of interest as below it, in a small radius, there often
+                is a geode like cave, containing a mighty crystal.
+                """);
+
+        this.page("geode", () -> BookTextPageModel.create()
+                .withTitle(this.context().pageTitle())
+                .withText(this.context().pageText()));
+
+        this.pageTitle("Deep Sea Structures");
+        this.pageText("""
+                Around the crystal there is also a variety of loot. The crystal itself is surrounded with scaffolding which might be useful
+                later on...
+                \\
+                \\
+                Edit: Do NOT break the crystal (yet) as it seems to shatter completely, without leaving anything behind.
+                """);
     }
 
     @Override

@@ -1,1 +1,16 @@
-// 1.21.1	2024-09-13T18:06:50.0655091	Loot Tables
+// 1.21.1	2024-09-29T02:27:34.286677852	Loot Tables
+41719eca89c8053e263d78613ee41d3d1597d2f8 data/nautec/loot_table/blocks/aquarine_steel_block.json
+0db317348cd6a30700738aad0c4ee8bf13bdda43 data/nautec/loot_table/blocks/augmentation_station.json
+89010d86a80ddcea039479bd7f53ac2a03cb959d data/nautec/loot_table/blocks/augmentation_station_extension.json
+1174573fcdf3f6ce8973ee45db6557634dcb4bda data/nautec/loot_table/blocks/augmentation_station_part.json
+41b64deb69add5aba548b36fb7de36f1bdcae2ba data/nautec/loot_table/blocks/charger.json
+fcf05cc18fcb8b9624d59dc8c707dc1c5620eb70 data/nautec/loot_table/blocks/chiseled_dark_prismarine.json
+f403acf76ab195da1607916f7678d6a1a79dcf25 data/nautec/loot_table/blocks/dark_prismarine_pillar.json
+70569a466f470b7160131c892029c4ccc54df2c2 data/nautec/loot_table/blocks/deep_sea_drain.json
+42e084ccc92c50847afd04f1906c864d1cfe8d40 data/nautec/loot_table/blocks/deep_sea_drain_wall.json
+e90a32f36ece9a0d7c78ed93505bccddc8d505ec data/nautec/loot_table/blocks/laser_junction.json
+e82dcfcfa3ad60ff3ab2eece61c4a426a72a4cb6 data/nautec/loot_table/blocks/long_distance_laser.json
+aebefb09b28c0e85666d103e15dcea0c2fecf572 data/nautec/loot_table/blocks/mixer.json
+de667d48405eca934d75fcf7c05a333f42a06c43 data/nautec/loot_table/blocks/polished_prismarine.json
+e8ee191fa32b03b0128ddb6946630c58a4159591 data/nautec/loot_table/blocks/prismarine_laser_relay.json
+a22ebcb1d9483dfaa403866787730f3582716c02 data/nautec/loot_table/blocks/prismarine_sand.json
