@@ -1,3 +1,7 @@
 {
-    "introduction.mdx": "Introduction"
+  "introduction.mdx": "Introduction",
+  "structures.mdx": "Structures",
+  "laser_power.mdx": "Laser Power",
+  "item_transformation.mdx": "Item Transformation",
+  "machine_part.mdx": "Machine Part"
 }
