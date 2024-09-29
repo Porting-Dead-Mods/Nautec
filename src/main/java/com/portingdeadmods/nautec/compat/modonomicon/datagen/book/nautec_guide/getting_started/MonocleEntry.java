@@ -41,7 +41,7 @@ public class MonocleEntry extends EntryProvider {
 
     @Override
     protected String entryDescription() {
-        return "The Third Eye of the Sea";
+        return "The Sixth Eye of the Sea";
     }
 
     @Override

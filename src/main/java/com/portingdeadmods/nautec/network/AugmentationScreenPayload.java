@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.network;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.client.screen.AugmentScreen;
 import com.portingdeadmods.nautec.content.menus.AugmentMenu;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -13,8 +14,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-
-import static com.portingdeadmods.nautec.Nautec.instance;
 
 public record AugmentationScreenPayload(byte payloadType) implements CustomPacketPayload {
     // 0 -> toServer
@@ -43,7 +42,7 @@ public record AugmentationScreenPayload(byte payloadType) implements CustomPacke
 
             if (payload.payloadType == 1) {
                 Player player = context.player();
-                instance.setScreen(new AugmentScreen(
+                Minecraft.getInstance().setScreen(new AugmentScreen(
                         new AugmentMenu(player, player.containerMenu.containerId),
                         player.getInventory(),
                         Component.literal("Augmentation")

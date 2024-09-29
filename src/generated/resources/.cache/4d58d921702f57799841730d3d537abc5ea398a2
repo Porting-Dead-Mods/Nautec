@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-28T13:07:04.811321282	Item Models: nautec
+// 1.21.1	2024-09-29T15:46:30.473567706	Item Models: nautec
 53692692f57914fc54eb6ebf416ce1cb7789e57b assets/nautec/models/item/air_bottle.json
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
 f031500271b315d13a5f3ca96fc3a73ea8d47054 assets/nautec/models/item/aquarine_steel_axe_enabled.json
@@ -46,7 +46,7 @@ c085f601646336ad76e9a613649bcffc3a304c9a assets/nautec/models/item/dolphin_fin.j
 0620a4b87e92446ecf5521b595d2f1a6a9401529 assets/nautec/models/item/drowned_lungs.json
 4d2bc30dbb5e9bca7902cfeafeb133ff4facbee8 assets/nautec/models/item/eas_bucket.json
 81b061a707ce97739bf742ee8c4832e9612c3f18 assets/nautec/models/item/eas_vial.json
-6c5731275bcae93051e29386748f65364b3ea8bd assets/nautec/models/item/eldritch_artifact.json
+7bdd896a173f2dbd2cf64ff41e82f6c5525dcf49 assets/nautec/models/item/eldritch_heart.json
 d26c5a9588cd86145f6c2e03e5fd5eabc4ed0f07 assets/nautec/models/item/etching_acid_bucket.json
 490588573d27c343b055c02b137c221a71866aa8 assets/nautec/models/item/gear.json
 2b617afc38ea0b797aeba3ca00dfb25f33be4bd3 assets/nautec/models/item/glass_vial.json

@@ -6,7 +6,6 @@ import com.portingdeadmods.nautec.content.items.*;
 import com.portingdeadmods.nautec.content.items.tiers.NTArmorMaterials;
 import com.portingdeadmods.nautec.content.items.tools.*;
 import com.portingdeadmods.nautec.data.NTDataComponents;
-import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
@@ -59,8 +58,6 @@ public final class NTItems {
             Item::new, new Item.Properties());
 
 
-    public static final DeferredItem<Item> ELDRITCH_ARTIFACT = registerItem("eldritch_artifact",
-            Item::new, new Item.Properties());
     public static final DeferredItem<Item> CAST_IRON_INGOT = registerItem("cast_iron_ingot", Item::new, new Item.Properties());
     public static final DeferredItem<Item> CAST_IRON_NUGGET = registerItem("cast_iron_nugget", Item::new, new Item.Properties());
     public static final DeferredItem<Item> CAST_IRON_ROD = registerItem("cast_iron_rod", Item::new, new Item.Properties());
@@ -72,6 +69,8 @@ public final class NTItems {
     public static final DeferredItem<Item> DOLPHIN_FIN = registerItem("dolphin_fin",
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> GUARDIAN_EYE = registerItem("guardian_eye",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> ELDRITCH_HEART = registerItem("eldritch_heart",
             Item::new, new Item.Properties());
 
     // Robot Arms

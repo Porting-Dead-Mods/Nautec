@@ -8,16 +8,13 @@ import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
-import net.minecraft.client.gui.screens.recipebook.BlastingRecipeBookComponent;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.BlastingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
@@ -126,7 +123,7 @@ public class RecipesProvider extends RecipeProvider {
                 .define('A', NTItems.AQUARINE_STEEL_INGOT)
                 .define('P', NTBlocks.POLISHED_PRISMARINE)
                 .define('C', NTItems.PRISMARINE_CRYSTAL_SHARD)
-                .define('E', NTItems.ELDRITCH_ARTIFACT)
+                .define('E', NTItems.ELDRITCH_HEART)
                 .unlockedBy("has_item", has(NTItems.PRISMARINE_CRYSTAL_SHARD))
                 .save(pRecipeOutput);
 
@@ -526,10 +523,15 @@ public class RecipesProvider extends RecipeProvider {
                 .ingredients(IngredientWithCount.fromItemLike(NTItems.DROWNED_LUNGS.get()))
                 .save(pRecipeOutput, "drowned_lung");
 
-        AugmentationRecipeBuilder.newRecipe(NTAugments.GUARDIAN_EYE_AUGMENT.get())
+        AugmentationRecipeBuilder.newRecipe(NTAugments.GUARDIAN_EYE.get())
                 .augmentItem(NTItems.GUARDIAN_EYE.get(), "Shoots lasers at enemies you are looking at")
                 .ingredients(IngredientWithCount.fromItemLike(NTItems.GUARDIAN_EYE.get()))
                 .save(pRecipeOutput, "guardian_eye_augment");
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.ELDRITCH_HEART.get())
+                .augmentItem(NTItems.ELDRITCH_HEART.get(), "Increased health regeneration when underwater")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.ELDRITCH_HEART.get()))
+                .save(pRecipeOutput, "eldritch_heart");
     }
 
     private static @NotNull IngredientWithCount iwcFromItemLike(Item item, int count) {

@@ -7,8 +7,6 @@ import com.portingdeadmods.nautec.content.items.PrismMonocleItem;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.registries.*;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.component.DataComponents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
@@ -19,7 +17,6 @@ import org.slf4j.Logger;
 
 @Mod(Nautec.MODID)
 public final class Nautec {
-    public static final Minecraft instance = Minecraft.getInstance();
     public static final String MODID = "nautec";
     public static final String MODNAME = "NauTec";
     public static final Logger LOGGER = LogUtils.getLogger();
