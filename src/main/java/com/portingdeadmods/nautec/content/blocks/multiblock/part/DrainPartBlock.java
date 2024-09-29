@@ -167,7 +167,8 @@ public class DrainPartBlock extends LaserBlock implements SimpleWaterloggedBlock
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (state.getValue(OPEN) && (state.getValue(DrainMultiblock.DRAIN_PART) == 4 || state.getValue(DrainMultiblock.DRAIN_PART) % 2 != 0)) {
+        DrainPartBlockEntity be = (DrainPartBlockEntity) level.getBlockEntity(pos);
+        if (be.getPower() > 15 && state.getValue(OPEN) && (state.getValue(DrainMultiblock.DRAIN_PART) == 4 || state.getValue(DrainMultiblock.DRAIN_PART) % 2 != 0)) {
             BubbleColumnBlock.updateColumn(level, pos.above(), state);
         }
     }

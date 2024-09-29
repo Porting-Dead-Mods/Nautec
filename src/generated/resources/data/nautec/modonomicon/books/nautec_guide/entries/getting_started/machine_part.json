@@ -19,6 +19,18 @@
       "text": "book.nautec.nautec_guide.getting_started.machine_part.machine_part.text",
       "title": "book.nautec.nautec_guide.getting_started.machine_part.machine_part.title",
       "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "nautec:burnt_coil"
+      },
+      "text": "",
+      "title": "book.nautec.nautec_guide.getting_started.machine_part.machine_part_examples.title"
     }
   ],
   "parents": [
