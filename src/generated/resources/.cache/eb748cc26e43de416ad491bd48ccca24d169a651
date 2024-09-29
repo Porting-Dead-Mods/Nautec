@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-29T17:14:08.1252643	Books: nautec
+// 1.21.1	2024-09-29T22:09:00.8266603	Books: nautec
 6d944fd1b3f4f8d8baf18317dbdea1e50476ed05 data/nautec/modonomicon/books/nautec_guide/book.json
 ea5fe754ad19a1903e7a9d19f39e3b1488e59cfe data/nautec/modonomicon/books/nautec_guide/categories/getting_started.json
 41b01f32b9f23cf1eb5a33085b98bd30f0a1f943 data/nautec/modonomicon/books/nautec_guide/categories/laser_augmentation.json
@@ -23,5 +23,5 @@ d70be2eaf9729ca163499da6d7a33730cf7e07f2 data/nautec/modonomicon/books/nautec_gu
 34c421cb513a6d5ac4631180a2bbd14aa09d021a data/nautec/modonomicon/books/nautec_guide/entries/laser_chemistry/drain.json
 65716fa85df9020bd445a8da037a326dd41e4887 data/nautec/modonomicon/books/nautec_guide/entries/laser_chemistry/laser_manipulation.json
 36b15f5de5e5af848e148b4b01fae16583900bca data/nautec/modonomicon/books/nautec_guide/entries/laser_chemistry/mixer.json
-928679f259e0edf901721ea568ce3a90918098e2 data/nautec/modonomicon/books/nautec_guide/entries/laser_chemistry/prismatic_battery.json
+ff17de9e527f75fdbe8a985f0254ef4e5d0a3dd4 data/nautec/modonomicon/books/nautec_guide/entries/laser_chemistry/prismatic_battery.json
 d7962fa5a5a4e89ba57d4f4ec46d4f98787a6d33 data/nautec/modonomicon/books/nautec_guide/entries/laser_chemistry/tools.json

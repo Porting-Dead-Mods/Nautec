@@ -19,6 +19,17 @@
       "text": "book.nautec.nautec_guide.laser_chemistry.prismatic_battery.prismatic_battery.text",
       "title": "book.nautec.nautec_guide.laser_chemistry.prismatic_battery.prismatic_battery.title",
       "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "nautec:prismatic_battery",
+      "text": "",
+      "title1": "Prismatic Battery Recipe",
+      "title2": ""
     }
   ],
   "parents": [
