@@ -19,6 +19,30 @@
       "text": "book.nautec.nautec_guide.laser_augmentation.aquarine_steel_armor.aquarine_steel_armor.text",
       "title": "book.nautec.nautec_guide.laser_augmentation.aquarine_steel_armor.aquarine_steel_armor.title",
       "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "natuec:aquarine_steel_helmet",
+      "recipe_id_2": "nautec:aquarine_steel_chestplate",
+      "text": "",
+      "title1": "Aquarine Steel Helmet",
+      "title2": "Aquarine Steel Chestplate"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "natuec:aquarine_steel_leggings",
+      "recipe_id_2": "nautec:aquarine_steel_boots",
+      "text": "",
+      "title1": "Aquarine Steel Leggings",
+      "title2": "Aquarine Steel Boots"
     }
   ],
   "parents": [
