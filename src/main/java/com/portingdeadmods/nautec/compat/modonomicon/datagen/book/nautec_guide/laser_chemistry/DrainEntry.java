@@ -37,7 +37,7 @@ public class DrainEntry extends EntryProvider {
                 .withVisualizeButton(true)
                 .withText(this.context().pageText()));
         this.pageText("""
-                To form the deep sea drain, the player
+                To form the deep sea drain, you
                 needs to right-click the center block with
                 an Aquarine Steel Wrench.
                 \\

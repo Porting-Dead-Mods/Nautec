@@ -43,6 +43,9 @@ public class GettingStartedCategory extends CategoryProvider {
         BookEntryModel cratesEtching = new CratesEtchingEntry(this)
                 .generate(new Vec2(2, 2));
         add(cratesEtching.withParent(structuresEntry));
+        BookEntryModel machinePartEntry = new MachinePartEntry(this)
+                .generate(new Vec2(4, -2));
+        add(machinePartEntry.withParent(structuresEntry));
     }
 
     @Override

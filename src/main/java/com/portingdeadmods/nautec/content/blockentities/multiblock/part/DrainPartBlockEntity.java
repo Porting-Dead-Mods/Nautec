@@ -49,6 +49,9 @@ public class DrainPartBlockEntity extends LaserBlockEntity implements FakeBlockE
 
     @Override
     public ObjectSet<Direction> getLaserOutputs() {
+        if (laserPort != null) {
+            return ObjectSet.of(laserPort.getOpposite());
+        }
         return ObjectSet.of();
     }
 
@@ -99,5 +102,11 @@ public class DrainPartBlockEntity extends LaserBlockEntity implements FakeBlockE
         if (this.laserPort != null) {
             tag.putInt("laserPort", this.laserPort.ordinal());
         }
+    }
+
+    @Override
+    public void commonTick() {
+        super.commonTick();
+        transmitPower(getPower());
     }
 }

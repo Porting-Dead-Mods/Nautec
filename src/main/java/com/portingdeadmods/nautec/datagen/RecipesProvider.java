@@ -480,24 +480,14 @@ public class RecipesProvider extends RecipeProvider {
                 .duration(200)
                 .save(pRecipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.ETCHING_ACID_BUCKET.get(), 1)
-                .pattern("ACE")
-                .pattern("HBD")
-                .pattern("IGF")
-                .define('A', Items.POISONOUS_POTATO)
-                .define('B', Items.WATER_BUCKET)
-                .define('C', Items.COPPER_INGOT)
-                .define('D', Items.REDSTONE)
-                .define('E', Items.GLOWSTONE_DUST)
-                .define('F', Items.BLAZE_POWDER)
-                .define('G', Items.GUNPOWDER)
-                .define('H', Items.BLAZE_POWDER)
-                .define('I', Items.BONE_MEAL)
-
-
-                .unlockedBy("has_item", has(NTItems.BROWN_POLYMER))
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.ETCHING_ACID_BUCKET)
+                .requires(Items.POISONOUS_POTATO)
+                .requires(Items.GUNPOWDER)
+                .requires(Items.BONE_MEAL)
+                .requires(Items.WATER_BUCKET)
+                .requires(Items.REDSTONE)
+                .unlockedBy("has_item", has(Items.POISONOUS_POTATO))
                 .save(pRecipeOutput);
-
     }
 
     private static void chemistryRecipes(@NotNull RecipeOutput pRecipeOutput) {
@@ -509,6 +499,15 @@ public class RecipesProvider extends RecipeProvider {
                 .duration(200)
                 .fluidIngredient(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), 1000))
                 .fluidResult(new FluidStack(NTFluids.EAS_SOURCE.get(), 1000))
+                .save(pRecipeOutput);
+
+        MixingRecipeBuilder.newRecipe(ItemStack.EMPTY)
+                .ingredients(iwcFromItemLike(Items.REDSTONE, 1),
+                        iwcFromItemLike(Items.GUNPOWDER, 1),
+                        iwcFromItemLike(Items.BONE_MEAL, 1))
+                .duration(1200)
+                .fluidIngredient(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), 1000))
+                .fluidResult(new FluidStack(NTFluids.ETCHING_ACID_SOURCE.get(), 1000))
                 .save(pRecipeOutput);
     }
 

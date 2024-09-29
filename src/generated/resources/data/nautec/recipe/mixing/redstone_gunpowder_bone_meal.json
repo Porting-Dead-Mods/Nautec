@@ -1,0 +1,24 @@
+{
+  "type": "nautec:mixing",
+  "duration": 1200,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "id": "nautec:salt_water"
+  },
+  "fluid_result": {
+    "amount": 1000,
+    "id": "nautec:etching_acid"
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    }
+  ],
+  "result": {}
+}

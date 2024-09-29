@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec.content.blockentities.multiblock.controller;
 
 import com.google.common.collect.ImmutableMap;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
+import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockEntity;
 import com.portingdeadmods.nautec.api.multiblocks.MultiblockData;
 import com.portingdeadmods.nautec.capabilities.IOActions;
@@ -11,6 +12,7 @@ import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.utils.BlockUtils;
 import it.unimi.dsi.fastutil.Pair;
+import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -28,7 +30,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 
 // TODO: Require power to work
-public class DrainBlockEntity extends ContainerBlockEntity implements MultiblockEntity {
+public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEntity {
     private MultiblockData multiblockData;
 
     // TODO: Merge these variables
@@ -91,6 +93,19 @@ public class DrainBlockEntity extends ContainerBlockEntity implements Multiblock
     }
 
     @Override
+    public ObjectSet<Direction> getLaserInputs() {
+        if (getBlockState().getValue(DrainMultiblock.FORMED)) {
+            return ObjectSet.of(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST);
+        }
+        return ObjectSet.of();
+    }
+
+    @Override
+    public ObjectSet<Direction> getLaserOutputs() {
+        return ObjectSet.of();
+    }
+
+    @Override
     public void commonTick() {
         super.commonTick();
         performRotation();
@@ -106,7 +121,7 @@ public class DrainBlockEntity extends ContainerBlockEntity implements Multiblock
 
     private void performDraining() {
         // Every second
-        if (level.getGameTime() % 20 == 0 && lidInUse == 0) {
+        if (level.getGameTime() % 20 == 0 && lidInUse == 0 && getPower() > 15) {
             if (hasWater()) {
                 if (openAndFormed()) {
                     if (level.getBiome(worldPosition).is(BiomeTags.IS_OCEAN)) {

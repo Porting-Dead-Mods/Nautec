@@ -17,16 +17,19 @@ public class CrystalShardsEntry extends EntryProvider {
 
     @Override
     protected void generatePages() {
-        this.page("prismarine_crystal_shards", () -> BookTextPageModel.create()
+        this.page("prismarine_crystal_shards", () -> BookSpotlightPageModel.create()
                 .withTitle(this.context().pageTitle())
+                .withItem(NTItems.PRISMARINE_CRYSTAL_SHARD)
                 .withText(this.context().pageText()));
         this.pageTitle("Prismarine Crystal Shard");
         this.pageText("""
                 Prismarine Crystal Shards are a pristine
                 material required for some of the most
                 advanced machinery.
-                \\
-                \\
+                """);
+        this.page("shard_and_crystal", () -> BookTextPageModel.create()
+                .withText(this.context().pageText()));
+        this.pageText("""
                 In order to obtain them you have to
                 use the Aquarine Steel Pickaxe with
                 its ability enabled and mine a Prismarine crystal.
@@ -34,11 +37,6 @@ public class CrystalShardsEntry extends EntryProvider {
                 Make sure that it has more than 100 power as that is
                 the amount it needs to preserve the drops.
                 """);
-
-        this.page("shard_and_crystal", () -> BookSpotlightPageModel.create()
-                .withTitle("Crystal & Shard")
-                .withItem(NTBlocks.PRISMARINE_CRYSTAL)
-                .withItem(NTItems.PRISMARINE_CRYSTAL_SHARD));
     }
 
     @Override

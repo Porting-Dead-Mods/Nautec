@@ -19,6 +19,17 @@
       "text": "book.nautec.nautec_guide.laser_augmentation.augmentation_station.augmentation_station.text",
       "title": "book.nautec.nautec_guide.laser_augmentation.augmentation_station.augmentation_station.title",
       "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "multiblock_id": "aumgentation_station",
+      "multiblock_name": "",
+      "show_visualize_button": true,
+      "text": "book.nautec.nautec_guide.laser_augmentation.augmentation_station.augmentation_station_multiblock.text"
     }
   ],
   "parents": [

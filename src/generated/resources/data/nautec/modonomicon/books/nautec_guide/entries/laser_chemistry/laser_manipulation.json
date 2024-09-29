@@ -10,15 +10,15 @@
   "name": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.name",
   "pages": [
     {
-      "type": "modonomicon:text",
+      "type": "modonomicon:crafting_recipe",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
-      "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.laser_manipulation.text",
-      "title": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.laser_manipulation.title",
-      "use_markdown_in_title": false
+      "recipe_id_1": "nautec:prismarine_laser_relay",
+      "text": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.laser_relay.text",
+      "title1": "Prismarine Laser Relay",
+      "title2": ""
     },
     {
       "type": "modonomicon:crafting_recipe",
@@ -26,11 +26,21 @@
       "condition": {
         "type": "modonomicon:none"
       },
-      "recipe_id_1": "nautec:prismarine_laser_relay",
-      "recipe_id_2": "nautec:laser_junction",
-      "text": "",
-      "title1": "Prismarine Laser Relay",
-      "title2": "Laser Junction"
+      "recipe_id_1": "nautec:laser_junction",
+      "text": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.laser_junction0.text",
+      "title1": "Laser Junction",
+      "title2": ""
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.laser_junction1.text",
+      "title": "",
+      "use_markdown_in_title": false
     }
   ],
   "show_when_any_parent_unlocked": false,

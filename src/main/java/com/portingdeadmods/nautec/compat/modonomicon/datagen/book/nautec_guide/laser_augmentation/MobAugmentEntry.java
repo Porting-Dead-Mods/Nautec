@@ -22,8 +22,11 @@ public class MobAugmentEntry extends EntryProvider {
                 .withText(this.context().pageText()));
         this.pageTitle("Guardian Eye");
         this.pageText("""
-                Gain the ability to shoot a laser at the entity you are looking at, within a 15 block radius.
-                This can be obtained as a rare drop from Guardians.
+                The Guardian Eye gives you the ability to shoot a laser at the entity you are looking at, within a 15 block radius.
+                Note however, that in order to do this you need to hold down a keybind.
+                \\
+                \\
+                The item can be obtained as a rare drop from Guardians.
                 """);
         this.page("dolphin_fin", () -> BookSpotlightPageModel.create()
                 .withTitle(this.context().pageTitle())
@@ -31,8 +34,12 @@ public class MobAugmentEntry extends EntryProvider {
                 .withText(this.context().pageText()));
         this.pageTitle("Dolphin Fin");
         this.pageText("""
-                Permanently gain the dolphins grace effect while swimming, for much faster water exploration.
-                This can be obtained as a rare drop from Dolphins.
+                The Dolphin Fin affects you with the Dolphins Grace effect while swimming.
+                \\
+                This allows you to explore the water more efficiently.
+                \\
+                \\
+                This item can be obtained as a rare drop from Dolphins.
                 """);
         this.page("drowned_lung", () -> BookSpotlightPageModel.create()
                 .withTitle(this.context().pageTitle())
@@ -40,8 +47,12 @@ public class MobAugmentEntry extends EntryProvider {
                 .withText(this.context().pageText()));
         this.pageTitle("Drowned Lungs");
         this.pageText("""
-                You no longer lose oxygen while in water, this allows you to keep swimming indefinitely.
-                This can be obtained as a rare drop from Drowned.
+                The Drowned Lungs is one of the most powerful augments.
+                \\
+                They allow you to breathe both underwater and on the surface
+                \\
+                \\
+                This item can be obtained as a rare drop from Drowned.
                 """);
         this.page("eldritch_heart", () -> BookSpotlightPageModel.create()
                 .withTitle(this.context().pageTitle())
@@ -49,8 +60,14 @@ public class MobAugmentEntry extends EntryProvider {
                 .withText(this.context().pageText()));
         this.pageTitle("Eldritch_heart");
         this.pageText("""
-                While you are in water, you regen your health
-                This can be obtain (somehow)
+                The Eldritch Heart will increase your Regeneration under water.
+                \\
+                While this might not sound too overwhelming on its own, it is
+                worth noting, that the eldritch heart is also required for the
+                Augmentation Station.
+                \\
+                \\
+                This item can be obtained from Elder Guardians.
                 """);
     }
 

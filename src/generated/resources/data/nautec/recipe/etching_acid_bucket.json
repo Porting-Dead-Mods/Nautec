@@ -1,39 +1,22 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "key": {
-    "A": {
+  "ingredients": [
+    {
       "item": "minecraft:poisonous_potato"
     },
-    "B": {
-      "item": "minecraft:water_bucket"
-    },
-    "C": {
-      "item": "minecraft:copper_ingot"
-    },
-    "D": {
-      "item": "minecraft:redstone"
-    },
-    "E": {
-      "item": "minecraft:glowstone_dust"
-    },
-    "F": {
-      "item": "minecraft:blaze_powder"
-    },
-    "G": {
+    {
       "item": "minecraft:gunpowder"
     },
-    "H": {
-      "item": "minecraft:blaze_powder"
-    },
-    "I": {
+    {
       "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "minecraft:redstone"
     }
-  },
-  "pattern": [
-    "ACE",
-    "HBD",
-    "IGF"
   ],
   "result": {
     "count": 1,
