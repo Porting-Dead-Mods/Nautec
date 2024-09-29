@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-29T22:11:39.260838228	Books: nautec
+// 1.21.1	2024-09-29T22:25:47.188109806	Books: nautec
 6d944fd1b3f4f8d8baf18317dbdea1e50476ed05 data/nautec/modonomicon/books/nautec_guide/book.json
 ea5fe754ad19a1903e7a9d19f39e3b1488e59cfe data/nautec/modonomicon/books/nautec_guide/categories/getting_started.json
 41b01f32b9f23cf1eb5a33085b98bd30f0a1f943 data/nautec/modonomicon/books/nautec_guide/categories/laser_augmentation.json
@@ -12,7 +12,7 @@ e14fe6ef8f7859e1cc70ec4136effe073aa2c58e data/nautec/modonomicon/books/nautec_gu
 45e26701a17f09bdc7b1cb6883e95df5488f6d54 data/nautec/modonomicon/books/nautec_guide/entries/getting_started/monocle.json
 208abc52b3b1a594abae2333834da891aef78ac1 data/nautec/modonomicon/books/nautec_guide/entries/getting_started/structures.json
 f8a4b84b6a937e6fbc1566d38f1bb6aa2642174d data/nautec/modonomicon/books/nautec_guide/entries/getting_started/utilities.json
-7048a5be1bf4a964e785317ea716a44dcdf14ac8 data/nautec/modonomicon/books/nautec_guide/entries/laser_augmentation/aquarine_steel_armor.json
+e3651fd2bdd4cb99fac6b4ce3f1222c26753b8da data/nautec/modonomicon/books/nautec_guide/entries/laser_augmentation/aquarine_steel_armor.json
 db21fcc9c4e1801a8bf9886da26700b52e4d60be data/nautec/modonomicon/books/nautec_guide/entries/laser_augmentation/augmentation.json
 501c5b32cef70628ae813df135c5a7b69a3d3728 data/nautec/modonomicon/books/nautec_guide/entries/laser_augmentation/augmentation_station.json
 a46ba5de3d71172e50fe191f2d6ef51327d7f188 data/nautec/modonomicon/books/nautec_guide/entries/laser_augmentation/laser_augmentation_introduction.json
