@@ -1,0 +1,36 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "laser_chemistry",
+  "description": "book.nautec.nautec_guide.laser_chemistry.prismatic_battery.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "nautec:prismatic_battery"
+  },
+  "name": "book.nautec.nautec_guide.laser_chemistry.prismatic_battery.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.nautec.nautec_guide.laser_chemistry.prismatic_battery.prismatic_battery.text",
+      "title": "book.nautec.nautec_guide.laser_chemistry.prismatic_battery.prismatic_battery.title",
+      "use_markdown_in_title": false
+    }
+  ],
+  "parents": [
+    {
+      "draw_arrow": true,
+      "entry": "laser_chemistry/crystal_shards",
+      "line_enabled": true,
+      "line_reversed": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 7,
+  "x": 8,
+  "y": -2
+}

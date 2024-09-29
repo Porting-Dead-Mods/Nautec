@@ -1,0 +1,11 @@
+{
+  "type": "nautec:augmentation",
+  "augmentItem": "nautec:eldritch_heart",
+  "desc": "Increased health regeneration when underwater",
+  "ingredients": [
+    {
+      "item": "nautec:eldritch_heart"
+    }
+  ],
+  "resultAugment": "nautec:eldritch_heart"
+}
