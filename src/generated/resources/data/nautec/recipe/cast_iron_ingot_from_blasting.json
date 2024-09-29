@@ -1,13 +1,37 @@
 {
-  "type": "minecraft:blasting",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "cookingtime": 100,
-  "experience": 0.2,
-  "ingredient": {
-    "tag": "c:ingots/iron"
-  },
+  "ingredients": [
+    {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    {
+      "item": "nautec:aquarine_steel_ingot"
+    }
+  ],
   "result": {
     "count": 1,
-    "id": "nautec:cast_iron_ingot"
+    "id": "nautec:aquarine_steel_block"
   }
 }

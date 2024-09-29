@@ -1,13 +1,13 @@
 {
   "background_u_index": 0,
   "background_v_index": 0,
-  "category": "getting_started",
-  "description": "book.nautec.nautec_guide.getting_started.laser_manipulation.description",
+  "category": "laser_chemistry",
+  "description": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.description",
   "hide_while_locked": false,
   "icon": {
     "item": "nautec:laser_junction"
   },
-  "name": "book.nautec.nautec_guide.getting_started.laser_manipulation.name",
+  "name": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.name",
   "pages": [
     {
       "type": "modonomicon:text",
@@ -16,8 +16,8 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.getting_started.laser_manipulation.laser_manipulation.text",
-      "title": "book.nautec.nautec_guide.getting_started.laser_manipulation.laser_manipulation.title",
+      "text": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.laser_manipulation.text",
+      "title": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.laser_manipulation.title",
       "use_markdown_in_title": false
     },
     {
@@ -33,16 +33,8 @@
       "title2": "Laser Junction"
     }
   ],
-  "parents": [
-    {
-      "draw_arrow": true,
-      "entry": "getting_started/laser_power",
-      "line_enabled": true,
-      "line_reversed": false
-    }
-  ],
   "show_when_any_parent_unlocked": false,
-  "sort_number": 7,
-  "x": 4,
+  "sort_number": 0,
+  "x": 0,
   "y": -2
 }

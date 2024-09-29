@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec;
 
 import com.mojang.logging.LogUtils;
+import com.portingdeadmods.nautec.compat.duradisplay.DuraDisplayCompat;
 import com.portingdeadmods.nautec.content.items.BatteryItem;
 import com.portingdeadmods.nautec.content.items.PrismMonocleItem;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
@@ -10,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
@@ -51,5 +53,9 @@ public final class Nautec {
         modEventBus.addListener(BatteryItem::registerCapabilities);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, NTConfig.SPEC);
+
+        if (ModList.get().isLoaded("duradisplay")) {
+            DuraDisplayCompat.register();
+        }
     }
 }

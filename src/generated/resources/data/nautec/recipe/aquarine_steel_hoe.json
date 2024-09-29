@@ -5,13 +5,16 @@
     "A": {
       "item": "nautec:aquarine_steel_ingot"
     },
+    "C": {
+      "item": "nautec:laser_channeling_coil"
+    },
     "R": {
       "item": "nautec:cast_iron_rod"
     }
   },
   "pattern": [
     "AA ",
-    " R ",
+    " C ",
     " R "
   ],
   "result": {

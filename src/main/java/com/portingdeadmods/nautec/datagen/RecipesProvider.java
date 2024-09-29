@@ -254,48 +254,53 @@ public class RecipesProvider extends RecipeProvider {
 
     private static void aquarineSteelToolsRecipes(@NotNull RecipeOutput pRecipeOutput) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.AQUARINE_PICKAXE.get().getDefaultInstance())
-                .pattern("AAA")
-                .pattern(" R ")
+                .pattern("AGA")
+                .pattern(" C ")
                 .pattern(" R ")
                 .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT.get()))
                 .define('A', NTItems.AQUARINE_STEEL_INGOT.get())
                 .define('R', NTItems.CAST_IRON_ROD.get())
+                .define('G', NTItems.GEAR.get())
+                .define('C', NTItems.LASER_CHANNELING_COIL.get())
                 .save(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.AQUARINE_SHOVEL.get().getDefaultInstance())
                 .pattern(" A ")
-                .pattern(" R ")
+                .pattern(" G ")
                 .pattern(" R ")
                 .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT.get()))
                 .define('A', NTItems.AQUARINE_STEEL_INGOT.get())
+                .define('G', NTItems.GEAR.get())
                 .define('R', NTItems.CAST_IRON_ROD.get())
                 .save(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.AQUARINE_AXE.get().getDefaultInstance())
-                .pattern("AA ")
+                .pattern("AG ")
                 .pattern("AR ")
                 .pattern(" R ")
                 .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT.get()))
                 .define('A', NTItems.AQUARINE_STEEL_INGOT.get())
+                .define('G', NTItems.GEAR.get())
                 .define('R', NTItems.CAST_IRON_ROD.get())
                 .save(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.AQUARINE_HOE.get().getDefaultInstance())
                 .pattern("AA ")
-                .pattern(" R ")
+                .pattern(" C ")
                 .pattern(" R ")
                 .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT.get()))
                 .define('A', NTItems.AQUARINE_STEEL_INGOT.get())
                 .define('R', NTItems.CAST_IRON_ROD.get())
+                .define('C', NTItems.LASER_CHANNELING_COIL.get())
                 .save(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.AQUARINE_SWORD.get().getDefaultInstance())
                 .pattern(" A ")
                 .pattern(" A ")
-                .pattern(" R ")
+                .pattern(" C ")
                 .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT.get()))
                 .define('A', NTItems.AQUARINE_STEEL_INGOT.get())
-                .define('R', NTItems.CAST_IRON_ROD.get())
+                .define('C', NTItems.LASER_CHANNELING_COIL.get())
                 .save(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.AQUARINE_WRENCH.get().getDefaultInstance())

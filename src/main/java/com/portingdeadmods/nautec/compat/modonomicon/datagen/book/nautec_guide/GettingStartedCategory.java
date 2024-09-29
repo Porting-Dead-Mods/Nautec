@@ -40,15 +40,9 @@ public class GettingStartedCategory extends CategoryProvider {
         BookEntryModel utilitiesEntry = new UtilitiesEntry(this)
                 .generate(new Vec2(6, -2));
         add(utilitiesEntry.withParent(itemTransformationEntry));
-        BookEntryModel laserManipulationEntry = new LaserManipulationEntry(this)
-                .generate(new Vec2(4, -2));
-        add(laserManipulationEntry.withParent(laserPowerEntry));
         BookEntryModel cratesEtching = new CratesEtchingEntry(this)
                 .generate(new Vec2(2, 2));
         add(cratesEtching.withParent(structuresEntry));
-        BookEntryModel mixerEntry = new MixerEntry(this)
-                .generate(new Vec2(6, 2));
-        add(mixerEntry.withParent(laserPowerEntry).withParent(itemTransformationEntry));
     }
 
     @Override
