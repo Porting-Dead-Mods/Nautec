@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-29T05:46:35.962772	Recipes
+// 1.21.1	2024-09-29T10:20:47.3671384	Recipes
 11639f08778ec1107c05d822f9beaa1f90e3bb32 data/minecraft/advancement/recipes/misc/cast_iron_ingot_blasting.json
 5f305b97f7366fc61918bd266d0bacfa386b16c1 data/minecraft/advancement/recipes/misc/cast_iron_nugget_to_ingot.json
 c01db9d69b288d37c769cf605b945ebf60a08e21 data/minecraft/advancement/recipes/misc/diving_chestplate.json
@@ -38,6 +38,7 @@ b8ada0e92e270525f1fbabdd97372d76c1a93add data/nautec/advancement/recipes/misc/de
 6509407527141fb273373552cb19b6a67bea0f03 data/nautec/advancement/recipes/misc/diving_boots.json
 f453783b629e6901fe593efb42e4a537f9a615fd data/nautec/advancement/recipes/misc/diving_helmet.json
 45f2ce9aa457103af0b898a510b7e5a279870619 data/nautec/advancement/recipes/misc/diving_leggings.json
+5842ced583fa4591f1c28c0e93c1771ab1b7a7f4 data/nautec/advancement/recipes/misc/etching_acid_bucket.json
 2e227620c2d867bc1e46276896b5281bb34d7eb0 data/nautec/advancement/recipes/misc/glass_vial.json
 e8c7d011fc8d7584ae12c127a368e794c349cc43 data/nautec/advancement/recipes/misc/laser_junction.json
 5a63e821107905c4834ef94b9dda1d99041e5cc0 data/nautec/advancement/recipes/misc/long_distance_laser.json
@@ -77,6 +78,7 @@ cfc02afe736a2867e27a155b5dc8d9f9c9f0f491 data/nautec/recipe/deep_sea_drain.json
 374e9e369089bee2db4da1d961a2a11a93f7e88f data/nautec/recipe/diving_boots.json
 ad76d1e18615e634a5fd16459f0d0efaeea97cd2 data/nautec/recipe/diving_helmet.json
 7ebba94ed073b518f596623e5c9f3e44d80c3ffa data/nautec/recipe/diving_leggings.json
+d2755f100cbac4b39a6cc7968a24843d145ddecf data/nautec/recipe/etching_acid_bucket.json
 fe30c6078bd52f68fa02455d52d2eb51b8718c16 data/nautec/recipe/glass_vial.json
 0e781b8c85808d8ee2691a5c39404da2b6a8f061 data/nautec/recipe/item_etching/ancient_valve_to_valve.json
 92b1c892b837a6f4a88591b221bc580fa73ee881 data/nautec/recipe/item_etching/rusty_crate_to_crate.json

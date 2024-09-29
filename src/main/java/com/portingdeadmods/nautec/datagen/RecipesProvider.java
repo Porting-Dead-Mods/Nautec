@@ -476,6 +476,24 @@ public class RecipesProvider extends RecipeProvider {
                 .duration(200)
                 .save(pRecipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.ETCHING_ACID_BUCKET.get(), 1)
+                .pattern("ACE")
+                .pattern("HBD")
+                .pattern("IGF")
+                .define('A', Items.POISONOUS_POTATO)
+                .define('B', Items.WATER_BUCKET)
+                .define('C', Items.COPPER_INGOT)
+                .define('D', Items.REDSTONE)
+                .define('E', Items.GLOWSTONE_DUST)
+                .define('F', Items.BLAZE_POWDER)
+                .define('G', Items.GUNPOWDER)
+                .define('H', Items.BLAZE_POWDER)
+                .define('I', Items.BONE_MEAL)
+
+
+                .unlockedBy("has_item", has(NTItems.BROWN_POLYMER))
+                .save(pRecipeOutput);
+
     }
 
     private static void chemistryRecipes(@NotNull RecipeOutput pRecipeOutput) {

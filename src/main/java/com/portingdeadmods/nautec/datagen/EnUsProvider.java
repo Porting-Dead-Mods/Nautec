@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.datagen;
 import com.klikli_dev.modonomicon.api.datagen.AbstractModonomiconLanguageProvider;
 import com.klikli_dev.modonomicon.api.datagen.ModonomiconLanguageProvider;
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTFluidTypes;
 import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.Utils;
@@ -75,6 +76,11 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem("cast_iron_ingot", "Cast Iron Ingot");
         addItem("cast_iron_rod", "Cast Iron Rod");
         addItem("cast_iron_nugget", "Cast Iron Nugget");
+        addItem(LASER_CHANNELING_COIL, "Laser Channeling Coil");
+        addItem(BURNT_COIL, "Burnt Coil");
+        addItem(ELDRITCH_ARTIFACT, "Eldritch Artifact");
+        addItem(GUARDIAN_EYE, "Guardian Eye");
+        addItem(VALVE, "Valve²");
 
         // Adding missing block translations
         addBlock("rusty_crate", "Rusty Crate");
@@ -94,6 +100,8 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addBlock("deep_sea_drain", "Deep Sea Drain");
         addBlock("augmentation_station_part", "Augmentation Station");
         addBlock("augmentation_station_extentsion", "Augmentation Station Extension");
+        addBlock(NTBlocks.CHARGER, "Charger");
+        addBlock(NTBlocks.PRISMARINE_SAND, "Prismarine Sand");
 
         // Multiblock information
         add("multiblock.info.failed_to_construct", "Missing or invalid block");
