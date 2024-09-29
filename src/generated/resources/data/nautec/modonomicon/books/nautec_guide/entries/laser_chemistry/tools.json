@@ -19,6 +19,41 @@
       "text": "book.nautec.nautec_guide.laser_chemistry.tools.basic_tools.text",
       "title": "book.nautec.nautec_guide.laser_chemistry.tools.basic_tools.title",
       "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "nautec:aquarine_steel_sword",
+      "recipe_id_2": "nautec:aquarine_steel_pickaxe",
+      "text": "",
+      "title1": "Sword Recipe",
+      "title2": "Pickaxe Recipe"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "nautec:aquarine_steel_axe",
+      "recipe_id_2": "nautec:aquarine_steel_shovel",
+      "text": "",
+      "title1": "Axe Recipe",
+      "title2": "Shovel Recipe"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "nautec:aquarine_steel_hoe",
+      "text": "",
+      "title1": "Hoe Recipe",
+      "title2": ""
     }
   ],
   "parents": [
