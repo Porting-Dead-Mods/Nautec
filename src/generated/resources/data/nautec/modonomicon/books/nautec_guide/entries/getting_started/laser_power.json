@@ -19,6 +19,17 @@
       "text": "book.nautec.nautec_guide.getting_started.laser_power.intro.text",
       "title": "book.nautec.nautec_guide.getting_started.laser_power.intro.title",
       "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "nautec:aquatic_catalyst",
+      "text": "It can be accomplished by supplying the catalyst with fuel, like for\nexample Kelp and activating it with a Heart Of the Sea.\n\\\nAfter right-clicking the item on the catalyst, a laser beam will shoot\nout of the opposite side as long as it has a target.\n",
+      "title1": "Aquatic Catalyst",
+      "title2": ""
     }
   ],
   "parents": [

@@ -7,6 +7,7 @@ import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
+import net.minecraft.client.gui.screens.recipebook.BlastingRecipeBookComponent;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.PackOutput;
@@ -14,6 +15,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.BlastingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
@@ -90,6 +92,16 @@ public class RecipesProvider extends RecipeProvider {
 
         augmentationStationRecipes(pRecipeOutput);
 
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.NAUTEC_GUIDE.get(), 1)
+                .requires(Items.BOOK)
+                .requires(NTItems.CAST_IRON_NUGGET.get(), 1)
+                .unlockedBy("has_item", has(NTItems.CAST_IRON_NUGGET.get()))
+                .save(pRecipeOutput);
+
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(Tags.Items.INGOTS_IRON), RecipeCategory.MISC, NTItems.CAST_IRON_INGOT.get(), 2, 10)
+                .unlockedBy("has_item", has(Items.IRON_INGOT))
+                .save(pRecipeOutput);
     }
 
     private static void aquarineSteelRecipes(@NotNull RecipeOutput pRecipeOutput) {
@@ -183,7 +195,7 @@ public class RecipesProvider extends RecipeProvider {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.AQUATIC_CATALYST.asItem(), 1)
                 .pattern("PDP")
-                .pattern("DPD")
+                .pattern("D D")
                 .pattern("PDP")
                 .define('D', NTBlocks.DARK_PRISMARINE_PILLAR)
                 .define('P', NTBlocks.POLISHED_PRISMARINE)

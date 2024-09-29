@@ -69,7 +69,8 @@ public class CrateBlock extends BaseEntityBlock {
 
         if (!(level.getBlockEntity(pos) instanceof CrateBlockEntity be)
                 || !stack.is(NTItems.CROWBAR)
-                || state.getValue(BlockStateProperties.OPEN))
+                || state.getValue(BlockStateProperties.OPEN)
+                || !state.is(NTBlocks.CRATE.get()))
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
         if (player.getCooldowns().isOnCooldown(stack.getItem())) return ItemInteractionResult.FAIL;
@@ -94,7 +95,7 @@ public class CrateBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         } else if (player.isSpectator()) {
             return InteractionResult.CONSUME;
-        } else if (level.getBlockEntity(pos) instanceof CrateBlockEntity be && state.is(NTBlocks.CRATE.get())) {
+        } else if (level.getBlockEntity(pos) instanceof CrateBlockEntity be) {
             if (state.getValue(BlockStateProperties.OPEN)) {
                 player.openMenu(be);
                 player.awardStat(Stats.OPEN_BARREL);
@@ -142,8 +143,8 @@ public class CrateBlock extends BaseEntityBlock {
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof CrateBlockEntity be) {
             if (be.isEmpty() && !state.getValue(BlockStateProperties.OPEN)) {
-                ItemStack itemstack = NTBlocks.CRATE.toStack();
-                itemstack.applyComponents(blockentity.collectComponents());
+                ItemStack itemstack = asItem().getDefaultInstance();
+                be.saveToItem(itemstack, level.registryAccess());
                 ItemEntity itementity = new ItemEntity(
                         level, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, itemstack
                 );
@@ -156,28 +157,14 @@ public class CrateBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (state.getValue(BlockStateProperties.OPEN)) {
-            Containers.dropContentsOnDestroy(state, newState, level, pos);
-            return;
-        }
-        super.onRemove(state, level, pos, newState, movedByPiston);
-    }
-
-    @Override
     protected @NotNull List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
-        BlockEntity blockentity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-        if (blockentity instanceof CrateBlockEntity be) {
-            params = params.withDynamicDrop(CONTENTS, p_56219_ -> {
-                for (int i = 0; i < be.getContainerSize(); i++) {
-                    p_56219_.accept(be.getItem(i));
-                }
-            });
+        if (params.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof CrateBlockEntity be) {
+            ItemStack stack = new ItemStack(this);
+            be.saveToItem(stack, params.getLevel().registryAccess());
+            return List.of(stack);
         }
-
         return super.getDrops(state, params);
     }
-
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {

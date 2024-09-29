@@ -1,5 +1,6 @@
 {
   "values": [
-    "nautec:crate"
+    "nautec:crate",
+    "nautec:rusty_crate"
   ]
 }

@@ -1,10 +1,9 @@
-// 1.21.1	2024-09-28T23:25:11.4454983	Books: nautec
+// 1.21.1	2024-09-29T03:21:41.786782575	Books: nautec
 6d944fd1b3f4f8d8baf18317dbdea1e50476ed05 data/nautec/modonomicon/books/nautec_guide/book.json
 ea5fe754ad19a1903e7a9d19f39e3b1488e59cfe data/nautec/modonomicon/books/nautec_guide/categories/getting_started.json
-39a8bd00ca1bcea47116cc4539d6b3c12c3a1119 data/nautec/modonomicon/books/nautec_guide/entries/getting_started/diving_gear.json
+840e237eb35798d6695b2c42abbeead5128626f3 data/nautec/modonomicon/books/nautec_guide/entries/getting_started/diving_gear.json
 3025c1f954bcbae17b5500c8814af26ccda6cf0a data/nautec/modonomicon/books/nautec_guide/entries/getting_started/introduction.json
 331ded6d67b46405edf0f82e7a74e5160530c1ca data/nautec/modonomicon/books/nautec_guide/entries/getting_started/item_transformation.json
-40140193be4c48a3946a4eed262f6112a8b9d27d data/nautec/modonomicon/books/nautec_guide/entries/getting_started/laser_power.json
-9f4ec8803b2037cb66af69a9c61f6b61aff0f807 data/nautec/modonomicon/books/nautec_guide/entries/getting_started/monocle.json
-64e2f7b87ddb0f2dd0a3521147809265328217ee data/nautec/modonomicon/books/nautec_guide/entries/getting_started/structures.json
-5ef2adf3382b30f31a6233f15157b2fde45e0a6c data/nautec/modonomicon/books/nautec_guide/entries/getting_started/utils.json
+7c1359fceaa3b513a15df94a5eb6811d624a1ad4 data/nautec/modonomicon/books/nautec_guide/entries/getting_started/laser_power.json
+4587f6a0b818015ee60e5ab7c98a879612fbbb14 data/nautec/modonomicon/books/nautec_guide/entries/getting_started/monocle.json
+208abc52b3b1a594abae2333834da891aef78ac1 data/nautec/modonomicon/books/nautec_guide/entries/getting_started/structures.json

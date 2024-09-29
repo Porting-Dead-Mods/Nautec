@@ -233,8 +233,10 @@ public abstract class ContainerBlockEntity extends BlockEntity {
 
     public void drop() {
         ItemStack[] stacks = getItemHandlerStacks();
-        SimpleContainer inventory = new SimpleContainer(stacks);
-        Containers.dropContents(this.level, this.worldPosition, inventory);
+        if (stacks != null) {
+            SimpleContainer inventory = new SimpleContainer(stacks);
+            Containers.dropContents(this.level, this.worldPosition, inventory);
+        }
     }
 
     public @Nullable ItemStack[] getItemHandlerStacks() {

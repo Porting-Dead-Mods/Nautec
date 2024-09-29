@@ -186,7 +186,6 @@ public class DrainPartBlock extends LaserBlock implements SimpleWaterloggedBlock
             DrainPartBlockEntity partBE = (DrainPartBlockEntity) level.getBlockEntity(pos);
             BlockPos actualBlockEntityPos = partBE.getActualBlockEntityPos();
             MultiblockHelper.unform(NTMultiblocks.DRAIN.get(), actualBlockEntityPos, level, null);
-            level.removeBlock(actualBlockEntityPos.above(), false);
         }
 
         super.onRemove(state, level, pos, newState, movedByPiston);
