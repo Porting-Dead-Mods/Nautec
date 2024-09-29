@@ -101,7 +101,7 @@ public class RecipesProvider extends RecipeProvider {
 
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(Tags.Items.INGOTS_IRON), RecipeCategory.MISC, NTItems.CAST_IRON_INGOT.get(), 2, 10)
                 .unlockedBy("has_item", has(Items.IRON_INGOT))
-                .save(pRecipeOutput);
+                .save(pRecipeOutput, "cast_iron_ingot_blasting");
     }
 
     private static void aquarineSteelRecipes(@NotNull RecipeOutput pRecipeOutput) {
@@ -347,7 +347,7 @@ public class RecipesProvider extends RecipeProvider {
                 .pattern("NNN")
                 .define('N', NTItems.CAST_IRON_NUGGET.asItem())
                 .unlockedBy("has_item", has(NTItems.CAST_IRON_INGOT.get()))
-                .save(pRecipeOutput);
+                .save(pRecipeOutput, "cast_iron_nugget_to_ingot");
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.CAST_IRON_NUGGET.get(), 9)
                 .requires(NTItems.CAST_IRON_INGOT.get())
