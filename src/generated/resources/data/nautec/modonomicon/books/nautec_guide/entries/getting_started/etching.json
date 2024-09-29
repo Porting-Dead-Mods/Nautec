@@ -2,12 +2,12 @@
   "background_u_index": 0,
   "background_v_index": 0,
   "category": "getting_started",
-  "description": "book.nautec.nautec_guide.getting_started.monocle.description",
+  "description": "book.nautec.nautec_guide.getting_started.etching.description",
   "hide_while_locked": false,
   "icon": {
-    "item": "nautec:prism_monocle"
+    "item": "nautec:rusty_crate"
   },
-  "name": "book.nautec.nautec_guide.getting_started.monocle.name",
+  "name": "book.nautec.nautec_guide.getting_started.etching.name",
   "pages": [
     {
       "type": "modonomicon:text",
@@ -16,8 +16,8 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.getting_started.monocle.monocle.text",
-      "title": "book.nautec.nautec_guide.getting_started.monocle.monocle.title",
+      "text": "book.nautec.nautec_guide.getting_started.etching.etching.text",
+      "title": "book.nautec.nautec_guide.getting_started.etching.etching.title",
       "use_markdown_in_title": false
     },
     {
@@ -26,22 +26,22 @@
       "condition": {
         "type": "modonomicon:none"
       },
-      "recipe_id_1": "nautec:prism_monocle",
+      "recipe_id_1": "nautec:etching_acid_bucket",
       "text": "",
-      "title1": "Recipe",
+      "title1": "Etching Acid Recipe",
       "title2": ""
     }
   ],
   "parents": [
     {
       "draw_arrow": true,
-      "entry": "getting_started/laser_power",
+      "entry": "getting_started/structures",
       "line_enabled": true,
       "line_reversed": false
     }
   ],
   "show_when_any_parent_unlocked": false,
-  "sort_number": 4,
-  "x": 4,
+  "sort_number": 8,
+  "x": 2,
   "y": 2
 }

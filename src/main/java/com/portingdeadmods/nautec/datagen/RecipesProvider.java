@@ -101,7 +101,7 @@ public class RecipesProvider extends RecipeProvider {
 
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(Tags.Items.INGOTS_IRON), RecipeCategory.MISC, NTItems.CAST_IRON_INGOT.get(), 2, 10)
                 .unlockedBy("has_item", has(Items.IRON_INGOT))
-                .save(pRecipeOutput);
+                .save(pRecipeOutput, "cast_iron_ingot_blasting");
     }
 
     private static void aquarineSteelRecipes(@NotNull RecipeOutput pRecipeOutput) {
@@ -347,7 +347,7 @@ public class RecipesProvider extends RecipeProvider {
                 .pattern("NNN")
                 .define('N', NTItems.CAST_IRON_NUGGET.asItem())
                 .unlockedBy("has_item", has(NTItems.CAST_IRON_INGOT.get()))
-                .save(pRecipeOutput);
+                .save(pRecipeOutput, "cast_iron_nugget_to_ingot");
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.CAST_IRON_NUGGET.get(), 9)
                 .requires(NTItems.CAST_IRON_INGOT.get())
@@ -474,6 +474,24 @@ public class RecipesProvider extends RecipeProvider {
         ItemEtchingRecipeBuilder.newRecipe(outputCrate)
                 .ingredient(inputCrate)
                 .duration(200)
+                .save(pRecipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.ETCHING_ACID_BUCKET.get(), 1)
+                .pattern("ACE")
+                .pattern("HBD")
+                .pattern("IGF")
+                .define('A', Items.POISONOUS_POTATO)
+                .define('B', Items.WATER_BUCKET)
+                .define('C', Items.COPPER_INGOT)
+                .define('D', Items.REDSTONE)
+                .define('E', Items.GLOWSTONE_DUST)
+                .define('F', Items.BLAZE_POWDER)
+                .define('G', Items.GUNPOWDER)
+                .define('H', Items.BLAZE_POWDER)
+                .define('I', Items.BONE_MEAL)
+
+
+                .unlockedBy("has_item", has(NTItems.BROWN_POLYMER))
                 .save(pRecipeOutput);
 
     }
