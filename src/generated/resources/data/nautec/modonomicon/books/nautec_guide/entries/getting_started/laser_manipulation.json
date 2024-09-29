@@ -2,12 +2,12 @@
   "background_u_index": 0,
   "background_v_index": 0,
   "category": "getting_started",
-  "description": "book.nautec.nautec_guide.getting_started.monocle.description",
+  "description": "book.nautec.nautec_guide.getting_started.laser_manipulation.description",
   "hide_while_locked": false,
   "icon": {
-    "item": "nautec:prism_monocle"
+    "item": "nautec:laser_junction"
   },
-  "name": "book.nautec.nautec_guide.getting_started.monocle.name",
+  "name": "book.nautec.nautec_guide.getting_started.laser_manipulation.name",
   "pages": [
     {
       "type": "modonomicon:text",
@@ -16,8 +16,8 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.getting_started.monocle.monocle.text",
-      "title": "book.nautec.nautec_guide.getting_started.monocle.monocle.title",
+      "text": "book.nautec.nautec_guide.getting_started.laser_manipulation.laser_manipulation.text",
+      "title": "book.nautec.nautec_guide.getting_started.laser_manipulation.laser_manipulation.title",
       "use_markdown_in_title": false
     },
     {
@@ -26,10 +26,11 @@
       "condition": {
         "type": "modonomicon:none"
       },
-      "recipe_id_1": "nautec:prism_monocle",
+      "recipe_id_1": "nautec:prismarine_laser_relay",
+      "recipe_id_2": "nautec:laser_junction",
       "text": "",
-      "title1": "Recipe",
-      "title2": ""
+      "title1": "Prismarine Laser Relay",
+      "title2": "Laser Junction"
     }
   ],
   "parents": [
@@ -41,7 +42,7 @@
     }
   ],
   "show_when_any_parent_unlocked": false,
-  "sort_number": 4,
+  "sort_number": 7,
   "x": 4,
-  "y": 2
+  "y": -2
 }

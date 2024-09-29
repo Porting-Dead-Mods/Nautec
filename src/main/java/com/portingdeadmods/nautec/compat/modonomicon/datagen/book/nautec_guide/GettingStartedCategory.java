@@ -6,7 +6,6 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.getting_started.*;
 import com.portingdeadmods.nautec.registries.NTBlocks;
-import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.world.phys.Vec2;
 
 public class GettingStartedCategory extends CategoryProvider {
@@ -35,9 +34,21 @@ public class GettingStartedCategory extends CategoryProvider {
         add(itemTransformationEntry.withParent(laserPowerEntry));
         BookEntryModel monocleEntry = new MonocleEntry(this)
                 .generate(new Vec2(4, 2));
-        add(monocleEntry.withParent(itemTransformationEntry));
+        add(monocleEntry.withParent(laserPowerEntry));
         BookEntryModel divingGear = new DivingGearEntry(this).generate(new Vec2(2, -2));
         add(divingGear.withParent(introductionEntry));
+        BookEntryModel utilitiesEntry = new UtilitiesEntry(this)
+                .generate(new Vec2(6, -2));
+        add(utilitiesEntry.withParent(itemTransformationEntry));
+        BookEntryModel laserManipulationEntry = new LaserManipulationEntry(this)
+                .generate(new Vec2(4, -2));
+        add(laserManipulationEntry.withParent(laserPowerEntry));
+        BookEntryModel cratesEtching = new CratesEtchingEntry(this)
+                .generate(new Vec2(2, 2));
+        add(cratesEtching.withParent(structuresEntry));
+        BookEntryModel mixerEntry = new MixerEntry(this)
+                .generate(new Vec2(6, 2));
+        add(mixerEntry.withParent(laserPowerEntry).withParent(itemTransformationEntry));
     }
 
     @Override
