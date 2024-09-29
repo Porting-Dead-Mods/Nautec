@@ -39,6 +39,13 @@ public class LaserPowerEntry extends EntryProvider {
                         After right-clicking the item on the catalyst, a laser beam will shoot
                         out of the opposite side as long as it has a target.
                         """));
+        this.page("purity", () -> BookTextPageModel.create()
+                .withTitle("Purity")
+                .withText("""
+                        By shooting a laser beam into a crystal, one can increase the lasers purity.
+                        The lasers that are created by this shot (top and bottom) now have a purity of 3.0
+                        this means they can be used for Item Transformation!
+                        """));
     }
 
     @Override

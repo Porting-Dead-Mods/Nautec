@@ -30,6 +30,17 @@
       "text": "It can be accomplished by supplying the catalyst with fuel, like for\nexample Kelp and activating it with a Heart Of the Sea.\n\\\nAfter right-clicking the item on the catalyst, a laser beam will shoot\nout of the opposite side as long as it has a target.\n",
       "title1": "Aquatic Catalyst",
       "title2": ""
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "By shooting a laser beam into a crystal, one can increase the lasers purity.\nThe lasers that are created by this shot (top and bottom) now have a purity of 3.0\nthis means they can be used for Item Transformation!\n",
+      "title": "Purity",
+      "use_markdown_in_title": false
     }
   ],
   "parents": [
