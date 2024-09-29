@@ -1,0 +1,121 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "nautec:augmentation_station_part",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "as_part": "0"
+              }
+            }
+          ],
+          "name": "nautec:aquarine_steel_block"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "nautec:augmentation_station_part",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "as_part": "1"
+              }
+            }
+          ],
+          "name": "nautec:polished_prismarine"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "nautec:augmentation_station_part",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "as_part": "2"
+              }
+            }
+          ],
+          "name": "nautec:aquarine_steel_block"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "nautec:augmentation_station_part",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "as_part": "3"
+              }
+            }
+          ],
+          "name": "nautec:polished_prismarine"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "nautec:augmentation_station_part",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "as_part": "4"
+              }
+            }
+          ],
+          "name": "nautec:aquarine_steel_block"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "nautec:augmentation_station_part",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "as_part": "5"
+              }
+            }
+          ],
+          "name": "nautec:polished_prismarine"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "nautec:augmentation_station_part",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "as_part": "6"
+              }
+            }
+          ],
+          "name": "nautec:aquarine_steel_block"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "nautec:augmentation_station_part",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "as_part": "7"
+              }
+            }
+          ],
+          "name": "nautec:polished_prismarine"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "nautec:blocks/augmentation_station_part"
+}

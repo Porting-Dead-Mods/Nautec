@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "nautec:augmentation_station_extension"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "nautec:blocks/augmentation_station_extension"
+}
