@@ -31,7 +31,7 @@ public class NTJeiPlugin implements IModPlugin {
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
-        return ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"jei_plugin");
+        return ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "jei_plugin");
     }
 
     @Override
@@ -85,6 +85,8 @@ public class NTJeiPlugin implements IModPlugin {
 
         registration.addIngredientInfo(NTItems.PRISMARINE_CRYSTAL_SHARD.toStack(), VanillaTypes.ITEM_STACK,
                 Component.literal("Prismarine Crystal Shards are pristine crystals, capable of channeling power like no other material. They can be obtained by breaking a prismarine crystal using an Aquarine Steel Pickaxe with its ability enabled."));
+
+        registration.addIngredientInfo(List.of(NTItems.BROKEN_WHISK.toStack(), NTItems.BURNT_COIL.toStack(), NTItems.ANCIENT_VALVE.toStack(), NTItems.RUSTY_GEAR.toStack()), VanillaTypes.ITEM_STACK, Component.literal("These ancient machine components can be found in chests and are dropped by underwater mobs"));
     }
 
     @Override

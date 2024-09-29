@@ -27,6 +27,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 
+// TODO: Require power to work
 public class DrainBlockEntity extends ContainerBlockEntity implements MultiblockEntity {
     private MultiblockData multiblockData;
 

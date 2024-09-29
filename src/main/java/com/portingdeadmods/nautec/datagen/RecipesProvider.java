@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.datagen;
 
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.datagen.recipeBuilder.*;
@@ -12,6 +13,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -92,14 +94,13 @@ public class RecipesProvider extends RecipeProvider {
 
         augmentationStationRecipes(pRecipeOutput);
 
-
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.NAUTEC_GUIDE.get(), 1)
                 .requires(Items.BOOK)
                 .requires(NTItems.CAST_IRON_NUGGET.get(), 1)
                 .unlockedBy("has_item", has(NTItems.CAST_IRON_NUGGET.get()))
                 .save(pRecipeOutput);
 
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(Tags.Items.INGOTS_IRON), RecipeCategory.MISC, NTItems.CAST_IRON_INGOT.get(), 2, 10)
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(Tags.Items.INGOTS_IRON), RecipeCategory.MISC, NTItems.CAST_IRON_INGOT.get(), 0.2f, 100)
                 .unlockedBy("has_item", has(Items.IRON_INGOT))
                 .save(pRecipeOutput, "cast_iron_ingot_blasting");
     }
@@ -114,7 +115,7 @@ public class RecipesProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTBlocks.AQUARINE_STEEL_BLOCK.asItem(), 1)
                 .requires(NTItems.AQUARINE_STEEL_INGOT, 9)
                 .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT))
-                .save(pRecipeOutput);
+                .save(pRecipeOutput, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "cast_iron_ingot_from_blasting"));
     }
 
     private static void augmentationStationRecipes(@NotNull RecipeOutput pRecipeOutput) {
@@ -205,9 +206,10 @@ public class RecipesProvider extends RecipeProvider {
 
     private static void machineRecipes(@NotNull RecipeOutput pRecipeOutput) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.MIXER.asItem())
-                .pattern("D D")
+                .pattern("DGD")
                 .pattern("PWP")
                 .pattern("PAP")
+                .define('G', NTItems.GEAR)
                 .define('D', NTBlocks.POLISHED_PRISMARINE)
                 .define('P', NTBlocks.POLISHED_PRISMARINE)
                 .define('W', NTItems.WHISK)
