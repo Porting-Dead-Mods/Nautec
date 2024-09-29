@@ -1,0 +1,42 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "laser_chemistry",
+  "description": "book.nautec.nautec_guide.laser_chemistry.tools.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "nautec:aquarine_steel_axe"
+  },
+  "name": "book.nautec.nautec_guide.laser_chemistry.tools.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.nautec.nautec_guide.laser_chemistry.tools.basic_tools.text",
+      "title": "book.nautec.nautec_guide.laser_chemistry.tools.basic_tools.title",
+      "use_markdown_in_title": false
+    }
+  ],
+  "parents": [
+    {
+      "draw_arrow": true,
+      "entry": "laser_chemistry/chemistry_introduction",
+      "line_enabled": true,
+      "line_reversed": false
+    },
+    {
+      "draw_arrow": true,
+      "entry": "laser_chemistry/charger",
+      "line_enabled": true,
+      "line_reversed": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 4,
+  "x": 4,
+  "y": 0
+}

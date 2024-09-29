@@ -1,0 +1,39 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "laser_chemistry",
+  "description": "book.nautec.nautec_guide.laser_chemistry.mixer.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "nautec:mixer"
+  },
+  "name": "book.nautec.nautec_guide.laser_chemistry.mixer.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.nautec.nautec_guide.laser_chemistry.mixer.mixer.text",
+      "title": "book.nautec.nautec_guide.laser_chemistry.mixer.mixer.title",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "nautec:mixer",
+      "text": "",
+      "title1": "Mixer Recipe",
+      "title2": ""
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 1,
+  "x": 0,
+  "y": 0
+}

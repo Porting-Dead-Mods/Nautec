@@ -1,4 +1,4 @@
-package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.getting_started;
+package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_chemistry;
 
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
 import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
@@ -22,7 +22,7 @@ public class LaserManipulationEntry extends EntryProvider {
             this.pageTitle("Laser Manipulation");
             this.pageText("""
                             The Prismarine Laser Relay is a block that allows you to extend the range of your lasers.
-                             Make sure to point the arrow to the right direction!
+                            Make sure to point the arrow to the right direction!
                             \\
                             It is crafted using 6 Polish Prismarine blocks.
                             \\

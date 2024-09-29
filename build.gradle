@@ -78,6 +78,7 @@ dependencies {
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}+1.21"
     implementation "curse.maven:jade-324717:5729884"
     implementation "curse.maven:modonomicon-538392:5717209"
+    implementation "curse.maven:durability-display-1009842:5599487"
 
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"

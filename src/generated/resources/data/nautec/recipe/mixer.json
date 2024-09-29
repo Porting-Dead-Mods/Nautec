@@ -8,6 +8,9 @@
     "D": {
       "item": "nautec:polished_prismarine"
     },
+    "G": {
+      "item": "nautec:gear"
+    },
     "P": {
       "item": "nautec:polished_prismarine"
     },
@@ -16,7 +19,7 @@
     }
   },
   "pattern": [
-    "D D",
+    "DGD",
     "PWP",
     "PAP"
   ],

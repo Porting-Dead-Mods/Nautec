@@ -5,12 +5,15 @@
     "A": {
       "item": "nautec:aquarine_steel_ingot"
     },
+    "G": {
+      "item": "nautec:gear"
+    },
     "R": {
       "item": "nautec:cast_iron_rod"
     }
   },
   "pattern": [
-    "AA ",
+    "AG ",
     "AR ",
     " R "
   ],
