@@ -22,7 +22,8 @@ public class MobAugmentEntry extends EntryProvider {
                 .withText(this.context().pageText()));
         this.pageTitle("Guardian Eye");
         this.pageText("""
-                augment purpose, obtaining...
+                Gain the ability to shoot a laser at the entity you are looking at, within a 15 block radius.
+                This can be obtained as a rare drop from Guardians.
                 """);
         this.page("dolphin_fin", () -> BookSpotlightPageModel.create()
                 .withTitle(this.context().pageTitle())
@@ -30,7 +31,8 @@ public class MobAugmentEntry extends EntryProvider {
                 .withText(this.context().pageText()));
         this.pageTitle("Dolphin Fin");
         this.pageText("""
-                augment purpose, obtaining...
+                Permanently gain the dolphins grace effect while swimming, for much faster water exploration.
+                This can be obtained as a rare drop from Dolphins.
                 """);
         this.page("drowned_lung", () -> BookSpotlightPageModel.create()
                 .withTitle(this.context().pageTitle())
@@ -38,7 +40,8 @@ public class MobAugmentEntry extends EntryProvider {
                 .withText(this.context().pageText()));
         this.pageTitle("Drowned Lungs");
         this.pageText("""
-                augment purpose, obtaining...
+                You no longer lose oxygen while in water, this allows you to keep swimming indefinitely.
+                This can be obtained as a rare drop from Drowned.
                 """);
         this.page("eldritch_heart", () -> BookSpotlightPageModel.create()
                 .withTitle(this.context().pageTitle())
@@ -46,8 +49,8 @@ public class MobAugmentEntry extends EntryProvider {
                 .withText(this.context().pageText()));
         this.pageTitle("Eldritch_heart");
         this.pageText("""
-                augment purpose, obtaining... (regen in water)
-                usage in augmentation station
+                While you are in water, you regen your health
+                This can be obtain (somehow)
                 """);
     }
 
