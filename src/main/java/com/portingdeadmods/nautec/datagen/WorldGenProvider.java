@@ -57,8 +57,8 @@ public class WorldGenProvider extends DatapackBuiltinEntriesProvider {
                         OreConfiguration.target(SAND_REPLACEABLES, NTBlocks.PRISMARINE_SAND.get().defaultBlockState())
                 );
 
-                context.register(PRISMARINE_SAND_BEACH_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(prismarine_sand_config, 3)));
-                context.register(PRISMARINE_SAND_OCEAN_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(prismarine_sand_config, 5)));
+                context.register(PRISMARINE_SAND_BEACH_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(prismarine_sand_config, 6)));
+                context.register(PRISMARINE_SAND_OCEAN_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(prismarine_sand_config, 12)));
 
                 LOGGER.info("Registered Prismarine Sand Generation as a configured feature.");
             })
@@ -67,7 +67,7 @@ public class WorldGenProvider extends DatapackBuiltinEntriesProvider {
 
                 context.register(PRISMARINE_SAND_BEACH_PLACE_KEY, new PlacedFeature(configuredFeatures.getOrThrow(PRISMARINE_SAND_BEACH_KEY),
                         List.of(
-                                CountPlacement.of(8),
+                                CountPlacement.of(40),
                                 InSquarePlacement.spread(),
                                 HeightRangePlacement.uniform(
                                         VerticalAnchor.absolute(50),
@@ -77,7 +77,7 @@ public class WorldGenProvider extends DatapackBuiltinEntriesProvider {
                 ));
                 context.register(PRISMARINE_SAND_OCEAN_PLACE_KEY, new PlacedFeature(configuredFeatures.getOrThrow(PRISMARINE_SAND_OCEAN_KEY),
                         List.of(
-                                CountPlacement.of(4),
+                                CountPlacement.of(20),
                                 InSquarePlacement.spread(),
                                 HeightRangePlacement.uniform(
                                         VerticalAnchor.absolute(40),
@@ -87,6 +87,5 @@ public class WorldGenProvider extends DatapackBuiltinEntriesProvider {
                 ));
 
                 LOGGER.info("Registered Prismarine Sand Generation as a placed feature.");
-            })
-            ;
+            });
 }
