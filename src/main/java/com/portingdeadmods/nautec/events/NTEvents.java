@@ -8,6 +8,7 @@ import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
+import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
 import com.portingdeadmods.nautec.content.commands.arguments.AugmentSlotArgumentType;
 import com.portingdeadmods.nautec.content.commands.arguments.AugmentTypeArgumentType;
 import com.portingdeadmods.nautec.content.recipes.ItemEtchingRecipe;
@@ -16,10 +17,7 @@ import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.events.helper.ItemInfusion;
 import com.portingdeadmods.nautec.network.SyncAugmentPayload;
-import com.portingdeadmods.nautec.registries.NTBlocks;
-import com.portingdeadmods.nautec.registries.NTFluidTypes;
-import com.portingdeadmods.nautec.registries.NTFluids;
-import com.portingdeadmods.nautec.registries.NTItems;
+import com.portingdeadmods.nautec.registries.*;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
 import com.portingdeadmods.nautec.utils.ParticlesUtils;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -47,12 +45,14 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
@@ -95,6 +95,14 @@ public final class NTEvents {
                     augment.deserializeNBT(player.level().registryAccess(), nbt);
                 }
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncAugmentPayload(augment, nbt != null ? nbt : new CompoundTag()));
+            }
+
+            // Add the Nautec Guide attachment to the player
+            if (ModList.get().isLoaded("modonomicon")) {
+                if (!player.getData(NTAttachmentTypes.HAS_NAUTEC_GUIDE.get())) {
+                    ItemHandlerHelper.giveItemToPlayer(player, ModonomiconCompat.getItemStack());
+                    player.setData(NTAttachmentTypes.HAS_NAUTEC_GUIDE.get(), true);
+                }
             }
         }
 

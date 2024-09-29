@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.datagen;
 import com.klikli_dev.modonomicon.api.datagen.AbstractModonomiconLanguageProvider;
 import com.klikli_dev.modonomicon.api.datagen.ModonomiconLanguageProvider;
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTFluidTypes;
 import com.portingdeadmods.nautec.utils.Utils;
@@ -80,6 +81,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem(ELDRITCH_HEART, "Eldritch Artifact");
         addItem(GUARDIAN_EYE, "Guardian Eye");
         addItem(VALVE, "Valve²");
+        add("nautec_guide.desc.0","Nautec's Guide");
 
         // Adding missing block translations
         addBlock("rusty_crate", "Rusty Crate");
