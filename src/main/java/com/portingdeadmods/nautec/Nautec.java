@@ -42,6 +42,7 @@ public final class Nautec {
         NTBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
         NTCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         NTDataComponents.DATA_COMPONENT_TYPES.register(modEventBus);
+        NTAttachmentTypes.ATTACHMENT_TYPES.register(modEventBus);
         NTMultiblocks.MULTIBLOCKS.register(modEventBus);
         NTAugments.AUGMENTS.register(modEventBus);
         NTAugmentSlots.AUGMENT_SLOTS.register(modEventBus);

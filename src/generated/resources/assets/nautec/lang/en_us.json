@@ -64,9 +64,9 @@
   "book.nautec.nautec_guide.getting_started.utilities.name": "Tools and Utilities",
   "book.nautec.nautec_guide.getting_started.utilities.utilities.text": "The Aquarine Steel Wrench, can be used to rotate blocks and change modes on machinery, it can be crafted using 4 Aquarine Steel Ingots.\n\\\n\\\nThe crowbar is another useful tool that will allow you to open the many crates you will find in the ocean.\n",
   "book.nautec.nautec_guide.getting_started.utilities.utilities.title": "Tools and Utilities",
-  "book.nautec.nautec_guide.laser_chemistry.charger.charger.text": "Charging...\n",
+  "book.nautec.nautec_guide.laser_chemistry.charger.charger.text": " The charger is a block that can be used to charge items with Aquatic Power.\n \\\n To use it, shoot it with a laser beam from an energy source. \n \\\n The charger will then charge the item in the slot above it.\n ",
   "book.nautec.nautec_guide.laser_chemistry.charger.charger.title": "Charger",
-  "book.nautec.nautec_guide.laser_chemistry.charger.description": "Bzzzzzz",
+  "book.nautec.nautec_guide.laser_chemistry.charger.description": "Laser Charging ????",
   "book.nautec.nautec_guide.laser_chemistry.charger.name": "Charger",
   "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.chemistry.text": "Chemistry is a powerful concept that while mysterious is\nalso quite interesting. An observation i have made is that chemistry\nis heavily focused around the ocean and mainly uses plants\nor magical crystals as ingredients for substances.\n\\\n\\\nEven though all of this might sound foreign, you have already\ncome across a chemical substance, Etching Acid.\nWhile not typical in its structure, it is still considered a chemical fluid\ndue to its transforming abilities.\n",
   "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.chemistry.title": "Introduction to chemistry",
@@ -74,7 +74,7 @@
   "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.eas.text": "Electrolyte Algae Serum (EAS) is on of the first chemicals\nyou will come across. It is known for\nits transforming abilities that can empower\nitems and entities.\n\\\nYou might have already discovered that it uses another liquid: Salt Water\n\\\nSalt water can be obtained by filling a bucket of water in an ocean biome which\nwill turn it into salt water. In the future there are even more powerful ways\nto gather it, so stay tuned!\n",
   "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.eas.title": "Electrolyte Algae Serum",
   "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.name": "Introduction to Chemistry",
-  "book.nautec.nautec_guide.laser_chemistry.crystal_shards.description": "Don't underestimate them",
+  "book.nautec.nautec_guide.laser_chemistry.crystal_shards.description": "Not an amethyst rextexture!",
   "book.nautec.nautec_guide.laser_chemistry.crystal_shards.name": "Prismarine Crystal Shards",
   "book.nautec.nautec_guide.laser_chemistry.crystal_shards.prismarine_crystal_shards.text": "Crystal shards are end of chapter :3\n",
   "book.nautec.nautec_guide.laser_chemistry.crystal_shards.prismarine_crystal_shards.title": "Prismarine Crystal Shard",
@@ -90,7 +90,7 @@
   "book.nautec.nautec_guide.laser_chemistry.mixer.mixer.text": "The Mixer is a powerful machine that can mix and combine items in a variety of ways.\n\\\nIt requires laser power to operate. To display informations about the ongoing process, you can use the Monocle.\n\\\nIts main purpose is to craft the Electrolyte Algae Serum, used to infuse tools to unlock their full potential.\n",
   "book.nautec.nautec_guide.laser_chemistry.mixer.name": "The Mixer",
   "book.nautec.nautec_guide.laser_chemistry.name": "Laser Chemistry",
-  "book.nautec.nautec_guide.laser_chemistry.tools.basic_tools.text": "Tools...\n",
+  "book.nautec.nautec_guide.laser_chemistry.tools.basic_tools.text": "The Aquarine Steel Tools are quite special. They use Aquatic Power to function and are unbreakable.\n\\\nBy infusing them in EAS fluid, they can be upgraded to have special abilities.\n\\\nEach tool has a unique ability that is explained in the tooltips.\n\\\nShift-right-clicking with the tool in hand will activate the ability.\n",
   "book.nautec.nautec_guide.laser_chemistry.tools.basic_tools.title": "Aquarine Steel Tools",
   "book.nautec.nautec_guide.laser_chemistry.tools.description": "Innocent looking",
   "book.nautec.nautec_guide.laser_chemistry.tools.name": "Aquarine Steel Tools",
@@ -153,5 +153,6 @@
   "multiblock.info.block_pos": "Coordinates: %d, %d, %d",
   "multiblock.info.expected_block": "Expected: %s",
   "multiblock.info.failed_to_construct": "Missing or invalid block",
-  "nautec.creative_tab.main": "NauTec"
+  "nautec.creative_tab.main": "NauTec",
+  "nautec_guide.desc.0": "Nautec's Guide"
 }
