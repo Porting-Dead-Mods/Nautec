@@ -22,6 +22,9 @@ public class MixerEntry extends EntryProvider {
             this.pageText("""
                     The Mixer is a powerful machine that can mix and combine items in a variety of ways.
                     \\
+                    Materials can be inserted manually, note however that you can only input one ingredient
+                    per horizontal direction.
+                    \\
                     It requires laser power to operate. To display informations about the ongoing process, you can use the Monocle.
                     """);
             this.page("mixer_recipe", () -> BookCraftingRecipePageModel.create()
