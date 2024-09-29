@@ -27,10 +27,22 @@
         "type": "modonomicon:none"
       },
       "item": {
-        "item": "nautec:salt_water_bucket"
+        "item": "nautec:eas_bucket"
       },
       "text": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.eas.text",
       "title": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.eas.title"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "nautec:salt_water_bucket"
+      },
+      "text": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.salt_water.text",
+      "title": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.salt_water.title"
     }
   ],
   "parents": [

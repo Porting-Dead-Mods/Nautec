@@ -44,11 +44,11 @@ public class ChemistryIntroductionEntry extends EntryProvider {
                 items and entities.
                 """);
 
-        this.page("eas", () -> BookSpotlightPageModel.create()
+        this.page("salt_water", () -> BookSpotlightPageModel.create()
                         .withTitle(this.context().pageTitle())
                         .withItem(NTItems.SALT_WATER_BUCKET.get())
                         .withText(this.context().pageText()));
-        this.pageTitle("Electrolyte Algae Serum");
+        this.pageTitle("Salt Water");
         this.pageText("""
                 You might have already discovered that it uses another liquid: Salt Water
                 \\
