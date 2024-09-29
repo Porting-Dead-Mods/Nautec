@@ -1,5 +1,5 @@
 package com.portingdeadmods.nautec.content.structures;
-
+/* REPLACED BY NORMAL ORE GENERATION, MIGHT REVISIT
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -11,6 +11,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.NoiseColumn;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
@@ -68,10 +69,12 @@ public class Prismarine_sand_vein extends Structure {
         this.liquidSettings = liquidSettings;
     }
 
-    private static boolean isFlatSandArea(NoiseColumn column, BlockPos pos) {
+    private static boolean isFlatSandArea(WorldGenLevel worldGenLevel, BlockPos pos) {
         for (int x = -2; x <= 2; x++) {
             for (int z = -2; z <= 2; z++) {
-                if (column.getBlock(pos.getY()).getBlock() != Blocks.SAND) {
+                BlockPos checkPos = pos.offset(x, 0, z);
+                BlockState blockState = worldGenLevel.getBlockState(checkPos);
+                if (blockState.getBlock() != Blocks.SAND) {
                     return false;
                 }
             }
@@ -95,7 +98,7 @@ public class Prismarine_sand_vein extends Structure {
                 context.randomState()) < context.chunkGenerator().getSeaLevel());
 
         // Check for a flat 5x5 square of sand
-        boolean res2 = isFlatSandArea(context.chunkGenerator().getBaseColumn(pos.getX(), pos.getZ(), context.heightAccessor(), context.randomState()), pos);
+        //boolean res2 = isFlatSandArea(context.chunkGenerator().getLevel, pos);
         return res1;
     }
 
@@ -136,5 +139,5 @@ public class Prismarine_sand_vein extends Structure {
     public StructureType<?> type() {
         return NTStructures.PRISMARINE_SAND_VEIN.get();
     }
-}
+}*/
 

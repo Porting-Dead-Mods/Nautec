@@ -28,6 +28,8 @@
   "block.nautec.prismarine_crystal": "Prismarine Crystal",
   "block.nautec.prismarine_laser_relay": "Prismarine Laser Relay",
   "block.nautec.rusty_crate": "Rusty Crate",
+  "block.nautec.prismarine_sand": "Prismarine Sand",
+
   "book.nautec.nautec_guide.getting_started.diving_gear.description": "Explore the depths of the ocean",
   "book.nautec.nautec_guide.getting_started.diving_gear.diving.text": "The Diving Suit is a special suit that allows you to explore the depths of the ocean.\n\\\nCrafted from a special Polymer material, the Diving Suit is must-have for any underwater explorer.\n\\\nThe Helmet will clear your vision underwater while the chestplate will provide you with 10min of oxygen.\n",
   "book.nautec.nautec_guide.getting_started.diving_gear.diving.title": "Diving Gear",
