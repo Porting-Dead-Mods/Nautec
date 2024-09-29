@@ -3,5 +3,9 @@
   "structures.mdx": "Structures",
   "laser_power.mdx": "Laser Power",
   "item_transformation.mdx": "Item Transformation",
-  "machine_part.mdx": "Machine Part"
+  "machine_part.mdx": "Machine Part",
+  "crates_etching.mdx": "Crates Etching",
+  "diving_gear.mdx": "Diving Gear",
+  "monocle.mdx": "Monocle",
+  "ultity_items.mdx": "Utility Items"
 }
