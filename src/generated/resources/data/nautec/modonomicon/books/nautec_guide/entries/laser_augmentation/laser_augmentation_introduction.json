@@ -1,0 +1,15 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "laser_augmentation",
+  "description": "book.nautec.nautec_guide.laser_augmentation.laser_augmentation_introduction.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "nautec:eldritch_heart"
+  },
+  "name": "book.nautec.nautec_guide.laser_augmentation.laser_augmentation_introduction.name",
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 0,
+  "x": 0,
+  "y": 0
+}
