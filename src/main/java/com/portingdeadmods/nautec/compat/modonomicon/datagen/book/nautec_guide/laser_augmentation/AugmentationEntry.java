@@ -4,6 +4,7 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
 import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
 import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTItems;
@@ -21,6 +22,15 @@ public class AugmentationEntry extends EntryProvider {
         this.pageTitle("Player Augmentation");
         this.pageText("""
                 Step onto augmentation station. Make sure item in slot. Select slot, click apply. View applied augments in gui using keybind
+                """);
+        this.page("robot_arm", () -> BookSpotlightPageModel.create()
+                .withTitle(this.context().pageTitle())
+                .withItem(NTItems.CLAW_ROBOT_ARM)
+                .withText(this.context().pageText()));
+        this.pageTitle("Robot arm");
+        this.pageText("""
+                Used in the augmentation station, which when paired with a Mob Augment allows the player to augment the player with the supplied augment.
+                Check the Mob Augments page for more info on what you can augment with.
                 """);
     }
 

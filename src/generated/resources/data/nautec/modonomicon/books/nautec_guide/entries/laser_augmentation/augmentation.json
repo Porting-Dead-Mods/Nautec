@@ -19,6 +19,18 @@
       "text": "book.nautec.nautec_guide.laser_augmentation.augmentation.augmentation.text",
       "title": "book.nautec.nautec_guide.laser_augmentation.augmentation.augmentation.title",
       "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "nautec:claw_robot_arm"
+      },
+      "text": "book.nautec.nautec_guide.laser_augmentation.augmentation.robot_arm.text",
+      "title": "book.nautec.nautec_guide.laser_augmentation.augmentation.robot_arm.title"
     }
   ],
   "parents": [
