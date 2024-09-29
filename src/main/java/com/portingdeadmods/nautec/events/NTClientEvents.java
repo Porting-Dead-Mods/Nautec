@@ -19,14 +19,11 @@ import com.portingdeadmods.nautec.client.renderer.augments.SimpleAugmentRenderer
 import com.portingdeadmods.nautec.client.renderer.robotArms.ClawRobotArmRenderer;
 import com.portingdeadmods.nautec.client.screen.AugmentScreen;
 import com.portingdeadmods.nautec.client.screen.AugmentationStationExtensionScreen;
-import com.portingdeadmods.nautec.content.augments.GuardianEyeAugment;
-import com.portingdeadmods.nautec.content.menus.AugmentMenu;
 import com.portingdeadmods.nautec.content.menus.AugmentationViewerScreen;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;
 import com.portingdeadmods.nautec.client.screen.CrateScreen;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
-import com.portingdeadmods.nautec.network.AugmentationScreenPayload;
 import com.portingdeadmods.nautec.registries.*;
 import com.portingdeadmods.nautec.utils.ArmorModelsHandler;
 import net.minecraft.client.Camera;
@@ -35,7 +32,6 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.network.chat.Component;
@@ -56,7 +52,6 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -148,7 +143,7 @@ public final class NTClientEvents {
             event.registerBlockEntityRenderer(NTBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), AugmentStationExtensionBERenderer::new);
             AugmentLayerRenderer.registerRenderer(NTAugments.DOLPHIN_FIN.get(),
                     ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.MATERIAL, true, ctx));
-            AugmentLayerRenderer.registerRenderer(NTAugments.GUARDIAN_EYE_AUGMENT.get(), GuardianEyeRenderer::new);
+            AugmentLayerRenderer.registerRenderer(NTAugments.GUARDIAN_EYE.get(), GuardianEyeRenderer::new);
             AugmentStationExtensionBERenderer.registerRenderer(NTItems.CLAW_ROBOT_ARM.get(), ClawRobotArmRenderer::new);
         }
 

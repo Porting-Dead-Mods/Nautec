@@ -1,4 +1,4 @@
-package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_chemistry;
+package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_augmentation;
 
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
 import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
@@ -6,34 +6,32 @@ import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import com.mojang.datafixers.util.Pair;
-import com.portingdeadmods.nautec.registries.NTItems;
+import com.portingdeadmods.nautec.registries.NTBlocks;
 
-public class CrystalShardsEntry extends EntryProvider {
-    public CrystalShardsEntry(CategoryProviderBase parent) {
+public class LongDistanceLaserEntry extends EntryProvider {
+    public LongDistanceLaserEntry(CategoryProviderBase parent) {
         super(parent);
     }
 
     @Override
     protected void generatePages() {
-        this.page("prismarine_crystal_shards", () -> BookTextPageModel.create()
+        this.page("long_distance_laser", () -> BookTextPageModel.create()
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
-        this.pageTitle("Prismarine Crystal Shard");
+        this.pageTitle("Long Distance Laser");
         this.pageText("""
-                Prismarine Crystal Shards are a pristine
-                material required for some of the most
-                advanced machinery
+                shoot lasers up to 64 blocks, might be bad for fps
                 """);
     }
 
     @Override
     protected String entryName() {
-        return "Prismarine Crystal Shards";
+        return "long_distance_laser";
     }
 
     @Override
     protected String entryDescription() {
-        return "Not an amethyst rextexture!";
+        return "Who needs pipelines when you can have this";
     }
 
     @Override
@@ -43,11 +41,11 @@ public class CrystalShardsEntry extends EntryProvider {
 
     @Override
     protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTItems.PRISMARINE_CRYSTAL_SHARD.get());
+        return BookIconModel.create(NTBlocks.LONG_DISTANCE_LASER);
     }
 
     @Override
     protected String entryId() {
-        return "crystal_shards";
+        return "long_distance_laser";
     }
 }

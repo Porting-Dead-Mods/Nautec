@@ -1,23 +1,17 @@
 package com.portingdeadmods.nautec.content.augments;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.network.KeyPressedPayload;
-import com.portingdeadmods.nautec.registries.NTAugmentSlots;
 import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.registries.NTKeybinds;
-import com.portingdeadmods.nautec.utils.InputUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -30,7 +24,7 @@ public class GuardianEyeAugment extends Augment {
     private float clientLaserTime;
 
     public GuardianEyeAugment(AugmentSlot augmentSlot) {
-        super(NTAugments.GUARDIAN_EYE_AUGMENT.get(), augmentSlot);
+        super(NTAugments.GUARDIAN_EYE.get(), augmentSlot);
     }
 
     @Override

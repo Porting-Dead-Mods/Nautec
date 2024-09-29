@@ -23,12 +23,14 @@ public class MixerEntry extends EntryProvider {
                     The Mixer is a powerful machine that can mix and combine items in a variety of ways.
                     \\
                     It requires laser power to operate. To display informations about the ongoing process, you can use the Monocle.
-                    \\
-                    Its main purpose is to craft the Electrolyte Algae Serum, used to infuse tools to unlock their full potential.
                     """);
             this.page("mixer_recipe", () -> BookCraftingRecipePageModel.create()
                     .withTitle1("Mixer Recipe")
-                    .withRecipeId1("nautec:mixer"));
+                    .withRecipeId1("nautec:mixer")
+                    .withText(this.context().pageText()));
+            this.pageText("""
+                    Its main purpose is to mix ingredients into chemicals like EAS or Etching Acid, used to infuse tools to unlock their full potential.
+                    """);
     }
 
     @Override

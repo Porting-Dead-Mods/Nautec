@@ -5,7 +5,6 @@ import com.klikli_dev.modonomicon.api.datagen.ModonomiconLanguageProvider;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTFluidTypes;
-import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.Utils;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -78,7 +77,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem("cast_iron_nugget", "Cast Iron Nugget");
         addItem(LASER_CHANNELING_COIL, "Laser Channeling Coil");
         addItem(BURNT_COIL, "Burnt Coil");
-        addItem(ELDRITCH_ARTIFACT, "Eldritch Artifact");
+        addItem(ELDRITCH_HEART, "Eldritch Artifact");
         addItem(GUARDIAN_EYE, "Guardian Eye");
         addItem(VALVE, "Valve²");
 

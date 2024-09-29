@@ -19,7 +19,7 @@ public final class NTAugments {
             () -> AugmentType.of(DolphinFinAugment::new, NTAugmentSlots.BODY.get()));
     public static final Supplier<AugmentType<ThrowBouncingTridentAugment>> THROWN_BOUNCING_TRIDENT_AUGMENT = AUGMENTS.register("throw_bouncing_trident",
             () -> AugmentType.of(ThrowBouncingTridentAugment::new));
-    public static final Supplier<AugmentType<GuardianEyeAugment>> GUARDIAN_EYE_AUGMENT = AUGMENTS.register("guardian_eye",
+    public static final Supplier<AugmentType<GuardianEyeAugment>> GUARDIAN_EYE = AUGMENTS.register("guardian_eye",
             () -> AugmentType.of(GuardianEyeAugment::new, NTAugmentSlots.EYES.get()));
     public static final Supplier<AugmentType<LeapAugment>> LEAP_AUGMENT = AUGMENTS.register("leap",
             () -> AugmentType.of(LeapAugment::new));
@@ -35,8 +35,8 @@ public final class NTAugments {
             () -> AugmentType.of(CreativeFlightAugment::new));
     public static final Supplier<AugmentType<MagnetAugment>> MAGNET_AUGMENT = AUGMENTS.register("magnet",
             () -> AugmentType.of(MagnetAugment::new));
-    public static final Supplier<AugmentType<WaterRegenAugment>> WATER_REGEN_AUGMENT = AUGMENTS.register("water_regen",
-            () -> AugmentType.of(WaterRegenAugment::new));
+    public static final Supplier<AugmentType<EldritchHeartAugment>> ELDRITCH_HEART = AUGMENTS.register("eldritch_heart",
+            () -> AugmentType.of(EldritchHeartAugment::new, NTAugmentSlots.HEART.get()));
     public static final Supplier<AugmentType<WalkingSpeedAugment>> WALKING_SPEED_AUGMENT = AUGMENTS.register("walking_speed",
             () -> AugmentType.of(WalkingSpeedAugment::new));
     public static final Supplier<AugmentType<ThrowSpreadingTrident>> SPREADING_TRIDENT_AUGMENT = AUGMENTS.register("spreading_trident",

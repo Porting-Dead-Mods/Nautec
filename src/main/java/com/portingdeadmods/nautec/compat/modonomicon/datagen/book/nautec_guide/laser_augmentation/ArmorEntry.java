@@ -1,4 +1,4 @@
-package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_chemistry;
+package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_augmentation;
 
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
 import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
@@ -8,32 +8,30 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTItems;
 
-public class CrystalShardsEntry extends EntryProvider {
-    public CrystalShardsEntry(CategoryProviderBase parent) {
+public class ArmorEntry extends EntryProvider {
+    public ArmorEntry(CategoryProviderBase parent) {
         super(parent);
     }
 
     @Override
     protected void generatePages() {
-        this.page("prismarine_crystal_shards", () -> BookTextPageModel.create()
+        this.page("aquarine_steel_armor", () -> BookTextPageModel.create()
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
-        this.pageTitle("Prismarine Crystal Shard");
+        this.pageTitle("Aquarine Steel Armor");
         this.pageText("""
-                Prismarine Crystal Shards are a pristine
-                material required for some of the most
-                advanced machinery
+                Powahhh armor. Requires valves & crystals
                 """);
     }
 
     @Override
     protected String entryName() {
-        return "Prismarine Crystal Shards";
+        return "Aquarine Steel Armor";
     }
 
     @Override
     protected String entryDescription() {
-        return "Not an amethyst rextexture!";
+        return "Fancy power quantum super ultra mecha armor";
     }
 
     @Override
@@ -43,11 +41,11 @@ public class CrystalShardsEntry extends EntryProvider {
 
     @Override
     protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTItems.PRISMARINE_CRYSTAL_SHARD.get());
+        return BookIconModel.create(NTItems.AQUARINE_CHESTPLATE);
     }
 
     @Override
     protected String entryId() {
-        return "crystal_shards";
+        return "aquarine_steel_armor";
     }
 }

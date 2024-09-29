@@ -33,17 +33,23 @@ public class ChemistryIntroductionEntry extends EntryProvider {
                 due to its transforming abilities.
                 """);
         this.page("eas", () -> BookSpotlightPageModel.create()
-                .withTitle(this.context().pageTitle())
-                .withItem(NTItems.EAS_BUCKET.get())
-                .withText(this.context().pageText()))
-                .withItem(NTItems.SALT_WATER_BUCKET);
+                        .withTitle(this.context().pageTitle())
+                        .withItem(NTItems.EAS_BUCKET.get())
+                        .withText(this.context().pageText()));
         this.pageTitle("Electrolyte Algae Serum");
         this.pageText("""
-                Electrolyte Algae Serum (EAS) is on of the first chemicals
+                Electrolyte Algae Serum (EAS) is one of the first chemicals
                 you will come across. It is known for
                 its transforming abilities that can empower
                 items and entities.
-                \\
+                """);
+
+        this.page("eas", () -> BookSpotlightPageModel.create()
+                        .withTitle(this.context().pageTitle())
+                        .withItem(NTItems.SALT_WATER_BUCKET.get())
+                        .withText(this.context().pageText()));
+        this.pageTitle("Electrolyte Algae Serum");
+        this.pageText("""
                 You might have already discovered that it uses another liquid: Salt Water
                 \\
                 Salt water can be obtained by filling a bucket of water in an ocean biome which
