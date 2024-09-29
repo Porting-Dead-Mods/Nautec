@@ -20,5 +20,17 @@ public class NautecGuideMultiblockProvider extends MultiblockProvider {
                 )
                 .block('W', NTBlocks.DRAIN_WALL)
                 .block('0', NTBlocks.DRAIN).build(false));
+        this.add(modLoc("aumgentation_station"), new MultiblockProvider.DenseMultiblockBuilder()
+                .layer(
+                        "  E  ",
+                        " SPS ",
+                        "EP0PE",
+                        " SPS ",
+                        "  E  "
+                )
+                .block('S', NTBlocks.AQUARINE_STEEL_BLOCK)
+                .block('P', NTBlocks.POLISHED_PRISMARINE)
+                .block('E', NTBlocks.AUGMENTATION_STATION_EXTENSION)
+                .block('0', NTBlocks.AUGMENTATION_STATION).build(false));
     }
 }

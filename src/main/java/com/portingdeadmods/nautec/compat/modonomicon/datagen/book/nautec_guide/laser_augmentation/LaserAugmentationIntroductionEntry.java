@@ -15,12 +15,18 @@ public class LaserAugmentationIntroductionEntry extends EntryProvider {
 
     @Override
     protected void generatePages() {
-        this.page("long_distance_laser", () -> BookTextPageModel.create()
+        this.page("laser_augmentation_intro", () -> BookTextPageModel.create()
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
-        this.pageTitle("Long Distance Laser");
+        this.pageTitle("Introduction to Laser Augmentation");
         this.pageText("""
-                shoot lasers up to 64 blocks, might be bad for fps
+                Now that you have made such huge progress in your studies,
+                you are able to explore the most dangerous parts of science.
+                Body Augmentation. Since this is such an
+                advanced topic I have dedicated this entire chapter to it.
+                \\
+                \\
+                Read it carefully and with patience.
                 """);
     }
 

@@ -16,25 +16,30 @@ public class LaserManipulationEntry extends EntryProvider {
 
     @Override
     protected void generatePages() {
-            this.page("laser_manipulation", () -> BookTextPageModel.create()
-                    .withTitle(this.context().pageTitle())
-                    .withText(this.context().pageText()));
-            this.pageTitle("Laser Manipulation");
-            this.pageText("""
-                            The Prismarine Laser Relay is a block that allows you to extend the range of your lasers.
-                            Make sure to point the arrow to the right direction!
-                            \\
-                            It is crafted using 6 Polish Prismarine blocks.
-                            \\
-                            \\
-                            The Laser Junction is a block that allows you to split a laser beam into multiple directions.
-                            While the recipe is quite expensive, it is a very useful block to have.
-                            """);
-            this.page("laser_manipulation_recipe", () -> BookCraftingRecipePageModel.create()
-                    .withTitle1("Prismarine Laser Relay")
-                    .withRecipeId1("nautec:prismarine_laser_relay")
-                    .withTitle2("Laser Junction")
-                    .withRecipeId2("nautec:laser_junction"));
+        this.page("laser_relay", () -> BookCraftingRecipePageModel.create()
+                .withTitle1("Prismarine Laser Relay")
+                .withRecipeId1("nautec:prismarine_laser_relay")
+                .withText(this.context().pageText()));
+        this.pageText("""
+                The Prismarine Laser Relay is a block that allows you to extend the range of your lasers.
+                Make sure to point the arrow in the right direction!
+                \\
+                It is crafted using 6 Polish Prismarine blocks.
+                """);
+        this.page("laser_junction0", () -> BookCraftingRecipePageModel.create()
+                .withTitle1("Laser Junction")
+                .withRecipeId1("nautec:laser_junction")
+                .withText(this.context.pageText()));
+        this.pageText("""
+                The Laser Junction is a block that allows you to split a laser beam into multiple directions
+                or bundle multiple Beams into a single one.
+                """);
+        this.page("laser_junction1", () -> BookTextPageModel.create()
+                .withText(this.context.pageText()));
+        this.pageText("""
+                Right-click or Shift-right-click to toggle input output on the blocks side.
+                While this block is quite expensive, it is also a useful and very powerful block to have.
+                """);
     }
 
     @Override

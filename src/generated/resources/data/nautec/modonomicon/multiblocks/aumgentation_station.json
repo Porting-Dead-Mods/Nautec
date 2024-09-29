@@ -1,0 +1,30 @@
+{
+  "type": "modonomicon:dense",
+  "mapping": {
+    "0": {
+      "type": "modonomicon:block",
+      "block": "nautec:augmentation_station"
+    },
+    "E": {
+      "type": "modonomicon:block",
+      "block": "nautec:augmentation_station_extension"
+    },
+    "P": {
+      "type": "modonomicon:block",
+      "block": "nautec:polished_prismarine"
+    },
+    "S": {
+      "type": "modonomicon:block",
+      "block": "nautec:aquarine_steel_block"
+    }
+  },
+  "pattern": [
+    [
+      "__E__",
+      "_SPS_",
+      "EP0PE",
+      "_SPS_",
+      "__E__"
+    ]
+  ]
+}

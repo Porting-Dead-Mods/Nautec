@@ -21,7 +21,14 @@ public class AugmentationEntry extends EntryProvider {
                 .withText(this.context().pageText()));
         this.pageTitle("Player Augmentation");
         this.pageText("""
-                Step onto augmentation station. Make sure item in slot. Select slot, click apply. View applied augments in gui using keybind
+                To start the augmentation process, make sure each
+                Augmentation Station Extension has an augment item
+                and a Robot Arm as well as being supplied with enough
+                Power.
+                \\
+                Next, step onto the middle of the Augmentation Station
+                where a screen should open, in which you can configure
+                the augment and start its application.
                 """);
         this.page("robot_arm", () -> BookSpotlightPageModel.create()
                 .withTitle(this.context().pageTitle())

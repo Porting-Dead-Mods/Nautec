@@ -1,0 +1,36 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "getting_started",
+  "description": "book.nautec.nautec_guide.getting_started.machine_part.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "nautec:ancient_valve"
+  },
+  "name": "book.nautec.nautec_guide.getting_started.machine_part.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.nautec.nautec_guide.getting_started.machine_part.machine_part.text",
+      "title": "book.nautec.nautec_guide.getting_started.machine_part.machine_part.title",
+      "use_markdown_in_title": false
+    }
+  ],
+  "parents": [
+    {
+      "draw_arrow": true,
+      "entry": "getting_started/structures",
+      "line_enabled": true,
+      "line_reversed": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 8,
+  "x": 4,
+  "y": -2
+}

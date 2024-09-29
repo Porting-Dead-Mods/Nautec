@@ -10,14 +10,26 @@
   "name": "book.nautec.nautec_guide.laser_chemistry.crystal_shards.name",
   "pages": [
     {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "nautec:prismarine_crystal_shard"
+      },
+      "text": "book.nautec.nautec_guide.laser_chemistry.crystal_shards.prismarine_crystal_shards.text",
+      "title": "book.nautec.nautec_guide.laser_chemistry.crystal_shards.prismarine_crystal_shards.title"
+    },
+    {
       "type": "modonomicon:text",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.laser_chemistry.crystal_shards.prismarine_crystal_shards.text",
-      "title": "book.nautec.nautec_guide.laser_chemistry.crystal_shards.prismarine_crystal_shards.title",
+      "text": "book.nautec.nautec_guide.laser_chemistry.crystal_shards.shard_and_crystal.text",
+      "title": "",
       "use_markdown_in_title": false
     },
     {
