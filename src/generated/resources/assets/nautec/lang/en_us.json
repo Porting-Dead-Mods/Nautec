@@ -129,7 +129,7 @@
   "book.nautec.nautec_guide.laser_chemistry.name": "Laser Chemistry",
   "book.nautec.nautec_guide.laser_chemistry.prismatic_battery.description": "Charger²",
   "book.nautec.nautec_guide.laser_chemistry.prismatic_battery.name": "Prismatic Battery",
-  "book.nautec.nautec_guide.laser_chemistry.prismatic_battery.prismatic_battery.text": "Curios slot, charges inventory\n",
+  "book.nautec.nautec_guide.laser_chemistry.prismatic_battery.prismatic_battery.text": "The Prismatic Battery is a powerful energy storage device that can store up to 10,000 AP\n\\\nIt is mainly used to charge tools and armor in your inventory.\n\\\nShift-right-clicking with the battery in your hand will enable it.\n\\\nWhen enabled, the battery will charge any item in your inventory that can be charged.\n\\\n(Note: It has to be in it's curios slot to function)\n",
   "book.nautec.nautec_guide.laser_chemistry.prismatic_battery.prismatic_battery.title": "Prismatic Battery",
   "book.nautec.nautec_guide.laser_chemistry.tools.basic_tools.text": "The Aquarine Steel Tools are quite special. They use Aquatic Power to function and are unbreakable.\n\\\nBy infusing them in EAS fluid, they can be upgraded to have special abilities.\n\\\nEach tool has a unique ability that is explained in the tooltips.\n\\\nShift-right-clicking with the tool in hand will activate the ability.\n",
   "book.nautec.nautec_guide.laser_chemistry.tools.basic_tools.title": "Aquarine Steel Tools",
