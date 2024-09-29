@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:poisonous_potato"
+    },
+    "B": {
+      "item": "minecraft:water_bucket"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "D": {
+      "item": "minecraft:redstone"
+    },
+    "E": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "F": {
+      "item": "minecraft:blaze_powder"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "H": {
+      "item": "minecraft:blaze_powder"
+    },
+    "I": {
+      "item": "minecraft:bone_meal"
+    }
+  },
+  "pattern": [
+    "ACE",
+    "HBD",
+    "IGF"
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:etching_acid_bucket"
+  }
+}
