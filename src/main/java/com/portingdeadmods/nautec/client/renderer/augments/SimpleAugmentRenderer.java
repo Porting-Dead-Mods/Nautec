@@ -6,6 +6,7 @@ import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.client.model.augments.AugmentModel;
 import com.portingdeadmods.nautec.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
+import com.portingdeadmods.nautec.events.helper.AugmentSlotsRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -33,7 +34,7 @@ public class SimpleAugmentRenderer<T extends Augment> extends AugmentRenderer<T>
         {
             AugmentSlot augmentSlot = augment.getAugmentSlot();
             if (augmentSlot != null) {
-                ModelPart modelPart = augmentSlot.getModelPart().getModelPart(superRenderer.getParentModel());
+                ModelPart modelPart = AugmentSlotsRenderer.modelPartBySlot(augmentSlot).getModelPart(superRenderer.getParentModel());
                 if (modelPart != null && moveWithBody) {
                     modelPart.translateAndRotate(poseStack);
                 }

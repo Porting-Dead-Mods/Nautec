@@ -5,12 +5,14 @@ import com.portingdeadmods.nautec.tags.NTTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
@@ -37,6 +39,19 @@ public class ItemTagProvider extends ItemTagsProvider{
         tag(ItemTags.CHEST_ARMOR_ENCHANTABLE,NTItems.AQUARINE_CHESTPLATE);
         tag(ItemTags.LEG_ARMOR_ENCHANTABLE,NTItems.AQUARINE_LEGGINGS);
         tag(ItemTags.FOOT_ARMOR_ENCHANTABLE,NTItems.AQUARINE_BOOTS);
+
+        this.tag(NTTags.Items.CORALS,
+                Items.TUBE_CORAL,
+                Items.BRAIN_CORAL,
+                Items.BUBBLE_CORAL,
+                Items.FIRE_CORAL,
+                Items.HORN_CORAL,
+                Items.TUBE_CORAL_FAN,
+                Items.BRAIN_CORAL_FAN,
+                Items.BUBBLE_CORAL_FAN,
+                Items.FIRE_CORAL_FAN,
+                Items.HORN_CORAL_FAN);
+
     }
 
 

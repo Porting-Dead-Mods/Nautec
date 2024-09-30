@@ -8,10 +8,13 @@ import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
+import com.portingdeadmods.nautec.tags.NTTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -30,11 +33,7 @@ public class RecipesProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(@NotNull RecipeOutput pRecipeOutput) {
-        AquaticCatalystChannelingRecipeBuilder.newRecipe(Ingredient.of(Items.KELP))
-                .powerAmount(500)
-                .purity(0)
-                .duration(100)
-                .save(pRecipeOutput);
+        aquaticCatalystRecipes(pRecipeOutput);
 
         aquarineSteelRecipes(pRecipeOutput);
 
@@ -100,6 +99,19 @@ public class RecipesProvider extends RecipeProvider {
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(Tags.Items.INGOTS_IRON), RecipeCategory.MISC, NTItems.CAST_IRON_INGOT.get(), 0.2f, 100)
                 .unlockedBy("has_item", has(Items.IRON_INGOT))
                 .save(pRecipeOutput, "cast_iron_ingot_blasting");
+    }
+
+    private static void aquaticCatalystRecipes(@NotNull RecipeOutput pRecipeOutput) {
+        AquaticCatalystChannelingRecipeBuilder.newRecipe(Ingredient.of(Items.KELP))
+                .powerAmount(500)
+                .purity(0)
+                .duration(100)
+                .save(pRecipeOutput);
+        AquaticCatalystChannelingRecipeBuilder.newRecipe(Ingredient.of(NTTags.Items.CORALS))
+                .powerAmount(1400)
+                .purity(0.4f)
+                .duration(200)
+                .save(pRecipeOutput);
     }
 
     private static void aquarineSteelRecipes(@NotNull RecipeOutput pRecipeOutput) {

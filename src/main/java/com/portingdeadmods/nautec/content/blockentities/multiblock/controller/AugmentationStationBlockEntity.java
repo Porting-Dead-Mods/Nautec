@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.blockentities.multiblock.controller;
 
+import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
@@ -17,6 +18,7 @@ import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
 import com.portingdeadmods.nautec.utils.PlayerUtils;
 import it.unimi.dsi.fastutil.Pair;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -72,7 +74,7 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
                 for (BlockPos pos : augmentItems.keySet()) {
                     AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
 
-                    if (be.getPower() < 15) {
+                    if (be.getPower() < NTConfig.augmentationStationPower) {
                         return;
                     }
 
@@ -129,8 +131,8 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
                 if (playerUUID.equals(uuid)) {
                     if (playerOpenMenuInterval > 0) {
                         playerOpenMenuInterval--;
-                        if (playerOpenMenuInterval == 0) {
-                            PlayerUtils.openScreen(player, new AugmentationStationScreen(this, player, Component.literal("Augmentation Station")));
+                        if (playerOpenMenuInterval == 0 && player.level().isClientSide()) {
+                            PlayerUtils.openAugmentationStationScreen(player, this, Component.literal("Augmentation Station"));
                         }
                     }
                 } else {
@@ -143,7 +145,7 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
                     for (BlockPos pos : augmentItems.keySet()) {
                         AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
 
-                        if (be.getPower() < 15) {
+                        if (be.getPower() < NTConfig.augmentationStationPower) {
                             this.duration = 0;
                             this.isRunning = false;
                             restorePlayerAttributes();

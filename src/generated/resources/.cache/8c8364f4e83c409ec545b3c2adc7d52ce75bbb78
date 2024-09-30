@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-25T20:43:57.0831263	Tags for minecraft:item mod id vanilla
+// 1.21.1	2024-09-30T15:40:31.84996349	Tags for minecraft:item mod id vanilla
 7de3b52dcf805e01385dac0a127c581667cfb6a3 data/minecraft/tags/item/axes.json
 c66bf155ebc054231fc94de1993fec77011e34bf data/minecraft/tags/item/enchantable/chest_armor.json
 ef042778aecaf44c97c28a4854a3979b6ef42e55 data/minecraft/tags/item/enchantable/foot_armor.json
@@ -10,3 +10,4 @@ fa5a2dc47abd8cf1a20218b427781b0772371859 data/minecraft/tags/item/pickaxes.json
 3c067495112d7424b2f3d1ce992db724c21b06f9 data/minecraft/tags/item/swords.json
 255db1048249ab333a1f41009c18cbcd639e3ae4 data/nautec/tags/item/aquarine_steel.json
 e1102ee826d5ec0d457c55612bc006b93dfc1ed5 data/nautec/tags/item/aquatic_catalyst.json
+06a586fdbf53c6ed3d17e0f071d666c2a95b5330 data/nautec/tags/item/corals.json

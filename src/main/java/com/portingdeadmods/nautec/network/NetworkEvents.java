@@ -27,11 +27,6 @@ public class NetworkEvents {
                 SetCooldownPayload::setCooldownAction
         );
         registrar.playBidirectional(
-                AugmentationScreenPayload.TYPE,
-                AugmentationScreenPayload.STREAM_CODEC,
-                AugmentationScreenPayload::AugmentationScreenAction
-        );
-        registrar.playBidirectional(
                 StartAugmentationPayload.TYPE,
                 StartAugmentationPayload.STREAM_CODEC,
                 StartAugmentationPayload::startAugmentation

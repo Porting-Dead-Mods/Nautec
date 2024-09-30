@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.mixin;
 
+import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -32,35 +33,38 @@ public abstract class BucketItemMixin {
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void onUse(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
-        ItemStack itemStack = player.getItemInHand(hand);
-        BlockHitResult blockHitResult = getPlayerPOVHitResult(
-                level, player, ClipContext.Fluid.SOURCE_ONLY
-        );
+        if (NTConfig.collectSaltWater) {
 
-        if (blockHitResult.getType() == HitResult.Type.BLOCK) {
-            BlockPos blockPos = blockHitResult.getBlockPos();
-            BlockState blockState = level.getBlockState(blockPos);
+            ItemStack itemStack = player.getItemInHand(hand);
+            BlockHitResult blockHitResult = getPlayerPOVHitResult(
+                    level, player, ClipContext.Fluid.SOURCE_ONLY
+            );
 
-            if (blockState.getBlock() instanceof BucketPickup bucketPickup) {
+            if (blockHitResult.getType() == HitResult.Type.BLOCK) {
+                BlockPos blockPos = blockHitResult.getBlockPos();
+                BlockState blockState = level.getBlockState(blockPos);
 
-                if (level.getFluidState(blockPos).is(FluidTags.WATER) && level.getBiome(blockPos).getRegisteredName().contains("ocean")) {
+                if (blockState.getBlock() instanceof BucketPickup bucketPickup) {
 
-                    ItemStack filledBucket = bucketPickup.pickupBlock(player, level, blockPos, blockState);
-                    if (!filledBucket.isEmpty()) {
+                    if (level.getFluidState(blockPos).is(FluidTags.WATER) && level.getBiome(blockPos).getRegisteredName().contains("ocean")) {
 
-                        filledBucket = new ItemStack(NTItems.SALT_WATER_BUCKET.asItem());
-                        player.awardStat(Stats.ITEM_USED.get(Items.BUCKET));
+                        ItemStack filledBucket = bucketPickup.pickupBlock(player, level, blockPos, blockState);
+                        if (!filledBucket.isEmpty()) {
 
-                        bucketPickup.getPickupSound(blockState).ifPresent(soundEvent ->
-                                level.playSound(player, blockPos, soundEvent, SoundSource.BLOCKS, 1.0F, 1.0F)
-                        );
+                            filledBucket = new ItemStack(NTItems.SALT_WATER_BUCKET.asItem());
+                            player.awardStat(Stats.ITEM_USED.get(Items.BUCKET));
 
-                        if (!level.isClientSide) {
-                            CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, filledBucket);
+                            bucketPickup.getPickupSound(blockState).ifPresent(soundEvent ->
+                                    level.playSound(player, blockPos, soundEvent, SoundSource.BLOCKS, 1.0F, 1.0F)
+                            );
+
+                            if (!level.isClientSide) {
+                                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, filledBucket);
+                            }
+
+                            cir.setReturnValue(InteractionResultHolder.sidedSuccess(ItemUtils.createFilledResult(itemStack, player, filledBucket), level.isClientSide()));
+                            cir.cancel();
                         }
-
-                        cir.setReturnValue(InteractionResultHolder.sidedSuccess(ItemUtils.createFilledResult(itemStack, player, filledBucket), level.isClientSide()));
-                        cir.cancel();
                     }
                 }
             }

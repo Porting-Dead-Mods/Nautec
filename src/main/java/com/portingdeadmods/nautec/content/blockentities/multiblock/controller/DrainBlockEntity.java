@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.content.blockentities.multiblock.controller;
 
 import com.google.common.collect.ImmutableMap;
+import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockEntity;
@@ -50,7 +51,7 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
 
     public DrainBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.DRAIN.get(), blockPos, blockState);
-        addFluidTank(128_000);
+        addFluidTank(NTConfig.drainCapacity);
         this.multiblockData = MultiblockData.EMPTY;
     }
 
@@ -121,11 +122,11 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
 
     private void performDraining() {
         // Every second
-        if (level.getGameTime() % 20 == 0 && lidInUse == 0 && getPower() > 15) {
+        if (level.getGameTime() % 20 == 0 && lidInUse == 0 && getPower() > NTConfig.drainPower) {
             if (hasWater()) {
                 if (openAndFormed()) {
                     if (level.getBiome(worldPosition).is(BiomeTags.IS_OCEAN)) {
-                        getFluidHandler().fill(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), 500), IFluidHandler.FluidAction.EXECUTE);
+                        getFluidHandler().fill(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), NTConfig.drainSaltWaterAmount), IFluidHandler.FluidAction.EXECUTE);
                     }
                 }
             }

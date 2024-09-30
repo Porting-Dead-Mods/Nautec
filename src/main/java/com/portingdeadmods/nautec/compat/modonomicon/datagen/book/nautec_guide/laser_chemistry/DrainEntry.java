@@ -30,6 +30,9 @@ public class DrainEntry extends EntryProvider {
                 on the center valve block to open it.
                 Also make sure to right-click one of the middle wall blocks
                 with a wrench to open a laser port and supply it with power.
+                \\
+                To extract the salt water, one can either hook up a pipe
+                to the bottom side of the center block or interact with a bucket.
                 """);
 
         this.page("drain_multi", () -> BookMultiblockPageModel.create()
