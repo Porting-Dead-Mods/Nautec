@@ -28,7 +28,7 @@ public final class Nautec {
             event.register(NTRegistries.AUGMENT_TYPE);
         });
 
-        NTEntites.ENTITIES.register(modEventBus);
+        NTEntities.ENTITIES.register(modEventBus);
         NTItems.ITEMS.register(modEventBus);
         NTFluids.FLUIDS.register(modEventBus);
         NTBlocks.BLOCKS.register(modEventBus);

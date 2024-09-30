@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#c:is_beach",
+  "features": "nautec:prismarine_sand_beach",
+  "step": "underground_ores"
+}

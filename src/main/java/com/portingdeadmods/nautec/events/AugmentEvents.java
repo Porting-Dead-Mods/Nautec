@@ -37,16 +37,6 @@ public final class AugmentEvents {
         }
     }
 
-    @SubscribeEvent
-    public static void breakEvent(BlockEvent.BreakEvent event){
-        Iterable<Augment> augments = AugmentHelper.getAugments(event.getPlayer()).values();
-        for (Augment augment : augments) {
-            if (augment != null) {
-                //ingredients.get(i).breakBlock(AugmentSlot.GetValue(i),event);
-            }
-        }
-    }
-
 
     @SubscribeEvent
     public static void playerTick(PlayerTickEvent.Post event) {

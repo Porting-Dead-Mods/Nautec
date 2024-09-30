@@ -85,13 +85,17 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
                 }
             }
 
-            if (duration >= recipe.duration()) {
-                getItemStackHandler().setStackInSlot(0, stack.copyWithCount(stack.getCount() - 1));
-                duration = 0;
-            } else {
-                amount = recipe.powerAmount() / recipe.duration();
-                transmitPower(amount);
-                duration++;
+            Direction direction = getBlockState().getValue(BlockStateProperties.FACING);
+            if (getLaserDistances().getInt(direction.getOpposite()) > 0) {
+                if (duration >= recipe.duration()) {
+                    getItemStackHandler().setStackInSlot(0, stack.copyWithCount(stack.getCount() - 1));
+                    duration = 0;
+                } else {
+                    amount = recipe.powerAmount() / recipe.duration();
+                    transmitPower(amount);
+                    setPurity(recipe.purity());
+                    duration++;
+                }
             }
         } else {
             this.recipe = null;

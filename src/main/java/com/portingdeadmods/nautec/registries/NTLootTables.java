@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class NTLootTables {
+public final class NTLootTables {
 
     private static final Set<ResourceKey<LootTable>> LOCATIONS = new HashSet<>();
     private static final Set<ResourceKey<LootTable>> IMMUTABLE_LOCATIONS = Collections.unmodifiableSet(LOCATIONS);
