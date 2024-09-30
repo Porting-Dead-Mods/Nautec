@@ -30,9 +30,13 @@ public class GuardianEyeAugment extends Augment {
 
     @Override
     public void clientTick(PlayerTickEvent.Post event) {
-        if (NTKeybinds.ACTIVATE_LASER_KEYBIND.get().consumeClick()) {
+        if (NTKeybinds.ACTIVATE_LASER_KEYBIND.get().isDown()) {
             PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
             handleKeybindPress();
+        }
+
+        if (targetEntity != null && !targetEntity.isAlive()) {
+            targetEntity = null;
         }
 
         if (targetEntity != null) {
@@ -82,6 +86,7 @@ public class GuardianEyeAugment extends Augment {
         for (double t = 0; t <= maxDistance; t += step) {
             Vec3 checkPos = startPos.add(look.scale(t));
             List<LivingEntity> entities = player.level().getEntitiesOfClass(LivingEntity.class, new AABB(checkPos.add(-0.5, -0.5, -0.5), checkPos.add(0.5, 0.5, 0.5)));
+
             for (LivingEntity entity : entities) {
                 if (entity != player) {
                     if (!player.level().isClientSide) {
@@ -95,6 +100,8 @@ public class GuardianEyeAugment extends Augment {
                 }
             }
         }
+
+        this.targetEntity = null;
     }
 
     public Entity getTargetEntity() {

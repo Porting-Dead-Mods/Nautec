@@ -1,0 +1,9 @@
+{
+  "type": "nautec:aquatic_catalyst_channeling",
+  "duration": 200,
+  "ingredient": {
+    "tag": "nautec:corals"
+  },
+  "power_amount": 1400,
+  "purity": 0.4
+}
