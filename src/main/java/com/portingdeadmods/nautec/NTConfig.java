@@ -19,12 +19,17 @@ public final class NTConfig {
             .defineInRange("mixerPowerRequirement", 15, 0, Integer.MAX_VALUE);
     private static final ModConfigSpec.IntValue AUGMENTATION_STATION_REQUIREMENT = BUILDER
             .comment("The amount of power required by the Augmentation Station each tick.")
-            .defineInRange("mixerPowerRequirement", 50, 0, Integer.MAX_VALUE);
+            .defineInRange("augmentationPowerRequirement", 50, 0, Integer.MAX_VALUE);
+
+    private static final ModConfigSpec.BooleanValue SPAWN_BOOK_IN_INVENTORY = BUILDER
+            .comment("REQUIRES MODONOMICON TO BE INSTALLED")
+            .define("spawnBookInInventory", true);
 
 
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public static int kelpHeight;
+    public static boolean spawnBookInInventory;
 
     private static boolean validateItemName(final Object obj) {
         return obj instanceof String itemName && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));
@@ -33,5 +38,6 @@ public final class NTConfig {
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
         kelpHeight = KELP_HEIGHT.get();
+        spawnBookInInventory = SPAWN_BOOK_IN_INVENTORY.get();
     }
 }

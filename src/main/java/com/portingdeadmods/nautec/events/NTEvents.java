@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.events;
 
+import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
@@ -99,7 +100,7 @@ public final class NTEvents {
 
             // Add the Nautec Guide attachment to the player
             if (ModList.get().isLoaded("modonomicon")) {
-                if (!player.getData(NTAttachmentTypes.HAS_NAUTEC_GUIDE.get())) {
+                if (!player.getData(NTAttachmentTypes.HAS_NAUTEC_GUIDE.get()) && NTConfig.spawnBookInInventory) {
                     ItemHandlerHelper.giveItemToPlayer(player, ModonomiconCompat.getItemStack());
                     player.setData(NTAttachmentTypes.HAS_NAUTEC_GUIDE.get(), true);
                 }
