@@ -91,7 +91,6 @@ public class GuardianEyeAugment extends Augment {
                 if (entity != player) {
                     if (!player.level().isClientSide) {
                         entity.hurt(entity.damageSources().magic(), NTConfig.guardianAugmentDamage);
-                        entity.setRemainingFireTicks(10);
                         timeLeft = 1000;
                         laserFiredPos = entity.getEyePosition();
                     }

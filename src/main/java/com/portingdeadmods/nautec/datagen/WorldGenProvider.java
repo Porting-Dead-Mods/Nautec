@@ -59,15 +59,13 @@ public class WorldGenProvider extends DatapackBuiltinEntriesProvider {
 
                 context.register(PRISMARINE_SAND_BEACH_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(prismarine_sand_config, 6)));
                 context.register(PRISMARINE_SAND_OCEAN_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(prismarine_sand_config, 12)));
-
-                LOGGER.info("Registered Prismarine Sand Generation as a configured feature.");
             })
             .add(Registries.PLACED_FEATURE, context -> {
                 HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
                 context.register(PRISMARINE_SAND_BEACH_PLACE_KEY, new PlacedFeature(configuredFeatures.getOrThrow(PRISMARINE_SAND_BEACH_KEY),
                         List.of(
-                                CountPlacement.of(40),
+                                CountPlacement.of(20),
                                 InSquarePlacement.spread(),
                                 HeightRangePlacement.uniform(
                                         VerticalAnchor.absolute(50),
@@ -77,7 +75,7 @@ public class WorldGenProvider extends DatapackBuiltinEntriesProvider {
                 ));
                 context.register(PRISMARINE_SAND_OCEAN_PLACE_KEY, new PlacedFeature(configuredFeatures.getOrThrow(PRISMARINE_SAND_OCEAN_KEY),
                         List.of(
-                                CountPlacement.of(20),
+                                CountPlacement.of(10),
                                 InSquarePlacement.spread(),
                                 HeightRangePlacement.uniform(
                                         VerticalAnchor.absolute(40),

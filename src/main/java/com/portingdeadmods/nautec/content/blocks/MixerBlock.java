@@ -122,7 +122,6 @@ public class MixerBlock extends LaserBlock {
         }
     }
 
-    // Secondary handler extraction doesn't work
     private static void extractFluid(Player player, Level level, InteractionHand interactionHand, FluidTank fluidHandler, FluidTank secondaryFluidHandler, IFluidHandler fluidHandlerItem) {
         FluidTank curHandler = secondaryFluidHandler.getFluidInTank(0).isEmpty() ? fluidHandler : secondaryFluidHandler;
         Nautec.LOGGER.debug("Extracting secondary: {}", curHandler == secondaryFluidHandler);
