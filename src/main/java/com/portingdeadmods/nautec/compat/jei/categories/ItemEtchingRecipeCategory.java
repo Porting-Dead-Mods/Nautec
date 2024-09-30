@@ -66,7 +66,7 @@ public class ItemEtchingRecipeCategory implements IRecipeCategory<ItemEtchingRec
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, ItemEtchingRecipe recipe, IFocusGroup focuses) {
         //Just one input slot, an arrow and an output slot
-        builder.addSlot(RecipeIngredientRole.INPUT, 0,0 ).addItemStack(recipe.getIngredients().get(0).getItems()[0]);
+        builder.addSlot(RecipeIngredientRole.INPUT, 0,0 ).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 64, 0).addItemStack(recipe.getResultItem(null));
     }
 

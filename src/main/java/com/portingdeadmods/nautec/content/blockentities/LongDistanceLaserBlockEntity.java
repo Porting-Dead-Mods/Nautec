@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.blockentities;
 
+import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.blocks.LongDistanceLaserBlock;
@@ -36,7 +37,7 @@ public class LongDistanceLaserBlockEntity extends LaserBlockEntity {
 
     @Override
     public int getMaxLaserDistance() {
-        return 64;
+        return NTConfig.longDistanceLaserDistance;
     }
 
     @Override

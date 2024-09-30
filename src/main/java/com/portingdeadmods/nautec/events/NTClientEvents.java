@@ -17,13 +17,13 @@ import com.portingdeadmods.nautec.client.model.block.WhiskModel;
 import com.portingdeadmods.nautec.client.renderer.augments.GuardianEyeRenderer;
 import com.portingdeadmods.nautec.client.renderer.augments.SimpleAugmentRenderer;
 import com.portingdeadmods.nautec.client.renderer.robotArms.ClawRobotArmRenderer;
-import com.portingdeadmods.nautec.client.screen.AugmentScreen;
 import com.portingdeadmods.nautec.client.screen.AugmentationStationExtensionScreen;
 import com.portingdeadmods.nautec.content.menus.AugmentationViewerScreen;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;
 import com.portingdeadmods.nautec.client.screen.CrateScreen;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
+import com.portingdeadmods.nautec.events.helper.AugmentSlotsRenderer;
 import com.portingdeadmods.nautec.registries.*;
 import com.portingdeadmods.nautec.utils.ArmorModelsHandler;
 import net.minecraft.client.Camera;
@@ -145,6 +145,14 @@ public final class NTClientEvents {
                     ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.MATERIAL, true, ctx));
             AugmentLayerRenderer.registerRenderer(NTAugments.GUARDIAN_EYE.get(), GuardianEyeRenderer::new);
             AugmentStationExtensionBERenderer.registerRenderer(NTItems.CLAW_ROBOT_ARM.get(), ClawRobotArmRenderer::new);
+
+            AugmentSlotsRenderer.registerAugmentSlotModelPart(NTAugmentSlots.HEAD, model -> model.head);
+            AugmentSlotsRenderer.registerAugmentSlotModelPart(NTAugmentSlots.EYES, model -> model.head);
+            AugmentSlotsRenderer.registerAugmentSlotModelPart(NTAugmentSlots.LEFT_ARM, model -> model.leftArm);
+            AugmentSlotsRenderer.registerAugmentSlotModelPart(NTAugmentSlots.RIGHT_ARM, model -> model.rightArm);
+            AugmentSlotsRenderer.registerAugmentSlotModelPart(NTAugmentSlots.LEFT_LEG, model -> model.leftLeg);
+            AugmentSlotsRenderer.registerAugmentSlotModelPart(NTAugmentSlots.RIGHT_LEG, model -> model.rightLeg);
+            AugmentSlotsRenderer.registerAugmentSlotModelPart(NTAugmentSlots.BODY, model -> model.body);
         }
 
         @SubscribeEvent
@@ -170,7 +178,6 @@ public final class NTClientEvents {
         public static void registerMenus(RegisterMenuScreensEvent event) {
             event.register(NTMenuTypes.CRATE.get(), CrateScreen::new);
             event.register(NTMenuTypes.AUGMENT_STATION_EXTENSION.get(), AugmentationStationExtensionScreen::new);
-            event.register(NTMenuTypes.AUGMENTS.get(), AugmentScreen::new);
         }
 
         @SubscribeEvent
@@ -208,9 +215,6 @@ public final class NTClientEvents {
 
         @SubscribeEvent
         public static void onClientTick(ClientTickEvent.Post event) {
-            // while (NTKeybinds.AUGMENT_SCREEN_KEYBIND.get().consumeClick()) {
-            //     PacketDistributor.sendToServer(new AugmentationScreenPayload((byte) 0));
-            // }
             if (NTKeybinds.AUGMENT_SCREEN_KEYBIND.get().consumeClick()) {
                 if (Minecraft.getInstance().screen == null) {
                     Minecraft.getInstance().setScreen(new AugmentationViewerScreen(Component.literal("test"), Minecraft.getInstance().player));

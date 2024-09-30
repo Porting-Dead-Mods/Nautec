@@ -7,6 +7,7 @@ import com.portingdeadmods.nautec.client.model.augment.GuardianEyeModel;
 import com.portingdeadmods.nautec.client.renderer.augments.helper.GuardianEyeRenderHelper;
 import com.portingdeadmods.nautec.content.augments.GuardianEyeAugment;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
+import com.portingdeadmods.nautec.events.helper.AugmentSlotsRenderer;
 import com.portingdeadmods.nautec.utils.LaserRendererHelper;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -26,7 +27,7 @@ public class GuardianEyeRenderer extends AugmentRenderer<GuardianEyeAugment> {
         {
             AugmentSlot augmentSlot = augment.getAugmentSlot();
             if (augmentSlot != null) {
-                ModelPart modelPart = augmentSlot.getModelPart().getModelPart(superRenderer.getParentModel());
+                ModelPart modelPart = AugmentSlotsRenderer.modelPartBySlot(augmentSlot).getModelPart(superRenderer.getParentModel());
                 if (modelPart != null) {
                     modelPart.translateAndRotate(poseStack);
                 }

@@ -73,6 +73,6 @@ public class AquaticCatalystChannelingRecipeCategory implements IRecipeCategory<
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, AquaticCatalystChannelingRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, getWidth() / 2 - 8, 0).addItemStack(recipe.getIngredients().get(0).getItems()[0]);
+        builder.addSlot(RecipeIngredientRole.INPUT, getWidth() / 2 - 8, 0).addIngredients(recipe.getIngredients().get(0));
     }
 }

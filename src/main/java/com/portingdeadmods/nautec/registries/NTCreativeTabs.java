@@ -25,7 +25,7 @@ public final class NTCreativeTabs {
 
     public static final Supplier<CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register("main", () -> CreativeModeTab.builder()
             .title(Component.translatable("nautec.creative_tab.main"))
-            .icon(() -> Blocks.DARK_PRISMARINE.asItem().getDefaultInstance())
+            .icon(() -> NTBlocks.AQUATIC_CATALYST.asItem().getDefaultInstance())
             .displayItems((params, output) -> {
                 for (ItemLike item : NTItems.CREATIVE_TAB_ITEMS) {
                     output.accept(item);
@@ -40,6 +40,8 @@ public final class NTCreativeTabs {
                 output.accept(NTItems.SALT_WATER_BUCKET);
                 output.accept(NTItems.EAS_BUCKET);
                 output.accept(NTItems.ETCHING_ACID_BUCKET);
+
+                output.accept(NTBlocks.CREATIVE_POWER_SOURCE);
             })
             .build());
 

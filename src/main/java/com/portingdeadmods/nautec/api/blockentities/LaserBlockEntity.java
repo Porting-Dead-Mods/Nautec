@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.api.blockentities;
 
+import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.nautec.content.recipes.inputs.ItemTransformationRecipeInput;
 import com.portingdeadmods.nautec.utils.ParticlesUtils;
@@ -58,7 +59,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     }
 
     public int getMaxLaserDistance() {
-        return 16;
+        return NTConfig.laserDistance;
     }
 
     protected int checkConnectionsInterval() {

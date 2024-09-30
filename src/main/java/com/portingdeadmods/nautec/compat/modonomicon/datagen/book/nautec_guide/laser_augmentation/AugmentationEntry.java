@@ -30,14 +30,13 @@ public class AugmentationEntry extends EntryProvider {
                 where a screen should open, in which you can configure
                 the augment and start its application.
                 """);
-        this.page("robot_arm", () -> BookSpotlightPageModel.create()
+        this.page("augmentation1", () -> BookTextPageModel.create()
                 .withTitle(this.context().pageTitle())
-                .withItem(NTItems.CLAW_ROBOT_ARM)
                 .withText(this.context().pageText()));
-        this.pageTitle("Robot arm");
+        this.pageTitle("Active Augments");
         this.pageText("""
-                Used in the augmentation station, which when paired with a Mob Augment allows the player to augment the player with the supplied augment.
-                Check the Mob Augments page for more info on what you can augment with.
+                To view your active augments, there is a screen that can be opened
+                using a keybind (typically 'B')
                 """);
     }
 

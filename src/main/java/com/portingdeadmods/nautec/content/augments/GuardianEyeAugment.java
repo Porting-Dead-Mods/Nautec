@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.augments;
 
+import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.network.KeyPressedPayload;
@@ -84,8 +85,7 @@ public class GuardianEyeAugment extends Augment {
             for (LivingEntity entity : entities) {
                 if (entity != player) {
                     if (!player.level().isClientSide) {
-                        // TODO: Make a config value for damage amoutn
-                        entity.hurt(entity.damageSources().magic(), 4f);
+                        entity.hurt(entity.damageSources().magic(), NTConfig.guardianAugmentDamage);
                         entity.setRemainingFireTicks(10);
                         timeLeft = 1000;
                         laserFiredPos = entity.getEyePosition();

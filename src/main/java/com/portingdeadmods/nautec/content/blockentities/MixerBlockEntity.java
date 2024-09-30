@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.blockentities;
 
+import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.recipes.MixingRecipe;
@@ -46,9 +47,9 @@ public class MixerBlockEntity extends LaserBlockEntity {
         super(NTBlockEntityTypes.MIXER.get(), blockPos, blockState);
         addItemHandler(5, (slot, stack) -> slot != 4);
         // in
-        addFluidTank(1000);
+        addFluidTank(NTConfig.mixerInputCapacity);
         // out
-        addSecondaryFluidTank(1000, fluidStack -> false);
+        addSecondaryFluidTank(NTConfig.mixerOutputCapacity, fluidStack -> false);
     }
 
     @Override
@@ -102,7 +103,7 @@ public class MixerBlockEntity extends LaserBlockEntity {
     }
 
     private void performRecipe() {
-        if (recipe != null && getPower() > 20) {
+        if (recipe != null && getPower() > NTConfig.mixerPower) {
             this.running = true;
             if (duration >= recipe.duration()) {
                 duration = 0;
