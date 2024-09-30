@@ -100,7 +100,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addBlock("prismarine_laser_relay", "Prismarine Laser Relay");
         addBlock("deep_sea_drain", "Deep Sea Drain");
         addBlock("augmentation_station_part", "Augmentation Station");
-        addBlock("augmentation_station_extentsion", "Augmentation Station Extension");
+        addBlock(NTBlocks.AUGMENTATION_STATION_EXTENSION, "Augmentation Station Extension");
         addBlock(NTBlocks.CHARGER, "Charger");
         addBlock(NTBlocks.PRISMARINE_SAND, "Prismarine Sand");
 
