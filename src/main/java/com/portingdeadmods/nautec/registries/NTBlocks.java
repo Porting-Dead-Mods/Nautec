@@ -30,6 +30,7 @@ public final class NTBlocks {
 
     public static final DeferredBlock<PrismarineSandBlock> PRISMARINE_SAND = registerBlockAndItem("prismarine_sand", props -> new PrismarineSandBlock(UniformInt.of(4, 6), props),
             BlockBehaviour.Properties.ofFullCopy(Blocks.SAND));
+
     public static final DeferredBlock<CrateBlock> CRATE = registerBlockAndItem("crate", CrateBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL));
     public static final DeferredBlock<CrateBlock> RUSTY_CRATE = registerBlockAndItem("rusty_crate", CrateBlock::new,
