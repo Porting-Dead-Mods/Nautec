@@ -1,8 +1,8 @@
-// 1.21.1	2024-09-28T18:46:07.723492931	Global Loot Modifiers : nautec
-410596f86cb6483fedbadaf04fd849a7f5e005d5 data/nautec/loot_modifiers/dolphin_modifier.json
-f1c95413e15f26e6dee27ac81fc8a36d01c98e82 data/nautec/loot_modifiers/drowned_modifier.json
-8a9f4ead3b5dc76b8214aa334b6fe78b3ca5b2e4 data/nautec/loot_modifiers/elder_guardian_modifier.json
-bd88a76887ff8aa8132b942818506dc74b2aa22c data/nautec/loot_modifiers/guardian_modifier.json
+// 1.21.1	2024-10-03T23:19:09.4559489	Global Loot Modifiers : nautec
+75bdeb6a11a7c2f92d07591d32680e57a2995ec7 data/nautec/loot_modifiers/dolphin_modifier.json
+80d1b0e204a5703265c312f3eeecf8cafcd63a07 data/nautec/loot_modifiers/drowned_modifier.json
+f193284430531eb505bd548da6c1bde69cb3b5d8 data/nautec/loot_modifiers/elder_guardian_modifier.json
+5e9cbb9ae473929292805eb0f315a89c1f145a19 data/nautec/loot_modifiers/guardian_modifier.json
 9ff3f403aef84216a0796bf7d1d9dc0709105ff0 data/nautec/loot_modifiers/ocean_ruins_modifier.json
 c9d45597f0bf1d6d2e27272ac7fe3ef27b2376ad data/nautec/loot_modifiers/shipwreck_modifier.json
 49d31a0defcb6a20562172e6cd7ae34268cd6bd9 data/nautec/loot_modifiers/suspicious_ruins_sand_modifier.json
