@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.content.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
@@ -16,7 +17,10 @@ import net.minecraft.world.entity.player.Player;
 // /modjam augments get <slot>
 public class GetAugmentCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal(Nautec.MODID)
+        LiteralArgumentBuilder<CommandSourceStack> nautecCommand = Commands.literal(Nautec.MODID)
+                .requires(player -> player.hasPermission(2));
+
+        dispatcher.register(nautecCommand
                 .then(Commands.literal("augments")
                         .then(Commands.literal("get")
                                 .then(Commands.argument("slot", AugmentSlotArgumentType.getInstance())

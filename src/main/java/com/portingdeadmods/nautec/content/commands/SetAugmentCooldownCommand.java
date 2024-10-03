@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec.content.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
@@ -18,7 +19,10 @@ import net.minecraft.world.entity.player.Player;
 // TODO: Only set ingredients for slots that support them
 public class SetAugmentCooldownCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal(Nautec.MODID)
+        LiteralArgumentBuilder<CommandSourceStack> nautecCommand = Commands.literal(Nautec.MODID)
+                .requires(player -> player.hasPermission(2));
+
+        dispatcher.register(nautecCommand
                 .then(Commands.literal("augments")
                         .then(Commands.literal("cooldown")
                                 .then(Commands.literal("set")
