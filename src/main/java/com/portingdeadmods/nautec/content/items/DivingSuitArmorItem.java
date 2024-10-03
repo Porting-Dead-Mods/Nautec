@@ -23,7 +23,7 @@ import java.util.List;
 public class DivingSuitArmorItem extends ArmorItem {
 
     public DivingSuitArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
-        super(material, type, properties);
+        super(material, type, properties.durability(type.getDurability(5)));
     }
 
     @Override

@@ -44,4 +44,9 @@ public class AirBottleItem extends Item {
         tooltipComponents.add(Component.literal("Right click a glass bottle on a bubble column to fill with pressurized air").withStyle(ChatFormatting.GRAY));
         tooltipComponents.add(Component.literal("Edible").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY));
     }
+
+    @Override
+    public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
+        return Items.GLASS_BOTTLE.getDefaultInstance();
+    }
 }

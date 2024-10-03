@@ -19,6 +19,7 @@ public class CratesEtchingEntry extends EntryProvider {
         this.page("etching", () -> BookTextPageModel.create()
                 .withTitle(this.context().pageTitle())
                 .withText(this.context().pageText()));
+        this.pageTitle("Etching");
         this.pageText("""
                 Etching is a mechanic that allows you to remove the rust from rusty objects.
                 \\

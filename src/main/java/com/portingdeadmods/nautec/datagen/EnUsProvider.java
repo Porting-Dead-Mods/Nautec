@@ -80,7 +80,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem(BURNT_COIL, "Burnt Coil");
         addItem(ELDRITCH_HEART, "Eldritch Artifact");
         addItem(GUARDIAN_EYE, "Guardian Eye");
-        addItem(VALVE, "Valve²");
+        addItem(VALVE, "Valve");
         add("nautec_guide.desc.0","Nautec's Guide");
 
         // Adding missing block translations
