@@ -10,5 +10,5 @@
       "condition": "minecraft:random_chance"
     }
   ],
-  "table": "nautec:entities/dolphin"
+  "table": "minecraft:entities/dolphin"
 }

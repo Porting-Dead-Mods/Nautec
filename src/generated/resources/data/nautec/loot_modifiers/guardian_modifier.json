@@ -10,5 +10,5 @@
       "condition": "minecraft:random_chance"
     }
   ],
-  "table": "nautec:entities/guardian"
+  "table": "minecraft:entities/guardian"
 }
