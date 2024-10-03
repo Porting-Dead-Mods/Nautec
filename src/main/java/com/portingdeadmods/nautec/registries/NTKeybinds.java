@@ -15,8 +15,8 @@ public final class NTKeybinds {
     public static final Lazy<KeyMapping> AUGMENT_SCREEN_KEYBIND = keyBind(
             "Open the Augmentation Screen", GLFW.GLFW_KEY_B);
 
-    public static final Lazy<KeyMapping> GIVE_DIAMOND_KEYBIND = keyBind(
-            "Give Diamond", GLFW.GLFW_KEY_N);
+    // public static final Lazy<KeyMapping> GIVE_DIAMOND_KEYBIND = keyBind(
+    //         "Give Diamond", GLFW.GLFW_KEY_N);
 
     public static final Lazy<KeyMapping> THROW_TRIDENT_KEYBIND = keyBind(
             "Throw Trident", GLFW.GLFW_KEY_Y);
@@ -40,7 +40,7 @@ public final class NTKeybinds {
     @SubscribeEvent
     public static void registerBindings(RegisterKeyMappingsEvent event) {
         event.register(AUGMENT_SCREEN_KEYBIND.get());
-        event.register(GIVE_DIAMOND_KEYBIND.get());
+        //event.register(GIVE_DIAMOND_KEYBIND.get());
         event.register(THROW_TRIDENT_KEYBIND.get());
         event.register(LEAP_KEYBIND.get());
         event.register(THROW_POTION_KEYBIND.get());
