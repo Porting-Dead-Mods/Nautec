@@ -1,5 +1,6 @@
-// 1.21.1	2024-09-29T02:27:34.286677852	Loot Tables
+// 1.21.1	2024-10-03T12:03:18.6141223	Loot Tables
 41719eca89c8053e263d78613ee41d3d1597d2f8 data/nautec/loot_table/blocks/aquarine_steel_block.json
+b0138d22def1a787c4e45722fc046c703e36ec05 data/nautec/loot_table/blocks/aquatic_catalyst.json
 0db317348cd6a30700738aad0c4ee8bf13bdda43 data/nautec/loot_table/blocks/augmentation_station.json
 89010d86a80ddcea039479bd7f53ac2a03cb959d data/nautec/loot_table/blocks/augmentation_station_extension.json
 1174573fcdf3f6ce8973ee45db6557634dcb4bda data/nautec/loot_table/blocks/augmentation_station_part.json
