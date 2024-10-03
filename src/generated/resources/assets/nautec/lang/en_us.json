@@ -1,7 +1,4 @@
 {
-  "augment.nautec.dolphin_fin": "Dolphin Fin",
-  "augment.nautec.drowned_lung": "Drowned Lung",
-  "augment.nautec.guardian_eye": "Guardian Eye",
   "augment_slot.nautec.body": "Body",
   "augment_slot.nautec.eyes": "Eyes",
   "augment_slot.nautec.head": "Head",
@@ -11,6 +8,9 @@
   "augment_slot.nautec.lung": "Lungs",
   "augment_slot.nautec.right_arm": "Right Arm",
   "augment_slot.nautec.right_leg": "Right Leg",
+  "augment_type.nautec.dolphin_fin": "Dolphin Fin",
+  "augment_type.nautec.drowned_lung": "Drowned Lung",
+  "augment_type.nautec.guardian_eye": "Guardian Eye",
   "block.nautec.aquarine_steel_block": "Aquarine Steel Block",
   "block.nautec.aquatic_catalyst": "Aquatic Catalyst",
   "block.nautec.augmentation_station": "Augmentation Station",
