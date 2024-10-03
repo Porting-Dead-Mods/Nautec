@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.content.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
@@ -16,7 +17,10 @@ import java.util.HashMap;
 // /modjam augments clear
 public class ClearAugmentsCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal(Nautec.MODID)
+        LiteralArgumentBuilder<CommandSourceStack> nautecCommand = Commands.literal(Nautec.MODID)
+                .requires(player -> player.hasPermission(2));
+
+        dispatcher.register(nautecCommand
                 .then(Commands.literal("augments")
                         .then(Commands.literal("clear").executes(ClearAugmentsCommand::execute))));
     }
