@@ -56,6 +56,7 @@ public class LootTableProvider extends BlockLootSubProvider {
     protected void generate() {
         // Generate loot tables here
         prismarineSand(NTBlocks.PRISMARINE_SAND.get());
+        dropSelf(NTBlocks.AQUATIC_CATALYST.get());
         dropSelf(NTBlocks.PRISMARINE_RELAY.get());
         dropSelf(NTBlocks.LASER_JUNCTION.get());
         dropSelf(NTBlocks.LONG_DISTANCE_LASER.get());
