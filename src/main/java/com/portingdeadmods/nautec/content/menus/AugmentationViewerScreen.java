@@ -89,7 +89,7 @@ public class AugmentationViewerScreen extends Screen {
 
     public void displayAugment(GuiGraphics graphics, AugmentSlot slot, Augment aug, int x, int y) {
         graphics.drawString(this.font, Component.translatable("augment_slot.nautec." + slot.getName()).append(Component.literal(":")), x, y, 0);
-        graphics.drawString(this.font, aug == null ? Component.literal("    No Augment in slot") : Component.literal("    ").append(Component.translatable("augment." + aug.getAugmentType().toString())), x, y + 10, 0);
+        graphics.drawString(this.font, aug == null ? Component.literal("    No Augment in slot") : Component.literal("    ").append(Component.translatable("augment_type." + aug.getAugmentType().toString())), x, y + 10, 0);
     }
 
     @Override

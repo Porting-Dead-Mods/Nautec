@@ -26,6 +26,7 @@ public class MagnetAugment extends Augment {
             List<ItemEntity> nearbyItems = player.level().getEntitiesOfClass(ItemEntity.class, player.getBoundingBox().inflate(MAGNET_RADIUS));
             for (ItemEntity itemEntity : nearbyItems) {
                 Vec3 pullVec = player.position().subtract(itemEntity.position()).normalize().scale(MAGNET_PULL_SPEED);
+                itemEntity.setPickUpDelay(0);
                 itemEntity.setDeltaMovement(itemEntity.getDeltaMovement().add(pullVec));
             }
         }
