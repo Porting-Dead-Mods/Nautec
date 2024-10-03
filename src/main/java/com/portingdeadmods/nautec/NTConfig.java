@@ -52,6 +52,9 @@ public final class NTConfig {
     private static final ModConfigSpec.BooleanValue COLLECT_SALT_WATER = BUILDER
             .comment("Determines whether the player should be able to collect salt water when picking up water in an ocean biome")
             .define("collectSaltWater", true);
+    private static final ModConfigSpec.BooleanValue COLLECT_AIR_WITH_BOTTLE = BUILDER
+            .comment("Determines whether the player should be able to collect pressurized air bottles by right-clicking on a bubble column")
+            .define("collectAirWithBottle", true);
 
     private static final ModConfigSpec.IntValue GUARDIAN_AUGMENT_DAMAGE = BUILDER
             .comment("The amount of damage the guardian augments laser deals")
@@ -63,6 +66,7 @@ public final class NTConfig {
     public static int kelpHeight;
     public static boolean spawnBookInInventory;
     public static boolean collectSaltWater;
+    public static boolean collectAirWithBottle;
 
     public static int mixerPower;
     public static int drainPower;
@@ -83,6 +87,7 @@ public final class NTConfig {
         kelpHeight = KELP_HEIGHT.get();
         spawnBookInInventory = SPAWN_BOOK_IN_INVENTORY.get();
         collectSaltWater = COLLECT_SALT_WATER.getAsBoolean();
+        collectAirWithBottle = COLLECT_AIR_WITH_BOTTLE.getAsBoolean();
 
         mixerPower = MIXER_POWER_REQUIREMENT.get();
         drainPower = DRAIN_POWER_REQUIREMENT.get();

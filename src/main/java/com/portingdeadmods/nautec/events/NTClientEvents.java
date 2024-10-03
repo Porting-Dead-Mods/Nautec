@@ -66,7 +66,7 @@ public final class NTClientEvents {
         @SubscribeEvent
         public static void registerGuiOverlays(RegisterGuiLayersEvent event) {
             event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "scanner_info_overlay"), PrismMonocleOverlay.HUD);
-            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "diving_suit_overlay"), DivingSuitOverlay.HUD);
+            event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "diving_suit_overlay"), DivingSuitOverlay::render);
         }
 
         @SubscribeEvent

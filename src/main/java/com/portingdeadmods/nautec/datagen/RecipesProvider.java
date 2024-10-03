@@ -497,7 +497,7 @@ public class RecipesProvider extends RecipeProvider {
                 .requires(Items.GUNPOWDER)
                 .requires(Items.BONE_MEAL)
                 .requires(Items.WATER_BUCKET)
-                .requires(Items.REDSTONE)
+                .requires(Items.PUFFERFISH)
                 .unlockedBy("has_item", has(Items.POISONOUS_POTATO))
                 .save(pRecipeOutput);
     }
@@ -514,7 +514,7 @@ public class RecipesProvider extends RecipeProvider {
                 .save(pRecipeOutput);
 
         MixingRecipeBuilder.newRecipe(ItemStack.EMPTY)
-                .ingredients(iwcFromItemLike(Items.REDSTONE, 1),
+                .ingredients(iwcFromItemLike(Items.PUFFERFISH, 1),
                         iwcFromItemLike(Items.GUNPOWDER, 1),
                         iwcFromItemLike(Items.BONE_MEAL, 1))
                 .duration(1200)
