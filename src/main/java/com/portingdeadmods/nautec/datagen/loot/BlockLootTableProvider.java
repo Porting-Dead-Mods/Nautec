@@ -1,8 +1,7 @@
-package com.portingdeadmods.nautec.datagen;
+package com.portingdeadmods.nautec.datagen.loot;
 
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.content.multiblocks.AugmentationStationMultiblock;
-import com.portingdeadmods.nautec.content.multiblocks.DrainMultiblock;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -10,7 +9,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -19,8 +17,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
@@ -32,11 +28,11 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
-public class LootTableProvider extends BlockLootSubProvider {
+public class BlockLootTableProvider extends BlockLootSubProvider {
 
     private final Set<Block> knownBlocks = new ReferenceOpenHashSet<>();
 
-    protected LootTableProvider(HolderLookup.Provider pRegistries) {
+    public BlockLootTableProvider(HolderLookup.Provider pRegistries) {
         super(Collections.emptySet(), FeatureFlags.VANILLA_SET, pRegistries);
     }
 

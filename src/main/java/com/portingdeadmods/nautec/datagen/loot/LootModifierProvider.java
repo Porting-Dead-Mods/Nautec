@@ -1,20 +1,15 @@
-package com.portingdeadmods.nautec.datagen;
+package com.portingdeadmods.nautec.datagen.loot;
 
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.loot.AddItemModifier;
 import com.portingdeadmods.nautec.registries.NTBlocks;
-import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.registries.NTLootTables;
-import com.sun.jna.platform.unix.Resource;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.SeededContainerLoot;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;

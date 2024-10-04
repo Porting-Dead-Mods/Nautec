@@ -22,8 +22,8 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSetting
 
 import java.util.Optional;
 
-public class Deepslate_crystal_geode extends Structure {
-    public static final MapCodec<Deepslate_crystal_geode> CODEC = RecordCodecBuilder.mapCodec(instance ->
+public class DeepslateCrystalGeode extends Structure {
+    public static final MapCodec<DeepslateCrystalGeode> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(Ruins1.settingsCodec(instance),
                     StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
                     ResourceLocation.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(structure -> structure.startJigsawName),
@@ -33,7 +33,7 @@ public class Deepslate_crystal_geode extends Structure {
                     Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
                     DimensionPadding.CODEC.optionalFieldOf("dimension_padding", JigsawStructure.DEFAULT_DIMENSION_PADDING).forGetter(structure -> structure.dimensionPadding),
                     LiquidSettings.CODEC.optionalFieldOf("liquid_settings", JigsawStructure.DEFAULT_LIQUID_SETTINGS).forGetter(structure -> structure.liquidSettings)
-            ).apply(instance, Deepslate_crystal_geode::new));
+            ).apply(instance, DeepslateCrystalGeode::new));
 
     private final Holder<StructureTemplatePool> startPool;
     private final Optional<ResourceLocation> startJigsawName;
@@ -44,15 +44,15 @@ public class Deepslate_crystal_geode extends Structure {
     private final DimensionPadding dimensionPadding;
     private final LiquidSettings liquidSettings;
 
-    public Deepslate_crystal_geode(StructureSettings config,
-                                   Holder<StructureTemplatePool> startPool,
-                                   Optional<ResourceLocation> startJigsawName,
-                                   int size,
-                                   HeightProvider startHeight,
-                                   Optional<Heightmap.Types> projectStartToHeightmap,
-                                   int maxDistanceFromCenter,
-                                   DimensionPadding dimensionPadding,
-                                   LiquidSettings liquidSettings)
+    public DeepslateCrystalGeode(StructureSettings config,
+                                 Holder<StructureTemplatePool> startPool,
+                                 Optional<ResourceLocation> startJigsawName,
+                                 int size,
+                                 HeightProvider startHeight,
+                                 Optional<Heightmap.Types> projectStartToHeightmap,
+                                 int maxDistanceFromCenter,
+                                 DimensionPadding dimensionPadding,
+                                 LiquidSettings liquidSettings)
     {
         super(config);
         this.startPool = startPool;
@@ -82,7 +82,7 @@ public class Deepslate_crystal_geode extends Structure {
     @Override
     public Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
 
-        if (!Deepslate_crystal_geode.extraSpawningChecks(context)) {
+        if (!DeepslateCrystalGeode.extraSpawningChecks(context)) {
             return Optional.empty();
         }
 
