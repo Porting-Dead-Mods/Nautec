@@ -55,7 +55,7 @@ public final class NTBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE), true, false);
 
     public static final DeferredBlock<PrismarineCrystalBlock> PRISMARINE_CRYSTAL = registerBlockAndItem("prismarine_crystal", PrismarineCrystalBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN), PrismarineCrystalItem::new);
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(50, 1200), PrismarineCrystalItem::new);
     public static final DeferredBlock<PrismarineCrystalPartBlock> PRISMARINE_CRYSTAL_PART = BLOCKS.registerBlock("prismarine_crystal_part", PrismarineCrystalPartBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN));
     public static final DeferredBlock<ChargerBlock> CHARGER = registerBlockAndItem("charger", ChargerBlock::new,

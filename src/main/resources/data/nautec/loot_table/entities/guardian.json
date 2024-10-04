@@ -11,7 +11,7 @@
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 1,
+                "min": 2,
                 "max": 3
               }
             }
@@ -20,7 +20,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "nautec:rusty_gear",
+          "name": "nautec:burnt_coil",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -30,7 +30,7 @@
               }
             }
           ],
-          "weight": 3
+          "weight": 4
         },
         {
           "type": "minecraft:item",

@@ -3,20 +3,76 @@
   "pools": [
     {
       "rolls": {
-        "min": 2,
-        "max": 5
+        "min": 5,
+        "max": 7
       },
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:gold_nugget",
+          "name": "nautec:rusty_gear",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "nautec:aquarine_steel_compound",
           "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:gold_nugget",
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "min": 2,
                 "max": 5
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "nautec:brown_polymer",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "nautec:air_bottle",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
               }
             }
           ]
@@ -37,41 +93,13 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:prismarine_crystals",
-          "weight": 5,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_ingot",
-          "weight": 8,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 5
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "nautec:aquarine_steel_ingot",
+          "name": "minecraft:kelp",
           "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 1,
+                "min": 0,
                 "max": 3
               }
             }
@@ -79,42 +107,28 @@
         },
         {
           "type": "minecraft:item",
-          "name": "nautec:rusty_gear",
-          "weight": 4,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 2
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "nautec:ancient_valve",
-          "weight": 4,
+          "name": "minecraft:seagrass",
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "min": 0,
-                "max": 1
+                "max": 3
               }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "nautec:atlantic_gold_nugget",
+          "name": "minecraft:sea_pickle",
           "weight": 1,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 2
+                "min": 2,
+                "max": 3
               }
             }
           ]

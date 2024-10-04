@@ -2,9 +2,12 @@ package com.portingdeadmods.nautec.datagen;
 
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.compat.modonomicon.datagen.ModonomiconDatagen;
+import com.portingdeadmods.nautec.datagen.loot.BlockLootTableProvider;
+import com.portingdeadmods.nautec.datagen.loot.LootModifierProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
@@ -31,8 +34,8 @@ public class DataGatherer {
         generator.addProvider(event.includeClient(), new ItemModelProvider(output, existingFileHelper));
         generator.addProvider(event.includeClient(), new BlockModelProvider(output, existingFileHelper));
         generator.addProvider(event.includeClient(), new RecipesProvider(output, lookupProvider));
-        generator.addProvider(event.includeServer(), new net.minecraft.data.loot.LootTableProvider(output, Collections.emptySet(), List.of(
-                new net.minecraft.data.loot.LootTableProvider.SubProviderEntry(LootTableProvider::new, LootContextParamSets.BLOCK)
+        generator.addProvider(event.includeServer(), new LootTableProvider(output, Collections.emptySet(), List.of(
+                new LootTableProvider.SubProviderEntry(BlockLootTableProvider::new, LootContextParamSets.BLOCK)
         ), lookupProvider));
         BlockTagProvider blockTagProvider = new BlockTagProvider(output, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeClient(), blockTagProvider);

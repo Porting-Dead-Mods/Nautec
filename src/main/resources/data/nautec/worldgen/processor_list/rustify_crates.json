@@ -21,7 +21,7 @@
 
           "block_entity_modifier": {
             "type": "minecraft:append_loot",
-            "loot_table": "nautec:chests/rusty_crate"
+            "loot_table": "nautec:chests/geode_rusty_crate"
           }
         }
       ]

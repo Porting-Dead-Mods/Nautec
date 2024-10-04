@@ -78,7 +78,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem("cast_iron_nugget", "Cast Iron Nugget");
         addItem(LASER_CHANNELING_COIL, "Laser Channeling Coil");
         addItem(BURNT_COIL, "Burnt Coil");
-        addItem(ELDRITCH_HEART, "Eldritch Artifact");
+        addItem(ELDRITCH_HEART, "Eldritch Heart");
         addItem(GUARDIAN_EYE, "Guardian Eye");
         addItem(VALVE, "Valve");
         add("nautec_guide.desc.0","Nautec's Guide");
