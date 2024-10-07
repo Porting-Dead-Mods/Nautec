@@ -46,7 +46,7 @@ public abstract class BottleItemMixin extends Item {
                     level.gameEvent(player, GameEvent.FLUID_PICKUP, blockPos);
                     com.portingdeadmods.nautec.utils.ItemUtils.giveItemToPlayerNoSound(player, airBottleStack);
                     ItemStack itemInHand = player.getItemInHand(hand);
-
+                    itemInHand.shrink(1);
                     cir.setReturnValue(InteractionResultHolder.sidedSuccess(itemInHand, level.isClientSide()));
                 }
             }
