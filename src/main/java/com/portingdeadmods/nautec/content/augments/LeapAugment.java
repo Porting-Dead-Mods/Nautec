@@ -1,16 +1,12 @@
 package com.portingdeadmods.nautec.content.augments;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.registries.NTAugmentSlots;
 import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.registries.NTKeybinds;
-import com.portingdeadmods.nautec.utils.InputUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import org.jetbrains.annotations.Nullable;
 
 import static com.portingdeadmods.nautec.utils.MathUtils.*;
 

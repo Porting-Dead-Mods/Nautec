@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.api.blockentities;
 import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.nautec.content.recipes.inputs.ItemTransformationRecipeInput;
-import com.portingdeadmods.nautec.utils.ParticlesUtils;
+import com.portingdeadmods.nautec.utils.ParticleUtils;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -204,7 +204,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
                         iterator.remove();
                     } else {
                         activeTransformation.put(cookingItem, cookTime + 1);
-                        ParticlesUtils.spawnParticlesAroundItem(cookingItem, level, ParticleTypes.END_ROD);
+                        ParticleUtils.spawnParticlesAroundItem(cookingItem, level, ParticleTypes.END_ROD);
                     }
                 }
             }
@@ -215,7 +215,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         BlockPos pos = worldPosition.relative(direction, distance);
 
         Vec3 start = worldPosition.relative(direction).getCenter();
-        double v = 0.2;
+        double v = 0.3;
         if (direction == Direction.UP || direction == Direction.DOWN) {
             start = start.subtract(v, 0, v);
         } else if (direction == Direction.NORTH || direction == Direction.SOUTH) {

@@ -103,12 +103,12 @@ public class RecipesProvider extends RecipeProvider {
 
     private static void aquaticCatalystRecipes(@NotNull RecipeOutput pRecipeOutput) {
         AquaticCatalystChannelingRecipeBuilder.newRecipe(Ingredient.of(Items.KELP))
-                .powerAmount(500)
+                .powerAmount(700)
                 .purity(0)
                 .duration(100)
                 .save(pRecipeOutput);
         AquaticCatalystChannelingRecipeBuilder.newRecipe(Ingredient.of(NTTags.Items.CORALS))
-                .powerAmount(1400)
+                .powerAmount(2000)
                 .purity(0.4f)
                 .duration(200)
                 .save(pRecipeOutput);

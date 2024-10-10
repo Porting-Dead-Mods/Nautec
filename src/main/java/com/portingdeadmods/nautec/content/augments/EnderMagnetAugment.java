@@ -2,18 +2,10 @@ package com.portingdeadmods.nautec.content.augments;
 
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.registries.NTAugments;
-import com.portingdeadmods.nautec.utils.ParticlesUtils;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
