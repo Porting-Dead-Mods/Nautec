@@ -17,7 +17,7 @@ public final class NTConfig {
 
     private static final ModConfigSpec.IntValue MIXER_POWER_REQUIREMENT = BUILDER
             .comment("The amount of power required by the mixer each tick.")
-            .defineInRange("mixerPowerRequirement", 15, 0, Integer.MAX_VALUE);
+            .defineInRange("mixerPowerRequirement", 10, 0, Integer.MAX_VALUE);
     private static final ModConfigSpec.IntValue AUGMENTATION_STATION_POWER_REQUIREMENT = BUILDER
             .comment("The amount of power required by the Augmentation Station each tick.")
             .defineInRange("augmentationPowerRequirement", 25, 0, Integer.MAX_VALUE);
