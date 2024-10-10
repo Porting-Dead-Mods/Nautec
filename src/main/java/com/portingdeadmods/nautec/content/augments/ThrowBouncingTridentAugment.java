@@ -1,20 +1,14 @@
 package com.portingdeadmods.nautec.content.augments;
 
-import com.mojang.blaze3d.platform.InputConstants;
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.content.entites.ThrownBouncingTrident;
 import com.portingdeadmods.nautec.network.KeyPressedPayload;
-import com.portingdeadmods.nautec.registries.NTAugmentSlots;
 import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.registries.NTKeybinds;
-import com.portingdeadmods.nautec.utils.AugmentHelper;
-import com.portingdeadmods.nautec.utils.InputUtils;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.jetbrains.annotations.Nullable;
 
 // TODO: Implement this
 public class ThrowBouncingTridentAugment extends Augment {

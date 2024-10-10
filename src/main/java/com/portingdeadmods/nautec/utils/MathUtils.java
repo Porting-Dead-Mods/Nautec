@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.utils;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
-public class MathUtils {
+public final class MathUtils {
 
     public static Vec3 rotatePitch(Vec3 vec, float pitch){
         float fc = Mth.cos(pitch);

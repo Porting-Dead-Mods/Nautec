@@ -5,7 +5,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
 
-public class ParticlesUtils {
+public final class ParticleUtils {
 
     private static final int PARTICLE_COUNT = 20; // Number of particles to spawn
     private static final double PARTICLE_RADIUS = 0.5; // Radius of the sphere around the item

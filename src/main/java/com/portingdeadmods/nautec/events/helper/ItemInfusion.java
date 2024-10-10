@@ -2,7 +2,7 @@ package com.portingdeadmods.nautec.events.helper;
 
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
-import com.portingdeadmods.nautec.utils.ParticlesUtils;
+import com.portingdeadmods.nautec.utils.ParticleUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.HashMap;
@@ -80,7 +81,7 @@ public class ItemInfusion {
                 // Remove fluid from original position
                 BlockPos originalFluidPos = infusionData.getOriginalFluidPos();
                 if (level.getBlockState(originalFluidPos).getFluidState().isSource()) {
-                    level.setBlockAndUpdate(originalFluidPos, Fluids.EMPTY.defaultFluidState().createLegacyBlock());
+                    level.setBlock(itemEntity.getOnPos(), Blocks.AIR.defaultBlockState(), 11);
                 }
             } else {
                 // Continue the infusion process
@@ -88,7 +89,7 @@ public class ItemInfusion {
 
                 // Spawn particles at regular intervals
                 if (infusionData.getInfusionProgress() % PARTICLE_INTERVAL == 0) {
-                    ParticlesUtils.spawnParticlesAroundItem(itemEntity, level, ParticleTypes.ENCHANT);  // Infusion particles
+                    ParticleUtils.spawnParticlesAroundItem(itemEntity, level, ParticleTypes.ENCHANT);  // Infusion particles
                 }
 
                 // Play sound at intervals
@@ -102,7 +103,7 @@ public class ItemInfusion {
 
     private static void spawnCompletionEffects(ItemEntity itemEntity, Level level) {
         // Completion particle effects
-        ParticlesUtils.spawnParticlesAroundItem(itemEntity, level, ParticleTypes.DRAGON_BREATH);
+        ParticleUtils.spawnParticlesAroundItem(itemEntity, level, ParticleTypes.DRAGON_BREATH);
 
         // Play completion sound
         level.playSound(null, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(),

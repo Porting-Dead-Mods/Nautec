@@ -12,23 +12,16 @@ import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
 import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
 import com.portingdeadmods.nautec.content.commands.arguments.AugmentSlotArgumentType;
 import com.portingdeadmods.nautec.content.commands.arguments.AugmentTypeArgumentType;
-import com.portingdeadmods.nautec.content.recipes.ItemEtchingRecipe;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
+import com.portingdeadmods.nautec.events.helper.ItemEtching;
 import com.portingdeadmods.nautec.events.helper.ItemInfusion;
 import com.portingdeadmods.nautec.network.SyncAugmentPayload;
 import com.portingdeadmods.nautec.registries.*;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
-import com.portingdeadmods.nautec.utils.ParticlesUtils;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -38,13 +31,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.world.item.component.SeededContainerLoot;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -59,14 +46,12 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public final class NTEvents {
 
     @EventBusSubscriber(modid = Nautec.MODID, bus = EventBusSubscriber.Bus.GAME)
     public static class Game {
-        private static final Object2IntMap<ItemEntity> activeTransformations = new Object2IntOpenHashMap<>();
 
         @SubscribeEvent
         public static void onItemEntityTick(EntityTickEvent.Post event) {
@@ -74,7 +59,7 @@ public final class NTEvents {
                 Level level = itemEntity.level();
 
                 if (itemEntity.isInFluidType(NTFluidTypes.ETCHING_ACID_FLUID_TYPE.get())) {
-                    processItemEtching(itemEntity, level);
+                    ItemEtching.processItemEtching(itemEntity, level);
                 }
 
                 if (itemEntity.isInFluidType(NTFluidTypes.EAS_FLUID_TYPE.get()) || level.getBlockState(itemEntity.blockPosition().below()).getFluidState().is(NTFluids.EAS_SOURCE.get())) {
@@ -175,60 +160,6 @@ public final class NTEvents {
                 }
             }
         }
-
-        private static void processItemEtching(ItemEntity itemEntity, Level level) {
-            ItemStack stack = itemEntity.getItem();
-
-            if (!activeTransformations.containsKey(itemEntity)) {
-                Optional<ItemEtchingRecipe> optionalRecipe = getEtchingRecipe(stack, level);
-                if (optionalRecipe.isPresent()) {
-                    activeTransformations.put(itemEntity, 0);
-                }
-            } else {
-                int etchingTime = activeTransformations.getInt(itemEntity);
-
-                if (etchingTime >= 100) {
-                    Optional<ItemEtchingRecipe> optionalRecipe = getEtchingRecipe(stack, level);
-                    if (optionalRecipe.isPresent()) {
-                        transformItem(itemEntity, optionalRecipe.get(), level);
-                    }
-                    activeTransformations.removeInt(itemEntity);
-                } else {
-                    activeTransformations.put(itemEntity, etchingTime + 1);
-                    // Optionally spawn particles while etching
-                    ParticlesUtils.spawnParticlesAroundItem(itemEntity, level, ParticleTypes.FLAME);
-                }
-            }
-        }
-
-        private static Optional<ItemEtchingRecipe> getEtchingRecipe(ItemStack stack, Level level) {
-            return level.getRecipeManager()
-                    .getRecipeFor(ItemEtchingRecipe.Type.INSTANCE, new SingleRecipeInput(stack), level)
-                    .map(RecipeHolder::value);
-        }
-
-        private static void transformItem(ItemEntity itemEntity, ItemEtchingRecipe recipe, Level level) {
-            Vec3 position = itemEntity.position();
-            ItemStack inputStack = itemEntity.getItem();
-            ItemStack resultStack = recipe.getResultItem(level.registryAccess()).copy();
-            resultStack.setCount(itemEntity.getItem().getCount());
-
-            if(inputStack.is(NTBlocks.RUSTY_CRATE.asItem()) && resultStack.is(NTBlocks.CRATE.asItem())) {
-               for (DataComponentType<?> type : itemEntity.getItem().getComponents().keySet()) {
-                   Nautec.LOGGER.debug("Type: {}", BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(type));
-               }
-                ItemContainerContents value = itemEntity.getItem().copy().get(DataComponents.CONTAINER);
-                resultStack.set(DataComponents.CONTAINER, value);
-                SeededContainerLoot value1 = itemEntity.getItem().copy().get(DataComponents.CONTAINER_LOOT);
-                resultStack.set(DataComponents.CONTAINER_LOOT, value1);
-            }
-
-            itemEntity.discard();
-
-            ItemEntity newItemEntity = new ItemEntity(level, position.x, position.y, position.z, resultStack);
-            level.addFreshEntity(newItemEntity);
-        }
-
     }
 
     @EventBusSubscriber(modid = Nautec.MODID, bus = EventBusSubscriber.Bus.MOD)
