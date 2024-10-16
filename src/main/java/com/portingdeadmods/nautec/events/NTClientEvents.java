@@ -26,6 +26,7 @@ import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.events.helper.AugmentSlotsRenderer;
 import com.portingdeadmods.nautec.registries.*;
 import com.portingdeadmods.nautec.utils.ArmorModelsHandler;
+import com.portingdeadmods.nautec.utils.AugmentHelper;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -215,9 +216,11 @@ public final class NTClientEvents {
 
         @SubscribeEvent
         public static void onClientTick(ClientTickEvent.Post event) {
+            Minecraft mc = Minecraft.getInstance();
             if (NTKeybinds.AUGMENT_SCREEN_KEYBIND.get().consumeClick()) {
-                if (Minecraft.getInstance().screen == null) {
-                    Minecraft.getInstance().setScreen(new AugmentationViewerScreen(Component.literal("test"), Minecraft.getInstance().player));
+                if (Minecraft.getInstance().screen == null || mc.player != null) {
+                    if (!AugmentHelper.getAugments(mc.player).isEmpty())
+                        Minecraft.getInstance().setScreen(new AugmentationViewerScreen(Component.literal("test"), Minecraft.getInstance().player));
                 }
             }
         }
