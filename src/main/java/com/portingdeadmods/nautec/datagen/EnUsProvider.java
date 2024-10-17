@@ -103,6 +103,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addBlock(NTBlocks.AUGMENTATION_STATION_EXTENSION, "Augmentation Station Extension");
         addBlock(NTBlocks.CHARGER, "Charger");
         addBlock(NTBlocks.PRISMARINE_SAND, "Prismarine Sand");
+        addBlock(NTBlocks.CREATIVE_POWER_SOURCE,"Creative Power Source");
 
         // Multiblock information
         add("multiblock.info.failed_to_construct", "Missing or invalid block");
