@@ -149,6 +149,7 @@ public class CrateBlock extends BaseEntityBlock {
                         level, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, itemstack
                 );
                 itementity.setDefaultPickUpDelay();
+                if(player.isCreative()){return super.playerWillDestroy(level, pos, state, player);}
                 level.addFreshEntity(itementity);
             }
         }
