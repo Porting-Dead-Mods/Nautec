@@ -517,9 +517,17 @@ public class RecipesProvider extends RecipeProvider {
                 .ingredients(iwcFromItemLike(Items.PUFFERFISH, 1),
                         iwcFromItemLike(Items.GUNPOWDER, 1),
                         iwcFromItemLike(Items.BONE_MEAL, 1))
-                .duration(1200)
+                .duration(150)
                 .fluidIngredient(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), 1000))
                 .fluidResult(new FluidStack(NTFluids.ETCHING_ACID_SOURCE.get(), 1000))
+                .save(pRecipeOutput);
+
+        MixingRecipeBuilder.newRecipe(NTItems.AQUARINE_STEEL_COMPOUND.toStack(5))
+                .ingredients(iwcFromItemLike(Items.RAW_IRON, 2),
+                        iwcFromItemLike(Items.PRISMARINE_CRYSTALS, 1))
+                .duration(100)
+                .fluidIngredient(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), 1000))
+                .fluidResult(FluidStack.EMPTY)
                 .save(pRecipeOutput);
     }
 
