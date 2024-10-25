@@ -1,0 +1,22 @@
+{
+  "type": "nautec:mixing",
+  "duration": 100,
+  "fluid_ingredient": {
+    "amount": 1000,
+    "id": "nautec:salt_water"
+  },
+  "fluid_result": {},
+  "ingredients": [
+    {
+      "count": 2,
+      "item": "minecraft:raw_iron"
+    },
+    {
+      "item": "minecraft:prismarine_crystals"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "id": "nautec:aquarine_steel_compound"
+  }
+}

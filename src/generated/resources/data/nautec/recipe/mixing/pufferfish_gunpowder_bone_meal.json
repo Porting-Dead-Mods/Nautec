@@ -1,6 +1,6 @@
 {
   "type": "nautec:mixing",
-  "duration": 1200,
+  "duration": 150,
   "fluid_ingredient": {
     "amount": 1000,
     "id": "nautec:salt_water"

@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-30T17:50:22.386956784	Recipes
+// 1.21.1	2024-10-26T00:12:36.915938173	Recipes
 11639f08778ec1107c05d822f9beaa1f90e3bb32 data/minecraft/advancement/recipes/misc/cast_iron_ingot_blasting.json
 5f305b97f7366fc61918bd266d0bacfa386b16c1 data/minecraft/advancement/recipes/misc/cast_iron_nugget_to_ingot.json
 c01db9d69b288d37c769cf605b945ebf60a08e21 data/minecraft/advancement/recipes/misc/diving_chestplate.json
@@ -62,8 +62,8 @@ c4fdc4aa2913699bef2463d5c929bc4724d180ae data/nautec/recipe/aquarine_steel_compo
 c99f07ec9ec3b3e570ab81f9f6b5890fdcf3930f data/nautec/recipe/aquarine_steel_sword.json
 78c4da26cb8c9f272043276502bbd017b1c163ea data/nautec/recipe/aquarine_steel_wrench.json
 e5b299cdc66cfaa5d495fc6677a39188d7e05304 data/nautec/recipe/aquatic_catalyst.json
-de88783f55020c8a7c502ccd8b3c46da4f93de8f data/nautec/recipe/aquatic_catalyst_channeling/corals.json
-a60abd473ea054db8b2b484be6948f74ef64abd7 data/nautec/recipe/aquatic_catalyst_channeling/kelp.json
+69ccc6392657a824e91bea60558c69e4f26685f1 data/nautec/recipe/aquatic_catalyst_channeling/corals.json
+45a043fa8907c3b7f592f8f8b5947f8ea60134be data/nautec/recipe/aquatic_catalyst_channeling/kelp.json
 ba5f2ec03f05fc1f52d3c03f544988e459826d69 data/nautec/recipe/augmentation_station.json
 9c2bc24537825f94866e46c4d37cd820f1f59cc3 data/nautec/recipe/augmentation_station_extension.json
 b2cb1d73b9e1e2104af451250ff4464197c45531 data/nautec/recipe/brown_polymer.json
@@ -91,7 +91,8 @@ a4bdb97abe0834d405f7584452f78242585e02ff data/nautec/recipe/item_transformation/
 11d23344db3f6e98c1520328fd6c883bccd8ca57 data/nautec/recipe/long_distance_laser.json
 4925f952a200ae56a4e1ad04a45897be4988aad4 data/nautec/recipe/mixer.json
 35a2d38352317596d0e56958db954ee65944fd30 data/nautec/recipe/mixing/dried_kelp_slime_ball_prismarine_crystals_seagrass.json
-5fbbf5a23b0127f53c2bddf26d9c6c9406bd48e9 data/nautec/recipe/mixing/pufferfish_gunpowder_bone_meal.json
+33cb8c2e11304d00aa38c66d64e202ca4230e924 data/nautec/recipe/mixing/pufferfish_gunpowder_bone_meal.json
+0494c39abde80cacbab32aff60ec56ddcd323fcb data/nautec/recipe/mixing/raw_iron_prismarine_crystals_to_aquarine_steel_compound.json
 674df651148d747a200794f496996b82ca94e72f data/nautec/recipe/nautec_guide.json
 cd9bfbdf0f0468399cc4700d0c360b8283253c96 data/nautec/recipe/polished_prismarine.json
 4fe8f6115c759c654e132afedec76d846f0a89d5 data/nautec/recipe/prism_monocle.json
