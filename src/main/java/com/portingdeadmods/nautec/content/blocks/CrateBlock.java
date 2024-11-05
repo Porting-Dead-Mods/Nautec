@@ -138,26 +138,6 @@ public class CrateBlock extends BaseEntityBlock {
     }
 
     @Override
-    public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (level.isClientSide()) return super.playerWillDestroy(level, pos, state, player);
-        BlockEntity blockentity = level.getBlockEntity(pos);
-        if (blockentity instanceof CrateBlockEntity be) {
-            if (be.isEmpty() && !state.getValue(BlockStateProperties.OPEN)) {
-                ItemStack itemstack = asItem().getDefaultInstance();
-                be.saveToItem(itemstack, level.registryAccess());
-                ItemEntity itementity = new ItemEntity(
-                        level, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, itemstack
-                );
-                itementity.setDefaultPickUpDelay();
-                if(player.isCreative()){return super.playerWillDestroy(level, pos, state, player);}
-                level.addFreshEntity(itementity);
-            }
-        }
-
-        return super.playerWillDestroy(level, pos, state, player);
-    }
-
-    @Override
     protected @NotNull List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
         if (params.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof CrateBlockEntity be) {
             ItemStack stack = new ItemStack(this);
