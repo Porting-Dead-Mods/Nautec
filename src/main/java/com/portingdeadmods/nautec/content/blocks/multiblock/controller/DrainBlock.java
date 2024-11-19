@@ -67,8 +67,10 @@ public class DrainBlock extends ContainerBlock {
             } else  if (p_60503_.getValue(Multiblock.FORMED)) {
                 ItemStack stack = player.getMainHandItem();
                 IFluidHandler itemFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
-                extractFluid(player, level, InteractionHand.MAIN_HAND, (FluidTank) drainBlockEntity.getFluidHandler(), itemFluidHandler);
-                return InteractionResult.SUCCESS;
+                if (itemFluidHandler != null) {
+                    extractFluid(player, level, InteractionHand.MAIN_HAND, (FluidTank) drainBlockEntity.getFluidHandler(), itemFluidHandler);
+                    return InteractionResult.SUCCESS;
+                }
             }
         }
 

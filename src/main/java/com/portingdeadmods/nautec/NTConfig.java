@@ -1,7 +1,5 @@
 package com.portingdeadmods.nautec;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
@@ -60,7 +58,6 @@ public final class NTConfig {
             .comment("The amount of damage the guardian augments laser deals")
             .defineInRange("guardianAugmentDamage", 3, 0, Integer.MAX_VALUE);
 
-
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public static int kelpHeight;
@@ -104,4 +101,5 @@ public final class NTConfig {
 
         guardianAugmentDamage = GUARDIAN_AUGMENT_DAMAGE.get();
     }
+
 }
