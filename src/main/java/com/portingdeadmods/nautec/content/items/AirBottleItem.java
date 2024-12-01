@@ -1,10 +1,12 @@
 package com.portingdeadmods.nautec.content.items;
 
+import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
@@ -34,6 +36,10 @@ public class AirBottleItem extends Item {
             stack.shrink(1);
             if (entity instanceof Player player) {
                 player.addItem(new ItemStack(Items.GLASS_BOTTLE));
+                int currentLevel = NTDataComponentsUtils.getOxygenLevels(player.getItemBySlot(EquipmentSlot.CHEST));
+                if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof DivingSuitArmorItem && currentLevel < 100) {
+                    NTDataComponentsUtils.setOxygenLevels(player.getItemBySlot(EquipmentSlot.CHEST), currentLevel + 20);
+                }
             }
         }
         return super.finishUsingItem(stack, level, entity);
@@ -42,6 +48,7 @@ public class AirBottleItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         tooltipComponents.add(Component.literal("Right click a glass bottle on a bubble column to fill with pressurized air").withStyle(ChatFormatting.GRAY));
+        tooltipComponents.add(Component.literal("Either Craft with Chestplate or drink while wearing chestplate to increase oxygen level").withStyle(ChatFormatting.GRAY));
         tooltipComponents.add(Component.literal("Edible").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY));
     }
 
