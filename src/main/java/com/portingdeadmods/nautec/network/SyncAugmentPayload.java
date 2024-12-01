@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.network;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
+import com.portingdeadmods.nautec.utils.AugmentClientHelper;
 import com.portingdeadmods.nautec.utils.codec.AugmentCodecs;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
 import net.minecraft.nbt.CompoundTag;
@@ -41,6 +42,7 @@ public record SyncAugmentPayload(Augment augment, CompoundTag extraData) impleme
             AugmentSlot augmentSlot = augment.getAugmentSlot();
             AugmentHelper.setAugment(player, augmentSlot, augment);
             AugmentHelper.setAugmentExtraData(player, augmentSlot, tag);
+            AugmentClientHelper.invalidateCacheFor(player, augmentSlot);
         });
     }
 }
