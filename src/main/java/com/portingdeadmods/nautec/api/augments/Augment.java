@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.api.augments;
 import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
+import com.portingdeadmods.nautec.utils.AugmentClientHelper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
@@ -62,10 +63,6 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
     public void onRemoved(Player player) {
     }
 
-    public void breakBlock(BlockEvent.BreakEvent event) {
-
-    }
-
     public void commonTick(PlayerTickEvent.Post event) {
         if (player == null) return;
         if (isOnCooldown()) {
@@ -74,7 +71,9 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
         }
         if (player.level().isClientSide) {
             clientTick(event);
-        } else serverTick(event);
+        } else {
+            serverTick(event);
+        }
     }
 
     @Deprecated
@@ -101,6 +100,9 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
     // Call this, whenever NBT should be saved
     protected final void setChanged() {
         player.setData(NTDataAttachments.AUGMENT_DATA_CHANGED, NTRegistries.AUGMENT_SLOT.getId(augmentSlot));
+        if (player.level().isClientSide) {
+            AugmentClientHelper.invalidateCacheFor(player, augmentSlot);
+        }
     }
 
     @Override

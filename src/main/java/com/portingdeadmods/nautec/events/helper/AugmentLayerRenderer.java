@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec.events.helper;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.portingdeadmods.nautec.api.augments.Augment;
+import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
@@ -18,9 +19,16 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class AugmentLayerRenderer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
     private static final Object2ObjectMap<AugmentType<?>, AugmentRendererProvider<?>> RENDERER_PROVIDERS = new Object2ObjectOpenHashMap<>();
     private static final Object2ObjectMap<AugmentType<?>, AugmentRenderer<?>> RENDERERS = new Object2ObjectOpenHashMap<>();
+
+    public static Map<AugmentSlot, Augment> AUGMENTS_CACHE = new HashMap<>();
 
     public AugmentLayerRenderer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> renderLayerParent) {
         super(renderLayerParent);
@@ -28,7 +36,7 @@ public class AugmentLayerRenderer extends RenderLayer<AbstractClientPlayer, Play
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
-        Iterable<Augment> augments = getAugments(player);
+        Iterable<Augment> augments = AUGMENTS_CACHE.values();
         for (Augment augment : augments) {
             if (augment != null) {
                 poseStack.pushPose();
@@ -50,10 +58,6 @@ public class AugmentLayerRenderer extends RenderLayer<AbstractClientPlayer, Play
     @SuppressWarnings("unchecked")
     private static AugmentRenderer<Augment> getRenderer(Augment augment) {
         return (AugmentRenderer<Augment>) RENDERERS.get(augment.getAugmentType());
-    }
-
-    private Iterable<Augment> getAugments(Player player) {
-        return AugmentHelper.getAugments(player).values();
     }
 
     public static <T extends Augment> void registerRenderer(AugmentType<T> augmentType, AugmentRendererProvider<T> augmentRenderer) {

@@ -39,7 +39,9 @@ public final class AugmentHelper {
         Augment augment = augmentType.create(augmentSlot);
         augment.setPlayer(player);
         augment.onAdded(player);
+
         AugmentHelper.setAugment(player, augmentSlot, augment);
+        AugmentClientHelper.invalidateCacheFor(player, augmentSlot);
         return augment;
     }
 

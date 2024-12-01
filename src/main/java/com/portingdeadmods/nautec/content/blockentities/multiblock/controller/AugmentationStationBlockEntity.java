@@ -157,9 +157,7 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
                         this.isRunning = false;
 
                         AugmentType<?> type = recipe.resultAugment();
-                        Augment augment = type.create(slot);
-                        augment.setPlayer(player);
-                        AugmentHelper.setAugment(player, slot, augment);
+                        AugmentHelper.createAugment(type, player, slot);
 
                         for (BlockPos pos : augmentItems.keySet()) {
                             AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
