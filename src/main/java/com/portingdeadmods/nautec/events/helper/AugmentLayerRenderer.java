@@ -5,7 +5,6 @@ import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.api.client.renderer.augments.AugmentRenderer;
-import com.portingdeadmods.nautec.utils.AugmentHelper;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
@@ -15,13 +14,9 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AugmentLayerRenderer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
@@ -35,7 +30,7 @@ public class AugmentLayerRenderer extends RenderLayer<AbstractClientPlayer, Play
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void render(@NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight, @NotNull AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
         Iterable<Augment> augments = AUGMENTS_CACHE.values();
         for (Augment augment : augments) {
             if (augment != null) {
@@ -50,9 +45,10 @@ public class AugmentLayerRenderer extends RenderLayer<AbstractClientPlayer, Play
 
     private void renderAugmentModel(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, Augment augment) {
         AugmentRenderer<Augment> renderer = getRenderer(augment);
-        if (renderer != null) {
-            renderer.render(augment, this, poseStack, bufferSource, packedLight);
-        }
+        // Only called when renderer isnt null so no need to double check
+        assert renderer != null;
+        renderer.render(augment, this, poseStack, bufferSource, packedLight);
+
     }
 
     @SuppressWarnings("unchecked")

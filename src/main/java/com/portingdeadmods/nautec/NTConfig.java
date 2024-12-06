@@ -57,6 +57,9 @@ public final class NTConfig {
     private static final ModConfigSpec.IntValue GUARDIAN_AUGMENT_DAMAGE = BUILDER
             .comment("The amount of damage the guardian augments laser deals")
             .defineInRange("guardianAugmentDamage", 3, 0, Integer.MAX_VALUE);
+    private static final ModConfigSpec.BooleanValue ALLOW_AUGMENT_RENDERING = BUILDER
+            .comment("Set to false to disable the rendering of augments, this can improve performance")
+            .define("allowAugmentRendering", true);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 
@@ -78,6 +81,7 @@ public final class NTConfig {
     public static int drainCapacity;
 
     public static int guardianAugmentDamage;
+    public static boolean allowAugmentRendering;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
@@ -100,6 +104,7 @@ public final class NTConfig {
         drainCapacity = DRAIN_CAPACITY.getAsInt();
 
         guardianAugmentDamage = GUARDIAN_AUGMENT_DAMAGE.get();
+        allowAugmentRendering = ALLOW_AUGMENT_RENDERING.get();
     }
 
 }
