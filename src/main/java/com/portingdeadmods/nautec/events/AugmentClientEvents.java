@@ -31,7 +31,8 @@ public final class AugmentClientEvents {
         if (!NTConfig.allowAugmentRendering) return;
         PlayerRenderer renderer = event.getRenderer();
         renderer.addLayer(new AugmentLayerRenderer(renderer));
-        // Needs to be outside the augment renderer cuz pose stacks
+        // Needs to be outside the augment renderer cuz pose stacksA
+
         Map<AugmentSlot, Augment> augments = AugmentHelper.getAugments(event.getEntity());
         for (Augment augment : augments.values()) {
             if (augment instanceof GuardianEyeAugment eyeAugment && eyeAugment.getTargetEntity() != null) {
