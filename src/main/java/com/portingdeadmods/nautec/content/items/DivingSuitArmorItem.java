@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.content.items;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.registries.NTItems;
+import com.portingdeadmods.nautec.utils.Tooltips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -55,7 +56,7 @@ public class DivingSuitArmorItem extends ArmorItem {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if(stack.is(NTItems.DIVING_HELMET.get())) {
-            tooltipComponents.add(Component.literal("Allows you to see better underwater.").withStyle(ChatFormatting.GRAY));
+            Tooltips.trans(tooltipComponents, "nautec.helm.desc", ChatFormatting.GRAY);
         }
 
         if (stack.is(NTItems.DIVING_CHESTPLATE.get())) {
