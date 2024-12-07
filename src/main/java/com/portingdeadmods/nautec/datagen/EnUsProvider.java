@@ -125,6 +125,26 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         add("augment_type.nautec.drowned_lung", "Drowned Lung");
         add("augment_type.nautec.guardian_eye", "Guardian Eye");
         add("augment_type.nautec.dolphin_fin", "Dolphin Fin");
+
+        add("nautec.air_bottle.fill","Right click a glass bottle on a bubble column to fill with pressurized air");
+        add("nautec.air_bottle.craft_msg","Either Craft with Chestplate or drink while wearing chestplate to increase oxygen level");
+        add("nautec.edible","Edible");
+        add("nautec.armor.ability.desc", "Ability: Increases protection when powered");
+        add("nautec.armor.power", "Power: ");
+        add("nautec.armor.status", "Status: ");
+        add("nautec.armor.enabled", "Enabled");
+        add("nautec.armor.disabled", "Shift + Right Click to Enable");
+        add("nautec.helm.desc", "Allows you to see better underwater.");
+        add("nautec.tool.axe.ability", "Ability: Chop Down Entire Trees");
+        add("nautec.tool.hoe.ability", "Ability: Till 3x3 Farmland");
+        add("nautec.tool.pickaxe.ability", "Ability: Mine in a 3x3 Area");
+        add("nautec.tool.shovel.ability", "Ability: Mine in a 3x3 Area");
+        add("nautec.tool.sword.ability", "Ability: Deal 70% more damage and spawn lightnings at targets");
+        add("nautec.tool.infuse-me", "Infuse in Algae Serum to unlock Abilities");
+        add("nautec.tool.status", "Status: ");
+        add("nautec.tool.power", "Power: ");
+        add("nautec.tool.enabled", "Enabled");
+        add("nautec.tool.disabled", "Shift + Right Click to Enable");
     }
 
     private void addFluidType(Supplier<? extends FluidType> fluidType, String val) {
