@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec.data;
 
 import com.mojang.serialization.Codec;
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -18,6 +19,8 @@ public final class NTDataComponents {
             () -> builder -> builder.persistent(ComponentPowerStorage.CODEC).networkSynchronized(ComponentPowerStorage.STREAM_CODEC));
     public static final Supplier<DataComponentType<SimpleFluidContent>> FLUID = registerDataComponentType("fluid",
             () -> builder -> builder.persistent(SimpleFluidContent.CODEC).networkSynchronized(SimpleFluidContent.STREAM_CODEC));
+    public static final Supplier<DataComponentType<ComponentBacteriaStorage>> BACTERIA = registerDataComponentType("bacteria",
+            () -> builder -> builder.persistent(ComponentBacteriaStorage.CODEC).networkSynchronized(ComponentBacteriaStorage.STREAM_CODEC));
     public static final Supplier<DataComponentType<Boolean>> OPEN = registerDataComponentType("open",
             () -> builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
 
