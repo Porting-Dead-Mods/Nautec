@@ -49,10 +49,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class NTEvents {
-
     @EventBusSubscriber(modid = Nautec.MODID, bus = EventBusSubscriber.Bus.GAME)
     public static class Game {
-
         @SubscribeEvent
         public static void onItemEntityTick(EntityTickEvent.Post event) {
             if (event.getEntity() instanceof ItemEntity itemEntity) {
@@ -158,22 +156,6 @@ public final class NTEvents {
                     }
                     event.setCanceled(true);
                 }
-            }
-        }
-    }
-
-    @EventBusSubscriber(modid = Nautec.MODID, bus = EventBusSubscriber.Bus.MOD)
-    public static class Mod {
-        @SubscribeEvent
-        public static void onRegisterAugments(RegisterEvent event) {
-            Registry<AugmentSlot> slotRegistry = event.getRegistry(NTRegistries.AUGMENT_SLOT.key());
-            if (slotRegistry != null) {
-                AugmentSlotArgumentType.suggestions = slotRegistry.keySet().stream().map(Objects::toString).collect(Collectors.toSet());
-            }
-
-            Registry<AugmentType<?>> augmentRegistry = event.getRegistry(NTRegistries.AUGMENT_TYPE.key());
-            if (augmentRegistry != null) {
-                AugmentTypeArgumentType.suggestions = augmentRegistry.keySet().stream().map(Objects::toString).collect(Collectors.toSet());
             }
         }
     }

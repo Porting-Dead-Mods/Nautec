@@ -37,7 +37,6 @@ public final class AugmentEvents {
         }
     }
 
-
     @SubscribeEvent
     public static void playerTick(PlayerTickEvent.Post event) {
         Player player = event.getEntity();

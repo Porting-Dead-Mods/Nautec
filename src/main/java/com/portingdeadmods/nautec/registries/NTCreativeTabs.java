@@ -48,7 +48,9 @@ public final class NTCreativeTabs {
     public static void addPowered(CreativeModeTab.Output output, Item item) {
         ItemStack itemStack = new ItemStack(item);
         IPowerStorage storage = itemStack.getCapability(NTCapabilities.PowerStorage.ITEM);
-        storage.setPowerStored(storage.getPowerCapacity());
-        output.accept(itemStack);
+        if (storage != null) {
+            storage.setPowerStored(storage.getPowerCapacity());
+            output.accept(itemStack);
+        }
     }
 }

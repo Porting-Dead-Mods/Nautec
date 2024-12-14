@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.items;
 
+import com.portingdeadmods.nautec.api.items.ICurioItem;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
@@ -21,39 +22,11 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import java.util.List;
 
-public class BatteryItem extends Item implements IPowerItem {
+public class BatteryItem extends Item implements IPowerItem, ICurioItem {
     public BatteryItem(Properties properties) {
-        super(new Properties().component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(10000)).component(NTDataComponents.ABILITY_ENABLED,false));
-    }
-
-    public static void registerCapabilities(final RegisterCapabilitiesEvent evt) {
-        evt.registerItem(
-                CuriosCapability.ITEM,
-                (stack, context) -> new ICurio() {
-
-                    @Override
-                    public ItemStack getStack() {
-                        return NTItems.PRISMATIC_BATTERY.toStack();
-                    }
-
-                    @Override
-                    public void curioTick(SlotContext slotContext) {
-                        IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
-                        Player player = (Player) slotContext.entity();
-                        if (NTDataComponentsUtils.isAbilityEnabled(stack)) {
-                            for (ItemStack itemStack : player.getInventory().items) {
-                                if (itemStack.getCapability(NTCapabilities.PowerStorage.ITEM) != null) {
-                                    IPowerStorage itemPowerStorage = itemStack.getCapability(NTCapabilities.PowerStorage.ITEM);
-                                    if (itemPowerStorage.getPowerStored() < itemPowerStorage.getPowerCapacity()) {
-                                        int powerToTransfer = Math.min(powerStorage.getPowerStored(), itemPowerStorage.getPowerCapacity() - itemPowerStorage.getPowerStored());
-                                        powerStorage.tryDrainPower(powerToTransfer,false);
-                                        itemPowerStorage.tryFillPower(powerToTransfer,false);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }, NTItems.PRISMATIC_BATTERY.get());
+        super(properties
+                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(10000))
+                .component(NTDataComponents.ABILITY_ENABLED,false));
     }
 
     @Override
@@ -92,5 +65,23 @@ public class BatteryItem extends Item implements IPowerItem {
         tooltipComponents.add(Component.literal("Status: " + (NTDataComponentsUtils.isAbilityEnabled(stack) ? "Enabled" : "Shift + Right Click to Enable")).withStyle(NTDataComponentsUtils.isAbilityEnabled(stack) ? ChatFormatting.GREEN : ChatFormatting.RED));
         tooltipComponents.add(Component.literal("Power: " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity() + " AP").withStyle(ChatFormatting.DARK_AQUA));
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    }
+
+    @Override
+    public void curioTick(ItemStack stack, SlotContext slotContext) {
+        IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
+        Player player = (Player) slotContext.entity();
+        if (NTDataComponentsUtils.isAbilityEnabled(stack)) {
+            for (ItemStack itemStack : player.getInventory().items) {
+                if (itemStack.getCapability(NTCapabilities.PowerStorage.ITEM) != null) {
+                    IPowerStorage itemPowerStorage = itemStack.getCapability(NTCapabilities.PowerStorage.ITEM);
+                    if (itemPowerStorage.getPowerStored() < itemPowerStorage.getPowerCapacity()) {
+                        int powerToTransfer = Math.min(powerStorage.getPowerStored(), itemPowerStorage.getPowerCapacity() - itemPowerStorage.getPowerStored());
+                        powerStorage.tryDrainPower(powerToTransfer,false);
+                        itemPowerStorage.tryFillPower(powerToTransfer,false);
+                    }
+                }
+            }
+        }
     }
 }
