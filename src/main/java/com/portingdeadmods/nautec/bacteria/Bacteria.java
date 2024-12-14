@@ -4,6 +4,9 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.utils.codec.CodecUtils;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
 
 public interface Bacteria {
@@ -31,5 +34,19 @@ public interface Bacteria {
                     Codec.FLOAT.fieldOf("production_rate").forGetter(Bacteria::productionRate),
                     Codec.INT.fieldOf("lifespan").forGetter(Bacteria::lifespan)
             ).apply(instance, BacteriaImpl::new)
+    );
+
+    StreamCodec<RegistryFriendlyByteBuf, Bacteria> STREAM_CODEC = StreamCodec.composite(
+            CodecUtils.ITEM_STREAM_CODEC,
+            Bacteria::type,
+            ByteBufCodecs.FLOAT,
+            Bacteria::growthRate,
+            ByteBufCodecs.FLOAT,
+            Bacteria::mutationResistance,
+            ByteBufCodecs.FLOAT,
+            Bacteria::productionRate,
+            ByteBufCodecs.INT,
+            Bacteria::lifespan,
+            BacteriaImpl::new
     );
 }

@@ -4,10 +4,13 @@ import com.mojang.logging.LogUtils;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
+import com.portingdeadmods.nautec.api.items.IBacteriaItem;
 import com.portingdeadmods.nautec.api.items.ICurioItem;
 import com.portingdeadmods.nautec.api.items.IFluidItem;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
+import com.portingdeadmods.nautec.capabilities.bacteria.BacteriaStorage;
+import com.portingdeadmods.nautec.capabilities.bacteria.ItemBacteriaWrapper;
 import com.portingdeadmods.nautec.capabilities.power.ItemPowerWrapper;
 import com.portingdeadmods.nautec.compat.duradisplay.DuraDisplayCompat;
 import com.portingdeadmods.nautec.content.commands.arguments.AugmentSlotArgumentType;
@@ -98,8 +101,6 @@ public final class Nautec {
         }
     }
 
-
-
     private void registerCapabilities(RegisterCapabilitiesEvent event) {
         registerItemCaps(event);
         registerBECaps(event);
@@ -113,6 +114,10 @@ public final class Nautec {
 
             if (item instanceof IFluidItem fluidItem) {
                 event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidHandlerItemStack(NTDataComponents.FLUID, stack, fluidItem.getFluidCapacity()), item);
+            }
+
+            if (item instanceof IBacteriaItem) {
+                event.registerItem(NTCapabilities.BacteriaStorage.ITEM, (stack, ctx) -> new ItemBacteriaWrapper(NTDataComponents.BACTERIA, stack), item);
             }
 
             if (item instanceof ICurioItem curioItem) {

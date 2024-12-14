@@ -6,6 +6,7 @@ import com.portingdeadmods.nautec.content.items.*;
 import com.portingdeadmods.nautec.content.items.tiers.NTArmorMaterials;
 import com.portingdeadmods.nautec.content.items.tools.*;
 import com.portingdeadmods.nautec.data.NTDataComponents;
+import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
@@ -83,6 +84,11 @@ public final class NTItems {
     public static final DeferredItem<Item> GLASS_VIAL = registerItem("glass_vial", Item::new, new Item.Properties());
     public static final DeferredItem<Item> ELECTROLYTE_ALGAE_SERUM_VIAL = registerItem("eas_vial", Item::new, new Item.Properties());
 
+    // BACTERIA
+    public static final DeferredItem<PetriDishItem> PETRI_DISH = registerItem("petri_dish", PetriDishItem::new, () -> new Item.Properties()
+            .stacksTo(1)
+            .component(NTDataComponents.BACTERIA, ComponentBacteriaStorage.EMPTY));
+
     // ARMOR
     // CURIO ITEMS
     public static final DeferredItem<BatteryItem> PRISMATIC_BATTERY = registerItem("prismatic_battery",
@@ -130,6 +136,9 @@ public final class NTItems {
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Item.Properties properties) {
         return registerItem(name, itemConstructor, properties, true);
     }
+    public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Supplier<Item.Properties> properties) {
+        return registerItem(name, itemConstructor, properties, true);
+    }
 
     private static <T extends Item> DeferredItem<T> registerItemBucket(String name, Supplier<T> item) {
         return ITEMS.register(name, item);
@@ -143,6 +152,14 @@ public final class NTItems {
 
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Item.Properties properties, boolean addToTab) {
         DeferredItem<T> toReturn = ITEMS.registerItem(name, itemConstructor, properties);
+        if (addToTab) {
+            CREATIVE_TAB_ITEMS.add(toReturn);
+        }
+        return toReturn;
+    }
+
+    public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Supplier<Item.Properties> properties, boolean addToTab) {
+        DeferredItem<T> toReturn = ITEMS.register(name,  () -> itemConstructor.apply(properties.get()));
         if (addToTab) {
             CREATIVE_TAB_ITEMS.add(toReturn);
         }
