@@ -23,7 +23,7 @@ import java.util.List;
 public class DivingSuitArmorItem extends ArmorItem {
 
     public DivingSuitArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
-        super(material, type, properties.durability(type.getDurability(5)));
+        super(material, type, properties.durability(type.getDurability(10)));
     }
 
     @Override
@@ -34,11 +34,7 @@ public class DivingSuitArmorItem extends ArmorItem {
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (entity instanceof Player player) {
-            if (stack == player.getItemBySlot(EquipmentSlot.CHEST) &&
-                    player.getItemBySlot(EquipmentSlot.HEAD).is(NTItems.DIVING_HELMET) &&
-                    player.getItemBySlot(EquipmentSlot.LEGS).is(NTItems.DIVING_LEGGINGS) &&
-                    player.getItemBySlot(EquipmentSlot.FEET).is(NTItems.DIVING_BOOTS)) {
-
+            if (hasFullArmorSet(stack, player)) {
                 if (player.isUnderWater() && !player.isCreative() && !player.isSpectator()) {
                     if (level.getGameTime() % 20 == 0) {
                         int currentOxygen = NTDataComponentsUtils.getOxygenLevels(stack);
@@ -50,6 +46,13 @@ public class DivingSuitArmorItem extends ArmorItem {
                 }
             }
         }
+    }
+
+    private static boolean hasFullArmorSet(ItemStack stack, Player player) {
+        return stack == player.getItemBySlot(EquipmentSlot.CHEST) &&
+                player.getItemBySlot(EquipmentSlot.HEAD).is(NTItems.DIVING_HELMET) &&
+                player.getItemBySlot(EquipmentSlot.LEGS).is(NTItems.DIVING_LEGGINGS) &&
+                player.getItemBySlot(EquipmentSlot.FEET).is(NTItems.DIVING_BOOTS);
     }
 
     @Override
@@ -70,6 +73,7 @@ public class DivingSuitArmorItem extends ArmorItem {
 
             tooltipComponents.add(Component.literal(String.format("Oxygen: %d minutes %d seconds", minutesRemaining, secondsRemaining))
                     .withStyle(style -> style.withColor(TextColor.fromRgb(colorHex))));
+            tooltipComponents.add(Component.literal("Can be filled up using Bottles of pressurized air").withStyle(ChatFormatting.GRAY));
         }
     }
 

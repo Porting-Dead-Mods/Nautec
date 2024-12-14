@@ -41,7 +41,9 @@ public final class AugmentHelper {
         augment.onAdded(player);
 
         AugmentHelper.setAugment(player, augmentSlot, augment);
-        AugmentClientHelper.invalidateCacheFor(player, augmentSlot);
+        if (player.level().isClientSide()) {
+            AugmentClientHelper.invalidateCacheFor(player, augmentSlot);
+        }
         return augment;
     }
 

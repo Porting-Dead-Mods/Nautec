@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.items;
 
+import com.portingdeadmods.nautec.api.items.ICurioItem;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.content.items.tiers.NTArmorMaterials;
 import com.portingdeadmods.nautec.data.NTDataComponents;
@@ -13,28 +14,10 @@ import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
-public class PrismMonocleItem extends ArmorItem implements IPowerItem {
+public class PrismMonocleItem extends ArmorItem implements IPowerItem, ICurioItem {
     public PrismMonocleItem(Properties properties) {
         super(NTArmorMaterials.PRISMARINE, Type.HELMET, properties.component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(100)));
     }
-
-    public static void registerCapabilities(final RegisterCapabilitiesEvent evt) {
-        evt.registerItem(
-                CuriosCapability.ITEM,
-                (stack, context) -> new ICurio() {
-
-                    @Override
-                    public ItemStack getStack() {
-                        return NTItems.PRISM_MONOCLE.toStack();
-                    }
-
-                    @Override
-                    public void curioTick(SlotContext slotContext) {
-                        // ticking logic here
-                    }
-                }, NTItems.PRISM_MONOCLE.get());
-    }
-
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
@@ -59,5 +42,9 @@ public class PrismMonocleItem extends ArmorItem implements IPowerItem {
     @Override
     public int getMaxOutput() {
         return 0;
+    }
+
+    @Override
+    public void curioTick(ItemStack itemStack, SlotContext slotContext) {
     }
 }

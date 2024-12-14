@@ -33,7 +33,7 @@ public final class AugmentClientEvents {
         PlayerRenderer renderer = event.getRenderer();
         renderer.addLayer(new AugmentLayerRenderer(renderer));
         // Needs to be outside the augment renderer cuz pose stacks
-        Map<AugmentSlot, Augment> augments = AugmentHelper.getAugments(event.getEntity());
+        Map<AugmentSlot, Augment> augments = AugmentLayerRenderer.AUGMENTS_CACHE;
         for (Augment augment : augments.values()) {
             if (augment instanceof GuardianEyeAugment eyeAugment && eyeAugment.getTargetEntity() != null) {
                 GuardianEyeRenderHelper.render(event.getEntity(), eyeAugment, event.getPartialTick(), event.getPoseStack(), event.getMultiBufferSource());
