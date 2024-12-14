@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.content.items;
 
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
+import com.portingdeadmods.nautec.utils.Tooltips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -47,9 +48,9 @@ public class AirBottleItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.literal("Right click a glass bottle on a bubble column to fill with pressurized air").withStyle(ChatFormatting.GRAY));
-        tooltipComponents.add(Component.literal("Either Craft with Chestplate or drink while wearing chestplate to increase oxygen level").withStyle(ChatFormatting.GRAY));
-        tooltipComponents.add(Component.literal("Edible").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY));
+        Tooltips.trans(tooltipComponents, "nautec.air_bottle.fill", ChatFormatting.GRAY);
+        Tooltips.trans(tooltipComponents,"nautec.air_bottle.craft_msg", ChatFormatting.GRAY);
+        Tooltips.trans(tooltipComponents,"nautec.edible",ChatFormatting.GRAY, ChatFormatting.ITALIC);
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.portingdeadmods.nautec.content.items.tiers.NTArmorMaterials;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
 import com.portingdeadmods.nautec.utils.ItemUtils;
+import com.portingdeadmods.nautec.utils.Tooltips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -104,8 +105,8 @@ public class AquarineArmorItem extends ArmorItem implements IPowerItem {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
-        tooltipComponents.add(Component.literal("Ability: Increases protection when powered").withStyle(ChatFormatting.DARK_PURPLE));
-        tooltipComponents.add(Component.literal("Power: " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity()).withStyle(ChatFormatting.DARK_AQUA));
+        Tooltips.trans(tooltipComponents, "nautec.armor.ability.desc", ChatFormatting.DARK_PURPLE);
+        Tooltips.transInsert(tooltipComponents, "nautec.armor.power", powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity() , ChatFormatting.DARK_AQUA);
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }

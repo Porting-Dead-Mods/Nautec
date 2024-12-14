@@ -46,20 +46,27 @@ public class GuardianEyeAugment extends Augment {
                 this.clientLaserTime = 0;
             }
 
-            double d5 = (double) this.getLaserScale(0.0F);
-            double d0 = targetEntity.getX() - player.getX();
-            double d1 = targetEntity.getY(0.5) - player.getEyeY();
-            double d2 = targetEntity.getZ() - player.getZ();
-            double d3 = Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-            d0 /= d3;
-            d1 /= d3;
-            d2 /= d3;
-            double d4 = player.getRandom().nextDouble();
+            double laserScale = this.getLaserScale(0.0F);
+            double dx = targetEntity.getX() - player.getX();
+            double dy = targetEntity.getY(0.5) - player.getEyeY();
+            double dz = targetEntity.getZ() - player.getZ();
 
-            while (d4 < d3) {
-                d4 += 1.8 - d5 + player.getRandom().nextDouble() * (1.7 - d5);
-                player.level()
-                        .addParticle(ParticleTypes.BUBBLE, player.getX() + d0 * d4, player.getEyeY() + d1 * d4, player.getZ() + d2 * d4, 0.0, 0.0, 0.0);
+            double dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+            double nx = dx / dist;
+            double ny = dy / dist;
+            double nz = dz / dist;
+
+            double rOffset = player.getRandom().nextDouble();
+            double particleDist = 0.0;
+
+            while (particleDist < dist) {
+                particleDist += 1.8 - laserScale + rOffset * (1.7-laserScale);
+                player.level().addParticle(ParticleTypes.BUBBLE,
+                        player.getX() + nx * particleDist,
+                        player.getEyeY() + ny * particleDist,
+                        player.getZ() + nz * particleDist,
+                        0.0,0.0,0.0);
             }
 
         }
