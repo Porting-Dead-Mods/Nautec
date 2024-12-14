@@ -33,7 +33,8 @@ public class AugmentSlotsRenderer {
     }
 
     public static void render(RenderPlayerEvent.Pre event) {
-        Map<AugmentSlot, Augment> augments = AugmentHelper.getAugments(event.getEntity());
+
+        Map<AugmentSlot, Augment> augments = AugmentLayerRenderer.AUGMENTS_CACHE;
         for (AugmentSlot slot : augments.keySet()) {
             Augment augment = augments.get(slot);
             if (augment.replaceBodyPart()) {

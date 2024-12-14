@@ -9,6 +9,7 @@ import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
 import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.ItemUtils;
+import com.portingdeadmods.nautec.utils.Tooltips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -62,8 +63,8 @@ public class BatteryItem extends Item implements IPowerItem, ICurioItem {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
-        tooltipComponents.add(Component.literal("Status: " + (NTDataComponentsUtils.isAbilityEnabled(stack) ? "Enabled" : "Shift + Right Click to Enable")).withStyle(NTDataComponentsUtils.isAbilityEnabled(stack) ? ChatFormatting.GREEN : ChatFormatting.RED));
-        tooltipComponents.add(Component.literal("Power: " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity() + " AP").withStyle(ChatFormatting.DARK_AQUA));
+        Tooltips.transtrans(tooltipComponents, "nautec.armor.status", NTDataComponentsUtils.isAbilityEnabled(stack)? "nautec.armor.enabled" : "nautec.armor.disabled", NTDataComponentsUtils.isAbilityEnabled(stack)?ChatFormatting.GREEN:ChatFormatting.RED);
+        Tooltips.transInsert(tooltipComponents, "nautec.armor.power", " " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity() , ChatFormatting.DARK_AQUA);
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 

@@ -9,6 +9,7 @@ import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
 import com.portingdeadmods.nautec.utils.ItemUtils;
+import com.portingdeadmods.nautec.utils.Tooltips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -141,12 +142,12 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
-        tooltipComponents.add(Component.literal("Ability: Deal 70% more damage and spawn lightnings at targets").withStyle(ChatFormatting.DARK_PURPLE));
+        Tooltips.trans(tooltipComponents, "nautec.tool.sword.ability", ChatFormatting.DARK_PURPLE);
         if(!NTDataComponentsUtils.isInfused(stack)){
-            tooltipComponents.add(Component.literal("Infuse in Algae Serum to unlock Abilities").withStyle(ChatFormatting.DARK_GREEN));
+            Tooltips.trans(tooltipComponents, "nautec.tool.infuse-me", ChatFormatting.DARK_GREEN);
         }else{
-            tooltipComponents.add(Component.literal("Status: " + ((NTDataComponentsUtils.isAbilityEnabled(stack)) ? "Enabled" : "Shift + Right Click to Enable")).withStyle((NTDataComponentsUtils.isAbilityEnabled(stack)) ? ChatFormatting.GREEN : ChatFormatting.RED));
+            Tooltips.transtrans(tooltipComponents, "nautec.tool.status", NTDataComponentsUtils.isAbilityEnabled(stack) ? "nautec.tool.enabled" : "nautec.tool.disabled", NTDataComponentsUtils.isAbilityEnabled(stack) ? ChatFormatting.GREEN : ChatFormatting.RED);
         }
-        tooltipComponents.add(Component.literal("Power: " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity() + " AP").withStyle(ChatFormatting.DARK_AQUA));
+        Tooltips.transInsert(tooltipComponents, "nautec.tool.power", powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity(), ChatFormatting.DARK_AQUA);
     }
 }
