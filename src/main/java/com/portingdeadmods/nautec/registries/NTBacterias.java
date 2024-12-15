@@ -6,7 +6,7 @@ import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 
-public class NTBacteria {
+public class NTBacterias {
     public static final ResourceKey<Bacteria> EMPTY = key("empty");
 
     public static void bootstrap(BootstrapContext<Bacteria> context) {

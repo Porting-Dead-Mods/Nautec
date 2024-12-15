@@ -1,17 +1,18 @@
 package com.portingdeadmods.nautec.api.bacteria;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.utils.codec.CodecUtils;
+import com.portingdeadmods.nautec.NTRegistries;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
 public interface Bacteria {
+    Codec<Bacteria> CODEC = NTRegistries.BACTERIA_SERIALIZER.byNameCodec().dispatch(Bacteria::getSerializer, BacteriaSerializer::mapCodec);
+    StreamCodec<RegistryFriendlyByteBuf, Bacteria> STREAM_CODEC = ByteBufCodecs.registry(NTRegistries.BACTERIA_SERIALIZER_KEY).dispatch(Bacteria::getSerializer, BacteriaSerializer::streamCodec);
+
     /*
     Bacteria! We begin with only one!
     Bacteria! Two's what we then become!
@@ -23,60 +24,49 @@ public interface Bacteria {
     Bacteria! We will take over the world!
      */
     ResourceLocation id();
-    Item type();
-    float growthRate();
-    float mutationResistance();
-    float productionRate();
-    int lifespan();
-    int color();
 
-    default byte getAlpha() {
-        return (byte) ((color() >> 24) & 0xFF);
+    BacteriaStats stats();
+
+    BacteriaSerializer<?> getSerializer();
+
+    static Builder of() {
+        return new Builder();
     }
-
-    default byte getRed() {
-        return (byte) ((color() >> 16) & 0xFF);
-    }
-
-    default byte getGreen() {
-        return (byte) ((color() >> 8) & 0xFF);
-    }
-
-    default byte getBlue() {
-        return (byte) (color() & 0xFF);
-    }
-
-    Codec<Bacteria> CODEC = RecordCodecBuilder.create(
-            instance -> instance.group(
-                    ResourceLocation.CODEC.fieldOf("id").forGetter(Bacteria::id),
-                    CodecUtils.ITEM_CODEC.fieldOf("type").forGetter(Bacteria::type),
-                    Codec.FLOAT.fieldOf("growth_rate").forGetter(Bacteria::growthRate),
-                    Codec.FLOAT.fieldOf("mutation_resistance").forGetter(Bacteria::mutationResistance),
-                    Codec.FLOAT.fieldOf("production_rate").forGetter(Bacteria::productionRate),
-                    Codec.INT.fieldOf("lifespan").forGetter(Bacteria::lifespan),
-                    Codec.INT.fieldOf("color").forGetter(Bacteria::color)
-            ).apply(instance, BacteriaImpl::new)
-    );
-
-    StreamCodec<RegistryFriendlyByteBuf, Bacteria> STREAM_CODEC = StreamCodec.composite(
-            CodecUtils.ITEM_STREAM_CODEC,
-            Bacteria::type,
-            ByteBufCodecs.FLOAT,
-            Bacteria::growthRate,
-            ByteBufCodecs.FLOAT,
-            Bacteria::mutationResistance,
-            ByteBufCodecs.FLOAT,
-            Bacteria::productionRate,
-            ByteBufCodecs.INT,
-            Bacteria::lifespan,
-            ByteBufCodecs.INT,
-            Bacteria::color,
-            (a, b, c, d, e, f) -> new BacteriaImpl(Nautec.rl("empty"), a, b, c, d, e, f)
-    );
 
     class Builder {
+        private float growthRate;
+        private float mutationResistance;
+        private float productionRate;
+        private int lifespan;
+        private int color;
+
+        public Builder growthRate(float growthRate) {
+            this.growthRate = growthRate;
+            return this;
+        }
+
+        public Builder mutationResistance(float mutationResistance) {
+            this.mutationResistance = mutationResistance;
+            return this;
+        }
+
+        public Builder productionRate(float productionRate) {
+            this.productionRate = productionRate;
+            return this;
+        }
+
+        public Builder lifespan(int lifespan) {
+            this.lifespan = lifespan;
+            return this;
+        }
+
+        public Builder color(int color) {
+            this.color = color;
+            return this;
+        }
+
         public Bacteria build(ResourceLocation location) {
-            return new BacteriaImpl(location, Items.AIR, 0, 0, 0, 0, 0);
+            return new BacteriaImpl(location, new BacteriaStats(Items.AIR, growthRate, mutationResistance, productionRate, lifespan, color));
         }
     }
 }

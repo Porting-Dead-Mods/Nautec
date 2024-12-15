@@ -2,54 +2,21 @@ package com.portingdeadmods.nautec.data.components;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
+import com.portingdeadmods.nautec.registries.NTBacterias;
+import com.portingdeadmods.nautec.utils.BacteriaHelper;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 
 import java.util.Objects;
+import java.util.function.Function;
 
 public record ComponentBacteriaStorage(Bacteria bacteria, long bacteriaAmount) {
-    public static final ComponentBacteriaStorage EMPTY = new ComponentBacteriaStorage(new Bacteria() {
-        @Override
-        public ResourceLocation id() {
-            return Nautec.rl("empty");
-        }
-
-        @Override
-        public Item type() {
-            return Items.AIR;
-        }
-
-        @Override
-        public float growthRate() {
-            return 0;
-        }
-
-        @Override
-        public float mutationResistance() {
-            return 0;
-        }
-
-        @Override
-        public float productionRate() {
-            return 0;
-        }
-
-        @Override
-        public int lifespan() {
-            return 0;
-        }
-
-        @Override
-        public int color() {
-            return 0;
-        }
-    }, 0);
+    public static final Function<HolderLookup.Provider, ComponentBacteriaStorage> EMPTY =
+            lookup -> new ComponentBacteriaStorage(BacteriaHelper.getBacteria(lookup, NTBacterias.EMPTY), 0);
     public static final Codec<ComponentBacteriaStorage> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Bacteria.CODEC.fieldOf("bacteriaType").forGetter(ComponentBacteriaStorage::bacteria),
             Codec.LONG.fieldOf("bacteriaAmount").forGetter(ComponentBacteriaStorage::bacteriaAmount)

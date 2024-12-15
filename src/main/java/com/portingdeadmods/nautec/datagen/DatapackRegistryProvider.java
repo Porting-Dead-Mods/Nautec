@@ -2,7 +2,7 @@ package com.portingdeadmods.nautec.datagen;
 
 import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.registries.NTBacteria;
+import com.portingdeadmods.nautec.registries.NTBacterias;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
@@ -50,7 +50,7 @@ public class DatapackRegistryProvider extends DatapackBuiltinEntriesProvider {
 
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             // -- BACTERIA --
-            .add(NTRegistries.BACTERIA_KEY, NTBacteria::bootstrap)
+            .add(NTRegistries.BACTERIA_KEY, NTBacterias::bootstrap)
             // -- WORLDGEN --
             // Beach - Higher Spawn Chance - 1 to 4 Ores in a Vein
             .add(Registries.CONFIGURED_FEATURE, context -> {
