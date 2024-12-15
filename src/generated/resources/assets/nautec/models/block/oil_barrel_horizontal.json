@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "nautec:block/oil_barrel",
+    "side": "nautec:block/oil_barrel_side",
+    "top": "nautec:block/oil_barrel_bottom"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "parent": "neoforge:item/bucket",
+  "fluid": "nautec:oil",
+  "loader": "neoforge:fluid_container"
+}
