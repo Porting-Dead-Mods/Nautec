@@ -1,9 +1,7 @@
 package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.content.menus.AugmentMenu;
-import com.portingdeadmods.nautec.content.menus.AugmentationStationExtensionMenu;
-import com.portingdeadmods.nautec.content.menus.CrateMenu;
+import com.portingdeadmods.nautec.content.menus.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -18,6 +16,9 @@ public final class NTMenuTypes {
     public static final DeferredHolder<MenuType<?>,MenuType<CrateMenu>> CRATE = registerMenuType(CrateMenu::new,"crate");
     public static final DeferredHolder<MenuType<?>,MenuType<AugmentMenu>> AUGMENTS = registerMenuType(AugmentMenu::new,"augments");
     public static final DeferredHolder<MenuType<?>,MenuType<AugmentationStationExtensionMenu>> AUGMENT_STATION_EXTENSION = registerMenuType(AugmentationStationExtensionMenu::new,"augment_station_extension");
+    public static final DeferredHolder<MenuType<?>,MenuType<BioReactorMenu>> BIO_REACTOR = registerMenuType(BioReactorMenu::new,"bio_reactor");
+    public static final DeferredHolder<MenuType<?>,MenuType<IncubatorMenu>> INCUBATOR = registerMenuType(IncubatorMenu::new,"incubator");
+    public static final DeferredHolder<MenuType<?>,MenuType<MutatorMenu>> MUTATOR = registerMenuType(MutatorMenu::new,"mutator");
 
     private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>,MenuType<T>> registerMenuType(IContainerFactory<T> factory,
                                                                                                               String name) {
