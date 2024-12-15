@@ -2,12 +2,9 @@ package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.bacteria.Bacteria;
-import net.minecraft.core.registries.Registries;
+import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.enchantment.Enchantment;
 
 public class NTBacteria {
     public static final ResourceKey<Bacteria> EMPTY = key("empty");

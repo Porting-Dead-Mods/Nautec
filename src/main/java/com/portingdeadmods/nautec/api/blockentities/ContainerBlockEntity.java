@@ -2,6 +2,8 @@ package com.portingdeadmods.nautec.api.blockentities;
 
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.capabilities.IOActions;
+import com.portingdeadmods.nautec.capabilities.bacteria.BacteriaStorage;
+import com.portingdeadmods.nautec.capabilities.bacteria.IBacteriaStorage;
 import com.portingdeadmods.nautec.capabilities.fluid.SidedFluidHandler;
 import com.portingdeadmods.nautec.capabilities.item.SidedItemHandler;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
@@ -44,6 +46,7 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     private @Nullable FluidTank fluidTank;
     private @Nullable FluidTank secondaryFluidTank;
     private @Nullable PowerStorage powerStorage;
+    private @Nullable BacteriaStorage bacteriaStorage;
 
     public ContainerBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
@@ -68,6 +71,9 @@ public abstract class ContainerBlockEntity extends BlockEntity {
         return powerStorage;
     }
 
+    public IBacteriaStorage getBacteriaStorage() {
+        return bacteriaStorage;
+    }
 
     protected ItemStackHandler getItemStackHandler() {
         return itemHandler;
@@ -81,8 +87,12 @@ public abstract class ContainerBlockEntity extends BlockEntity {
         return secondaryFluidTank;
     }
 
-    protected PowerStorage getEnergyStorageImpl() {
+    protected PowerStorage getPowerStorageImpl() {
         return powerStorage;
+    }
+
+    protected BacteriaStorage getBacteriaStorageImpl() {
+        return bacteriaStorage;
     }
 
     @Override
@@ -94,8 +104,10 @@ public abstract class ContainerBlockEntity extends BlockEntity {
             this.getSecondaryFluidTank().readFromNBT(provider, nbt.getCompound("secondary_fluid"));
         if (this.getItemStackHandler() != null)
             this.getItemStackHandler().deserializeNBT(provider, nbt.getCompound("itemhandler"));
-        if (this.getEnergyStorageImpl() != null)
-            this.getEnergyStorageImpl().deserializeNBT(provider, nbt.getCompound("power_storage"));
+        if (this.getPowerStorageImpl() != null)
+            this.getPowerStorageImpl().deserializeNBT(provider, nbt.getCompound("power_storage"));
+        if (this.getBacteriaStorageImpl() != null)
+            this.getBacteriaStorageImpl().deserializeNBT(provider, nbt.getCompound("bacteria_storage"));
         loadData(nbt, provider);
     }
 
@@ -114,8 +126,10 @@ public abstract class ContainerBlockEntity extends BlockEntity {
         }
         if (getItemStackHandler() != null)
             nbt.put("itemhandler", getItemStackHandler().serializeNBT(provider));
-        if (getEnergyStorageImpl() != null)
-            nbt.put("power_storage", getEnergyStorageImpl().serializeNBT(provider));
+        if (getPowerStorageImpl() != null)
+            nbt.put("power_storage", getPowerStorageImpl().serializeNBT(provider));
+        if (getBacteriaStorageImpl() != null)
+            nbt.put("bacteria_storage", getBacteriaStorageImpl().serializeNBT(provider));
         saveData(nbt, provider);
     }
 
@@ -211,6 +225,10 @@ public abstract class ContainerBlockEntity extends BlockEntity {
             }
         };
         this.powerStorage.setPowerCapacity(powerCapacity);
+    }
+
+    protected final void addBacteriaStorage() {
+        this.bacteriaStorage = new BacteriaStorage();
     }
 
     private void update() {

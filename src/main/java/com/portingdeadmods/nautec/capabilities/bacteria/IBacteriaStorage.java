@@ -1,6 +1,6 @@
 package com.portingdeadmods.nautec.capabilities.bacteria;
 
-import com.portingdeadmods.nautec.bacteria.Bacteria;
+import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 
 public interface IBacteriaStorage {
     void setBacteria(Bacteria bacteria);

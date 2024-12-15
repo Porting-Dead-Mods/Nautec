@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
-import com.portingdeadmods.nautec.bacteria.Bacteria;
+import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

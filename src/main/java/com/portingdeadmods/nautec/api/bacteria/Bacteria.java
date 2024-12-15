@@ -1,4 +1,4 @@
-package com.portingdeadmods.nautec.bacteria;
+package com.portingdeadmods.nautec.api.bacteria;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

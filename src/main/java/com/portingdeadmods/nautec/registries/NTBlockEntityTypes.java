@@ -40,6 +40,9 @@ public final class NTBlockEntityTypes {
     public static final Supplier<BlockEntityType<AnchorBlockEntity>> ANCHOR = BLOCK_ENTITIES.register("anchor",
             () -> BlockEntityType.Builder.of(AnchorBlockEntity::new,
                     NTBlocks.ANCHOR.get()).build(null));
+    public static final Supplier<BlockEntityType<FishingStationBlockEntity>> FISHING_STATION = BLOCK_ENTITIES.register("fishing_station",
+            () -> BlockEntityType.Builder.of(FishingStationBlockEntity::new,
+                    NTBlocks.FISHING_STATION.get()).build(null));
 
     public static final Supplier<BlockEntityType<CreativePowerSourceBlockEntity>> CREATIVE_POWER_SOURCE = BLOCK_ENTITIES.register("creative_power_source",
             () -> BlockEntityType.Builder.of(CreativePowerSourceBlockEntity::new,

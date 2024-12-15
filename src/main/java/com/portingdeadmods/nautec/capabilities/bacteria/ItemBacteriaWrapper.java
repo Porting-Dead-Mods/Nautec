@@ -1,6 +1,6 @@
 package com.portingdeadmods.nautec.capabilities.bacteria;
 
-import com.portingdeadmods.nautec.bacteria.Bacteria;
+import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.item.ItemStack;
