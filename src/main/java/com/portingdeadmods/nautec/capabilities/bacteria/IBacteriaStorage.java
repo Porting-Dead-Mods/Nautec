@@ -1,11 +1,12 @@
 package com.portingdeadmods.nautec.capabilities.bacteria;
 
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
+import net.minecraft.resources.ResourceKey;
 
 public interface IBacteriaStorage {
-    void setBacteria(Bacteria bacteria);
+    void setBacteria(ResourceKey<Bacteria> bacteria);
 
-    Bacteria getBacteria();
+    ResourceKey<Bacteria> getBacteria();
 
     void setBacteriaAmount(long bacteriaAmount);
 

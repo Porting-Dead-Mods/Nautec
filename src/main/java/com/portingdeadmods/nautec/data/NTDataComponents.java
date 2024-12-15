@@ -20,10 +20,10 @@ public final class NTDataComponents {
             () -> builder -> builder.persistent(ComponentPowerStorage.CODEC).networkSynchronized(ComponentPowerStorage.STREAM_CODEC));
     public static final Supplier<DataComponentType<SimpleFluidContent>> FLUID = registerDataComponentType("fluid",
             () -> builder -> builder.persistent(SimpleFluidContent.CODEC).networkSynchronized(SimpleFluidContent.STREAM_CODEC));
-    public static final Supplier<DataComponentType<Optional<ComponentBacteriaStorage>>> BACTERIA = registerDataComponentType("bacteria",
+    public static final Supplier<DataComponentType<ComponentBacteriaStorage>> BACTERIA = registerDataComponentType("bacteria",
             () -> builder -> builder
-                    .persistent(ComponentBacteriaStorage.CODEC.optionalFieldOf("bacteriaComponent").codec())
-                    .networkSynchronized(ByteBufCodecs.optional(ComponentBacteriaStorage.STREAM_CODEC)));
+                    .persistent(ComponentBacteriaStorage.CODEC)
+                    .networkSynchronized(ComponentBacteriaStorage.STREAM_CODEC));
     public static final Supplier<DataComponentType<Boolean>> OPEN = registerDataComponentType("open",
             () -> builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
 

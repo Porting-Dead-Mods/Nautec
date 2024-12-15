@@ -123,10 +123,7 @@ public final class Nautec {
             }
 
             if (item instanceof IBacteriaItem) {
-                event.registerItem(NTCapabilities.BacteriaStorage.ITEM, (stack, ctx) -> stack.get(NTDataComponents.BACTERIA).isPresent()
-                                ? new ItemBacteriaWrapper(NTDataComponents.BACTERIA, stack)
-                                : null,
-                        item);
+                event.registerItem(NTCapabilities.BacteriaStorage.ITEM, (stack, ctx) -> new ItemBacteriaWrapper(NTDataComponents.BACTERIA, stack), item);
             }
 
             if (item instanceof ICurioItem curioItem) {

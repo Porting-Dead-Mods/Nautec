@@ -10,19 +10,19 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 
 import java.util.Objects;
 import java.util.function.Function;
 
-public record ComponentBacteriaStorage(Bacteria bacteria, long bacteriaAmount) {
-    public static final Function<HolderLookup.Provider, ComponentBacteriaStorage> EMPTY =
-            lookup -> new ComponentBacteriaStorage(BacteriaHelper.getBacteria(lookup, NTBacterias.EMPTY), 0);
+public record ComponentBacteriaStorage(ResourceKey<Bacteria> bacteria, long bacteriaAmount) {
+    public static final ComponentBacteriaStorage EMPTY = new ComponentBacteriaStorage(NTBacterias.EMPTY, 0);
     public static final Codec<ComponentBacteriaStorage> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Bacteria.CODEC.fieldOf("bacteriaType").forGetter(ComponentBacteriaStorage::bacteria),
+            ResourceKey.codec(NTRegistries.BACTERIA_KEY).fieldOf("bacteriaType").forGetter(ComponentBacteriaStorage::bacteria),
             Codec.LONG.fieldOf("bacteriaAmount").forGetter(ComponentBacteriaStorage::bacteriaAmount)
     ).apply(instance, ComponentBacteriaStorage::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, ComponentBacteriaStorage> STREAM_CODEC = StreamCodec.composite(
-            Bacteria.STREAM_CODEC,
+            ResourceKey.streamCodec(NTRegistries.BACTERIA_KEY),
             ComponentBacteriaStorage::bacteria,
             ByteBufCodecs.VAR_LONG,
             ComponentBacteriaStorage::bacteriaAmount,

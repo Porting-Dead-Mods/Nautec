@@ -1,6 +1,10 @@
 package com.portingdeadmods.nautec.data;
 
+import com.portingdeadmods.nautec.NTRegistries;
+import com.portingdeadmods.nautec.registries.NTBacterias;
+import com.portingdeadmods.nautec.utils.BacteriaHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class NTDataComponentsUtils {
 
@@ -25,7 +29,7 @@ public class NTDataComponentsUtils {
     }
 
     public static float hasBacteria(ItemStack stack) {
-        return stack.get(NTDataComponents.BACTERIA).isPresent() ? 1 : 0;
+        return stack.get(NTDataComponents.BACTERIA).bacteria() == NTBacterias.EMPTY ? 1 : 0;
     }
 
     public static void setInfusedStatus(ItemStack stack, Boolean value) {
