@@ -37,6 +37,11 @@ public record ComponentBacteriaStorage(Bacteria bacteria, long bacteriaAmount) {
         public int lifespan() {
             return 0;
         }
+
+        @Override
+        public int color() {
+            return 0;
+        }
     }, 0);
     public static final Codec<ComponentBacteriaStorage> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Bacteria.CODEC.fieldOf("bacteriaType").forGetter(ComponentBacteriaStorage::bacteria),

@@ -25,6 +25,23 @@ public interface Bacteria {
     float mutationResistance();
     float productionRate();
     int lifespan();
+    int color();
+
+    default byte getAlpha() {
+        return (byte) ((color() >> 24) & 0xFF);
+    }
+
+    default byte getRed() {
+        return (byte) ((color() >> 16) & 0xFF);
+    }
+
+    default byte getGreen() {
+        return (byte) ((color() >> 8) & 0xFF);
+    }
+
+    default byte getBlue() {
+        return (byte) (color() & 0xFF);
+    }
 
     Codec<Bacteria> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
@@ -32,7 +49,8 @@ public interface Bacteria {
                     Codec.FLOAT.fieldOf("growth_rate").forGetter(Bacteria::growthRate),
                     Codec.FLOAT.fieldOf("mutation_resistance").forGetter(Bacteria::mutationResistance),
                     Codec.FLOAT.fieldOf("production_rate").forGetter(Bacteria::productionRate),
-                    Codec.INT.fieldOf("lifespan").forGetter(Bacteria::lifespan)
+                    Codec.INT.fieldOf("lifespan").forGetter(Bacteria::lifespan),
+                    Codec.INT.fieldOf("color").forGetter(Bacteria::color)
             ).apply(instance, BacteriaImpl::new)
     );
 
@@ -47,6 +65,8 @@ public interface Bacteria {
             Bacteria::productionRate,
             ByteBufCodecs.INT,
             Bacteria::lifespan,
+            ByteBufCodecs.INT,
+            Bacteria::color,
             BacteriaImpl::new
     );
 }

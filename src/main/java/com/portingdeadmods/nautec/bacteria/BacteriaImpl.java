@@ -7,6 +7,26 @@ public record BacteriaImpl(
         float growthRate,
         float mutationResistance,
         float productionRate,
-        int lifespan) implements Bacteria {
+        int lifespan,
+        int color) implements Bacteria {
 
+    @Override
+    public byte getAlpha() {
+        return (byte) ((color >> 24) & 0xFF);
+    }
+
+    @Override
+    public byte getRed() {
+        return (byte) ((color >> 16) & 0xFF);
+    }
+
+    @Override
+    public byte getGreen() {
+        return (byte) ((color >> 8) & 0xFF);
+    }
+
+    @Override
+    public byte getBlue() {
+        return (byte) (color & 0xFF);
+    }
 }
