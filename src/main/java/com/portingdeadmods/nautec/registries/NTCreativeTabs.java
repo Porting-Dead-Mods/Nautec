@@ -1,12 +1,14 @@
 package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.api.items.IBacteriaItem;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
 import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
 import com.portingdeadmods.nautec.data.NTDataComponents;
+import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public final class NTCreativeTabs {
@@ -32,7 +35,15 @@ public final class NTCreativeTabs {
                     if (item.asItem() instanceof IPowerItem) {
                         addPowered(output, item.asItem());
                     }
+
+                    if (item.asItem() instanceof IBacteriaItem) {
+                        ItemStack stack = new ItemStack(item);
+                        stack.set(NTDataComponents.BACTERIA, Optional.of(ComponentBacteriaStorage.EMPTY));
+                        output.accept(item);
+                        output.accept(stack);
+                    }
                 }
+
                 if (ModList.get().isLoaded("modonomicon")) {
                     output.accept(ModonomiconCompat.getItemStack());
                 }

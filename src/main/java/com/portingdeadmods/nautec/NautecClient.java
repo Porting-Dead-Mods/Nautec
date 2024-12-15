@@ -4,6 +4,7 @@ import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.client.renderer.blockentities.LaserBlockEntityRenderer;
+import com.portingdeadmods.nautec.api.client.renderer.items.AnchorItemRenderer;
 import com.portingdeadmods.nautec.api.client.renderer.items.PrismarineCrystalItemRenderer;
 import com.portingdeadmods.nautec.api.fluids.BaseFluidType;
 import com.portingdeadmods.nautec.api.items.ICurioItem;
@@ -15,10 +16,7 @@ import com.portingdeadmods.nautec.client.hud.DivingSuitOverlay;
 import com.portingdeadmods.nautec.client.hud.PrismMonocleOverlay;
 import com.portingdeadmods.nautec.client.model.augment.DolphinFinModel;
 import com.portingdeadmods.nautec.client.model.augment.GuardianEyeModel;
-import com.portingdeadmods.nautec.client.model.block.DrainTopModel;
-import com.portingdeadmods.nautec.client.model.block.PrismarineCrystalModel;
-import com.portingdeadmods.nautec.client.model.block.RobotArmModel;
-import com.portingdeadmods.nautec.client.model.block.WhiskModel;
+import com.portingdeadmods.nautec.client.model.block.*;
 import com.portingdeadmods.nautec.client.renderer.augments.GuardianEyeRenderer;
 import com.portingdeadmods.nautec.client.renderer.augments.SimpleAugmentRenderer;
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;
@@ -58,10 +56,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
@@ -93,9 +88,11 @@ public final class NautecClient {
         modEventBus.addListener(this::registerLayerDefinitions);
         modEventBus.addListener(this::registerMenus);
         modEventBus.addListener(this::onFMLClientSetupEvent);
+        modEventBus.addListener(this::registerColorHandlers);
     }
 
     public static final PrismarineCrystalItemRenderer PRISMARINE_CRYSTAL_RENDERER = new PrismarineCrystalItemRenderer();
+    public static final AnchorItemRenderer ANCHOR_RENDERER = new AnchorItemRenderer();
 
     private void registerGuiOverlays(RegisterGuiLayersEvent event) {
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "scanner_info_overlay"), PrismMonocleOverlay.HUD);
@@ -152,6 +149,13 @@ public final class NautecClient {
 
         event.registerItem(new IClientItemExtensions() {
             @Override
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return ANCHOR_RENDERER;
+            }
+        }, NTBlocks.ANCHOR.asItem());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack
                     itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 return ArmorModelsHandler.armorModel(ArmorModelsHandler.divingSuit, equipmentSlot);
@@ -172,6 +176,7 @@ public final class NautecClient {
         event.registerBlockEntityRenderer(NTBlockEntityTypes.CHARGER.get(), ChargerBERenderer::new);
         event.registerBlockEntityRenderer(NTBlockEntityTypes.DRAIN_PART.get(), DrainBERenderer::new);
         event.registerBlockEntityRenderer(NTBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), AugmentStationExtensionBERenderer::new);
+        event.registerBlockEntityRenderer(NTBlockEntityTypes.ANCHOR.get(), AnchorBERenderer::new);
         AugmentLayerRenderer.registerRenderer(NTAugments.DOLPHIN_FIN.get(),
                 ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.MATERIAL, true, ctx));
         AugmentLayerRenderer.registerRenderer(NTAugments.GUARDIAN_EYE.get(), GuardianEyeRenderer::new);
@@ -196,6 +201,8 @@ public final class NautecClient {
     private void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(DrainTopModel.LAYER_LOCATION, DrainTopModel::createBodyLayer);
         event.registerLayerDefinition(PrismarineCrystalModel.LAYER_LOCATION, PrismarineCrystalModel::createBodyLayer);
+        event.registerLayerDefinition(AnchorModel.LAYER_LOCATION, AnchorModel::createBodyLayer);
+        event.registerLayerDefinition(FishingNetModel.LAYER_LOCATION, FishingNetModel::createBodyLayer);
         event.registerLayerDefinition(WhiskModel.LAYER_LOCATION, WhiskModel::createBodyLayer);
         event.registerLayerDefinition(RobotArmModel.LAYER_LOCATION, RobotArmModel::createBodyLayer);
         event.registerLayerDefinition(DolphinFinModel.LAYER_LOCATION, DolphinFinModel::createBodyLayer);
@@ -220,6 +227,12 @@ public final class NautecClient {
                     (stack, level, living, id) -> NTDataComponentsUtils.isAbilityEnabledNBT(stack));
             ItemProperties.register(NTItems.AQUARINE_HOE.get(), ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "enabled"),
                     (stack, level, living, id) -> NTDataComponentsUtils.isAbilityEnabledNBT(stack));
+            ItemProperties.register(NTItems.PETRI_DISH.get(), ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "has_bacteria"),
+                    (stack, level, living, id) -> NTDataComponentsUtils.hasBacteria(stack));
         });
+    }
+
+    private void registerColorHandlers(RegisterColorHandlersEvent.Item event) {
+        event.register((stack, layer) -> layer == 1 ? FastColor.ARGB32.color(180, 20, 20) : -1, NTItems.PETRI_DISH);
     }
 }

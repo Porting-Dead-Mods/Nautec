@@ -1,8 +1,10 @@
 package com.portingdeadmods.nautec.bacteria;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 public record BacteriaImpl(
+        ResourceLocation id,
         Item type,
         float growthRate,
         float mutationResistance,

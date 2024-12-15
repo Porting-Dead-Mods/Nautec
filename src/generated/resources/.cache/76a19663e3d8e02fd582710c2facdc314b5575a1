@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-28T13:18:28.198733764	Block States: nautec
+// 1.21.1	2024-12-15T13:39:38.353720754	Block States: nautec
 3f3049296b6ec6590b05af441a717618bb232b69 assets/nautec/blockstates/aquarine_steel_block.json
 414381329d7663eb1d1db8c3f42df8d9932d2cfe assets/nautec/blockstates/aquatic_catalyst.json
 920d567f0ae8731bc428c8970aac5400741ea87d assets/nautec/blockstates/augmentation_station.json
@@ -12,6 +12,7 @@ e7796e8fce418c4dbe7aa3bb43424741ca161694 assets/nautec/blockstates/augmentation_
 db6a852fb0c5f4ea3f9dc93c00de3525ae2c3c66 assets/nautec/blockstates/deep_sea_drain.json
 1c9b4139f22feb008d851c9111723677d120c8e9 assets/nautec/blockstates/deep_sea_drain_part.json
 54a81a303705faa291263c742ac06ba54cdb645e assets/nautec/blockstates/deep_sea_drain_wall.json
+598ae230bc49b4eabb36afad7d049401dc1c1252 assets/nautec/blockstates/fishing_station.json
 7fd72e44fd8677c659e8b261fcaa92b12a845b78 assets/nautec/blockstates/laser_junction.json
 ad55c3b07839453f1153e1bb0eafcfd55cd2f9e1 assets/nautec/blockstates/long_distance_laser.json
 64a25cd06f6d770e7408fbde89cfb1413550aeb5 assets/nautec/blockstates/mixer.json

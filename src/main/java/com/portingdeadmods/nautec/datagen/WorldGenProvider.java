@@ -1,6 +1,8 @@
 package com.portingdeadmods.nautec.datagen;
 
+import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.registries.NTBacteria;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
@@ -50,7 +52,7 @@ public class WorldGenProvider extends DatapackBuiltinEntriesProvider {
     private static final RuleTest SAND_REPLACEABLES = new BlockMatchTest(Blocks.SAND);
 
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-
+            .add(NTRegistries.BACTERIA_KEY, NTBacteria::bootstrap)
             // Beach - Higher Spawn Chance - 1 to 4 Ores in a Vein
             .add(Registries.CONFIGURED_FEATURE, context -> {
                 List<OreConfiguration.TargetBlockState> prismarine_sand_config = List.of(

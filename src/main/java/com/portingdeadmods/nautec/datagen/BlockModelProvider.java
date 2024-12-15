@@ -49,6 +49,7 @@ public class BlockModelProvider extends BlockStateProvider {
         //simpleBlock(NTBlocks.PRISMARINE_SAND.get()); Ya didnt commit the texture
         simpleBlock(NTBlocks.MIXER.get(), models().getExistingFile(existingModelFile(NTBlocks.MIXER.get())));
         simpleBlock(NTBlocks.CHARGER.get(), models().getExistingFile(existingModelFile(NTBlocks.CHARGER.get())));
+        simpleBlock(NTBlocks.FISHING_STATION.get(), models().getExistingFile(existingModelFile(NTBlocks.FISHING_STATION.get())));
         crateBlock(NTBlocks.CRATE.get());
         rustyCrateBlock(NTBlocks.RUSTY_CRATE.get());
 
