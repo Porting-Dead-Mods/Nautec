@@ -3,7 +3,7 @@
   "duration": 150,
   "fluid_ingredient": {
     "amount": 1000,
-    "id": "nautec:salt_water"
+    "id": "nautec:saltwater"
   },
   "fluid_result": {
     "amount": 1000,

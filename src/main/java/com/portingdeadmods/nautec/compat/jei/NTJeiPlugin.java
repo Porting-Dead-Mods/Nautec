@@ -5,6 +5,7 @@ import com.portingdeadmods.nautec.compat.jei.categories.*;
 import com.portingdeadmods.nautec.content.recipes.*;
 import com.portingdeadmods.nautec.datagen.recipeBuilder.AugmentationRecipeBuilder;
 import com.portingdeadmods.nautec.registries.NTBlocks;
+import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -93,7 +94,7 @@ public class NTJeiPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(NTBlocks.AQUATIC_CATALYST.get()),
                 AquaticCatalystChannelingRecipeCategory.RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(NTItems.ETCHING_ACID_BUCKET.get()),
+        registration.addRecipeCatalyst(new ItemStack(NTFluids.ETCHING_ACID.getBucket()),
                 ItemEtchingRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(NTBlocks.MIXER.get()),
                 MixingRecipeCategory.RECIPE_TYPE);

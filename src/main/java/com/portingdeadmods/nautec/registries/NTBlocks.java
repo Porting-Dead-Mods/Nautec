@@ -35,6 +35,10 @@ public final class NTBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL));
     public static final DeferredBlock<CrateBlock> RUSTY_CRATE = registerBlockAndItem("rusty_crate", CrateBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL));
+    public static final DeferredBlock<RotatedPillarBlock> OIL_BARREL = registerBlockAndItem("oil_barrel", RotatedPillarBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+    public static final DeferredBlock<Block> BROWN_POLYMER_BLOCK = registerBlockAndItem("brown_polymer_block", Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<RotatedPillarBlock> DARK_PRISMARINE_PILLAR = registerBlockAndItem("dark_prismarine_pillar", RotatedPillarBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
     public static final DeferredBlock<Block> CHISELED_DARK_PRISMARINE = registerBlockAndItem("chiseled_dark_prismarine", Block::new,
@@ -90,17 +94,6 @@ public final class NTBlocks {
     public static final DeferredBlock<AugmentationStationExtensionBlock> AUGMENTATION_STATION_EXTENSION = registerBlockAndItem("augmentation_station_extension",
             AugmentationStationExtensionBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
-
-
-    // FLUIDS
-    public static final DeferredBlock<LiquidBlock> SALT_WATER_FLUID_BLOCK = BLOCKS.register("salt_water_block",
-            () -> new LiquidBlock(NTFluids.SALT_WATER_SOURCE.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
-
-    public static final DeferredBlock<LiquidBlock> EAS_FLUID_BLOCK = BLOCKS.register("electrolyte_algae_serum_block",
-            () -> new LiquidBlock(NTFluids.EAS_SOURCE.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
-
-    public static final DeferredBlock<LiquidBlock> ETCHING_ACID_FLUID_BLOCK = BLOCKS.register("etching_acid_block",
-            () -> new LiquidBlock(NTFluids.ETCHING_ACID_SOURCE.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
 
     public static final DeferredBlock<CreativePowerSourceBlock> CREATIVE_POWER_SOURCE = registerBlockAndItem("creative_power_source", CreativePowerSourceBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), false, true);

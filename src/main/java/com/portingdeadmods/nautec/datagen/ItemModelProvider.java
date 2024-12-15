@@ -1,16 +1,22 @@
 package com.portingdeadmods.nautec.datagen;
 
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.api.fluids.NTFluid;
 import com.portingdeadmods.nautec.registries.NTBlocks;
+import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.loaders.DynamicFluidContainerModelBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -65,9 +71,9 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         handHeldItem(NTItems.AQUARINE_WRENCH.get());
         handHeldItem(NTItems.CROWBAR.get());
 
-        basicItem(NTItems.SALT_WATER_BUCKET.get());
-        basicItem(NTItems.EAS_BUCKET.get());
-        basicItem(NTItems.ETCHING_ACID_BUCKET.get());
+        for (NTFluid fluid : NTFluids.HELPER.getFluids()) {
+            bucket(fluid.getStillFluid());
+        }
 
         aquarineSteelTool(NTItems.AQUARINE_AXE.get());
         aquarineSteelTool(NTItems.AQUARINE_HOE.get());
@@ -84,6 +90,16 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         parentItemBlock(NTBlocks.LASER_JUNCTION.asItem(), "_base");
 
         blockItems();
+    }
+
+    private void bucket(Fluid f) {
+        withExistingParent(key(f.getBucket()).getPath(), ResourceLocation.fromNamespaceAndPath("neoforge", "item/bucket"))
+                .customLoader(DynamicFluidContainerModelBuilder::begin)
+                .fluid(f);
+    }
+
+    private static @NotNull ResourceLocation key(ItemLike item) {
+        return BuiltInRegistries.ITEM.getKey(item.asItem());
     }
 
     private void blockItems() {

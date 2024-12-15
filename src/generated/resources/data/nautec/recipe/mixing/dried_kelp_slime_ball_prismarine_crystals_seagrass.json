@@ -3,11 +3,11 @@
   "duration": 200,
   "fluid_ingredient": {
     "amount": 1000,
-    "id": "nautec:salt_water"
+    "id": "nautec:saltwater"
   },
   "fluid_result": {
     "amount": 1000,
-    "id": "nautec:electrolyte_algae_serum"
+    "id": "nautec:eas"
   },
   "ingredients": [
     {

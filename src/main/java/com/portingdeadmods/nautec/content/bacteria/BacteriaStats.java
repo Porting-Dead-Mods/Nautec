@@ -2,21 +2,22 @@ package com.portingdeadmods.nautec.content.bacteria;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.portingdeadmods.nautec.api.bacteria.BaseBacteriaStats;
 import com.portingdeadmods.nautec.utils.codec.CodecUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
 
-public record BacteriaStats(Item type,
+public record BacteriaStats(Item resource,
                             float growthRate,
                             float mutationResistance,
                             float productionRate,
                             int lifespan,
-                            int color) {
+                            int color) implements BaseBacteriaStats {
     public static final Codec<BacteriaStats> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                    CodecUtils.ITEM_CODEC.fieldOf("type").forGetter(BacteriaStats::type),
+                    CodecUtils.ITEM_CODEC.fieldOf("type").forGetter(BacteriaStats::resource),
                     Codec.FLOAT.fieldOf("growth_rate").forGetter(BacteriaStats::growthRate),
                     Codec.FLOAT.fieldOf("mutation_resistance").forGetter(BacteriaStats::mutationResistance),
                     Codec.FLOAT.fieldOf("production_rate").forGetter(BacteriaStats::productionRate),
@@ -27,7 +28,7 @@ public record BacteriaStats(Item type,
 
     public static final StreamCodec<RegistryFriendlyByteBuf, BacteriaStats> STREAM_CODEC = StreamCodec.composite(
             CodecUtils.ITEM_STREAM_CODEC,
-            BacteriaStats::type,
+            BacteriaStats::resource,
             ByteBufCodecs.FLOAT,
             BacteriaStats::growthRate,
             ByteBufCodecs.FLOAT,

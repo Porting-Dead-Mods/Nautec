@@ -66,6 +66,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.client.model.DynamicFluidContainerModel;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -242,5 +243,6 @@ public final class NautecClient {
             Bacteria bacteria = BacteriaHelper.getBacteria(Minecraft.getInstance().level.registryAccess(), stack.get(NTDataComponents.BACTERIA).bacteria());
             return layer == 1 ? bacteria.stats().color() : -1;
         }, NTItems.PETRI_DISH);
+        event.register(new DynamicFluidContainerModel.Colors(), NTFluids.SALT_WATER.getBucket());
     }
 }

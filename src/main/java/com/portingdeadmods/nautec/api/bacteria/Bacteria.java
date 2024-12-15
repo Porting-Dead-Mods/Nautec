@@ -26,7 +26,7 @@ public interface Bacteria {
      */
     ResourceLocation id();
 
-    BacteriaStats stats();
+    BaseBacteriaStats stats();
 
     BacteriaSerializer<?> getSerializer();
 }

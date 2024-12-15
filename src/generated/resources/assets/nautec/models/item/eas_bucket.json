@@ -1,6 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "nautec:item/eas_bucket"
-  }
+  "parent": "neoforge:item/bucket",
+  "fluid": "nautec:eas",
+  "loader": "neoforge:fluid_container"
 }

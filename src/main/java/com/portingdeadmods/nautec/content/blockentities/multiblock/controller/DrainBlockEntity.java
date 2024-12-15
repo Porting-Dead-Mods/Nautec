@@ -134,7 +134,7 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
             if (hasWater()) {
                 if (openAndFormed()) {
                     if (level.getBiome(worldPosition).is(BiomeTags.IS_OCEAN)) {
-                        getFluidHandler().fill(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), NTConfig.drainSaltWaterAmount), IFluidHandler.FluidAction.EXECUTE);
+                        getFluidHandler().fill(new FluidStack(NTFluids.SALT_WATER.getStillFluid(), NTConfig.drainSaltWaterAmount), IFluidHandler.FluidAction.EXECUTE);
                     }
                 }
             }

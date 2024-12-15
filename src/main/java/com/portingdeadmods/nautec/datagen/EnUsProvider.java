@@ -3,9 +3,8 @@ package com.portingdeadmods.nautec.datagen;
 import com.klikli_dev.modonomicon.api.datagen.AbstractModonomiconLanguageProvider;
 import com.klikli_dev.modonomicon.api.datagen.ModonomiconLanguageProvider;
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
 import com.portingdeadmods.nautec.registries.NTBlocks;
-import com.portingdeadmods.nautec.registries.NTFluidTypes;
+import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.utils.Utils;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -27,16 +26,16 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
 
         add("nautec.creative_tab.main", "NauTec");
 
-        addFluidType(NTFluidTypes.SALT_WATER_FLUID_TYPE, "Salt Water");
-        addFluidType(NTFluidTypes.EAS_FLUID_TYPE, "Electrolyte Algae Serum");
-        addFluidType(NTFluidTypes.ETCHING_ACID_FLUID_TYPE, "Etching Acid");
+        addFluidType(NTFluids.SALT_WATER.getFluidType(), "Salt Water");
+        addFluidType(NTFluids.EAS.getFluidType(), "Electrolyte Algae Serum");
+        addFluidType(NTFluids.ETCHING_ACID.getFluidType(), "Etching Acid");
 
         addItem(PRISM_MONOCLE, "Prism Monocle");
         addItem(AQUARINE_STEEL_INGOT, "Aquarine Steel Ingot");
         addItem(ATLANTIC_GOLD_INGOT, "Atlantic Gold Ingot");
         addItem(ATLANTIC_GOLD_NUGGET, "Atlantic Gold Nugget");
-        addItem(SALT_WATER_BUCKET, "Salt Water Bucket");
-        addItem(EAS_BUCKET, "Electrolyte Algae Serum (EAS) Bucket");
+        addItem(NTFluids.SALT_WATER.getDeferredBucket(), "Salt Water Bucket");
+        addItem(NTFluids.EAS.getDeferredBucket(), "Electrolyte Algae Serum (EAS) Bucket");
         addItem(GLASS_VIAL, "Glass Vial");
         addItem(ELECTROLYTE_ALGAE_SERUM_VIAL, "Electrolyte Algae Serum (EAS) Vial");
         addItem(CROWBAR, "Crowbar");

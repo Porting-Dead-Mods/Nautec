@@ -6,6 +6,7 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
+import com.portingdeadmods.nautec.api.fluids.NTFluid;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
@@ -56,11 +57,11 @@ public final class NTEvents {
             if (event.getEntity() instanceof ItemEntity itemEntity) {
                 Level level = itemEntity.level();
 
-                if (itemEntity.isInFluidType(NTFluidTypes.ETCHING_ACID_FLUID_TYPE.get())) {
+                if (itemEntity.isInFluidType(NTFluids.ETCHING_ACID.getFluidType().get())) {
                     ItemEtching.processItemEtching(itemEntity, level);
                 }
 
-                if (itemEntity.isInFluidType(NTFluidTypes.EAS_FLUID_TYPE.get()) || level.getBlockState(itemEntity.blockPosition().below()).getFluidState().is(NTFluids.EAS_SOURCE.get())) {
+                if (itemEntity.isInFluidType(NTFluids.EAS.getFluidType().get()) || level.getBlockState(itemEntity.blockPosition().below()).getFluidState().is(NTFluids.EAS.getStillFluid())) {
                     ItemInfusion.processPowerItemInfusion(itemEntity, level);
                 }
             }

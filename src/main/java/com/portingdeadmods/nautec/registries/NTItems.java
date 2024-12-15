@@ -40,6 +40,7 @@ public final class NTItems {
             AirBottleItem::new, new Item.Properties().stacksTo(16));
     public static final DeferredItem<Item> AQUARINE_STEEL_COMPOUND = registerItem("aquarine_steel_compound",
             Item::new, new Item.Properties());
+    public static final DeferredItem<Item> SALT = registerItem("salt", Item::new, new Item.Properties());
 
     // MACHINE PARTS
     public static final DeferredItem<Item> RUSTY_GEAR = registerItem("rusty_gear",
@@ -119,14 +120,6 @@ public final class NTItems {
     public static final DeferredItem<AquarineHoeItem> AQUARINE_HOE = registerItem("aquarine_steel_hoe", AquarineHoeItem::new);
     public static final DeferredItem<AquarinePickaxeItem> AQUARINE_PICKAXE = registerItem("aquarine_steel_pickaxe", AquarinePickaxeItem::new);
     public static final DeferredItem<AquarineShovelItem> AQUARINE_SHOVEL = registerItem("aquarine_steel_shovel", AquarineShovelItem::new);
-
-    // BUCKETS
-    public static final DeferredItem<BucketItem> SALT_WATER_BUCKET = registerItemBucket("salt_water_bucket",
-            () -> new BucketItem(NTFluids.SALT_WATER_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final DeferredItem<BucketItem> EAS_BUCKET = registerItemBucket("eas_bucket",
-            () -> new BucketItem(NTFluids.EAS_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final DeferredItem<BucketItem> ETCHING_ACID_BUCKET = registerItemBucket("etching_acid_bucket",
-            () -> new BucketItem(NTFluids.ETCHING_ACID_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     // TOOLS
     public static final DeferredItem<AquarineWrenchItem> AQUARINE_WRENCH = registerItem("aquarine_steel_wrench",

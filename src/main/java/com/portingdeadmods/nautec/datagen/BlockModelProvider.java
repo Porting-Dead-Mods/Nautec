@@ -62,6 +62,18 @@ public class BlockModelProvider extends BlockStateProvider {
         augmentationStationExtension(NTBlocks.AUGMENTATION_STATION_EXTENSION.get());
 
         simpleBlock(NTBlocks.DRAIN_WALL.get());
+
+        axisBlock(NTBlocks.OIL_BARREL.get(), models().cubeBottomTop(
+                name(NTBlocks.OIL_BARREL.get()),
+                blockTexture(NTBlocks.OIL_BARREL.get(), "_side"),
+                blockTexture(NTBlocks.OIL_BARREL.get(), "_bottom"),
+                blockTexture(NTBlocks.OIL_BARREL.get())
+        ), models().cubeBottomTop(
+                name(NTBlocks.OIL_BARREL.get()) + "_horizontal",
+                blockTexture(NTBlocks.OIL_BARREL.get(), "_side"),
+                blockTexture(NTBlocks.OIL_BARREL.get()),
+                blockTexture(NTBlocks.OIL_BARREL.get(), "_bottom")
+        ));
     }
 
     private void augmentationStationController(AugmentationStationBlock augmentationStationBlock) {
@@ -273,6 +285,11 @@ public class BlockModelProvider extends BlockStateProvider {
             }
         }
         return builder;
+    }
+
+    public ResourceLocation blockTexture(Block block, String suffix) {
+        ResourceLocation name = key(block);
+        return ResourceLocation.fromNamespaceAndPath(name.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + name.getPath() + suffix);
     }
 
     private ResourceLocation existingModelFile(Block block) {

@@ -3,19 +3,15 @@ package com.portingdeadmods.nautec.client.hud;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
-import com.portingdeadmods.nautec.registries.NTFluidTypes;
 import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 
 
