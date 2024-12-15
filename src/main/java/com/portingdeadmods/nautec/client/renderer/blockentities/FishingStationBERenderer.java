@@ -19,17 +19,13 @@ public class FishingStationBERenderer implements BlockEntityRenderer<FishingStat
         this.model.setupAnim();
     }
 
-    private int getLightLevel(Level level, BlockPos pos) {
-        return LevelRenderer.getLightColor(level, pos);
-    }
-
     @Override
     public void render(FishingStationBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         {
             poseStack.translate(0.5, 0.5, 0.5);
             poseStack.translate(1.75, -0.125, 0);
-            this.model.renderToBuffer(poseStack, FishingNetModel.MATERIAL.buffer(bufferSource, RenderType::entityCutout), getLightLevel(blockEntity.getLevel(), blockEntity.getBlockPos().above()), packedOverlay);
+            this.model.renderToBuffer(poseStack, FishingNetModel.MATERIAL.buffer(bufferSource, RenderType::entityCutout), packedLight, packedOverlay);
         }
         poseStack.popPose();
     }

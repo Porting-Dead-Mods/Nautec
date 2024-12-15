@@ -8,7 +8,7 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 
-public class AugmentClientHelper {
+public final class AugmentClientHelper {
     public static void initCache(Player player) {
         AugmentLayerRenderer.AUGMENTS_CACHE = new HashMap<>(AugmentHelper.getAugments(player));
     }

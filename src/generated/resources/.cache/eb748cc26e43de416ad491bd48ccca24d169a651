@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-30T17:58:20.5863696	Books: nautec
+// 1.21.1	2024-12-15T20:55:07.9620151	Books: nautec
 6d944fd1b3f4f8d8baf18317dbdea1e50476ed05 data/nautec/modonomicon/books/nautec_guide/book.json
 ea5fe754ad19a1903e7a9d19f39e3b1488e59cfe data/nautec/modonomicon/books/nautec_guide/categories/getting_started.json
 41b01f32b9f23cf1eb5a33085b98bd30f0a1f943 data/nautec/modonomicon/books/nautec_guide/categories/laser_augmentation.json
@@ -19,7 +19,7 @@ a46ba5de3d71172e50fe191f2d6ef51327d7f188 data/nautec/modonomicon/books/nautec_gu
 513198812cfe6695951eb9e1f60fd3fcf8d36ee6 data/nautec/modonomicon/books/nautec_guide/entries/laser_augmentation/long_distance_laser.json
 c03c7b650f9ea70b95dcb4465e44d1abaa28d838 data/nautec/modonomicon/books/nautec_guide/entries/laser_augmentation/mob_augments.json
 d70be2eaf9729ca163499da6d7a33730cf7e07f2 data/nautec/modonomicon/books/nautec_guide/entries/laser_chemistry/charger.json
-86bf0538af8e99ca0d8477c0c301c0a7938dea44 data/nautec/modonomicon/books/nautec_guide/entries/laser_chemistry/chemistry_introduction.json
+bb25a50ac33f339011a5a153e21eff93381ae8b5 data/nautec/modonomicon/books/nautec_guide/entries/laser_chemistry/chemistry_introduction.json
 36ffcf02fad4cee8ac0db723f1c03bc2df14049e data/nautec/modonomicon/books/nautec_guide/entries/laser_chemistry/crystal_shards.json
 34c421cb513a6d5ac4631180a2bbd14aa09d021a data/nautec/modonomicon/books/nautec_guide/entries/laser_chemistry/drain.json
 a7779a4159c603668355d3064d5bf7b4560a3490 data/nautec/modonomicon/books/nautec_guide/entries/laser_chemistry/laser_manipulation.json

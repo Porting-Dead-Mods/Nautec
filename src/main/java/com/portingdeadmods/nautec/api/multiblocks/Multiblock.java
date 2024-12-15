@@ -87,8 +87,8 @@ public interface Multiblock {
     Int2ObjectMap<Block> getDefinition();
 
     /**
-     * This method provides the block entity type for the controller of your multiblock.
-     * @return the blockentity type of your controllers blockentity
+     * This method provides the block entity resource for the controller of your multiblock.
+     * @return the blockentity resource of your controllers blockentity
      */
     BlockEntityType<? extends MultiblockEntity> getMultiBlockEntityType();
 

@@ -1,7 +1,9 @@
 package com.portingdeadmods.nautec.compat.jei.categories;
 
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.api.fluids.NTFluid;
 import com.portingdeadmods.nautec.content.recipes.ItemEtchingRecipe;
+import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -32,7 +34,7 @@ public class ItemEtchingRecipeCategory implements IRecipeCategory<ItemEtchingRec
 
     public ItemEtchingRecipeCategory(IGuiHelper helper) {
         this.background = helper.createBlankDrawable(80, 28);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(NTItems.ETCHING_ACID_BUCKET.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(NTFluids.ETCHING_ACID.getBucket()));
     }
 
     @Override

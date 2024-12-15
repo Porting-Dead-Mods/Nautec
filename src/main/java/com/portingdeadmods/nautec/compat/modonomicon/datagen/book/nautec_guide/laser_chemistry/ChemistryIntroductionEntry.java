@@ -7,6 +7,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import com.mojang.datafixers.util.Pair;
+import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
 
 public class ChemistryIntroductionEntry extends EntryProvider {
@@ -34,7 +35,7 @@ public class ChemistryIntroductionEntry extends EntryProvider {
                 """);
         this.page("eas", () -> BookSpotlightPageModel.create()
                         .withTitle(this.context().pageTitle())
-                        .withItem(NTItems.EAS_BUCKET.get())
+                        .withItem(NTFluids.EAS.getBucket())
                         .withText(this.context().pageText()));
         this.pageTitle("Electrolyte Algae Serum");
         this.pageText("""
@@ -46,7 +47,7 @@ public class ChemistryIntroductionEntry extends EntryProvider {
 
         this.page("salt_water", () -> BookSpotlightPageModel.create()
                         .withTitle(this.context().pageTitle())
-                        .withItem(NTItems.SALT_WATER_BUCKET.get())
+                        .withItem(NTFluids.SALT_WATER.getBucket())
                         .withText(this.context().pageText()));
         this.pageTitle("Salt Water");
         this.pageText("""
@@ -75,7 +76,7 @@ public class ChemistryIntroductionEntry extends EntryProvider {
 
     @Override
     protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTItems.EAS_BUCKET.get());
+        return BookIconModel.create(NTFluids.EAS.getBucket());
     }
 
     @Override

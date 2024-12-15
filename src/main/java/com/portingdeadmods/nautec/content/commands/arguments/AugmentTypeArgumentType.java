@@ -21,7 +21,7 @@ public class AugmentTypeArgumentType implements ArgumentType<AugmentType<?>> {
     private static final AugmentTypeArgumentType INSTANCE = new AugmentTypeArgumentType();
 
     private static final DynamicCommandExceptionType UNKNOWN_TYPE = new DynamicCommandExceptionType(
-            type -> Component.literal("Unknown augment type: " + type));
+            type -> Component.literal("Unknown augment resource: " + type));
     public static Set<String> suggestions = new HashSet<>();
 
     private AugmentTypeArgumentType() {

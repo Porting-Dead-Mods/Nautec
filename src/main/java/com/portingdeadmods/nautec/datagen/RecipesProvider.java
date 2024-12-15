@@ -492,7 +492,7 @@ public class RecipesProvider extends RecipeProvider {
                 .duration(200)
                 .save(pRecipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.ETCHING_ACID_BUCKET)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTFluids.ETCHING_ACID.getBucket())
                 .requires(Items.POISONOUS_POTATO)
                 .requires(Items.GUNPOWDER)
                 .requires(Items.BONE_MEAL)
@@ -509,8 +509,8 @@ public class RecipesProvider extends RecipeProvider {
                         iwcFromItemLike(Items.PRISMARINE_CRYSTALS, 1),
                         iwcFromItemLike(Items.SEAGRASS, 5))
                 .duration(200)
-                .fluidIngredient(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), 1000))
-                .fluidResult(new FluidStack(NTFluids.EAS_SOURCE.get(), 1000))
+                .fluidIngredient(new FluidStack(NTFluids.SALT_WATER.getStillFluid(), 1000))
+                .fluidResult(new FluidStack(NTFluids.EAS.getStillFluid(), 1000))
                 .save(pRecipeOutput);
 
         MixingRecipeBuilder.newRecipe(ItemStack.EMPTY)
@@ -518,15 +518,15 @@ public class RecipesProvider extends RecipeProvider {
                         iwcFromItemLike(Items.GUNPOWDER, 1),
                         iwcFromItemLike(Items.BONE_MEAL, 1))
                 .duration(150)
-                .fluidIngredient(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), 1000))
-                .fluidResult(new FluidStack(NTFluids.ETCHING_ACID_SOURCE.get(), 1000))
+                .fluidIngredient(new FluidStack(NTFluids.SALT_WATER.getStillFluid(), 1000))
+                .fluidResult(new FluidStack(NTFluids.ETCHING_ACID.getStillFluid(), 1000))
                 .save(pRecipeOutput);
 
         MixingRecipeBuilder.newRecipe(NTItems.AQUARINE_STEEL_COMPOUND.toStack(5))
                 .ingredients(iwcFromItemLike(Items.RAW_IRON, 2),
                         iwcFromItemLike(Items.PRISMARINE_CRYSTALS, 1))
                 .duration(100)
-                .fluidIngredient(new FluidStack(NTFluids.SALT_WATER_SOURCE.get(), 1000))
+                .fluidIngredient(new FluidStack(NTFluids.SALT_WATER.getStillFluid(), 1000))
                 .fluidResult(FluidStack.EMPTY)
                 .save(pRecipeOutput);
     }

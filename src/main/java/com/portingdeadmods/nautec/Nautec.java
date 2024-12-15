@@ -67,10 +67,8 @@ public final class Nautec {
 
         NTEntities.ENTITIES.register(modEventBus);
         NTItems.ITEMS.register(modEventBus);
-        NTFluids.FLUIDS.register(modEventBus);
         NTBlocks.BLOCKS.register(modEventBus);
         NTRecipes.SERIALIZERS.register(modEventBus);
-        NTFluidTypes.FLUID_TYPES.register(modEventBus);
         NTDataAttachments.ATTACHMENTS.register(modEventBus);
         NTArgumentTypes.ARGUMENT_TYPES.register(modEventBus);
         NTBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
@@ -84,6 +82,8 @@ public final class Nautec {
         NTStructures.STRUCTURES.register(modEventBus);
         NTLootModifier.LOOT_MODIFIERS.register(modEventBus);
         NTBacteriaSerializers.SERIALIZERS.register(modEventBus);
+
+        NTFluids.HELPER.register(modEventBus);
 
         modEventBus.addListener(this::onRegisterAugments);
         modEventBus.addListener(this::registerCapabilities);
