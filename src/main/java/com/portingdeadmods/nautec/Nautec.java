@@ -8,6 +8,7 @@ import com.portingdeadmods.nautec.api.items.IBacteriaItem;
 import com.portingdeadmods.nautec.api.items.ICurioItem;
 import com.portingdeadmods.nautec.api.items.IFluidItem;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
+import com.portingdeadmods.nautec.bacteria.Bacteria;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.bacteria.BacteriaStorage;
 import com.portingdeadmods.nautec.capabilities.bacteria.ItemBacteriaWrapper;
@@ -23,6 +24,7 @@ import com.portingdeadmods.nautec.registries.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -36,6 +38,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
+import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
@@ -58,6 +61,10 @@ public final class Nautec {
             event.register(NTRegistries.MULTIBLOCK);
             event.register(NTRegistries.AUGMENT_SLOT);
             event.register(NTRegistries.AUGMENT_TYPE);
+        });
+
+        modEventBus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> {
+            event.dataPackRegistry(NTRegistries.BACTERIA_KEY, Bacteria.CODEC);
         });
 
         NTEntities.ENTITIES.register(modEventBus);
@@ -117,7 +124,10 @@ public final class Nautec {
             }
 
             if (item instanceof IBacteriaItem) {
-                event.registerItem(NTCapabilities.BacteriaStorage.ITEM, (stack, ctx) -> new ItemBacteriaWrapper(NTDataComponents.BACTERIA, stack), item);
+                event.registerItem(NTCapabilities.BacteriaStorage.ITEM, (stack, ctx) -> stack.get(NTDataComponents.BACTERIA).isPresent()
+                                ? new ItemBacteriaWrapper(NTDataComponents.BACTERIA, stack)
+                                : null,
+                        item);
             }
 
             if (item instanceof ICurioItem curioItem) {
@@ -155,5 +165,9 @@ public final class Nautec {
                 }
             }
         }
+    }
+
+    public static ResourceLocation rl(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }

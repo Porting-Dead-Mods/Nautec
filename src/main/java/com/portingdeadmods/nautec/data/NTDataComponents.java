@@ -9,6 +9,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
@@ -19,8 +20,10 @@ public final class NTDataComponents {
             () -> builder -> builder.persistent(ComponentPowerStorage.CODEC).networkSynchronized(ComponentPowerStorage.STREAM_CODEC));
     public static final Supplier<DataComponentType<SimpleFluidContent>> FLUID = registerDataComponentType("fluid",
             () -> builder -> builder.persistent(SimpleFluidContent.CODEC).networkSynchronized(SimpleFluidContent.STREAM_CODEC));
-    public static final Supplier<DataComponentType<ComponentBacteriaStorage>> BACTERIA = registerDataComponentType("bacteria",
-            () -> builder -> builder.persistent(ComponentBacteriaStorage.CODEC).networkSynchronized(ComponentBacteriaStorage.STREAM_CODEC));
+    public static final Supplier<DataComponentType<Optional<ComponentBacteriaStorage>>> BACTERIA = registerDataComponentType("bacteria",
+            () -> builder -> builder
+                    .persistent(ComponentBacteriaStorage.CODEC.optionalFieldOf("bacteriaComponent").codec())
+                    .networkSynchronized(ByteBufCodecs.optional(ComponentBacteriaStorage.STREAM_CODEC)));
     public static final Supplier<DataComponentType<Boolean>> OPEN = registerDataComponentType("open",
             () -> builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
 

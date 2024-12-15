@@ -53,7 +53,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(NTItems.GLASS_VIAL.get());
         basicItem(NTItems.ELECTROLYTE_ALGAE_SERUM_VIAL.get());
 
-        basicItem(NTItems.PETRI_DISH.get());
+        petriDishItem(NTItems.PETRI_DISH.get());
 
         basicItem(NTItems.PRISM_MONOCLE.get());
 
@@ -108,6 +108,23 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
                 .parent(new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(name.getNamespace(), "block/" + name.getPath() + suffix)));
     }
 
+    public void petriDishItem(Item item) {
+        ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
+        ResourceLocation hasBacteria = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "has_bacteria");
+        getBuilder(location.toString())
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .override()
+                .model(basicItem(item))
+                .predicate(hasBacteria, 0)
+                .end()
+                .override()
+                .model(basicItem(item, "_bacteria")
+                        .texture("layer1", itemTexture(item, "_overlay")))
+                .predicate(hasBacteria, 1)
+                .end()
+                .texture("layer0", itemTexture(item, ""));
+    }
+
     public void aquarineSteelTool(Item item) {
         ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
         ResourceLocation enabled = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "enabled");
@@ -130,8 +147,20 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
     public ItemModelBuilder handHeldItem(Item item, String suffix) {
         ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
-        return getBuilder(location +suffix)
+        return getBuilder(location + suffix)
                 .parent(new ModelFile.UncheckedModelFile("item/handheld"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath()+suffix));
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath() + suffix));
+    }
+
+    private ResourceLocation itemTexture(Item item, String suffx) {
+        ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
+        return ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath() + suffx);
+    }
+
+    public ItemModelBuilder basicItem(Item item, String suffix) {
+        ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
+        return getBuilder(item.toString() + suffix)
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath()));
     }
 }

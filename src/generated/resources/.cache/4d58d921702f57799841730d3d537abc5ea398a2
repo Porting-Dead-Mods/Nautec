@@ -1,5 +1,6 @@
-// 1.21.1	2024-12-14T20:23:59.70087773	Item Models: nautec
+// 1.21.1	2024-12-15T13:39:38.358791409	Item Models: nautec
 53692692f57914fc54eb6ebf416ce1cb7789e57b assets/nautec/models/item/air_bottle.json
+cc6ee3887ec6e0c53216dc681ac7b32b34182253 assets/nautec/models/item/anchor.json
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
 f031500271b315d13a5f3ca96fc3a73ea8d47054 assets/nautec/models/item/aquarine_steel_axe_enabled.json
 597ea4ecad0b0a10ad86d8dac724222f83aab903 assets/nautec/models/item/aquarine_steel_block.json
@@ -48,6 +49,7 @@ c085f601646336ad76e9a613649bcffc3a304c9a assets/nautec/models/item/dolphin_fin.j
 81b061a707ce97739bf742ee8c4832e9612c3f18 assets/nautec/models/item/eas_vial.json
 7bdd896a173f2dbd2cf64ff41e82f6c5525dcf49 assets/nautec/models/item/eldritch_heart.json
 d26c5a9588cd86145f6c2e03e5fd5eabc4ed0f07 assets/nautec/models/item/etching_acid_bucket.json
+cb07777d8dcd1c00bea806efc2b7f64c6c13a8c3 assets/nautec/models/item/fishing_station.json
 490588573d27c343b055c02b137c221a71866aa8 assets/nautec/models/item/gear.json
 2b617afc38ea0b797aeba3ca00dfb25f33be4bd3 assets/nautec/models/item/glass_vial.json
 1f8f85fa3cfb3f9fada3af0abc3f67b91ee70b81 assets/nautec/models/item/guardian_eye.json
@@ -55,7 +57,8 @@ d30193c75aab5ff8f4d4945df8689f575874c0f0 assets/nautec/models/item/laser_channel
 644f1395dba609cfe064a66a028001e76dd20ab7 assets/nautec/models/item/laser_junction.json
 e2a54f360d7c345a624bfd88678359ffce2af94d assets/nautec/models/item/long_distance_laser.json
 2a5b3ee493a3b20a37c3f391ebd960de088f2b7c assets/nautec/models/item/mixer.json
-312565f208fcf706ea6e2f7550dadd69a7503bc2 assets/nautec/models/item/petri_dish.json
+c30b2391537fbc383c41aebe69a6eab8b2f9bd31 assets/nautec/models/item/petri_dish.json
+888fbf8e3629b4cd0df267581ac130f534f80ac5 assets/nautec/models/item/petri_dish_bacteria.json
 e8d19ed0a058c92c28efb20a5f8887ff0b78770f assets/nautec/models/item/polished_prismarine.json
 113d63fc1bd37fbe0fb477446a06eafa25ce09b1 assets/nautec/models/item/prism_monocle.json
 8e22e42d27bc66bc91cc76fd66d0ff5457b585b1 assets/nautec/models/item/prismarine_crystal.json

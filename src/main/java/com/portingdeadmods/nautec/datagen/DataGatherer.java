@@ -42,7 +42,7 @@ public class DataGatherer {
         generator.addProvider(event.includeClient(), new ItemTagProvider(output, lookupProvider, blockTagProvider.contentsGetter()));
         generator.addProvider(event.includeServer(),new LootModifierProvider(output,lookupProvider));
         generator.addProvider(event.includeServer(), new WorldGenProvider(output, lookupProvider));
-        generator.addProvider(event.includeServer(), new BacteriaProvider(output, lookupProvider));
+//        generator.addProvider(event.includeServer(), new BacteriaProvider(output, lookupProvider));
 
         if (ModList.get().isLoaded("modonomicon")) {
             ModonomiconDatagen.register(event);

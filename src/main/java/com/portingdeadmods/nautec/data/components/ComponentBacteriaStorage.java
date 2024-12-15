@@ -2,10 +2,12 @@ package com.portingdeadmods.nautec.data.components;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.bacteria.Bacteria;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
@@ -13,6 +15,11 @@ import java.util.Objects;
 
 public record ComponentBacteriaStorage(Bacteria bacteria, long bacteriaAmount) {
     public static final ComponentBacteriaStorage EMPTY = new ComponentBacteriaStorage(new Bacteria() {
+        @Override
+        public ResourceLocation id() {
+            return Nautec.rl("empty");
+        }
+
         @Override
         public Item type() {
             return Items.AIR;

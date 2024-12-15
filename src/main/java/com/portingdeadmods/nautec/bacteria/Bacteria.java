@@ -1,13 +1,15 @@
 package com.portingdeadmods.nautec.bacteria;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.utils.codec.CodecUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 public interface Bacteria {
     /*
@@ -20,6 +22,7 @@ public interface Bacteria {
     Bacteria! The plan now unfolds!
     Bacteria! We will take over the world!
      */
+    ResourceLocation id();
     Item type();
     float growthRate();
     float mutationResistance();
@@ -45,6 +48,7 @@ public interface Bacteria {
 
     Codec<Bacteria> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
+                    ResourceLocation.CODEC.fieldOf("id").forGetter(Bacteria::id),
                     CodecUtils.ITEM_CODEC.fieldOf("type").forGetter(Bacteria::type),
                     Codec.FLOAT.fieldOf("growth_rate").forGetter(Bacteria::growthRate),
                     Codec.FLOAT.fieldOf("mutation_resistance").forGetter(Bacteria::mutationResistance),
@@ -67,6 +71,12 @@ public interface Bacteria {
             Bacteria::lifespan,
             ByteBufCodecs.INT,
             Bacteria::color,
-            BacteriaImpl::new
+            (a, b, c, d, e, f) -> new BacteriaImpl(Nautec.rl("empty"), a, b, c, d, e, f)
     );
+
+    class Builder {
+        public Bacteria build(ResourceLocation location) {
+            return new BacteriaImpl(location, Items.AIR, 0, 0, 0, 0, 0);
+        }
+    }
 }

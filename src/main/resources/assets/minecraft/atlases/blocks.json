@@ -1,22 +1,6 @@
 {
   "sources": [
     {
-      "type": "single",
-      "resource": "nautec:entity/drain_top"
-    },
-    {
-      "type": "single",
-      "resource": "nautec:entity/prismarine_crystal"
-    },
-    {
-      "type": "single",
-      "resource": "nautec:entity/whisk"
-    },
-    {
-      "type": "single",
-      "resource": "nautec:entity/robot_arm"
-    },
-    {
       "type": "directory",
       "source": "fluid",
       "prefix": "fluid/"
@@ -25,6 +9,11 @@
       "type": "directory",
       "source": "augments",
       "prefix": "augments/"
+    },
+    {
+      "type": "directory",
+      "source": "entity",
+      "prefix": "entity/"
     }
   ]
 }
