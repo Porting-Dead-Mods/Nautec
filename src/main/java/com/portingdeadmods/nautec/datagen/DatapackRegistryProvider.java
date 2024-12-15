@@ -11,7 +11,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -20,15 +19,13 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
-import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-public class WorldGenProvider extends DatapackBuiltinEntriesProvider {
+public class DatapackRegistryProvider extends DatapackBuiltinEntriesProvider {
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerConfigKey(String name) {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, name));
@@ -37,7 +34,7 @@ public class WorldGenProvider extends DatapackBuiltinEntriesProvider {
         return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, name));
     }
 
-    public WorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    public DatapackRegistryProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(Nautec.MODID));
     }
 
