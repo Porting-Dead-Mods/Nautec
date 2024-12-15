@@ -65,6 +65,14 @@ public final class NTBlocks {
     public static final DeferredBlock<FishingStationBlock> FISHING_STATION = registerBlockAndItem("fishing_station", FishingStationBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
 
+    // Biology
+    public static final DeferredBlock<MutatorBlock> MUTATOR = registerBlockAndItem("mutator", MutatorBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+    public static final DeferredBlock<IncubatorBlock> INCUBATOR = registerBlockAndItem("incubator", IncubatorBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+    public static final DeferredBlock<BioReactorBlock> BIO_REACTOR = registerBlockAndItem("bio_reactor", BioReactorBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+
     // MULTIBLOCKS
     public static final DeferredBlock<DrainBlock> DRAIN = registerBlockAndItem("deep_sea_drain", DrainBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
