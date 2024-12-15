@@ -1,9 +1,12 @@
 {
-  "type": "minecraft:air",
-  "color": 0,
-  "growth_rate": 0.0,
+  "type": "nautec:simple",
   "id": "nautec:empty",
-  "lifespan": 0,
-  "mutation_resistance": 0.0,
-  "production_rate": 0.0
+  "stats": {
+    "type": "minecraft:air",
+    "color": -65281,
+    "growth_rate": 0.1,
+    "lifespan": 10,
+    "mutation_resistance": 2.0,
+    "production_rate": 1.0
+  }
 }

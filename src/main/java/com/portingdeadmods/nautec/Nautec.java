@@ -58,6 +58,7 @@ public final class Nautec {
             event.register(NTRegistries.MULTIBLOCK);
             event.register(NTRegistries.AUGMENT_SLOT);
             event.register(NTRegistries.AUGMENT_TYPE);
+            event.register(NTRegistries.BACTERIA_SERIALIZER);
         });
 
         modEventBus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> {
@@ -82,6 +83,7 @@ public final class Nautec {
         NTMenuTypes.MENUS.register(modEventBus);
         NTStructures.STRUCTURES.register(modEventBus);
         NTLootModifier.LOOT_MODIFIERS.register(modEventBus);
+        NTBacteriaSerializers.SERIALIZERS.register(modEventBus);
 
         modEventBus.addListener(this::onRegisterAugments);
         modEventBus.addListener(this::registerCapabilities);

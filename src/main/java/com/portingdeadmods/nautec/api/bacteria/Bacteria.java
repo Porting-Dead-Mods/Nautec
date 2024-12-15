@@ -2,7 +2,6 @@ package com.portingdeadmods.nautec.api.bacteria;
 
 import com.mojang.serialization.Codec;
 import com.portingdeadmods.nautec.NTRegistries;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -66,7 +65,7 @@ public interface Bacteria {
         }
 
         public Bacteria build(ResourceLocation location) {
-            return new BacteriaImpl(location, new BacteriaStats(Items.AIR, growthRate, mutationResistance, productionRate, lifespan, color));
+            return new SimpleBacteria(location, new BacteriaStats(Items.AIR, growthRate, mutationResistance, productionRate, lifespan, color));
         }
     }
 }
