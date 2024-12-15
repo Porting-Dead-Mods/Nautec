@@ -1,7 +1,6 @@
 package com.portingdeadmods.nautec.api.bacteria;
 
 import com.mojang.serialization.MapCodec;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 
