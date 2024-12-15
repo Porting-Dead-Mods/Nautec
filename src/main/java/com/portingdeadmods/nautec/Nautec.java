@@ -160,6 +160,10 @@ public final class Nautec {
                 if (containerBE.getFluidHandler() != null) {
                     event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, be.get(), (blockEntity, dir) -> ((ContainerBlockEntity) blockEntity).getFluidHandlerOnSide(dir));
                 }
+
+                if (containerBE.getBacteriaStorage() != null){
+                    event.registerBlockEntity(NTCapabilities.BacteriaStorage.BLOCK, be.get(), (blockEntity, ctx) -> ((ContainerBlockEntity) blockEntity).getBacteriaStorage());
+                }
             }
         }
     }
