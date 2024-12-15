@@ -29,7 +29,7 @@ public class NTDataComponentsUtils {
     }
 
     public static float hasBacteria(ItemStack stack) {
-        return stack.get(NTDataComponents.BACTERIA).bacteria() == NTBacterias.EMPTY ? 1 : 0;
+        return stack.get(NTDataComponents.BACTERIA).bacteria() != NTBacterias.EMPTY ? 1 : 0;
     }
 
     public static void setInfusedStatus(ItemStack stack, Boolean value) {

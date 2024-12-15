@@ -62,7 +62,7 @@ public final class Nautec {
         });
 
         modEventBus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> {
-            event.dataPackRegistry(NTRegistries.BACTERIA_KEY, Bacteria.CODEC);
+            event.dataPackRegistry(NTRegistries.BACTERIA_KEY, Bacteria.CODEC, Bacteria.CODEC);
         });
 
         NTEntities.ENTITIES.register(modEventBus);
