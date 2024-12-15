@@ -38,7 +38,7 @@ public final class NTCreativeTabs {
 
                     if (item.asItem() instanceof IBacteriaItem) {
                         ItemStack stack = new ItemStack(item);
-                        stack.set(NTDataComponents.BACTERIA, Optional.of(ComponentBacteriaStorage.EMPTY.apply(params.holders())));
+                        stack.set(NTDataComponents.BACTERIA, ComponentBacteriaStorage.EMPTY);
                         output.accept(item);
                         output.accept(stack);
                     }

@@ -2,26 +2,28 @@ package com.portingdeadmods.nautec.capabilities.bacteria;
 
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.DataResult;
+import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceKey;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.UnknownNullability;
 
 public class BacteriaStorage implements IBacteriaStorage, INBTSerializable<CompoundTag> {
-    private Bacteria bacteria;
+    private ResourceKey<Bacteria> bacteria;
     private long bacteriaAmount;
 
     @Override
-    public void setBacteria(Bacteria bacteria) {
+    public void setBacteria(ResourceKey<Bacteria> bacteria) {
         this.bacteria = bacteria;
     }
 
     @Override
-    public Bacteria getBacteria() {
+    public ResourceKey<Bacteria> getBacteria() {
         return this.bacteria;
     }
 
@@ -39,7 +41,7 @@ public class BacteriaStorage implements IBacteriaStorage, INBTSerializable<Compo
     public @UnknownNullability CompoundTag serializeNBT(HolderLookup.Provider provider) {
         CompoundTag tag = new CompoundTag();
         tag.putLong("bacteriaAmount", this.bacteriaAmount);
-        DataResult<Tag> tagDataResult = Bacteria.CODEC.encodeStart(NbtOps.INSTANCE, this.bacteria);
+        DataResult<Tag> tagDataResult = ResourceKey.codec(NTRegistries.BACTERIA_KEY).encodeStart(NbtOps.INSTANCE, this.bacteria);
         if (tagDataResult.isSuccess()) {
             tag.put("bacteriaType", tagDataResult.getOrThrow());
         } else {
@@ -51,7 +53,7 @@ public class BacteriaStorage implements IBacteriaStorage, INBTSerializable<Compo
     @Override
     public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
         this.bacteriaAmount = nbt.getLong("bacteriaAmount");
-        DataResult<Pair<Bacteria, Tag>> decodedBacteria = Bacteria.CODEC.decode(NbtOps.INSTANCE, nbt.get("bacteriaType"));
+        DataResult<Pair<ResourceKey<Bacteria>, Tag>> decodedBacteria = ResourceKey.codec(NTRegistries.BACTERIA_KEY).decode(NbtOps.INSTANCE, nbt.get("bacteriaType"));
         if (decodedBacteria.isSuccess()) {
             this.bacteria = decodedBacteria.result().get().getFirst();
         } else {

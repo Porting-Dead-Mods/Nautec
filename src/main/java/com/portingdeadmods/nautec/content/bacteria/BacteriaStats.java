@@ -1,13 +1,11 @@
-package com.portingdeadmods.nautec.api.bacteria;
+package com.portingdeadmods.nautec.content.bacteria;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.utils.codec.CodecUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 public record BacteriaStats(Item type,
