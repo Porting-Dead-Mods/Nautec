@@ -44,6 +44,17 @@ public final class NTBlockEntityTypes {
             () -> BlockEntityType.Builder.of(FishingStationBlockEntity::new,
                     NTBlocks.FISHING_STATION.get()).build(null));
 
+    // Biology
+    public static final Supplier<BlockEntityType<MutatorBlockEntity>> MUTATOR = BLOCK_ENTITIES.register("mutator",
+            () -> BlockEntityType.Builder.of(MutatorBlockEntity::new,
+                    NTBlocks.MUTATOR.get()).build(null));
+    public static final Supplier<BlockEntityType<IncubatorBlockEntity>> INCUBATOR = BLOCK_ENTITIES.register("incubator",
+            () -> BlockEntityType.Builder.of(IncubatorBlockEntity::new,
+                    NTBlocks.INCUBATOR.get()).build(null));
+    public static final Supplier<BlockEntityType<BioReactorBlockEntity>> BIO_REACTOR = BLOCK_ENTITIES.register("bio_reactor",
+            () -> BlockEntityType.Builder.of(BioReactorBlockEntity::new,
+                    NTBlocks.BIO_REACTOR.get()).build(null));
+
     public static final Supplier<BlockEntityType<CreativePowerSourceBlockEntity>> CREATIVE_POWER_SOURCE = BLOCK_ENTITIES.register("creative_power_source",
             () -> BlockEntityType.Builder.of(CreativePowerSourceBlockEntity::new,
                     NTBlocks.CREATIVE_POWER_SOURCE.get()).build(null));
