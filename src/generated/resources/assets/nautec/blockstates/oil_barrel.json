@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "nautec:block/oil_barrel_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "nautec:block/oil_barrel"
+    },
+    "axis=z": {
+      "model": "nautec:block/oil_barrel_horizontal",
+      "x": 90
+    }
+  }
+}
