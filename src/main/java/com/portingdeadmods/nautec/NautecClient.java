@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec;
 
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.client.renderer.blockentities.LaserBlockEntityRenderer;
 import com.portingdeadmods.nautec.api.client.renderer.items.AnchorItemRenderer;
@@ -29,7 +30,9 @@ import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.events.helper.AugmentSlotsRenderer;
 import com.portingdeadmods.nautec.registries.*;
 import com.portingdeadmods.nautec.utils.ArmorModelsHandler;
+import com.portingdeadmods.nautec.utils.BacteriaHelper;
 import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -37,6 +40,7 @@ import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
@@ -234,6 +238,9 @@ public final class NautecClient {
     }
 
     private void registerColorHandlers(RegisterColorHandlersEvent.Item event) {
-        event.register((stack, layer) -> layer == 1 ? FastColor.ARGB32.color(180, 20, 20) : -1, NTItems.PETRI_DISH);
+        event.register((stack, layer) -> {
+            Bacteria bacteria = BacteriaHelper.getBacteria(Minecraft.getInstance().level.registryAccess(), stack.get(NTDataComponents.BACTERIA).bacteria());
+            return layer == 1 ? bacteria.stats().color() : -1;
+        }, NTItems.PETRI_DISH);
     }
 }

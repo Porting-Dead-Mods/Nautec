@@ -2,8 +2,8 @@
   "type": "nautec:simple",
   "id": "nautec:halobacteria",
   "stats": {
-    "type": "minecraft:air",
-    "color": 0,
+    "type": "minecraft:gold_ingot",
+    "color": -6912,
     "growth_rate": 0.0,
     "lifespan": 0,
     "mutation_resistance": 0.0,

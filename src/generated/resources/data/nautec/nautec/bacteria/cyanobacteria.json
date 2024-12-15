@@ -2,8 +2,8 @@
   "type": "nautec:simple",
   "id": "nautec:cyanobacteria",
   "stats": {
-    "type": "minecraft:air",
-    "color": 0,
+    "type": "minecraft:iron_ingot",
+    "color": -13434881,
     "growth_rate": 0.0,
     "lifespan": 0,
     "mutation_resistance": 0.0,
