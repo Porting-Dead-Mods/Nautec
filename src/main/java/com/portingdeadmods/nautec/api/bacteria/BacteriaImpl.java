@@ -1,4 +1,4 @@
-package com.portingdeadmods.nautec.bacteria;
+package com.portingdeadmods.nautec.api.bacteria;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

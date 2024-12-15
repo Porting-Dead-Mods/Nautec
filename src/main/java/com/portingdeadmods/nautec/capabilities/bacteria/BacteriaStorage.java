@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.capabilities.bacteria;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.DataResult;
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.bacteria.Bacteria;
+import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;

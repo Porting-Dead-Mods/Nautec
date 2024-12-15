@@ -44,6 +44,13 @@ public class FishingNetModel extends Model {
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
+    public void setupAnim() {
+        main.xRot = (float) Math.toRadians(180);
+        main.x = 0;
+        main.y = 0;
+        main.z = 0;
+    }
+
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
         main.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);

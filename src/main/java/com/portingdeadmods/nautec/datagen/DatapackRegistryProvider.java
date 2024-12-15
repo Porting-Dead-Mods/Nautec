@@ -49,7 +49,9 @@ public class DatapackRegistryProvider extends DatapackBuiltinEntriesProvider {
     private static final RuleTest SAND_REPLACEABLES = new BlockMatchTest(Blocks.SAND);
 
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+            // -- BACTERIA --
             .add(NTRegistries.BACTERIA_KEY, NTBacteria::bootstrap)
+            // -- WORLDGEN --
             // Beach - Higher Spawn Chance - 1 to 4 Ores in a Vein
             .add(Registries.CONFIGURED_FEATURE, context -> {
                 List<OreConfiguration.TargetBlockState> prismarine_sand_config = List.of(
