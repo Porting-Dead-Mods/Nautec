@@ -54,6 +54,9 @@ public final class NTBlockEntityTypes {
     public static final Supplier<BlockEntityType<BioReactorBlockEntity>> BIO_REACTOR = BLOCK_ENTITIES.register("bio_reactor",
             () -> BlockEntityType.Builder.of(BioReactorBlockEntity::new,
                     NTBlocks.BIO_REACTOR.get()).build(null));
+    public static final Supplier<BlockEntityType<BacterialAnalyzerBlockEntity>> BACTERIAL_ANALYZER = BLOCK_ENTITIES.register("bacterial_analyzer",
+            () -> BlockEntityType.Builder.of(BacterialAnalyzerBlockEntity::new,
+                    NTBlocks.BACTERIAL_ANALYZER.get()).build(null));
 
     public static final Supplier<BlockEntityType<CreativePowerSourceBlockEntity>> CREATIVE_POWER_SOURCE = BLOCK_ENTITIES.register("creative_power_source",
             () -> BlockEntityType.Builder.of(CreativePowerSourceBlockEntity::new,

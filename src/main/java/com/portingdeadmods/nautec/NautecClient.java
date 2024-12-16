@@ -22,8 +22,7 @@ import com.portingdeadmods.nautec.client.renderer.augments.GuardianEyeRenderer;
 import com.portingdeadmods.nautec.client.renderer.augments.SimpleAugmentRenderer;
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;
 import com.portingdeadmods.nautec.client.renderer.robotArms.ClawRobotArmRenderer;
-import com.portingdeadmods.nautec.client.screen.AugmentationStationExtensionScreen;
-import com.portingdeadmods.nautec.client.screen.CrateScreen;
+import com.portingdeadmods.nautec.client.screen.*;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
@@ -219,6 +218,11 @@ public final class NautecClient {
     private void registerMenus(RegisterMenuScreensEvent event) {
         event.register(NTMenuTypes.CRATE.get(), CrateScreen::new);
         event.register(NTMenuTypes.AUGMENT_STATION_EXTENSION.get(), AugmentationStationExtensionScreen::new);
+
+        event.register(NTMenuTypes.INCUBATOR.get(), IncubatorScreen::new);
+        event.register(NTMenuTypes.MUTATOR.get(), MutatorScreen::new);
+        event.register(NTMenuTypes.BIO_REACTOR.get(), BioReactorScreen::new);
+        event.register(NTMenuTypes.BACTERIAL_ANALYZER.get(), BacterialAnalyzerScreen::new);
     }
 
     private void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
