@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "nautec:aquarine_steel_ingot"
+            "items": "nautec:diving_chestplate"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "nautec:aquarine_steel_shovel"
+        "recipe": "nautec:diving_chestplate_oxygen"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "nautec:aquarine_steel_shovel"
+      "nautec:diving_chestplate_oxygen"
     ]
   }
 }

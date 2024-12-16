@@ -42,6 +42,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem(RUSTY_GEAR, "Rusty Gear");
         addItem(GEAR, "Gear");
         addItem(ANCIENT_VALVE, "Ancient Valve");
+        addItem(PETRI_DISH, "Petri Dish");
 
         // Adding missing items
         addItem("drowned_lungs", "Drowned Lungs");
@@ -106,6 +107,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addBlock(NTBlocks.MUTATOR, "Mutator");
         addBlock(NTBlocks.INCUBATOR, "Incubator");
         addBlock(NTBlocks.BIO_REACTOR, "Bio Reactor");
+        addBlock(NTBlocks.BACTERIAL_ANALYZER, "Bacterial Analyzer");
 
         // Multiblock information
         add("multiblock.info.failed_to_construct", "Missing or invalid block");
@@ -147,6 +149,12 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         add("nautec.tool.power", "Power: ");
         add("nautec.tool.enabled", "Enabled");
         add("nautec.tool.disabled", "Shift + Right Click to Enable");
+
+        // Bacteria
+        add("nautec:cyanobacteria", "Cyanobacteria");
+        add("nautec:halobacteria", "Halobacteria");
+        add("nautec:thermophiles", "Thermophiles");
+        add("nautec:methanogens", "Methanogens");
     }
 
     private void addFluidType(Supplier<? extends FluidType> fluidType, String val) {
