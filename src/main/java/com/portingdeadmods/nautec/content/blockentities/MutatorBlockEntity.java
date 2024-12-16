@@ -25,6 +25,7 @@ public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider
 
     public MutatorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.MUTATOR.get(), blockPos, blockState);
+        addItemHandler(1);
     }
 
     @Override

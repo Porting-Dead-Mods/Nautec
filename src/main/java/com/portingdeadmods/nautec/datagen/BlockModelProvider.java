@@ -46,12 +46,17 @@ public class BlockModelProvider extends BlockStateProvider {
         laserJunction(NTBlocks.LASER_JUNCTION.get());
 
         // Stuff
-        //simpleBlock(NTBlocks.PRISMARINE_SAND.get()); Ya didnt commit the texture
         simpleBlock(NTBlocks.MIXER.get(), models().getExistingFile(existingModelFile(NTBlocks.MIXER.get())));
         simpleBlock(NTBlocks.CHARGER.get(), models().getExistingFile(existingModelFile(NTBlocks.CHARGER.get())));
         simpleBlock(NTBlocks.FISHING_STATION.get(), models().getExistingFile(existingModelFile(NTBlocks.FISHING_STATION.get())));
         crateBlock(NTBlocks.CRATE.get());
         rustyCrateBlock(NTBlocks.RUSTY_CRATE.get());
+
+        // Biology - TODO: Models
+//        mutator(NTBlocks.MUTATOR.get());
+//        bacterialAnalyzer(NTBlocks.BACTERIAL_ANALYZER.get());
+//        incubator(NTBlocks.INCUBATOR.get());
+//        bioReactor(NTBlocks.BIO_REACTOR.get());
 
         // Multiblock
         drainController(NTBlocks.DRAIN.get());

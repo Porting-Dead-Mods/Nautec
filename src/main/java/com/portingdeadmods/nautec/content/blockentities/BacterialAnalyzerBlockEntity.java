@@ -2,8 +2,8 @@ package com.portingdeadmods.nautec.content.blockentities;
 
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
-import com.portingdeadmods.nautec.content.menus.AugmentationStationExtensionMenu;
-import com.portingdeadmods.nautec.content.menus.BioReactorMenu;
+import com.portingdeadmods.nautec.content.menus.BacterialAnalyzerMenu;
+import com.portingdeadmods.nautec.content.menus.MutatorMenu;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
@@ -20,12 +20,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class BioReactorBlockEntity extends LaserBlockEntity implements MenuProvider {
+public class BacterialAnalyzerBlockEntity extends LaserBlockEntity implements MenuProvider {
 
 
-    public BioReactorBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(NTBlockEntityTypes.BIO_REACTOR.get(), blockPos, blockState);
-        addItemHandler(2);
+    public BacterialAnalyzerBlockEntity(BlockPos blockPos, BlockState blockState) {
+        super(NTBlockEntityTypes.BACTERIAL_ANALYZER.get(), blockPos, blockState);
+        addItemHandler(1);
     }
 
     @Override
@@ -45,11 +45,11 @@ public class BioReactorBlockEntity extends LaserBlockEntity implements MenuProvi
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Bio Reactor");
+        return Component.literal("Bacterial Analyzer");
     }
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-        return new BioReactorMenu(containerId, playerInventory, this);
+        return new BacterialAnalyzerMenu(containerId, playerInventory, this);
     }
 }

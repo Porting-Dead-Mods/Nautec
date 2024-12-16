@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.content.blockentities.BacterialAnalyzerBlockEntity;
 import com.portingdeadmods.nautec.content.items.blocks.PrismarineCrystalItem;
 import com.portingdeadmods.nautec.content.blocks.*;
 import com.portingdeadmods.nautec.content.blocks.multiblock.controller.AugmentationStationBlock;
@@ -75,6 +76,8 @@ public final class NTBlocks {
     public static final DeferredBlock<IncubatorBlock> INCUBATOR = registerBlockAndItem("incubator", IncubatorBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<BioReactorBlock> BIO_REACTOR = registerBlockAndItem("bio_reactor", BioReactorBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+    public static final DeferredBlock<BacterialAnalyzerBlock> BACTERIAL_ANALYZER = registerBlockAndItem("bacterial_analyzer", BacterialAnalyzerBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
 
     // MULTIBLOCKS

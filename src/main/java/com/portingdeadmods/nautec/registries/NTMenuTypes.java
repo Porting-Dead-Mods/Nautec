@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.client.screen.BacterialAnalyzerScreen;
 import com.portingdeadmods.nautec.content.menus.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -19,6 +20,8 @@ public final class NTMenuTypes {
     public static final DeferredHolder<MenuType<?>,MenuType<BioReactorMenu>> BIO_REACTOR = registerMenuType(BioReactorMenu::new,"bio_reactor");
     public static final DeferredHolder<MenuType<?>,MenuType<IncubatorMenu>> INCUBATOR = registerMenuType(IncubatorMenu::new,"incubator");
     public static final DeferredHolder<MenuType<?>,MenuType<MutatorMenu>> MUTATOR = registerMenuType(MutatorMenu::new,"mutator");
+    public static final DeferredHolder<MenuType<?>,MenuType<BacterialAnalyzerMenu>> BACTERIAL_ANALYZER = registerMenuType(BacterialAnalyzerMenu::new,"bacterial_analyzer");
+
 
     private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>,MenuType<T>> registerMenuType(IContainerFactory<T> factory,
                                                                                                               String name) {

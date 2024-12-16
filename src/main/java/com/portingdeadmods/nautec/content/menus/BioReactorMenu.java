@@ -14,7 +14,7 @@ public class BioReactorMenu extends NTAbstractContainerMenu<BioReactorBlockEntit
     }
 
     public BioReactorMenu(int containerId, @NotNull Inventory inv, @NotNull BioReactorBlockEntity blockEntity) {
-        super(NTMenuTypes.INCUBATOR.get(), containerId, inv, blockEntity);
+        super(NTMenuTypes.BIO_REACTOR.get(), containerId, inv, blockEntity);
 
     }
 
