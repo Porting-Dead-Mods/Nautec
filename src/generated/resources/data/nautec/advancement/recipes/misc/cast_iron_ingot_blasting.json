@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "nautec:brown_polymer"
+            "items": "minecraft:iron_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:diving_chestplate"
+        "recipe": "nautec:cast_iron_ingot_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:diving_chestplate"
+      "nautec:cast_iron_ingot_blasting"
     ]
   }
 }

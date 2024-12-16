@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-15T22:05:05.897545572	Item Models: nautec
+// 1.21.1	2024-12-16T01:42:11.7301004	Item Models: nautec
 53692692f57914fc54eb6ebf416ce1cb7789e57b assets/nautec/models/item/air_bottle.json
 cc6ee3887ec6e0c53216dc681ac7b32b34182253 assets/nautec/models/item/anchor.json
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
@@ -27,6 +27,7 @@ f616877025b33a5d417689bd59cba3385b11e5c9 assets/nautec/models/item/augmentation_
 cd68bca3502f5a671aa5c4bbd828397047b19b8b assets/nautec/models/item/bio_reactor.json
 b1e3c9080ae5a0f78b06fa90f3c5da5b3805f842 assets/nautec/models/item/broken_whisk.json
 cf1524c962ddbbf1cb5e8782d764e71888a03eb1 assets/nautec/models/item/brown_polymer.json
+888a9dd92c350f3174e3cb52f714096944855bd5 assets/nautec/models/item/brown_polymer_block.json
 5415b7ed1e075d2bffe7acdd5bc251f77363c0ac assets/nautec/models/item/burnt_coil.json
 3765b1b45adbf0ee91fcc48de00bb0df37617481 assets/nautec/models/item/cast_iron_ingot.json
 14accf57cadcd851d3cd53c5717728f60d7de51f assets/nautec/models/item/cast_iron_nugget.json
@@ -65,12 +66,12 @@ da47351a6e7410de2b6761d4c90edf257d4620aa assets/nautec/models/item/oil_barrel.js
 c30b2391537fbc383c41aebe69a6eab8b2f9bd31 assets/nautec/models/item/petri_dish.json
 888fbf8e3629b4cd0df267581ac130f534f80ac5 assets/nautec/models/item/petri_dish_bacteria.json
 e8d19ed0a058c92c28efb20a5f8887ff0b78770f assets/nautec/models/item/polished_prismarine.json
-113d63fc1bd37fbe0fb477446a06eafa25ce09b1 assets/nautec/models/item/prism_monocle.json
 8e22e42d27bc66bc91cc76fd66d0ff5457b585b1 assets/nautec/models/item/prismarine_crystal.json
 8b90a03798a28c038b1c16da2f723e90694d182b assets/nautec/models/item/prismarine_crystal_shard.json
 09882392c9745a728907f265dd968977ca0f171b assets/nautec/models/item/prismarine_laser_relay.json
 b01055cbe0dd02e958fe1063758658a9be6b753a assets/nautec/models/item/prismarine_sand.json
 e0209c5f64b38c19f4b8cc62dc90d23fd5f3bad0 assets/nautec/models/item/prismatic_battery.json
+113d63fc1bd37fbe0fb477446a06eafa25ce09b1 assets/nautec/models/item/prism_monocle.json
 0441fb5aafacad25af44cc70caad7de17d4d7762 assets/nautec/models/item/rusty_crate.json
 546756658cb53a34f117de278d075cbdd09c70ba assets/nautec/models/item/rusty_gear.json
 e706cc4892f1d7f29d5b1940770668d233d0bf94 assets/nautec/models/item/saltwater_bucket.json

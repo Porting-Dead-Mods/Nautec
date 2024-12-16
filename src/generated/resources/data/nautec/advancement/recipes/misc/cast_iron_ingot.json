@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "nautec:prismarine_crystal_shard"
+            "items": "nautec:cast_iron_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "nautec:aquarine_steel_chestplate"
+        "recipe": "nautec:cast_iron_ingot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "nautec:aquarine_steel_chestplate"
+      "nautec:cast_iron_ingot"
     ]
   }
 }
