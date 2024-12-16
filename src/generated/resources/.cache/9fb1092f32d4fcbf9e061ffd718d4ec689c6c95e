@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-16T16:09:32.183077884	Recipes
+// 1.21.1	2024-12-16T22:58:24.975013206	Recipes
 ebae64ded4bb31c5b0cf21d6f4a5df5c4bce9ab0 data/nautec/advancement/recipes/building_blocks/brown_polymer_block.json
 056382c183d52a8f0d17b4992017b217f7444060 data/nautec/advancement/recipes/building_blocks/brown_polymer_from_block.json
 e1102abc52970c4638811a9f3aed423c343b2976 data/nautec/advancement/recipes/building_blocks/chiseled_dark_prismarine.json
@@ -67,7 +67,7 @@ ba5f2ec03f05fc1f52d3c03f544988e459826d69 data/nautec/recipe/augmentation_station
 1ed2e8bdcfab093c605a5a5f7c9fcd6c709be258 data/nautec/recipe/banner_from_brown_polymer.json
 a9c53478ce9eefdcdd917217c32a19cc7fe8344c data/nautec/recipe/bed_from_brown_polymer.json
 8ed31c62db2e3f744332a5027d264e3758d46c82 data/nautec/recipe/book_from_brown_polymer.json
-b2cb1d73b9e1e2104af451250ff4464197c45531 data/nautec/recipe/brown_polymer.json
+1414dd3fe07a9bcdb87c1dcda433476089f02a10 data/nautec/recipe/brown_polymer.json
 6818283cb29f588a3b5c60460db0ac59ff0c287e data/nautec/recipe/brown_polymer_block.json
 8234eaba36308abfceeda4158ae8975eb16e3c0b data/nautec/recipe/brown_polymer_from_block.json
 5d8fdeabdc238a5b557a2a159a9ccb30e723703b data/nautec/recipe/cast_iron_ingot.json

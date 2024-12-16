@@ -20,7 +20,7 @@ public record BacteriaStats(Item resource,
                             int color) implements BaseBacteriaStats {
     public static final Codec<BacteriaStats> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                    CodecUtils.ITEM_CODEC.fieldOf("type").forGetter(BacteriaStats::resource),
+                    CodecUtils.ITEM_CODEC.fieldOf("resource").forGetter(BacteriaStats::resource),
                     Codec.FLOAT.fieldOf("growth_rate").forGetter(BacteriaStats::growthRate),
                     Codec.FLOAT.fieldOf("mutation_resistance").forGetter(BacteriaStats::mutationResistance),
                     Codec.FLOAT.fieldOf("production_rate").forGetter(BacteriaStats::productionRate),

@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public record SimpleBacteria(ResourceLocation id, BacteriaStats stats) implements Bacteria {
+public record SimpleBacteria(BacteriaStats stats) implements Bacteria {
     public static Builder of() {
         return new Builder();
     }
@@ -23,12 +23,9 @@ public record SimpleBacteria(ResourceLocation id, BacteriaStats stats) implement
     public static final class Serializer implements BacteriaSerializer<SimpleBacteria> {
         public static final Serializer INSTANCE = new Serializer();
         public static final MapCodec<SimpleBacteria> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                ResourceLocation.CODEC.fieldOf("id").forGetter(SimpleBacteria::id),
                 BacteriaStats.CODEC.fieldOf("stats").forGetter(SimpleBacteria::stats)
         ).apply(instance, SimpleBacteria::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, SimpleBacteria> STREAM_CODEC = StreamCodec.composite(
-                ResourceLocation.STREAM_CODEC,
-                SimpleBacteria::id,
                 BacteriaStats.STREAM_CODEC,
                 SimpleBacteria::stats,
                 SimpleBacteria::new
@@ -87,7 +84,7 @@ public record SimpleBacteria(ResourceLocation id, BacteriaStats stats) implement
         }
 
         public Bacteria build(ResourceLocation location) {
-            return new SimpleBacteria(location, new BacteriaStats(resource, growthRate, mutationResistance, productionRate, lifespan, color));
+            return new SimpleBacteria(new BacteriaStats(resource, growthRate, mutationResistance, productionRate, lifespan, color));
         }
     }
 }

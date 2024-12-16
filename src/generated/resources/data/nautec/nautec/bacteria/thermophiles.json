@@ -1,12 +1,11 @@
 {
   "type": "nautec:simple",
-  "id": "nautec:thermophiles",
   "stats": {
-    "type": "minecraft:lava_bucket",
     "color": -65536,
     "growth_rate": 0.0,
     "lifespan": 0,
     "mutation_resistance": 0.0,
-    "production_rate": 0.0
+    "production_rate": 0.0,
+    "resource": "minecraft:lava_bucket"
   }
 }
