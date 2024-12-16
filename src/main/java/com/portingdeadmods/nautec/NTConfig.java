@@ -68,6 +68,13 @@ public final class NTConfig {
     private static final ModConfigSpec.IntValue FISHER_DURATION = BUILDER
             .comment("The amount of ticks the fisher takes to make a new item")
             .defineInRange("fisherRunDuration", 40, 0, Integer.MAX_VALUE);
+    private static final ModConfigSpec.IntValue FISHER_RADIUS = BUILDER
+            .comment("The radius on the x and z plane the fisher checks for the water")
+            .defineInRange("fisherRadius", 2, 1, Integer.MAX_VALUE);
+
+    private static final ModConfigSpec.IntValue FISHER_DEPTH = BUILDER
+            .comment("The y depth the fisher checks for water")
+            .defineInRange("fisherDepth", 2, 1, Integer.MAX_VALUE);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 
@@ -93,7 +100,8 @@ public final class NTConfig {
 
     public static int fisherLaserLevel;
     public static int fisherRunDuration;
-
+    public static int fisherRadius;
+    public static int fisherDepth;
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
         kelpHeight = KELP_HEIGHT.get();
@@ -119,6 +127,8 @@ public final class NTConfig {
 
         fisherLaserLevel = FISHER_LASER_LEVEL.getAsInt();
         fisherRunDuration = FISHER_DURATION.getAsInt();
+        fisherDepth = FISHER_DEPTH.getAsInt();
+        fisherRadius = FISHER_RADIUS.getAsInt();
     }
 
 }
