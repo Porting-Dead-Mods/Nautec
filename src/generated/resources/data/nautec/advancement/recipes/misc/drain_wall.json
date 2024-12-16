@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "nautec:deep_sea_drain_wall"
+        "recipe": "nautec:drain_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "nautec:deep_sea_drain_wall"
+      "nautec:drain_wall"
     ]
   }
 }

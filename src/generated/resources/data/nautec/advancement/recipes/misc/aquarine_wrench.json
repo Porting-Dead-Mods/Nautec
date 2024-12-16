@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "nautec:aquarine_steel_wrench"
+        "recipe": "nautec:aquarine_wrench"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "nautec:aquarine_steel_wrench"
+      "nautec:aquarine_wrench"
     ]
   }
 }

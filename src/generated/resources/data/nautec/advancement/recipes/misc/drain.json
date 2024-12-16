@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "nautec:prismarine_crystal_shard"
+            "items": "nautec:valve"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "nautec:aquarine_steel_helmet"
+        "recipe": "nautec:drain"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "nautec:aquarine_steel_helmet"
+      "nautec:drain"
     ]
   }
 }

@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "nautec:aquarine_steel_ingot"
+            "items": "nautec:prismarine_crystal_shard"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "nautec:aquarine_steel_sword"
+        "recipe": "nautec:aquarine_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "nautec:aquarine_steel_sword"
+      "nautec:aquarine_leggings"
     ]
   }
 }
