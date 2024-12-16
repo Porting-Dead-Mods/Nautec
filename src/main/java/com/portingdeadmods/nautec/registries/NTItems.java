@@ -89,7 +89,8 @@ public final class NTItems {
     // BACTERIA
     public static final DeferredItem<PetriDishItem> PETRI_DISH = registerItem("petri_dish", PetriDishItem::new, () -> new Item.Properties()
             .stacksTo(1)
-            .component(NTDataComponents.BACTERIA, ComponentBacteriaStorage.EMPTY));
+            .component(NTDataComponents.BACTERIA, ComponentBacteriaStorage.EMPTY)
+            .component(NTDataComponents.ANALYZED, false));
 
     // ARMOR
     // CURIO ITEMS

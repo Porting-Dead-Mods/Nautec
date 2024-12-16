@@ -348,7 +348,7 @@ public class RecipesProvider extends RecipeProvider {
     }
 
     private static void miscItemsRecipes(@NotNull RecipeOutput pRecipeOutput) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.BROWN_POLYMER.get(), 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.BROWN_POLYMER.get(), 2)
                 .requires(Items.DRIED_KELP)
                 .requires(Items.BROWN_DYE)
                 .unlockedBy("has_item", has(Items.DRIED_KELP))

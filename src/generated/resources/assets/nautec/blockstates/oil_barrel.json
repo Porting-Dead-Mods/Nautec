@@ -1,16 +1,56 @@
 {
   "variants": {
-    "axis=x": {
-      "model": "nautec:block/oil_barrel_horizontal",
+    "facing=down,open=false": {
+      "model": "nautec:block/oil_barrel",
+      "x": 180
+    },
+    "facing=down,open=true": {
+      "model": "nautec:block/oil_barrel_open",
+      "x": 180
+    },
+    "facing=east,open=false": {
+      "model": "nautec:block/oil_barrel",
       "x": 90,
       "y": 90
     },
-    "axis=y": {
+    "facing=east,open=true": {
+      "model": "nautec:block/oil_barrel_open",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,open=false": {
+      "model": "nautec:block/oil_barrel",
+      "x": 90
+    },
+    "facing=north,open=true": {
+      "model": "nautec:block/oil_barrel_open",
+      "x": 90
+    },
+    "facing=south,open=false": {
+      "model": "nautec:block/oil_barrel",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,open=true": {
+      "model": "nautec:block/oil_barrel_open",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,open=false": {
       "model": "nautec:block/oil_barrel"
     },
-    "axis=z": {
-      "model": "nautec:block/oil_barrel_horizontal",
-      "x": 90
+    "facing=up,open=true": {
+      "model": "nautec:block/oil_barrel_open"
+    },
+    "facing=west,open=false": {
+      "model": "nautec:block/oil_barrel",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,open=true": {
+      "model": "nautec:block/oil_barrel_open",
+      "x": 90,
+      "y": 270
     }
   }
 }

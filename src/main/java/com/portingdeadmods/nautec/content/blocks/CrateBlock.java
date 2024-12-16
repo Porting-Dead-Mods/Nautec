@@ -110,29 +110,6 @@ public class CrateBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        VoxelShape shape = Shapes.empty();
-        shape = Shapes.join(shape, Shapes.box(0.1875, 0.125, 0.1875, 0.8125, 0.75, 0.8125), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.0625, 0, 0.0625, 0.9375, 0.125, 0.1875), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.0625, 0, 0.1875, 0.1875, 0.125, 0.8125), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.8125, 0, 0.1875, 0.9375, 0.125, 0.8125), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.0625, 0, 0.8125, 0.9375, 0.125, 0.9375), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.0625, 0.125, 0.0625, 0.1875, 0.75, 0.1875), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.8125, 0.125, 0.0625, 0.9375, 0.75, 0.1875), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.8125, 0.125, 0.8125, 0.9375, 0.75, 0.9375), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.0625, 0.125, 0.8125, 0.1875, 0.75, 0.9375), BooleanOp.OR);
-
-        if (!state.getValue(BlockStateProperties.OPEN)) {
-            shape = Shapes.join(shape, Shapes.box(0.1875, 0.75, 0.1875, 0.8125, 0.8125, 0.8125), BooleanOp.OR);
-            shape = Shapes.join(shape, Shapes.box(0.0625, 0.75, 0.8125, 0.9375, 0.875, 0.9375), BooleanOp.OR);
-            shape = Shapes.join(shape, Shapes.box(0.0625, 0.75, 0.1875, 0.1875, 0.875, 0.8125), BooleanOp.OR);
-            shape = Shapes.join(shape, Shapes.box(0.0625, 0.75, 0.0625, 0.9375, 0.875, 0.1875), BooleanOp.OR);
-            shape = Shapes.join(shape, Shapes.box(0.8125, 0.75, 0.1875, 0.9375, 0.875, 0.8125), BooleanOp.OR);
-        }
-        return shape;
-    }
-
-    @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CrateBlockEntity(pos, state);
     }

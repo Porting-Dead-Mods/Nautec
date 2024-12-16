@@ -33,6 +33,9 @@ public final class NTDataComponents {
     public static final Supplier<DataComponentType<Boolean>> IS_INFUSED = registerDataComponentType("is_infused",
             () -> builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
 
+    public static final Supplier<DataComponentType<Boolean>> ANALYZED = registerDataComponentType("anaylzed",
+            () -> builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
+
     public static final Supplier<DataComponentType<Integer>> OXYGEN = registerDataComponentType("oxygen",
             () -> builder -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT));
 
