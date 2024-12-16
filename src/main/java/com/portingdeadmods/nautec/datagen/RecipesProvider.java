@@ -90,6 +90,10 @@ public class RecipesProvider extends RecipeProvider {
 
         augmentationStationRecipes(pRecipeOutput);
 
+        brownPolymerRecipes(pRecipeOutput);
+
+
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.NAUTEC_GUIDE.get(), 1)
                 .requires(Items.BOOK)
                 .requires(NTItems.CAST_IRON_NUGGET.get(), 1)
@@ -370,7 +374,7 @@ public class RecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(NTItems.CAST_IRON_INGOT.get()))
                 .save(pRecipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.CAST_IRON_ROD.get(), 2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.CAST_IRON_ROD.get(), 4)
                 .pattern("C")
                 .pattern("C")
                 .define('C', NTItems.CAST_IRON_INGOT.asItem())
@@ -379,26 +383,72 @@ public class RecipesProvider extends RecipeProvider {
     }
 
     private static void decoBlockRecipes(@NotNull RecipeOutput pRecipeOutput) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.CHISELED_DARK_PRISMARINE.asItem(), 4)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, NTBlocks.CHISELED_DARK_PRISMARINE.asItem(), 4)
                 .pattern("DD")
                 .pattern("DD")
                 .define('D', Blocks.DARK_PRISMARINE.asItem())
                 .unlockedBy("has_item", has(Blocks.DARK_PRISMARINE))
                 .save(pRecipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.POLISHED_PRISMARINE.asItem(), 4)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, NTBlocks.POLISHED_PRISMARINE.asItem(), 4)
                 .pattern("DD")
                 .pattern("DD")
                 .define('D', Blocks.PRISMARINE.asItem())
                 .unlockedBy("has_item", has(Blocks.DARK_PRISMARINE))
                 .save(pRecipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.DARK_PRISMARINE_PILLAR.asItem(), 2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, NTBlocks.DARK_PRISMARINE_PILLAR.asItem(), 2)
                 .pattern("D")
                 .pattern("D")
                 .define('D', Blocks.DARK_PRISMARINE.asItem())
                 .unlockedBy("has_item", has(Blocks.DARK_PRISMARINE))
                 .save(pRecipeOutput);
+    }
+
+    private static void brownPolymerRecipes(RecipeOutput pRecipeOutput) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, NTBlocks.BROWN_POLYMER_BLOCK)
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', NTItems.BROWN_POLYMER.asItem())
+                .unlockedBy("has_item", has(NTItems.BROWN_POLYMER))
+                .save(pRecipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, NTItems.BROWN_POLYMER, 4)
+                .requires(NTBlocks.BROWN_POLYMER_BLOCK)
+                .unlockedBy("has_item", has(NTBlocks.BROWN_POLYMER_BLOCK))
+                .save(pRecipeOutput, Nautec.rl("brown_polymer_from_block"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BOOK, 2)
+                .requires(NTItems.BROWN_POLYMER)
+                .requires(Items.PAPER, 3)
+                .unlockedBy("has_item", has(NTItems.BROWN_POLYMER))
+                .save(pRecipeOutput, Nautec.rl("book_from_brown_polymer"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.BROWN_BANNER, 2)
+                .pattern("BBB")
+                .pattern("BBB")
+                .pattern(" S ")
+                .define('B', NTItems.BROWN_POLYMER.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .unlockedBy("has_item", has(NTItems.BROWN_POLYMER.get()))
+                .save(pRecipeOutput, Nautec.rl("banner_from_brown_polymer"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.ITEM_FRAME, 2)
+                .pattern("SSS")
+                .pattern("SBS")
+                .pattern("SSS")
+                .define('B', NTItems.BROWN_POLYMER.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .unlockedBy("has_item", has(NTItems.BROWN_POLYMER.get()))
+                .save(pRecipeOutput, Nautec.rl("item_frame_from_brown_polymer"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.BROWN_BED)
+                .pattern("BBB")
+                .pattern("PPP")
+                .define('B', NTItems.BROWN_POLYMER.get())
+                .define('P', ItemTags.PLANKS)
+                .unlockedBy("has_item", has(NTItems.BROWN_POLYMER.get()))
+                .save(pRecipeOutput, Nautec.rl("bed_from_brown_polymer"));
     }
 
     private static void aquarineSteelArmorRecipes(@NotNull RecipeOutput pRecipeOutput) {

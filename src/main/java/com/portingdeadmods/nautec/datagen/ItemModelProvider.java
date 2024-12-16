@@ -34,9 +34,10 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(NTItems.ATLANTIC_GOLD_NUGGET.get());
         basicItem(NTItems.PRISMARINE_CRYSTAL_SHARD.get());
         basicItem(NTItems.AQUARINE_STEEL_COMPOUND.get());
+        basicItem(NTItems.SALT.get());
         basicItem(NTItems.AIR_BOTTLE.get());
-        basicItem(NTItems.ELDRITCH_HEART.get());
 
+        basicItem(NTItems.ELDRITCH_HEART.get());
         basicItem(NTItems.DROWNED_LUNGS.get());
         basicItem(NTItems.GUARDIAN_EYE.get());
         basicItem(NTItems.DOLPHIN_FIN.get());
