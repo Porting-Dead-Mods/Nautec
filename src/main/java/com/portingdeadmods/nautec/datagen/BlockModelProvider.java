@@ -62,6 +62,7 @@ public class BlockModelProvider extends BlockStateProvider {
         augmentationStationExtension(NTBlocks.AUGMENTATION_STATION_EXTENSION.get());
 
         simpleBlock(NTBlocks.DRAIN_WALL.get());
+        simpleBlock(NTBlocks.BROWN_POLYMER_BLOCK.get());
 
         axisBlock(NTBlocks.OIL_BARREL.get(), models().cubeBottomTop(
                 name(NTBlocks.OIL_BARREL.get()),

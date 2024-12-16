@@ -1,9 +1,10 @@
-// 1.21.1	2024-12-15T22:34:29.540723671	Block States: nautec
+// 1.21.1	2024-12-16T14:03:51.458751724	Block States: nautec
 3f3049296b6ec6590b05af441a717618bb232b69 assets/nautec/blockstates/aquarine_steel_block.json
 414381329d7663eb1d1db8c3f42df8d9932d2cfe assets/nautec/blockstates/aquatic_catalyst.json
 920d567f0ae8731bc428c8970aac5400741ea87d assets/nautec/blockstates/augmentation_station.json
 e7796e8fce418c4dbe7aa3bb43424741ca161694 assets/nautec/blockstates/augmentation_station_extension.json
 13de9de23d402708fc1201b11b07efb3bbcab7a1 assets/nautec/blockstates/augmentation_station_part.json
+dfb8c1c3f9d27e155f65fb8bbb49239248175485 assets/nautec/blockstates/brown_polymer_block.json
 95e42b0dd95027fc74e0ddf4cc4460e2d724ae2a assets/nautec/blockstates/charger.json
 25d8fc96fc916e569c72c56d1f6a5faaab599b84 assets/nautec/blockstates/chiseled_dark_prismarine.json
 393256f7f8427905913fcea346cf00e42cc01d76 assets/nautec/blockstates/crate.json
@@ -32,6 +33,7 @@ e0c219d97f7659b22b353e5d09e49deaf601f473 assets/nautec/models/block/aquatic_cata
 98354e0a660994d556449c5fc6782400d5d20c15 assets/nautec/models/block/augmentation_station.json
 4cd777b593be834a619c30850292c016be6e7341 assets/nautec/models/block/augmentation_station_extension.json
 4b041c67e6dfb342c778f9f65997ae038f7144c5 assets/nautec/models/block/augmentation_station_part_0.json
+16146ea12fe66045ff8ed608419b4ee09bb3ce03 assets/nautec/models/block/brown_polymer_block.json
 dbb2de853fc70f313a4493a20f1c81a7d477a132 assets/nautec/models/block/chiseled_dark_prismarine.json
 af047960d1c2a98ff7e2daae55eec22f59ca111f assets/nautec/models/block/creative_power_source.json
 bacd9b7ead96acf8d4378b9b2e973575941884e5 assets/nautec/models/block/dark_prismarine_pillar.json
