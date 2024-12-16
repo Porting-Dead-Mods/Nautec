@@ -24,6 +24,7 @@ public class IncubatorBlockEntity extends LaserBlockEntity implements MenuProvid
 
     public IncubatorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.INCUBATOR.get(), blockPos, blockState);
+        addItemHandler(1);
     }
 
     @Override

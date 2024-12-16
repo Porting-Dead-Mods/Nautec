@@ -16,6 +16,7 @@
   "block.nautec.augmentation_station": "Augmentation Station",
   "block.nautec.augmentation_station_extension": "Augmentation Station Extension",
   "block.nautec.augmentation_station_part": "Augmentation Station",
+  "block.nautec.bacterial_analyzer": "Bacterial Analyzer",
   "block.nautec.bio_reactor": "Bio Reactor",
   "block.nautec.charger": "Charger",
   "block.nautec.chiseled_dark_prismarine": "Chiseled Dark Prismarine",
@@ -194,6 +195,7 @@
   "item.nautec.guardian_eye": "Guardian Eye",
   "item.nautec.laser_channeling_coil": "Laser Channeling Coil",
   "item.nautec.neptunes_trident": "Neptune's Trident",
+  "item.nautec.petri_dish": "Petri Dish",
   "item.nautec.prism_monocle": "Prism Monocle",
   "item.nautec.prismarine_crystal_shard": "Prismarine Crystal Shard",
   "item.nautec.prismatic_battery": "Prismatic Battery",
@@ -226,5 +228,9 @@
   "nautec.tool.shovel.ability": "Ability: Mine in a 3x3 Area",
   "nautec.tool.status": "Status: ",
   "nautec.tool.sword.ability": "Ability: Deal 70% more damage and spawn lightnings at targets",
+  "nautec:cyanobacteria": "Cyanobacteria",
+  "nautec:halobacteria": "Halobacteria",
+  "nautec:methanogens": "Methanogens",
+  "nautec:thermophiles": "Thermophiles",
   "nautec_guide.desc.0": "Nautec's Guide"
 }
