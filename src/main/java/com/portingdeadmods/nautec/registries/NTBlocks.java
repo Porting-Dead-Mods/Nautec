@@ -1,7 +1,6 @@
 package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.content.blockentities.BacterialAnalyzerBlockEntity;
 import com.portingdeadmods.nautec.content.items.blocks.PrismarineCrystalItem;
 import com.portingdeadmods.nautec.content.blocks.*;
 import com.portingdeadmods.nautec.content.blocks.multiblock.controller.AugmentationStationBlock;
@@ -11,7 +10,6 @@ import com.portingdeadmods.nautec.content.blocks.multiblock.part.AugmentationSta
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalPartBlock;
-import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -36,7 +34,7 @@ public final class NTBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL));
     public static final DeferredBlock<CrateBlock> RUSTY_CRATE = registerBlockAndItem("rusty_crate", CrateBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL));
-    public static final DeferredBlock<RotatedPillarBlock> OIL_BARREL = registerBlockAndItem("oil_barrel", RotatedPillarBlock::new,
+    public static final DeferredBlock<OilBarrelBlock> OIL_BARREL = registerBlockAndItem("oil_barrel", OilBarrelBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<Block> BROWN_POLYMER_BLOCK = registerBlockAndItem("brown_polymer_block", Block::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_WOOL));

@@ -246,9 +246,6 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     public void onPowerChanged() {
     }
 
-    public void onHeatChanged() {
-    }
-
     public void drop() {
         ItemStack[] stacks = getItemHandlerStacks();
         if (stacks != null) {

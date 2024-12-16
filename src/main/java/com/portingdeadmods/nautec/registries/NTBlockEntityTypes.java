@@ -43,6 +43,9 @@ public final class NTBlockEntityTypes {
     public static final Supplier<BlockEntityType<FishingStationBlockEntity>> FISHING_STATION = BLOCK_ENTITIES.register("fishing_station",
             () -> BlockEntityType.Builder.of(FishingStationBlockEntity::new,
                     NTBlocks.FISHING_STATION.get()).build(null));
+    public static final Supplier<BlockEntityType<OilBarrelBlockEntity>> OIL_BARREL = BLOCK_ENTITIES.register("oil_barrel",
+            () -> BlockEntityType.Builder.of(OilBarrelBlockEntity::new,
+                    NTBlocks.OIL_BARREL.get()).build(null));
 
     // Biology
     public static final Supplier<BlockEntityType<MutatorBlockEntity>> MUTATOR = BLOCK_ENTITIES.register("mutator",

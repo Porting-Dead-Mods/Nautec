@@ -5,9 +5,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.api.bacteria.BaseBacteriaStats;
 import com.portingdeadmods.nautec.utils.codec.CodecUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
+
+import java.util.List;
 
 public record BacteriaStats(Item resource,
                             float growthRate,
@@ -41,4 +44,12 @@ public record BacteriaStats(Item resource,
             BacteriaStats::color,
             BacteriaStats::new
     );
+
+    @Override
+    public List<Component> statsTooltip() {
+        return List.of(
+                Component.literal("Resource: "+resource.getDefaultInstance().getDisplayName().getString()),
+                Component.literal("Growth Rate: "+growthRate)
+        );
+    }
 }

@@ -10,7 +10,7 @@ import org.joml.Vector4i;
 public class OilFluid extends NTFluid {
     public OilFluid(String name) {
         super(name);
-        this.fluidType = registerFluidType(FluidType.Properties.create(), new Vector4i(255, 255, 255, 255), FluidTemplates.OIL);
+        this.fluidType = registerFluidType(FluidType.Properties.create(), new Vector4i(20, 20, 20, 255), FluidTemplates.WATER);
     }
 
     @Override

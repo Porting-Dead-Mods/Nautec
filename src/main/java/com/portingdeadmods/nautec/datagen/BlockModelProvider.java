@@ -6,12 +6,11 @@ import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.content.blocks.AquaticCatalystBlock;
 import com.portingdeadmods.nautec.content.blocks.CrateBlock;
 import com.portingdeadmods.nautec.content.blocks.LaserJunctionBlock;
+import com.portingdeadmods.nautec.content.blocks.OilBarrelBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.controller.AugmentationStationBlock;
-import com.portingdeadmods.nautec.content.blocks.multiblock.part.AugmentationStationPartBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.content.multiblocks.AugmentationStationMultiblock;
 import com.portingdeadmods.nautec.content.multiblocks.DrainMultiblock;
-import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTMultiblocks;
 import net.minecraft.core.Direction;
@@ -69,16 +68,16 @@ public class BlockModelProvider extends BlockStateProvider {
         simpleBlock(NTBlocks.DRAIN_WALL.get());
         simpleBlock(NTBlocks.BROWN_POLYMER_BLOCK.get());
 
-        axisBlock(NTBlocks.OIL_BARREL.get(), models().cubeBottomTop(
+        oilBarrel(NTBlocks.OIL_BARREL.get(), models().cubeBottomTop(
                 name(NTBlocks.OIL_BARREL.get()),
                 blockTexture(NTBlocks.OIL_BARREL.get(), "_side"),
                 blockTexture(NTBlocks.OIL_BARREL.get(), "_bottom"),
                 blockTexture(NTBlocks.OIL_BARREL.get())
         ), models().cubeBottomTop(
-                name(NTBlocks.OIL_BARREL.get()) + "_horizontal",
+                name(NTBlocks.OIL_BARREL.get()) + "_open",
                 blockTexture(NTBlocks.OIL_BARREL.get(), "_side"),
-                blockTexture(NTBlocks.OIL_BARREL.get()),
-                blockTexture(NTBlocks.OIL_BARREL.get(), "_bottom")
+                blockTexture(NTBlocks.OIL_BARREL.get(), "_bottom"),
+                blockTexture(NTBlocks.OIL_BARREL.get(), "_open")
         ));
     }
 
@@ -241,6 +240,34 @@ public class BlockModelProvider extends BlockStateProvider {
                 .modelForState().modelFile(model).rotationX(90).rotationY(90).addModel()
                 .partialState().with(BlockStateProperties.FACING, Direction.WEST)
                 .modelForState().modelFile(model).rotationX(90).rotationY(270).addModel();
+    }
+
+    public void oilBarrel(Block block, ModelFile model, ModelFile openModel) {
+        getVariantBuilder(block)
+                .partialState().with(BlockStateProperties.FACING, Direction.UP).with(OilBarrelBlock.OPEN, false)
+                .modelForState().modelFile(model).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.DOWN).with(OilBarrelBlock.OPEN, false)
+                .modelForState().modelFile(model).rotationX(180).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.NORTH).with(OilBarrelBlock.OPEN, false)
+                .modelForState().modelFile(model).rotationX(90).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.SOUTH).with(OilBarrelBlock.OPEN, false)
+                .modelForState().modelFile(model).rotationX(90).rotationY(180).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.EAST).with(OilBarrelBlock.OPEN, false)
+                .modelForState().modelFile(model).rotationX(90).rotationY(90).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.WEST).with(OilBarrelBlock.OPEN, false)
+                .modelForState().modelFile(model).rotationX(90).rotationY(270).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.UP).with(OilBarrelBlock.OPEN, true)
+                .modelForState().modelFile(openModel).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.DOWN).with(OilBarrelBlock.OPEN, true)
+                .modelForState().modelFile(openModel).rotationX(180).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.NORTH).with(OilBarrelBlock.OPEN, true)
+                .modelForState().modelFile(openModel).rotationX(90).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.SOUTH).with(OilBarrelBlock.OPEN, true)
+                .modelForState().modelFile(openModel).rotationX(90).rotationY(180).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.EAST).with(OilBarrelBlock.OPEN, true)
+                .modelForState().modelFile(openModel).rotationX(90).rotationY(90).addModel()
+                .partialState().with(BlockStateProperties.FACING, Direction.WEST).with(OilBarrelBlock.OPEN, true)
+                .modelForState().modelFile(openModel).rotationX(90).rotationY(270).addModel();
     }
 
     private void crateBlock(CrateBlock crateBlock) {
