@@ -61,6 +61,14 @@ public final class NTConfig {
             .comment("Set to false to disable the rendering of augments, this can improve performance")
             .define("allowAugmentRendering", true);
 
+    private static final ModConfigSpec.IntValue FISHER_LASER_LEVEL = BUILDER
+            .comment("The amount laser power required to have the fisher work")
+            .defineInRange("fisherLaserLevel", 1, 0, Integer.MAX_VALUE);
+
+    private static final ModConfigSpec.IntValue FISHER_DURATION = BUILDER
+            .comment("The amount of ticks the fisher takes to make a new item")
+            .defineInRange("fisherRunDuration", 40, 0, Integer.MAX_VALUE);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public static int kelpHeight;
@@ -82,6 +90,9 @@ public final class NTConfig {
 
     public static int guardianAugmentDamage;
     public static boolean allowAugmentRendering;
+
+    public static int fisherLaserLevel;
+    public static int fisherRunDuration;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
@@ -105,6 +116,9 @@ public final class NTConfig {
 
         guardianAugmentDamage = GUARDIAN_AUGMENT_DAMAGE.get();
         allowAugmentRendering = ALLOW_AUGMENT_RENDERING.get();
+
+        fisherLaserLevel = FISHER_LASER_LEVEL.getAsInt();
+        fisherRunDuration = FISHER_DURATION.getAsInt();
     }
 
 }
