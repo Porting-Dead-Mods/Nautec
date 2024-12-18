@@ -14,9 +14,22 @@ public interface BaseBacteriaStats {
 
     float productionRate();
 
+    float colonySize();
+
     int lifespan();
 
     int color();
 
     List<Component> statsTooltip();
+
+    // Mutator
+    BaseBacteriaStats rollGrowthRate();
+    BaseBacteriaStats rollMutationResistance();
+    BaseBacteriaStats rollProductionRate();
+    BaseBacteriaStats rollLifespan();
+    BaseBacteriaStats rollStats();
+
+    // Incubator
+    BaseBacteriaStats grow();
+    BaseBacteriaStats shrink();
 }
