@@ -17,7 +17,7 @@ public class BacterialAnalyzerMenu extends NTAbstractContainerMenu<BacterialAnal
     public BacterialAnalyzerMenu(int containerId, @NotNull Inventory inv, @NotNull BacterialAnalyzerBlockEntity blockEntity) {
         super(NTMenuTypes.BACTERIAL_ANALYZER.get(), containerId, inv, blockEntity);
 
-        // Catalyst
+        // Input Slot
         addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 80, 35));
 
         addPlayerInventory(inv, 84);

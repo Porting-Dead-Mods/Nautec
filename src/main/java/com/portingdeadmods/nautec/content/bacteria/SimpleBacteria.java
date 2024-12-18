@@ -50,6 +50,7 @@ public record SimpleBacteria(BacteriaStats stats) implements Bacteria {
         private float growthRate;
         private float mutationResistance;
         private float productionRate;
+        private float colonySize;
         private int lifespan;
         private int color;
 
@@ -73,6 +74,11 @@ public record SimpleBacteria(BacteriaStats stats) implements Bacteria {
             return this;
         }
 
+        public Builder colonySize(float colonySize) {
+            this.colonySize = colonySize;
+            return this;
+        }
+
         public Builder lifespan(int lifespan) {
             this.lifespan = lifespan;
             return this;
@@ -84,7 +90,7 @@ public record SimpleBacteria(BacteriaStats stats) implements Bacteria {
         }
 
         public Bacteria build(ResourceLocation location) {
-            return new SimpleBacteria(new BacteriaStats(resource, growthRate, mutationResistance, productionRate, lifespan, color));
+            return new SimpleBacteria(new BacteriaStats(resource, growthRate, mutationResistance, productionRate, colonySize, lifespan, color));
         }
     }
 }
