@@ -67,6 +67,8 @@ public final class NTBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<FishingStationBlock> FISHING_STATION = registerBlockAndItem("fishing_station", FishingStationBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+    public static final DeferredBlock<BreakerBlock> BREAKER_BLOCK = registerBlockAndItem("breaker", BreakerBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
 
     // Biology
     public static final DeferredBlock<MutatorBlock> MUTATOR = registerBlockAndItem("mutator", MutatorBlock::new,
