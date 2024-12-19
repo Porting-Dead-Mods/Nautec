@@ -7,12 +7,14 @@ import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.utils.Utils;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceKey;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.function.Supplier;
 
 import static com.portingdeadmods.nautec.registries.NTItems.*;
+import static com.portingdeadmods.nautec.registries.NTBacterias.*;
 
 public class EnUsProvider extends AbstractModonomiconLanguageProvider {
     public EnUsProvider(PackOutput output, ModonomiconLanguageProvider cacheProvider) {
@@ -151,10 +153,12 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         add("nautec.tool.disabled", "Shift + Right Click to Enable");
 
         // Bacteria
-        add("nautec:cyanobacteria", "Cyanobacteria");
-        add("nautec:halobacteria", "Halobacteria");
-        add("nautec:thermophiles", "Thermophiles");
-        add("nautec:methanogens", "Methanogens");
+        addBacteria(METHANOGENS, "Methanogens");
+        addBacteria(THERMOPHILES, "Thermophiles");
+        addBacteria(HALOBACTERIA, "Halobacteria");
+        addBacteria(CYANOBACTERIA, "Cyanobacteria / Blue-Green algae");
+        addBacteria(EMPTY, "Empty");
+
     }
 
     private void addFluidType(Supplier<? extends FluidType> fluidType, String val) {
@@ -167,6 +171,10 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
 
     private void addItem(String key, String val) {
         add("item.nautec." + key, val);
+    }
+
+    private void addBacteria(ResourceKey<?> key, String val) {
+        add(key.registry().getPath() + "." + key.location().getNamespace() + "." + key.location().getPath(), val);
     }
 
     private void addBlock(String key, String val) {
