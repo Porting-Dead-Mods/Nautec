@@ -1,6 +1,7 @@
 {
   "type": "nautec:simple",
   "stats": {
+    "colony_size": 0.0,
     "color": -65536,
     "growth_rate": 0.0,
     "lifespan": 0,

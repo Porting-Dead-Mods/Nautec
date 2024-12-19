@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
 
 import static com.portingdeadmods.nautec.NTConfig.*;
 
@@ -35,7 +36,7 @@ public record BacteriaStats(Item resource,
             ).apply(instance, BacteriaStats::new)
     );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, BacteriaStats> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, BacteriaStats> STREAM_CODEC = NeoForgeStreamCodecs.composite(
             CodecUtils.ITEM_STREAM_CODEC,
             BacteriaStats::resource,
             ByteBufCodecs.FLOAT,

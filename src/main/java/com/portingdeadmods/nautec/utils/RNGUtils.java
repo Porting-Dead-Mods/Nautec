@@ -69,5 +69,6 @@ public final class RNGUtils {
         } else if (bias > 0) {
             return uniformRandFloat(left * (1 - absBias), right) + middlePoint;
         }
+        return uniformRandFloat(left, right) + middlePoint;
     }
 }
