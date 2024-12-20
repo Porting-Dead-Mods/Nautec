@@ -11,6 +11,11 @@
   "augment_type.nautec.dolphin_fin": "Dolphin Fin",
   "augment_type.nautec.drowned_lung": "Drowned Lung",
   "augment_type.nautec.guardian_eye": "Guardian Eye",
+  "bacteria.nautec.cyanobacteria": "Cyanobacteria / Blue-Green algae",
+  "bacteria.nautec.empty": "Empty",
+  "bacteria.nautec.halobacteria": "Halobacteria",
+  "bacteria.nautec.methanogens": "Methanogens",
+  "bacteria.nautec.thermophiles": "Thermophiles",
   "block.nautec.aquarine_steel_block": "Aquarine Steel Block",
   "block.nautec.aquatic_catalyst": "Aquatic Catalyst",
   "block.nautec.augmentation_station": "Augmentation Station",
@@ -228,9 +233,5 @@
   "nautec.tool.shovel.ability": "Ability: Mine in a 3x3 Area",
   "nautec.tool.status": "Status: ",
   "nautec.tool.sword.ability": "Ability: Deal 70% more damage and spawn lightnings at targets",
-  "nautec:cyanobacteria": "Cyanobacteria",
-  "nautec:halobacteria": "Halobacteria",
-  "nautec:methanogens": "Methanogens",
-  "nautec:thermophiles": "Thermophiles",
   "nautec_guide.desc.0": "Nautec's Guide"
 }

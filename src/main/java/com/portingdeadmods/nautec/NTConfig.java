@@ -76,6 +76,27 @@ public final class NTConfig {
             .comment("The y depth the fisher checks for water")
             .defineInRange("fisherDepth", 2, 1, Integer.MAX_VALUE);
 
+    // Biology
+    private static final ModConfigSpec.DoubleValue BACTERIA_GROWTH_RATE_CAP = BUILDER
+            .comment("The maximum rate at which bacteria can grow")
+            .defineInRange("bacteriaGrowthRateCap", 5, 0, Float.MAX_VALUE);
+
+    private static final ModConfigSpec.DoubleValue BACTERIA_PRODUCTION_RATE_CAP = BUILDER
+            .comment("The maximum rate at which bacteria can produce")
+            .defineInRange("bacteriaProductionRateCap", 2, 0, Float.MAX_VALUE);
+
+    private static final ModConfigSpec.DoubleValue BACTERIA_MUTATION_RESISTANCE_CAP = BUILDER
+            .comment("The maximum rate at which bacteria can resist mutation")
+            .defineInRange("bacteriaMutationResistanceCap", 1, 0, Float.MAX_VALUE);
+
+    private static final ModConfigSpec.DoubleValue BACTERIA_COLONY_SIZE_CAP = BUILDER
+            .comment("The maximum size a bacteria colony can grow to")
+            .defineInRange("bacteriaColonySizeCap", 100d, 0, Float.MAX_VALUE);
+
+    private static final ModConfigSpec.IntValue BACTERIA_LIFESPAN_CAP = BUILDER
+            .comment("The maximum lifespan of a bacteria colony")
+            .defineInRange("bacteriaLifespanCap", 24000, 0, Integer.MAX_VALUE);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public static int kelpHeight;
@@ -102,6 +123,13 @@ public final class NTConfig {
     public static int fisherRunDuration;
     public static int fisherRadius;
     public static int fisherDepth;
+
+    public static float bacteriaGrowthRateCap;
+    public static float bacteriaProductionRateCap;
+    public static float bacteriaMutationResistanceCap;
+    public static float bacteriaColonySizeCap;
+    public static int bacteriaLifespanCap;
+
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
         kelpHeight = KELP_HEIGHT.get();
@@ -129,6 +157,12 @@ public final class NTConfig {
         fisherRunDuration = FISHER_DURATION.getAsInt();
         fisherDepth = FISHER_DEPTH.getAsInt();
         fisherRadius = FISHER_RADIUS.getAsInt();
+
+        bacteriaGrowthRateCap = (float) BACTERIA_GROWTH_RATE_CAP.getAsDouble();
+        bacteriaProductionRateCap = (float) BACTERIA_PRODUCTION_RATE_CAP.getAsDouble();
+        bacteriaMutationResistanceCap = (float) BACTERIA_MUTATION_RESISTANCE_CAP.getAsDouble();
+        bacteriaColonySizeCap = (float) BACTERIA_COLONY_SIZE_CAP.getAsDouble();
+        bacteriaLifespanCap = BACTERIA_LIFESPAN_CAP.get();
     }
 
 }
