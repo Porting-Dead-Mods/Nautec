@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-16T16:09:32.176187626	Item Models: nautec
+// 1.21.1	2024-12-18T15:31:36.54862117	Item Models: nautec
 53692692f57914fc54eb6ebf416ce1cb7789e57b assets/nautec/models/item/air_bottle.json
 cc6ee3887ec6e0c53216dc681ac7b32b34182253 assets/nautec/models/item/anchor.json
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
@@ -24,7 +24,7 @@ f60b23b8ca6d44e339c9c415f53102833b4ff633 assets/nautec/models/item/atlantic_gold
 a95dff0d56139e74443ee5069394ccbe31bc875a assets/nautec/models/item/atlantic_gold_nugget.json
 6338d151fe16332a6bd885776f58d9c9a4ffad62 assets/nautec/models/item/augmentation_station.json
 f616877025b33a5d417689bd59cba3385b11e5c9 assets/nautec/models/item/augmentation_station_extension.json
-77496bd37cb0cd85dfb77e146366322e44bfcd63 assets/nautec/models/item/bacterial_analyzer.json
+8d57f0feda40d2aa883370a346a266cf9d149895 assets/nautec/models/item/bacterial_containment_shield.json
 cd68bca3502f5a671aa5c4bbd828397047b19b8b assets/nautec/models/item/bio_reactor.json
 b1e3c9080ae5a0f78b06fa90f3c5da5b3805f842 assets/nautec/models/item/broken_whisk.json
 cf1524c962ddbbf1cb5e8782d764e71888a03eb1 assets/nautec/models/item/brown_polymer.json

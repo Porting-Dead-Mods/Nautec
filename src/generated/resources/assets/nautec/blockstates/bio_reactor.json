@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "facing=south": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "nautec:block/polished_prismarine",
+    "top": "nautec:block/bio_reactor_top"
+  }
+}

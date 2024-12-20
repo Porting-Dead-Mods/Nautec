@@ -18,7 +18,8 @@ public class BacterialAnalyzerMenu extends NTAbstractContainerMenu<BacterialAnal
         super(NTMenuTypes.BACTERIAL_ANALYZER.get(), containerId, inv, blockEntity);
 
         // Catalyst
-        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 80, 35));
+        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 53, 38));
+        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 1, 107, 38));
 
         addPlayerInventory(inv, 84);
         addPlayerHotbar(inv, 142);
@@ -26,6 +27,6 @@ public class BacterialAnalyzerMenu extends NTAbstractContainerMenu<BacterialAnal
 
     @Override
     protected int getMergeableSlotCount() {
-        return 1;
+        return 2;
     }
 }

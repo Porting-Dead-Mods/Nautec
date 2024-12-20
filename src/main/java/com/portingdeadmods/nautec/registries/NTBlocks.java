@@ -62,7 +62,7 @@ public final class NTBlocks {
     public static final DeferredBlock<PrismarineCrystalPartBlock> PRISMARINE_CRYSTAL_PART = BLOCKS.registerBlock("prismarine_crystal_part", PrismarineCrystalPartBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN));
     public static final DeferredBlock<AnchorBlock> ANCHOR = registerBlockAndItem("anchor", AnchorBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).sound(SoundType.ANVIL));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).sound(SoundType.ANVIL).noOcclusion());
     public static final DeferredBlock<ChargerBlock> CHARGER = registerBlockAndItem("charger", ChargerBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<FishingStationBlock> FISHING_STATION = registerBlockAndItem("fishing_station", FishingStationBlock::new,
@@ -76,6 +76,8 @@ public final class NTBlocks {
     public static final DeferredBlock<BioReactorBlock> BIO_REACTOR = registerBlockAndItem("bio_reactor", BioReactorBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<BacterialAnalyzerBlock> BACTERIAL_ANALYZER = registerBlockAndItem("bacterial_analyzer", BacterialAnalyzerBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), true, false);
+    public static final DeferredBlock<BacterialAnalyzerTopBlock> BACTERIAL_ANALYZER_TOP = BLOCKS.registerBlock("bacterial_analyzer_top", BacterialAnalyzerTopBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
 
     // MULTIBLOCKS
@@ -95,6 +97,9 @@ public final class NTBlocks {
     public static final DeferredBlock<AugmentationStationExtensionBlock> AUGMENTATION_STATION_EXTENSION = registerBlockAndItem("augmentation_station_extension",
             AugmentationStationExtensionBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
+
+    public static final DeferredBlock<Block> BACTERIAL_CONTAINMENT_SHIELD = registerBlockAndItem("bacterial_containment_shield", Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE));
 
     public static final DeferredBlock<CreativePowerSourceBlock> CREATIVE_POWER_SOURCE = registerBlockAndItem("creative_power_source", CreativePowerSourceBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), false, true);
