@@ -59,7 +59,7 @@ public class BacterialAnalyzerTopBlock extends Block {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (level.getBlockEntity(pos.below()) instanceof BacterialAnalyzerBlockEntity be) {
-            player.openMenu(be, pos);
+            player.openMenu(be, pos.below());
             return InteractionResult.SUCCESS;
         }
         return super.useWithoutItem(state, level, pos, player, hitResult);
