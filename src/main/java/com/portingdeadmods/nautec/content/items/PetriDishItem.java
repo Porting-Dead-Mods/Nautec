@@ -28,11 +28,11 @@ public class PetriDishItem extends Item implements IBacteriaItem {
         ResourceKey<Bacteria> bacteriaType = stack.get(NTDataComponents.BACTERIA).bacteria();
         Bacteria bacteria = BacteriaHelper.getBacteria(context.registries(), bacteriaType);
         if (bacteria != null) {
-            tooltipComponents.add(Component.literal("Name: ").append(Utils.registryTranslation(bacteriaType)).withStyle(ChatFormatting.GRAY));
+            tooltipComponents.add(Component.literal("Name: ").append(Utils.registryTranslation(bacteriaType)).withStyle(ChatFormatting.WHITE));
             if (bacteriaType != NTBacterias.EMPTY) {
                 MutableComponent statsCaption = Component.literal("Stats: ");
                 if (Boolean.TRUE.equals(stack.get(NTDataComponents.ANALYZED))) {
-                    tooltipComponents.add(statsCaption.withStyle(ChatFormatting.GRAY));
+                    tooltipComponents.add(statsCaption.withStyle(ChatFormatting.WHITE));
                     for (Component tooltipComponent : bacteria.stats().statsTooltip()) {
                         tooltipComponents.add(Component.literal(" ".repeat(2)).append(tooltipComponent).withStyle(ChatFormatting.GRAY));
                     }
