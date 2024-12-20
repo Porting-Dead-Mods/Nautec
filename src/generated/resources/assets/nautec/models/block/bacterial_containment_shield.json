@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "nautec:block/bacterial_containment_shield"
+  }
+}

@@ -52,7 +52,7 @@ public class FishingStationBlockEntity extends LaserBlockEntity {
     private boolean canRun(){
         BlockPos start = worldPosition.offset(-NTConfig.fisherRadius,-NTConfig.fisherDepth,-NTConfig.fisherRadius);
         BlockPos end = worldPosition.offset(NTConfig.fisherRadius,-1,NTConfig.fisherRadius);
-        for (BlockPos pos: BlockPos.betweenClosed(start,end)) {
+        for (BlockPos pos : BlockPos.betweenClosed(start,end)) {
             if (!level.getBlockState(pos).is(Blocks.WATER)) return false;
         }
         return true;
@@ -69,7 +69,9 @@ public class FishingStationBlockEntity extends LaserBlockEntity {
                     spawnLoot();
                 }
                 counter++;
-            } else running = canRun();
+            } else {
+                running = canRun();
+            }
         }
     }
 

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "nautec:block/bacterial_analyzer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nautec:block/bacterial_analyzer"
+    },
+    "facing=south": {
+      "model": "nautec:block/bacterial_analyzer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nautec:block/bacterial_analyzer",
+      "y": 270
+    }
+  }
+}

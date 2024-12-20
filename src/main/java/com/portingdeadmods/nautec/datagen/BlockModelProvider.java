@@ -64,7 +64,10 @@ public class BlockModelProvider extends BlockStateProvider {
         augmentationStationController(NTBlocks.AUGMENTATION_STATION.get());
         augmentationStationPart(NTBlocks.AUGMENTATION_STATION_PART.get(), IntegerRange.of(0, 8));
         augmentationStationExtension(NTBlocks.AUGMENTATION_STATION_EXTENSION.get());
+        simpleBlock(NTBlocks.BACTERIAL_CONTAINMENT_SHIELD.get());
 
+        horizontalBlock(NTBlocks.BIO_REACTOR.get(), models()
+                .cubeTop(name(NTBlocks.BIO_REACTOR.get()), blockTexture(NTBlocks.POLISHED_PRISMARINE.get()), blockTexture(NTBlocks.BIO_REACTOR.get(), "_top")));
         simpleBlock(NTBlocks.DRAIN_WALL.get());
         simpleBlock(NTBlocks.BROWN_POLYMER_BLOCK.get());
 
@@ -79,6 +82,9 @@ public class BlockModelProvider extends BlockStateProvider {
                 blockTexture(NTBlocks.OIL_BARREL.get(), "_bottom"),
                 blockTexture(NTBlocks.OIL_BARREL.get(), "_open")
         ));
+
+        horizontalBlock(NTBlocks.BACTERIAL_ANALYZER.get(), models().getExistingFile(existingModelFile(NTBlocks.BACTERIAL_ANALYZER.get())));
+        horizontalBlock(NTBlocks.BACTERIAL_ANALYZER_TOP.get(), models().getExistingFile(existingModelFile(NTBlocks.BACTERIAL_ANALYZER_TOP.get())));
     }
 
     private void augmentationStationController(AugmentationStationBlock augmentationStationBlock) {
