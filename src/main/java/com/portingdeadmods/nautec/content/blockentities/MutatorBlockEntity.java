@@ -38,7 +38,13 @@ public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider
 
     public MutatorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.MUTATOR.get(), blockPos, blockState);
-        addItemHandler(3, 1, (slot, stack) -> (slot == 0 && stack.getItem() instanceof PetriDishItem) || slot == 1 || slot == 2);
+        addItemHandler(3, (slot) -> {
+            if (slot == 0 || slot == 1) {
+                return 1;
+            } else {
+                return 64;
+            }
+        }, (slot, stack) -> (slot == 0 && stack.getItem() instanceof PetriDishItem) || slot == 1 || slot == 2);
     }
 
     @Override
@@ -62,13 +68,13 @@ public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider
 
                     ItemStack result = extracted.copy();
 
-//                    Bacteria bacteria = BacteriaHelper.getBacteria(getLevel().getServer().registryAccess(), extracted.get(NTDataComponents.BACTERIA).bacteria());
-//                    bacteria.stats().rollStats();
-//
-//                    result.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(
-//                            NTBacterias.EMPTY,
-//                            1
-//                    ));
+                    Bacteria bacteria = BacteriaHelper.getBacteria(getLevel().getServer().registryAccess(), extracted.get(NTDataComponents.BACTERIA).bacteria());
+                    bacteria.stats().rollStats();
+
+                    result.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(
+                            NTBacterias.EMPTY,
+                            1
+                    ));
 
                     getItemHandler().insertItem(1, result, false);
                 } else {

@@ -18,13 +18,13 @@ public class MutatorMenu extends NTAbstractContainerMenu<MutatorBlockEntity> {
     public MutatorMenu(int containerId, @NotNull Inventory inv, @NotNull MutatorBlockEntity blockEntity) {
         super(NTMenuTypes.MUTATOR.get(), containerId, inv, blockEntity);
         // Input
-        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 25, 25));
+        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 26, 25));
 
         // Output
-        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 1, 133, 25));
+        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 1, 134, 25));
 
         // Catalyst
-        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 2, 79, 54));
+        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 2, 80, 54));
 
         addPlayerInventory(inv, 84);
         addPlayerHotbar(inv, 142);
