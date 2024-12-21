@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.registries;
 import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
+import com.portingdeadmods.nautec.content.bacteria.EmptyBacteria;
 import com.portingdeadmods.nautec.content.bacteria.SimpleBacteria;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -17,7 +18,7 @@ public final class NTBacterias {
     public static final ResourceKey<Bacteria> THERMOPHILES = key("thermophiles");
 
     public static void bootstrap(BootstrapContext<Bacteria> context) {
-        register(context, EMPTY, SimpleBacteria.of());
+        register(context, EMPTY, EmptyBacteria.INSTANCE);
         register(context, CYANOBACTERIA, SimpleBacteria.of()
                 .resource(Items.IRON_INGOT)
                 .color(FastColor.ARGB32.color(50, 255, 255)));
@@ -32,8 +33,8 @@ public final class NTBacterias {
                 .color(FastColor.ARGB32.color(255, 0, 0)));
     }
 
-    private static void register(BootstrapContext<Bacteria> context, ResourceKey<Bacteria> key, SimpleBacteria.Builder builder) {
-        context.register(key, builder.build(key.location()));
+    private static void register(BootstrapContext<Bacteria> context, ResourceKey<Bacteria> key, Bacteria.Builder<?> builder) {
+        context.register(key, builder.build());
     }
 
     private static ResourceKey<Bacteria> key(String name) {

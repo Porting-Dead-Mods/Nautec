@@ -39,7 +39,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 public abstract class ContainerBlockEntity extends BlockEntity {
     private @Nullable ItemStackHandler itemHandler;
@@ -150,8 +152,15 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     protected final void addItemHandler(int slots, BiPredicate<Integer, ItemStack> validation) {
         addItemHandler(slots, 64, validation);
     }
+    protected final void addItemHandler(int slots, UnaryOperator<Integer> slotLimit) {
+        addItemHandler(slots, slotLimit, (slot, itemStack) -> true);
+    }
 
     protected final void addItemHandler(int slots, int slotLimit, BiPredicate<Integer, ItemStack> validation) {
+        addItemHandler(slots, slot -> slotLimit, validation);
+    }
+
+    protected final void addItemHandler(int slots, UnaryOperator<Integer> slotLimit, BiPredicate<Integer, ItemStack> validation) {
         this.itemHandler = new ItemStackHandler(slots) {
             @Override
             protected void onContentsChanged(int slot) {
@@ -168,7 +177,7 @@ public abstract class ContainerBlockEntity extends BlockEntity {
 
             @Override
             public int getSlotLimit(int slot) {
-                return slotLimit;
+                return slotLimit.apply(slot);
             }
 
             @Override
@@ -227,8 +236,8 @@ public abstract class ContainerBlockEntity extends BlockEntity {
         this.powerStorage.setPowerCapacity(powerCapacity);
     }
 
-    protected final void addBacteriaStorage() {
-        this.bacteriaStorage = new BacteriaStorage();
+    protected final void addBacteriaStorage(int slots) {
+        this.bacteriaStorage = new BacteriaStorage(slots);
     }
 
     private void update() {

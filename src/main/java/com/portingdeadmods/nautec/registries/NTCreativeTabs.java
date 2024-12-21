@@ -9,6 +9,7 @@ import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
 import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
+import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
 import net.minecraft.core.HolderLookup;
@@ -46,8 +47,8 @@ public final class NTCreativeTabs {
                         if (lookup.isPresent()) {
                             Stream<ResourceKey<Bacteria>> resourceKeyStream = lookup.get().listElementIds();
                             resourceKeyStream.forEach(elem -> {
-                                addPetriDish(output, item, elem, false);
-                                addPetriDish(output, item, elem, true);
+                                addPetriDish(output, params.holders(), item, elem, false);
+                                addPetriDish(output, params.holders(), item, elem, true);
                             });
                         }
                     }
@@ -68,10 +69,10 @@ public final class NTCreativeTabs {
             })
             .build());
 
-    private static void addPetriDish(CreativeModeTab.Output output, ItemLike item, ResourceKey<Bacteria> elem, boolean analyzed) {
+    private static void addPetriDish(CreativeModeTab.Output output, HolderLookup.Provider lookup, ItemLike item, ResourceKey<Bacteria> elem, boolean analyzed) {
         if (elem != NTBacterias.EMPTY) {
             ItemStack stack = new ItemStack(item);
-            stack.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(elem, 1));
+            stack.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(new BacteriaInstance(elem, lookup)));
             stack.set(NTDataComponents.ANALYZED, analyzed);
             output.accept(stack);
         }

@@ -1,14 +1,20 @@
 package com.portingdeadmods.nautec.capabilities.bacteria;
 
-import com.portingdeadmods.nautec.api.bacteria.Bacteria;
-import net.minecraft.resources.ResourceKey;
+import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
+import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
+
+import java.util.function.UnaryOperator;
 
 public interface IBacteriaStorage {
-    void setBacteria(ResourceKey<Bacteria> bacteria);
+    void setBacteria(int slot, BacteriaInstance bacteriaInstance);
 
-    ResourceKey<Bacteria> getBacteria();
+    BacteriaInstance getBacteria(int slot);
 
-    void setBacteriaAmount(long bacteriaAmount);
+    int getBacteriaSlots();
 
-    long getBacteriaAmount();
+    default void modifyStats(int slot, UnaryOperator<BacteriaStats> statsModifier) {
+        BacteriaInstance bacteriaInstance = getBacteria(slot);
+        BacteriaStats newStats = statsModifier.apply(bacteriaInstance.getStats());
+
+    }
 }

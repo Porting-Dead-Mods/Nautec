@@ -33,6 +33,7 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.util.FastColor;
@@ -225,8 +226,9 @@ public final class NautecClient {
 
     private void registerColorHandlers(RegisterColorHandlersEvent.Item event) {
         event.register((stack, layer) -> {
-            Bacteria bacteria = BacteriaHelper.getBacteria(Minecraft.getInstance().level.registryAccess(), stack.get(NTDataComponents.BACTERIA).bacteria());
-            return layer == 1 ? bacteria.stats().color() : -1;
+            ResourceKey<Bacteria> bacteriaType = stack.get(NTDataComponents.BACTERIA).bacteriaInstance().getBacteria();
+            Bacteria bacteria = BacteriaHelper.getBacteria(Minecraft.getInstance().level.registryAccess(), bacteriaType);
+            return layer == 1 ? bacteria.initialStats().color() : -1;
         }, NTItems.PETRI_DISH);
         event.register(new DynamicFluidContainerModel.Colors(), NTFluids.SALT_WATER.getBucket());
     }

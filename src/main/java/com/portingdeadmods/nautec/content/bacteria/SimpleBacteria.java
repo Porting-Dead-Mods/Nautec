@@ -4,13 +4,13 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaSerializer;
+import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public record SimpleBacteria(BacteriaStats stats) implements Bacteria {
+public record SimpleBacteria(Resource.ItemResource resource, BacteriaStats initialStats) implements Bacteria {
     public static Builder of() {
         return new Builder();
     }
@@ -23,11 +23,14 @@ public record SimpleBacteria(BacteriaStats stats) implements Bacteria {
     public static final class Serializer implements BacteriaSerializer<SimpleBacteria> {
         public static final Serializer INSTANCE = new Serializer();
         public static final MapCodec<SimpleBacteria> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                BacteriaStats.CODEC.fieldOf("stats").forGetter(SimpleBacteria::stats)
+                Resource.ItemResource.CODEC.fieldOf("resource").forGetter(SimpleBacteria::resource),
+                BacteriaStats.CODEC.fieldOf("stats").forGetter(SimpleBacteria::initialStats)
         ).apply(instance, SimpleBacteria::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, SimpleBacteria> STREAM_CODEC = StreamCodec.composite(
+                Resource.ItemResource.STREAM_CODEC,
+                SimpleBacteria::resource,
                 BacteriaStats.STREAM_CODEC,
-                SimpleBacteria::stats,
+                SimpleBacteria::initialStats,
                 SimpleBacteria::new
         );
 
@@ -45,17 +48,16 @@ public record SimpleBacteria(BacteriaStats stats) implements Bacteria {
         }
     }
 
-    public static class Builder {
-        private Item resource = Items.AIR;
+    public static class Builder implements Bacteria.Builder<SimpleBacteria> {
+        private Resource.ItemResource resource = new Resource.ItemResource(Items.AIR);
         private float growthRate;
         private float mutationResistance;
         private float productionRate;
-        private float colonySize;
         private int lifespan;
         private int color;
 
         public Builder resource(Item resource) {
-            this.resource = resource;
+            this.resource = new Resource.ItemResource(resource);
             return this;
         }
 
@@ -74,11 +76,6 @@ public record SimpleBacteria(BacteriaStats stats) implements Bacteria {
             return this;
         }
 
-        public Builder colonySize(float colonySize) {
-            this.colonySize = colonySize;
-            return this;
-        }
-
         public Builder lifespan(int lifespan) {
             this.lifespan = lifespan;
             return this;
@@ -89,8 +86,8 @@ public record SimpleBacteria(BacteriaStats stats) implements Bacteria {
             return this;
         }
 
-        public Bacteria build(ResourceLocation location) {
-            return new SimpleBacteria(new BacteriaStats(resource, growthRate, mutationResistance, productionRate, colonySize, lifespan, color));
+        public SimpleBacteria build() {
+            return new SimpleBacteria(resource, new SimpleBacteriaStats(growthRate, mutationResistance, productionRate, lifespan, color));
         }
     }
 }
