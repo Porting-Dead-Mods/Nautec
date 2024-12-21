@@ -23,6 +23,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
+
 public class DrainMultiblock implements Multiblock {
     public static final IntegerProperty DRAIN_PART = IntegerProperty.create("drain_part", 0, 8);
 
@@ -48,7 +50,7 @@ public class DrainMultiblock implements Multiblock {
     }
 
     @Override
-    public Int2ObjectMap<Block> getDefinition() {
+    public Map<Integer, Block> getDefinition() {
         Int2ObjectMap<Block> def = new Int2ObjectOpenHashMap<>();
         def.put(0, NTBlocks.DRAIN_WALL.get());
         def.put(1, getUnformedController());

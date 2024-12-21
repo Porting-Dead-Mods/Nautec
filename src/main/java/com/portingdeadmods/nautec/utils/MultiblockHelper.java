@@ -224,8 +224,8 @@ public final class MultiblockHelper {
      */
     public static Vec3i getRelativeControllerPos(Multiblock multiblock) {
         Object2IntMap<Block> revDef = new Object2IntOpenHashMap<>();
-        for (var entry : multiblock.getDefinition().int2ObjectEntrySet()) {
-            revDef.put(entry.getValue(), entry.getIntKey());
+        for (var entry : multiblock.getDefinition().entrySet()) {
+            revDef.put(entry.getValue(), entry.getKey());
         }
 
         MultiblockLayer[] layout = multiblock.getLayout();
@@ -299,7 +299,7 @@ public final class MultiblockHelper {
         Vec3i relativeControllerPos = getRelativeControllerPos(multiblock);
         // Calculate block pos of the first block in the multi (multiblock.getLayout().get(0))
         BlockPos firstBlockPos = getFirstBlockPos(direction, controllerPos, relativeControllerPos);
-        Int2ObjectMap<Block> def = multiblock.getDefinition();
+        Map<Integer, Block> def = multiblock.getDefinition();
         Nautec.LOGGER.debug("first: {}", firstBlockPos);
 
         multiblock.onStartForming(level, firstBlockPos, controllerPos);

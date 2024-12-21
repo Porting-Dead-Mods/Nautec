@@ -3,13 +3,14 @@ package com.portingdeadmods.nautec.registries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.blockentities.*;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.AugmentationStationBlockEntity;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.BioReactorBlockEntity;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.DrainBlockEntity;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.part.AugmentationStationExtensionBlockEntity;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.part.AugmentationStationPartBlockEntity;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.part.BioReactorPartBlockEntity;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.part.DrainPartBlockEntity;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.semi.PrismarineCrystalBlockEntity;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.semi.PrismarineCrystalPartBlockEntity;
-import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalPartBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -60,6 +61,9 @@ public final class NTBlockEntityTypes {
     public static final Supplier<BlockEntityType<BioReactorBlockEntity>> BIO_REACTOR = BLOCK_ENTITIES.register("bio_reactor",
             () -> BlockEntityType.Builder.of(BioReactorBlockEntity::new,
                     NTBlocks.BIO_REACTOR.get()).build(null));
+    public static final Supplier<BlockEntityType<BioReactorPartBlockEntity>> BIO_REACTOR_PART = BLOCK_ENTITIES.register("bio_reactor_part",
+            () -> BlockEntityType.Builder.of(BioReactorPartBlockEntity::new,
+                    NTBlocks.BIO_REACTOR_PART.get()).build(null));
     public static final Supplier<BlockEntityType<BacterialAnalyzerBlockEntity>> BACTERIAL_ANALYZER = BLOCK_ENTITIES.register("bacterial_analyzer",
             () -> BlockEntityType.Builder.of(BacterialAnalyzerBlockEntity::new,
                     NTBlocks.BACTERIAL_ANALYZER.get()).build(null));
