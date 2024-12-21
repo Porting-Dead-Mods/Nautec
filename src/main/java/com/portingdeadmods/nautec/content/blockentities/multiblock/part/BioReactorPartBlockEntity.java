@@ -11,7 +11,7 @@ public class BioReactorPartBlockEntity extends BlockEntity implements Multiblock
     private BlockPos controllerPos;
 
     public BioReactorPartBlockEntity(BlockPos pos, BlockState blockState) {
-        super(NTBlockEntityTypes, pos, blockState);
+        super(NTBlockEntityTypes.BIO_REACTOR_PART.get(), pos, blockState);
     }
 
     @Override

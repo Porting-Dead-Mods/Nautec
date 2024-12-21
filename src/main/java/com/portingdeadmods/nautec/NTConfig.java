@@ -97,6 +97,24 @@ public final class NTConfig {
             .comment("The maximum lifespan of a bacteria colony")
             .defineInRange("bacteriaLifespanCap", 24000, 0, Integer.MAX_VALUE);
 
+    private static final ModConfigSpec.IntValue BACTERIA_ANALYZER_CRAFTING_SPEED = BUILDER
+            .comment("The amount of ticks it takes for the Bacterial Analyzer to analyze a Petri Dish")
+            .defineInRange("bacteriaAnalyzerCraftingSpeed", 60, 0, Integer.MAX_VALUE);
+
+    private static final ModConfigSpec.IntValue BACTERIA_ANALYZER_POWER_USAGE = BUILDER
+            .comment("The amount of power used by the Bacterial Analyzer each tick")
+            .defineInRange("bacteriaAnalyzerPowerUsage", 5, 0, Integer.MAX_VALUE);
+
+    private static final ModConfigSpec.IntValue MUTATOR_CRAFTING_SPEED = BUILDER
+            .comment("The amount of ticks it takes for the Bacterial Analyzer to analyze a Petri Dish")
+            .defineInRange("mutatorCraftingSpeed", 240, 0, Integer.MAX_VALUE);
+
+    private static final ModConfigSpec.IntValue MUTATOR_POWER_USAGE = BUILDER
+            .comment("The amount of power used by the Mutator each tick")
+            .defineInRange("mutatorPowerUsage", 10, 0, Integer.MAX_VALUE);
+
+
+
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public static int kelpHeight;
@@ -129,6 +147,12 @@ public final class NTConfig {
     public static float bacteriaMutationResistanceCap;
     public static float bacteriaColonySizeCap;
     public static int bacteriaLifespanCap;
+
+    public static int bacteriaAnalyzerCraftingSpeed;
+    public static int bacteriaAnalyzerPowerUsage;
+
+    public static int mutatorCraftingSpeed;
+    public static int mutatorPowerUsage;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
@@ -163,6 +187,12 @@ public final class NTConfig {
         bacteriaMutationResistanceCap = (float) BACTERIA_MUTATION_RESISTANCE_CAP.getAsDouble();
         bacteriaColonySizeCap = (float) BACTERIA_COLONY_SIZE_CAP.getAsDouble();
         bacteriaLifespanCap = BACTERIA_LIFESPAN_CAP.get();
+
+        bacteriaAnalyzerCraftingSpeed = BACTERIA_ANALYZER_CRAFTING_SPEED.get();
+        bacteriaAnalyzerPowerUsage = BACTERIA_ANALYZER_POWER_USAGE.get();
+
+        mutatorCraftingSpeed = MUTATOR_CRAFTING_SPEED.get();
+        mutatorPowerUsage = MUTATOR_POWER_USAGE.get();
     }
 
 }

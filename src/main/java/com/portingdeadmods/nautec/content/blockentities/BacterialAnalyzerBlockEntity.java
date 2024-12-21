@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.blockentities;
 
+import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
@@ -26,8 +27,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 
 public class BacterialAnalyzerBlockEntity extends LaserBlockEntity implements MenuProvider {
-    public static final int MAX_PROGRESS = 60;
-    public static final int POWER_USAGE = 5;
+    public static final int MAX_PROGRESS = NTConfig.bacteriaAnalyzerCraftingSpeed;
+    public static final int POWER_USAGE = NTConfig.bacteriaAnalyzerPowerUsage;
 
     private boolean hasRecipe;
     private int progress;
