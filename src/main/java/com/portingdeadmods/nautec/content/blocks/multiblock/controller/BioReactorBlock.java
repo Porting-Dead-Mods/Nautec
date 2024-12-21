@@ -1,8 +1,10 @@
-package com.portingdeadmods.nautec.content.blocks;
+package com.portingdeadmods.nautec.content.blocks.multiblock.controller;
 
 import com.mojang.serialization.MapCodec;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
+import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
+import com.portingdeadmods.nautec.content.multiblocks.BioReactorMultiblock;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,12 +28,15 @@ public class BioReactorBlock extends LaserBlock {
 
     public BioReactorBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH));
+        registerDefaultState(defaultBlockState()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(Multiblock.FORMED, false)
+        );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder.add(FACING));
+        super.createBlockStateDefinition(builder.add(FACING, Multiblock.FORMED, BioReactorMultiblock.BIO_REACTOR_PART));
     }
 
     @Override
