@@ -13,11 +13,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
 public class BioReactorMultiblock implements Multiblock {
+    public static final IntegerProperty BIO_REACTOR_PART = IntegerProperty.create("bio_reactor_part", 0, 8);
+
     @Override
     public Block getUnformedController() {
         return NTBlocks.BIO_REACTOR.get();
@@ -61,10 +64,10 @@ public class BioReactorMultiblock implements Multiblock {
 
     @Override
     public @Nullable BlockState formBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, MultiblockData multiblockData, @Nullable Player player) {
-        return switch (layerIndex) {
-            case 4 -> Blocks.BARREL.defaultBlockState();
-            default -> Blocks.BAMBOO_PLANKS.defaultBlockState();
-        };
+        if (layerIndex == 4) {
+            return getFormedController().defaultBlockState().setValue(BIO_REACTOR_PART, layerIndex).setValue(FORMED, true);
+        }
+        return NTBlocks.BIO_REACTOR_PART.get().defaultBlockState().setValue(BIO_REACTOR_PART, layerIndex).setValue(FORMED, true);
     }
 
     @Override

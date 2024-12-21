@@ -30,9 +30,14 @@ public class PetriDishItem extends Item implements IBacteriaItem {
             if (bacteriaType != NTBacterias.EMPTY) {
                 MutableComponent statsCaption = Component.literal("Stats: ");
                 if (Boolean.TRUE.equals(stack.get(NTDataComponents.ANALYZED))) {
-                    tooltipComponents.add(statsCaption.withStyle(ChatFormatting.WHITE));
-                    for (Component tooltipComponent : bacteria.initialStats().statsTooltip()) {
-                        tooltipComponents.add(Component.literal(" ".repeat(2)).append(tooltipComponent).withStyle(ChatFormatting.GRAY));
+                    if (!tooltipFlag.hasShiftDown()) {
+                        statsCaption.append("<Shift>");
+                    }
+                    tooltipComponents.add(statsCaption.withStyle(ChatFormatting.GRAY));
+                    if (tooltipFlag.hasShiftDown()) {
+                        for (Component tooltipComponent : bacteria.initialStats().statsTooltip()) {
+                            tooltipComponents.add(Component.literal(" ".repeat(2)).append(tooltipComponent).withStyle(ChatFormatting.GRAY));
+                        }
                     }
                 } else {
                     statsCaption.append("???");
