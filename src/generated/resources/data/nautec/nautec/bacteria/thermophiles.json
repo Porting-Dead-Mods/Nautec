@@ -1,12 +1,12 @@
 {
   "type": "nautec:simple",
+  "resource": "minecraft:lava_bucket",
   "stats": {
-    "colony_size": 0.0,
+    "type": "nautec:simple",
     "color": -65536,
     "growth_rate": 0.0,
     "lifespan": 0,
     "mutation_resistance": 0.0,
-    "production_rate": 0.0,
-    "resource": "minecraft:lava_bucket"
+    "production_rate": 0.0
   }
 }
