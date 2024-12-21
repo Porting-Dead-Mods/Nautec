@@ -1,6 +1,5 @@
 package com.portingdeadmods.nautec.content.multiblocks;
 
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockEntity;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.api.multiblocks.MultiblockData;
@@ -15,12 +14,13 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 public class AugmentationStationMultiblock implements Multiblock {
     public static final IntegerProperty AS_PART = IntegerProperty.create("as_part", 0, 8);
@@ -52,7 +52,7 @@ public class AugmentationStationMultiblock implements Multiblock {
     }
 
     @Override
-    public Int2ObjectMap<Block> getDefinition() {
+    public Map<Integer, Block> getDefinition() {
         Int2ObjectMap<Block> def = new Int2ObjectOpenHashMap<>();
         def.put(0, null);
         def.put(1, getUnformedController());
@@ -79,7 +79,7 @@ public class AugmentationStationMultiblock implements Multiblock {
 
     @Override
     public void iterBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, MultiblockData data, boolean forming) {
-        Int2ObjectMap<Block> def = getDefinition();
+        Map<Integer, Block> def = getDefinition();
         int[] curLayer = getLayout()[0].layer();
         Block block = def.get(curLayer[layerIndex]);
         if (block == getUnformedController()
@@ -91,7 +91,7 @@ public class AugmentationStationMultiblock implements Multiblock {
 
     @Override
     public @Nullable BlockState formBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, MultiblockData multiblockData, @Nullable Player player) {
-        Int2ObjectMap<Block> def = getDefinition();
+        Map<Integer, Block> def = getDefinition();
         int[] curLayer = getLayout()[0].layer();
         Block block = def.get(curLayer[layerIndex]);
         if (block == getUnformedController()

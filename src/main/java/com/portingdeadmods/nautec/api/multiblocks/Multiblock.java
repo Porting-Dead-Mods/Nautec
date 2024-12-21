@@ -2,7 +2,6 @@ package com.portingdeadmods.nautec.api.multiblocks;
 
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockEntity;
 import com.portingdeadmods.nautec.api.utils.HorizontalDirection;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.IntIntPair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -16,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public interface Multiblock {
     BooleanProperty FORMED = BooleanProperty.create("formed");
@@ -82,9 +82,10 @@ public interface Multiblock {
      * <br>
      * <br>
      * Example: {@link com.indref.industrial_reforged.registries.multiblocks.BlastFurnaceMultiblock#getDefinition() BlastFurnaceMultiblock.getDefintion()}
+     *
      * @return The integer to block map that provides the integer keys and their block values
      */
-    Int2ObjectMap<Block> getDefinition();
+    Map<Integer, Block> getDefinition();
 
     /**
      * This method provides the block entity resource for the controller of your multiblock.
