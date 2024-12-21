@@ -1,6 +1,8 @@
 package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.content.blocks.multiblock.controller.BioReactorBlock;
+import com.portingdeadmods.nautec.content.blocks.multiblock.part.BioReactorPartBlock;
 import com.portingdeadmods.nautec.content.items.blocks.PrismarineCrystalItem;
 import com.portingdeadmods.nautec.content.blocks.*;
 import com.portingdeadmods.nautec.content.blocks.multiblock.controller.AugmentationStationBlock;
