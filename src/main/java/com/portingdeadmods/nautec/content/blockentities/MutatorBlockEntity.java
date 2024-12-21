@@ -1,9 +1,17 @@
 package com.portingdeadmods.nautec.content.blockentities;
 
+import com.portingdeadmods.nautec.NTConfig;
+import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
+import com.portingdeadmods.nautec.capabilities.NTCapabilities;
+import com.portingdeadmods.nautec.content.items.PetriDishItem;
 import com.portingdeadmods.nautec.content.menus.MutatorMenu;
+import com.portingdeadmods.nautec.data.NTDataComponents;
+import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
+import com.portingdeadmods.nautec.registries.NTBacterias;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.utils.BacteriaHelper;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
@@ -13,6 +21,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.BlockCapability;
@@ -21,11 +30,58 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 
 public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider {
+    public static final int MAX_PROGRESS = NTConfig.mutatorCraftingSpeed;
+    public static final int POWER_USAGE = NTConfig.mutatorPowerUsage;
 
+    private boolean hasRecipe;
+    private int progress;
 
     public MutatorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.MUTATOR.get(), blockPos, blockState);
-        addItemHandler(1);
+        addItemHandler(3, 1, (slot, stack) -> (slot == 0 && stack.getItem() instanceof PetriDishItem) || slot == 1 || slot == 2);
+    }
+
+    @Override
+    protected void onItemsChanged(int slot) {
+        super.onItemsChanged(slot);
+
+        ItemStack stack = getItemHandler().getStackInSlot(0);
+        ItemStack resultStack = getItemHandler().getStackInSlot(1);
+        this.hasRecipe = stack.getCapability(NTCapabilities.BacteriaStorage.ITEM) != null
+                && resultStack.isEmpty();
+    }
+
+    @Override
+    public void commonTick() {
+        super.commonTick();
+
+        if (hasRecipe) {
+            if (getPower() >= POWER_USAGE) {
+                if (progress >= MAX_PROGRESS) {
+                    ItemStack extracted = getItemHandler().extractItem(0, 1, false);
+
+                    ItemStack result = extracted.copy();
+
+                    Bacteria bacteria = BacteriaHelper.getBacteria(getLevel().getServer().registryAccess(), extracted.get(NTDataComponents.BACTERIA).bacteria());
+                    bacteria.stats().rollStats();
+
+                    result.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(
+                            NTBacterias.EMPTY,
+                            1
+                    ));
+
+                    getItemHandler().insertItem(1, result, false);
+                } else {
+                    progress++;
+                }
+            }
+        } else {
+            progress = 0;
+        }
+    }
+
+    public int getProgress() {
+        return progress;
     }
 
     @Override

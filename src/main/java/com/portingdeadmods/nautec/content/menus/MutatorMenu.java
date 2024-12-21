@@ -17,9 +17,14 @@ public class MutatorMenu extends NTAbstractContainerMenu<MutatorBlockEntity> {
 
     public MutatorMenu(int containerId, @NotNull Inventory inv, @NotNull MutatorBlockEntity blockEntity) {
         super(NTMenuTypes.MUTATOR.get(), containerId, inv, blockEntity);
+        // Input
+        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 25, 25));
+
+        // Output
+        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 1, 133, 25));
 
         // Catalyst
-        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 80, 35));
+        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 2, 79, 54));
 
         addPlayerInventory(inv, 84);
         addPlayerHotbar(inv, 142);
@@ -27,6 +32,6 @@ public class MutatorMenu extends NTAbstractContainerMenu<MutatorBlockEntity> {
 
     @Override
     protected int getMergeableSlotCount() {
-        return 1;
+        return 2;
     }
 }
