@@ -114,6 +114,8 @@ public final class NTBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), false, true);
     public static final DeferredBlock<CreativeEnergySourceBlock> CREATIVE_ENERGY_SOURCE = registerBlockAndItem("creative_energy_source", CreativeEnergySourceBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), false, true);
+    public static final DeferredBlock<EnergyConverterBlock> ENERGY_CONVERTER = registerBlockAndItem("energy_converter", EnergyConverterBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), false, true);
 
     private static <T extends Block> DeferredBlock<T> registerBlockAndItem(String name, Function<BlockBehaviour.Properties, T> blockConstructor, BlockBehaviour.Properties properties) {
         return registerBlockAndItem(name, blockConstructor, properties, true, true);
