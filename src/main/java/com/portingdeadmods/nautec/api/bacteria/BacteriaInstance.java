@@ -69,4 +69,8 @@ public final class BacteriaInstance {
     public BacteriaInstance copy() {
         return new BacteriaInstance(this.bacteria, amount, this.stats.copy());
     }
+
+    public boolean isEmpty() {
+        return bacteria == NTBacterias.EMPTY;
+    }
 }

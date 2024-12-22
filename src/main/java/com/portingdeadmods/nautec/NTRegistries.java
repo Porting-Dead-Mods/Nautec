@@ -29,5 +29,5 @@ public final class NTRegistries {
     public static final Registry<AugmentSlot> AUGMENT_SLOT = new RegistryBuilder<>(AUGMENT_SLOT_KEY).create();
     public static final Registry<Multiblock> MULTIBLOCK = new RegistryBuilder<>(MULTIBLOCK_KEY).create();
     public static final Registry<BacteriaSerializer<?>> BACTERIA_SERIALIZER = new RegistryBuilder<>(BACTERIA_SERIALIZER_KEY).create();
-    public static final Registry<BacteriaStatsSerializer<?>> BACTERIA_STATS_SERIALIZER = new RegistryBuilder<>(BACTERIA_STATS_SERIALIZER_KEY).create();
+    public static final Registry<BacteriaStatsSerializer<?>> BACTERIA_STATS_SERIALIZER = new RegistryBuilder<>(BACTERIA_STATS_SERIALIZER_KEY).sync(true).create();
 }

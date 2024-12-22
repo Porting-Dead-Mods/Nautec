@@ -1,12 +1,17 @@
 package com.portingdeadmods.nautec.content.blockentities;
 
 import com.portingdeadmods.nautec.NTConfig;
+import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.content.items.PetriDishItem;
 import com.portingdeadmods.nautec.content.menus.MutatorMenu;
+import com.portingdeadmods.nautec.data.NTDataComponents;
+import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
+import com.portingdeadmods.nautec.registries.NTBacterias;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.utils.BacteriaHelper;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
@@ -62,13 +67,13 @@ public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider
 
                     ItemStack result = extracted.copy();
 
-                    Bacteria bacteria = BacteriaHelper.getBacteria(getLevel().getServer().registryAccess(), extracted.get(NTDataComponents.BACTERIA).bacteria());
-                    bacteria.stats().rollStats();
-
-                    result.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(
-                            NTBacterias.EMPTY,
-                            1
-                    ));
+//                    Bacteria bacteria = BacteriaHelper.getBacteria(getLevel().getServer().registryAccess(), extracted.get(NTDataComponents.BACTERIA).bacteria());
+//                    bacteria.stats().rollStats();
+//
+//                    result.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(
+//                            NTBacterias.EMPTY,
+//                            1
+//                    ));
 
                     getItemHandler().insertItem(1, result, false);
                 } else {

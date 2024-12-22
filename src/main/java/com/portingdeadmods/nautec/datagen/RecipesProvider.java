@@ -90,8 +90,6 @@ public class RecipesProvider extends RecipeProvider {
 
         brownPolymerRecipes(pRecipeOutput);
 
-
-
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.NAUTEC_GUIDE.get(), 1)
                 .requires(Items.BOOK)
                 .requires(NTItems.CAST_IRON_NUGGET.get(), 1)
@@ -120,14 +118,11 @@ public class RecipesProvider extends RecipeProvider {
     private static void aquarineSteelRecipes(@NotNull RecipeOutput pRecipeOutput) {
         ItemTransformationRecipeBuilder.newRecipe(new ItemStack(NTItems.AQUARINE_STEEL_INGOT.get(), 1))
                 .ingredient(new ItemStack(NTItems.AQUARINE_STEEL_COMPOUND.get()))
-                .purity(3)
+                .purity(0)
                 .duration(100)
                 .save(pRecipeOutput, Nautec.rl("aquarine_steel_ingot"));
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTBlocks.AQUARINE_STEEL_BLOCK.asItem(), 1)
-                .requires(NTItems.AQUARINE_STEEL_INGOT, 9)
-                .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT))
-                .save(pRecipeOutput, Nautec.rl( "cast_iron_ingot_from_blasting"));
+        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, NTItems.AQUARINE_STEEL_INGOT.get(), RecipeCategory.BUILDING_BLOCKS, NTBlocks.AQUARINE_STEEL_BLOCK.get());
     }
 
     private static void augmentationStationRecipes(@NotNull RecipeOutput pRecipeOutput) {
