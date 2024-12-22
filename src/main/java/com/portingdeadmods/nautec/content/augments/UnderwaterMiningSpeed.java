@@ -2,12 +2,10 @@ package com.portingdeadmods.nautec.content.augments;
 
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.registries.NTAugments;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import org.jetbrains.annotations.Nullable;
 
 public class UnderwaterMiningSpeed extends Augment {
     public UnderwaterMiningSpeed(AugmentSlot augmentSlot) {

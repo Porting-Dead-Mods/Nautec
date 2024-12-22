@@ -4,17 +4,13 @@ import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.utils.ParticleUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Fluids;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,5 @@
 package com.portingdeadmods.nautec.content.blockentities;
 
-import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
@@ -12,11 +11,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.BlockCapability;

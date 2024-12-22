@@ -5,14 +5,10 @@ import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.content.items.tiers.NTArmorMaterials;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
-import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.ItemUtils;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class PrismMonocleItem extends ArmorItem implements IPowerItem, ICurioItem {
     public PrismMonocleItem(Properties properties) {

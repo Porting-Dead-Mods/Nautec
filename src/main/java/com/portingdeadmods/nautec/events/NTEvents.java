@@ -5,24 +5,21 @@ import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.api.augments.AugmentType;
-import com.portingdeadmods.nautec.api.fluids.NTFluid;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
 import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
-import com.portingdeadmods.nautec.content.commands.arguments.AugmentSlotArgumentType;
-import com.portingdeadmods.nautec.content.commands.arguments.AugmentTypeArgumentType;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.events.helper.ItemEtching;
 import com.portingdeadmods.nautec.events.helper.ItemInfusion;
 import com.portingdeadmods.nautec.network.SyncAugmentPayload;
-import com.portingdeadmods.nautec.registries.*;
+import com.portingdeadmods.nautec.registries.NTAttachmentTypes;
+import com.portingdeadmods.nautec.registries.NTFluids;
+import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,11 +40,8 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.registries.RegisterEvent;
 
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 public final class NTEvents {
     @EventBusSubscriber(modid = Nautec.MODID, bus = EventBusSubscriber.Bus.GAME)

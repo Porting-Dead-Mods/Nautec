@@ -2,18 +2,13 @@ package com.portingdeadmods.nautec.content.augments;
 
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.api.augments.AugmentType;
-import com.portingdeadmods.nautec.content.entites.ThrownBouncingTrident;
 import com.portingdeadmods.nautec.content.entites.ThrownSpreadingTrident;
 import com.portingdeadmods.nautec.network.KeyPressedPayload;
 import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.registries.NTKeybinds;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.jetbrains.annotations.Nullable;
 
 public class ThrowSpreadingTrident extends Augment {
     private static final float SPREAD_ANGLE = 8.0f;

@@ -1,6 +1,5 @@
 package com.portingdeadmods.nautec.content.blockentities.multiblock.semi;
 
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalPartBlock;

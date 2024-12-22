@@ -1,17 +1,272 @@
 {
   "variants": {
-    "facing=east": {
+    "bio_reactor_part=0,facing=east,formed=false": {
       "model": "nautec:block/bio_reactor",
       "y": 90
     },
-    "facing=north": {
+    "bio_reactor_part=0,facing=east,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=0,facing=north,formed=false": {
       "model": "nautec:block/bio_reactor"
     },
-    "facing=south": {
+    "bio_reactor_part=0,facing=north,formed=true": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=0,facing=south,formed=false": {
       "model": "nautec:block/bio_reactor",
       "y": 180
     },
-    "facing=west": {
+    "bio_reactor_part=0,facing=south,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=0,facing=west,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=0,facing=west,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=1,facing=east,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=1,facing=east,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=1,facing=north,formed=false": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=1,facing=north,formed=true": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=1,facing=south,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=1,facing=south,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=1,facing=west,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=1,facing=west,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=2,facing=east,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=2,facing=east,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=2,facing=north,formed=false": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=2,facing=north,formed=true": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=2,facing=south,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=2,facing=south,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=2,facing=west,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=2,facing=west,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=3,facing=east,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=3,facing=east,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=3,facing=north,formed=false": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=3,facing=north,formed=true": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=3,facing=south,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=3,facing=south,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=3,facing=west,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=3,facing=west,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=4,facing=east,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=4,facing=east,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=4,facing=north,formed=false": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=4,facing=north,formed=true": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=4,facing=south,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=4,facing=south,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=4,facing=west,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=4,facing=west,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=5,facing=east,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=5,facing=east,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=5,facing=north,formed=false": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=5,facing=north,formed=true": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=5,facing=south,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=5,facing=south,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=5,facing=west,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=5,facing=west,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=6,facing=east,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=6,facing=east,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=6,facing=north,formed=false": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=6,facing=north,formed=true": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=6,facing=south,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=6,facing=south,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=6,facing=west,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=6,facing=west,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=7,facing=east,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=7,facing=east,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=7,facing=north,formed=false": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=7,facing=north,formed=true": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=7,facing=south,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=7,facing=south,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=7,facing=west,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=7,facing=west,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=8,facing=east,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=8,facing=east,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 90
+    },
+    "bio_reactor_part=8,facing=north,formed=false": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=8,facing=north,formed=true": {
+      "model": "nautec:block/bio_reactor"
+    },
+    "bio_reactor_part=8,facing=south,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=8,facing=south,formed=true": {
+      "model": "nautec:block/bio_reactor",
+      "y": 180
+    },
+    "bio_reactor_part=8,facing=west,formed=false": {
+      "model": "nautec:block/bio_reactor",
+      "y": 270
+    },
+    "bio_reactor_part=8,facing=west,formed=true": {
       "model": "nautec:block/bio_reactor",
       "y": 270
     }

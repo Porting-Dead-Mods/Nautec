@@ -1,13 +1,9 @@
 package com.portingdeadmods.nautec.content.blocks;
 
 import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.SimpleMapCodec;
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
-import com.portingdeadmods.nautec.api.utils.HorizontalDirection;
 import com.portingdeadmods.nautec.content.blockentities.ChargerBlockEntity;
-import com.portingdeadmods.nautec.content.blockentities.MixerBlockEntity;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,9 +21,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 

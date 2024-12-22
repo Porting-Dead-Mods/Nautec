@@ -12,9 +12,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
-import static com.portingdeadmods.nautec.NTConfig.*;
-
 import java.util.List;
+
+import static com.portingdeadmods.nautec.NTConfig.*;
 
 public record SimpleBacteriaStats(float growthRate,
                                   float mutationResistance,

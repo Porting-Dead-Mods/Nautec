@@ -2,18 +2,12 @@ package com.portingdeadmods.nautec.events.helper;
 
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.api.augments.AugmentType;
-import com.portingdeadmods.nautec.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.nautec.api.client.renderer.augments.ModelPartGetter;
-import com.portingdeadmods.nautec.utils.AugmentHelper;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import it.unimi.dsi.fastutil.objects.ObjectSet;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.neoforged.neoforge.client.event.RenderPlayerEvent;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 

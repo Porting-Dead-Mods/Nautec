@@ -8,7 +8,6 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTFluids;
-import com.portingdeadmods.nautec.registries.NTItems;
 
 public class ChemistryIntroductionEntry extends EntryProvider {
     public ChemistryIntroductionEntry(CategoryProviderBase parent) {

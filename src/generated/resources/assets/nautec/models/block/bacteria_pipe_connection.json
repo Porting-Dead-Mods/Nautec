@@ -1,0 +1,6 @@
+{
+  "parent": "nautec:block/pipe_connection",
+  "textures": {
+    "texture": "nautec:block/bacteria_pipe"
+  }
+}

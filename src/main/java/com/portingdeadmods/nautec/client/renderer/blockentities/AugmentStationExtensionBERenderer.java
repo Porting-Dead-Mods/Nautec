@@ -1,7 +1,6 @@
 package com.portingdeadmods.nautec.client.renderer.blockentities;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.portingdeadmods.nautec.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.nautec.api.client.renderer.robotArms.RobotArmRenderer;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.part.AugmentationStationExtensionBlockEntity;
 import com.portingdeadmods.nautec.content.items.RobotArmItem;

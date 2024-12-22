@@ -5,10 +5,8 @@ import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
 import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel;
-import com.klikli_dev.modonomicon.api.datagen.book.page.BookRecipePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import com.mojang.datafixers.util.Pair;
-import com.portingdeadmods.nautec.content.items.NeptunesTridentItem;
 import com.portingdeadmods.nautec.registries.NTItems;
 
 public class MonocleEntry extends EntryProvider {

@@ -2,7 +2,9 @@ package com.portingdeadmods.nautec.registries;
 
 import com.mojang.serialization.MapCodec;
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.content.structures.*;
+import com.portingdeadmods.nautec.content.structures.DeepslateCrystalGeode;
+import com.portingdeadmods.nautec.content.structures.Ruins1;
+import com.portingdeadmods.nautec.content.structures.StoneCrystalGeode;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;

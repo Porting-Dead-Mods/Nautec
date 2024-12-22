@@ -2,7 +2,6 @@ package com.portingdeadmods.nautec.content.menus;
 
 import com.portingdeadmods.nautec.api.menu.NTAbstractContainerMenu;
 import com.portingdeadmods.nautec.content.blockentities.IncubatorBlockEntity;
-import com.portingdeadmods.nautec.content.blockentities.MutatorBlockEntity;
 import com.portingdeadmods.nautec.registries.NTMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;

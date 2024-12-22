@@ -5,7 +5,6 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.AugmentationStationBlockEntity;
 import com.portingdeadmods.nautec.content.recipes.AugmentationRecipe;
 import com.portingdeadmods.nautec.network.StartAugmentationPayload;
-import com.portingdeadmods.nautec.registries.NTAugmentSlots;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -17,12 +16,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.network.PacketDistributor;
-
-import java.util.List;
-import java.util.Optional;
 
 public class AugmentationStationScreen extends Screen {
     public static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/augment_station.png");

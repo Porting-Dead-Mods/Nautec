@@ -1,14 +1,12 @@
 package com.portingdeadmods.nautec.client.renderer.augments;
 
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.nautec.client.model.augment.GuardianEyeModel;
-import com.portingdeadmods.nautec.client.renderer.augments.helper.GuardianEyeRenderHelper;
 import com.portingdeadmods.nautec.content.augments.GuardianEyeAugment;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.events.helper.AugmentSlotsRenderer;
-import com.portingdeadmods.nautec.utils.LaserRendererHelper;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;

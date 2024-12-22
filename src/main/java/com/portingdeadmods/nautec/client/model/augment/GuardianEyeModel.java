@@ -15,8 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.InventoryMenu;
 
-import java.util.function.Function;
-
 public class GuardianEyeModel extends AugmentModel<GuardianEyeAugment> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "guardian_eye"), "main");
     public static final Material MATERIAL = new Material(

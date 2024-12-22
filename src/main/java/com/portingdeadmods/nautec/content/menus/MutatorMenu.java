@@ -2,11 +2,9 @@ package com.portingdeadmods.nautec.content.menus;
 
 import com.portingdeadmods.nautec.api.menu.NTAbstractContainerMenu;
 import com.portingdeadmods.nautec.content.blockentities.MutatorBlockEntity;
-import com.portingdeadmods.nautec.content.blockentities.multiblock.part.AugmentationStationExtensionBlockEntity;
 import com.portingdeadmods.nautec.registries.NTMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.MenuType;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 

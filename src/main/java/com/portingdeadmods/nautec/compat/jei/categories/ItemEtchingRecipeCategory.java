@@ -1,10 +1,8 @@
 package com.portingdeadmods.nautec.compat.jei.categories;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.api.fluids.NTFluid;
 import com.portingdeadmods.nautec.content.recipes.ItemEtchingRecipe;
 import com.portingdeadmods.nautec.registries.NTFluids;
-import com.portingdeadmods.nautec.registries.NTItems;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;

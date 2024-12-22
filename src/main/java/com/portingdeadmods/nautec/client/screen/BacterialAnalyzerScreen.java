@@ -4,7 +4,6 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.client.screen.NTAbstractContainerScreen;
 import com.portingdeadmods.nautec.api.menu.NTAbstractContainerMenu;
 import com.portingdeadmods.nautec.content.blockentities.BacterialAnalyzerBlockEntity;
-import com.portingdeadmods.nautec.content.blockentities.multiblock.part.AugmentationStationExtensionBlockEntity;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

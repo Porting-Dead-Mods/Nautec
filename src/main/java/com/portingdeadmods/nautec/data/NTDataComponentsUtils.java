@@ -1,10 +1,7 @@
 package com.portingdeadmods.nautec.data;
 
-import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.registries.NTBacterias;
-import com.portingdeadmods.nautec.utils.BacteriaHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 
 public class NTDataComponentsUtils {
 

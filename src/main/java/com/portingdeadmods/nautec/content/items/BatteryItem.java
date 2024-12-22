@@ -7,7 +7,6 @@ import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
-import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.ItemUtils;
 import com.portingdeadmods.nautec.utils.Tooltips;
 import net.minecraft.ChatFormatting;
@@ -16,10 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import java.util.List;
 

@@ -3,25 +3,17 @@ package com.portingdeadmods.nautec.content.menus;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.registries.NTAugmentSlots;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
-
-import static com.portingdeadmods.nautec.client.screen.AugmentationStationScreen.BACKGROUND_TEXTURE;
 
 public class AugmentationViewerScreen extends Screen {
 

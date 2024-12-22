@@ -9,7 +9,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 

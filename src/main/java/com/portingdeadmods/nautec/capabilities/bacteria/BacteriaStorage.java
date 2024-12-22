@@ -4,15 +4,11 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceKey;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.UnknownNullability;
 

@@ -1,7 +1,6 @@
 package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.client.screen.BacterialAnalyzerScreen;
 import com.portingdeadmods.nautec.content.menus.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.AbstractContainerMenu;

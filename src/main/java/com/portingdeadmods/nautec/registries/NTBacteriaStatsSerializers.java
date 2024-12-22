@@ -2,9 +2,7 @@ package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.api.bacteria.BacteriaSerializer;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaStatsSerializer;
-import com.portingdeadmods.nautec.content.bacteria.SimpleBacteria;
 import com.portingdeadmods.nautec.content.bacteria.SimpleBacteriaStats;
 import net.neoforged.neoforge.registries.DeferredRegister;
 

@@ -3,16 +3,9 @@ package com.portingdeadmods.nautec.compat.duradisplay;
 import com.portingdeadmods.duradisplay.DuraDisplay;
 import com.portingdeadmods.duradisplay.KeyBinds;
 import com.portingdeadmods.duradisplay.compat.BuiltinCompat;
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
-import com.portingdeadmods.nautec.content.items.tools.AquarineAxeItem;
-import com.portingdeadmods.nautec.data.NTDataComponents;
-import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
-import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.SharedConstants;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import java.util.Collections;
 
