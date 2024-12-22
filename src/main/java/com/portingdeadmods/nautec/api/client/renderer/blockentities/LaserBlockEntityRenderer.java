@@ -1,7 +1,6 @@
 package com.portingdeadmods.nautec.api.client.renderer.blockentities;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.utils.LaserRendererHelper;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;

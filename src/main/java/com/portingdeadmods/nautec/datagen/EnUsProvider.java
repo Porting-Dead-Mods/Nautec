@@ -13,8 +13,8 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.function.Supplier;
 
-import static com.portingdeadmods.nautec.registries.NTItems.*;
 import static com.portingdeadmods.nautec.registries.NTBacterias.*;
+import static com.portingdeadmods.nautec.registries.NTItems.*;
 
 public class EnUsProvider extends AbstractModonomiconLanguageProvider {
     public EnUsProvider(PackOutput output, ModonomiconLanguageProvider cacheProvider) {

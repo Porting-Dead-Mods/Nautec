@@ -5,8 +5,6 @@ import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 
 public abstract class AugmentRenderer<T extends Augment> {
     public AugmentRenderer(Context ctx) {

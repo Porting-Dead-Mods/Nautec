@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "nautec:block/polished_prismarine",
+    "east": "nautec:block/multiblock/bio_reactor/side_bottom_1",
+    "north": "nautec:block/multiblock/bio_reactor/side_bottom_1",
+    "south": "nautec:block/multiblock/bio_reactor/side_bottom_1",
+    "up": "nautec:block/multiblock/bio_reactor/top_4",
+    "west": "nautec:block/multiblock/bio_reactor/side_bottom_1"
+  }
+}

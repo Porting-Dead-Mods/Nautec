@@ -8,7 +8,9 @@ import com.portingdeadmods.nautec.content.items.tools.*;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -16,7 +18,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 

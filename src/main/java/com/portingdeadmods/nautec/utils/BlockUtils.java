@@ -2,8 +2,11 @@ package com.portingdeadmods.nautec.utils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.neoforged.neoforge.capabilities.BlockCapability;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -36,5 +39,9 @@ public final class BlockUtils {
         int nextDirectionIndex = (currentDirectionIndex + 1) % directions.size();
         Direction nextDirection = directions.get(nextDirectionIndex);
         return state.setValue(prop, nextDirection);
+    }
+
+    public static <T, C> @Nullable T blockEntityCapability(BlockCapability<T, C> cap, BlockEntity blockEntity) {
+        return blockEntity.getLevel().getCapability(cap, blockEntity.getBlockPos(), blockEntity.getBlockState(), blockEntity, null);
     }
 }

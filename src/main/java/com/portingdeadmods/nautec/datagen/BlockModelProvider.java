@@ -3,16 +3,8 @@ package com.portingdeadmods.nautec.datagen;
 import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
-import com.portingdeadmods.nautec.content.blocks.AquaticCatalystBlock;
-import com.portingdeadmods.nautec.content.blocks.CrateBlock;
-import com.portingdeadmods.nautec.content.blocks.LaserJunctionBlock;
-import com.portingdeadmods.nautec.content.blocks.OilBarrelBlock;
-import com.portingdeadmods.nautec.content.blocks.multiblock.controller.AugmentationStationBlock;
-import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
-import com.portingdeadmods.nautec.content.multiblocks.AugmentationStationMultiblock;
-import com.portingdeadmods.nautec.content.multiblocks.DrainMultiblock;
+import com.portingdeadmods.nautec.content.blocks.*;
 import com.portingdeadmods.nautec.registries.NTBlocks;
-import com.portingdeadmods.nautec.registries.NTMultiblocks;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -22,7 +14,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.apache.commons.lang3.IntegerRange;
-import org.jetbrains.annotations.NotNull;
 
 public class BlockModelProvider extends BlockStateProvider {
     public BlockModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -31,6 +22,8 @@ public class BlockModelProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        MultiblockModelHelper helper = new MultiblockModelHelper(this);
+
         axisBlock(NTBlocks.DARK_PRISMARINE_PILLAR.get());
         simpleBlock(NTBlocks.CHISELED_DARK_PRISMARINE.get());
         simpleBlock(NTBlocks.PRISMARINE_SAND.get());
@@ -58,13 +51,17 @@ public class BlockModelProvider extends BlockStateProvider {
 //        bioReactor(NTBlocks.BIO_REACTOR.get());
 
         // Multiblock
-        drainController(NTBlocks.DRAIN.get());
-        drainPart(NTBlocks.DRAIN_PART.get(), IntegerRange.of(0, 8));
+        helper.drainController(NTBlocks.DRAIN.get());
+        helper.drainPart(NTBlocks.DRAIN_PART.get(), IntegerRange.of(0, 8));
 
-        augmentationStationController(NTBlocks.AUGMENTATION_STATION.get());
-        augmentationStationPart(NTBlocks.AUGMENTATION_STATION_PART.get(), IntegerRange.of(0, 8));
-        augmentationStationExtension(NTBlocks.AUGMENTATION_STATION_EXTENSION.get());
+        helper.augmentationStationController(NTBlocks.AUGMENTATION_STATION.get());
+        helper.augmentationStationPart(NTBlocks.AUGMENTATION_STATION_PART.get(), IntegerRange.of(0, 8));
+        helper.augmentationStationExtension(NTBlocks.AUGMENTATION_STATION_EXTENSION.get());
+
+        helper.bioReactorPart(NTBlocks.BIO_REACTOR_PART.get());
+
         simpleBlock(NTBlocks.BACTERIAL_CONTAINMENT_SHIELD.get());
+        pipeBlock(NTBlocks.BACTERIA_PIPE.get());
 
         horizontalBlock(NTBlocks.BIO_REACTOR.get(), models()
                 .cubeTop(name(NTBlocks.BIO_REACTOR.get()), blockTexture(NTBlocks.POLISHED_PRISMARINE.get()), blockTexture(NTBlocks.BIO_REACTOR.get(), "_top")));
@@ -87,116 +84,31 @@ public class BlockModelProvider extends BlockStateProvider {
         horizontalBlock(NTBlocks.BACTERIAL_ANALYZER_TOP.get(), models().getExistingFile(existingModelFile(NTBlocks.BACTERIAL_ANALYZER_TOP.get())));
     }
 
-    private void augmentationStationController(AugmentationStationBlock augmentationStationBlock) {
-        ModelFile formedModel = models().getExistingFile(existingModelFile("multiblock/augmentation_station_4"));
-        getVariantBuilder(augmentationStationBlock).partialState().with(Multiblock.FORMED, true)
-                .modelForState().modelFile(formedModel).addModel()
-                .partialState().with(Multiblock.FORMED, false)
-                .modelForState().modelFile(unformedAugmentationStationPart(augmentationStationBlock, "controller")).addModel();
+    private void pipeBlock(Block block) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(block);
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
+        pipeConnection(builder, loc, Direction.DOWN, 0, 0);
+        pipeConnection(builder, loc, Direction.UP, 180, 0);
+        pipeConnection(builder, loc, Direction.NORTH, 90, 180);
+        pipeConnection(builder, loc, Direction.EAST, 90, 270);
+        pipeConnection(builder, loc, Direction.SOUTH, 90, 0);
+        pipeConnection(builder, loc, Direction.WEST, 90, 90);
+        builder.part().modelFile(pipeBaseModel(loc)).addModel().end();
     }
 
-    private void augmentationStationExtension(Block augmentationStationExtensionBlock) {
-        VariantBlockStateBuilder builder = getVariantBuilder(augmentationStationExtensionBlock);
-        builder
-                .partialState().with(Multiblock.FORMED, false)
-                .modelForState().modelFile(unformedAugmentationStationPart(augmentationStationExtensionBlock, "extension")).addModel();
-        for (Direction dir : BlockStateProperties.HORIZONTAL_FACING.getPossibleValues()) {
-            builder.partialState().with(Multiblock.FORMED, true).with(BlockStateProperties.HORIZONTAL_FACING, dir)
-                    .modelForState().modelFile(models().getExistingFile(existingModelFile("multiblock/augmentation_station_extension")))
-                    .rotationY(((int) dir.toYRot() + 180) % 360).addModel();
-        }
+    private ModelFile pipeBaseModel(ResourceLocation blockLoc) {
+        return models().withExistingParent(blockLoc.getPath() + "_base", modLoc("block/pipe_base"))
+                .texture("texture", ResourceLocation.fromNamespaceAndPath(blockLoc.getNamespace(), "block/" + blockLoc.getPath()));
     }
 
-    private void augmentationStationPart(Block augmentationStationPartBlock, IntegerRange range) {
-        VariantBlockStateBuilder builder = getVariantBuilder(augmentationStationPartBlock);
-        builder.partialState().with(Multiblock.FORMED, false)
-                .modelForState().modelFile(drainPartModel(augmentationStationPartBlock, 0, false)).addModel();
-        for (int i = range.getMinimum(); i <= range.getMaximum(); i++) {
-            ModelFile formedModel = models().getExistingFile(existingModelFile("multiblock/augmentation_station_" + (8 - i)));
-            int index = i;
-            if (i == 0 || i == 3 || i == 6) {
-                index += 2;
-            } else if (i == 2 || i == 5 || i == 8) {
-                index -= 2;
-            }
-            builder.partialState().with(Multiblock.FORMED, true).with(AugmentationStationMultiblock.AS_PART, index)
-                    .modelForState().modelFile(formedModel).addModel();
-        }
+    private ModelFile pipeConnectionModel(ResourceLocation blockLoc) {
+        return models().withExistingParent(blockLoc.getPath() + "_connection", modLoc("block/pipe_connection"))
+                .texture("texture", ResourceLocation.fromNamespaceAndPath(blockLoc.getNamespace(), "block/" + blockLoc.getPath()));
     }
 
-    private @NotNull BlockModelBuilder unformedAugmentationStationPart(Block augmentationStationController, String part) {
-        Multiblock multiblock = NTMultiblocks.AUGMENTATION_STATION.get();
-        BlockModelBuilder builder = models().withExistingParent(name(augmentationStationController), "cube");
-        builder.texture("up", multiblockTexture(multiblock, "unformed/" + part + "_top"))
-                .texture("down", multiblockTexture(multiblock, "unformed/" + part + "_bottom"))
-                .texture("north", multiblockTexture(multiblock, "unformed/" + part + "_side"))
-                .texture("east", multiblockTexture(multiblock, "unformed/" + part + "_side"))
-                .texture("south", multiblockTexture(multiblock, "unformed/" + part + "_side"))
-                .texture("west", multiblockTexture(multiblock, "unformed/" + part + "_side"));
-        return builder;
-    }
-
-    private void drainController(Block drainController) {
-        Multiblock multiblock = NTMultiblocks.DRAIN.get();
-        ModelFile unformedModel = drainControllerModel(drainController, multiblock, false);
-        getVariantBuilder(drainController).partialState().with(DrainMultiblock.FORMED, false)
-                .modelForState().modelFile(unformedModel).addModel();
-        ModelFile formedModel = drainControllerModel(drainController, multiblock, true);
-        getVariantBuilder(drainController).partialState().with(DrainMultiblock.FORMED, true)
-                .modelForState().modelFile(formedModel).addModel();
-    }
-
-    private @NotNull BlockModelBuilder drainControllerModel(Block drainController, Multiblock multiblock, boolean formed) {
-        BlockModelBuilder builder = models().withExistingParent(name(drainController) + (formed ? "_formed" : ""), "cube");
-        builder.texture("up", multiblockTexture(multiblock, formed ? "top_4" : "drain_top_unformed"))
-                .texture("down", multiblockTexture(multiblock, formed ? "bottom_4" : "drain_bottom_unformed"))
-                .texture("north", multiblockTexture(multiblock, "drain_side_unformed"))
-                .texture("east", multiblockTexture(multiblock, "drain_side_unformed"))
-                .texture("south", multiblockTexture(multiblock, "drain_side_unformed"))
-                .texture("west", multiblockTexture(multiblock, "drain_side_unformed"));
-        return builder;
-    }
-
-    private void drainPart(Block drainPartBlock, IntegerRange range) {
-        VariantBlockStateBuilder builder = getVariantBuilder(drainPartBlock);
-        builder.partialState().with(DrainMultiblock.FORMED, false)
-                .modelForState().modelFile(drainPartModel(drainPartBlock, 0, false)).addModel();
-        for (int i = range.getMinimum(); i <= range.getMaximum(); i++) {
-            builder.partialState().with(DrainMultiblock.DRAIN_PART, i).with(DrainMultiblock.FORMED, true).with(DrainPartBlock.LASER_PORT, false)
-                    .modelForState().modelFile(drainPartModel(drainPartBlock, i, false)).addModel();
-            builder.partialState().with(DrainMultiblock.DRAIN_PART, i).with(DrainMultiblock.FORMED, true).with(DrainPartBlock.LASER_PORT, true)
-                    .modelForState().modelFile(drainPartModel(drainPartBlock, i, true)).addModel();
-        }
-    }
-
-    private ModelFile drainPartModel(Block drainPartBlock, int index, boolean laserPort) {
-        String postfix = laserPort ? "_open" : "";
-        BlockModelBuilder builder = models().withExistingParent(name(drainPartBlock) + "_" + index + postfix, "cube");
-        Multiblock multiblock = NTMultiblocks.DRAIN.get();
-        // TODO: Clean up
-        if (index % 2 != 0) {
-            builder.texture("up", multiblockTexture(multiblock, "top_" + index))
-                    .texture("down", multiblockTexture(multiblock, "bottom_" + index))
-                    .texture("north", multiblockTexture(multiblock, "side_1" + postfix))
-                    .texture("east", multiblockTexture(multiblock, "side_1" + postfix))
-                    .texture("south", multiblockTexture(multiblock, "side_1" + postfix))
-                    .texture("west", multiblockTexture(multiblock, "side_1" + postfix));
-        } else if (index == 0 || index == 2) {
-            builder.texture("up", multiblockTexture(multiblock, "top_" + index))
-                    .texture("down", multiblockTexture(multiblock, "bottom_" + index))
-                    .texture("north", multiblockTexture(multiblock, "side_" + (2 - index % 3)))
-                    .texture("east", multiblockTexture(multiblock, "side_" + index % 3))
-                    .texture("south", multiblockTexture(multiblock, "side_" + (2 - index % 3)))
-                    .texture("west", multiblockTexture(multiblock, "side_" + index % 3));
-        } else {
-            builder.texture("up", multiblockTexture(multiblock, "top_" + index))
-                    .texture("down", multiblockTexture(multiblock, "bottom_" + index))
-                    .texture("north", multiblockTexture(multiblock, "side_" + index % 3))
-                    .texture("east", multiblockTexture(multiblock, "side_" + (2 - index % 3)))
-                    .texture("south", multiblockTexture(multiblock, "side_" + index % 3))
-                    .texture("west", multiblockTexture(multiblock, "side_" + (2 - index % 3)));
-        }
-        return builder;
+    private void pipeConnection(MultiPartBlockStateBuilder builder, ResourceLocation loc, Direction direction, int x, int y) {
+        builder.part().modelFile(pipeConnectionModel(loc)).rotationX(x).rotationY(y).addModel()
+                .condition(BacteriaPipeBlock.CONNECTION[direction.get3DDataValue()], true).end();
     }
 
     private void laserJunction(Block block) {
@@ -331,24 +243,24 @@ public class BlockModelProvider extends BlockStateProvider {
         return ResourceLocation.fromNamespaceAndPath(name.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + name.getPath() + suffix);
     }
 
-    private ResourceLocation existingModelFile(Block block) {
+    public ResourceLocation existingModelFile(Block block) {
         ResourceLocation name = key(block);
         return ResourceLocation.fromNamespaceAndPath(name.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + name.getPath());
     }
 
-    private ResourceLocation existingModelFile(String name) {
+    public ResourceLocation existingModelFile(String name) {
         return modLoc(ModelProvider.BLOCK_FOLDER + "/" + name);
     }
 
-    private ResourceLocation key(Block block) {
+    public ResourceLocation key(Block block) {
         return BuiltInRegistries.BLOCK.getKey(block);
     }
 
-    private String name(Block block) {
+    public String name(Block block) {
         return key(block).getPath();
     }
 
-    private ResourceLocation extend(ResourceLocation rl, String suffix) {
+    public ResourceLocation extend(ResourceLocation rl, String suffix) {
         return ResourceLocation.fromNamespaceAndPath(rl.getNamespace(), rl.getPath() + suffix);
     }
 }

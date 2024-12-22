@@ -10,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -25,12 +26,18 @@ public class BioReactorPartBlock extends BaseEntityBlock {
         registerDefaultState(defaultBlockState()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(Multiblock.FORMED, false)
+                .setValue(BioReactorMultiblock.TOP, false)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder.add(Multiblock.FORMED, BioReactorMultiblock.BIO_REACTOR_PART));
+        super.createBlockStateDefinition(builder.add(FACING, Multiblock.FORMED, BioReactorMultiblock.BIO_REACTOR_PART, BioReactorMultiblock.TOP));
+    }
+
+    @Override
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
     }
 
     @Override

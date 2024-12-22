@@ -1,7 +1,6 @@
 package com.portingdeadmods.nautec.api.augments;
 
 import com.portingdeadmods.nautec.NTRegistries;
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
 import com.portingdeadmods.nautec.utils.AugmentClientHelper;
 import net.minecraft.core.HolderLookup;
@@ -9,10 +8,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 
 public abstract class Augment implements INBTSerializable<CompoundTag> {

@@ -2,7 +2,9 @@ package com.portingdeadmods.nautec.client.model.armor;
 
 import com.portingdeadmods.nautec.api.client.model.armor.NTArmorModel;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 
 public class DivingArmorModel {
     public static LayerDefinition createBodyLayer() {

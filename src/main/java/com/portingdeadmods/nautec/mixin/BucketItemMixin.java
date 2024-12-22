@@ -2,7 +2,6 @@ package com.portingdeadmods.nautec.mixin;
 
 import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.registries.NTFluids;
-import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;

@@ -3,13 +3,10 @@ package com.portingdeadmods.nautec.client.renderer.blockentities;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.portingdeadmods.nautec.client.model.block.FishingNetModel;
 import com.portingdeadmods.nautec.content.blockentities.FishingStationBlockEntity;
-import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 
 public class FishingStationBERenderer implements BlockEntityRenderer<FishingStationBlockEntity> {
     private final FishingNetModel model;

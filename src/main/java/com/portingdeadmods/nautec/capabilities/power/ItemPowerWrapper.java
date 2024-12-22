@@ -1,6 +1,5 @@
 package com.portingdeadmods.nautec.capabilities.power;
 
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;

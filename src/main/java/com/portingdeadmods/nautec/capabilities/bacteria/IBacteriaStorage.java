@@ -1,7 +1,7 @@
 package com.portingdeadmods.nautec.capabilities.bacteria;
 
-import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
+import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
 
 import java.util.function.UnaryOperator;
 

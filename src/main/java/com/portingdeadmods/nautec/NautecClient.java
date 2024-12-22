@@ -12,7 +12,6 @@ import com.portingdeadmods.nautec.client.hud.PrismMonocleOverlay;
 import com.portingdeadmods.nautec.client.model.augment.DolphinFinModel;
 import com.portingdeadmods.nautec.client.model.augment.GuardianEyeModel;
 import com.portingdeadmods.nautec.client.model.block.*;
-import com.portingdeadmods.nautec.client.renderer.blockentities.BacterialAnalyzerBERenderer;
 import com.portingdeadmods.nautec.client.renderer.augments.GuardianEyeRenderer;
 import com.portingdeadmods.nautec.client.renderer.augments.SimpleAugmentRenderer;
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;

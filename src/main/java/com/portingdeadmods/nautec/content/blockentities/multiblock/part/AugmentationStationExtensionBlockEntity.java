@@ -1,6 +1,5 @@
 package com.portingdeadmods.nautec.content.blockentities.multiblock.part;
 
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockPartEntity;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;

@@ -5,7 +5,6 @@ import com.klikli_dev.modonomicon.api.datagen.ModonomiconProviderBase;
 import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_augmentation.*;
-import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_chemistry.BatteryEntry;
 import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.world.phys.Vec2;
 

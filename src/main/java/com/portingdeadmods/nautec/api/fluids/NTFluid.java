@@ -1,8 +1,7 @@
 package com.portingdeadmods.nautec.api.fluids;
-import net.minecraft.core.Vec3i;
+
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;

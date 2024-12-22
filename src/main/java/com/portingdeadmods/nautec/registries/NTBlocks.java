@@ -1,21 +1,24 @@
 package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.content.blocks.multiblock.controller.BioReactorBlock;
-import com.portingdeadmods.nautec.content.blocks.multiblock.part.BioReactorPartBlock;
-import com.portingdeadmods.nautec.content.items.blocks.PrismarineCrystalItem;
 import com.portingdeadmods.nautec.content.blocks.*;
 import com.portingdeadmods.nautec.content.blocks.multiblock.controller.AugmentationStationBlock;
+import com.portingdeadmods.nautec.content.blocks.multiblock.controller.BioReactorBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.controller.DrainBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.AugmentationStationExtensionBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.AugmentationStationPartBlock;
+import com.portingdeadmods.nautec.content.blocks.multiblock.part.BioReactorPartBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalPartBlock;
+import com.portingdeadmods.nautec.content.items.blocks.PrismarineCrystalItem;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -23,8 +26,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
-
-import static net.minecraft.world.level.block.Blocks.register;
 
 public final class NTBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Nautec.MODID);
@@ -85,6 +86,8 @@ public final class NTBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), true, false);
     public static final DeferredBlock<BacterialAnalyzerTopBlock> BACTERIAL_ANALYZER_TOP = BLOCKS.registerBlock("bacterial_analyzer_top", BacterialAnalyzerTopBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+    public static final DeferredBlock<BacteriaPipeBlock> BACTERIA_PIPE = registerBlockAndItem("bacteria_pipe", BacteriaPipeBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS), true, false);
 
     // MULTIBLOCKS
     public static final DeferredBlock<DrainBlock> DRAIN = registerBlockAndItem("deep_sea_drain", DrainBlock::new,

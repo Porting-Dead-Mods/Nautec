@@ -12,7 +12,6 @@ import com.portingdeadmods.nautec.api.utils.HorizontalDirection;
 import it.unimi.dsi.fastutil.booleans.BooleanArrayList;
 import it.unimi.dsi.fastutil.booleans.BooleanList;
 import it.unimi.dsi.fastutil.booleans.BooleanLists;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.ChatFormatting;
@@ -48,7 +47,7 @@ public final class MultiblockHelper {
         MultiblockLayer[] actualLayout = new MultiblockLayer[multiblock.getMaxSize()];
         Map<Integer, Block> def = multiblock.getDefinition();
         Vec3i relativeControllerPos = getRelativeControllerPos(multiblock);
-        Set<HorizontalDirection> directions = getHorizontalDirections(multiblock, player);
+        List<HorizontalDirection> directions = getHorizontalDirections(multiblock, player);
 
         // Indexing (Positions)
         int y = 0;
@@ -166,7 +165,7 @@ public final class MultiblockHelper {
         return new MultiblockData(false, null, null);
     }
 
-    private static @NotNull Set<HorizontalDirection> getHorizontalDirections(Multiblock multiblock, @Nullable Player player) {
+    private static @NotNull List<HorizontalDirection> getHorizontalDirections(Multiblock multiblock, @Nullable Player player) {
         HorizontalDirection direction;
         if (multiblock.getFixedDirection() != null) {
             direction = multiblock.getFixedDirection();
@@ -177,11 +176,12 @@ public final class MultiblockHelper {
         }
 
         // Make player direction first entry of Set to prioritize
-        Set<HorizontalDirection> directions = new HashSet<>();
-        directions.add(direction);
-
+        List<HorizontalDirection> directions;
         if (multiblock.getFixedDirection() == null) {
-            directions.addAll(List.of(HorizontalDirection.values()));
+            HorizontalDirection[] values = HorizontalDirection.values();
+            directions = List.of(values);
+        } else {
+            directions = Collections.singletonList(direction);
         }
 
         return directions;

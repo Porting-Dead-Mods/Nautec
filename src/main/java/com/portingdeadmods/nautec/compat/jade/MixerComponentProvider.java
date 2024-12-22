@@ -1,9 +1,7 @@
 package com.portingdeadmods.nautec.compat.jade;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.content.blockentities.AquaticCatalystBlockEntity;
 import com.portingdeadmods.nautec.content.blockentities.MixerBlockEntity;
-import com.portingdeadmods.nautec.content.blocks.MixerBlock;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.fluids.FluidStack;

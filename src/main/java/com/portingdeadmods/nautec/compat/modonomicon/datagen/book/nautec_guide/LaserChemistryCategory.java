@@ -10,7 +10,6 @@ import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.l
 import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
-import org.apache.logging.log4j.core.util.NameUtil;
 
 public class LaserChemistryCategory extends CategoryProvider {
     public LaserChemistryCategory(ModonomiconProviderBase parent) {
