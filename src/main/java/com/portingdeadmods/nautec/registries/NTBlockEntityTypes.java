@@ -71,6 +71,9 @@ public final class NTBlockEntityTypes {
     public static final Supplier<BlockEntityType<CreativePowerSourceBlockEntity>> CREATIVE_POWER_SOURCE = BLOCK_ENTITIES.register("creative_power_source",
             () -> BlockEntityType.Builder.of(CreativePowerSourceBlockEntity::new,
                     NTBlocks.CREATIVE_POWER_SOURCE.get()).build(null));
+    public static final Supplier<BlockEntityType<CreativeEnergySourceBlockEntity>> CREATIVE_ENERGY_SOURCE = BLOCK_ENTITIES.register("creative_energy_source",
+            () -> BlockEntityType.Builder.of(CreativeEnergySourceBlockEntity::new,
+                    NTBlocks.CREATIVE_ENERGY_SOURCE.get()).build(null));
     public static final Supplier<BlockEntityType<ChargerBlockEntity>> CHARGER = BLOCK_ENTITIES.register("charger",
             () -> BlockEntityType.Builder.of(ChargerBlockEntity::new,
                     NTBlocks.CHARGER.get()).build(null));
