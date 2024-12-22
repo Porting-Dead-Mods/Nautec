@@ -4,6 +4,7 @@ import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
+import com.portingdeadmods.nautec.capabilities.bacteria.IBacteriaStorage;
 import com.portingdeadmods.nautec.content.items.PetriDishItem;
 import com.portingdeadmods.nautec.content.menus.BacterialAnalyzerMenu;
 import com.portingdeadmods.nautec.data.NTDataComponents;
@@ -33,7 +34,7 @@ public class BacterialAnalyzerBlockEntity extends LaserBlockEntity implements Me
 
     public BacterialAnalyzerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.BACTERIAL_ANALYZER.get(), blockPos, blockState);
-        addItemHandler(2, 1, (slot, stack) -> (slot == 0 && stack.getItem() instanceof PetriDishItem) || slot == 1);
+        addItemHandler(2, 1, (slot, stack) -> (slot == 0 && stack.getItem() instanceof PetriDishItem));
     }
 
     @Override
@@ -42,7 +43,9 @@ public class BacterialAnalyzerBlockEntity extends LaserBlockEntity implements Me
 
         ItemStack stack = getItemHandler().getStackInSlot(0);
         ItemStack resultStack = getItemHandler().getStackInSlot(1);
-        this.hasRecipe = stack.getCapability(NTCapabilities.BacteriaStorage.ITEM) != null
+        IBacteriaStorage iBacteriaStorage = stack.getCapability(NTCapabilities.BacteriaStorage.ITEM);
+        this.hasRecipe = iBacteriaStorage != null
+                && !iBacteriaStorage.getBacteria(0).isEmpty()
                 && Boolean.FALSE.equals(stack.get(NTDataComponents.ANALYZED))
                 && resultStack.isEmpty();
     }
@@ -59,7 +62,8 @@ public class BacterialAnalyzerBlockEntity extends LaserBlockEntity implements Me
                     ItemStack result = extracted.copy();
                     result.set(NTDataComponents.ANALYZED, true);
 
-                    getItemHandler().insertItem(1, result, false);
+                    forceInsertItem(1, result, false);
+
                 } else {
                     progress++;
                 }

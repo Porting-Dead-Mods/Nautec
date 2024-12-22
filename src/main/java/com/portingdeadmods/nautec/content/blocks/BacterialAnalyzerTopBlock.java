@@ -1,12 +1,15 @@
 package com.portingdeadmods.nautec.content.blocks;
 
 import com.portingdeadmods.nautec.content.blockentities.BacterialAnalyzerBlockEntity;
+import com.portingdeadmods.nautec.registries.NTBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -14,6 +17,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -58,11 +62,17 @@ public class BacterialAnalyzerTopBlock extends Block {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (level.getBlockEntity(pos.below()) instanceof BacterialAnalyzerBlockEntity be) {
-            player.openMenu(be, pos.below());
+        BlockPos below = pos.below();
+        if (level.getBlockEntity(below) instanceof BacterialAnalyzerBlockEntity be) {
+            player.openMenu(be, below);
             return InteractionResult.SUCCESS;
         }
         return super.useWithoutItem(state, level, pos, player, hitResult);
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        return NTBlocks.BACTERIAL_ANALYZER.toStack();
     }
 
     @Override
@@ -85,11 +95,13 @@ public class BacterialAnalyzerTopBlock extends Block {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         super.onRemove(state, level, pos, newState, movedByPiston);
 
-        level.removeBlock(pos.below(), false);
+        if (!state.is(newState.getBlock())) {
+            level.removeBlock(pos.below(), false);
+        }
     }
 
     @Override
     public @Nullable PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.IGNORE;
+        return PushReaction.BLOCK;
     }
 }

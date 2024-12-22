@@ -17,8 +17,6 @@ import java.util.Map;
 
 @EventBusSubscriber(modid = Nautec.MODID, value = Dist.CLIENT)
 public final class AugmentClientEvents {
-
-    // TODO: CACHING
     @SubscribeEvent
     public static void renderPlayerPart(RenderPlayerEvent.Pre event) {
         AugmentSlotsRenderer.render(event);
