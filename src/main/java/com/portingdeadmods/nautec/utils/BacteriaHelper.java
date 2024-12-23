@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec.utils;
 
 import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
+import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceKey;
@@ -13,5 +14,9 @@ public final class BacteriaHelper {
         Optional<HolderGetter<Bacteria>> lookup1 = lookup.asGetterLookup().lookup(NTRegistries.BACTERIA_KEY);
         return lookup1.map(bacteriaHolderGetter -> bacteriaHolderGetter.getOrThrow(bacteriaType).value())
                 .orElse(null);
+    }
+
+    public static void rollBacteriaStats(BacteriaInstance instance) {
+        instance.setStats(instance.getStats().rollStats());
     }
 }
