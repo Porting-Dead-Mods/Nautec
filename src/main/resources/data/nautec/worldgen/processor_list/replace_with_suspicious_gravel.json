@@ -16,7 +16,11 @@
           },
 
           "output_state": {
-            "Name": "minecraft:suspicious_gravel"
+            "Name": "minecraft:suspicious_gravel",
+            "Properties": {
+              "dusted": 0,
+              "LootTable": "nautec:chests/ruins_rusty_crate"
+            }
           }
         }
       ]
