@@ -15,19 +15,19 @@ public class CrateMenu extends AbstractContainerMenu {
     private final Container container;
 
     public CrateMenu(int containerId, Inventory playerInventory) {
-        this(containerId, playerInventory, new SimpleContainer(27));
+        this(containerId, playerInventory, new SimpleContainer(CONTAINER_SIZE));
     }
 
     public CrateMenu(int containerId, Inventory playerInventory, Container container) {
         super(NTMenuTypes.CRATE.get(), containerId);
-        checkContainerSize(container, 27);
+        checkContainerSize(container, 15);
         this.container = container;
         container.startOpen(playerInventory.player);
         int i = 3;
         int j = 9;
 
-        for (int k = 0; k < 3; k++) {
-            for (int l = 0; l < 9; l++) {
+        for (int k = 0; k < i; k++) {
+            for (int l = 0; l < j; l++) {
                 this.addSlot(new Slot(container, l + k * 9, 8 + l * 18, 18 + k * 18));
             }
         }

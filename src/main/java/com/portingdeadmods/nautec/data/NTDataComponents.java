@@ -23,8 +23,6 @@ public final class NTDataComponents {
             () -> builder -> builder
                     .persistent(ComponentBacteriaStorage.CODEC)
                     .networkSynchronized(ComponentBacteriaStorage.STREAM_CODEC));
-    public static final Supplier<DataComponentType<Boolean>> OPEN = registerDataComponentType("open",
-            () -> builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
 
     public static final Supplier<DataComponentType<Boolean>> ABILITY_ENABLED = registerDataComponentType("ability_enabled",
             () -> builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));

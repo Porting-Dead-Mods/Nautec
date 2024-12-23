@@ -19,12 +19,10 @@ public enum CrateComponentProvider implements IBlockComponentProvider {
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if(blockAccessor.getBlockEntity() instanceof CrateBlockEntity blockEntity) {
-            if(!blockEntity.components().has(NTDataComponents.OPEN.get())) {
-                IElementHelper helper = IElementHelper.get();
-                iTooltip.append(helper.item(new ItemStack(NTItems.CROWBAR.get())));
-                iTooltip.add(Component.literal("Locked"));
-            }
+        if (blockAccessor.getBlockEntity() instanceof CrateBlockEntity) {
+            IElementHelper helper = IElementHelper.get();
+            iTooltip.append(helper.item(new ItemStack(NTItems.CROWBAR.get())));
+            iTooltip.add(Component.literal("Locked"));
         }
     }
 

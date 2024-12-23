@@ -66,13 +66,6 @@ public class CrateBlock extends BaseEntityBlock {
 
         if (player.getCooldowns().isOnCooldown(stack.getItem())) return ItemInteractionResult.FAIL;
 
-        RandomSource random = level.getRandom();
-
-        if (random.nextInt(0, 7) == 0) {
-            be.playSound(state, SoundEvents.ANVIL_HIT);
-            player.getCooldowns().addCooldown(stack.getItem(), 10);
-            return ItemInteractionResult.FAIL;
-        }
         level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.OPEN, true));
         player.getCooldowns().addCooldown(stack.getItem(), 30);
         be.playSound(state, SoundEvents.ANVIL_USE);

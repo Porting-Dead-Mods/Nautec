@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nautec:block/cast_iron_block"
+    }
+  }
+}
