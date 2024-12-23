@@ -37,5 +37,9 @@ public final class MathUtils {
 
         return new Vec3(newX, direction.y, newZ);
     }
+
+    public static Float roundToPrecision(float value, int precision) {
+        return (float) Math.round(value * Math.pow(10, precision)) / (float) Math.pow(10, precision);
+    }
 }
 // Wow this class is full of maths, I guess the person who did it, is just good at maths :shrug:
