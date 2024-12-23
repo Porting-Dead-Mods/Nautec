@@ -29,10 +29,12 @@ public class BlockModelProvider extends BlockStateProvider {
         simpleBlock(NTBlocks.PRISMARINE_SAND.get());
         simpleBlock(NTBlocks.POLISHED_PRISMARINE.get());
         simpleBlock(NTBlocks.AQUARINE_STEEL_BLOCK.get());
+        simpleBlock(NTBlocks.CAST_IRON_BLOCK.get());
 
         // Laser Stuffs
         simpleBlock(NTBlocks.CREATIVE_POWER_SOURCE.get());
-        aquaticCatalyst(NTBlocks.AQUATIC_CATALYST.get());
+        facingBlock(NTBlocks.AQUATIC_CATALYST.get(), models().cubeAll(name(NTBlocks.AQUATIC_CATALYST.get()),
+                blockTexture(NTBlocks.AQUATIC_CATALYST.get())));
         existingFacingBlock(NTBlocks.PRISMARINE_RELAY.get());
         longDistanceLaser(NTBlocks.LONG_DISTANCE_LASER.get());
         laserJunction(NTBlocks.LASER_JUNCTION.get());
@@ -214,16 +216,6 @@ public class BlockModelProvider extends BlockStateProvider {
 
     public ResourceLocation multiblockTexture(Multiblock multiblock, String name) {
         return modLoc(ModelProvider.BLOCK_FOLDER + "/multiblock/" + NTRegistries.MULTIBLOCK.getKey(multiblock).getPath() + "/" + name);
-    }
-
-    private void aquaticCatalyst(AquaticCatalystBlock block) {
-        VariantBlockStateBuilder builder = getVariantBuilder(block);
-        builder.partialState().with(AquaticCatalystBlock.CORE_ACTIVE, false)
-                .modelForState().modelFile(models().cubeAll(name(block), blockTexture(block))).addModel();
-        for (Direction direction : Direction.values()) {
-            builder.partialState().with(BlockStateProperties.FACING, direction).with(AquaticCatalystBlock.CORE_ACTIVE, true)
-                    .modelForState().modelFile(createActiveACModel(block, direction)).addModel();
-        }
     }
 
     private ModelFile createActiveACModel(AquaticCatalystBlock block, Direction activeSide) {

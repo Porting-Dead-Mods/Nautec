@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item": {
+    "has_aquarine_steel_block": {
       "conditions": {
         "items": [
           {
-            "items": "nautec:aquarine_steel_ingot"
+            "items": "nautec:aquarine_steel_block"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "nautec:cast_iron_ingot_from_blasting"
+        "recipe": "minecraft:aquarine_steel_ingot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_item"
+      "has_aquarine_steel_block"
     ]
   ],
   "rewards": {
     "recipes": [
-      "nautec:cast_iron_ingot_from_blasting"
+      "minecraft:aquarine_steel_ingot"
     ]
   }
 }

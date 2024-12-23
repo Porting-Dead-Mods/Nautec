@@ -17,6 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -96,9 +97,20 @@ public class RecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(NTItems.CAST_IRON_NUGGET.get()))
                 .save(pRecipeOutput, Nautec.rl("nautec_guide"));
 
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(Tags.Items.INGOTS_IRON), RecipeCategory.MISC, NTItems.CAST_IRON_INGOT.get(), 0.2f, 100)
+
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(NTBlocks.ANCHOR), RecipeCategory.MISC, NTItems.CAST_IRON_INGOT.toStack(11), 0.2f, 400)
+                .unlockedBy("has_item", has(Items.IRON_INGOT))
+                .save(pRecipeOutput, Nautec.rl("cast_iron_ingot_from_anchor_blasting"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(NTBlocks.OIL_BARREL), RecipeCategory.MISC, NTItems.CAST_IRON_INGOT.toStack(5), 0.2f, 400)
+                .unlockedBy("has_item", has(Items.IRON_INGOT))
+                .save(pRecipeOutput, Nautec.rl("cast_iron_ingot_from_oil_barrel_blasting"));
+
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(NTItems.CAST_IRON_COMPOUND), RecipeCategory.MISC, NTItems.CAST_IRON_INGOT.get(), 0.2f, 100)
                 .unlockedBy("has_item", has(Items.IRON_INGOT))
                 .save(pRecipeOutput, Nautec.rl("cast_iron_ingot_blasting"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(NTItems.CAST_IRON_COMPOUND), RecipeCategory.MISC, NTItems.CAST_IRON_INGOT.get(), 0.2f, 200)
+                .unlockedBy("has_item", has(Items.IRON_INGOT))
+                .save(pRecipeOutput, Nautec.rl("cast_iron_ingot_smelting"));
     }
 
     private static void aquaticCatalystRecipes(@NotNull RecipeOutput pRecipeOutput) {
@@ -355,18 +367,11 @@ public class RecipesProvider extends RecipeProvider {
     }
 
     private static void castIronRecipes(@NotNull RecipeOutput pRecipeOutput) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.CAST_IRON_INGOT, 1)
-                .pattern("NNN")
-                .pattern("NNN")
-                .pattern("NNN")
-                .define('N', NTItems.CAST_IRON_NUGGET.asItem())
-                .unlockedBy("has_item", has(NTItems.CAST_IRON_INGOT.get()))
-                .save(pRecipeOutput, Nautec.rl("cast_iron_ingot"));
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.CAST_IRON_NUGGET.get(), 9)
-                .requires(NTItems.CAST_IRON_INGOT.get())
-                .unlockedBy("has_item", has(NTItems.CAST_IRON_INGOT.get()))
-                .save(pRecipeOutput, Nautec.rl("cast_iron_nugget"));
+        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, NTItems.CAST_IRON_NUGGET, RecipeCategory.MISC, NTItems.CAST_IRON_INGOT,
+                Nautec.MODID + ":cast_iron_ingot_from_nuggets", null, Nautec.MODID + ":nuggets_from_cast_iron_ingot", null);
+        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, NTItems.CAST_IRON_INGOT, RecipeCategory.BUILDING_BLOCKS, NTBlocks.CAST_IRON_BLOCK,
+                Nautec.MODID + ":cast_iron_block_from_ingots", null, Nautec.MODID + ":ingots_from_cast_iron_block", null);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.CAST_IRON_ROD.get(), 4)
                 .pattern("C")

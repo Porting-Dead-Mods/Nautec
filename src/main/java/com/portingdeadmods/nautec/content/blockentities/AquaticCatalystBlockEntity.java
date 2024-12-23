@@ -115,7 +115,7 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     }
 
     public boolean isActive() {
-        return getBlockState().getValue(AquaticCatalystBlock.CORE_ACTIVE);
+        return true;
     }
 
     @Override

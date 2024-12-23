@@ -24,12 +24,7 @@ import java.util.List;
 public class DivingSuitArmorItem extends ArmorItem {
 
     public DivingSuitArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {
-        super(material, type, properties.durability(type.getDurability(10)));
-    }
-
-    @Override
-    public int getMaxStackSize(ItemStack stack) {
-        return 1;
+        super(material, type, properties.stacksTo(1).durability(type.getDurability(20)));
     }
 
     @Override

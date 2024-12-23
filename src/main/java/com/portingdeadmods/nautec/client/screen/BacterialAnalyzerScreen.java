@@ -18,13 +18,14 @@ public class BacterialAnalyzerScreen extends NTAbstractContainerScreen<Bacterial
     public BacterialAnalyzerScreen(NTAbstractContainerMenu<BacterialAnalyzerBlockEntity> menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
         this.titleLabelY = 4;
+        this.imageHeight = 174;
     }
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float delta, int mouseX, int mouseY) {
         super.renderBg(guiGraphics, delta, mouseX, mouseY);
         int i = this.leftPos;
-        int j = this.topPos;
+        int j = this.topPos - 4;
 
         int progress = menu.blockEntity.getProgress();
 

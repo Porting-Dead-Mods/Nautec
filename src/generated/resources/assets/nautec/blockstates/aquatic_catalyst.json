@@ -1,25 +1,30 @@
 {
   "variants": {
-    "core_active=false": {
+    "facing=down": {
+      "model": "nautec:block/aquatic_catalyst",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "nautec:block/aquatic_catalyst",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nautec:block/aquatic_catalyst",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "nautec:block/aquatic_catalyst",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
       "model": "nautec:block/aquatic_catalyst"
     },
-    "core_active=true,facing=down": {
-      "model": "nautec:block/aquatic_catalyst_down"
-    },
-    "core_active=true,facing=east": {
-      "model": "nautec:block/aquatic_catalyst_east"
-    },
-    "core_active=true,facing=north": {
-      "model": "nautec:block/aquatic_catalyst_north"
-    },
-    "core_active=true,facing=south": {
-      "model": "nautec:block/aquatic_catalyst_south"
-    },
-    "core_active=true,facing=up": {
-      "model": "nautec:block/aquatic_catalyst_up"
-    },
-    "core_active=true,facing=west": {
-      "model": "nautec:block/aquatic_catalyst_west"
+    "facing=west": {
+      "model": "nautec:block/aquatic_catalyst",
+      "x": 90,
+      "y": 270
     }
   }
 }

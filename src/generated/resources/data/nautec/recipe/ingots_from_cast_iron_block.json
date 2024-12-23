@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "nautec:cast_iron_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "nautec:cast_iron_ingot"
+  }
+}

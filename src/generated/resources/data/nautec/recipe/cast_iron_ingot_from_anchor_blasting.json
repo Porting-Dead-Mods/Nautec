@@ -1,13 +1,13 @@
 {
   "type": "minecraft:blasting",
   "category": "misc",
-  "cookingtime": 100,
+  "cookingtime": 400,
   "experience": 0.2,
   "ingredient": {
-    "item": "nautec:cast_iron_compound"
+    "item": "nautec:anchor"
   },
   "result": {
-    "count": 1,
+    "count": 11,
     "id": "nautec:cast_iron_ingot"
   }
 }

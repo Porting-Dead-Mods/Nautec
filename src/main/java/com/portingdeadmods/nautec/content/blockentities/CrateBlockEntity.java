@@ -76,18 +76,6 @@ public class CrateBlockEntity extends RandomizableContainerBlockEntity {
     }
 
     @Override
-    protected void collectImplicitComponents(DataComponentMap.Builder components) {
-        super.collectImplicitComponents(components);
-        components.set(NTDataComponents.OPEN.get(),getBlockState().getValue(BlockStateProperties.OPEN));
-    }
-
-    @Override
-    protected void applyImplicitComponents(DataComponentInput componentInput) {
-        super.applyImplicitComponents(componentInput);
-        level.setBlockAndUpdate(getBlockPos(),getBlockState().setValue(BlockStateProperties.OPEN,componentInput.getOrDefault(NTDataComponents.OPEN,false)));
-    }
-
-    @Override
     public int getContainerSize() {
         return 27;
     }

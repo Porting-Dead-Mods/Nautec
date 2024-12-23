@@ -1,14 +1,8 @@
 {
-  "type": "nautec:mixing",
-  "duration": 100,
-  "fluid_ingredient": {
-    "amount": 1000,
-    "id": "nautec:saltwater"
-  },
-  "fluid_result": {},
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
   "ingredients": [
     {
-      "count": 2,
       "item": "minecraft:raw_iron"
     },
     {
@@ -16,7 +10,7 @@
     }
   ],
   "result": {
-    "count": 5,
+    "count": 2,
     "id": "nautec:aquarine_steel_compound"
   }
 }

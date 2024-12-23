@@ -49,8 +49,10 @@ public final class NTBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
     public static final DeferredBlock<Block> AQUARINE_STEEL_BLOCK = registerBlockAndItem("aquarine_steel_block", Block::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+    public static final DeferredBlock<Block> CAST_IRON_BLOCK = registerBlockAndItem("cast_iron_block", Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<AquaticCatalystBlock> AQUATIC_CATALYST = registerBlockAndItem("aquatic_catalyst", AquaticCatalystBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).lightLevel(state -> state.getValue(AquaticCatalystBlock.CORE_ACTIVE) ? 12 : 0));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
     public static final DeferredBlock<PrismarineLaserRelayBlock> PRISMARINE_RELAY = registerBlockAndItem("prismarine_laser_relay", PrismarineLaserRelayBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS));
     public static final DeferredBlock<MixerBlock> MIXER = registerBlockAndItem("mixer", MixerBlock::new,
