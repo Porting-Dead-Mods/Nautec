@@ -163,6 +163,7 @@ public final class NautecClient {
         event.registerBlockEntityRenderer(NTBlockEntityTypes.ANCHOR.get(), AnchorBERenderer::new);
         event.registerBlockEntityRenderer(NTBlockEntityTypes.BACTERIAL_ANALYZER.get(), BacterialAnalyzerBERenderer::new);
         event.registerBlockEntityRenderer(NTBlockEntityTypes.FISHING_STATION.get(), FishingStationBERenderer::new);
+
         AugmentLayerRenderer.registerRenderer(NTAugments.DOLPHIN_FIN.get(),
                 ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.MATERIAL, true, ctx));
         AugmentLayerRenderer.registerRenderer(NTAugments.GUARDIAN_EYE.get(), GuardianEyeRenderer::new);

@@ -29,6 +29,7 @@ public interface BacteriaStats {
     BacteriaStats copy();
 
     List<Component> statsTooltip();
+    List<Component> statsTooltipWithMutatorValues();
 
     BacteriaStatsSerializer<?> getSerializer();
 

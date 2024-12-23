@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.client.screen;
 
+import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.client.screen.NTAbstractContainerScreen;
 import com.portingdeadmods.nautec.api.menu.NTAbstractContainerMenu;
@@ -29,8 +30,9 @@ public class MutatorScreen extends NTAbstractContainerScreen<MutatorBlockEntity>
 
         int progress = menu.blockEntity.getProgress();
 
-        int j1 = Mth.ceil(((float) progress / BacterialAnalyzerBlockEntity.MAX_PROGRESS) * 72.0F);
-        guiGraphics.blitSprite(PROGRESS_ARROW, 72, 24, 0, 0, i + 76, j + 29, j1, 24);
+        int j1 = Mth.ceil(((float) progress / NTConfig.mutatorCraftingSpeed) * 79.0F);
+
+        guiGraphics.blitSprite(PROGRESS_ARROW, 79, 24, 0, 0, i + 47, j + 22, j1, 24);
     }
 
     @Override
