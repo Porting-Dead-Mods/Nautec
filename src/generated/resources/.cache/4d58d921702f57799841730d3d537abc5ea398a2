@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-22T15:03:48.196904205	Item Models: nautec
+// 1.21.1	2024-12-24T18:06:56.5202249	Item Models: nautec
 53692692f57914fc54eb6ebf416ce1cb7789e57b assets/nautec/models/item/air_bottle.json
 cc6ee3887ec6e0c53216dc681ac7b32b34182253 assets/nautec/models/item/anchor.json
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
@@ -41,6 +41,7 @@ f265d14b36a179870fb0d210c3677f6235e11ed8 assets/nautec/models/item/cast_iron_blo
 204c2b87988bae0f1d52f4bdbf783705a53f0187 assets/nautec/models/item/chiseled_dark_prismarine.json
 9c2eb8e87b6da76b41d01bbbe9d6dc72fa5a7479 assets/nautec/models/item/claw_robot_arm.json
 480b14b512773eff106e41db280b20b18ff623f8 assets/nautec/models/item/crate.json
+37df154a32accd3c4866a4ffd2ea62e39fd84766 assets/nautec/models/item/creative_energy_source.json
 412b50bfa2123bb08b78fca03ade3d5c4522984b assets/nautec/models/item/creative_power_source.json
 3877f32e28dc1c15c50bf3a2b3b9a1b42d1efc11 assets/nautec/models/item/crowbar.json
 93a27b412d5f8766eaadc9a39bbb9a8e7ad49ea5 assets/nautec/models/item/dark_prismarine_pillar.json
@@ -55,6 +56,7 @@ c085f601646336ad76e9a613649bcffc3a304c9a assets/nautec/models/item/dolphin_fin.j
 61a7044af6e7a6c51552eb1abfa03e96aa677420 assets/nautec/models/item/eas_bucket.json
 81b061a707ce97739bf742ee8c4832e9612c3f18 assets/nautec/models/item/eas_vial.json
 7bdd896a173f2dbd2cf64ff41e82f6c5525dcf49 assets/nautec/models/item/eldritch_heart.json
+f756459da05f56a3fc46f479c1737332da8d90ce assets/nautec/models/item/energy_converter.json
 3e19378d1e8cd3808548edc4bbb93a4dfe4ade74 assets/nautec/models/item/etching_acid_bucket.json
 cb07777d8dcd1c00bea806efc2b7f64c6c13a8c3 assets/nautec/models/item/fishing_station.json
 490588573d27c343b055c02b137c221a71866aa8 assets/nautec/models/item/gear.json
@@ -71,12 +73,12 @@ da47351a6e7410de2b6761d4c90edf257d4620aa assets/nautec/models/item/oil_barrel.js
 c30b2391537fbc383c41aebe69a6eab8b2f9bd31 assets/nautec/models/item/petri_dish.json
 888fbf8e3629b4cd0df267581ac130f534f80ac5 assets/nautec/models/item/petri_dish_bacteria.json
 e8d19ed0a058c92c28efb20a5f8887ff0b78770f assets/nautec/models/item/polished_prismarine.json
-113d63fc1bd37fbe0fb477446a06eafa25ce09b1 assets/nautec/models/item/prism_monocle.json
 8e22e42d27bc66bc91cc76fd66d0ff5457b585b1 assets/nautec/models/item/prismarine_crystal.json
 8b90a03798a28c038b1c16da2f723e90694d182b assets/nautec/models/item/prismarine_crystal_shard.json
 09882392c9745a728907f265dd968977ca0f171b assets/nautec/models/item/prismarine_laser_relay.json
 b01055cbe0dd02e958fe1063758658a9be6b753a assets/nautec/models/item/prismarine_sand.json
 e0209c5f64b38c19f4b8cc62dc90d23fd5f3bad0 assets/nautec/models/item/prismatic_battery.json
+113d63fc1bd37fbe0fb477446a06eafa25ce09b1 assets/nautec/models/item/prism_monocle.json
 0441fb5aafacad25af44cc70caad7de17d4d7762 assets/nautec/models/item/rusty_crate.json
 546756658cb53a34f117de278d075cbdd09c70ba assets/nautec/models/item/rusty_gear.json
 98e84d6566a67fb207e7dc979f77a6a88f2f0fcf assets/nautec/models/item/salt.json
