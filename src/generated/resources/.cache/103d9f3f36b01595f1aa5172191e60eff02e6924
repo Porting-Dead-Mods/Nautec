@@ -1,9 +1,9 @@
-// 1.21.1	2024-12-21T13:29:07.948008452	Registries
-731c134d2749f365fc9a6d44d8d6e400e77eec49 data/nautec/nautec/bacteria/cyanobacteria.json
+// 1.21.1	2024-12-24T18:15:02.5464049	Registries
+f1cbe78b749af58e6ab35cfcf0e117e8ff1201fd data/nautec/nautec/bacteria/cyanobacteria.json
 6e0101d77b1f0382041425952ff4b8544733f2e2 data/nautec/nautec/bacteria/empty.json
-81c72e6a3cfb78f800e627cdad79edbb044de4a1 data/nautec/nautec/bacteria/halobacteria.json
-09d49475a6a9fffaf92674fc3f0e4df1f76ea94d data/nautec/nautec/bacteria/methanogens.json
-f8693e008a409782cc34263ff0b2c2c61c99a3cc data/nautec/nautec/bacteria/thermophiles.json
+8bfd159438fbc05a4170b1682dbb19f13b40c2ce data/nautec/nautec/bacteria/halobacteria.json
+7752dbd2acb008e58069226bdc06b45deddec8d8 data/nautec/nautec/bacteria/methanogens.json
+89cc03b8955fa19e495528d6f9a47db32f938641 data/nautec/nautec/bacteria/thermophiles.json
 d3949aab832fc1b72c2512c35586c2682dea4d4d data/nautec/worldgen/configured_feature/prismarine_sand_beach.json
 e9f0c0ce377bc6f731c3b36673e845152a53327d data/nautec/worldgen/configured_feature/prismarine_sand_ocean.json
 685d14b2486e0da05c931e69fe78236dd9523cbf data/nautec/worldgen/placed_feature/prismarine_sand_beach.json
