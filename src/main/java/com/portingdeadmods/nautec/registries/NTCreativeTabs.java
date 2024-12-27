@@ -72,7 +72,11 @@ public final class NTCreativeTabs {
     private static void addPetriDish(CreativeModeTab.Output output, HolderLookup.Provider lookup, ItemLike item, ResourceKey<Bacteria> elem, boolean analyzed) {
         if (elem != NTBacterias.EMPTY) {
             ItemStack stack = new ItemStack(item);
-            stack.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(new BacteriaInstance(elem, lookup)));
+
+            BacteriaInstance bacteriaInstance = new BacteriaInstance(elem, lookup);
+            bacteriaInstance.setStats(bacteriaInstance.getStats().getMaxStats());
+
+            stack.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(bacteriaInstance));
             stack.set(NTDataComponents.ANALYZED, analyzed);
             output.accept(stack);
         }

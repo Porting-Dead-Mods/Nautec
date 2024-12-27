@@ -10,6 +10,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.Items;
 
+import java.util.List;
+
 public final class NTBacterias {
     public static final ResourceKey<Bacteria> EMPTY = key("empty");
     public static final ResourceKey<Bacteria> CYANOBACTERIA = key("cyanobacteria");
@@ -21,15 +23,31 @@ public final class NTBacterias {
         register(context, EMPTY, EmptyBacteria.INSTANCE);
         register(context, CYANOBACTERIA, SimpleBacteria.of()
                 .resource(Items.IRON_INGOT)
+                .productionRate(List.of(0.1F, 0.5F))
+                .lifespan(List.of(1200, 2400))
+                .growthRate(List.of(0.5F, 1F))
+                .mutationResistance(List.of(0F, 0.1F))
                 .color(FastColor.ARGB32.color(50, 255, 255)));
         register(context, HALOBACTERIA, SimpleBacteria.of()
                 .resource(Items.GOLD_INGOT)
+                .productionRate(List.of(0.1F, 0.5F))
+                .lifespan(List.of(1200, 2400))
+                .growthRate(List.of(0.5F, 1F))
+                .mutationResistance(List.of(0F, 0.1F))
                 .color(FastColor.ARGB32.color(255, 229, 0)));
         register(context, METHANOGENS, SimpleBacteria.of()
                 .resource(Items.COOKED_BEEF)
+                .productionRate(List.of(0.1F, 0.5F))
+                .lifespan(List.of(1200, 2400))
+                .growthRate(List.of(0.5F, 1F))
+                .mutationResistance(List.of(0F, 0.1F))
                 .color(FastColor.ARGB32.color(235, 186, 237)));
         register(context, THERMOPHILES, SimpleBacteria.of()
                 .resource(Items.LAVA_BUCKET)
+                .productionRate(List.of(0.1F, 0.5F))
+                .lifespan(List.of(1200, 2400))
+                .growthRate(List.of(0.5F, 1F))
+                .mutationResistance(List.of(0F, 0.1F))
                 .color(FastColor.ARGB32.color(255, 0, 0)));
     }
 

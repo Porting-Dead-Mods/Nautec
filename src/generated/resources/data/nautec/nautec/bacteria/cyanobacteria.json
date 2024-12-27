@@ -4,9 +4,21 @@
   "stats": {
     "type": "nautec:simple",
     "color": -13434881,
-    "growth_rate": 0.0,
-    "lifespan": 0,
-    "mutation_resistance": 0.0,
-    "production_rate": 10.0
+    "growth_rate": [
+      0.5,
+      1.0
+    ],
+    "lifespan": [
+      1200,
+      2400
+    ],
+    "mutation_resistance": [
+      0.0,
+      0.1
+    ],
+    "production_rate": [
+      0.1,
+      0.5
+    ]
   }
 }

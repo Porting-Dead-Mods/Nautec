@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec.api.bacteria;
 
 import com.mojang.serialization.Codec;
 import com.portingdeadmods.nautec.NTRegistries;
+import com.portingdeadmods.nautec.content.bacteria.CollapsedStats;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -16,31 +17,17 @@ public interface BacteriaStats {
             ByteBufCodecs.registry(NTRegistries.BACTERIA_STATS_SERIALIZER_KEY).dispatch(BacteriaStats::getSerializer, BacteriaStatsSerializer::streamCodec);
 
 
-    float growthRate();
+    List<Float> growthRate();
 
-    float mutationResistance();
+    List<Float> mutationResistance();
 
-    float productionRate();
+    List<Float> productionRate();
 
-    int lifespan();
+    List<Integer> lifespan();
+
+    CollapsedStats collapse();
 
     int color();
 
-    BacteriaStats copy();
-
-    List<Component> statsTooltip();
-    List<Component> statsTooltipWithMutatorValues();
-
     BacteriaStatsSerializer<?> getSerializer();
-
-    // Mutator
-    BacteriaStats rollGrowthRate();
-    BacteriaStats rollMutationResistance();
-    BacteriaStats rollProductionRate();
-    BacteriaStats rollLifespan();
-    BacteriaStats rollStats();
-
-    // Incubator
-    BacteriaStats grow();
-    BacteriaStats shrink();
 }
