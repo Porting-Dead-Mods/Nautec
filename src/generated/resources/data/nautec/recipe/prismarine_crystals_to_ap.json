@@ -1,0 +1,9 @@
+{
+  "type": "nautec:aquatic_catalyst_channeling",
+  "duration": 160,
+  "ingredient": {
+    "item": "minecraft:prismarine_crystals"
+  },
+  "power_amount": 1000,
+  "purity": 0.8
+}

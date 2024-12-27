@@ -1,0 +1,9 @@
+{
+  "type": "nautec:aquatic_catalyst_channeling",
+  "duration": 200,
+  "ingredient": {
+    "item": "nautec:prismarine_crystal_shard"
+  },
+  "power_amount": 2400,
+  "purity": 1.2
+}

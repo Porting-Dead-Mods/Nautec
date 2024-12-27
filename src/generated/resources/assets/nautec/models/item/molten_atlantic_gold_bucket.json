@@ -1,0 +1,5 @@
+{
+  "parent": "neoforge:item/bucket",
+  "fluid": "nautec:molten_atlantic_gold",
+  "loader": "neoforge:fluid_container"
+}
