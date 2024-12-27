@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-22T15:03:48.203068696	Recipes
+// 1.21.1	2024-12-27T13:13:39.427431824	Recipes
 11933701842708efdf83b2addbac6d99021a027f data/minecraft/advancement/recipes/building_blocks/aquarine_steel_block.json
 3ba1f15fc847a9824f87190fcd71894e2e0bd42c data/minecraft/advancement/recipes/misc/aquarine_steel_ingot.json
 e2133e76635915c0fe35f2fcb585f73a55be9574 data/minecraft/recipe/aquarine_steel_block.json
@@ -88,7 +88,6 @@ b95b1df90afe8e960f9da4c4f7a2a6fd770654e1 data/nautec/recipe/cast_iron_ingot_from
 a1104a2fca829ca101471417232e05510e405423 data/nautec/recipe/charger.json
 8f563bd85ef2e4f655ed27548b35967961ce4035 data/nautec/recipe/chiseled_dark_prismarine.json
 7cb4ad5a479e5690ce11e6025ce01a38090012c7 data/nautec/recipe/claw_robot_arm.json
-69ccc6392657a824e91bea60558c69e4f26685f1 data/nautec/recipe/corals.json
 92b1c892b837a6f4a88591b221bc580fa73ee881 data/nautec/recipe/crate.json
 f540636f940eb6cab30e9e30319f69ef3a76899b data/nautec/recipe/crowbar.json
 b4db622a427960600d52b7e951f21cfeab52ca7b data/nautec/recipe/dark_prismarine_pillar.json
@@ -110,7 +109,6 @@ fe30c6078bd52f68fa02455d52d2eb51b8718c16 data/nautec/recipe/glass_vial.json
 8476e4500001a8b1e18c57e5add46ab9b1f43493 data/nautec/recipe/guardian_eye.json
 1059c1581209c9fb4cb7a39ff9f5f6b14bb31d6f data/nautec/recipe/ingots_from_cast_iron_block.json
 38e5ac85f700956260714f824d8f5688c5385d39 data/nautec/recipe/item_frame_from_brown_polymer.json
-45a043fa8907c3b7f592f8f8b5947f8ea60134be data/nautec/recipe/kelp.json
 a4bdb97abe0834d405f7584452f78242585e02ff data/nautec/recipe/laser_channeling_coil.json
 3ff56013c9c1926be24f71bdb57c93527ef7ee28 data/nautec/recipe/laser_junction.json
 11d23344db3f6e98c1520328fd6c883bccd8ca57 data/nautec/recipe/long_distance_laser.json
@@ -119,7 +117,10 @@ a4bdb97abe0834d405f7584452f78242585e02ff data/nautec/recipe/laser_channeling_coi
 0e7ac319099e484ba772e18754213fe7009a42cd data/nautec/recipe/nuggets_from_cast_iron_ingot.json
 f9596d9be4a76ba5e91496e7396018daa20cccfc data/nautec/recipe/polished_prismarine.json
 4fe8f6115c759c654e132afedec76d846f0a89d5 data/nautec/recipe/prism_monocle.json
+2a43114635e0447258071edac38094539bd18419 data/nautec/recipe/prismarine_crystal_shards_to_ap.json
+eddec90fa358587829f82254fcfb53098a51cbb6 data/nautec/recipe/prismarine_crystals_to_ap.json
 ac628b97c097227e3af94f13cbe35a2cf3ee3124 data/nautec/recipe/prismarine_relay.json
+e21b3a2484a1550a4198e9df5e213fd6dd81a5a3 data/nautec/recipe/prismarine_shards_to_ap.json
 4745c9855337a311cb5b7211168927a61645d193 data/nautec/recipe/prismatic_battery.json
 0e781b8c85808d8ee2691a5c39404da2b6a8f061 data/nautec/recipe/valve.json
 266c89a0698de108847ad3b60be50d230822cee4 data/nautec/recipe/whisk.json

@@ -1,21 +1,27 @@
 package com.portingdeadmods.nautec.api.blockentities;
 
 import com.portingdeadmods.nautec.NTConfig;
+import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
 import com.portingdeadmods.nautec.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.nautec.content.recipes.inputs.ItemTransformationRecipeInput;
 import com.portingdeadmods.nautec.utils.ParticleUtils;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -80,7 +86,11 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     }
 
     public void receivePower(int amount, Direction direction, BlockPos originPos) {
+        int prevAmount = this.powerPerSide.getInt(direction);
         setPowerPerSide(direction, amount);
+        if (prevAmount != amount) {
+            onPowerChanged();
+        }
     }
 
     // PURITY
@@ -240,21 +250,18 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     protected void checkConnections() {
         for (Direction direction : getLaserOutputs()) {
             int maxLaserDistance = getMaxLaserDistance();
-            for (int i = 1; i < maxLaserDistance; i++) {
-                BlockPos pos = worldPosition.relative(direction, i);
-                BlockState state = level.getBlockState(pos);
-
-                if (level.getBlockEntity(pos) instanceof LaserBlockEntity laserBlockEntity) {
-                    if (laserBlockEntity.getLaserInputs().contains(direction.getOpposite())) {
-                        laserDistances.put(direction, i);
-                        break;
-                    }
+            Vec3 from = worldPosition.relative(direction).getCenter();
+            Vec3 to = worldPosition.relative(direction, maxLaserDistance).getCenter();
+            BlockHitResult blockHitResult = level.clip(new ClipContext(from, to, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, CollisionContext.empty()));
+            BlockPos resultPos = blockHitResult.getBlockPos();
+            if (level.getBlockEntity(resultPos) instanceof LaserBlockEntity laserBlockEntity) {
+                if (laserBlockEntity.getLaserInputs().contains(direction.getOpposite())) {
+                    Vec3i diffVec3 = worldPosition.subtract(resultPos);
+                    int diff = diffVec3.getX() + diffVec3.getY() + diffVec3.getZ();
+                    this.laserDistances.put(direction, Math.abs(diff));
                 }
-
-                if (!state.canBeReplaced() || i == maxLaserDistance - 1) {
-                    laserDistances.put(direction, 0);
-                    break;
-                }
+            } else {
+                this.laserDistances.put(direction, 0);
             }
         }
     }

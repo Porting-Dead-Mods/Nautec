@@ -114,17 +114,23 @@ public class RecipesProvider extends RecipeProvider {
     }
 
     private static void aquaticCatalystRecipes(@NotNull RecipeOutput pRecipeOutput) {
-        AquaticCatalystChannelingRecipeBuilder.newRecipe(Ingredient.of(Items.KELP))
-                .powerAmount(700)
-                .purity(0)
-                .duration(100)
-                .save(pRecipeOutput, Nautec.rl("kelp"));
+        AquaticCatalystChannelingRecipeBuilder.newRecipe(Ingredient.of(Items.PRISMARINE_CRYSTALS))
+                .powerAmount(1000)
+                .purity(0.8f)
+                .duration(160)
+                .save(pRecipeOutput, Nautec.rl("prismarine_crystals_to_ap"));
 
-        AquaticCatalystChannelingRecipeBuilder.newRecipe(Ingredient.of(NTTags.Items.CORALS))
+        AquaticCatalystChannelingRecipeBuilder.newRecipe(Ingredient.of(Items.PRISMARINE_SHARD))
                 .powerAmount(2000)
                 .purity(0.4f)
+                .duration(160)
+                .save(pRecipeOutput, Nautec.rl("prismarine_shards_to_ap"));
+
+        AquaticCatalystChannelingRecipeBuilder.newRecipe(Ingredient.of(NTItems.PRISMARINE_CRYSTAL_SHARD))
+                .powerAmount(2400)
+                .purity(1.2f)
                 .duration(200)
-                .save(pRecipeOutput, Nautec.rl("corals"));
+                .save(pRecipeOutput, Nautec.rl("prismarine_crystal_shards_to_ap"));
     }
 
     private static void aquarineSteelRecipes(@NotNull RecipeOutput pRecipeOutput) {

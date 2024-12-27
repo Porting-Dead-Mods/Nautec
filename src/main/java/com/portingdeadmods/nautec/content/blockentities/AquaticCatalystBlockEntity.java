@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.content.blockentities;
 
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.blocks.AquaticCatalystBlock;
@@ -12,6 +13,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
@@ -24,8 +26,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.portingdeadmods.nautec.content.blocks.AquaticCatalystBlock.ACTIVE;
+import static com.portingdeadmods.nautec.content.blocks.AquaticCatalystBlock.STAGE;
+
+// TODO: actually consume item before starting to generate power
 public class AquaticCatalystBlockEntity extends LaserBlockEntity {
-    private AquaticCatalystChannelingRecipe recipe;
+    private RecipeHolder<AquaticCatalystChannelingRecipe> recipe;
     private int amount;
     private int duration;
 
@@ -48,7 +54,7 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     }
 
     public int getRemainingDuration() {
-        return recipe != null ? recipe.duration() - duration : 0;
+        return recipe != null ? recipe.value().duration() - duration : 0;
     }
 
     public ItemStack getProcessingItem() {
@@ -56,7 +62,19 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     }
 
     public Optional<AquaticCatalystChannelingRecipe> getCurrentRecipe() {
-        return Optional.ofNullable(this.recipe);
+        return Optional.ofNullable(this.recipe).map(RecipeHolder::value);
+    }
+
+    @Override
+    protected void onItemsChanged(int slot) {
+        super.onItemsChanged(slot);
+
+        BlockState state = getBlockState().setValue(ACTIVE, !getItemHandler().getStackInSlot(0).isEmpty());
+
+        float i = (float) getItemHandler().getStackInSlot(0).getCount() / getItemHandler().getSlotLimit(0);
+        int stage = (int) (i * 6);
+        Nautec.LOGGER.debug("ratio: {}, stage: {}", i, stage);
+        level.setBlockAndUpdate(worldPosition, state.setValue(STAGE, stage));
     }
 
     @Override
@@ -77,9 +95,10 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
         if (!stack.isEmpty() && isActive()) {
             // caching
             if (recipe == null) {
-                Optional<AquaticCatalystChannelingRecipe> recipe1 = level.getRecipeManager().getRecipeFor(AquaticCatalystChannelingRecipe.Type.INSTANCE, new SingleRecipeInput(stack), level).map(RecipeHolder::value);
+                Optional<RecipeHolder<AquaticCatalystChannelingRecipe>> recipe1 = level.getRecipeManager().getRecipeFor(AquaticCatalystChannelingRecipe.Type.INSTANCE, new SingleRecipeInput(stack), level);
                 if (recipe1.isPresent()) {
                     this.recipe = recipe1.get();
+                    getItemStackHandler().setStackInSlot(0, stack.copyWithCount(stack.getCount() - 1));
                 } else {
                     return;
                 }
@@ -87,13 +106,12 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
 
             Direction direction = getBlockState().getValue(BlockStateProperties.FACING);
             if (getLaserDistances().getInt(direction.getOpposite()) > 0) {
-                if (duration >= recipe.duration()) {
-                    getItemStackHandler().setStackInSlot(0, stack.copyWithCount(stack.getCount() - 1));
+                if (duration >= recipe.value().duration()) {
                     duration = 0;
                 } else {
-                    amount = recipe.powerAmount() / recipe.duration();
+                    amount = recipe.value().powerAmount() / recipe.value().duration();
                     transmitPower(amount);
-                    setPurity(recipe.purity());
+                    setPurity(recipe.value().purity());
                     duration++;
                 }
             }
@@ -115,18 +133,22 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     }
 
     public boolean isActive() {
-        return true;
+        return getBlockState().getValue(ACTIVE);
     }
 
     @Override
     protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
         super.loadData(tag, provider);
         this.duration = tag.getInt("duration");
+
+        Optional<RecipeHolder<?>> recipe1 = level.getRecipeManager().byKey(ResourceLocation.parse(tag.getString("recipe")));
+        recipe1.ifPresent(recipeHolder -> this.recipe = (RecipeHolder<AquaticCatalystChannelingRecipe>) recipeHolder);
     }
 
     @Override
     protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
         super.saveData(tag, provider);
         tag.putInt("duration", this.duration);
+        tag.putString("recipe", this.recipe != null ? this.recipe.toString() : "");
     }
 }
