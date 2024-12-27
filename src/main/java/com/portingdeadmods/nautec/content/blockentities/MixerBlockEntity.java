@@ -53,10 +53,7 @@ public class MixerBlockEntity extends LaserBlockEntity {
 
     @Override
     public ObjectSet<Direction> getLaserInputs() {
-        return ObjectSet.of(
-                Direction.UP,
-                Direction.DOWN
-        );
+        return ObjectSet.of(Direction.values());
     }
 
     @Override
@@ -135,6 +132,12 @@ public class MixerBlockEntity extends LaserBlockEntity {
             }
         }
         fluidHandler.drain(mixingRecipe.fluidIngredient().getAmount(), IFluidHandler.FluidAction.EXECUTE);
+    }
+
+    @Override
+    public void onPowerChanged() {
+        super.onPowerChanged();
+        this.recipe = getRecipe().orElse(null);
     }
 
     private void setOutputs(MixingRecipe mixingRecipe) {

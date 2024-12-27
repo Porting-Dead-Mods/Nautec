@@ -1,25 +1,20 @@
 package com.portingdeadmods.nautec.content.blocks;
 
 import com.mojang.serialization.MapCodec;
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.DisplayBlock;
 import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
 import com.portingdeadmods.nautec.content.blockentities.AquaticCatalystBlockEntity;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
-import com.portingdeadmods.nautec.tags.NTTags;
-import com.portingdeadmods.nautec.utils.ItemUtils;
-import net.minecraft.ChatFormatting;
+import com.portingdeadmods.nautec.utils.BlockUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -29,17 +24,24 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
+    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
+    public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 6);
+
     public AquaticCatalystBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState()
                 .setValue(BlockStateProperties.FACING, Direction.NORTH)
+                .setValue(STAGE, 0)
+                .setValue(ACTIVE, false)
         );
     }
 
@@ -55,13 +57,40 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder.add(BlockStateProperties.FACING));
+        super.createBlockStateDefinition(builder.add(BlockStateProperties.FACING, STAGE, ACTIVE));
     }
 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState state = super.getStateForPlacement(context);
         return state != null ? state.setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite()) : null;
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        AquaticCatalystBlockEntity be = (AquaticCatalystBlockEntity) level.getBlockEntity(pos);
+        IItemHandler itemHandler = be.getItemHandler();
+        if (!stack.isEmpty()) {
+            boolean valid = itemHandler.isItemValid(0, stack);
+            if (valid) {
+                ItemStack remainder = itemHandler.insertItem(0, stack, false);
+                player.setItemInHand(hand, remainder);
+
+                if (!state.getValue(ACTIVE)) {
+                    Nautec.LOGGER.debug("Setting active");
+                    level.setBlockAndUpdate(pos, level.getBlockState(pos)
+                            .setValue(ACTIVE, true)
+                            .setValue(BlockStateProperties.FACING, hitResult.getDirection()));
+                }
+
+                return ItemInteractionResult.SUCCESS;
+            }
+        } else {
+            ItemStack extracted = itemHandler.extractItem(0, itemHandler.getSlotLimit(0), false);
+            ItemHandlerHelper.giveItemToPlayer(player, extracted, player.getInventory().selected);
+            return ItemInteractionResult.SUCCESS;
+        }
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     //    @Override

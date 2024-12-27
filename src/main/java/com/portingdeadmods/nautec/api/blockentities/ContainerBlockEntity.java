@@ -178,11 +178,6 @@ public abstract class ContainerBlockEntity extends BlockEntity {
             public int getSlotLimit(int slot) {
                 return slotLimit.apply(slot);
             }
-
-            @Override
-            public int getSlots() {
-                return slots;
-            }
         };
     }
 

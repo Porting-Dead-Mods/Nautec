@@ -33,8 +33,8 @@ public class BlockModelProvider extends BlockStateProvider {
 
         // Laser Stuffs
         simpleBlock(NTBlocks.CREATIVE_POWER_SOURCE.get());
-        facingBlock(NTBlocks.AQUATIC_CATALYST.get(), models().cubeAll(name(NTBlocks.AQUATIC_CATALYST.get()),
-                blockTexture(NTBlocks.AQUATIC_CATALYST.get())));
+        aquaticCatalyst(NTBlocks.AQUATIC_CATALYST.get());
+
         existingFacingBlock(NTBlocks.PRISMARINE_RELAY.get());
         longDistanceLaser(NTBlocks.LONG_DISTANCE_LASER.get());
         laserJunction(NTBlocks.LASER_JUNCTION.get());
@@ -84,6 +84,21 @@ public class BlockModelProvider extends BlockStateProvider {
 
         horizontalBlock(NTBlocks.BACTERIAL_ANALYZER.get(), models().getExistingFile(existingModelFile(NTBlocks.BACTERIAL_ANALYZER.get())));
         horizontalBlock(NTBlocks.BACTERIAL_ANALYZER_TOP.get(), models().getExistingFile(existingModelFile(NTBlocks.BACTERIAL_ANALYZER_TOP.get())));
+    }
+
+    private void aquaticCatalyst(AquaticCatalystBlock block) {
+        VariantBlockStateBuilder builder = getVariantBuilder(block);
+        builder.partialState().with(AquaticCatalystBlock.ACTIVE, false)
+                .modelForState().modelFile(models().cubeAll(name(block), blockTexture(block))).addModel();
+        for (Direction direction : Direction.values()) {
+            for (int stage : AquaticCatalystBlock.STAGE.getPossibleValues()) {
+                builder.partialState()
+                        .with(BlockStateProperties.FACING, direction)
+                        .with(AquaticCatalystBlock.ACTIVE, true)
+                        .with(AquaticCatalystBlock.STAGE, stage)
+                        .modelForState().modelFile(createActiveACModel(block, direction, stage)).addModel();
+            }
+        }
     }
 
     private void pipeBlock(Block block) {
@@ -218,11 +233,11 @@ public class BlockModelProvider extends BlockStateProvider {
         return modLoc(ModelProvider.BLOCK_FOLDER + "/multiblock/" + NTRegistries.MULTIBLOCK.getKey(multiblock).getPath() + "/" + name);
     }
 
-    private ModelFile createActiveACModel(AquaticCatalystBlock block, Direction activeSide) {
-        BlockModelBuilder builder = models().withExistingParent(name(block) + "_" + activeSide.getSerializedName(), "cube");
+    private ModelFile createActiveACModel(AquaticCatalystBlock block, Direction activeSide, int stage) {
+        BlockModelBuilder builder = models().withExistingParent(name(block) + "_" + activeSide.getSerializedName() + "_" + stage, "cube");
         for (Direction dir : Direction.values()) {
             if (dir == activeSide) {
-                builder.texture(dir.getName(), extend(blockTexture(block), "_active"));
+                builder.texture(dir.getName(), extend(blockTexture(block), "_active_" + stage));
             } else {
                 builder.texture(dir.getName(), blockTexture(block));
             }

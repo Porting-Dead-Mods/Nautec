@@ -16,8 +16,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-public class LaserBlockEntityRenderer<T extends LaserBlockEntity> implements BlockEntityRenderer<T> {
+public class LaserBlockEntityRenderer<T extends LaserBlockEntity> extends NTBERenderer<T> {
     public LaserBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
+        super(ctx);
     }
 
     @Override
