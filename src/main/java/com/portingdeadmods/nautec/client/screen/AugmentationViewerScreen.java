@@ -1,4 +1,4 @@
-package com.portingdeadmods.nautec.content.menus;
+package com.portingdeadmods.nautec.client.screen;
 
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;

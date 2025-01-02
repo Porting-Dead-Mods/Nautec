@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.content.items.tools;
 import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
+import com.portingdeadmods.nautec.content.blockentities.LaserJunctionBlockEntity;
 import com.portingdeadmods.nautec.content.blocks.LaserJunctionBlock;
 import com.portingdeadmods.nautec.utils.BlockUtils;
 import com.portingdeadmods.nautec.utils.MultiblockHelper;
@@ -22,6 +23,8 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Set;
+
 public class AquarineWrenchItem extends Item {
     public AquarineWrenchItem(Properties properties) {
         super(properties);
@@ -40,8 +43,8 @@ public class AquarineWrenchItem extends Item {
         BlockState controllerState = blockState;
         Player player = useOnContext.getPlayer();
 
-        if (blockState.getBlock() instanceof LaserJunctionBlock && blockState.hasProperty(LaserJunctionBlock.CONNECTION[0])) {
-            Direction direction = getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE).getDirection();
+        if (level.getBlockEntity(pos) instanceof LaserJunctionBlockEntity be && blockState.hasProperty(LaserJunctionBlock.CONNECTION[0])) {
+            Direction direction = useOnContext.getClickedFace();
             LaserJunctionBlock.ConnectionType newType = switch (blockState.getValue(LaserJunctionBlock.CONNECTION[direction.ordinal()])) {
                 case INPUT ->
                         player.isShiftKeyDown() ? LaserJunctionBlock.ConnectionType.OUTPUT : LaserJunctionBlock.ConnectionType.NONE;
@@ -51,6 +54,21 @@ public class AquarineWrenchItem extends Item {
                         player.isShiftKeyDown() ? LaserJunctionBlock.ConnectionType.OUTPUT : LaserJunctionBlock.ConnectionType.INPUT;
             };
             level.setBlockAndUpdate(pos, blockState.setValue(LaserJunctionBlock.CONNECTION[direction.ordinal()], newType));
+            switch (newType) {
+                case INPUT -> {
+                    be.getLaserInputs().add(direction);
+                    be.getLaserOutputs().remove(direction);
+                }
+                case OUTPUT -> {
+                    be.getLaserInputs().remove(direction);
+                    be.getLaserOutputs().add(direction);
+                }
+                case NONE -> {
+                    be.getLaserInputs().remove(direction);
+                    be.getLaserOutputs().remove(direction);
+                }
+            }
+
             return InteractionResult.SUCCESS;
         }
 

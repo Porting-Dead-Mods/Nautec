@@ -18,6 +18,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
+
 public class DrainPartBlockEntity extends LaserBlockEntity implements FakeBlockEntity, SavesControllerPosBlockEntity {
     private BlockPos controllerPos;
     private Direction laserPort;
@@ -43,12 +45,12 @@ public class DrainPartBlockEntity extends LaserBlockEntity implements FakeBlockE
     }
 
     @Override
-    public ObjectSet<Direction> getLaserInputs() {
+    public Set<Direction> getLaserInputs() {
         return ObjectSet.of(laserPort);
     }
 
     @Override
-    public ObjectSet<Direction> getLaserOutputs() {
+    public Set<Direction> getLaserOutputs() {
         if (laserPort != null) {
             return ObjectSet.of(laserPort.getOpposite());
         }

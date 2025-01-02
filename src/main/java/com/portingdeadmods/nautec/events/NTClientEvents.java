@@ -2,7 +2,7 @@ package com.portingdeadmods.nautec.events;
 
 import com.mojang.blaze3d.shaders.FogShape;
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.content.menus.AugmentationViewerScreen;
+import com.portingdeadmods.nautec.client.screen.AugmentationViewerScreen;
 import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.registries.NTKeybinds;
 import com.portingdeadmods.nautec.utils.AugmentHelper;

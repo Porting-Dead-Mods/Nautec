@@ -77,7 +77,6 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
                 player.setItemInHand(hand, remainder);
 
                 if (!state.getValue(ACTIVE)) {
-                    Nautec.LOGGER.debug("Setting active");
                     level.setBlockAndUpdate(pos, level.getBlockState(pos)
                             .setValue(ACTIVE, true)
                             .setValue(BlockStateProperties.FACING, hitResult.getDirection()));

@@ -18,6 +18,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Set;
 
 public class ChargerBlockEntity extends LaserBlockEntity {
     public ChargerBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -27,12 +28,12 @@ public class ChargerBlockEntity extends LaserBlockEntity {
 
 
     @Override
-    public ObjectSet<Direction> getLaserInputs() {
+    public Set<Direction> getLaserInputs() {
         return ObjectSet.of(Direction.values());
     }
 
     @Override
-    public ObjectSet<Direction> getLaserOutputs() {
+    public Set<Direction> getLaserOutputs() {
         return ObjectSet.of();
     }
 

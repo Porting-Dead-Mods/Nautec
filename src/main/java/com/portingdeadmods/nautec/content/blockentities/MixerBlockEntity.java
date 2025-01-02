@@ -25,10 +25,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class MixerBlockEntity extends LaserBlockEntity {
     public static final int OUTPUT_SLOT = 4;
@@ -52,12 +49,12 @@ public class MixerBlockEntity extends LaserBlockEntity {
     }
 
     @Override
-    public ObjectSet<Direction> getLaserInputs() {
+    public Set<Direction> getLaserInputs() {
         return ObjectSet.of(Direction.values());
     }
 
     @Override
-    public ObjectSet<Direction> getLaserOutputs() {
+    public Set<Direction> getLaserOutputs() {
         return ObjectSet.of();
     }
 

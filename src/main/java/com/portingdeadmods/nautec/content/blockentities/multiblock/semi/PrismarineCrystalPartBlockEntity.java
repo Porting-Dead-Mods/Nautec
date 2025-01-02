@@ -13,6 +13,7 @@ import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Set;
 
 public class PrismarineCrystalPartBlockEntity extends LaserBlockEntity {
     public PrismarineCrystalPartBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -20,12 +21,12 @@ public class PrismarineCrystalPartBlockEntity extends LaserBlockEntity {
     }
 
     @Override
-    public ObjectSet<Direction> getLaserInputs() {
+    public Set<Direction> getLaserInputs() {
         return ObjectSet.of();
     }
 
     @Override
-    public ObjectSet<Direction> getLaserOutputs() {
+    public Set<Direction> getLaserOutputs() {
         if (getBlockState().getValue(PrismarineCrystalPartBlock.INDEX) == 0) {
             return ObjectSet.of(
                     Direction.UP

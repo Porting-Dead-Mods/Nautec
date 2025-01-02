@@ -151,6 +151,7 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     protected final void addItemHandler(int slots, BiPredicate<Integer, ItemStack> validation) {
         addItemHandler(slots, 64, validation);
     }
+
     protected final void addItemHandler(int slots, UnaryOperator<Integer> slotLimit) {
         addItemHandler(slots, slotLimit, (slot, itemStack) -> true);
     }
@@ -164,7 +165,6 @@ public abstract class ContainerBlockEntity extends BlockEntity {
             @Override
             protected void onContentsChanged(int slot) {
                 update();
-                setChanged();
                 onItemsChanged(slot);
                 invalidateCapabilities();
             }
@@ -183,6 +183,35 @@ public abstract class ContainerBlockEntity extends BlockEntity {
 
     private static int getStackLimit(IItemHandler itemHandler, int slot, ItemStack stack) {
         return Math.min(itemHandler.getSlotLimit(slot), stack.getMaxStackSize());
+    }
+
+    public ItemStack forceExtractItem(int slot, int amount, boolean simulate) {
+        if (amount == 0)
+            return ItemStack.EMPTY;
+
+        ItemStack existing = getItemHandler().getStackInSlot(slot);
+
+        if (existing.isEmpty())
+            return ItemStack.EMPTY;
+
+        int toExtract = Math.min(amount, existing.getMaxStackSize());
+
+        if (existing.getCount() <= toExtract) {
+            if (!simulate) {
+                getItemStackHandler().setStackInSlot(slot, ItemStack.EMPTY);
+                onItemsChanged(slot);
+                return existing;
+            } else {
+                return existing.copy();
+            }
+        } else {
+            if (!simulate) {
+                getItemStackHandler().setStackInSlot(slot, existing.copyWithCount(existing.getCount() - toExtract));
+                onItemsChanged(slot);
+            }
+
+            return existing.copyWithCount(toExtract);
+        }
     }
 
     public ItemStack forceInsertItem(int slot, ItemStack stack, boolean simulate) {
@@ -239,7 +268,6 @@ public abstract class ContainerBlockEntity extends BlockEntity {
             @Override
             protected void onContentsChanged() {
                 update();
-                setChanged();
                 onFluidChanged();
             }
 
@@ -260,7 +288,6 @@ public abstract class ContainerBlockEntity extends BlockEntity {
             @Override
             public void onEnergyChanged() {
                 update();
-                setChanged();
                 ContainerBlockEntity.this.onPowerChanged();
             }
         };
@@ -271,10 +298,9 @@ public abstract class ContainerBlockEntity extends BlockEntity {
         this.bacteriaStorage = new BacteriaStorage(slots);
     }
 
-    private void update() {
-        if (!level.isClientSide()) {
-            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-        }
+    public void update() {
+        setChanged();
+        level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
     }
 
     protected void onItemsChanged(int slot) {
