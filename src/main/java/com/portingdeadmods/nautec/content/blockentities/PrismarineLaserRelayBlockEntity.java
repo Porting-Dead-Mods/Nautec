@@ -13,20 +13,22 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
+
 public class PrismarineLaserRelayBlockEntity extends LaserBlockEntity {
     public PrismarineLaserRelayBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.PRISMARINE_LASER_RELAY.get(), blockPos, blockState);
     }
 
     @Override
-    public ObjectSet<Direction> getLaserInputs() {
+    public Set<Direction> getLaserInputs() {
         return ObjectSet.of(
                 getBlockState().getValue(PrismarineLaserRelayBlock.FACING).getOpposite()
         );
     }
 
     @Override
-    public ObjectSet<Direction> getLaserOutputs() {
+    public Set<Direction> getLaserOutputs() {
         return ObjectSet.of(
                 getBlockState().getValue(PrismarineLaserRelayBlock.FACING)
         );

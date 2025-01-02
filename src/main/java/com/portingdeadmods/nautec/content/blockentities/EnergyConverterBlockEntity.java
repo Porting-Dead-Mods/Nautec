@@ -13,6 +13,7 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Set;
 
 public class EnergyConverterBlockEntity extends LaserBlockEntity implements IEnergyStorage {
     private static final int FE_CONVERSION_RATE = 100;
@@ -24,12 +25,12 @@ public class EnergyConverterBlockEntity extends LaserBlockEntity implements IEne
     }
 
     @Override
-    public ObjectSet<Direction> getLaserInputs() {
+    public Set<Direction> getLaserInputs() {
         return ObjectSet.of();
     }
 
     @Override
-    public ObjectSet<Direction> getLaserOutputs() {
+    public Set<Direction> getLaserOutputs() {
         return ObjectSet.of(Direction.values());
     }
 

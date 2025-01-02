@@ -1,7 +1,6 @@
 package com.portingdeadmods.nautec.content.blockentities;
 
 import com.portingdeadmods.nautec.NTConfig;
-import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
@@ -27,6 +26,7 @@ import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Set;
 
 public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider {
     public static final int MAX_PROGRESS = NTConfig.mutatorCraftingSpeed;
@@ -89,12 +89,12 @@ public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider
     }
 
     @Override
-    public ObjectSet<Direction> getLaserInputs() {
+    public Set<Direction> getLaserInputs() {
         return ObjectSet.of(Direction.UP, Direction.DOWN);
     }
 
     @Override
-    public ObjectSet<Direction> getLaserOutputs() {
+    public Set<Direction> getLaserOutputs() {
         return ObjectSet.of();
     }
 

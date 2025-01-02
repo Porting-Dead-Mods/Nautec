@@ -57,6 +57,9 @@ public class BioReactorBlock extends LaserBlock {
 
     @Override
     protected @NotNull InteractionResult useWithoutItem(BlockState p_60503_, Level p_60504_, BlockPos p_60505_, Player p_60506_, BlockHitResult p_60508_) {
+        if (p_60503_.getValue(Multiblock.FORMED)) {
+            return super.useWithoutItem(p_60503_, p_60504_, p_60505_, p_60506_, p_60508_);
+        }
         return InteractionResult.FAIL;
     }
 }

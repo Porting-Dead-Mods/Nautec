@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Set;
 
 public class BioReactorBlockEntity extends LaserBlockEntity implements MenuProvider, MultiblockEntity {
     private MultiblockData multiblockData;
@@ -34,12 +35,12 @@ public class BioReactorBlockEntity extends LaserBlockEntity implements MenuProvi
     }
 
     @Override
-    public ObjectSet<Direction> getLaserInputs() {
+    public Set<Direction> getLaserInputs() {
         return ObjectSet.of(Direction.UP, Direction.DOWN);
     }
 
     @Override
-    public ObjectSet<Direction> getLaserOutputs() {
+    public Set<Direction> getLaserOutputs() {
         return ObjectSet.of();
     }
 

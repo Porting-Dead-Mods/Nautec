@@ -57,7 +57,7 @@ public class LaserJunctionBlock extends LaserBlock {
     }
 
     @Override
-    public VoxelShape getShape(BlockState blockState, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
+    public @NotNull VoxelShape getShape(BlockState blockState, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
         int index = 0;
 
         for (Direction direction : Direction.values()) {
@@ -78,7 +78,7 @@ public class LaserJunctionBlock extends LaserBlock {
         if (shapes[i] == null) {
             shapes[i] = shapeCenter;
 
-            if (((i >> 0) & 1) != 0) {
+            if ((i & 1) != 0) {
                 shapes[i] = Shapes.or(shapes[i], shapeD);
             }
 

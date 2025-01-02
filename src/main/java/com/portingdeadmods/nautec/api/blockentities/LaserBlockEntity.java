@@ -1,8 +1,6 @@
 package com.portingdeadmods.nautec.api.blockentities;
 
 import com.portingdeadmods.nautec.NTConfig;
-import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
 import com.portingdeadmods.nautec.content.recipes.ItemTransformationRecipe;
 import com.portingdeadmods.nautec.content.recipes.inputs.ItemTransformationRecipeInput;
 import com.portingdeadmods.nautec.utils.ParticleUtils;
@@ -27,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 public abstract class LaserBlockEntity extends ContainerBlockEntity {
     protected final Object2IntMap<Direction> laserDistances;
@@ -52,9 +51,9 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         this.purity = 0;
     }
 
-    public abstract ObjectSet<Direction> getLaserInputs();
+    public abstract Set<Direction> getLaserInputs();
 
-    public abstract ObjectSet<Direction> getLaserOutputs();
+    public abstract Set<Direction> getLaserOutputs();
 
     public boolean shouldRender(Direction direction) {
         return getLaserOutputs().contains(direction) && (power > 0 || powerToTransfer > 0);
@@ -258,12 +257,26 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
                 if (laserBlockEntity.getLaserInputs().contains(direction.getOpposite())) {
                     Vec3i diffVec3 = worldPosition.subtract(resultPos);
                     int diff = diffVec3.getX() + diffVec3.getY() + diffVec3.getZ();
-                    this.laserDistances.put(direction, Math.abs(diff));
+                    int prevDistance = this.laserDistances.getInt(direction);
+                    int newDistance = Math.abs(diff);
+                    if (prevDistance != newDistance) {
+                        this.laserDistances.put(direction, newDistance);
+                        onLaserDistancesChanged(direction, prevDistance);
+                    }
                 }
             } else {
-                this.laserDistances.put(direction, 0);
+                int prevDistance = this.laserDistances.getInt(direction);
+                int newDistance = 0;
+                if (prevDistance != newDistance) {
+                    this.laserDistances.put(direction, 0);
+                    onLaserDistancesChanged(direction, prevDistance);
+                }
             }
         }
+    }
+
+    protected void onLaserDistancesChanged(Direction direction, int prevDistance) {
+
     }
 
     // CLIENT

@@ -5,7 +5,7 @@ import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.blocks.LaserJunctionBlock;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
-import it.unimi.dsi.fastutil.objects.ObjectArraySet;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,22 +13,29 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import static org.codehaus.plexus.util.StringUtils.capitalizeFirstLetter;
 
 public class LaserJunctionBlockEntity extends LaserBlockEntity {
+    private final Set<Direction> inputDirections;
+    private final Set<Direction> outputDirections;
+
     public LaserJunctionBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.LASER_JUNCTION.get(), blockPos, blockState);
+        this.inputDirections = new ObjectOpenHashSet<>();
+        this.outputDirections = new ObjectOpenHashSet<>();
     }
 
     @Override
-    public ObjectSet<Direction> getLaserInputs() {
-        return getConnections(LaserJunctionBlock.ConnectionType.INPUT);
+    public Set<Direction> getLaserInputs() {
+        return inputDirections;
     }
 
     public String getLaserInputsAsString() {
-        ObjectSet<Direction> inputs = getLaserInputs();
+        Set<Direction> inputs = getLaserInputs();
         if (inputs.isEmpty()) {
             return "No inputs";
         }
@@ -40,12 +47,12 @@ public class LaserJunctionBlockEntity extends LaserBlockEntity {
                 .orElse("");
     }
     @Override
-    public ObjectSet<Direction> getLaserOutputs() {
-        return getConnections(LaserJunctionBlock.ConnectionType.OUTPUT);
+    public Set<Direction> getLaserOutputs() {
+        return outputDirections;
     }
 
     public String getLaserOutputsAsString() {
-        ObjectSet<Direction> outputs = getLaserOutputs();
+        Set<Direction> outputs = getLaserOutputs();
         if (outputs.isEmpty()) {
             return "No outputs";
         }
@@ -55,18 +62,6 @@ public class LaserJunctionBlockEntity extends LaserBlockEntity {
                 .map(direction -> capitalizeFirstLetter(direction.getName()))
                 .reduce((a, b) -> a + ", " + b)
                 .orElse("");
-    }
-
-
-    // TODO: Cache this
-    private ObjectSet<Direction> getConnections(LaserJunctionBlock.ConnectionType type) {
-        ObjectSet<Direction> connections = new ObjectArraySet<>();
-        for (Direction direction : Direction.values()) {
-            if (getBlockState().getValue(LaserJunctionBlock.CONNECTION[direction.get3DDataValue()]) == type) {
-                connections.add(direction);
-            }
-        }
-        return connections;
     }
 
     @Override

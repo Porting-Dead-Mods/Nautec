@@ -29,6 +29,8 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
+
 // TODO: Require power to work
 public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEntity {
     private MultiblockData multiblockData;
@@ -93,7 +95,7 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
     }
 
     @Override
-    public ObjectSet<Direction> getLaserInputs() {
+    public Set<Direction> getLaserInputs() {
         if (getBlockState().getValue(DrainMultiblock.FORMED)) {
             return ObjectSet.of(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST);
         }
@@ -101,7 +103,7 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
     }
 
     @Override
-    public ObjectSet<Direction> getLaserOutputs() {
+    public Set<Direction> getLaserOutputs() {
         return ObjectSet.of();
     }
 

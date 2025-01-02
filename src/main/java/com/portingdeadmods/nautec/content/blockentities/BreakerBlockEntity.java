@@ -20,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class BreakerBlockEntity extends LaserBlockEntity {
     private boolean running;
@@ -29,12 +30,12 @@ public class BreakerBlockEntity extends LaserBlockEntity {
     }
 
     @Override
-    public ObjectSet<Direction> getLaserInputs() {
+    public Set<Direction> getLaserInputs() {
         return ObjectSet.of(Direction.UP, Direction.DOWN, Direction.EAST, Direction.NORTH,Direction.WEST, Direction.SOUTH);
     }
 
     @Override
-    public ObjectSet<Direction> getLaserOutputs() {
+    public Set<Direction> getLaserOutputs() {
         return ObjectSet.of();
     }
 

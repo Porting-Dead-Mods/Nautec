@@ -18,6 +18,7 @@ import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Set;
 
 public class IncubatorBlockEntity extends LaserBlockEntity implements MenuProvider {
 
@@ -28,12 +29,12 @@ public class IncubatorBlockEntity extends LaserBlockEntity implements MenuProvid
     }
 
     @Override
-    public ObjectSet<Direction> getLaserInputs() {
+    public Set<Direction> getLaserInputs() {
         return ObjectSet.of(Direction.UP, Direction.DOWN);
     }
 
     @Override
-    public ObjectSet<Direction> getLaserOutputs() {
+    public Set<Direction> getLaserOutputs() {
         return ObjectSet.of();
     }
 
