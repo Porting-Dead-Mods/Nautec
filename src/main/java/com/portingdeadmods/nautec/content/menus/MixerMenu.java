@@ -15,6 +15,9 @@ public class MixerMenu extends NTAbstractContainerMenu<MixerBlockEntity> {
 
     public MixerMenu(int containerId, @NotNull Inventory inv, @NotNull MixerBlockEntity blockEntity) {
         super(NTMenuTypes.MIXER.get(), containerId, inv, blockEntity);
+
+        addPlayerInventory(inv, 92);
+        addPlayerHotbar(inv, 150);
     }
 
     @Override

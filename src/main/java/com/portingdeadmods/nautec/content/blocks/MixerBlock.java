@@ -77,7 +77,7 @@ public class MixerBlock extends LaserBlock {
 
     @Override
     protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (level.getBlockEntity(pos) instanceof MixerBlockEntity mixerBE) {
+        /*if (level.getBlockEntity(pos) instanceof MixerBlockEntity mixerBE) {
             IItemHandler itemHandler = mixerBE.getItemHandler();
             IFluidHandler fluidHandler = mixerBE.getFluidHandler();
             IFluidHandler secondaryFluidHandler = mixerBE.getSecondaryFluidHandler();
@@ -98,7 +98,7 @@ public class MixerBlock extends LaserBlock {
             } else {
                 return insertItemsSided(stack, player, hand, itemHandler, clickedFace);
             }
-        }
+        }*/
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 

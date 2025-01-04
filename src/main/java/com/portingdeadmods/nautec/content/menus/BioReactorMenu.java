@@ -15,6 +15,8 @@ public class BioReactorMenu extends NTAbstractContainerMenu<BioReactorBlockEntit
     public BioReactorMenu(int containerId, @NotNull Inventory inv, @NotNull BioReactorBlockEntity blockEntity) {
         super(NTMenuTypes.BIO_REACTOR.get(), containerId, inv, blockEntity);
 
+        addPlayerInventory(inv, 92);
+        addPlayerHotbar(inv, 150);
     }
 
     @Override
