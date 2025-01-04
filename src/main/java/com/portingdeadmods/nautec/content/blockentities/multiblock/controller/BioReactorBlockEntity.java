@@ -30,7 +30,8 @@ public class BioReactorBlockEntity extends LaserBlockEntity implements MenuProvi
 
     public BioReactorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.BIO_REACTOR.get(), blockPos, blockState);
-        addItemHandler(2);
+        addItemHandler(3);
+        addBacteriaStorage(3);
         this.multiblockData = MultiblockData.EMPTY;
     }
 

@@ -204,6 +204,7 @@ public final class NautecClient {
         event.register(NTMenuTypes.INCUBATOR.get(), IncubatorScreen::new);
         event.register(NTMenuTypes.MUTATOR.get(), MutatorScreen::new);
         event.register(NTMenuTypes.BIO_REACTOR.get(), BioReactorScreen::new);
+        event.register(NTMenuTypes.MIXER.get(), MixerScreen::new);
         event.register(NTMenuTypes.BACTERIAL_ANALYZER.get(), BacterialAnalyzerScreen::new);
     }
 

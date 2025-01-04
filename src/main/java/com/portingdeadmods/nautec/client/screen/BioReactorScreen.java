@@ -15,6 +15,7 @@ public class BioReactorScreen extends NTAbstractContainerScreen<BioReactorBlockE
     public BioReactorScreen(NTAbstractContainerMenu<BioReactorBlockEntity> menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
         this.titleLabelY = 4;
+        this.imageHeight = 174;
     }
 
     @Override
