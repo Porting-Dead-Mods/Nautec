@@ -1,8 +1,7 @@
 package com.portingdeadmods.nautec.capabilities.bacteria;
 
 import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
-import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
-import com.portingdeadmods.nautec.content.bacteria.CollapsedStats;
+import com.portingdeadmods.nautec.content.bacteria.SimpleCollapsedStats;
 
 import java.util.function.UnaryOperator;
 
@@ -13,8 +12,8 @@ public interface IBacteriaStorage {
 
     int getBacteriaSlots();
 
-    default void modifyStats(int slot, UnaryOperator<CollapsedStats> statsModifier) {
+    default void modifyStats(int slot, UnaryOperator<SimpleCollapsedStats> statsModifier) {
         BacteriaInstance bacteriaInstance = getBacteria(slot);
-        CollapsedStats newStats = statsModifier.apply(bacteriaInstance.getStats());
+        SimpleCollapsedStats newStats = statsModifier.apply(bacteriaInstance.getStats());
     }
 }

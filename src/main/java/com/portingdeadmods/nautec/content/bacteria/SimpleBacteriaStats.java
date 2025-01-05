@@ -3,30 +3,29 @@ package com.portingdeadmods.nautec.content.bacteria;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaStatsSerializer;
-import com.portingdeadmods.nautec.utils.ComponentUtils;
-import com.portingdeadmods.nautec.utils.MathUtils;
-import com.portingdeadmods.nautec.utils.RNGUtils;
 import com.portingdeadmods.nautec.utils.codec.CodecUtils;
-import net.minecraft.ChatFormatting;
+import com.portingdeadmods.nautec.utils.ranges.FloatRange;
+import com.portingdeadmods.nautec.utils.ranges.IntRange;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 import java.util.List;
 
-import static com.portingdeadmods.nautec.NTConfig.*;
-
-public record SimpleBacteriaStats(List<Float> growthRate,
-                                  List<Float> mutationResistance,
-                                  List<Float> productionRate,
-                                  List<Integer> lifespan,
-                                  int color) implements BacteriaStats {
-    public static final SimpleBacteriaStats EMPTY = new SimpleBacteriaStats(List.of(0F, 0F), List.of(0F, 0F), List.of(0F, 0F), List.of(1200, 2400), -1);
+public record SimpleBacteriaStats(FloatRange growthRate,
+                                  FloatRange mutationResistance,
+                                  FloatRange productionRate,
+                                  IntRange lifespan,
+                                  int color) implements BacteriaStats<SimpleCollapsedStats> {
+    public static final SimpleBacteriaStats EMPTY = new SimpleBacteriaStats(
+            FloatRange.of(0F, 0F),
+            FloatRange.of(0F, 0F),
+            FloatRange.of(0F, 0F),
+            IntRange.of(1200, 2400),
+            -1
+    );
     public static final MapCodec<SimpleBacteriaStats> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
                     Codec.list(Codec.FLOAT).fieldOf("growth_rate").forGetter(SimpleBacteriaStats::growthRate),
@@ -51,8 +50,8 @@ public record SimpleBacteriaStats(List<Float> growthRate,
     );
 
     @Override
-    public CollapsedStats collapse() {
-        return CollapsedStats.from(this);
+    public SimpleCollapsedStats collapse() {
+        return SimpleCollapsedStats.from(this);
     }
 
     @Override
