@@ -20,7 +20,7 @@ public final class NTRegistries {
             ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "multiblock"));
     public static final ResourceKey<Registry<BacteriaSerializer<?>>> BACTERIA_SERIALIZER_KEY =
             ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "bacteria_serializer"));
-    public static final ResourceKey<Registry<BacteriaStatsSerializer<?>>> BACTERIA_STATS_SERIALIZER_KEY =
+    public static final ResourceKey<Registry<BacteriaStatsSerializer<?, ?>>> BACTERIA_STATS_SERIALIZER_KEY =
             ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "bacteria_stats_serializer"));
     public static final ResourceKey<Registry<Bacteria>> BACTERIA_KEY =
             ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "bacteria"));
@@ -29,5 +29,5 @@ public final class NTRegistries {
     public static final Registry<AugmentSlot> AUGMENT_SLOT = new RegistryBuilder<>(AUGMENT_SLOT_KEY).create();
     public static final Registry<Multiblock> MULTIBLOCK = new RegistryBuilder<>(MULTIBLOCK_KEY).create();
     public static final Registry<BacteriaSerializer<?>> BACTERIA_SERIALIZER = new RegistryBuilder<>(BACTERIA_SERIALIZER_KEY).create();
-    public static final Registry<BacteriaStatsSerializer<?>> BACTERIA_STATS_SERIALIZER = new RegistryBuilder<>(BACTERIA_STATS_SERIALIZER_KEY).sync(true).create();
+    public static final Registry<BacteriaStatsSerializer<?, ?>> BACTERIA_STATS_SERIALIZER = new RegistryBuilder<>(BACTERIA_STATS_SERIALIZER_KEY).sync(true).create();
 }

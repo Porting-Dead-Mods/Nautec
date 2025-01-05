@@ -1,8 +1,15 @@
 package com.portingdeadmods.nautec.utils;
 
+import com.portingdeadmods.nautec.utils.ranges.FloatRange;
+import com.portingdeadmods.nautec.utils.ranges.IntRange;
+
 public final class RNGUtils {
     public static float random() {
         return (float) Math.random();
+    }
+
+    public static int uniformRandInt(IntRange range) {
+        return uniformRandInt(range.getMin(), range.getMax());
     }
 
     public static int uniformRandInt(int min, int max) {
@@ -11,6 +18,10 @@ public final class RNGUtils {
 
     public static int uniformRandInt(int max) {
         return uniformRandInt(0, max);
+    }
+
+    public static float uniformRandFloat(FloatRange range) {
+        return uniformRandFloat(range.getMin(), range.getMax());
     }
 
     public static float uniformRandFloat(float min, float max) {

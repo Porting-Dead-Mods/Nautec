@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
+import com.portingdeadmods.nautec.api.bacteria.CollapsedBacteriaStats;
 import com.portingdeadmods.nautec.utils.ComponentUtils;
 import com.portingdeadmods.nautec.utils.MathUtils;
 import com.portingdeadmods.nautec.utils.RNGUtils;
@@ -21,74 +22,75 @@ import static com.portingdeadmods.nautec.NTConfig.bacteriaLifespanCap;
 
 /**
  * Collapses the ranges of a {@link BacteriaStats} instance.
+ *
  * @param growthRate
  * @param mutationResistance
  * @param productionRate
  * @param lifespan
  * @param color
  */
-public record CollapsedStats(float growthRate,
-                             float mutationResistance,
-                             float productionRate,
-                             int lifespan,
-                             int color) {
+public record SimpleCollapsedStats(float growthRate,
+                                   float mutationResistance,
+                                   float productionRate,
+                                   int lifespan,
+                                   int color) implements CollapsedBacteriaStats {
+    public static final SimpleCollapsedStats EMPTY = new SimpleCollapsedStats(0, 0, 0, 0, -1);
 
-    public static CollapsedStats from(BacteriaStats stats) {
-        return new CollapsedStats(
-                RNGUtils.uniformRandFloat(stats.growthRate().get(0), stats.growthRate().get(1)),
-                RNGUtils.uniformRandFloat(stats.mutationResistance().get(0), stats.mutationResistance().get(1)),
-                RNGUtils.uniformRandFloat(stats.productionRate().get(0), stats.productionRate().get(1)),
-                RNGUtils.uniformRandInt(stats.lifespan().get(0), stats.lifespan().get(1)),
+    public static SimpleCollapsedStats from(BacteriaStats<?> stats) {
+        return new SimpleCollapsedStats(
+                RNGUtils.uniformRandFloat(stats.growthRate()),
+                RNGUtils.uniformRandFloat(stats.mutationResistance()),
+                RNGUtils.uniformRandFloat(stats.productionRate()),
+                RNGUtils.uniformRandInt(stats.lifespan()),
                 stats.color()
         );
     }
 
-    public static final CollapsedStats EMPTY = new CollapsedStats(0, 0, 0, 0, -1);
-
-    public CollapsedStats getMaxStats() { return new CollapsedStats(
-            bacteriaGrowthRateCap,
-            bacteriaMutationResistanceCap,
-            bacteriaProductionRateCap,
-            bacteriaLifespanCap,
-            this.color
-    );
+    public SimpleCollapsedStats getMaxStats() {
+        return new SimpleCollapsedStats(
+                bacteriaGrowthRateCap,
+                bacteriaMutationResistanceCap,
+                bacteriaProductionRateCap,
+                bacteriaLifespanCap,
+                this.color
+        );
     }
 
-    public static final MapCodec<CollapsedStats> CODEC =
+    public static final MapCodec<SimpleCollapsedStats> CODEC =
             RecordCodecBuilder.mapCodec(
                     instance -> instance.group(
-                            Codec.FLOAT.fieldOf("growth_rate").forGetter(CollapsedStats::growthRate),
-                            Codec.FLOAT.fieldOf("mutation_resistance").forGetter(CollapsedStats::mutationResistance),
-                            Codec.FLOAT.fieldOf("production_rate").forGetter(CollapsedStats::productionRate),
-                            Codec.INT.fieldOf("lifespan").forGetter(CollapsedStats::lifespan),
-                            Codec.INT.fieldOf("color").forGetter(CollapsedStats::color)
-                    ).apply(instance, CollapsedStats::new)
+                            Codec.FLOAT.fieldOf("growth_rate").forGetter(SimpleCollapsedStats::growthRate),
+                            Codec.FLOAT.fieldOf("mutation_resistance").forGetter(SimpleCollapsedStats::mutationResistance),
+                            Codec.FLOAT.fieldOf("production_rate").forGetter(SimpleCollapsedStats::productionRate),
+                            Codec.INT.fieldOf("lifespan").forGetter(SimpleCollapsedStats::lifespan),
+                            Codec.INT.fieldOf("color").forGetter(SimpleCollapsedStats::color)
+                    ).apply(instance, SimpleCollapsedStats::new)
             );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, CollapsedStats> STREAM_CODEC =
+    public static final StreamCodec<RegistryFriendlyByteBuf, SimpleCollapsedStats> STREAM_CODEC =
             StreamCodec.composite(
                     ByteBufCodecs.FLOAT,
-                    CollapsedStats::growthRate,
+                    SimpleCollapsedStats::growthRate,
                     ByteBufCodecs.FLOAT,
-                    CollapsedStats::mutationResistance,
+                    SimpleCollapsedStats::mutationResistance,
                     ByteBufCodecs.FLOAT,
-                    CollapsedStats::productionRate,
+                    SimpleCollapsedStats::productionRate,
                     ByteBufCodecs.INT,
-                    CollapsedStats::lifespan,
+                    SimpleCollapsedStats::lifespan,
                     ByteBufCodecs.INT,
-                    CollapsedStats::color,
-                    CollapsedStats::new
+                    SimpleCollapsedStats::color,
+                    SimpleCollapsedStats::new
             );
 
     public static class Serializer {
         public static final Serializer INSTANCE = new Serializer();
 
-        public MapCodec<CollapsedStats> mapCodec() {
-            return CollapsedStats.CODEC;
+        public MapCodec<SimpleCollapsedStats> mapCodec() {
+            return SimpleCollapsedStats.CODEC;
         }
 
-        public StreamCodec<RegistryFriendlyByteBuf, CollapsedStats> streamCodec() {
-            return CollapsedStats.STREAM_CODEC;
+        public StreamCodec<RegistryFriendlyByteBuf, SimpleCollapsedStats> streamCodec() {
+            return SimpleCollapsedStats.STREAM_CODEC;
         }
     }
 
@@ -96,46 +98,46 @@ public record CollapsedStats(float growthRate,
         return Serializer.INSTANCE;
     }
 
-    public CollapsedStats rollGrowthRate() {
+    public SimpleCollapsedStats rollGrowthRate() {
         float newGR = growthRate + (RNGUtils.floatInRangeOf(growthRate) / (10 * (1 + mutationResistance)));
         newGR = Math.max(newGR, 0);
 
         newGR = Math.min(newGR, bacteriaGrowthRateCap);
 
-        return new CollapsedStats(newGR, mutationResistance, productionRate, lifespan, color);
+        return new SimpleCollapsedStats(newGR, mutationResistance, productionRate, lifespan, color);
     }
 
-    public CollapsedStats rollMutationResistance() {
+    public SimpleCollapsedStats rollMutationResistance() {
         float newMR = mutationResistance + RNGUtils.biasedInRange(0, 0.1f, mutationResistance / bacteriaMutationResistanceCap) / 10 * (bacteriaMutationResistanceCap - mutationResistance);
         newMR = Math.max(newMR, 0);
 
-        return new CollapsedStats(growthRate, newMR, productionRate, lifespan, color);
+        return new SimpleCollapsedStats(growthRate, newMR, productionRate, lifespan, color);
     }
 
-    public CollapsedStats rollProductionRate() {
+    public SimpleCollapsedStats rollProductionRate() {
         float newPR = productionRate + RNGUtils.floatInRangeOf(productionRate) / 10 * (1 + mutationResistance);
         newPR = Math.max(newPR, 0);
 
         newPR = Math.min(newPR, bacteriaProductionRateCap);
 
-        return new CollapsedStats(growthRate, mutationResistance, newPR, lifespan, color);
+        return new SimpleCollapsedStats(growthRate, mutationResistance, newPR, lifespan, color);
     }
 
-    public CollapsedStats rollLifespan() {
+    public SimpleCollapsedStats rollLifespan() {
         int newLS = lifespan + (int) (RNGUtils.uniformRandInt(-100, 100) / (1 + mutationResistance));
         newLS = Math.max(newLS, 0);
 
         newLS = Math.min(newLS, bacteriaLifespanCap);
 
-        return new CollapsedStats(growthRate, mutationResistance, productionRate, newLS, color);
+        return new SimpleCollapsedStats(growthRate, mutationResistance, productionRate, newLS, color);
     }
 
-    public CollapsedStats rollStats() {
+    public SimpleCollapsedStats rollStats() {
         return rollGrowthRate().rollMutationResistance().rollProductionRate().rollLifespan();
     }
 
     // TODO: Might wanna move this to SimpleBacteriaInstance
-    public CollapsedStats grow() {
+    public SimpleCollapsedStats grow() {
 //        float newCS = colonySize + RNGUtils.floatInRangeOf(0, growthRate);
 //        newCS = Math.min(newCS, bacteriaColonySizeCap);
 //
@@ -143,14 +145,14 @@ public record CollapsedStats(float growthRate,
         return this;
     }
 
-    public CollapsedStats shrink() {
+    public SimpleCollapsedStats shrink() {
 //        float newCS = colonySize - colonySize * RNGUtils.uniformRandFloat(25) - 1;
 //        return new BacteriaStats(growthRate, mutationResistance, productionRate, newCS, lifespan, color);
         return this;
     }
 
-    public CollapsedStats copy() {
-        return new CollapsedStats(growthRate, mutationResistance, productionRate, lifespan, color);
+    public SimpleCollapsedStats copy() {
+        return new SimpleCollapsedStats(growthRate, mutationResistance, productionRate, lifespan, color);
     }
 
     public List<Component> statsTooltip() {
