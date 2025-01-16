@@ -86,8 +86,11 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
         BlockPos selfPos = worldPosition.above();
         BlockPos[] aroundSelf = BlockUtils.getBlocksAroundSelf3x3(selfPos);
         for (BlockPos blockPos : aroundSelf) {
+            if (level.getBlockState(blockPos).hasProperty(DrainPartBlock.OPEN))
             level.setBlockAndUpdate(blockPos, level.getBlockState(blockPos).setValue(DrainPartBlock.OPEN, value));
         }
+
+        if (level.getBlockState(selfPos).hasProperty(DrainPartBlock.OPEN))
         level.setBlockAndUpdate(selfPos, level.getBlockState(selfPos).setValue(DrainPartBlock.OPEN, value));
     }
 
