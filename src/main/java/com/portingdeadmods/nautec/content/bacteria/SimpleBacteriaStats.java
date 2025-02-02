@@ -5,14 +5,11 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaStatsSerializer;
-import com.portingdeadmods.nautec.utils.codec.CodecUtils;
 import com.portingdeadmods.nautec.utils.ranges.FloatRange;
 import com.portingdeadmods.nautec.utils.ranges.IntRange;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-
-import java.util.List;
 
 public record SimpleBacteriaStats(FloatRange growthRate,
                                   FloatRange mutationResistance,
@@ -28,21 +25,21 @@ public record SimpleBacteriaStats(FloatRange growthRate,
     );
     public static final MapCodec<SimpleBacteriaStats> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                    Codec.list(Codec.FLOAT).fieldOf("growth_rate").forGetter(SimpleBacteriaStats::growthRate),
-                    Codec.list(Codec.FLOAT).fieldOf("mutation_resistance").forGetter(SimpleBacteriaStats::mutationResistance),
-                    Codec.list(Codec.FLOAT).fieldOf("production_rate").forGetter(SimpleBacteriaStats::productionRate),
-                    Codec.list(Codec.INT).fieldOf("lifespan").forGetter(SimpleBacteriaStats::lifespan),
+                    FloatRange.MAP_CODEC.fieldOf("growth_rate").forGetter(SimpleBacteriaStats::growthRate),
+                    FloatRange.MAP_CODEC.fieldOf("mutation_resistance").forGetter(SimpleBacteriaStats::mutationResistance),
+                    FloatRange.MAP_CODEC.fieldOf("production_rate").forGetter(SimpleBacteriaStats::productionRate),
+                    IntRange.MAP_CODEC.fieldOf("lifespan").forGetter(SimpleBacteriaStats::lifespan),
                     Codec.INT.fieldOf("color").forGetter(SimpleBacteriaStats::color)
             ).apply(instance, SimpleBacteriaStats::new)
     );
     public static final StreamCodec<RegistryFriendlyByteBuf, SimpleBacteriaStats> STREAM_CODEC = StreamCodec.composite(
-            CodecUtils.FLOAT_LIST_STREAM_CODEC,
+            FloatRange.STREAM_CODEC,
             SimpleBacteriaStats::growthRate,
-            CodecUtils.FLOAT_LIST_STREAM_CODEC,
+            FloatRange.STREAM_CODEC,
             SimpleBacteriaStats::mutationResistance,
-            CodecUtils.FLOAT_LIST_STREAM_CODEC,
+            FloatRange.STREAM_CODEC,
             SimpleBacteriaStats::productionRate,
-            CodecUtils.INT_LIST_STREAM_CODEC,
+            IntRange.STREAM_CODEC,
             SimpleBacteriaStats::lifespan,
             ByteBufCodecs.INT,
             SimpleBacteriaStats::color,
@@ -51,15 +48,20 @@ public record SimpleBacteriaStats(FloatRange growthRate,
 
     @Override
     public SimpleCollapsedStats collapse() {
-        return SimpleCollapsedStats.from(this);
+        return SimpleCollapsedStats.collapse(this);
     }
 
     @Override
-    public BacteriaStatsSerializer<SimpleBacteriaStats> getSerializer() {
+    public SimpleCollapsedStats collapseMaxStats() {
+        return SimpleCollapsedStats.getMaxStats(this);
+    }
+
+    @Override
+    public BacteriaStatsSerializer<SimpleCollapsedStats, SimpleBacteriaStats> getSerializer() {
         return Serializer.INSTANCE;
     }
 
-    public static final class Serializer implements BacteriaStatsSerializer<SimpleBacteriaStats> {
+    public static final class Serializer implements BacteriaStatsSerializer<SimpleCollapsedStats, SimpleBacteriaStats> {
         public static final Serializer INSTANCE = new Serializer();
 
         private Serializer() {
@@ -73,6 +75,16 @@ public record SimpleBacteriaStats(FloatRange growthRate,
         @Override
         public StreamCodec<RegistryFriendlyByteBuf, SimpleBacteriaStats> streamCodec() {
             return STREAM_CODEC;
+        }
+
+        @Override
+        public MapCodec<SimpleCollapsedStats> collapsedMapCodec() {
+            return SimpleCollapsedStats.CODEC;
+        }
+
+        @Override
+        public StreamCodec<RegistryFriendlyByteBuf, SimpleCollapsedStats> collapsedStreamCodec() {
+            return SimpleCollapsedStats.STREAM_CODEC;
         }
     }
 

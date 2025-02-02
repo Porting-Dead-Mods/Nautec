@@ -90,6 +90,8 @@ public final class NTItems {
     public static final DeferredItem<Item> ELECTROLYTE_ALGAE_SERUM_VIAL = registerItem("eas_vial", Item::new, new Item.Properties());
 
     // BACTERIA
+    public static final DeferredItem<GraftingToolItem> GRAFTING_TOOL = registerItem("grafting_tool", GraftingToolItem::new,
+            () -> new Item.Properties().durability(80));
     public static final DeferredItem<PetriDishItem> PETRI_DISH = registerItem("petri_dish", PetriDishItem::new, () -> new Item.Properties()
             .stacksTo(1)
             .component(NTDataComponents.BACTERIA, ComponentBacteriaStorage.EMPTY)

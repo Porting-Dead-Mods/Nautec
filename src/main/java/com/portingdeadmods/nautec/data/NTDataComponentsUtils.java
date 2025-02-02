@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.data;
 import com.portingdeadmods.nautec.registries.NTBacterias;
 import net.minecraft.world.item.ItemStack;
 
-public class NTDataComponentsUtils {
+public final class NTDataComponentsUtils {
 
     public static void setOxygenLevels(ItemStack stack, Integer value) {
         stack.set(NTDataComponents.OXYGEN, value);

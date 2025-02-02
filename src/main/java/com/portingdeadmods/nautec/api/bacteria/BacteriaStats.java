@@ -24,9 +24,11 @@ public interface BacteriaStats<C extends CollapsedBacteriaStats> {
 
     IntRange lifespan();
 
+    int color();
+
     C collapse();
 
-    int color();
+    C collapseMaxStats();
 
     BacteriaStatsSerializer<?, ?> getSerializer();
 }

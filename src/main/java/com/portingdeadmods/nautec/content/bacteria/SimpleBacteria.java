@@ -5,14 +5,14 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaSerializer;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
+import com.portingdeadmods.nautec.utils.ranges.FloatRange;
+import com.portingdeadmods.nautec.utils.ranges.IntRange;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-import java.util.List;
-
-public record SimpleBacteria(Resource.ItemResource resource, BacteriaStats initialStats) implements Bacteria {
+public record SimpleBacteria(Resource.ItemResource resource, BacteriaStats<?> stats) implements Bacteria {
     public static Builder of() {
         return new Builder();
     }
@@ -26,13 +26,13 @@ public record SimpleBacteria(Resource.ItemResource resource, BacteriaStats initi
         public static final Serializer INSTANCE = new Serializer();
         public static final MapCodec<SimpleBacteria> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 Resource.ItemResource.CODEC.fieldOf("resource").forGetter(SimpleBacteria::resource),
-                BacteriaStats.CODEC.fieldOf("stats").forGetter(SimpleBacteria::initialStats)
+                BacteriaStats.CODEC.fieldOf("stats").forGetter(SimpleBacteria::stats)
         ).apply(instance, SimpleBacteria::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, SimpleBacteria> STREAM_CODEC = StreamCodec.composite(
                 Resource.ItemResource.STREAM_CODEC,
                 SimpleBacteria::resource,
                 BacteriaStats.STREAM_CODEC,
-                SimpleBacteria::initialStats,
+                SimpleBacteria::stats,
                 SimpleBacteria::new
         );
 
@@ -52,10 +52,10 @@ public record SimpleBacteria(Resource.ItemResource resource, BacteriaStats initi
 
     public static class Builder implements Bacteria.Builder<SimpleBacteria> {
         private Resource.ItemResource resource = new Resource.ItemResource(Items.AIR);
-        private List<Float> growthRate = List.of(0F, 0F);
-        private List<Float> mutationResistance = List.of(0F, 0F);
-        private List<Float> productionRate = List.of(0F, 0F);
-        private List<Integer> lifespan = List.of(0, 0);
+        private FloatRange growthRate = FloatRange.of(0F, 0F);
+        private FloatRange mutationResistance = FloatRange.of(0F, 0F);
+        private FloatRange productionRate = FloatRange.of(0F, 0F);
+        private IntRange lifespan = IntRange.of(0, 0);
         private int color;
 
         public Builder resource(Item resource) {
@@ -63,38 +63,22 @@ public record SimpleBacteria(Resource.ItemResource resource, BacteriaStats initi
             return this;
         }
 
-        public Builder growthRate(List<Float> growthRate) {
-            if (growthRate.size() != 2) {
-                throw new IllegalArgumentException("GrowthRate builder must get exactly 2 values");
-            }
-
+        public Builder growthRate(FloatRange growthRate) {
             this.growthRate = growthRate;
             return this;
         }
 
-        public Builder mutationResistance(List<Float> mutationResistance) {
-            if (mutationResistance.size() != 2) {
-                throw new IllegalArgumentException("Mutation Resistance builder must get exactly 2 values");
-            }
-
+        public Builder mutationResistance(FloatRange mutationResistance) {
             this.mutationResistance = mutationResistance;
             return this;
         }
 
-        public Builder productionRate(List<Float> productionRate) {
-            if (productionRate.size() != 2) {
-                throw new IllegalArgumentException("Production Rate builder must get exactly 2 values");
-            }
-
+        public Builder productionRate(FloatRange productionRate) {
             this.productionRate = productionRate;
             return this;
         }
 
-        public Builder lifespan(List<Integer> lifespan) {
-            if (lifespan.size() != 2) {
-                throw new IllegalArgumentException("Lifespan builder must get exactly 2 values");
-            }
-
+        public Builder lifespan(IntRange lifespan) {
             this.lifespan = lifespan;
             return this;
         }

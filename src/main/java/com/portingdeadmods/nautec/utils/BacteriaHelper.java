@@ -15,8 +15,4 @@ public final class BacteriaHelper {
         return lookup1.map(bacteriaHolderGetter -> bacteriaHolderGetter.getOrThrow(bacteriaType).value())
                 .orElse(null);
     }
-
-    public static void rollBacteriaStats(BacteriaInstance instance) {
-        instance.setStats(instance.getStats().rollStats());
-    }
 }

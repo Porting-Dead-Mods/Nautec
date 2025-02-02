@@ -2,7 +2,6 @@ package com.portingdeadmods.nautec.api.bacteria;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.nautec.content.bacteria.SimpleCollapsedStats;
 import com.portingdeadmods.nautec.content.bacteria.SimpleBacteriaStats;
 import com.portingdeadmods.nautec.registries.NTBacterias;
 import com.portingdeadmods.nautec.utils.BacteriaHelper;
@@ -34,7 +33,7 @@ public final class BacteriaInstance {
     private CollapsedBacteriaStats stats;
 
     public BacteriaInstance(ResourceKey<Bacteria> bacteria, HolderLookup.Provider lookup) {
-        this(bacteria, 1, BacteriaHelper.getBacteria(lookup, bacteria).initialStats());
+        this(bacteria, 1, BacteriaHelper.getBacteria(lookup, bacteria).stats());
     }
 
     public BacteriaInstance(ResourceKey<Bacteria> bacteria, BacteriaStats<?> stats) {

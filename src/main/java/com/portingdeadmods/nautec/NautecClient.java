@@ -229,7 +229,7 @@ public final class NautecClient {
         event.register((stack, layer) -> {
             ResourceKey<Bacteria> bacteriaType = stack.get(NTDataComponents.BACTERIA).bacteriaInstance().getBacteria();
             Bacteria bacteria = BacteriaHelper.getBacteria(Minecraft.getInstance().level.registryAccess(), bacteriaType);
-            return layer == 1 ? bacteria.initialStats().color() : -1;
+            return layer == 1 ? bacteria.stats().color() : -1;
         }, NTItems.PETRI_DISH);
         event.register(new DynamicFluidContainerModel.Colors(), NTFluids.SALT_WATER.getBucket());
     }
