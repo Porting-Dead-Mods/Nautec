@@ -67,8 +67,9 @@ public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider
 
                     ItemStack result = extracted.copy();
 
-                    BacteriaInstance instance = result.get(NTDataComponents.BACTERIA).bacteriaInstance();
-                    BacteriaHelper.rollBacteriaStats(instance);
+                    BacteriaInstance instance = result.getCapability(NTCapabilities.BacteriaStorage.ITEM).getBacteria(0).copy();
+                    // TODO: Reimplement this
+                    //BacteriaHelper.rollBacteriaStats(instance);
 
                     result.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(instance));
 

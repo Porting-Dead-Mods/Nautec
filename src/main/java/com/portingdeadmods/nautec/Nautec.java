@@ -17,6 +17,7 @@ import com.portingdeadmods.nautec.content.commands.arguments.AugmentSlotArgument
 import com.portingdeadmods.nautec.content.commands.arguments.AugmentTypeArgumentType;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
 import com.portingdeadmods.nautec.data.NTDataComponents;
+import com.portingdeadmods.nautec.data.NTDataMaps;
 import com.portingdeadmods.nautec.registries.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -39,6 +40,7 @@ import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
+import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import org.slf4j.Logger;
 import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.SlotContext;
@@ -87,6 +89,7 @@ public final class Nautec {
 
         NTFluids.HELPER.register(modEventBus);
 
+        modEventBus.addListener(this::registerDataMaps);
         modEventBus.addListener(this::onRegisterAugments);
         modEventBus.addListener(this::registerCapabilities);
 
@@ -95,6 +98,10 @@ public final class Nautec {
         if (ModList.get().isLoaded("duradisplay")) {
             DuraDisplayCompat.register();
         }
+    }
+
+    private void registerDataMaps(RegisterDataMapTypesEvent event) {
+        event.register(NTDataMaps.BACTERIA_OBTAINING);
     }
 
     private void onRegisterAugments(RegisterEvent event) {

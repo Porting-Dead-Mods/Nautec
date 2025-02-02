@@ -36,7 +36,7 @@ public record SimpleCollapsedStats(float growthRate,
                                    int color) implements CollapsedBacteriaStats {
     public static final SimpleCollapsedStats EMPTY = new SimpleCollapsedStats(0, 0, 0, 0, -1);
 
-    public static SimpleCollapsedStats from(BacteriaStats<?> stats) {
+    public static SimpleCollapsedStats collapse(BacteriaStats<?> stats) {
         return new SimpleCollapsedStats(
                 RNGUtils.uniformRandFloat(stats.growthRate()),
                 RNGUtils.uniformRandFloat(stats.mutationResistance()),
@@ -46,13 +46,13 @@ public record SimpleCollapsedStats(float growthRate,
         );
     }
 
-    public SimpleCollapsedStats getMaxStats() {
+    public static SimpleCollapsedStats getMaxStats(BacteriaStats<SimpleCollapsedStats> stats) {
         return new SimpleCollapsedStats(
                 bacteriaGrowthRateCap,
                 bacteriaMutationResistanceCap,
                 bacteriaProductionRateCap,
                 bacteriaLifespanCap,
-                this.color
+                stats.color()
         );
     }
 
@@ -82,20 +82,8 @@ public record SimpleCollapsedStats(float growthRate,
                     SimpleCollapsedStats::new
             );
 
-    public static class Serializer {
-        public static final Serializer INSTANCE = new Serializer();
-
-        public MapCodec<SimpleCollapsedStats> mapCodec() {
-            return SimpleCollapsedStats.CODEC;
-        }
-
-        public StreamCodec<RegistryFriendlyByteBuf, SimpleCollapsedStats> streamCodec() {
-            return SimpleCollapsedStats.STREAM_CODEC;
-        }
-    }
-
-    public static Serializer getSerializer() {
-        return Serializer.INSTANCE;
+    public SimpleBacteriaStats.Serializer getSerializer() {
+        return SimpleBacteriaStats.Serializer.INSTANCE;
     }
 
     public SimpleCollapsedStats rollGrowthRate() {

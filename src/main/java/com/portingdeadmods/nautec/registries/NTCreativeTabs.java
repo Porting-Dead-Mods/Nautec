@@ -12,6 +12,7 @@ import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
 import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -73,8 +74,8 @@ public final class NTCreativeTabs {
         if (elem != NTBacterias.EMPTY) {
             ItemStack stack = new ItemStack(item);
 
-            BacteriaInstance bacteriaInstance = new BacteriaInstance(elem, lookup);
-            bacteriaInstance.setStats(bacteriaInstance.getStats().getMaxStats());
+            Holder<Bacteria> bacteria = lookup.holderOrThrow(elem);
+            BacteriaInstance bacteriaInstance = new BacteriaInstance(bacteria.getKey(), 1, bacteria.value().stats().collapseMaxStats());
 
             stack.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(bacteriaInstance));
             stack.set(NTDataComponents.ANALYZED, analyzed);

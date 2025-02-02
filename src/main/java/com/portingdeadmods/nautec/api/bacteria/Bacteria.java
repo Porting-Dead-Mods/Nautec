@@ -29,7 +29,7 @@ public interface Bacteria {
 
     Resource resource();
 
-    BacteriaStats initialStats();
+    BacteriaStats<?> stats();
 
     BacteriaSerializer<?> getSerializer();
 

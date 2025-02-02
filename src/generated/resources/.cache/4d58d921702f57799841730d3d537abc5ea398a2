@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-27T13:13:39.420469909	Item Models: nautec
+// 1.21.1	2025-02-02T22:41:26.808246694	Item Models: nautec
 53692692f57914fc54eb6ebf416ce1cb7789e57b assets/nautec/models/item/air_bottle.json
 cc6ee3887ec6e0c53216dc681ac7b32b34182253 assets/nautec/models/item/anchor.json
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
@@ -61,6 +61,7 @@ f756459da05f56a3fc46f479c1737332da8d90ce assets/nautec/models/item/energy_conver
 cb07777d8dcd1c00bea806efc2b7f64c6c13a8c3 assets/nautec/models/item/fishing_station.json
 490588573d27c343b055c02b137c221a71866aa8 assets/nautec/models/item/gear.json
 2b617afc38ea0b797aeba3ca00dfb25f33be4bd3 assets/nautec/models/item/glass_vial.json
+879611d2311accfce94e6609c33a1a1fa8b4e40b assets/nautec/models/item/grafting_tool.json
 1f8f85fa3cfb3f9fada3af0abc3f67b91ee70b81 assets/nautec/models/item/guardian_eye.json
 465fff8f345aedd2e37bc4a22fa70756fb069373 assets/nautec/models/item/incubator.json
 d30193c75aab5ff8f4d4945df8689f575874c0f0 assets/nautec/models/item/laser_channeling_coil.json

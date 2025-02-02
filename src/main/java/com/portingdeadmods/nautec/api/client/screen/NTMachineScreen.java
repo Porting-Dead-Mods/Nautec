@@ -42,7 +42,6 @@ public abstract class NTMachineScreen<T extends ContainerBlockEntity> extends Ab
 
         Font font = minecraft.font;
         if (this.hoveredBacteriaStorageSlot != null) {
-            SimpleCollapsedStats
             pGuiGraphics.renderComponentTooltip(font, List.of(Component.literal("Bacteria Storage")), pMouseX, pMouseY);
         }
 
