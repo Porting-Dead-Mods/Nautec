@@ -1,0 +1,8 @@
+{
+  "values": {
+    "minecraft:stone": {
+      "bacteria": "nautec:cyanobacteria",
+      "chance": 0.4
+    }
+  }
+}

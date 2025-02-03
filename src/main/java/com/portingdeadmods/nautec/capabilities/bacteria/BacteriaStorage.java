@@ -7,6 +7,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.neoforged.neoforge.common.util.INBTSerializable;
@@ -21,17 +22,20 @@ public class BacteriaStorage implements IBacteriaStorage, INBTSerializable<Tag> 
             Codec.INT.fieldOf("slots").forGetter(BacteriaStorage::getBacteriaSlots)
     ).apply(instance, BacteriaStorage::new));
 
-    private List<BacteriaInstance> bacteria;
+    private NonNullList<BacteriaInstance> bacteria;
     private int slots;
 
     public BacteriaStorage(int slots) {
-        this.bacteria = new ArrayList<>(slots);
+        this.bacteria = NonNullList.withSize(slots, BacteriaInstance.EMPTY);
         this.slots = slots;
     }
 
     private BacteriaStorage(List<BacteriaInstance> bacteria, int slots) {
-        this.bacteria = bacteria;
-        this.slots = slots;
+        this(slots);
+        for (int i = 0; i < bacteria.size(); i++) {
+            BacteriaInstance instance = bacteria.get(i);
+            this.bacteria.set(i, instance);
+        }
     }
 
     @Override
@@ -56,7 +60,7 @@ public class BacteriaStorage implements IBacteriaStorage, INBTSerializable<Tag> 
         }
     }
 
-    public List<BacteriaInstance> getBacteria() {
+    public NonNullList<BacteriaInstance> getBacteria() {
         return bacteria;
     }
 

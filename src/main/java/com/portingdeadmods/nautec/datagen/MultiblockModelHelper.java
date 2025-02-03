@@ -139,24 +139,41 @@ public class MultiblockModelHelper {
     public void bioReactorPart(Block block) {
         VariantBlockStateBuilder builder = bmp.getVariantBuilder(block);
         for (int i : BioReactorMultiblock.BIO_REACTOR_PART.getPossibleValues()) {
-            builder.partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, true).with(BioReactorMultiblock.TOP, true)
-                    .modelForState().modelFile(bioReactorPartModel(block, i, true)).addModel()
-                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, false).with(BioReactorMultiblock.TOP, true)
-                    .modelForState().modelFile(bioReactorPartModel(block, i, true)).addModel()
-                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, true).with(BioReactorMultiblock.TOP, false)
-                    .modelForState().modelFile(bioReactorPartModel(block, i, false)).addModel()
-                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, false).with(BioReactorMultiblock.TOP, false)
-                    .modelForState().modelFile(bioReactorPartModel(block, i, false)).addModel();
+            builder.partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, true)
+                    .with(BioReactorMultiblock.TOP, true).with(BioReactorMultiblock.HATCH, true)
+                    .modelForState().modelFile(bioReactorPartModel(block, i, true, true)).addModel()
+                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, false)
+                    .with(BioReactorMultiblock.TOP, true).with(BioReactorMultiblock.HATCH, true)
+                    .modelForState().modelFile(bioReactorPartModel(block, i, true, true)).addModel()
+                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, true)
+                    .with(BioReactorMultiblock.TOP, false).with(BioReactorMultiblock.HATCH, true)
+                    .modelForState().modelFile(bioReactorPartModel(block, i, false, true)).addModel()
+                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, false)
+                    .with(BioReactorMultiblock.TOP, false).with(BioReactorMultiblock.HATCH, true)
+                    .modelForState().modelFile(bioReactorPartModel(block, i, false, true)).addModel()
+                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, true)
+                    .with(BioReactorMultiblock.TOP, true).with(BioReactorMultiblock.HATCH, false)
+                    .modelForState().modelFile(bioReactorPartModel(block, i, true, false)).addModel()
+                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, false)
+                    .with(BioReactorMultiblock.TOP, true).with(BioReactorMultiblock.HATCH, false)
+                    .modelForState().modelFile(bioReactorPartModel(block, i, true, false)).addModel()
+                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, true)
+                    .with(BioReactorMultiblock.TOP, false).with(BioReactorMultiblock.HATCH, false)
+                    .modelForState().modelFile(bioReactorPartModel(block, i, false, false)).addModel()
+                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, false)
+                    .with(BioReactorMultiblock.TOP, false).with(BioReactorMultiblock.HATCH, false)
+                    .modelForState().modelFile(bioReactorPartModel(block, i, false, false)).addModel();
         }
     }
 
-    private ModelFile bioReactorPartModel(Block block, int index, boolean top) {
+    private ModelFile bioReactorPartModel(Block block, int index, boolean top, boolean hatch) {
         Multiblock multiblock = NTMultiblocks.BIO_REACTOR.get();
         String middleFix = top ? "top" : "bottom";
-        BlockModelBuilder builder = bmp.models().withExistingParent(bmp.name(block) + "_" + index + "_" + middleFix, "cube");
+        BlockModelBuilder builder = bmp.models().withExistingParent(bmp.name(block) + "_" + index + "_" + middleFix + (hatch ? "_hatch" : ""), "cube");
         // TODO: Clean up
+
         if (index % 2 != 0) {
-            builder.texture("up", bmp.multiblockTexture(multiblock, "top_" + index))
+            builder.texture("up", hatch ? bmp.multiblockTexture(multiblock, "top_" + index + "_hatch") : bmp.multiblockTexture(multiblock, "top_" + index))
                     .texture("down", bmp.blockTexture(NTBlocks.POLISHED_PRISMARINE.get()))
                     .texture("north", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_1"))
                     .texture("east", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_1"))

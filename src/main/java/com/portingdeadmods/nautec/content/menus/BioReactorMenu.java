@@ -19,7 +19,7 @@ public class BioReactorMenu extends NTMachineMenu<BioReactorBlockEntity> {
         super(NTMenuTypes.BIO_REACTOR.get(), containerId, inv, blockEntity);
 
         for (int i = 0; i < 3; i++) {
-            addBacteriaStorageSlot(new SlotBacteriaStorage(blockEntity.getBacteriaStorage(), i, 20, 20 + i * 30));
+            addBacteriaStorageSlot(new SlotBacteriaStorage(blockEntity.getBacteriaStorage(), i, 52, 11 + i * 22));
             addSlot(new SlotItemHandler(blockEntity.getItemHandler(), i, 107, 12 + i * 22));
         }
     }

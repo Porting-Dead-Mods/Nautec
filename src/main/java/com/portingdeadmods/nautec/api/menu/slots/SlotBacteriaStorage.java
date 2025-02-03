@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.api.menu.slots;
 
+import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import com.portingdeadmods.nautec.capabilities.bacteria.IBacteriaStorage;
 
 public class SlotBacteriaStorage extends AbstractSlot {
@@ -10,6 +11,10 @@ public class SlotBacteriaStorage extends AbstractSlot {
     public SlotBacteriaStorage(IBacteriaStorage bacteriaStorage, int index, int x, int y) {
         super(index, x, y);
         this.bacteriaStorage = bacteriaStorage;
+    }
+
+    public BacteriaInstance getBacteriaInstance() {
+        return bacteriaStorage.getBacteria(slot);
     }
 
     public IBacteriaStorage getBacteriaStorage() {

@@ -56,7 +56,13 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     public abstract Set<Direction> getLaserOutputs();
 
     public boolean shouldRender(Direction direction) {
-        return getLaserOutputs().contains(direction) && (power > 0 || powerToTransfer > 0);
+        BlockPos pos = worldPosition.relative(direction, this.laserDistances.getInt(direction));
+        boolean b = getLaserOutputs().contains(direction)
+                && !pos.equals(worldPosition)
+                && level.getBlockEntity(pos) instanceof LaserBlockEntity be
+                && be.getLaserInputs().contains(direction.getOpposite())
+                && (power > 0 || powerToTransfer > 0);
+        return b;
     }
 
     public Object2IntMap<Direction> getLaserDistances() {
@@ -261,6 +267,12 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
                     int newDistance = Math.abs(diff);
                     if (prevDistance != newDistance) {
                         this.laserDistances.put(direction, newDistance);
+                        onLaserDistancesChanged(direction, prevDistance);
+                    }
+                } else {
+                    int prevDistance = this.laserDistances.getInt(direction);
+                    if (prevDistance != 0) {
+                        this.laserDistances.put(direction, 0);
                         onLaserDistancesChanged(direction, prevDistance);
                     }
                 }
