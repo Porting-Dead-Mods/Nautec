@@ -295,7 +295,13 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     }
 
     protected final void addBacteriaStorage(int slots) {
-        this.bacteriaStorage = new BacteriaStorage(slots);
+        this.bacteriaStorage = new BacteriaStorage(slots) {
+            @Override
+            public void onBacteriaChanged(int slot) {
+                update();
+                ContainerBlockEntity.this.onBacteriaChanged(slot);
+            }
+        };
     }
 
     public void update() {
@@ -310,6 +316,9 @@ public abstract class ContainerBlockEntity extends BlockEntity {
     }
 
     public void onPowerChanged() {
+    }
+
+    public void onBacteriaChanged(int slot) {
     }
 
     public void drop() {
