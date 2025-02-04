@@ -1,6 +1,13 @@
 {
   "type": "nautec:simple",
-  "resource": "minecraft:cooked_beef",
+  "bacteria": "minecraft:cooked_beef",
+  "mutations": [
+    {
+      "bacteria": "nautec:thermophiles",
+      "catalyst": "minecraft:lava_bucket",
+      "chance": 100
+    }
+  ],
   "stats": {
     "type": "nautec:simple",
     "color": -1328403,

@@ -1,6 +1,13 @@
 {
   "type": "nautec:simple",
-  "resource": "minecraft:iron_ingot",
+  "bacteria": "minecraft:iron_ingot",
+  "mutations": [
+    {
+      "bacteria": "nautec:methanogens",
+      "catalyst": "minecraft:dirt",
+      "chance": 100
+    }
+  ],
   "stats": {
     "type": "nautec:simple",
     "color": -13434881,

@@ -8,6 +8,7 @@ import com.portingdeadmods.nautec.registries.NTItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -72,7 +73,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
         handHeldItem(NTItems.AQUARINE_WRENCH.get());
         handHeldItem(NTItems.CROWBAR.get());
-        handHeldItem(NTItems.GRAFTING_TOOL.get());
+        // TODO: handHeldItem(NTItems.GRAFTING_TOOL.get());
 
         for (NTFluid fluid : NTFluids.HELPER.getFluids()) {
             bucket(fluid.getStillFluid());

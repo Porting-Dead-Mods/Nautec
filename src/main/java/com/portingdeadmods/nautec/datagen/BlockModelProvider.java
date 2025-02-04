@@ -35,7 +35,7 @@ public class BlockModelProvider extends BlockStateProvider {
         simpleBlock(NTBlocks.CREATIVE_POWER_SOURCE.get());
         aquaticCatalyst(NTBlocks.AQUATIC_CATALYST.get());
 
-        existingFacingBlock(NTBlocks.PRISMARINE_RELAY.get());
+        existingFacingBlock(NTBlocks.PRISMARINE_RELAY.get(), NTBlocks.PRISMARINE_RELAY.get());
         longDistanceLaser(NTBlocks.LONG_DISTANCE_LASER.get());
         laserJunction(NTBlocks.LASER_JUNCTION.get());
 
@@ -157,8 +157,8 @@ public class BlockModelProvider extends BlockStateProvider {
         facingBlock(block, modelBuilder);
     }
 
-    public void existingFacingBlock(Block block) {
-        facingBlock(block, models().getExistingFile(existingModelFile(NTBlocks.PRISMARINE_RELAY.get())));
+    public void existingFacingBlock(Block block, Block modelOf) {
+        facingBlock(block, models().getExistingFile(existingModelFile(modelOf)));
     }
 
     public void facingBlock(Block block, ModelFile model) {
