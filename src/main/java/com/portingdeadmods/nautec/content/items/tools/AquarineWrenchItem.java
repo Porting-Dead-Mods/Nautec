@@ -4,7 +4,11 @@ import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.content.blockentities.LaserJunctionBlockEntity;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.part.BioReactorPartBlockEntity;
 import com.portingdeadmods.nautec.content.blocks.LaserJunctionBlock;
+import com.portingdeadmods.nautec.content.blocks.multiblock.part.BioReactorPartBlock;
+import com.portingdeadmods.nautec.content.multiblocks.BioReactorMultiblock;
+import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.utils.BlockUtils;
 import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import net.minecraft.core.BlockPos;
@@ -70,6 +74,17 @@ public class AquarineWrenchItem extends Item {
             }
 
             return InteractionResult.SUCCESS;
+        }
+
+        if (level.getBlockEntity(pos) instanceof BioReactorPartBlockEntity partBE) {
+            BlockState state = level.getBlockState(pos);
+            if (state.getValue(BioReactorMultiblock.BIO_REACTOR_PART) % 2 != 0) {
+                boolean hatch = !state.getValue(BioReactorMultiblock.HATCH);
+                level.setBlockAndUpdate(pos, state.setValue(BioReactorMultiblock.HATCH, hatch));
+                partBE.setLaserInput(hatch);
+                return InteractionResult.SUCCESS;
+            }
+            return InteractionResult.FAIL;
         }
 
         if (!useOnContext.getPlayer().isCrouching()) {

@@ -89,9 +89,9 @@ public final class NTConfig {
             .comment("The maximum rate at which bacteria can resist mutation")
             .defineInRange("bacteriaMutationResistanceCap", 1, 0, Float.MAX_VALUE);
 
-    private static final ModConfigSpec.DoubleValue BACTERIA_COLONY_SIZE_CAP = BUILDER
+    private static final ModConfigSpec.LongValue BACTERIA_COLONY_SIZE_CAP = BUILDER
             .comment("The maximum size a bacteria colony can grow to")
-            .defineInRange("bacteriaColonySizeCap", 100d, 0, Float.MAX_VALUE);
+            .defineInRange("bacteriaColonySizeCap", 100, 0, Long.MAX_VALUE);
 
     private static final ModConfigSpec.IntValue BACTERIA_LIFESPAN_CAP = BUILDER
             .comment("The maximum lifespan of a bacteria colony")
@@ -145,7 +145,7 @@ public final class NTConfig {
     public static float bacteriaGrowthRateCap;
     public static float bacteriaProductionRateCap;
     public static float bacteriaMutationResistanceCap;
-    public static float bacteriaColonySizeCap;
+    public static long bacteriaColonySizeCap;
     public static int bacteriaLifespanCap;
 
     public static int bacteriaAnalyzerCraftingSpeed;
@@ -185,7 +185,7 @@ public final class NTConfig {
         bacteriaGrowthRateCap = (float) BACTERIA_GROWTH_RATE_CAP.getAsDouble();
         bacteriaProductionRateCap = (float) BACTERIA_PRODUCTION_RATE_CAP.getAsDouble();
         bacteriaMutationResistanceCap = (float) BACTERIA_MUTATION_RESISTANCE_CAP.getAsDouble();
-        bacteriaColonySizeCap = (float) BACTERIA_COLONY_SIZE_CAP.getAsDouble();
+        bacteriaColonySizeCap = BACTERIA_COLONY_SIZE_CAP.get();
         bacteriaLifespanCap = BACTERIA_LIFESPAN_CAP.get();
 
         bacteriaAnalyzerCraftingSpeed = BACTERIA_ANALYZER_CRAFTING_SPEED.get();

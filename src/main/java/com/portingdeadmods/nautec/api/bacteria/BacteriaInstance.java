@@ -11,6 +11,8 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 
+import java.util.Objects;
+
 public final class BacteriaInstance {
     public static final BacteriaInstance EMPTY = new BacteriaInstance(NTBacterias.EMPTY, SimpleBacteriaStats.EMPTY);
     public static final Codec<BacteriaInstance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -81,7 +83,29 @@ public final class BacteriaInstance {
         return new BacteriaInstance(this.bacteria, amount, this.stats.copy());
     }
 
+    public BacteriaInstance copyWithAmount(long amount) {
+        if (amount > 0) {
+            return new BacteriaInstance(this.bacteria, amount, this.stats.copy());
+        }
+        return BacteriaInstance.EMPTY;
+    }
+
     public boolean isEmpty() {
         return bacteria == NTBacterias.EMPTY;
+    }
+
+    public static boolean isSameBacteriaAndStats(BacteriaInstance a, BacteriaInstance b) {
+        return a.bacteria.equals(b.bacteria) && a.stats.equals(b.stats);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof BacteriaInstance that)) return false;
+        return amount == that.amount && Objects.equals(bacteria, that.bacteria) && Objects.equals(stats, that.stats);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bacteria, amount, stats);
     }
 }

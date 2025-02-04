@@ -21,4 +21,8 @@ public abstract class AbstractSlot {
     public int getY() {
         return y;
     }
+
+    public int getSlot() {
+        return slot;
+    }
 }

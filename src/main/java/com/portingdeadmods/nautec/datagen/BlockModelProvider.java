@@ -63,7 +63,7 @@ public class BlockModelProvider extends BlockStateProvider {
         helper.bioReactorPart(NTBlocks.BIO_REACTOR_PART.get());
 
         simpleBlock(NTBlocks.BACTERIAL_CONTAINMENT_SHIELD.get());
-        pipeBlock(NTBlocks.BACTERIA_PIPE.get());
+        //pipeBlock(NTBlocks.BACTERIA_PIPE.get());
 
         horizontalBlock(NTBlocks.BIO_REACTOR.get(), models()
                 .cubeTop(name(NTBlocks.BIO_REACTOR.get()), blockTexture(NTBlocks.POLISHED_PRISMARINE.get()), blockTexture(NTBlocks.BIO_REACTOR.get(), "_top")));

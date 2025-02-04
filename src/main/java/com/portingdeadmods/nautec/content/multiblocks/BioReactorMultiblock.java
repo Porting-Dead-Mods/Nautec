@@ -22,6 +22,7 @@ import java.util.Map;
 public class BioReactorMultiblock implements Multiblock {
     public static final IntegerProperty BIO_REACTOR_PART = IntegerProperty.create("bio_reactor_part", 0, 8);
     public static final BooleanProperty TOP = BooleanProperty.create("top");
+    public static final BooleanProperty HATCH = BooleanProperty.create("hatch");
 
     @Override
     public Block getUnformedController() {
