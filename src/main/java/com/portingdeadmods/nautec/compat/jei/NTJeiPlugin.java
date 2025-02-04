@@ -1,11 +1,15 @@
 package com.portingdeadmods.nautec.compat.jei;
 
+import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.api.bacteria.Bacteria;
+import com.portingdeadmods.nautec.api.bacteria.BacteriaMutation;
 import com.portingdeadmods.nautec.compat.jei.categories.*;
 import com.portingdeadmods.nautec.content.recipes.*;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
+import com.portingdeadmods.nautec.utils.BacteriaHelper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -13,13 +17,16 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JeiPlugin
@@ -47,6 +54,9 @@ public class NTJeiPlugin implements IModPlugin {
         registration.addRecipeCategories(new AugmentationRecipeCategory(
                 registration.getJeiHelpers().getGuiHelper()));
 
+        registration.addRecipeCategories(new BacteriaMutationsCategory(
+                registration.getJeiHelpers().getGuiHelper()));
+
         registration.addRecipeCategories();
     }
 
@@ -69,11 +79,22 @@ public class NTJeiPlugin implements IModPlugin {
         List<AugmentationRecipe> augmentationRecipes = recipeManager.getAllRecipesFor(AugmentationRecipe.Type.INSTANCE)
                 .stream().map(RecipeHolder::value).toList();
 
+        List<BacteriaMutationRecipe> bacterias = new ArrayList<>();
+
+        RegistryAccess reg = Minecraft.getInstance().level.registryAccess();
+        for (ResourceKey<Bacteria> inputBacteria : reg.registryOrThrow(NTRegistries.BACTERIA_KEY).registryKeySet()) {
+            Bacteria bac = BacteriaHelper.getBacteria(reg, inputBacteria);
+            for (BacteriaMutation mut : bac.mutations()) {
+                bacterias.add(new BacteriaMutationRecipe(inputBacteria, mut.bacteria(), mut.catalyst(), mut.chance()));
+            }
+        }
+
         registration.addRecipes(AugmentationRecipeCategory.RECIPE_TYPE, augmentationRecipes);
         registration.addRecipes(ItemTransformationRecipeCategory.RECIPE_TYPE, transformationRecipes);
         registration.addRecipes(AquaticCatalystChannelingRecipeCategory.RECIPE_TYPE, channelingRecipes);
         registration.addRecipes(ItemEtchingRecipeCategory.RECIPE_TYPE, etchingRecipes);
         registration.addRecipes(MixingRecipeCategory.RECIPE_TYPE, mixingRecipes);
+        registration.addRecipes(BacteriaMutationsCategory.RECIPE_TYPE, bacterias);
 
         for (AugmentationRecipe recipe : augmentationRecipes) {
             registration.addIngredientInfo(recipe.augmentItem().getDefaultInstance(), VanillaTypes.ITEM_STACK, Component.translatable(recipe.desc()));
@@ -95,5 +116,7 @@ public class NTJeiPlugin implements IModPlugin {
                 MixingRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(NTBlocks.AUGMENTATION_STATION.get()),
                 AugmentationRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(NTBlocks.MUTATOR.get()),
+                BacteriaMutationsCategory.RECIPE_TYPE);
     }
 }
