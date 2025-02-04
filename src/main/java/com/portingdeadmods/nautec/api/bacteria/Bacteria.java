@@ -10,15 +10,17 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 
+import java.util.List;
+
 /**
- * Bacteria! We begin with only one!
- * Bacteria! Two's what we then become!
- * Bacteria! Each of us becomes two more!
- * Bacteria! We are stronger than before!
- * Bacteria! We keep growing at this rate!
- * Bacteria! No longer shall we wait!
- * Bacteria! The plan now unfolds!
- * Bacteria! We will take over the world!
+ * {@link Bacteria}! We begin with only one! <br>
+ * {@link Bacteria}! Two's what we then become! <br>
+ * {@link Bacteria}! Each of us becomes two more! <br>
+ * {@link Bacteria}! We are stronger than before! <br>
+ * {@link Bacteria}! We keep growing at this rate! <br>
+ * {@link Bacteria}! No longer shall we wait! <br>
+ * {@link Bacteria}! The plan now unfolds! <br>
+ * {@link Bacteria}! We will take over the world! <br>
  */
 public interface Bacteria {
     Codec<ResourceKey<Bacteria>> BACTERIA_TYPE_CODEC = ResourceKey.codec(NTRegistries.BACTERIA_KEY);
@@ -30,6 +32,8 @@ public interface Bacteria {
     Resource resource();
 
     BacteriaStats<?> stats();
+
+    List<BacteriaMutation> mutations();
 
     BacteriaSerializer<?> getSerializer();
 

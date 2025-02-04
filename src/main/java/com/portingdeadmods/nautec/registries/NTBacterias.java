@@ -29,28 +29,32 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1200, 2400))
                 .growthRate(FloatRange.of(0.5F, 1F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(50, 255, 255)));
+                .color(FastColor.ARGB32.color(50, 255, 255))
+                .mutation(Items.DIRT, METHANOGENS, 100));
         register(context, HALOBACTERIA, SimpleBacteria.of()
                 .resource(Items.GOLD_INGOT)
                 .productionRate(FloatRange.of(0.1F, 0.5F))
                 .lifespan(IntRange.of(1200, 2400))
                 .growthRate(FloatRange.of(0.5F, 1F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(255, 229, 0)));
+                .color(FastColor.ARGB32.color(255, 229, 0))
+                .mutation(Items.DIRT, METHANOGENS, 100));
         register(context, METHANOGENS, SimpleBacteria.of()
                 .resource(Items.COOKED_BEEF)
                 .productionRate(FloatRange.of(0.1F, 0.5F))
                 .lifespan(IntRange.of(1200, 2400))
                 .growthRate(FloatRange.of(0.5F, 1F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(235, 186, 237)));
+                .color(FastColor.ARGB32.color(235, 186, 237))
+                .mutation(Items.LAVA_BUCKET, THERMOPHILES, 100));
         register(context, THERMOPHILES, SimpleBacteria.of()
                 .resource(Items.LAVA_BUCKET)
                 .productionRate(FloatRange.of(0.1F, 0.5F))
                 .lifespan(IntRange.of(1200, 2400))
                 .growthRate(FloatRange.of(0.5F, 1F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(255, 0, 0)));
+                .color(FastColor.ARGB32.color(255, 0, 0))
+                .mutation(Items.DIRT, METHANOGENS, 100));
     }
 
     private static void register(BootstrapContext<Bacteria> context, ResourceKey<Bacteria> key, Bacteria.Builder<?> builder) {

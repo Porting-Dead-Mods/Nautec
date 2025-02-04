@@ -2,11 +2,14 @@ package com.portingdeadmods.nautec.content.bacteria;
 
 import com.mojang.serialization.MapCodec;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
+import com.portingdeadmods.nautec.api.bacteria.BacteriaMutation;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaSerializer;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Items;
+
+import java.util.List;
 
 public class EmptyBacteria implements Bacteria, Bacteria.Builder<EmptyBacteria> {
     public static final EmptyBacteria INSTANCE = new EmptyBacteria();
@@ -34,6 +37,11 @@ public class EmptyBacteria implements Bacteria, Bacteria.Builder<EmptyBacteria> 
     @Override
     public BacteriaStats stats() {
         return SimpleBacteriaStats.EMPTY;
+    }
+
+    @Override
+    public List<BacteriaMutation> mutations() {
+        return List.of();
     }
 
     @Override

@@ -1,6 +1,13 @@
 {
   "type": "nautec:simple",
-  "resource": "minecraft:lava_bucket",
+  "bacteria": "minecraft:lava_bucket",
+  "mutations": [
+    {
+      "bacteria": "nautec:methanogens",
+      "catalyst": "minecraft:dirt",
+      "chance": 100
+    }
+  ],
   "stats": {
     "type": "nautec:simple",
     "color": -65536,

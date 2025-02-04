@@ -72,6 +72,11 @@ public final class BacteriaInstance {
         return this.stats;
     }
 
+    public BacteriaInstance rollStats() {
+        this.stats = this.stats.rollStats();
+        return this;
+    }
+
     public BacteriaInstance copy() {
         return new BacteriaInstance(this.bacteria, amount, this.stats.copy());
     }

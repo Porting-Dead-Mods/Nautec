@@ -27,6 +27,8 @@ public interface CollapsedBacteriaStats {
 
     int color();
 
+    CollapsedBacteriaStats rollStats();
+
     List<Component> statsTooltip();
 
     List<Component> statsTooltipWithMutatorValues();

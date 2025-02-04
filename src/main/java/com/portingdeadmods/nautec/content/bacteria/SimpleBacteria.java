@@ -1,18 +1,25 @@
 package com.portingdeadmods.nautec.content.bacteria;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
+import com.portingdeadmods.nautec.api.bacteria.BacteriaMutation;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaSerializer;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
 import com.portingdeadmods.nautec.utils.ranges.FloatRange;
 import com.portingdeadmods.nautec.utils.ranges.IntRange;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public record SimpleBacteria(Resource.ItemResource resource, BacteriaStats<?> stats) implements Bacteria {
+import java.util.ArrayList;
+import java.util.List;
+
+public record SimpleBacteria(Resource.ItemResource resource, BacteriaStats<?> stats, List<BacteriaMutation> mutations) implements Bacteria {
     public static Builder of() {
         return new Builder();
     }
@@ -25,14 +32,17 @@ public record SimpleBacteria(Resource.ItemResource resource, BacteriaStats<?> st
     public static final class Serializer implements BacteriaSerializer<SimpleBacteria> {
         public static final Serializer INSTANCE = new Serializer();
         public static final MapCodec<SimpleBacteria> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                Resource.ItemResource.CODEC.fieldOf("resource").forGetter(SimpleBacteria::resource),
-                BacteriaStats.CODEC.fieldOf("stats").forGetter(SimpleBacteria::stats)
+                Resource.ItemResource.CODEC.fieldOf("bacteria").forGetter(SimpleBacteria::resource),
+                BacteriaStats.CODEC.fieldOf("stats").forGetter(SimpleBacteria::stats),
+                Codec.list(BacteriaMutation.CODEC).fieldOf("mutations").forGetter(SimpleBacteria::mutations)
         ).apply(instance, SimpleBacteria::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, SimpleBacteria> STREAM_CODEC = StreamCodec.composite(
                 Resource.ItemResource.STREAM_CODEC,
                 SimpleBacteria::resource,
                 BacteriaStats.STREAM_CODEC,
                 SimpleBacteria::stats,
+                BacteriaMutation.STREAM_CODEC.apply(ByteBufCodecs.list()),
+                SimpleBacteria::mutations,
                 SimpleBacteria::new
         );
 
@@ -57,6 +67,7 @@ public record SimpleBacteria(Resource.ItemResource resource, BacteriaStats<?> st
         private FloatRange productionRate = FloatRange.of(0F, 0F);
         private IntRange lifespan = IntRange.of(0, 0);
         private int color;
+        private final List<BacteriaMutation> mutations = new ArrayList<>();
 
         public Builder resource(Item resource) {
             this.resource = new Resource.ItemResource(resource);
@@ -88,8 +99,25 @@ public record SimpleBacteria(Resource.ItemResource resource, BacteriaStats<?> st
             return this;
         }
 
+        /**
+         * Adds a possible mutation to the bacteria<br>
+         * TODO: Add conditions besides catalyst
+         *
+         * @param catalyst Item that triggers the mutation
+         * @param mutation The resulting bacteria
+         * @param chance The chance of the mutation happening - (chance%)
+         * @return
+         */
+        public Builder mutation(Item catalyst, ResourceKey<Bacteria> mutation, int chance) {
+            if (chance < 0 || chance > 100) {
+                throw new IllegalArgumentException("Chance must be between 0 and 100");
+            }
+            mutations.add(new BacteriaMutation(catalyst, mutation, chance));
+            return this;
+        }
+
         public SimpleBacteria build() {
-            return new SimpleBacteria(resource, new SimpleBacteriaStats(growthRate, mutationResistance, productionRate, lifespan, color));
+            return new SimpleBacteria(resource, new SimpleBacteriaStats(growthRate, mutationResistance, productionRate, lifespan, color), mutations);
         }
     }
 }
