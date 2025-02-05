@@ -1,13 +1,10 @@
 {
   "type": "nautec:simple",
   "bacteria": "minecraft:lava_bucket",
-  "mutations": [
-    {
-      "bacteria": "nautec:methanogens",
-      "catalyst": "minecraft:dirt",
-      "chance": 100
-    }
-  ],
+  "initial_size": {
+    "max": 230,
+    "min": 120
+  },
   "stats": {
     "type": "nautec:simple",
     "color": -65536,

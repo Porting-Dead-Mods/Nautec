@@ -3,17 +3,13 @@ package com.portingdeadmods.nautec.content.bacteria;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.portingdeadmods.nautec.api.bacteria.BacteriaMutation;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaStatsSerializer;
 import com.portingdeadmods.nautec.utils.ranges.FloatRange;
 import com.portingdeadmods.nautec.utils.ranges.IntRange;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-
-import java.util.List;
 
 public record SimpleBacteriaStats(FloatRange growthRate,
                                   FloatRange mutationResistance,

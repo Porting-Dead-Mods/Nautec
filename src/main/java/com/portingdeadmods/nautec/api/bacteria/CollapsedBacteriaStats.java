@@ -17,6 +17,8 @@ public interface CollapsedBacteriaStats {
     StreamCodec<RegistryFriendlyByteBuf, CollapsedBacteriaStats> STREAM_CODEC =
             ByteBufCodecs.registry(NTRegistries.BACTERIA_STATS_SERIALIZER_KEY).dispatch(CollapsedBacteriaStats::getSerializer, BacteriaStatsSerializer::collapsedStreamCodec);
 
+    BacteriaStats<?> baseStats();
+
     float growthRate();
 
     float mutationResistance();

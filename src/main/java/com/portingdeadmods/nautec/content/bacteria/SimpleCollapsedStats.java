@@ -29,15 +29,17 @@ import static com.portingdeadmods.nautec.NTConfig.bacteriaLifespanCap;
  * @param lifespan
  * @param color
  */
-public record SimpleCollapsedStats(float growthRate,
+public record SimpleCollapsedStats(SimpleBacteriaStats baseStats,
+                                   float growthRate,
                                    float mutationResistance,
                                    float productionRate,
                                    int lifespan,
                                    int color) implements CollapsedBacteriaStats {
-    public static final SimpleCollapsedStats EMPTY = new SimpleCollapsedStats(0, 0, 0, 0, -1);
+    public static final SimpleCollapsedStats EMPTY = new SimpleCollapsedStats(SimpleBacteriaStats.EMPTY, 0, 0, 0, 0, -1);
 
-    public static SimpleCollapsedStats collapse(BacteriaStats<?> stats) {
+    public static SimpleCollapsedStats collapse(SimpleBacteriaStats stats) {
         return new SimpleCollapsedStats(
+                stats,
                 RNGUtils.uniformRandFloat(stats.growthRate()),
                 RNGUtils.uniformRandFloat(stats.mutationResistance()),
                 RNGUtils.uniformRandFloat(stats.productionRate()),
@@ -46,8 +48,9 @@ public record SimpleCollapsedStats(float growthRate,
         );
     }
 
-    public static SimpleCollapsedStats getMaxStats(BacteriaStats<SimpleCollapsedStats> stats) {
+    public static SimpleCollapsedStats getMaxStats(SimpleBacteriaStats stats) {
         return new SimpleCollapsedStats(
+                stats,
                 bacteriaGrowthRateCap,
                 bacteriaMutationResistanceCap,
                 bacteriaProductionRateCap,
@@ -59,6 +62,7 @@ public record SimpleCollapsedStats(float growthRate,
     public static final MapCodec<SimpleCollapsedStats> CODEC =
             RecordCodecBuilder.mapCodec(
                     instance -> instance.group(
+                            SimpleBacteriaStats.CODEC.fieldOf("base_stats").forGetter(SimpleCollapsedStats::baseStats),
                             Codec.FLOAT.fieldOf("growth_rate").forGetter(SimpleCollapsedStats::growthRate),
                             Codec.FLOAT.fieldOf("mutation_resistance").forGetter(SimpleCollapsedStats::mutationResistance),
                             Codec.FLOAT.fieldOf("production_rate").forGetter(SimpleCollapsedStats::productionRate),
@@ -69,6 +73,8 @@ public record SimpleCollapsedStats(float growthRate,
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SimpleCollapsedStats> STREAM_CODEC =
             StreamCodec.composite(
+                    SimpleBacteriaStats.STREAM_CODEC,
+                    SimpleCollapsedStats::baseStats,
                     ByteBufCodecs.FLOAT,
                     SimpleCollapsedStats::growthRate,
                     ByteBufCodecs.FLOAT,
@@ -92,14 +98,14 @@ public record SimpleCollapsedStats(float growthRate,
 
         newGR = Math.min(newGR, bacteriaGrowthRateCap);
 
-        return new SimpleCollapsedStats(newGR, mutationResistance, productionRate, lifespan, color);
+        return new SimpleCollapsedStats(baseStats, newGR, mutationResistance, productionRate, lifespan, color);
     }
 
     public SimpleCollapsedStats rollMutationResistance() {
         float newMR = mutationResistance + RNGUtils.biasedInRange(0, 0.1f, mutationResistance / bacteriaMutationResistanceCap) / 10 * (bacteriaMutationResistanceCap - mutationResistance);
         newMR = Math.max(newMR, 0);
 
-        return new SimpleCollapsedStats(growthRate, newMR, productionRate, lifespan, color);
+        return new SimpleCollapsedStats(baseStats, growthRate, newMR, productionRate, lifespan, color);
     }
 
     public SimpleCollapsedStats rollProductionRate() {
@@ -108,7 +114,7 @@ public record SimpleCollapsedStats(float growthRate,
 
         newPR = Math.min(newPR, bacteriaProductionRateCap);
 
-        return new SimpleCollapsedStats(growthRate, mutationResistance, newPR, lifespan, color);
+        return new SimpleCollapsedStats(baseStats, growthRate, mutationResistance, newPR, lifespan, color);
     }
 
     public SimpleCollapsedStats rollLifespan() {
@@ -117,7 +123,7 @@ public record SimpleCollapsedStats(float growthRate,
 
         newLS = Math.min(newLS, bacteriaLifespanCap);
 
-        return new SimpleCollapsedStats(growthRate, mutationResistance, productionRate, newLS, color);
+        return new SimpleCollapsedStats(baseStats, growthRate, mutationResistance, productionRate, newLS, color);
     }
 
     public SimpleCollapsedStats rollStats() {
@@ -140,7 +146,7 @@ public record SimpleCollapsedStats(float growthRate,
     }
 
     public SimpleCollapsedStats copy() {
-        return new SimpleCollapsedStats(growthRate, mutationResistance, productionRate, lifespan, color);
+        return new SimpleCollapsedStats(baseStats, growthRate, mutationResistance, productionRate, lifespan, color);
     }
 
     public List<Component> statsTooltip() {

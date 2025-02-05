@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.api.bacteria;
 import com.mojang.serialization.Codec;
 import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.utils.codec.CodecUtils;
+import com.portingdeadmods.nautec.utils.ranges.LongRange;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -29,13 +30,19 @@ public interface Bacteria {
     Codec<Bacteria> CODEC = NTRegistries.BACTERIA_SERIALIZER.byNameCodec().dispatch(Bacteria::getSerializer, BacteriaSerializer::mapCodec);
     StreamCodec<RegistryFriendlyByteBuf, Bacteria> STREAM_CODEC = ByteBufCodecs.registry(NTRegistries.BACTERIA_SERIALIZER_KEY).dispatch(Bacteria::getSerializer, BacteriaSerializer::streamCodec);
 
+    LongRange initialSize();
+
     Resource resource();
 
     BacteriaStats<?> stats();
 
-    List<BacteriaMutation> mutations();
-
     BacteriaSerializer<?> getSerializer();
+
+    long rollSize();
+
+    default long maxInitialSize() {
+        return initialSize().getMax();
+    }
 
     interface Resource {
         Codec<? extends Resource> codec();

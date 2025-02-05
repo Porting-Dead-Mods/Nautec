@@ -1,6 +1,8 @@
 package com.portingdeadmods.nautec.content.blockentities;
 
 import com.portingdeadmods.nautec.NTConfig;
+import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
+import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
@@ -45,10 +47,14 @@ public class BacterialAnalyzerBlockEntity extends LaserBlockEntity implements Me
         ItemStack stack = getItemHandler().getStackInSlot(0);
         ItemStack resultStack = getItemHandler().getStackInSlot(1);
         IBacteriaStorage iBacteriaStorage = stack.getCapability(NTCapabilities.BacteriaStorage.ITEM);
-        this.hasRecipe = iBacteriaStorage != null
-                && !iBacteriaStorage.getBacteria(0).isEmpty()
-                && Boolean.FALSE.equals(stack.get(NTDataComponents.ANALYZED))
-                && resultStack.isEmpty();
+        if (iBacteriaStorage != null) {
+            BacteriaInstance bacteria = iBacteriaStorage.getBacteria(0);
+            this.hasRecipe = !bacteria.isEmpty()
+                    && !bacteria.isAnalyzed()
+                    && resultStack.isEmpty();
+        } else {
+            this.hasRecipe = false;
+        }
     }
 
     @Override
@@ -61,7 +67,8 @@ public class BacterialAnalyzerBlockEntity extends LaserBlockEntity implements Me
                     ItemStack extracted = getItemHandler().extractItem(0, 1, false);
 
                     ItemStack result = extracted.copy();
-                    result.set(NTDataComponents.ANALYZED, true);
+                    IBacteriaStorage storage = result.getCapability(NTCapabilities.BacteriaStorage.ITEM);
+                    storage.getBacteria(0).setAnalyzed(true);
 
                     forceInsertItem(1, result, false);
 

@@ -13,6 +13,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -37,7 +38,6 @@ import java.util.Set;
 public class FishingStationBlockEntity extends LaserBlockEntity implements MenuProvider {
     private boolean running;
     private int progress;
-    private boolean itemsFull;
 
     private float independentAngle;
     private float chasingVelocity;
@@ -71,7 +71,7 @@ public class FishingStationBlockEntity extends LaserBlockEntity implements MenuP
                 return false;
             }
         }
-        return !itemsFull;
+        return true;
     }
 
     @Override
@@ -88,12 +88,11 @@ public class FishingStationBlockEntity extends LaserBlockEntity implements MenuP
                         for (int i = 0; i < getItemHandler().getSlots(); i++) {
                             ItemStack itemStack = forceInsertItem(i, stack.copy(), false);
                             if (itemStack.isEmpty()) {
-                                itemsFull = false;
                                 continue itemsLoop;
                             }
                         }
-                        itemsFull = true;
 
+                        Containers.dropItemStack(level, worldPosition.getX(), worldPosition.getY() + 0.5f, worldPosition.getZ(), stack.copy());
                     }
                 }
             }
@@ -145,7 +144,6 @@ public class FishingStationBlockEntity extends LaserBlockEntity implements MenuP
         super.loadData(tag, provider);
         this.independentAngle = tag.getFloat("angle");
         this.progress = tag.getInt("progress");
-        this.itemsFull = tag.getBoolean("itemsFull");
     }
 
     @Override
@@ -153,7 +151,6 @@ public class FishingStationBlockEntity extends LaserBlockEntity implements MenuP
         super.saveData(tag, provider);
         tag.putFloat("angle", this.independentAngle);
         tag.putInt("progress", this.progress);
-        tag.putBoolean("itemsFull", this.itemsFull);
     }
 
     @Override

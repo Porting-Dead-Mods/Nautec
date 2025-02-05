@@ -75,10 +75,9 @@ public final class NTCreativeTabs {
             ItemStack stack = new ItemStack(item);
 
             Holder<Bacteria> bacteria = lookup.holderOrThrow(elem);
-            BacteriaInstance bacteriaInstance = new BacteriaInstance(bacteria.getKey(), 1, bacteria.value().stats().collapseMaxStats());
+            BacteriaInstance bacteriaInstance = new BacteriaInstance(bacteria.getKey(), bacteria.value().maxInitialSize(), bacteria.value().stats().collapseMaxStats(), analyzed);
 
             stack.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(bacteriaInstance));
-            stack.set(NTDataComponents.ANALYZED, analyzed);
             output.accept(stack);
         }
     }

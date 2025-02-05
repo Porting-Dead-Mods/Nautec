@@ -3,8 +3,6 @@ package com.portingdeadmods.nautec.capabilities.bacteria;
 import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import com.portingdeadmods.nautec.api.bacteria.CollapsedBacteriaStats;
-import com.portingdeadmods.nautec.content.bacteria.SimpleCollapsedStats;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.function.UnaryOperator;
 
@@ -36,25 +34,25 @@ public interface IBacteriaStorage {
         BacteriaInstance bacteriaInSlot = getBacteria(slot);
 
         if (bacteriaInSlot.isEmpty()) {
-            long amount = Math.min(NTConfig.bacteriaColonySizeCap, instance.getAmount());
+            long amount = Math.min(NTConfig.bacteriaColonySizeCap, instance.getSize());
 
             if (!simulate) {
-                setBacteria(slot, instance.copyWithAmount(amount));
+                setBacteria(slot, instance.copyWithSize(amount));
                 onBacteriaChanged(slot);
             }
-            return instance.copyWithAmount(instance.getAmount() - amount);
+            return instance.copyWithSize(instance.getSize() - amount);
         }
 
         if (BacteriaInstance.isSameBacteriaAndStats(bacteriaInSlot, instance)) {
-            long rawAmount = bacteriaInSlot.getAmount() + instance.getAmount();
+            long rawAmount = bacteriaInSlot.getSize() + instance.getSize();
 
             long amount = Math.min(NTConfig.bacteriaColonySizeCap, rawAmount);
 
             if (!simulate) {
-                setBacteria(slot, instance.copyWithAmount(amount));
+                setBacteria(slot, instance.copyWithSize(amount));
                 onBacteriaChanged(slot);
             }
-            return instance.copyWithAmount(rawAmount - amount);
+            return instance.copyWithSize(rawAmount - amount);
         }
 
         return instance.copy();
@@ -71,7 +69,7 @@ public interface IBacteriaStorage {
 
         long toExtract = Math.min(amount, NTConfig.bacteriaColonySizeCap);
 
-        if (instance.getAmount() <= toExtract) {
+        if (instance.getSize() <= toExtract) {
             if (!simulate) {
                 setBacteria(slot, BacteriaInstance.EMPTY);
                 onBacteriaChanged(slot);
@@ -81,11 +79,11 @@ public interface IBacteriaStorage {
             }
         } else {
             if (!simulate) {
-                setBacteria(slot, instance.copyWithAmount(instance.getAmount() - toExtract));
+                setBacteria(slot, instance.copyWithSize(instance.getSize() - toExtract));
                 onBacteriaChanged(slot);
             }
 
-            return instance.copyWithAmount(toExtract);
+            return instance.copyWithSize(toExtract);
         }
     }
 

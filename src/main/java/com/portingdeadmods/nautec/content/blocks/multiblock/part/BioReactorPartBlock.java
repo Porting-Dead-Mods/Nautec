@@ -79,10 +79,12 @@ public class BioReactorPartBlock extends LaserBlock {
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (level.getBlockEntity(pos) instanceof BioReactorPartBlockEntity be) {
-            BlockPos controllerPos = be.getControllerPos();
-            if (controllerPos != null) {
-                MultiblockHelper.unform(NTMultiblocks.BIO_REACTOR.get(), controllerPos, level);
+        if (!state.is(newState.getBlock())) {
+            if (level.getBlockEntity(pos) instanceof BioReactorPartBlockEntity be) {
+                BlockPos controllerPos = be.getControllerPos();
+                if (controllerPos != null) {
+                    MultiblockHelper.unform(NTMultiblocks.BIO_REACTOR.get(), controllerPos, level);
+                }
             }
         }
 

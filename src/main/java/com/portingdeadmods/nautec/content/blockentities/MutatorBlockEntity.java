@@ -5,15 +5,10 @@ import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
-import com.portingdeadmods.nautec.capabilities.NTCapabilities;
-import com.portingdeadmods.nautec.content.items.PetriDishItem;
 import com.portingdeadmods.nautec.content.menus.MutatorMenu;
 import com.portingdeadmods.nautec.content.recipes.BacteriaMutationRecipe;
 import com.portingdeadmods.nautec.content.recipes.inputs.BacteriaMutationRecipeInput;
-import com.portingdeadmods.nautec.data.NTDataComponents;
-import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
-import com.portingdeadmods.nautec.utils.BacteriaHelper;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
@@ -75,11 +70,11 @@ public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider
         if (this.recipe != null) {
             if (getPower() >= POWER_USAGE) {
                 if (progress >= MAX_PROGRESS) {
-                    ResourceKey<Bacteria> bacteria = recipe.resultBacteria();
+                    ResourceKey<Bacteria> resultBacteria = recipe.resultBacteria();
                     BacteriaInstance inputBacteria = getBacteriaStorage().getBacteria(0);
-                    getBacteriaStorage().extractBacteria(0, inputBacteria.getAmount(), false);
+                    getBacteriaStorage().extractBacteria(0, inputBacteria.getSize(), false);
 
-                    getBacteriaStorage().insertBacteria(1, new BacteriaInstance(bacteria, level.registryAccess(), inputBacteria.getAmount()), false);
+                    getBacteriaStorage().insertBacteria(1, BacteriaInstance.roll(resultBacteria, level.registryAccess()), false);
 
                     progress = 0;
                 } else {

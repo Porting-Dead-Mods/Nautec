@@ -1,13 +1,10 @@
 {
   "type": "nautec:simple",
   "bacteria": "minecraft:gold_ingot",
-  "mutations": [
-    {
-      "bacteria": "nautec:methanogens",
-      "catalyst": "minecraft:dirt",
-      "chance": 100
-    }
-  ],
+  "initial_size": {
+    "max": 560,
+    "min": 480
+  },
   "stats": {
     "type": "nautec:simple",
     "color": -6912,
