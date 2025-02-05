@@ -71,11 +71,11 @@ public class BacteriaMutationsCategory implements IRecipeCategory<BacteriaMutati
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, BacteriaMutationRecipe recipe, IFocusGroup focuses) {
         // Petridish Slots
-        builder.addSlot(RecipeIngredientRole.INPUT, gap, gap + 8).addItemStack(recipe.INPUT_PETRIDISH);
-        builder.addSlot(RecipeIngredientRole.OUTPUT, gap + gapBetweenInOut - 1, gap + 8).addItemStack(recipe.OUTPUT_PETRIDISH);
+        //builder.addSlot(RecipeIngredientRole.INPUT, gap, gap + 8).addItemStack(recipe.);
+        //builder.addSlot(RecipeIngredientRole.OUTPUT, gap + gapBetweenInOut - 1, gap + 8).addItemStack(recipe.OUTPUT_PETRIDISH);
 
         // Catalyst Slot
-        builder.addSlot(RecipeIngredientRole.INPUT, drawableWidth / 2 - slotSize / 2 + 1, gap + 8 + YGapBetweenInCata).addItemLike(recipe.catalyst);
+        //builder.addSlot(RecipeIngredientRole.INPUT, drawableWidth / 2 - slotSize / 2 + 1, gap + 8 + YGapBetweenInCata).addItemLike(recipe.catalyst);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class BacteriaMutationsCategory implements IRecipeCategory<BacteriaMutati
         guiGraphics.blitSprite(SINGLE_SLOT_SPRITE, drawableWidth / 2 - slotSize / 2 - 1 + 1, gap + 8 + YGapBetweenInCata - 1, 18, 18);
 
         Font font = Minecraft.getInstance().font;
-        String purityString = recipe.chance + "%";
+        String purityString = recipe.chance() + "%";
 
         int width = font.width(purityString);
         guiGraphics.drawString(font, purityString, gap + gapBetweenInOut - (width - 18) / 2 - 1, gap + 8 - 3 - font.lineHeight, 0xFF808080, false);

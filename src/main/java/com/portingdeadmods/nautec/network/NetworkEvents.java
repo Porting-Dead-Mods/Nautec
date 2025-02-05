@@ -17,9 +17,9 @@ public class NetworkEvents {
                 KeyPressedPayload::keyPressedAction
         );
         registrar.playToServer(
-                InsertBacteriaSlotPayload.TYPE,
-                InsertBacteriaSlotPayload.STREAM_CODEC,
-                InsertBacteriaSlotPayload::handle
+                BacteriaSlotClickedPayload.TYPE,
+                BacteriaSlotClickedPayload.STREAM_CODEC,
+                BacteriaSlotClickedPayload::handle
         );
         registrar.playBidirectional(
                 SyncAugmentPayload.TYPE,

@@ -5,8 +5,6 @@ import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.bacteria.IBacteriaStorage;
-import com.portingdeadmods.nautec.data.NTDataComponents;
-import com.portingdeadmods.nautec.data.NTDataMaps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -16,17 +14,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record InsertBacteriaSlotPayload(BlockPos pos, int slot,
-                                        BacteriaInstance bacteria) implements CustomPacketPayload {
-    public static final Type<InsertBacteriaSlotPayload> TYPE = new Type<>(Nautec.rl("insert_bacteria"));
-    public static final StreamCodec<RegistryFriendlyByteBuf, InsertBacteriaSlotPayload> STREAM_CODEC = StreamCodec.composite(
+public record BacteriaSlotClickedPayload(BlockPos pos, int slot,
+                                         BacteriaInstance bacteria) implements CustomPacketPayload {
+    public static final Type<BacteriaSlotClickedPayload> TYPE = new Type<>(Nautec.rl("insert_bacteria"));
+    public static final StreamCodec<RegistryFriendlyByteBuf, BacteriaSlotClickedPayload> STREAM_CODEC = StreamCodec.composite(
             BlockPos.STREAM_CODEC,
-            InsertBacteriaSlotPayload::pos,
+            BacteriaSlotClickedPayload::pos,
             ByteBufCodecs.INT,
-            InsertBacteriaSlotPayload::slot,
+            BacteriaSlotClickedPayload::slot,
             BacteriaInstance.STREAM_CODEC,
-            InsertBacteriaSlotPayload::bacteria,
-            InsertBacteriaSlotPayload::new
+            BacteriaSlotClickedPayload::bacteria,
+            BacteriaSlotClickedPayload::new
     );
 
     @Override
@@ -49,7 +47,7 @@ public record InsertBacteriaSlotPayload(BlockPos pos, int slot,
                     beBacteriaStorage.setBacteria(slot, BacteriaInstance.EMPTY.copy());
                     beBacteriaStorage.onBacteriaChanged(slot);
                 } else {
-                    beBacteriaStorage.insertBacteria(slot, bacteria);
+                    beBacteriaStorage.insertBacteria(slot, bacteria, false);
                     itemBacteriaStorage.setBacteria(0, BacteriaInstance.EMPTY.copy());
                     itemBacteriaStorage.onBacteriaChanged(slot);
                 }

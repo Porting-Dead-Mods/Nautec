@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    "D": {
+      "item": "nautec:dark_prismarine_pillar"
+    },
+    "G": {
+      "item": "nautec:gear"
+    },
+    "R": {
+      "item": "nautec:cast_iron_rod"
+    }
+  },
+  "pattern": [
+    "DAD",
+    "RGR",
+    "DAD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:fishing_station"
+  }
+}

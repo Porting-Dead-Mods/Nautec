@@ -4,9 +4,11 @@ import com.ibm.icu.impl.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaMutation;
+import com.portingdeadmods.nautec.content.recipes.inputs.BacteriaMutationRecipeInput;
 import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
 import com.portingdeadmods.nautec.content.recipes.utils.RecipeUtils;
 import com.portingdeadmods.nautec.data.NTDataComponents;
@@ -33,30 +35,73 @@ import java.util.List;
 /**
  * <b><i>THIS CLASS SHOULD ONLY BE USED CLIENT SIDE :3</i></b>
  */
-public class BacteriaMutationRecipe {
+public record BacteriaMutationRecipe(ResourceKey<Bacteria> inputBacteria, ResourceKey<Bacteria> resultBacteria,
+                                     Ingredient catalyst, float chance) implements Recipe<BacteriaMutationRecipeInput> {
     public static final String NAME = "bacteria_mutation";
-    private static final RegistryAccess reg = Minecraft.getInstance().level.registryAccess();
+    public static final RecipeType<BacteriaMutationRecipe> TYPE = RecipeType.simple(Nautec.rl("bacteria_mutation"));
 
-    public final ItemStack INPUT_PETRIDISH;
-    public final ItemStack OUTPUT_PETRIDISH;
-    public final Item catalyst;
-    public final int chance;
+    @Override
+    public boolean matches(BacteriaMutationRecipeInput input, Level level) {
+        return input.input().is(inputBacteria) && catalyst.test(input.catalyst());
+    }
 
-    public BacteriaMutationRecipe(ResourceKey<Bacteria> input, ResourceKey<Bacteria> output, Item catalyst, int chance) {
-        this.catalyst = catalyst;
-        this.chance = chance;
+    @Override
+    public ItemStack assemble(BacteriaMutationRecipeInput input, HolderLookup.Provider registries) {
+        return ItemStack.EMPTY;
+    }
 
-        this.INPUT_PETRIDISH = new ItemStack(NTItems.PETRI_DISH.get(), 1);
-        INPUT_PETRIDISH.set(NTDataComponents.ANALYZED, false);
-        INPUT_PETRIDISH.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(
-                new BacteriaInstance(input, reg)
-        ));
+    @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
+    }
 
-        this.OUTPUT_PETRIDISH = new ItemStack(NTItems.PETRI_DISH.get(), 1);
-        OUTPUT_PETRIDISH.set(NTDataComponents.ANALYZED, false);
-        OUTPUT_PETRIDISH.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(
-                new BacteriaInstance(output, reg)
-        ));
+    @Override
+    public ItemStack getResultItem(HolderLookup.Provider registries) {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public RecipeSerializer<?> getSerializer() {
+        return Serializer.INSTANCE;
+    }
+
+    @Override
+    public RecipeType<?> getType() {
+        return TYPE;
+    }
+
+    public static final class Serializer implements RecipeSerializer<BacteriaMutationRecipe> {
+        public static final Serializer INSTANCE = new Serializer();
+        public static final MapCodec<BacteriaMutationRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
+                Bacteria.BACTERIA_TYPE_CODEC.fieldOf("input_bacteria").forGetter(BacteriaMutationRecipe::inputBacteria),
+                Bacteria.BACTERIA_TYPE_CODEC.fieldOf("result_bacteria").forGetter(BacteriaMutationRecipe::resultBacteria),
+                Ingredient.CODEC.fieldOf("catalyst").forGetter(BacteriaMutationRecipe::catalyst),
+                Codec.FLOAT.fieldOf("chance").forGetter(BacteriaMutationRecipe::chance)
+        ).apply(inst, BacteriaMutationRecipe::new));
+        public static final StreamCodec<RegistryFriendlyByteBuf, BacteriaMutationRecipe> STREAM_CODEC = StreamCodec.composite(
+                Bacteria.BACTERIA_TYPE_STREAM_CODEC,
+                BacteriaMutationRecipe::inputBacteria,
+                Bacteria.BACTERIA_TYPE_STREAM_CODEC,
+                BacteriaMutationRecipe::resultBacteria,
+                Ingredient.CONTENTS_STREAM_CODEC,
+                BacteriaMutationRecipe::catalyst,
+                ByteBufCodecs.FLOAT,
+                BacteriaMutationRecipe::chance,
+                BacteriaMutationRecipe::new
+        );
+
+        private Serializer() {
+        }
+
+        @Override
+        public MapCodec<BacteriaMutationRecipe> codec() {
+            return CODEC;
+        }
+
+        @Override
+        public StreamCodec<RegistryFriendlyByteBuf, BacteriaMutationRecipe> streamCodec() {
+            return STREAM_CODEC;
+        }
     }
 }
 

@@ -79,22 +79,15 @@ public class NTJeiPlugin implements IModPlugin {
         List<AugmentationRecipe> augmentationRecipes = recipeManager.getAllRecipesFor(AugmentationRecipe.Type.INSTANCE)
                 .stream().map(RecipeHolder::value).toList();
 
-        List<BacteriaMutationRecipe> bacterias = new ArrayList<>();
-
-        RegistryAccess reg = Minecraft.getInstance().level.registryAccess();
-        for (ResourceKey<Bacteria> inputBacteria : reg.registryOrThrow(NTRegistries.BACTERIA_KEY).registryKeySet()) {
-            Bacteria bac = BacteriaHelper.getBacteria(reg, inputBacteria);
-            for (BacteriaMutation mut : bac.mutations()) {
-                bacterias.add(new BacteriaMutationRecipe(inputBacteria, mut.bacteria(), mut.catalyst(), mut.chance()));
-            }
-        }
+        List<BacteriaMutationRecipe> mutationRecipes = recipeManager.getAllRecipesFor(BacteriaMutationRecipe.TYPE)
+                .stream().map(RecipeHolder::value).toList();
 
         registration.addRecipes(AugmentationRecipeCategory.RECIPE_TYPE, augmentationRecipes);
         registration.addRecipes(ItemTransformationRecipeCategory.RECIPE_TYPE, transformationRecipes);
         registration.addRecipes(AquaticCatalystChannelingRecipeCategory.RECIPE_TYPE, channelingRecipes);
         registration.addRecipes(ItemEtchingRecipeCategory.RECIPE_TYPE, etchingRecipes);
         registration.addRecipes(MixingRecipeCategory.RECIPE_TYPE, mixingRecipes);
-        registration.addRecipes(BacteriaMutationsCategory.RECIPE_TYPE, bacterias);
+        registration.addRecipes(BacteriaMutationsCategory.RECIPE_TYPE, mutationRecipes);
 
         for (AugmentationRecipe recipe : augmentationRecipes) {
             registration.addIngredientInfo(recipe.augmentItem().getDefaultInstance(), VanillaTypes.ITEM_STACK, Component.translatable(recipe.desc()));
@@ -119,4 +112,5 @@ public class NTJeiPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(NTBlocks.MUTATOR.get()),
                 BacteriaMutationsCategory.RECIPE_TYPE);
     }
+
 }
