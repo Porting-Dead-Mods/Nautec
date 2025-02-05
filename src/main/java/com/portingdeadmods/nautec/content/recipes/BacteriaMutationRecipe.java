@@ -1,36 +1,19 @@
 package com.portingdeadmods.nautec.content.recipes;
 
-import com.ibm.icu.impl.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
-import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
-import com.portingdeadmods.nautec.api.bacteria.BacteriaMutation;
 import com.portingdeadmods.nautec.content.recipes.inputs.BacteriaMutationRecipeInput;
-import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
-import com.portingdeadmods.nautec.content.recipes.utils.RecipeUtils;
-import com.portingdeadmods.nautec.data.NTDataComponents;
-import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
-import com.portingdeadmods.nautec.registries.NTItems;
-import com.portingdeadmods.nautec.utils.BacteriaHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * <b><i>THIS CLASS SHOULD ONLY BE USED CLIENT SIDE :3</i></b>

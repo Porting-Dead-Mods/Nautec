@@ -15,7 +15,7 @@ public class IntRange extends AbstractRange<Integer> {
     public static final MapCodec<IntRange> MAP_CODEC = rangeMapCodec(Codec.INT, IntRange::new);
     public static final StreamCodec<RegistryFriendlyByteBuf, IntRange> STREAM_CODEC = rangeStreamCodec(ByteBufCodecs.INT, IntRange::new);
 
-    protected IntRange(Integer min, Integer max) {
+    protected IntRange(int min, int max) {
         super(min, max);
     }
 

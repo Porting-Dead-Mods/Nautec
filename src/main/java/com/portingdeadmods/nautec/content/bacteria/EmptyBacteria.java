@@ -2,9 +2,9 @@ package com.portingdeadmods.nautec.content.bacteria;
 
 import com.mojang.serialization.MapCodec;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
-import com.portingdeadmods.nautec.api.bacteria.BacteriaMutation;
+import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaSerializer;
-import com.portingdeadmods.nautec.api.bacteria.BacteriaStats;
+import com.portingdeadmods.nautec.utils.ranges.LongRange;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Items;
@@ -30,6 +30,16 @@ public class EmptyBacteria implements Bacteria, Bacteria.Builder<EmptyBacteria> 
     }
 
     @Override
+    public LongRange initialSize() {
+        return LongRange.of(0, 0);
+    }
+
+    @Override
+    public long rollSize() {
+        return 0;
+    }
+
+    @Override
     public Resource resource() {
         return RESOURCE;
     }
@@ -37,11 +47,6 @@ public class EmptyBacteria implements Bacteria, Bacteria.Builder<EmptyBacteria> 
     @Override
     public SimpleBacteriaStats stats() {
         return SimpleBacteriaStats.EMPTY;
-    }
-
-    @Override
-    public List<BacteriaMutation> mutations() {
-        return List.of();
     }
 
     @Override

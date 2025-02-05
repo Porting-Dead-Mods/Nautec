@@ -37,7 +37,7 @@ public class GraftingToolItem extends Item {
             if (data != null && offhandItem.is(NTItems.PETRI_DISH.get())) {
                 IBacteriaStorage bacteriaStorage = offhandItem.getCapability(NTCapabilities.BacteriaStorage.ITEM);
                 if (level.getRandom().nextFloat() <= data.chance()) {
-                    bacteriaStorage.setBacteria(0, new BacteriaInstance(data.bacteria(), level.registryAccess()));
+                    bacteriaStorage.setBacteria(0, BacteriaInstance.roll(data.bacteria(), level.registryAccess()));
                 }
                 ItemStack itemInHand = context.getItemInHand();
                 itemInHand.hurtAndBreak(1, player, player.getEquipmentSlotForItem(itemInHand));

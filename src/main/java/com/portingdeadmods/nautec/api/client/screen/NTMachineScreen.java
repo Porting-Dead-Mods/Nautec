@@ -63,9 +63,7 @@ public abstract class NTMachineScreen<T extends ContainerBlockEntity> extends Ab
         if (slot != null) {
             BacteriaInstance bacteria = slot.getBacteriaStorage().getBacteria(slot.getSlot());
             if (!bacteria.isEmpty()) {
-                List<Component> tooltip = new ArrayList<>();
-                tooltip.add(Utils.registryTranslation(bacteria.getBacteria()));
-                tooltip.addAll(bacteria.getStats().statsTooltip());
+                List<Component> tooltip = bacteria.getTooltip();
                 pGuiGraphics.renderComponentTooltip(font, tooltip, pMouseX, pMouseY);
             }
             int color = FastColor.ARGB32.color(20, 30, 30, 30);
