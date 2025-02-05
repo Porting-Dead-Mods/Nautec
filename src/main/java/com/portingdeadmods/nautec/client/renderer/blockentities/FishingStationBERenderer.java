@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.client.renderer.blockentities;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import com.portingdeadmods.nautec.client.model.block.FishingNetModel;
 import com.portingdeadmods.nautec.content.blockentities.FishingStationBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -22,7 +23,16 @@ public class FishingStationBERenderer implements BlockEntityRenderer<FishingStat
         {
             poseStack.translate(0.5, 0.5, 0.5);
             poseStack.translate(1.75, -0.125, 0);
-            this.model.renderToBuffer(poseStack, FishingNetModel.MATERIAL.buffer(bufferSource, RenderType::entityCutout), packedLight, packedOverlay);
+            poseStack.pushPose();
+            {
+                if (blockEntity.isRunning()) {
+                    poseStack.translate(-1.75, 0, 0);
+                    poseStack.mulPose(Axis.YN.rotationDegrees(blockEntity.getIndependentAngle(partialTick)));
+                    poseStack.translate(1.75, 0, 0);
+                }
+                this.model.renderToBuffer(poseStack, FishingNetModel.MATERIAL.buffer(bufferSource, RenderType::entityCutout), packedLight, packedOverlay);
+            }
+            poseStack.popPose();
         }
         poseStack.popPose();
     }

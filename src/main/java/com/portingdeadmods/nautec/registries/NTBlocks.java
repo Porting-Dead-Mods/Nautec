@@ -82,7 +82,7 @@ public final class NTBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<BioReactorBlock> BIO_REACTOR = registerBlockAndItem("bio_reactor", BioReactorBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
-    public static final DeferredBlock<BioReactorPartBlock> BIO_REACTOR_PART = registerBlockAndItem("bio_reactor_part", BioReactorPartBlock::new,
+    public static final DeferredBlock<BioReactorPartBlock> BIO_REACTOR_PART = BLOCKS.registerBlock("bio_reactor_part", BioReactorPartBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<BacterialAnalyzerBlock> BACTERIAL_ANALYZER = registerBlockAndItem("bacterial_analyzer", BacterialAnalyzerBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), true, false);

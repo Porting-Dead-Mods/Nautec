@@ -83,6 +83,8 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem(ELDRITCH_HEART, "Eldritch Heart");
         addItem(GUARDIAN_EYE, "Guardian Eye");
         addItem(VALVE, "Valve");
+        addItem(CAST_IRON_COMPOUND, "Cast Iron Compound");
+        addItem(GRAFTING_TOOL, "Grafting Tool");
         add("nautec_guide.desc.0","Nautec's Guide");
 
         // Adding missing block translations
@@ -110,6 +112,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addBlock(NTBlocks.INCUBATOR, "Incubator");
         addBlock(NTBlocks.BIO_REACTOR, "Bio Reactor");
         addBlock(NTBlocks.BACTERIAL_ANALYZER, "Bacterial Analyzer");
+        addBlock(NTBlocks.FISHING_STATION, "Fishing Station");
 
         // Multiblock information
         add("multiblock.info.failed_to_construct", "Missing or invalid block");

@@ -35,7 +35,7 @@ public class EmptyBacteria implements Bacteria, Bacteria.Builder<EmptyBacteria> 
     }
 
     @Override
-    public BacteriaStats stats() {
+    public SimpleBacteriaStats stats() {
         return SimpleBacteriaStats.EMPTY;
     }
 

@@ -3,7 +3,9 @@ package com.portingdeadmods.nautec.client.screen;
 import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.client.screen.NTAbstractContainerScreen;
+import com.portingdeadmods.nautec.api.client.screen.NTMachineScreen;
 import com.portingdeadmods.nautec.api.menu.NTAbstractContainerMenu;
+import com.portingdeadmods.nautec.api.menu.NTMachineMenu;
 import com.portingdeadmods.nautec.content.blockentities.BacterialAnalyzerBlockEntity;
 import com.portingdeadmods.nautec.content.blockentities.MutatorBlockEntity;
 import net.minecraft.client.gui.GuiGraphics;
@@ -13,13 +15,12 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
-public class MutatorScreen extends NTAbstractContainerScreen<MutatorBlockEntity> {
+public class MutatorScreen extends NTMachineScreen<MutatorBlockEntity> {
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/mutator.png");
     public static final ResourceLocation PROGRESS_ARROW = Nautec.rl("container/mutator/progress_arrow");
 
-    public MutatorScreen(NTAbstractContainerMenu<MutatorBlockEntity> menu, Inventory playerInventory, Component title) {
+    public MutatorScreen(NTMachineMenu<MutatorBlockEntity> menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
-        this.titleLabelY = 4;
     }
 
     @Override
@@ -30,9 +31,9 @@ public class MutatorScreen extends NTAbstractContainerScreen<MutatorBlockEntity>
 
         int progress = menu.blockEntity.getProgress();
 
-        int j1 = Mth.ceil(((float) progress / NTConfig.mutatorCraftingSpeed) * 79.0F);
+        int j1 = Mth.ceil(((float) progress / NTConfig.mutatorCraftingSpeed) * 62f);
 
-        guiGraphics.blitSprite(PROGRESS_ARROW, 79, 24, 0, 0, i + 47, j + 22, j1, 24);
+        guiGraphics.blitSprite(PROGRESS_ARROW, 62, 14, 0, 0, i + 56, j + 36, j1, 14);
     }
 
     @Override

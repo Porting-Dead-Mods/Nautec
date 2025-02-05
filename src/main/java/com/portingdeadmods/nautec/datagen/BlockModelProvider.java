@@ -4,6 +4,7 @@ import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.content.blocks.*;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -51,6 +52,8 @@ public class BlockModelProvider extends BlockStateProvider {
 //        bacterialAnalyzer(NTBlocks.BACTERIAL_ANALYZER.get());
 //        incubator(NTBlocks.INCUBATOR.get());
 //        bioReactor(NTBlocks.BIO_REACTOR.get());
+        simpleBlock(NTBlocks.MUTATOR.get(), models().getExistingFile(existingModelFile(NTBlocks.MUTATOR.get())));
+        simpleBlock(NTBlocks.INCUBATOR.get(), models().getExistingFile(existingModelFile(NTBlocks.INCUBATOR.get())));
 
         // Multiblock
         helper.drainController(NTBlocks.DRAIN.get());

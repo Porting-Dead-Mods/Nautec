@@ -57,16 +57,16 @@ public abstract class ContainerBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected @NotNull InteractionResult useWithoutItem(BlockState p_60503_, Level p_60504_, BlockPos p_60505_, Player p_60506_, BlockHitResult p_60508_) {
-        BlockEntity blockEntity = p_60504_.getBlockEntity(p_60505_);
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MenuProvider menuProvider) {
-            BlockPos pos = p_60505_;
+            BlockPos pos1 = pos;
             if (blockEntity instanceof FakeBlockEntity fakeBlockEntity && fakeBlockEntity.getActualBlockEntityPos() != null) {
-                pos = fakeBlockEntity.getActualBlockEntityPos();
+                pos1 = fakeBlockEntity.getActualBlockEntityPos();
             }
-            p_60506_.openMenu(menuProvider, pos);
+            player.openMenu(menuProvider, pos1);
             return InteractionResult.SUCCESS;
         }
-        return super.useWithoutItem(p_60503_, p_60504_, p_60505_, p_60506_, p_60508_);
+        return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 }

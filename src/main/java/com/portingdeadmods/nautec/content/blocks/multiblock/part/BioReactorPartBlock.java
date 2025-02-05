@@ -9,6 +9,9 @@ import com.portingdeadmods.nautec.content.blocks.multiblock.controller.BioReacto
 import com.portingdeadmods.nautec.content.multiblocks.BioReactorMultiblock;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.registries.NTItems;
+import com.portingdeadmods.nautec.registries.NTMenuTypes;
+import com.portingdeadmods.nautec.registries.NTMultiblocks;
+import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -72,5 +75,17 @@ public class BioReactorPartBlock extends LaserBlock {
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new BioReactorPartBlockEntity(pos, state);
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (level.getBlockEntity(pos) instanceof BioReactorPartBlockEntity be) {
+            BlockPos controllerPos = be.getControllerPos();
+            if (controllerPos != null) {
+                MultiblockHelper.unform(NTMultiblocks.BIO_REACTOR.get(), controllerPos, level);
+            }
+        }
+
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 }

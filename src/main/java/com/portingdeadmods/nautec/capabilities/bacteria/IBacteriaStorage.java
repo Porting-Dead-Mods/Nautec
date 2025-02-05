@@ -4,6 +4,7 @@ import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import com.portingdeadmods.nautec.api.bacteria.CollapsedBacteriaStats;
 import com.portingdeadmods.nautec.content.bacteria.SimpleCollapsedStats;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.function.UnaryOperator;
 
@@ -27,7 +28,7 @@ public interface IBacteriaStorage {
      * Instance will not be modified but copied instead
      * @return the remaining instance that was not inserted
      */
-    default BacteriaInstance insertBacteria(int slot, BacteriaInstance instance) {
+    default BacteriaInstance insertBacteria(int slot, BacteriaInstance instance, boolean simulate) {
         if (instance.isEmpty()) {
             return BacteriaInstance.EMPTY;
         }
@@ -37,8 +38,10 @@ public interface IBacteriaStorage {
         if (bacteriaInSlot.isEmpty()) {
             long amount = Math.min(NTConfig.bacteriaColonySizeCap, instance.getAmount());
 
-            setBacteria(slot, instance.copyWithAmount(amount));
-            onBacteriaChanged(slot);
+            if (!simulate) {
+                setBacteria(slot, instance.copyWithAmount(amount));
+                onBacteriaChanged(slot);
+            }
             return instance.copyWithAmount(instance.getAmount() - amount);
         }
 
@@ -47,11 +50,43 @@ public interface IBacteriaStorage {
 
             long amount = Math.min(NTConfig.bacteriaColonySizeCap, rawAmount);
 
-            setBacteria(slot, instance.copyWithAmount(amount));
-            onBacteriaChanged(slot);
+            if (!simulate) {
+                setBacteria(slot, instance.copyWithAmount(amount));
+                onBacteriaChanged(slot);
+            }
             return instance.copyWithAmount(rawAmount - amount);
         }
 
         return instance.copy();
     }
+
+    /**
+     * Instance will not be modified but copied instead
+     * @return the bacteria that was extracted
+     */
+    default BacteriaInstance extractBacteria(int slot, long amount, boolean simulate) {
+        BacteriaInstance instance = getBacteria(slot);
+
+        if (amount <= 0 || instance.isEmpty()) return BacteriaInstance.EMPTY;
+
+        long toExtract = Math.min(amount, NTConfig.bacteriaColonySizeCap);
+
+        if (instance.getAmount() <= toExtract) {
+            if (!simulate) {
+                setBacteria(slot, BacteriaInstance.EMPTY);
+                onBacteriaChanged(slot);
+                return instance;
+            } else {
+                return instance.copy();
+            }
+        } else {
+            if (!simulate) {
+                setBacteria(slot, instance.copyWithAmount(instance.getAmount() - toExtract));
+                onBacteriaChanged(slot);
+            }
+
+            return instance.copyWithAmount(toExtract);
+        }
+    }
+
 }

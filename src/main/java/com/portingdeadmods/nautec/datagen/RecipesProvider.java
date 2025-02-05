@@ -4,10 +4,7 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.datagen.recipeBuilder.*;
-import com.portingdeadmods.nautec.registries.NTAugments;
-import com.portingdeadmods.nautec.registries.NTBlocks;
-import com.portingdeadmods.nautec.registries.NTFluids;
-import com.portingdeadmods.nautec.registries.NTItems;
+import com.portingdeadmods.nautec.registries.*;
 import com.portingdeadmods.nautec.tags.NTTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -63,6 +60,8 @@ public class RecipesProvider extends RecipeProvider {
         drainRecipes(pRecipeOutput);
 
         augmentationStationRecipes(pRecipeOutput);
+
+        mutationRecipes(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.GLASS_VIAL.asItem(), 3)
                 .pattern("G G")
@@ -230,7 +229,7 @@ public class RecipesProvider extends RecipeProvider {
     }
 
     private static void machineRecipes(@NotNull RecipeOutput pRecipeOutput) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.MIXER.asItem())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, NTBlocks.MIXER.asItem())
                 .pattern("DGD")
                 .pattern("PWP")
                 .pattern("PAP")
@@ -242,7 +241,18 @@ public class RecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(NTItems.PRISMARINE_CRYSTAL_SHARD))
                 .save(pRecipeOutput, Nautec.rl("mixer"));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.CHARGER.asItem())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, NTBlocks.FISHING_STATION.asItem())
+                .pattern("DAD")
+                .pattern("RGR")
+                .pattern("DAD")
+                .define('D', NTBlocks.DARK_PRISMARINE_PILLAR)
+                .define('R', NTItems.CAST_IRON_ROD)
+                .define('G', NTItems.GEAR)
+                .define('A', NTItems.AQUARINE_STEEL_INGOT)
+                .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT))
+                .save(pRecipeOutput, Nautec.rl("fishing_station"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, NTBlocks.CHARGER.asItem())
                 .pattern("PAP")
                 .pattern("DCD")
                 .define('P', NTBlocks.POLISHED_PRISMARINE)
@@ -356,6 +366,14 @@ public class RecipesProvider extends RecipeProvider {
                 .define('L', Tags.Items.DYES_BLUE)
                 .unlockedBy("has_item", has(NTItems.CAST_IRON_ROD))
                 .save(pRecipeOutput, Nautec.rl("crowbar"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.GRAFTING_TOOL.get(), 1)
+                .pattern(" R")
+                .pattern("I ")
+                .define('R', NTItems.CAST_IRON_ROD.get())
+                .define('I', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_item", has(NTItems.CAST_IRON_ROD))
+                .save(pRecipeOutput, Nautec.rl("grafting_tool"));
     }
 
     private static void miscItemsRecipes(@NotNull RecipeOutput pRecipeOutput) {
@@ -370,6 +388,13 @@ public class RecipesProvider extends RecipeProvider {
                 .requires(Items.PRISMARINE_CRYSTALS)
                 .unlockedBy("has_item", has(Items.PRISMARINE_CRYSTALS))
                 .save(pRecipeOutput, Nautec.rl("aquarine_steel_compound"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.CAST_IRON_COMPOUND.get(), 2)
+                .requires(Items.RAW_IRON)
+                .requires(ItemTags.COALS)
+                .requires(ItemTags.COALS)
+                .unlockedBy("has_raw:urib", has(Items.RAW_IRON))
+                .save(pRecipeOutput, Nautec.rl("cast_iron_compound"));
     }
 
     private static void castIronRecipes(@NotNull RecipeOutput pRecipeOutput) {
@@ -606,6 +631,11 @@ public class RecipesProvider extends RecipeProvider {
                 .augmentItem(NTItems.ELDRITCH_HEART.get(), "Increased health regeneration when underwater")
                 .ingredients(IngredientWithCount.fromItemLike(NTItems.ELDRITCH_HEART.get()))
                 .save(pRecipeOutput, Nautec.rl("eldritch_heart"));
+    }
+
+    private static void mutationRecipes(RecipeOutput output) {
+        new MutationRecipeBuilder(NTBacterias.METHANOGENS, NTBacterias.CYANOBACTERIA, Ingredient.of(Items.RAW_IRON), 0.65f)
+                .save(output);
     }
 
     private static @NotNull IngredientWithCount iwcFromItemLike(Item item, int count) {

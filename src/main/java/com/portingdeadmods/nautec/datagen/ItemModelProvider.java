@@ -73,7 +73,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
         handHeldItem(NTItems.AQUARINE_WRENCH.get());
         handHeldItem(NTItems.CROWBAR.get());
-        // TODO: handHeldItem(NTItems.GRAFTING_TOOL.get());
+        handHeldItem(NTItems.GRAFTING_TOOL.get());
 
         for (NTFluid fluid : NTFluids.HELPER.getFluids()) {
             bucket(fluid.getStillFluid());

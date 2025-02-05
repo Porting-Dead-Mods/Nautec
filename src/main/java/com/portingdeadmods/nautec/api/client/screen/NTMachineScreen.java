@@ -1,24 +1,34 @@
 package com.portingdeadmods.nautec.api.client.screen;
 
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.menu.NTMachineMenu;
 import com.portingdeadmods.nautec.api.menu.slots.SlotBacteriaStorage;
 import com.portingdeadmods.nautec.api.menu.slots.SlotFluidHandler;
+import com.portingdeadmods.nautec.capabilities.NTCapabilities;
+import com.portingdeadmods.nautec.capabilities.bacteria.IBacteriaStorage;
+import com.portingdeadmods.nautec.network.BacteriaSlotClickedPayload;
+import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.BacteriaHelper;
+import com.portingdeadmods.nautec.utils.GuiUtils;
 import com.portingdeadmods.nautec.utils.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.NumberFormat;
@@ -78,6 +88,10 @@ public abstract class NTMachineScreen<T extends ContainerBlockEntity> extends Ab
                     ).withStyle(ChatFormatting.GRAY)
             ), pMouseX, pMouseY);
         }
+
+        for (SlotBacteriaStorage bSlot : this.menu.getBacteriaStorageSlots()) {
+            GuiUtils.renderBacteria(pGuiGraphics, bSlot.getBacteriaInstance(), this.leftPos + bSlot.getX(), this.topPos + bSlot.getY());
+        }
     }
 
     private void hoverFluidSlot(int pMouseX, int pMouseY) {
@@ -116,9 +130,15 @@ public abstract class NTMachineScreen<T extends ContainerBlockEntity> extends Ab
         return hoveredBacteriaStorageSlot;
     }
 
-    private boolean isHovering(GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, int width, int height) {
-        return (guiGraphics == null ||
-                guiGraphics.containsPointInScissor(mouseX, mouseY))
-                && mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        ItemStack carried = menu.getCarried();
+        SlotBacteriaStorage slot = getHoveredBacteriaStorageSlot();
+        if (carried.is(NTItems.PETRI_DISH) && slot != null) {
+            Nautec.LOGGER.debug("index: {}", slot.getSlot());
+            IBacteriaStorage itemStorage = carried.getCapability(NTCapabilities.BacteriaStorage.ITEM);
+            PacketDistributor.sendToServer(new BacteriaSlotClickedPayload(menu.blockEntity.getBlockPos(), slot.getSlot(), itemStorage.getBacteria(0)));
+        }
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 }

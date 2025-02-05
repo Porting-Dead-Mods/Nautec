@@ -38,6 +38,10 @@ public final class BacteriaInstance {
         this(bacteria, 1, BacteriaHelper.getBacteria(lookup, bacteria).stats());
     }
 
+    public BacteriaInstance(ResourceKey<Bacteria> bacteria, HolderLookup.Provider lookup, long amount) {
+        this(bacteria, amount, BacteriaHelper.getBacteria(lookup, bacteria).stats());
+    }
+
     public BacteriaInstance(ResourceKey<Bacteria> bacteria, BacteriaStats<?> stats) {
         this(bacteria, 1, stats);
     }
@@ -88,6 +92,10 @@ public final class BacteriaInstance {
             return new BacteriaInstance(this.bacteria, amount, this.stats.copy());
         }
         return BacteriaInstance.EMPTY;
+    }
+
+    public boolean is(ResourceKey<Bacteria> bacteria) {
+        return this.bacteria.equals(bacteria);
     }
 
     public boolean isEmpty() {

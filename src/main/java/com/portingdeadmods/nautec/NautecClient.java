@@ -201,6 +201,7 @@ public final class NautecClient {
         event.register(NTMenuTypes.CRATE.get(), CrateScreen::new);
         event.register(NTMenuTypes.AUGMENT_STATION_EXTENSION.get(), AugmentationStationExtensionScreen::new);
 
+        event.register(NTMenuTypes.FISHING_STATION.get(), FishingStationScreen::new);
         event.register(NTMenuTypes.INCUBATOR.get(), IncubatorScreen::new);
         event.register(NTMenuTypes.MUTATOR.get(), MutatorScreen::new);
         event.register(NTMenuTypes.BIO_REACTOR.get(), BioReactorScreen::new);

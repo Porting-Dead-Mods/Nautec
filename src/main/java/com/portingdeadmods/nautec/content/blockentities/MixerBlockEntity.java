@@ -29,12 +29,25 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
 public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
     public static final int OUTPUT_SLOT = 4;
+    public static final Map<@NotNull Direction, @NotNull Pair<IOActions, int[]>> ITEM_HANDLER_SIDED_INTERACTIONS = Map.of(
+            Direction.NORTH, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3}),
+            Direction.EAST, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3}),
+            Direction.SOUTH, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3}),
+            Direction.WEST, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3})
+    );
+    public static final Map<@NotNull Direction, @NotNull Pair<IOActions, int[]>> FLUID_HANDLER_SIDED_INTERACTIONS = Map.of(
+            Direction.NORTH, Pair.of(IOActions.INSERT, new int[]{0}),
+            Direction.EAST, Pair.of(IOActions.INSERT, new int[]{0}),
+            Direction.SOUTH, Pair.of(IOActions.INSERT, new int[]{0}),
+            Direction.WEST, Pair.of(IOActions.INSERT, new int[]{0})
+    );
     private boolean running;
 
     private float independentAngle;
@@ -67,19 +80,9 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
     @Override
     public <T> Map<Direction, Pair<IOActions, int[]>> getSidedInteractions(BlockCapability<T, @Nullable Direction> capability) {
         if (capability == Capabilities.ItemHandler.BLOCK) {
-            return Map.of(
-                    Direction.NORTH, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3}),
-                    Direction.EAST, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3}),
-                    Direction.SOUTH, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3}),
-                    Direction.WEST, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3})
-            );
+            return ITEM_HANDLER_SIDED_INTERACTIONS;
         } else if (capability == Capabilities.FluidHandler.BLOCK) {
-            return Map.of(
-                    Direction.NORTH, Pair.of(IOActions.INSERT, new int[]{0}),
-                    Direction.EAST, Pair.of(IOActions.INSERT, new int[]{0}),
-                    Direction.SOUTH, Pair.of(IOActions.INSERT, new int[]{0}),
-                    Direction.WEST, Pair.of(IOActions.INSERT, new int[]{0})
-            );
+            return FLUID_HANDLER_SIDED_INTERACTIONS;
         }
         return Map.of();
     }
