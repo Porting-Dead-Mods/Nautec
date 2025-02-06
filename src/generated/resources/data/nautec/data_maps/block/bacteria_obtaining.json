@@ -2,6 +2,7 @@
   "values": {
     "minecraft:stone": {
       "bacteria": "nautec:cyanobacteria",
+      "biome": "minecraft:is_ocean",
       "chance": 0.4
     }
   }

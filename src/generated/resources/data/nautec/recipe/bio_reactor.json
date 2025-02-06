@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "nautec:aquatic_chip"
+    },
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "L": {
+      "item": "nautec:laser_channeling_coil"
+    },
+    "P": {
+      "item": "nautec:polished_prismarine"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "PAP",
+    "PLP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:bio_reactor"
+  }
+}

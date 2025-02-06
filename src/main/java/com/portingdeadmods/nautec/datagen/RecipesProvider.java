@@ -6,9 +6,11 @@ import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.datagen.recipeBuilder.*;
 import com.portingdeadmods.nautec.registries.*;
 import com.portingdeadmods.nautec.tags.NTTags;
+import com.portingdeadmods.nautec.utils.ranges.IntRange;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -62,6 +64,8 @@ public class RecipesProvider extends RecipeProvider {
         augmentationStationRecipes(pRecipeOutput);
 
         mutationRecipes(pRecipeOutput);
+
+        incubationRecipes(pRecipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.GLASS_VIAL.asItem(), 3)
                 .pattern("G G")
@@ -261,6 +265,50 @@ public class RecipesProvider extends RecipeProvider {
                 .define('C', NTItems.LASER_CHANNELING_COIL)
                 .unlockedBy("has_item", has(NTItems.PRISMARINE_CRYSTAL_SHARD))
                 .save(pRecipeOutput, Nautec.rl("charger"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, NTBlocks.INCUBATOR.asItem())
+                .pattern("PGP")
+                .pattern("CAC")
+                .pattern("PLP")
+                .define('P', NTBlocks.POLISHED_PRISMARINE)
+                .define('G', Tags.Items.GLASS_BLOCKS)
+                .define('C', Items.PRISMARINE_CRYSTALS)
+                .define('A', NTItems.AQUATIC_CHIP)
+                .define('L', NTItems.LASER_CHANNELING_COIL)
+                .unlockedBy("has_item", has(NTItems.LASER_CHANNELING_COIL))
+                .save(pRecipeOutput, Nautec.rl("incubator"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, NTBlocks.MUTATOR.asItem())
+                .pattern("DCD")
+                .pattern("PBP")
+                .pattern("DCD")
+                .define('P', NTItems.PETRI_DISH)
+                .define('B', NTFluids.EAS.getBucket())
+                .define('C', NTBlocks.BACTERIAL_CONTAINMENT_SHIELD)
+                .define('D', NTBlocks.DARK_PRISMARINE_PILLAR)
+                .unlockedBy("has_item", has(NTBlocks.BACTERIAL_CONTAINMENT_SHIELD))
+                .save(pRecipeOutput, Nautec.rl("mutator"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, NTBlocks.BACTERIAL_ANALYZER.asItem())
+                .pattern("PLP")
+                .pattern("A A")
+                .pattern("A A")
+                .define('P', NTBlocks.POLISHED_PRISMARINE)
+                .define('A', NTItems.AQUARINE_STEEL_INGOT)
+                .define('L', NTItems.PRISMARINE_LENS)
+                .unlockedBy("has_item", has(NTItems.PRISMARINE_LENS))
+                .save(pRecipeOutput, Nautec.rl("bacterial_analyzer"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, NTBlocks.BIO_REACTOR.asItem())
+                .pattern("CCC")
+                .pattern("PAP")
+                .pattern("PLP")
+                .define('P', NTBlocks.POLISHED_PRISMARINE)
+                .define('A', NTItems.AQUATIC_CHIP)
+                .define('C', Items.PRISMARINE_CRYSTALS)
+                .define('L', NTItems.LASER_CHANNELING_COIL)
+                .unlockedBy("has_item", has(NTItems.AQUATIC_CHIP))
+                .save(pRecipeOutput, Nautec.rl("bio_reactor"));
     }
 
     private static void ancientItemsRecipes(@NotNull RecipeOutput pRecipeOutput) {
@@ -635,6 +683,11 @@ public class RecipesProvider extends RecipeProvider {
 
     private static void mutationRecipes(RecipeOutput output) {
         new MutationRecipeBuilder(NTBacterias.METHANOGENS, NTBacterias.CYANOBACTERIA, Ingredient.of(Items.RAW_IRON), 0.65f)
+                .save(output);
+    }
+
+    private static void incubationRecipes(RecipeOutput output) {
+        new IncubationRecipeBuilder(NTBacterias.METHANOGENS, Ingredient.of(Items.PODZOL), IntRange.of(5, 20), 0.05f)
                 .save(output);
     }
 

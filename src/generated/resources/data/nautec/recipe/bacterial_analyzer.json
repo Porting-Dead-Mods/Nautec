@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "nautec:aquarine_steel_ingot"
+    },
+    "L": {
+      "item": "nautec:prismarine_lens"
+    },
+    "P": {
+      "item": "nautec:polished_prismarine"
+    }
+  },
+  "pattern": [
+    "PLP",
+    "A A",
+    "A A"
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:bacterial_analyzer"
+  }
+}

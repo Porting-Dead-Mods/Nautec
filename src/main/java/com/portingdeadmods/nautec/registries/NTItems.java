@@ -37,6 +37,8 @@ public final class NTItems {
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> PRISMARINE_CRYSTAL_SHARD = registerItem("prismarine_crystal_shard",
             Item::new, new Item.Properties());
+    public static final DeferredItem<Item> PRISMARINE_LENS = registerItem("prismarine_lens",
+            Item::new, new Item.Properties());
     public static final DeferredItem<AirBottleItem> AIR_BOTTLE = registerItem("air_bottle",
             AirBottleItem::new, new Item.Properties().stacksTo(16));
     public static final DeferredItem<Item> AQUARINE_STEEL_COMPOUND = registerItem("aquarine_steel_compound",
@@ -57,6 +59,10 @@ public final class NTItems {
     public static final DeferredItem<Item> BROKEN_WHISK = registerItem("broken_whisk",
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> WHISK = registerItem("whisk",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> DAMAGED_AQUATIC_CHIP = registerItem("damaged_aquatic_chip",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> AQUATIC_CHIP = registerItem("aquatic_chip",
             Item::new, new Item.Properties());
     public static final DeferredItem<Item> BURNT_COIL = registerItem("burnt_coil",
             Item::new, new Item.Properties());

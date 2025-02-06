@@ -1,0 +1,12 @@
+{
+  "type": "nautec:bacteria_incubation",
+  "bacteria": "nautec:methanogens",
+  "consume_chance": 0.05,
+  "growth": {
+    "max": 20,
+    "min": 5
+  },
+  "nutrient": {
+    "item": "minecraft:podzol"
+  }
+}

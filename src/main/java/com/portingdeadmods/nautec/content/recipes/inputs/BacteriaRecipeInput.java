@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 import org.jetbrains.annotations.NotNull;
 
-public record BacteriaMutationRecipeInput(BacteriaInstance input, ItemStack catalyst) implements RecipeInput {
+public record BacteriaRecipeInput(BacteriaInstance input, ItemStack catalyst) implements RecipeInput {
     @Override
     public @NotNull ItemStack getItem(int index) {
         return catalyst;

@@ -52,10 +52,6 @@ public final class BacteriaInstance {
         this.analyzed = analyzed;
     }
 
-    public BacteriaInstance(ResourceKey<Bacteria> bacteria, long size, CollapsedBacteriaStats stats) {
-        this(bacteria, size, stats, false);
-    }
-
     public static BacteriaInstance roll(ResourceKey<Bacteria> bacteria, HolderLookup.Provider lookupProvider) {
         Bacteria bacteria1 = BacteriaHelper.getBacteria(lookupProvider, bacteria);
         return new BacteriaInstance(bacteria, bacteria1.rollSize(), bacteria1.stats().collapse(), false);
@@ -95,14 +91,22 @@ public final class BacteriaInstance {
     }
 
     public BacteriaInstance copy() {
-        return new BacteriaInstance(this.bacteria, size, this.stats.copy());
+        return new BacteriaInstance(this.bacteria, size, this.stats.copy(), this.analyzed);
     }
 
     public BacteriaInstance copyWithSize(long size) {
         if (size > 0) {
-            return new BacteriaInstance(this.bacteria, size, this.stats.copy());
+            return new BacteriaInstance(this.bacteria, size, this.stats.copy(), this.analyzed);
         }
         return BacteriaInstance.EMPTY;
+    }
+
+    public void shrink(int amount) {
+        setSize(getSize() - amount);
+    }
+
+    public void grow(int amount) {
+        setSize(getSize() + amount);
     }
 
     public boolean is(ResourceKey<Bacteria> bacteria) {

@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec.content.menus;
 
 import com.portingdeadmods.nautec.api.menu.NTAbstractContainerMenu;
 import com.portingdeadmods.nautec.api.menu.NTMachineMenu;
+import com.portingdeadmods.nautec.api.menu.slots.SlotBacteriaStorage;
 import com.portingdeadmods.nautec.content.blockentities.IncubatorBlockEntity;
 import com.portingdeadmods.nautec.registries.NTMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
@@ -19,6 +20,8 @@ public class IncubatorMenu extends NTMachineMenu<IncubatorBlockEntity> {
 
         // Nutrient
         addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 80, 49));
+
+        addBacteriaStorageSlot(new SlotBacteriaStorage(blockEntity.getBacteriaStorage(), 0, 79, 26));
     }
 
     @Override
