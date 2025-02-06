@@ -5,7 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
-import com.portingdeadmods.nautec.content.recipes.inputs.BacteriaMutationRecipeInput;
+import com.portingdeadmods.nautec.content.recipes.inputs.BacteriaRecipeInput;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -19,17 +19,17 @@ import net.minecraft.world.level.Level;
  * <b><i>THIS CLASS SHOULD ONLY BE USED CLIENT SIDE :3</i></b>
  */
 public record BacteriaMutationRecipe(ResourceKey<Bacteria> inputBacteria, ResourceKey<Bacteria> resultBacteria,
-                                     Ingredient catalyst, float chance) implements Recipe<BacteriaMutationRecipeInput> {
+                                     Ingredient catalyst, float chance) implements Recipe<BacteriaRecipeInput> {
     public static final String NAME = "bacteria_mutation";
     public static final RecipeType<BacteriaMutationRecipe> TYPE = RecipeType.simple(Nautec.rl("bacteria_mutation"));
 
     @Override
-    public boolean matches(BacteriaMutationRecipeInput input, Level level) {
+    public boolean matches(BacteriaRecipeInput input, Level level) {
         return input.input().is(inputBacteria) && catalyst.test(input.catalyst());
     }
 
     @Override
-    public ItemStack assemble(BacteriaMutationRecipeInput input, HolderLookup.Provider registries) {
+    public ItemStack assemble(BacteriaRecipeInput input, HolderLookup.Provider registries) {
         return ItemStack.EMPTY;
     }
 

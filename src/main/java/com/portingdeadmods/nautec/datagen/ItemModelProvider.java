@@ -34,6 +34,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(NTItems.ATLANTIC_GOLD_INGOT.get());
         basicItem(NTItems.ATLANTIC_GOLD_NUGGET.get());
         basicItem(NTItems.PRISMARINE_CRYSTAL_SHARD.get());
+        basicItem(NTItems.PRISMARINE_LENS.get());
         basicItem(NTItems.AQUARINE_STEEL_COMPOUND.get());
         basicItem(NTItems.CAST_IRON_COMPOUND.get());
         basicItem(NTItems.SALT.get());
@@ -58,6 +59,8 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(NTItems.WHISK.get());
         basicItem(NTItems.BURNT_COIL.get());
         basicItem(NTItems.LASER_CHANNELING_COIL.get());
+        basicItem(NTItems.AQUATIC_CHIP.get());
+        basicItem(NTItems.DAMAGED_AQUATIC_CHIP.get());
 
         basicItem(NTItems.GLASS_VIAL.get());
         basicItem(NTItems.ELECTROLYTE_ALGAE_SERUM_VIAL.get());

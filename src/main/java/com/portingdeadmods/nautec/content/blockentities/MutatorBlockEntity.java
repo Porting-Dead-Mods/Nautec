@@ -7,7 +7,7 @@ import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.content.menus.MutatorMenu;
 import com.portingdeadmods.nautec.content.recipes.BacteriaMutationRecipe;
-import com.portingdeadmods.nautec.content.recipes.inputs.BacteriaMutationRecipeInput;
+import com.portingdeadmods.nautec.content.recipes.inputs.BacteriaRecipeInput;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
@@ -52,7 +52,7 @@ public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider
         ItemStack catalyst = getItemHandler().getStackInSlot(0);
         BacteriaInstance inputBacteria = getBacteriaStorage().getBacteria(0);
         BacteriaInstance resultBacteria = getBacteriaStorage().getBacteria(1);
-        BacteriaMutationRecipe recipe1 = level.getRecipeManager().getRecipeFor(BacteriaMutationRecipe.TYPE, new BacteriaMutationRecipeInput(inputBacteria, catalyst), level).map(RecipeHolder::value).orElse(null);
+        BacteriaMutationRecipe recipe1 = level.getRecipeManager().getRecipeFor(BacteriaMutationRecipe.TYPE, new BacteriaRecipeInput(inputBacteria, catalyst), level).map(RecipeHolder::value).orElse(null);
         this.recipe = (recipe1 != null && (resultBacteria.isEmpty() || resultBacteria.is(recipe1.resultBacteria()))) ? recipe1 : null;
     }
 

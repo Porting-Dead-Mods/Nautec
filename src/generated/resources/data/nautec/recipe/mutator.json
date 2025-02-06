@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "nautec:eas_bucket"
+    },
+    "C": {
+      "item": "nautec:bacterial_containment_shield"
+    },
+    "D": {
+      "item": "nautec:dark_prismarine_pillar"
+    },
+    "P": {
+      "item": "nautec:petri_dish"
+    }
+  },
+  "pattern": [
+    "DCD",
+    "PBP",
+    "DCD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "nautec:mutator"
+  }
+}

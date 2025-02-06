@@ -17,6 +17,7 @@ public final class NTRecipes {
         SERIALIZERS.register(MixingRecipe.NAME, () -> MixingRecipe.Serializer.INSTANCE);
         SERIALIZERS.register(AugmentationRecipe.NAME, () -> AugmentationRecipe.Serializer.INSTANCE);
         SERIALIZERS.register(BacteriaMutationRecipe.NAME, () -> BacteriaMutationRecipe.Serializer.INSTANCE);
+        SERIALIZERS.register(BacteriaIncubationRecipe.NAME, () -> BacteriaIncubationRecipe.Serializer.INSTANCE);
     }
 
 }

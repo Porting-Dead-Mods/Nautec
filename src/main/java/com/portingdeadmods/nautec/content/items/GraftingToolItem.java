@@ -32,9 +32,9 @@ public class GraftingToolItem extends Item {
         BlockState blockState = level.getBlockState(pos);
         BacteriaObtainValue data = blockState.getBlockHolder().getData(NTDataMaps.BACTERIA_OBTAINING);
         Player player = context.getPlayer();
-        if (player != null) {
+        if (player != null && data != null && level.getBiome(pos).is(data.biome())) {
             ItemStack offhandItem = player.getOffhandItem();
-            if (data != null && offhandItem.is(NTItems.PETRI_DISH.get())) {
+            if (offhandItem.is(NTItems.PETRI_DISH.get())) {
                 IBacteriaStorage bacteriaStorage = offhandItem.getCapability(NTCapabilities.BacteriaStorage.ITEM);
                 if (level.getRandom().nextFloat() <= data.chance()) {
                     bacteriaStorage.setBacteria(0, BacteriaInstance.roll(data.bacteria(), level.registryAccess()));

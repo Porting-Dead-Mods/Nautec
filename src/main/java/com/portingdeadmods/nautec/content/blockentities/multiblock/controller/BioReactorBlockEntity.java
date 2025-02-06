@@ -28,12 +28,13 @@ import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
 public class BioReactorBlockEntity extends LaserBlockEntity implements MenuProvider, MultiblockEntity {
     private MultiblockData multiblockData;
-    private int[] progress;
+    private final int[] progress;
 
     public BioReactorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.BIO_REACTOR.get(), blockPos, blockState);
@@ -64,8 +65,12 @@ public class BioReactorBlockEntity extends LaserBlockEntity implements MenuProvi
                     } else {
                         this.progress[i]++;
                     }
+                } else {
+                    this.progress[i] = 0;
                 }
             }
+        } else {
+            Arrays.fill(this.progress, 0);
         }
     }
 

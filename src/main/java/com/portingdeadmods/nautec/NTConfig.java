@@ -91,7 +91,7 @@ public final class NTConfig {
 
     private static final ModConfigSpec.LongValue BACTERIA_COLONY_SIZE_CAP = BUILDER
             .comment("The maximum size a bacteria colony can grow to")
-            .defineInRange("bacteriaColonySizeCap", 100, 0, Long.MAX_VALUE);
+            .defineInRange("bacteriaColonySizeCap", 40_000, 0, Long.MAX_VALUE);
 
     private static final ModConfigSpec.IntValue BACTERIA_LIFESPAN_CAP = BUILDER
             .comment("The maximum lifespan of a bacteria colony")
