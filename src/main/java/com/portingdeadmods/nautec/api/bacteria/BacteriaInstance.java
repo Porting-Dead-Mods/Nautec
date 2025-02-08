@@ -168,11 +168,13 @@ public final class BacteriaInstance {
                 }
                 tooltipComponents.add(statsCaption);
                 if (hasShiftDown && hasControlDown) {
+                    tooltipComponents.add(BacteriaHelper.resourceTooltip(bacteria));
                     for (Component tooltipComponent : getStats().statsTooltipWithMutatorValues()) {
                         tooltipComponents.add(Component.literal(" ".repeat(2)).append(tooltipComponent));
                     }
                 }
                 if (hasShiftDown && !hasControlDown) {
+                    tooltipComponents.add(BacteriaHelper.resourceTooltip(bacteria));
                     for (Component tooltipComponent : getStats().statsTooltip()) {
                         tooltipComponents.add(Component.literal(" ".repeat(2)).append(tooltipComponent));
                     }

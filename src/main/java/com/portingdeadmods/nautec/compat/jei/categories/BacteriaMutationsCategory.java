@@ -84,6 +84,8 @@ public class BacteriaMutationsCategory extends BacteriaCategory<BacteriaMutation
         addBacteriaSlot(recipe, gap - 1, gap + 7, recipe.inputBacteria());
         addBacteriaSlot(recipe, drawableWidth - gap - slotSize, gap + 7, recipe.resultBacteria());
 
+        builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(recipe.getInputDish());
+
         builder.addSlot(RecipeIngredientRole.INPUT, drawableWidth / 2 - slotSize / 2 + 1, gap + 8 + YGapBetweenInCata)
                 .addIngredients(recipe.catalyst());
     }
