@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_rion": {
+    "has_item": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:raw_iron"
+            "items": "nautec:aquarine_steel_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "nautec:cast_iron_compound"
+        "recipe": "nautec:bacteria_containment_shield_from_prismarine_crystals"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_raw_rion"
+      "has_item"
     ]
   ],
   "rewards": {
     "recipes": [
-      "nautec:cast_iron_compound"
+      "nautec:bacteria_containment_shield_from_prismarine_crystals"
     ]
   }
 }

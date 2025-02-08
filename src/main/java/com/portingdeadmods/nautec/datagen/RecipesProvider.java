@@ -5,7 +5,6 @@ import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.datagen.recipeBuilder.*;
 import com.portingdeadmods.nautec.registries.*;
-import com.portingdeadmods.nautec.tags.NTTags;
 import com.portingdeadmods.nautec.utils.ranges.IntRange;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -16,7 +15,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -47,7 +45,7 @@ public class RecipesProvider extends RecipeProvider {
 
         aquarineSteelArmorRecipes(pRecipeOutput);
 
-        decoBlockRecipes(pRecipeOutput);
+        buildingBlockRecipes(pRecipeOutput);
 
         utilityRecipes(pRecipeOutput);
 
@@ -441,8 +439,24 @@ public class RecipesProvider extends RecipeProvider {
                 .requires(Items.RAW_IRON)
                 .requires(ItemTags.COALS)
                 .requires(ItemTags.COALS)
-                .unlockedBy("has_raw:urib", has(Items.RAW_IRON))
+                .unlockedBy("has_raw_rion", has(Items.RAW_IRON))
                 .save(pRecipeOutput, Nautec.rl("cast_iron_compound"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.PRISMARINE_LENS.get())
+                .pattern(" A ")
+                .pattern("AGA")
+                .pattern(" A ")
+                .define('A', NTItems.AQUARINE_STEEL_INGOT)
+                .define('G', Tags.Items.GLASS_PANES_COLORLESS)
+                .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT))
+                .save(pRecipeOutput, Nautec.rl("prismarine_lens"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTItems.PETRI_DISH.get())
+                .pattern("G G")
+                .pattern("GGG")
+                .define('G', Tags.Items.GLASS_PANES_COLORLESS)
+                .unlockedBy("has_item", has(Tags.Items.GLASS_PANES_COLORLESS))
+                .save(pRecipeOutput, Nautec.rl("petri_dish"));
     }
 
     private static void castIronRecipes(@NotNull RecipeOutput pRecipeOutput) {
@@ -460,7 +474,27 @@ public class RecipesProvider extends RecipeProvider {
                 .save(pRecipeOutput, Nautec.rl("cast_iron_rod"));
     }
 
-    private static void decoBlockRecipes(@NotNull RecipeOutput pRecipeOutput) {
+    private static void buildingBlockRecipes(@NotNull RecipeOutput pRecipeOutput) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, NTBlocks.BACTERIAL_CONTAINMENT_SHIELD.asItem(), 2)
+                .pattern("APA")
+                .pattern("PCP")
+                .pattern("APA")
+                .define('P', NTBlocks.POLISHED_PRISMARINE.asItem())
+                .define('A', NTItems.AQUARINE_STEEL_INGOT.asItem())
+                .define('C', Items.PRISMARINE_CRYSTALS.asItem())
+                .unlockedBy("has_item", has(NTItems.AQUARINE_STEEL_INGOT.asItem()))
+                .save(pRecipeOutput, Nautec.rl("bacteria_containment_shield_from_prismarine_crystals"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, NTBlocks.BACTERIAL_CONTAINMENT_SHIELD.asItem(), 4)
+                .pattern("APA")
+                .pattern("PCP")
+                .pattern("APA")
+                .define('P', NTBlocks.POLISHED_PRISMARINE.asItem())
+                .define('A', NTItems.AQUARINE_STEEL_INGOT.asItem())
+                .define('C', NTItems.PRISMARINE_CRYSTAL_SHARD.asItem())
+                .unlockedBy("has_item", has(NTItems.PRISMARINE_CRYSTAL_SHARD.asItem()))
+                .save(pRecipeOutput, Nautec.rl("bacteria_containment_shield_from_prismarine_crystal_shard"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, NTBlocks.CHISELED_DARK_PRISMARINE.asItem(), 4)
                 .pattern("DD")
                 .pattern("DD")
