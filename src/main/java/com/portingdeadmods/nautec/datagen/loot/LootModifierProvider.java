@@ -62,6 +62,11 @@ public class LootModifierProvider extends GlobalLootModifierProvider {
                         LootTableIdCondition.builder(ResourceLocation.parse("entities/dolphin")).build(),
                         LootItemRandomChanceCondition.randomChance(0.20f).build()},
                         NTLootTables.DOLPHIN));
-
+        add("buried_treasure",
+                new AddTableLootModifier(new LootItemCondition[]{
+                        LootTableIdCondition.builder(ResourceLocation.parse("chests/buried_treasure")).build(),
+                        LootItemRandomChanceCondition.randomChance(0.45f).build()},
+                        NTLootTables.BURIED_TREASURE));
     }
+
 }

@@ -1,4 +1,5 @@
-// 1.21.1	2024-11-05T21:59:37.300964234	Global Loot Modifiers : nautec
+// 1.21.1	2025-02-08T13:34:26.509086044	Global Loot Modifiers : nautec
+63f63ce5de4d4931f653b80837582bc55181b27f data/nautec/loot_modifiers/buried_treasure.json
 410596f86cb6483fedbadaf04fd849a7f5e005d5 data/nautec/loot_modifiers/dolphin_modifier.json
 f1c95413e15f26e6dee27ac81fc8a36d01c98e82 data/nautec/loot_modifiers/drowned_modifier.json
 8a9f4ead3b5dc76b8214aa334b6fe78b3ca5b2e4 data/nautec/loot_modifiers/elder_guardian_modifier.json
@@ -6,4 +7,4 @@ bd88a76887ff8aa8132b942818506dc74b2aa22c data/nautec/loot_modifiers/guardian_mod
 9ff3f403aef84216a0796bf7d1d9dc0709105ff0 data/nautec/loot_modifiers/ocean_ruins_modifier.json
 c9d45597f0bf1d6d2e27272ac7fe3ef27b2376ad data/nautec/loot_modifiers/shipwreck_modifier.json
 49d31a0defcb6a20562172e6cd7ae34268cd6bd9 data/nautec/loot_modifiers/suspicious_ruins_sand_modifier.json
-55f235bfe36ef45075bb84ced7f2ebeb63ecc5b8 data/neoforge/loot_modifiers/global_loot_modifiers.json
+22d271070c49213c48357ace887f2aacdc1f52ec data/neoforge/loot_modifiers/global_loot_modifiers.json
