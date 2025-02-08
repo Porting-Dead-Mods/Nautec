@@ -56,7 +56,7 @@ public class BioReactorCategory extends BacteriaCategory<BioReactorCategory.BioR
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, BioReactorRecipe recipe, IFocusGroup focuses) {
         if (recipe.resource() instanceof Bacteria.Resource.ItemResource(Item item)) {
-            builder.addInputSlot(getWidth() - 18, 3).addItemLike(item);
+            builder.addOutputSlot(getWidth() - 18, 3).addItemLike(item);
         }
 
         addBacteriaSlot(recipe, 0, 3, recipe.bacteria);
