@@ -4,13 +4,16 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.content.recipes.BacteriaIncubationRecipe;
 import com.portingdeadmods.nautec.registries.NTBlocks;
+import com.portingdeadmods.nautec.utils.BacteriaHelper;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -59,6 +62,8 @@ public class BioReactorCategory extends BacteriaCategory<BioReactorCategory.BioR
             builder.addOutputSlot(getWidth() - 18, 3).addItemLike(item);
         }
 
+        builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(recipe.getInputDish());
+
         addBacteriaSlot(recipe, 0, 3, recipe.bacteria);
     }
 
@@ -71,5 +76,12 @@ public class BioReactorCategory extends BacteriaCategory<BioReactorCategory.BioR
 
     public record BioReactorRecipe(ResourceKey<Bacteria> bacteria, Bacteria.Resource resource) {
         public static final String NAME = "bio_reactor";
+
+        /**
+         * <b><i>THIS METHOD SHOULD ONLY BE USED CLIENT SIDE :3</i></b>
+         */
+        public ItemStack getInputDish() {
+            return BacteriaHelper.getMaxStatDish(bacteria, Minecraft.getInstance().level.registryAccess());
+        }
     }
 }

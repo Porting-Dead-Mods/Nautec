@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceKey;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 import static com.portingdeadmods.nautec.registries.NTBacterias.*;
@@ -86,6 +87,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem(CAST_IRON_COMPOUND, "Cast Iron Compound");
         addItem(GRAFTING_TOOL, "Grafting Tool");
         addItem(PRISMARINE_LENS, "Prismarine Lens");
+        addItem(AQUATIC_CHIP, "Aquatic Chip");
         add("nautec_guide.desc.0","Nautec's Guide");
 
         // Adding missing block translations
@@ -115,6 +117,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addBlock(NTBlocks.BACTERIAL_ANALYZER, "Bacterial Analyzer");
         addBlock(NTBlocks.FISHING_STATION, "Fishing Station");
         addBlock(NTBlocks.BACTERIAL_CONTAINMENT_SHIELD, "Bacteria Containment Shield");
+        addBlock(NTBlocks.CAST_IRON_BLOCK, "Cast Iron Block");
 
         // Multiblock information
         add("multiblock.info.failed_to_construct", "Missing or invalid block");
@@ -158,12 +161,9 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         add("nautec.tool.disabled", "Shift + Right Click to Enable");
 
         // Bacteria
-        addBacteria(METHANOGENS, "Methanogens");
-        addBacteria(THERMOPHILES, "Thermophiles");
-        addBacteria(HALOBACTERIA, "Halobacteria");
-        addBacteria(CYANOBACTERIA, "Cyanobacteria / Blue-Green algae");
-        addBacteria(EMPTY, "Empty");
-
+        for (ResourceKey<?> key : BACTERIAS) {
+            addDirectBacteria(key);
+        }
     }
 
     private void addFluidType(Supplier<? extends FluidType> fluidType, String val) {
@@ -179,6 +179,13 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
     }
 
     private void addBacteria(ResourceKey<?> key, String val) {
+        add(key.registry().getPath() + "." + key.location().getNamespace() + "." + key.location().getPath(), val);
+    }
+
+    private void addDirectBacteria(ResourceKey<?> key) {
+        String[] name = key.location().getPath().split("_");
+        String val = Arrays.stream(name).map(s -> s.substring(0, 1).toUpperCase() + s.substring(1)).reduce((s1, s2) -> s1 + " " + s2).orElse("");
+
         add(key.registry().getPath() + "." + key.location().getNamespace() + "." + key.location().getPath(), val);
     }
 

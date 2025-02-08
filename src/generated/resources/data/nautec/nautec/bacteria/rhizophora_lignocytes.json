@@ -1,13 +1,13 @@
 {
   "type": "nautec:simple",
-  "bacteria": "minecraft:acacia_log",
+  "bacteria": "minecraft:mangrove_log",
   "initial_size": {
     "max": 500,
     "min": 300
   },
   "stats": {
     "type": "nautec:simple",
-    "color": -5546959,
+    "color": -9557716,
     "growth_rate": {
       "max": 1.1,
       "min": 0.5
