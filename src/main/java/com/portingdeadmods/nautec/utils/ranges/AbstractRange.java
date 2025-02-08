@@ -38,7 +38,7 @@ public abstract class AbstractRange<T extends Number> {
 
     @Override
     public String toString() {
-        return min + "..." + max;
+        return min + " - " + max;
     }
 
     // Constructs a pair out of the range and uses that for encoding

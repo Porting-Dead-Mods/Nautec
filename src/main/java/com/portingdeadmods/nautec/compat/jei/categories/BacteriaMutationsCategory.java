@@ -43,14 +43,15 @@ public class BacteriaMutationsCategory extends BacteriaCategory<BacteriaMutation
 
     private final int gap = 5;
     private final int slotSize = 18;
-    private final int arrowWidth = 79;
-    private final int arrowHeight = 24;
-    private final int gapBetweenInOut = 107;
+    private final int arrowWidth = 62;
+    private final int arrowHeight = 14;
     private final int YGapBetweenInCata = 29;
     private final int gapBetweenSlotArrow = 3;
 
     private final int drawableWidth = gap * 2 + slotSize * 2 + arrowWidth + gapBetweenSlotArrow * 2; // 2 Slots + Arrow
     private final int drawableHeight = gap * 2 + slotSize + YGapBetweenInCata + 8; // 8 Reserved for the Chance text
+
+    private final int gapBetweenInOut = drawableHeight - 2 * gap - slotSize * 2 + 2 * gapBetweenSlotArrow;
 
     public BacteriaMutationsCategory(IGuiHelper helper) {
         this.background = helper.createBlankDrawable(drawableWidth, drawableHeight);
@@ -81,7 +82,7 @@ public class BacteriaMutationsCategory extends BacteriaCategory<BacteriaMutation
     public void setRecipe(IRecipeLayoutBuilder builder, BacteriaMutationRecipe recipe, IFocusGroup focuses) {
 
         addBacteriaSlot(recipe, gap - 1, gap + 7, recipe.inputBacteria());
-        addBacteriaSlot(recipe, gap + gapBetweenInOut - 2, gap + 7, recipe.resultBacteria());
+        addBacteriaSlot(recipe, drawableWidth - gap - slotSize, gap + 7, recipe.resultBacteria());
 
         builder.addSlot(RecipeIngredientRole.INPUT, drawableWidth / 2 - slotSize / 2 + 1, gap + 8 + YGapBetweenInCata)
                 .addIngredients(recipe.catalyst());
@@ -89,9 +90,7 @@ public class BacteriaMutationsCategory extends BacteriaCategory<BacteriaMutation
 
     @Override
     public void draw(@NotNull BacteriaMutationRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        guiGraphics.blitSprite(SINGLE_SLOT_SPRITE, gap - 1, gap + 8 - 1, 18, 18);
-        guiGraphics.blitSprite(SINGLE_SLOT_SPRITE, gap + gapBetweenInOut - 1 - 1, gap + 8 - 1, 18, 18);
-        guiGraphics.blitSprite(RIGHT_ARROW_SPRITE, gap + slotSize + gapBetweenSlotArrow, gap + 8 - 1 - 4, arrowWidth, arrowHeight);
+        guiGraphics.blitSprite(RIGHT_ARROW_SPRITE, gap + slotSize + gapBetweenSlotArrow, gap + 8 - 1, arrowWidth, arrowHeight);
 
         guiGraphics.blitSprite(SINGLE_SLOT_SPRITE, drawableWidth / 2 - slotSize / 2 - 1 + 1, gap + 8 + YGapBetweenInCata - 1, 18, 18);
 
@@ -99,7 +98,7 @@ public class BacteriaMutationsCategory extends BacteriaCategory<BacteriaMutation
         String purityString = recipe.chance() + "%";
 
         int width = font.width(purityString);
-        guiGraphics.drawString(font, purityString, gap + gapBetweenInOut - (width - 18) / 2 - 1, gap + 8 - 3 - font.lineHeight, 0xFF808080, false);
+        guiGraphics.drawString(font, purityString, drawableWidth - gap - slotSize - (width - 18) / 2, gap + 8 - 3 - font.lineHeight, 0xFF808080, false);
 
         super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
     }

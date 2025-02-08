@@ -1,0 +1,28 @@
+{
+  "type": "nautec:simple",
+  "bacteria": "minecraft:oak_log",
+  "initial_size": {
+    "max": 490,
+    "min": 280
+  },
+  "stats": {
+    "type": "nautec:simple",
+    "color": -7650029,
+    "growth_rate": {
+      "max": 1.0,
+      "min": 0.5
+    },
+    "lifespan": {
+      "max": 2500,
+      "min": 1300
+    },
+    "mutation_resistance": {
+      "max": 0.08,
+      "min": 0.0
+    },
+    "production_rate": {
+      "max": 0.45,
+      "min": 0.1
+    }
+  }
+}
