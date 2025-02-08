@@ -39,7 +39,7 @@ public class BacteriaGraftingCategory implements IRecipeCategory<BacteriaGraftin
     private final IDrawable icon;
 
     public BacteriaGraftingCategory(IGuiHelper helper) {
-        this.background = helper.createBlankDrawable(96, 42);
+        this.background = helper.createBlankDrawable(132, 42);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(NTItems.GRAFTING_TOOL.get()));
     }
 
@@ -65,7 +65,7 @@ public class BacteriaGraftingCategory implements IRecipeCategory<BacteriaGraftin
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, GraftingRecipe recipe, IFocusGroup focuses) {
-        int y = 16;
+        int y = 6;
 
         builder.addInputSlot(0, getHeight() / 2 - 9 + y).addItemLike(NTItems.PETRI_DISH);
 
@@ -82,7 +82,7 @@ public class BacteriaGraftingCategory implements IRecipeCategory<BacteriaGraftin
     public void draw(GraftingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         Font font = Minecraft.getInstance().font;
 
-        guiGraphics.drawString(font, Component.literal("Only In: ").append(Utils.registryTranslation(recipe.val.biome())),0, 0, ChatFormatting.DARK_GRAY.getColor(), false);
+        guiGraphics.drawString(font, Component.literal("Only In: ").append(recipe.val.biome().location().toString()),0, 0, ChatFormatting.DARK_GRAY.getColor(), false);
     }
 
     public record GraftingRecipe(Block block, BacteriaObtainValue val) {
