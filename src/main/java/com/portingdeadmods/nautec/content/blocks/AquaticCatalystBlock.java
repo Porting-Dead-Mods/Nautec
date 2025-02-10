@@ -8,6 +8,7 @@ import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
 import com.portingdeadmods.nautec.content.blockentities.AquaticCatalystBlockEntity;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.utils.BlockUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -33,15 +34,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
-    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
-    public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 6);
+    public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 8);
 
     public AquaticCatalystBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState()
                 .setValue(BlockStateProperties.FACING, Direction.NORTH)
                 .setValue(STAGE, 0)
-                .setValue(ACTIVE, false)
         );
     }
 
@@ -57,7 +56,7 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder.add(BlockStateProperties.FACING, STAGE, ACTIVE));
+        super.createBlockStateDefinition(builder.add(BlockStateProperties.FACING, STAGE));
     }
 
     @Override
@@ -75,12 +74,6 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
             if (valid) {
                 ItemStack remainder = itemHandler.insertItem(0, stack, false);
                 player.setItemInHand(hand, remainder);
-
-                if (!state.getValue(ACTIVE)) {
-                    level.setBlockAndUpdate(pos, level.getBlockState(pos)
-                            .setValue(ACTIVE, true)
-                            .setValue(BlockStateProperties.FACING, hitResult.getDirection()));
-                }
 
                 return ItemInteractionResult.SUCCESS;
             }
@@ -132,7 +125,7 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
         //Direction direction = blockState.getValue(BlockStateProperties.FACING);
         AquaticCatalystBlockEntity be = (AquaticCatalystBlockEntity) level.getBlockEntity(blockPos);
         return List.of(
-                Component.literal("Duration: " + be.getDuration())
+                Component.literal("Duration: " + be.getDuration()).withStyle(ChatFormatting.WHITE)
         );
     }
 
