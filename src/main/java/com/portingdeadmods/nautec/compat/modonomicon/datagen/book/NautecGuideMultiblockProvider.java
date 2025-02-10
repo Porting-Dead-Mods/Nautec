@@ -32,5 +32,20 @@ public class NautecGuideMultiblockProvider extends MultiblockProvider {
                 .block('P', NTBlocks.POLISHED_PRISMARINE)
                 .block('E', NTBlocks.AUGMENTATION_STATION_EXTENSION)
                 .block('0', NTBlocks.AUGMENTATION_STATION).build(false));
+        this.add(modLoc("bio_reactor"), new MultiblockProvider.DenseMultiblockBuilder()
+                .layer(
+                        "DCD",
+                        "C0C",
+                        "DCD"
+                )
+                .layer(
+                        "DCD",
+                        "CPC",
+                        "DCD"
+                )
+                .block('P', NTBlocks.POLISHED_PRISMARINE)
+                .block('C', NTBlocks.BACTERIAL_CONTAINMENT_SHIELD)
+                .block('0', NTBlocks.BIO_REACTOR)
+                .block('D', NTBlocks.DARK_PRISMARINE_PILLAR).build(false));
     }
 }

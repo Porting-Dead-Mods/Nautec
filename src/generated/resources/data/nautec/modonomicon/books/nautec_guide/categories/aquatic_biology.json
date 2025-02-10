@@ -8,11 +8,11 @@
   "display_mode": "node",
   "entry_textures": "modonomicon:textures/gui/entry_textures.png",
   "icon": {
-    "item": "nautec:claw_robot_arm"
+    "item": "nautec:petri_dish"
   },
   "max_scroll_x": 512,
   "max_scroll_y": 512,
-  "name": "book.nautec.nautec_guide.laser_augmentation.name",
+  "name": "book.nautec.nautec_guide.aquatic_biology.name",
   "show_category_button": true,
-  "sort_number": 3
+  "sort_number": 2
 }
