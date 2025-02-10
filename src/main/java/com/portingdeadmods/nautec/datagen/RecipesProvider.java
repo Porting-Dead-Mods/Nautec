@@ -15,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -314,6 +315,12 @@ public class RecipesProvider extends RecipeProvider {
                 .ingredient(NTItems.ANCIENT_VALVE.toStack())
                 .duration(200)
                 .save(pRecipeOutput, Nautec.rl("valve"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, NTItems.AQUATIC_CHIP.toStack())
+                .requires(NTItems.DAMAGED_AQUATIC_CHIP)
+                .requires(Items.PRISMARINE_SHARD, 3)
+                .unlockedBy("has_item", has(NTItems.DAMAGED_AQUATIC_CHIP.get()))
+                .save(pRecipeOutput, Nautec.rl("aquatic_chip"));
 
         ItemEtchingRecipeBuilder.newRecipe(NTItems.GEAR.toStack())
                 .ingredient(NTItems.RUSTY_GEAR.toStack())

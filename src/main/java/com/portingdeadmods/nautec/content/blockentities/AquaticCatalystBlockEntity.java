@@ -31,10 +31,9 @@ import static com.portingdeadmods.nautec.content.blocks.AquaticCatalystBlock.STA
 
 // TODO: actually consume item before starting to generate power
 public class AquaticCatalystBlockEntity extends LaserBlockEntity {
-    // cache that uses the current item
-    private RecipeHolder<AquaticCatalystChannelingRecipe> nextRecipeCache;
     // actually need to serialize this to know the amount of AP we need to produce
     private RecipeHolder<AquaticCatalystChannelingRecipe> currentRecipe;
+    private RecipeHolder<AquaticCatalystChannelingRecipe> nextRecipe;
     private int amount;
     private int duration;
     private boolean active;
@@ -43,6 +42,7 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     public AquaticCatalystBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.AQUATIC_CATALYST.get(), blockPos, blockState);
         addItemHandler(1, (slot, stack) -> hasRecipe(stack));
+        this.active = blockState.getValue(ACTIVE);
     }
 
     private boolean hasRecipe(ItemStack stack) {
@@ -59,7 +59,7 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     }
 
     public int getRemainingDuration() {
-        return nextRecipeCache != null ? nextRecipeCache.value().duration() - duration : 0;
+        return currentRecipe != null ? currentRecipe.value().duration() - duration : 0;
     }
 
     public ItemStack getProcessingItem() {
@@ -67,7 +67,7 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     }
 
     public Optional<AquaticCatalystChannelingRecipe> getCurrentRecipe() {
-        return Optional.ofNullable(this.nextRecipeCache).map(RecipeHolder::value);
+        return Optional.ofNullable(this.currentRecipe).map(RecipeHolder::value);
     }
 
     @Override
@@ -87,14 +87,14 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     private void updateRecipe(int slot) {
         ItemStackHandler itemStackHandler = getItemStackHandler();
         ItemStack stackInSlot1 = itemStackHandler.getStackInSlot(slot);
-        RecipeHolder<AquaticCatalystChannelingRecipe> recipe1 = getRecipeForCache(stackInSlot1);
-        if (recipe1 != null) {
+        RecipeHolder<AquaticCatalystChannelingRecipe> recipeForCache = getRecipeForCache(stackInSlot1);
+        if (recipeForCache != null) {
             this.updateRecipe = false;
-            itemStackHandler.extractItem(slot, 1, false);
+            getItemHandler().extractItem(0, 1, false);
             this.updateRecipe = true;
         }
-        this.nextRecipeCache = recipe1;
-        setActive(this.nextRecipeCache != null);
+        this.nextRecipe = recipeForCache;
+        setActive(this.currentRecipe != null);
     }
 
     public void setActive(boolean active) {
@@ -124,21 +124,32 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     public void commonTick() {
         super.commonTick();
 
-        if (isActive() && nextRecipeCache != null) {
-            Direction direction = getBlockState().getValue(BlockStateProperties.FACING);
-            if (getLaserDistances().getInt(direction.getOpposite()) > 0) {
-                if (duration >= nextRecipeCache.value().duration()) {
-                    duration = 0;
-                    updateRecipe(0);
-                    setActive(this.nextRecipeCache != null);
-                } else {
-                    amount = nextRecipeCache.value().powerAmount() / nextRecipeCache.value().duration();
-                    transmitPower(amount);
-                    setPurity(nextRecipeCache.value().purity());
-                    duration++;
+        if (isActive()) {
+            if (currentRecipe != null) {
+                Direction direction = getBlockState().getValue(BlockStateProperties.FACING);
+                if (getLaserDistances().getInt(direction.getOpposite()) > 0) {
+                    if (duration >= currentRecipe.value().duration()) {
+                        duration = 0;
+                    } else {
+                        amount = currentRecipe.value().powerAmount() / currentRecipe.value().duration();
+                        transmitPower(amount);
+                        setPurity(currentRecipe.value().purity());
+                        duration++;
+                    }
                 }
+            } else {
+                this.currentRecipe = nextRecipe;
+                updateRecipe(0);
+                setActive(this.currentRecipe != null);
             }
         }
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+
+        setActive(getBlockState().getValue(ACTIVE));
     }
 
     private @Nullable RecipeHolder<AquaticCatalystChannelingRecipe> getRecipeForCache(ItemStack stack) {
@@ -163,17 +174,18 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
         super.loadData(tag, provider);
         this.duration = tag.getInt("duration");
-        this.active = tag.getBoolean("active");
 
-        Optional<RecipeHolder<?>> recipe1 = level.getRecipeManager().byKey(ResourceLocation.parse(tag.getString("recipe")));
-        recipe1.ifPresent(recipeHolder -> this.nextRecipeCache = (RecipeHolder<AquaticCatalystChannelingRecipe>) recipeHolder);
+        Optional<RecipeHolder<?>> recipe1 = level.getRecipeManager().byKey(ResourceLocation.parse(tag.getString("current_recipe")));
+        recipe1.ifPresent(recipeHolder -> this.currentRecipe = (RecipeHolder<AquaticCatalystChannelingRecipe>) recipeHolder);
+        Optional<RecipeHolder<?>> recipe2 = level.getRecipeManager().byKey(ResourceLocation.parse(tag.getString("next_recipe")));
+        recipe2.ifPresent(recipeHolder -> this.nextRecipe = (RecipeHolder<AquaticCatalystChannelingRecipe>) recipeHolder);
     }
 
     @Override
     protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
         super.saveData(tag, provider);
         tag.putInt("duration", this.duration);
-        tag.putBoolean("active", this.active);
-        tag.putString("recipe", this.nextRecipeCache != null ? this.nextRecipeCache.toString() : "");
+        tag.putString("current_recipe", this.currentRecipe != null ? this.currentRecipe.toString() : "");
+        tag.putString("next_recipe", this.nextRecipe != null ? this.nextRecipe.toString() : "");
     }
 }

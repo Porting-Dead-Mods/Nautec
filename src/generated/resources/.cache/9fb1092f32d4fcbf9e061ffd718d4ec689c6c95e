@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-08T13:34:26.503658573	Recipes
+// 1.21.1	2025-02-08T15:02:44.452931175	Recipes
 11933701842708efdf83b2addbac6d99021a027f data/minecraft/advancement/recipes/building_blocks/aquarine_steel_block.json
 3ba1f15fc847a9824f87190fcd71894e2e0bd42c data/minecraft/advancement/recipes/misc/aquarine_steel_ingot.json
 e2133e76635915c0fe35f2fcb585f73a55be9574 data/minecraft/recipe/aquarine_steel_block.json
@@ -30,6 +30,7 @@ d6cf868112be7595f9e4a490bdbe0413ee21790b data/nautec/advancement/recipes/misc/aq
 d3a4e78e172af38cb5702831380c2364296e3060 data/nautec/advancement/recipes/misc/aquarine_sword.json
 7cc3c716c8022d0c684d5f8cc482383e29943742 data/nautec/advancement/recipes/misc/aquarine_wrench.json
 0ff88a44c7f1679b9540fa694bd324567be25f01 data/nautec/advancement/recipes/misc/aquatic_catalyst.json
+291448834fa90c0eb1df7452a5dcbf508f613480 data/nautec/advancement/recipes/misc/aquatic_chip.json
 4892a02e14ac5f73378727582505c2c6f671e254 data/nautec/advancement/recipes/misc/augmentation_station.json
 b52be24dd909e8a30bc3be0e4b48f5336cc80fab data/nautec/advancement/recipes/misc/augmentation_station_extension.json
 a99cf9516cbb9353b47e68ecf484902406da4333 data/nautec/advancement/recipes/misc/banner_from_brown_polymer.json
@@ -81,6 +82,7 @@ ac8c8ef9122a3e1312b101ce23af51ae019143e5 data/nautec/recipe/aquarine_steel_compo
 c99f07ec9ec3b3e570ab81f9f6b5890fdcf3930f data/nautec/recipe/aquarine_sword.json
 78c4da26cb8c9f272043276502bbd017b1c163ea data/nautec/recipe/aquarine_wrench.json
 e5b299cdc66cfaa5d495fc6677a39188d7e05304 data/nautec/recipe/aquatic_catalyst.json
+2b70a034f2ba4c191f9f91baa2020c8c418499f4 data/nautec/recipe/aquatic_chip.json
 ba5f2ec03f05fc1f52d3c03f544988e459826d69 data/nautec/recipe/augmentation_station.json
 9c2bc24537825f94866e46c4d37cd820f1f59cc3 data/nautec/recipe/augmentation_station_extension.json
 355da835cb8636d4ed5607ad8827ded6b922f4ed data/nautec/recipe/bacteria_containment_shield_from_prismarine_crystal_shard.json

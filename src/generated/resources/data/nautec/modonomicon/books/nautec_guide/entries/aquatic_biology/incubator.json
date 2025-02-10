@@ -1,0 +1,48 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "aquatic_biology",
+  "description": "book.nautec.nautec_guide.aquatic_biology.incubator.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "nautec:incubator"
+  },
+  "name": "book.nautec.nautec_guide.aquatic_biology.incubator.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "nautec:mutator"
+      },
+      "text": "book.nautec.nautec_guide.aquatic_biology.incubator.incubator.text",
+      "title": "book.nautec.nautec_guide.aquatic_biology.incubator.incubator.title"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "recipe_id_1": "nautec:incubator",
+      "text": "book.nautec.nautec_guide.aquatic_biology.incubator.incubator_recipe.text",
+      "title1": "Incubator Recipe",
+      "title2": ""
+    }
+  ],
+  "parents": [
+    {
+      "draw_arrow": true,
+      "entry": "aquatic_biology/bacterial_analyzer",
+      "line_enabled": true,
+      "line_reversed": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 5,
+  "x": 6,
+  "y": 1
+}

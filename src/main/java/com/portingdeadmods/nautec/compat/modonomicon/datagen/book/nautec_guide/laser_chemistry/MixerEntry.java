@@ -27,13 +27,13 @@ public class MixerEntry extends EntryProvider {
                     \\
                     It requires laser power to operate. To display informations about the ongoing process, you can use the Monocle.
                     """);
-            this.page("mixer_recipe", () -> BookCraftingRecipePageModel.create()
-                    .withTitle1("Mixer Recipe")
-                    .withRecipeId1("nautec:mixer")
-                    .withText(this.context().pageText()));
-            this.pageText("""
-                    Its main purpose is to mix ingredients into chemicals like EAS or Etching Acid, used to infuse tools to unlock their full potential.
-                    """);
+        page("mixer_recipe", () -> BookCraftingRecipePageModel.create()
+                .withTitle1("Mixer Recipe")
+                .withRecipeId1("nautec:mixer")
+                .withText(this.context().pageText()));
+        pageText("""
+                Its main purpose is to mix ingredients into chemicals like EAS or Etching Acid, used to infuse tools to unlock their full potential.
+                """);
     }
 
     @Override

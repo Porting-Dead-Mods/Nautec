@@ -40,7 +40,7 @@ public class IntroductionEntry extends EntryProvider {
 
     @Override
     protected String entryDescription() {
-        return "Intro desc";
+        return "Introducing... NAUTEC";
     }
 
     @Override

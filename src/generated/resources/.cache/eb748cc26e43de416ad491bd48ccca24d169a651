@@ -1,8 +1,16 @@
-// 1.21.1	2024-12-15T20:55:07.9620151	Books: nautec
+// 1.21.1	2025-02-08T20:54:59.661638544	Books: nautec
 6d944fd1b3f4f8d8baf18317dbdea1e50476ed05 data/nautec/modonomicon/books/nautec_guide/book.json
+bcc5a52bdf7c614090d0effb5a1466169b55202f data/nautec/modonomicon/books/nautec_guide/categories/aquatic_biology.json
 ea5fe754ad19a1903e7a9d19f39e3b1488e59cfe data/nautec/modonomicon/books/nautec_guide/categories/getting_started.json
-41b01f32b9f23cf1eb5a33085b98bd30f0a1f943 data/nautec/modonomicon/books/nautec_guide/categories/laser_augmentation.json
+017114f8211380a5e6b99895135d3a39018dd3e3 data/nautec/modonomicon/books/nautec_guide/categories/laser_augmentation.json
 3b186e166ff5703903304a77e793b8364cd2a0b7 data/nautec/modonomicon/books/nautec_guide/categories/laser_chemistry.json
+5437d8bd93e4dccdc57d67faea67daa8db2af9ae data/nautec/modonomicon/books/nautec_guide/entries/aquatic_biology/bacteria_grafting.json
+019a8ae77eebfef64cdaff80c448ccfaf65d348f data/nautec/modonomicon/books/nautec_guide/entries/aquatic_biology/bacteria_introduction.json
+5790c9aab4047379af77fcd7bce84021d8091fbe data/nautec/modonomicon/books/nautec_guide/entries/aquatic_biology/bacteria_stats.json
+43d41666275648fc14a9cde7533507394a240f91 data/nautec/modonomicon/books/nautec_guide/entries/aquatic_biology/bacterial_analyzer.json
+491e7fa8d78f10ebda0339f88d29aadf87a12465 data/nautec/modonomicon/books/nautec_guide/entries/aquatic_biology/bio_reactor.json
+0f20dba3b7127f33e5a32f79a11abad14f4e68b9 data/nautec/modonomicon/books/nautec_guide/entries/aquatic_biology/incubator.json
+776ec77cab5127c3ca65cb6a2f9e48fb0a4f1c80 data/nautec/modonomicon/books/nautec_guide/entries/aquatic_biology/mutator.json
 840e237eb35798d6695b2c42abbeead5128626f3 data/nautec/modonomicon/books/nautec_guide/entries/getting_started/diving_gear.json
 e29501f9e540790de1b926ec2c269c0b8906c5b6 data/nautec/modonomicon/books/nautec_guide/entries/getting_started/etching.json
 3025c1f954bcbae17b5500c8814af26ccda6cf0a data/nautec/modonomicon/books/nautec_guide/entries/getting_started/introduction.json
