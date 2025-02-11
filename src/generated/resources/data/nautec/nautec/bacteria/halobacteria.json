@@ -1,6 +1,6 @@
 {
   "type": "nautec:simple",
-  "bacteria": "minecraft:gold_ingot",
+  "bacteria": "minecraft:air",
   "initial_size": {
     "max": 560,
     "min": 480

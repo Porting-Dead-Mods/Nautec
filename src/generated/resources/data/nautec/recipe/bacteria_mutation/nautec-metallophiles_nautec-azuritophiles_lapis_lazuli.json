@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:lapis_lazuli"
+  },
+  "chance": 5.0,
+  "input_bacteria": "nautec:metallophiles",
+  "result_bacteria": "nautec:azuritophiles"
+}

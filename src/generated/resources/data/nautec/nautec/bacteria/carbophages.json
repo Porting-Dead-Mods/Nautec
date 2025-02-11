@@ -21,8 +21,8 @@
       "min": 0.0
     },
     "production_rate": {
-      "max": 0.55,
-      "min": 0.15
+      "max": 0.7,
+      "min": 0.2
     }
   }
 }

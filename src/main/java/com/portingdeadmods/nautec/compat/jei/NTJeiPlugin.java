@@ -26,6 +26,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.Block;
@@ -104,7 +105,7 @@ public class NTJeiPlugin implements IModPlugin {
         Registry<Bacteria> registry = registryAccess.registryOrThrow(NTRegistries.BACTERIA_KEY);
         List<BioReactorCategory.BioReactorRecipe> bioReactorRecipes = registry.entrySet().stream()
                 .map(entry -> new BioReactorCategory.BioReactorRecipe(entry.getKey(), entry.getValue().resource()))
-                .filter(recipe -> !recipe.bacteria().equals(NTBacterias.EMPTY))
+                .filter(recipe -> !(recipe.bacteria().equals(NTBacterias.EMPTY) || recipe.resource().isEmpty()))
                 .toList();
 
         Map<ResourceKey<Block>, BacteriaObtainValue> dataMap = BuiltInRegistries.BLOCK.getDataMap(NTDataMaps.BACTERIA_OBTAINING);
