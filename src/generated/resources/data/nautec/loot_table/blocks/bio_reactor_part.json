@@ -16,7 +16,7 @@
               "block": "nautec:bio_reactor_part",
               "condition": "minecraft:block_state_property",
               "properties": {
-                "bio_reactor_part": "0"
+                "bio_reactor_part": "6"
               }
             }
           ],
@@ -29,33 +29,7 @@
               "block": "nautec:bio_reactor_part",
               "condition": "minecraft:block_state_property",
               "properties": {
-                "bio_reactor_part": "1"
-              }
-            }
-          ],
-          "name": "nautec:bacterial_containment_shield"
-        },
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "block": "nautec:bio_reactor_part",
-              "condition": "minecraft:block_state_property",
-              "properties": {
-                "bio_reactor_part": "2"
-              }
-            }
-          ],
-          "name": "nautec:dark_prismarine_pillar"
-        },
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "block": "nautec:bio_reactor_part",
-              "condition": "minecraft:block_state_property",
-              "properties": {
-                "bio_reactor_part": "3"
+                "bio_reactor_part": "5"
               }
             }
           ],
@@ -81,7 +55,7 @@
               "block": "nautec:bio_reactor_part",
               "condition": "minecraft:block_state_property",
               "properties": {
-                "bio_reactor_part": "5"
+                "bio_reactor_part": "3"
               }
             }
           ],
@@ -94,7 +68,46 @@
               "block": "nautec:bio_reactor_part",
               "condition": "minecraft:block_state_property",
               "properties": {
-                "bio_reactor_part": "6"
+                "bio_reactor_part": "2"
+              }
+            }
+          ],
+          "name": "nautec:dark_prismarine_pillar"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "nautec:bio_reactor_part",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "bio_reactor_part": "1"
+              }
+            }
+          ],
+          "name": "nautec:bacterial_containment_shield"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "nautec:bio_reactor_part",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "bio_reactor_part": "0"
+              }
+            }
+          ],
+          "name": "nautec:dark_prismarine_pillar"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "nautec:bio_reactor_part",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "bio_reactor_part": "8"
               }
             }
           ],
@@ -112,19 +125,6 @@
             }
           ],
           "name": "nautec:bacterial_containment_shield"
-        },
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "block": "nautec:bio_reactor_part",
-              "condition": "minecraft:block_state_property",
-              "properties": {
-                "bio_reactor_part": "8"
-              }
-            }
-          ],
-          "name": "nautec:dark_prismarine_pillar"
         }
       ],
       "rolls": 1.0

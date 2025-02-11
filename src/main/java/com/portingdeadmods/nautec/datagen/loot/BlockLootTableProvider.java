@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
@@ -153,13 +154,50 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
 
     protected void prismarineSand(Block prismarineSandOre) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
-        add(prismarineSandOre, this.createSilkTouchDispatchTable(prismarineSandOre, this.applyExplosionDecay(prismarineSandOre, LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
-                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
-        )).withPool(LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(1f))
-                .add(LootItem.lootTableItem(Items.PRISMARINE_SHARD))
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))));
+//        add(
+//            prismarineSandOre,
+//            this.createSilkTouchDispatchTable(
+//                    prismarineSandOre,
+//                    this.applyExplosionDecay(
+//                            Items.AIR,
+//                            LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
+//                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+//                                    .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
+//                    )).withPool(LootPool.lootPool()
+//                            .setRolls(ConstantValue.exactly(1f))
+//                            .add(LootItem.lootTableItem(Items.PRISMARINE_SHARD))
+//                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+//            )
+//        );
+
+        add(
+                prismarineSandOre,
+                LootTable.lootTable()
+                        .withPool(
+                                LootPool.lootPool()
+                                        .add(LootItem.lootTableItem(prismarineSandOre))
+                                        .apply(SetItemCountFunction.setCount(new ConstantValue(1)))
+                                        .when(this.hasSilkTouch())
+                        )
+                        .withPool(
+                                LootPool.lootPool()
+                                        .setRolls(ConstantValue.exactly(1.0F))
+                                        .add(LootItem.lootTableItem(Items.PRISMARINE_SHARD)
+                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+                                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
+                                        )
+                                        .when(this.doesNotHaveSilkTouch())
+                        )
+                        .withPool(
+                                LootPool.lootPool()
+                                        .setRolls(ConstantValue.exactly(1.0F))
+                                        .add(LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
+                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+                                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
+                                        )
+                                        .when(this.doesNotHaveSilkTouch())
+                        )
+        );
     }
 
     protected LootTable.Builder multiblockPartDrop(
