@@ -2,8 +2,8 @@
   "type": "nautec:simple",
   "bacteria": "minecraft:lapis_lazuli",
   "initial_size": {
-    "max": 500,
-    "min": 300
+    "max": 450,
+    "min": 250
   },
   "stats": {
     "type": "nautec:simple",
@@ -21,8 +21,8 @@
       "min": 0.0
     },
     "production_rate": {
-      "max": 0.55,
-      "min": 0.15
+      "max": 0.6,
+      "min": 0.2
     }
   }
 }

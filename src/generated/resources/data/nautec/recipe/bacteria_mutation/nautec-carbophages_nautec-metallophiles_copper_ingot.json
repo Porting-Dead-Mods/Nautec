@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:copper_ingot"
+  },
+  "chance": 5.0,
+  "input_bacteria": "nautec:carbophages",
+  "result_bacteria": "nautec:metallophiles"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "nautec:bacteria_incubation",
+  "bacteria": "nautec:azuritophiles",
+  "consume_chance": 0.1,
+  "growth": {
+    "max": 25,
+    "min": 8
+  },
+  "nutrient": {
+    "tag": "c:ores/lapis"
+  }
+}

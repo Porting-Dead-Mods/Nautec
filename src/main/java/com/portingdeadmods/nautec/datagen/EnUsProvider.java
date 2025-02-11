@@ -88,6 +88,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem(GRAFTING_TOOL, "Grafting Tool");
         addItem(PRISMARINE_LENS, "Prismarine Lens");
         addItem(AQUATIC_CHIP, "Aquatic Chip");
+        
         add("nautec_guide.desc.0","Nautec's Guide");
 
         // Adding missing block translations

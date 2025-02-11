@@ -1,0 +1,12 @@
+{
+  "type": "nautec:bacteria_incubation",
+  "bacteria": "nautec:cactophyles",
+  "consume_chance": 0.07,
+  "growth": {
+    "max": 30,
+    "min": 10
+  },
+  "nutrient": {
+    "item": "minecraft:cactus"
+  }
+}

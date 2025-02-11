@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:cocoa_beans"
+  },
+  "chance": 10.0,
+  "input_bacteria": "nautec:junglophiles",
+  "result_bacteria": "nautec:cocoaphiles"
+}

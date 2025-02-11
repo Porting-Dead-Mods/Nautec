@@ -1,9 +1,9 @@
 {
   "type": "nautec:bacteria_mutation",
   "catalyst": {
-    "item": "minecraft:raw_iron"
+    "item": "minecraft:oak_log"
   },
-  "chance": 0.65,
+  "chance": 5.0,
   "input_bacteria": "nautec:methanogens",
-  "result_bacteria": "nautec:cyanobacteria"
+  "result_bacteria": "nautec:lignocytes"
 }

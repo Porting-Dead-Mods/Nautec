@@ -1,6 +1,6 @@
 {
   "type": "nautec:simple",
-  "bacteria": "minecraft:cooked_beef",
+  "bacteria": "minecraft:air",
   "initial_size": {
     "max": 600,
     "min": 240
