@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "nautec:block/aquatic_catalyst_bottom",
+    "east": "nautec:block/aquatic_catalyst_side",
+    "north": "nautec:block/aquatic_catalyst_side",
+    "south": "nautec:block/aquatic_catalyst_side",
+    "up": "nautec:block/aquatic_catalyst_top_3",
+    "west": "nautec:block/aquatic_catalyst_side"
+  }
+}
