@@ -723,12 +723,188 @@ public class RecipesProvider extends RecipeProvider {
     }
 
     private static void mutationRecipes(RecipeOutput output) {
-        new MutationRecipeBuilder(NTBacterias.METHANOGENS, NTBacterias.CYANOBACTERIA, Ingredient.of(Items.RAW_IRON), 0.65f)
+        // Ores and Minerals
+        new MutationRecipeBuilder(NTBacterias.THERMOPHILES, NTBacterias.LITHOPHILES, Ingredient.of(Items.STONE), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.LITHOPHILES, NTBacterias.CARBOPHAGES, Ingredient.of(Items.COAL), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.LITHOPHILES, NTBacterias.SILICOPHILES, Ingredient.of(Items.SAND), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.LITHOPHILES, NTBacterias.CALCIOPHILES, Ingredient.of(Items.BONE_MEAL), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.CARBOPHAGES, NTBacterias.METALLOPHILES, Ingredient.of(Items.COPPER_INGOT), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.METALLOPHILES, NTBacterias.ACIDOPHILES, Ingredient.of(Items.REDSTONE), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.ACIDOPHILES, NTBacterias.SULFUROPHILES, Ingredient.of(Items.GUNPOWDER), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.METALLOPHILES, NTBacterias.AZURITOPHILES, Ingredient.of(Items.LAPIS_LAZULI), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.METALLOPHILES, NTBacterias.FERROPHILES, Ingredient.of(Items.IRON_INGOT), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.FERROPHILES, NTBacterias.AURROPHILES, Ingredient.of(Items.GOLD_INGOT), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.AURROPHILES, NTBacterias.ADAMANTOPHILES, Ingredient.of(Items.DIAMOND), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.ADAMANTOPHILES, NTBacterias.SMARAGDOPHILES, Ingredient.of(Items.EMERALD), 5f)
+                .save(output);
+
+        // Mushrooms and Wood
+        new MutationRecipeBuilder(NTBacterias.METHANOGENS, NTBacterias.CARNIVOROUS_BACTERIA, Ingredient.of(Items.ROTTEN_FLESH), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.METHANOGENS, NTBacterias.RED_MYCOTROPHIC_BACTERIA, Ingredient.of(Items.RED_MUSHROOM_BLOCK), 20f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.METHANOGENS, NTBacterias.BROWN_MYCOTROPHIC_BACTERIA, Ingredient.of(Items.BROWN_MUSHROOM_BLOCK), 20f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.BROWN_MYCOTROPHIC_BACTERIA, NTBacterias.WARPED_MICROBES, Ingredient.of(Items.WARPED_FUNGUS), 3f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.RED_MYCOTROPHIC_BACTERIA, NTBacterias.WARPED_MICROBES, Ingredient.of(Items.WARPED_FUNGUS), 3f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.BROWN_MYCOTROPHIC_BACTERIA, NTBacterias.CRIMSON_MICROBES, Ingredient.of(Items.CRIMSON_FUNGUS), 3f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.RED_MYCOTROPHIC_BACTERIA, NTBacterias.CRIMSON_MICROBES, Ingredient.of(Items.CRIMSON_FUNGUS), 3f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.LIGNOCYTES, NTBacterias.CRIMSON_LIGNOCYTES, Ingredient.of(Items.CRIMSON_STEM), 3f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.LIGNOCYTES, NTBacterias.WARPED_LIGNOCYTES, Ingredient.of(Items.WARPED_STEM), 3f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.METHANOGENS, NTBacterias.LIGNOCYTES, Ingredient.of(Items.OAK_LOG), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.LIGNOCYTES, NTBacterias.DARK_LIGNOCYTES, Ingredient.of(Items.DARK_OAK_LOG), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.LIGNOCYTES, NTBacterias.ACACIOPHYLES, Ingredient.of(Items.ACACIA_LOG), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.LIGNOCYTES, NTBacterias.JUNGLOPHILES, Ingredient.of(Items.JUNGLE_LOG), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.LIGNOCYTES, NTBacterias.BOREOPHILES, Ingredient.of(Items.SPRUCE_LOG), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.LIGNOCYTES, NTBacterias.BETULOPHILES, Ingredient.of(Items.BIRCH_LOG), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.LIGNOCYTES, NTBacterias.RHIZOPHORA_LIGNOCYTES, Ingredient.of(Items.MANGROVE_LOG), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.LIGNOCYTES, NTBacterias.PRUNUS_LIGNOCYTES, Ingredient.of(Items.CHERRY_LOG), 5f)
+                .save(output);
+
+        // Plants
+        new MutationRecipeBuilder(NTBacterias.CYANOBACTERIA, NTBacterias.PHOTOTROPHS, Ingredient.of(Items.SUGAR_CANE), 10f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.PHOTOTROPHS, NTBacterias.CACTOPHYLES, Ingredient.of(Items.CACTUS), 10f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.HALOBACTERIA, NTBacterias.HALOTROPHS, Ingredient.of(Items.KELP), 25f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.HALOBACTERIA, NTBacterias.ALGAEFORMERS, Ingredient.of(Items.SEAGRASS), 25f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.ALGAEFORMERS, NTBacterias.CRYOBIONTS, Ingredient.of(Items.BLUE_ICE), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.HALOTROPHS, NTBacterias.PHOTOTROPHS, Ingredient.of(Items.SUGAR_CANE), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.PHOTOTROPHS, NTBacterias.RHIZOBACTERIA, Ingredient.of(Items.WHEAT), 5f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.RHIZOBACTERIA, NTBacterias.BETA_PHYLOBACTERIA, Ingredient.of(Items.BEETROOT), 10f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.RHIZOBACTERIA, NTBacterias.CAROTOPHYLES, Ingredient.of(Items.CARROT), 10f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.RHIZOBACTERIA, NTBacterias.SOLANOPHILES, Ingredient.of(Items.POTATO), 10f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.RHIZOBACTERIA, NTBacterias.CUCURBITOPHILES, Ingredient.of(Items.PUMPKIN), 10f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.CUCURBITOPHILES, NTBacterias.MELOPHAGES, Ingredient.of(Items.MELON_SLICE), 10f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.RHIZOBACTERIA, NTBacterias.BAMBOOPHAGES, Ingredient.of(Items.BAMBOO), 10f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.JUNGLOPHILES, NTBacterias.COCOAPHILES, Ingredient.of(Items.COCOA_BEANS), 10f)
+                .save(output);
+        new MutationRecipeBuilder(NTBacterias.RHIZOBACTERIA, NTBacterias.BRYOPHYTOPHILES, Ingredient.of(Items.MOSS_BLOCK), 5f)
                 .save(output);
     }
 
     private static void incubationRecipes(RecipeOutput output) {
-        new IncubationRecipeBuilder(NTBacterias.METHANOGENS, Ingredient.of(Items.PODZOL), IntRange.of(5, 20), 0.05f)
+        // Wood Bacteria
+        new IncubationRecipeBuilder(NTBacterias.LIGNOCYTES, Ingredient.of(Items.OAK_LOG), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.DARK_LIGNOCYTES, Ingredient.of(Items.DARK_OAK_LOG), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.ACACIOPHYLES, Ingredient.of(Items.ACACIA_LOG), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.JUNGLOPHILES, Ingredient.of(Items.JUNGLE_LOG), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.BOREOPHILES, Ingredient.of(Items.SPRUCE_LOG), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.BETULOPHILES, Ingredient.of(Items.BIRCH_LOG), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.CRIMSON_LIGNOCYTES, Ingredient.of(Items.CRIMSON_STEM), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.WARPED_LIGNOCYTES, Ingredient.of(Items.WARPED_STEM), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.RHIZOPHORA_LIGNOCYTES, Ingredient.of(Items.MANGROVE_LOG), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.PRUNUS_LIGNOCYTES, Ingredient.of(Items.CHERRY_LOG), IntRange.of(10, 30), 0.07f)
+                .save(output);
+
+        // Mineral Bacteria
+        new IncubationRecipeBuilder(NTBacterias.SILICOPHILES, Ingredient.of(Items.SAND), IntRange.of(8, 25), 0.05f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.LITHOPHILES, Ingredient.of(Items.STONE), IntRange.of(8, 25), 0.05f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.METALLOPHILES, Ingredient.of(Tags.Items.ORES_COPPER), IntRange.of(8, 25), 0.1f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.FERROPHILES, Ingredient.of(Tags.Items.ORES_IRON), IntRange.of(8, 25), 0.1f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.AURROPHILES, Ingredient.of(Tags.Items.ORES_GOLD), IntRange.of(8, 25), 0.1f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.ACIDOPHILES, Ingredient.of(Tags.Items.ORES_REDSTONE), IntRange.of(8, 25), 0.1f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.ADAMANTOPHILES, Ingredient.of(Tags.Items.ORES_DIAMOND), IntRange.of(8, 25), 0.1f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.SMARAGDOPHILES, Ingredient.of(Tags.Items.ORES_EMERALD), IntRange.of(8, 25), 0.1f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.AZURITOPHILES, Ingredient.of(Tags.Items.ORES_LAPIS), IntRange.of(8, 25), 0.1f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.CARBOPHAGES, Ingredient.of(Tags.Items.ORES_COAL), IntRange.of(8, 25), 0.1f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.CALCIOPHILES, Ingredient.of(Items.BONE_BLOCK), IntRange.of(8, 25), 0.1f)
+                .save(output);
+
+        // Plants
+        new IncubationRecipeBuilder(NTBacterias.PHOTOTROPHS, Ingredient.of(Items.SUGAR_CANE), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.RED_MYCOTROPHIC_BACTERIA, Ingredient.of(Items.RED_MUSHROOM_BLOCK), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.BROWN_MYCOTROPHIC_BACTERIA, Ingredient.of(Items.BROWN_MUSHROOM_BLOCK), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.HALOTROPHS, Ingredient.of(Items.SAND), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.BRYOPHYTOPHILES, Ingredient.of(Items.MOSS_BLOCK), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.ALGAEFORMERS, Ingredient.of(Items.KELP), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.RHIZOBACTERIA, Ingredient.of(Items.WHEAT), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.SOLANOPHILES, Ingredient.of(Items.POTATO), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.BAMBOOPHAGES, Ingredient.of(Items.BAMBOO), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.CACTOPHYLES, Ingredient.of(Items.CACTUS), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.CAROTOPHYLES, Ingredient.of(Items.CARROT), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.CUCURBITOPHILES, Ingredient.of(Items.PUMPKIN), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.BETA_PHYLOBACTERIA, Ingredient.of(Items.BEETROOT), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.MELOPHAGES, Ingredient.of(Items.MELON_SLICE), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.CRIMSON_MICROBES, Ingredient.of(Items.CRIMSON_NYLIUM), IntRange.of(10, 30), 0.07f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.WARPED_MICROBES, Ingredient.of(Items.WARPED_NYLIUM), IntRange.of(10, 30), 0.07f)
+                .save(output);
+
+        // Misc
+        new IncubationRecipeBuilder(NTBacterias.SULFUROPHILES, Ingredient.of(Items.GUNPOWDER), IntRange.of(5, 15), 0.1f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.CRYOBIONTS, Ingredient.of(Items.PACKED_ICE), IntRange.of(5, 15), 0.1f)
+                .save(output);
+        new IncubationRecipeBuilder(NTBacterias.CARNIVOROUS_BACTERIA, Ingredient.of(Items.ROTTEN_FLESH), IntRange.of(5, 15), 0.1f)
                 .save(output);
     }
 

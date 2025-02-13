@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:cherry_log"
+  },
+  "chance": 5.0,
+  "input_bacteria": "nautec:lignocytes",
+  "result_bacteria": "nautec:prunus_lignocytes"
+}

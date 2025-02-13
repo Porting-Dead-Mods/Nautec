@@ -2,8 +2,8 @@
   "type": "nautec:simple",
   "bacteria": "minecraft:copper_ingot",
   "initial_size": {
-    "max": 520,
-    "min": 260
+    "max": 480,
+    "min": 280
   },
   "stats": {
     "type": "nautec:simple",
@@ -21,8 +21,8 @@
       "min": 0.0
     },
     "production_rate": {
-      "max": 0.58,
-      "min": 0.18
+      "max": 0.65,
+      "min": 0.2
     }
   }
 }

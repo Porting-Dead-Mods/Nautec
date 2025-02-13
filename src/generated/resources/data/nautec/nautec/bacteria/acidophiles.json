@@ -2,8 +2,8 @@
   "type": "nautec:simple",
   "bacteria": "minecraft:redstone",
   "initial_size": {
-    "max": 400,
-    "min": 180
+    "max": 450,
+    "min": 250
   },
   "stats": {
     "type": "nautec:simple",
@@ -21,8 +21,8 @@
       "min": 0.0
     },
     "production_rate": {
-      "max": 0.52,
-      "min": 0.12
+      "max": 0.6,
+      "min": 0.2
     }
   }
 }

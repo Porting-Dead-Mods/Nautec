@@ -1,0 +1,12 @@
+{
+  "type": "nautec:bacteria_incubation",
+  "bacteria": "nautec:cryobionts",
+  "consume_chance": 0.1,
+  "growth": {
+    "max": 15,
+    "min": 5
+  },
+  "nutrient": {
+    "item": "minecraft:packed_ice"
+  }
+}

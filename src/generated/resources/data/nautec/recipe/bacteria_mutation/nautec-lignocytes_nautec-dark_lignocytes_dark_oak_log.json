@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:dark_oak_log"
+  },
+  "chance": 5.0,
+  "input_bacteria": "nautec:lignocytes",
+  "result_bacteria": "nautec:dark_lignocytes"
+}

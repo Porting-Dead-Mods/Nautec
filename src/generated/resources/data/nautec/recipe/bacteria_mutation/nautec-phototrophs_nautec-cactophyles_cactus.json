@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:cactus"
+  },
+  "chance": 10.0,
+  "input_bacteria": "nautec:phototrophs",
+  "result_bacteria": "nautec:cactophyles"
+}
