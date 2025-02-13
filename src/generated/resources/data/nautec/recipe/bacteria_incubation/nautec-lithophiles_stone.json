@@ -1,12 +1,12 @@
 {
   "type": "nautec:bacteria_incubation",
-  "bacteria": "nautec:methanogens",
+  "bacteria": "nautec:lithophiles",
   "consume_chance": 0.05,
   "growth": {
-    "max": 20,
-    "min": 5
+    "max": 25,
+    "min": 8
   },
   "nutrient": {
-    "item": "minecraft:podzol"
+    "item": "minecraft:stone"
   }
 }

@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:crimson_stem"
+  },
+  "chance": 3.0,
+  "input_bacteria": "nautec:lignocytes",
+  "result_bacteria": "nautec:crimson_lignocytes"
+}

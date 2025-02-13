@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:gold_ingot"
+  },
+  "chance": 5.0,
+  "input_bacteria": "nautec:ferrophiles",
+  "result_bacteria": "nautec:aurrophiles"
+}

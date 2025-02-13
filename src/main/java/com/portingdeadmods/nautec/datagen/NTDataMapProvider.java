@@ -24,6 +24,9 @@ public class NTDataMapProvider extends DataMapProvider {
     @Override
     protected void gather() {
         obtainBacteria(Blocks.STONE, NTBacterias.CYANOBACTERIA, BiomeTags.IS_OCEAN, 0.4f);
+        obtainBacteria(Blocks.PODZOL, NTBacterias.METHANOGENS, BiomeTags.IS_FOREST, 0.4f);
+        obtainBacteria(Blocks.SAND, NTBacterias.HALOBACTERIA, BiomeTags.IS_BEACH, 0.4f);
+        obtainBacteria(Blocks.NETHERRACK, NTBacterias.THERMOPHILES, BiomeTags.IS_NETHER, 0.4f);
     }
 
     private void obtainBacteria(Block block, ResourceKey<Bacteria> bacteria, TagKey<Biome> biome, float chance) {

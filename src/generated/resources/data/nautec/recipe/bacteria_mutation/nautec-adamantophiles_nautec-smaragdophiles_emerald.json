@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:emerald"
+  },
+  "chance": 5.0,
+  "input_bacteria": "nautec:adamantophiles",
+  "result_bacteria": "nautec:smaragdophiles"
+}

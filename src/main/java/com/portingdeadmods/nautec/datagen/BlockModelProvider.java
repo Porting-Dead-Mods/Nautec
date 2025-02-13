@@ -34,7 +34,7 @@ public class BlockModelProvider extends BlockStateProvider {
 
         // Laser Stuffs
         simpleBlock(NTBlocks.CREATIVE_POWER_SOURCE.get());
-        aquaticCatalyst(NTBlocks.AQUATIC_CATALYST.get());
+        //aquaticCatalyst(NTBlocks.AQUATIC_CATALYST.get());
 
         existingFacingBlock(NTBlocks.PRISMARINE_RELAY.get(), NTBlocks.PRISMARINE_RELAY.get());
         longDistanceLaser(NTBlocks.LONG_DISTANCE_LASER.get());

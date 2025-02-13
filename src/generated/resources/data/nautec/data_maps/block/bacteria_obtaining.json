@@ -1,5 +1,20 @@
 {
   "values": {
+    "minecraft:netherrack": {
+      "bacteria": "nautec:thermophiles",
+      "biome": "minecraft:is_nether",
+      "chance": 0.4
+    },
+    "minecraft:podzol": {
+      "bacteria": "nautec:methanogens",
+      "biome": "minecraft:is_forest",
+      "chance": 0.4
+    },
+    "minecraft:sand": {
+      "bacteria": "nautec:halobacteria",
+      "biome": "minecraft:is_beach",
+      "chance": 0.4
+    },
     "minecraft:stone": {
       "bacteria": "nautec:cyanobacteria",
       "biome": "minecraft:is_ocean",
