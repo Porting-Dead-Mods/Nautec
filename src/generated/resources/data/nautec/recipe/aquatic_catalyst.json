@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "D": {
-      "item": "nautec:dark_prismarine_pillar"
+    "C": {
+      "item": "minecraft:prismarine_crystals"
     },
     "P": {
       "item": "nautec:polished_prismarine"
     }
   },
   "pattern": [
-    "PDP",
-    "D D",
-    "PDP"
+    "PCP",
+    "P P",
+    "PCP"
   ],
   "result": {
     "count": 1,

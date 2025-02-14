@@ -45,10 +45,7 @@ public class AugmentLayerRenderer extends RenderLayer<AbstractClientPlayer, Play
 
     private void renderAugmentModel(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, Augment augment) {
         AugmentRenderer<Augment> renderer = getRenderer(augment);
-        // Only called when renderer isnt null so no need to double check
-        assert renderer != null;
         renderer.render(augment, this, poseStack, bufferSource, packedLight);
-
     }
 
     @SuppressWarnings("unchecked")

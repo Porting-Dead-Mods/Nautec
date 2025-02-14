@@ -33,7 +33,9 @@ import java.util.Map;
 import java.util.Set;
 
 public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity implements MultiblockPartEntity, MenuProvider {
-    private float middleIndependentAngle;
+    public float prevMiddleIndependentAngle;
+    public float prevTipIndependentAngle;
+    public float middleIndependentAngle;
     public float tipIndependentAngle;
 
     private int robotArmSpeed;
@@ -74,9 +76,11 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
         } else {
             if (animationTime > 0) {
                 animationTime--;
-                float oldMiddleAngle = middleIndependentAngle;
+                prevMiddleIndependentAngle = middleIndependentAngle;
+                prevTipIndependentAngle = tipIndependentAngle;
+
                 middleIndependentAngle += (robotArmSpeed * 10 / 3f) * 0.25f;
-                tipIndependentAngle += (middleIndependentAngle - oldMiddleAngle) * 1.5f;
+                tipIndependentAngle += (middleIndependentAngle - prevMiddleIndependentAngle) * 1.5f;
 
                 if (animation == Animation.FORWARD) {
                     if (animationTime == 0) {
@@ -123,6 +127,14 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
             return getItemHandler().getStackInSlot(0);
         }
         return ItemStack.EMPTY;
+    }
+
+    public float getPrevMiddleIndependentAngle(float partialTicks) {
+        return animationRunning ? (prevMiddleIndependentAngle + partialTicks) / 360 : 0;
+    }
+
+    public float getPrevTipIndependentAngle(float partialTicks) {
+        return animationRunning ? (prevTipIndependentAngle + partialTicks) / 360 : 0;
     }
 
     public float getMiddleIndependentAngle(float partialTicks) {

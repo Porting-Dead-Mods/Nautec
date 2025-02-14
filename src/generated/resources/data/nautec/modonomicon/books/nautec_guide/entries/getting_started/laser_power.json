@@ -46,13 +46,13 @@
   "parents": [
     {
       "draw_arrow": true,
-      "entry": "getting_started/structures",
+      "entry": "getting_started/introduction",
       "line_enabled": true,
       "line_reversed": false
     }
   ],
   "show_when_any_parent_unlocked": false,
-  "sort_number": 2,
-  "x": 4,
+  "sort_number": 3,
+  "x": 2,
   "y": 0
 }
