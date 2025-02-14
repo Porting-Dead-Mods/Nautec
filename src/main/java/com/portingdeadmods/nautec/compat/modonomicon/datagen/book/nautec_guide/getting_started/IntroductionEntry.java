@@ -20,16 +20,16 @@ public class IntroductionEntry extends EntryProvider {
                 .withText(this.context().pageText()));
         this.pageTitle("Introduction");
         this.pageText("""
-                Greetings Traveller,
+                Welcome to NauTec, the underwater
+                tech-magic mod. It offers a quite unique
+                progression with options for automation,
+                player augmentation and complex contraptions.
                 \\
-                it seems like you have obtained
-                my book. I hope to explain my discoveries
-                about the vast underwater world and how to leverage them in it.
-                \\
-                \\
-                To make this easier to follow along I have decided to structure
-                it in a way that allows for easy understanding and
-                replication of my steps.
+                Starting NauTec is quite straight-forward.
+                You can start by exploring beaches, gather
+                prismarine and build an aquatic catalyst.
+                The next pages will teach you how to do this
+                in greater detail.
                 """);
     }
 

@@ -1,5 +1,6 @@
-// 1.21.1	2025-02-11T16:53:59.6678042	Block States: nautec
+// 1.21.1	2025-02-13T16:20:06.173837164	Block States: nautec
 3f3049296b6ec6590b05af441a717618bb232b69 assets/nautec/blockstates/aquarine_steel_block.json
+6678769134fcedf2168a7d3921538972122961ce assets/nautec/blockstates/aquatic_catalyst.json
 920d567f0ae8731bc428c8970aac5400741ea87d assets/nautec/blockstates/augmentation_station.json
 e7796e8fce418c4dbe7aa3bb43424741ca161694 assets/nautec/blockstates/augmentation_station_extension.json
 13de9de23d402708fc1201b11b07efb3bbcab7a1 assets/nautec/blockstates/augmentation_station_part.json
@@ -30,6 +31,15 @@ bc5914e8ef7efce89c87e7320a64f1f02348ac6c assets/nautec/blockstates/polished_pris
 7930832874f271dd9739dd2fd92a54954d014df8 assets/nautec/blockstates/prismarine_sand.json
 7e786093d68ed9637eb1485a21647c9f133d68dc assets/nautec/blockstates/rusty_crate.json
 ae0bbb4f270da32fa2d11ba493fd0e9bd19fcc75 assets/nautec/models/block/aquarine_steel_block.json
+5c7cb08f2e3b93fe9e127e20c0c97292f8fd8b72 assets/nautec/models/block/aquatic_catalyst.json
+3fa49b4575a1a3ef551d18278736d6494e0793ff assets/nautec/models/block/aquatic_catalyst_1.json
+bed28a252fb24b84b17b134d5f48e3ac47e7afcc assets/nautec/models/block/aquatic_catalyst_2.json
+e11ce16a7903717e7220d1712b68d1fd6a9768d9 assets/nautec/models/block/aquatic_catalyst_3.json
+576c5b00e7789731be2dd0c8d83c0b17d3f50587 assets/nautec/models/block/aquatic_catalyst_4.json
+a306ed7b0153a6f41fc635e04cd937739481c881 assets/nautec/models/block/aquatic_catalyst_5.json
+9f7def28810c58fabb4c9e428e38dba42ea4fcf1 assets/nautec/models/block/aquatic_catalyst_6.json
+c6c995ed16fcef84a11c7360881b2d6a3ff988c8 assets/nautec/models/block/aquatic_catalyst_7.json
+005a68570c094180cdcd496b492c18746830b6e3 assets/nautec/models/block/aquatic_catalyst_8.json
 98354e0a660994d556449c5fc6782400d5d20c15 assets/nautec/models/block/augmentation_station.json
 4cd777b593be834a619c30850292c016be6e7341 assets/nautec/models/block/augmentation_station_extension.json
 4b041c67e6dfb342c778f9f65997ae038f7144c5 assets/nautec/models/block/augmentation_station_part_0.json

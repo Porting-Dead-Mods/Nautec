@@ -222,10 +222,10 @@ public class RecipesProvider extends RecipeProvider {
                 .save(pRecipeOutput, Nautec.rl("long_distance_laser"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, NTBlocks.AQUATIC_CATALYST.asItem(), 1)
-                .pattern("PDP")
-                .pattern("D D")
-                .pattern("PDP")
-                .define('D', NTBlocks.DARK_PRISMARINE_PILLAR)
+                .pattern("PCP")
+                .pattern("P P")
+                .pattern("PCP")
+                .define('C', Items.PRISMARINE_CRYSTALS)
                 .define('P', NTBlocks.POLISHED_PRISMARINE)
                 .unlockedBy("has_item", has(NTBlocks.POLISHED_PRISMARINE))
                 .save(pRecipeOutput, Nautec.rl("aquatic_catalyst"));
