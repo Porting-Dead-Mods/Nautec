@@ -45,7 +45,7 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
                 duration = 0;
                 currentRecipe = null;
             } else {
-                int distance = getLaserDistances().getInt(getBlockState().getValue(BlockStateProperties.FACING));
+                int distance = getLaserDistances().getInt(getBlockState().getValue(BlockStateProperties.FACING).getOpposite());
                 if (distance > 0) {
                     int amount = currentRecipe.value().powerAmount() / currentRecipe.value().duration();
                     transmitPower(amount);
