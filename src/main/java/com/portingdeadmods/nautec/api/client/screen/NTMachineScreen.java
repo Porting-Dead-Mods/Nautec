@@ -90,6 +90,10 @@ public abstract class NTMachineScreen<T extends ContainerBlockEntity> extends Ab
         for (SlotBacteriaStorage bSlot : this.menu.getBacteriaStorageSlots()) {
             GuiUtils.renderBacteria(pGuiGraphics, bSlot.getBacteriaInstance(), this.leftPos + bSlot.getX(), this.topPos + bSlot.getY());
         }
+
+        for (SlotFluidHandler fSlot : this.menu.getFluidTankSlots()) {
+            fSlot.getRenderer().render(pGuiGraphics.pose(), this.leftPos + fSlot.getX(), this.topPos + fSlot.getY(), fSlot.getFluidStack());
+        }
     }
 
     private void hoverFluidSlot(int pMouseX, int pMouseY) {
