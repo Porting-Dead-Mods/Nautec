@@ -3,6 +3,8 @@ package com.portingdeadmods.nautec.content.blockentities;
 import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
+import com.portingdeadmods.nautec.capabilities.fluid.SidedFluidHandler;
+import com.portingdeadmods.nautec.capabilities.fluid.TwoTankSidedFluidHandler;
 import com.portingdeadmods.nautec.content.menus.MixerMenu;
 import com.portingdeadmods.nautec.content.recipes.MixingRecipe;
 import com.portingdeadmods.nautec.content.recipes.inputs.MixingRecipeInput;
@@ -138,6 +140,16 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
             }
         }
         fluidHandler.drain(mixingRecipe.fluidIngredient().getAmount(), IFluidHandler.FluidAction.EXECUTE);
+    }
+
+    @Override
+    public IFluidHandler getFluidHandlerOnSide(Direction direction) {
+        return getHandlerOnSide(
+                Capabilities.FluidHandler.BLOCK,
+                (ignored, actionSlotsPair) -> new TwoTankSidedFluidHandler(getFluidHandler(), getSecondaryFluidHandler(), actionSlotsPair),
+                direction,
+                getFluidHandler()
+        );
     }
 
     @Override
