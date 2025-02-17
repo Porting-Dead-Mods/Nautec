@@ -3,7 +3,6 @@ package com.portingdeadmods.nautec.content.blockentities;
 import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
-import com.portingdeadmods.nautec.capabilities.fluid.SidedFluidHandler;
 import com.portingdeadmods.nautec.capabilities.fluid.TwoTankSidedFluidHandler;
 import com.portingdeadmods.nautec.content.menus.MixerMenu;
 import com.portingdeadmods.nautec.content.recipes.MixingRecipe;
@@ -45,10 +44,10 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
             Direction.WEST, Pair.of(IOActions.INSERT, new int[]{0, 1, 2, 3})
     );
     public static final Map<@NotNull Direction, @NotNull Pair<IOActions, int[]>> FLUID_HANDLER_SIDED_INTERACTIONS = Map.of(
-            Direction.NORTH, Pair.of(IOActions.INSERT, new int[]{0}),
-            Direction.EAST, Pair.of(IOActions.INSERT, new int[]{0}),
-            Direction.SOUTH, Pair.of(IOActions.INSERT, new int[]{0}),
-            Direction.WEST, Pair.of(IOActions.INSERT, new int[]{0})
+            Direction.NORTH, Pair.of(IOActions.BOTH, new int[]{0, 1}),
+            Direction.EAST, Pair.of(IOActions.BOTH, new int[]{0, 1}),
+            Direction.SOUTH, Pair.of(IOActions.BOTH, new int[]{0, 1}),
+            Direction.WEST, Pair.of(IOActions.BOTH, new int[]{0, 1})
     );
     private boolean running;
 
