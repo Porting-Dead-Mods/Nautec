@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -43,11 +44,13 @@ public class ClawRobotArmRenderer extends RobotArmRenderer {
             // Middle
             poseStack.pushPose();
             {
-                renderArmMiddle(poseStack, packedOverlay, consumer, light, blockEntity.getMiddleIndependentAngle(partialTick));
+                float middleIndependentAngle = blockEntity.getMiddleIndependentAngle(partialTick);
+                renderArmMiddle(poseStack, packedOverlay, consumer, light, Mth.lerp(partialTick, blockEntity.getPrevMiddleIndependentAngle(partialTick), middleIndependentAngle));
                 // Tip
                 poseStack.pushPose();
                 {
-                    renderArmTip(poseStack, packedOverlay, consumer, light, blockEntity.getTipIndependentAngle(partialTick));
+                    float tipIndependentAngle = blockEntity.getTipIndependentAngle(partialTick);
+                    renderArmTip(poseStack, packedOverlay, consumer, light, Mth.lerp(partialTick, blockEntity.getPrevTipIndependentAngle(partialTick), tipIndependentAngle));
                     renderItem(blockEntity, poseStack, bufferSource, packedLight, packedOverlay);
                 }
                 poseStack.popPose();

@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:seagrass"
+  },
+  "chance": 25.0,
+  "input_bacteria": "nautec:halobacteria",
+  "result_bacteria": "nautec:algaeformers"
+}

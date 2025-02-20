@@ -1,0 +1,28 @@
+{
+  "type": "nautec:simple",
+  "bacteria": "minecraft:bone_meal",
+  "initial_size": {
+    "max": 500,
+    "min": 260
+  },
+  "stats": {
+    "type": "nautec:simple",
+    "color": -657956,
+    "growth_rate": {
+      "max": 1.0,
+      "min": 0.45
+    },
+    "lifespan": {
+      "max": 2300,
+      "min": 1100
+    },
+    "mutation_resistance": {
+      "max": 0.1,
+      "min": 0.0
+    },
+    "production_rate": {
+      "max": 0.48,
+      "min": 0.12
+    }
+  }
+}

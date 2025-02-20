@@ -57,6 +57,11 @@ public final class BacteriaInstance {
         return new BacteriaInstance(bacteria, bacteria1.rollSize(), bacteria1.stats().collapse(), false);
     }
 
+    public static BacteriaInstance withMaxStats(ResourceKey<Bacteria> bacteria, HolderLookup.Provider lookupProvider) {
+        Bacteria bacteria1 = BacteriaHelper.getBacteria(lookupProvider, bacteria);
+        return new BacteriaInstance(bacteria, bacteria1.maxInitialSize(), bacteria1.stats().collapseMaxStats(), true);
+    }
+
     public void setSize(long size) {
         this.size = size;
     }
@@ -163,11 +168,13 @@ public final class BacteriaInstance {
                 }
                 tooltipComponents.add(statsCaption);
                 if (hasShiftDown && hasControlDown) {
+                    tooltipComponents.add(BacteriaHelper.resourceTooltip(bacteria));
                     for (Component tooltipComponent : getStats().statsTooltipWithMutatorValues()) {
                         tooltipComponents.add(Component.literal(" ".repeat(2)).append(tooltipComponent));
                     }
                 }
                 if (hasShiftDown && !hasControlDown) {
+                    tooltipComponents.add(BacteriaHelper.resourceTooltip(bacteria));
                     for (Component tooltipComponent : getStats().statsTooltip()) {
                         tooltipComponents.add(Component.literal(" ".repeat(2)).append(tooltipComponent));
                     }

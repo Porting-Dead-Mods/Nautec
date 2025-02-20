@@ -2,11 +2,11 @@ package com.portingdeadmods.nautec.content.blockentities;
 
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
+import com.portingdeadmods.nautec.content.blocks.AquaticCatalystBlock;
 import com.portingdeadmods.nautec.content.recipes.AquaticCatalystChannelingRecipe;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.utils.SidedCapUtils;
 import it.unimi.dsi.fastutil.Pair;
-import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -18,162 +18,139 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.capabilities.BlockCapability;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
-import static com.portingdeadmods.nautec.content.blocks.AquaticCatalystBlock.ACTIVE;
-import static com.portingdeadmods.nautec.content.blocks.AquaticCatalystBlock.STAGE;
-
-// TODO: actually consume item before starting to generate power
 public class AquaticCatalystBlockEntity extends LaserBlockEntity {
-    // cache that uses the current item
-    private RecipeHolder<AquaticCatalystChannelingRecipe> nextRecipeCache;
-    // actually need to serialize this to know the amount of AP we need to produce
     private RecipeHolder<AquaticCatalystChannelingRecipe> currentRecipe;
-    private int amount;
+    private RecipeHolder<AquaticCatalystChannelingRecipe> nextRecipe;
     private int duration;
-    private boolean active;
-    private boolean updateRecipe = true;
+    private ResourceLocation currentRecipeId;
+    private ResourceLocation nextRecipeId;
 
     public AquaticCatalystBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.AQUATIC_CATALYST.get(), blockPos, blockState);
-        addItemHandler(1, (slot, stack) -> hasRecipe(stack));
-    }
-
-    private boolean hasRecipe(ItemStack stack) {
-        return getRecipeForCache(stack) != null;
-    }
-
-    @Override
-    public Set<Direction> getLaserInputs() {
-        return ObjectSet.of();
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public int getRemainingDuration() {
-        return nextRecipeCache != null ? nextRecipeCache.value().duration() - duration : 0;
-    }
-
-    public ItemStack getProcessingItem() {
-        return getItemHandler().getStackInSlot(0);
-    }
-
-    public Optional<AquaticCatalystChannelingRecipe> getCurrentRecipe() {
-        return Optional.ofNullable(this.nextRecipeCache).map(RecipeHolder::value);
-    }
-
-    @Override
-    protected void onItemsChanged(int slot) {
-        if (updateRecipe) {
-            updateRecipe(slot);
-        }
-    }
-
-    @Override
-    protected void onLaserDistancesChanged(Direction direction, int prevDistance) {
-        if (updateRecipe) {
-            updateRecipe(0);
-        }
-    }
-
-    private void updateRecipe(int slot) {
-        ItemStackHandler itemStackHandler = getItemStackHandler();
-        ItemStack stackInSlot1 = itemStackHandler.getStackInSlot(slot);
-        RecipeHolder<AquaticCatalystChannelingRecipe> recipe1 = getRecipeForCache(stackInSlot1);
-        if (recipe1 != null) {
-            this.updateRecipe = false;
-            itemStackHandler.extractItem(slot, 1, false);
-            this.updateRecipe = true;
-        }
-        this.nextRecipeCache = recipe1;
-        setActive(this.nextRecipeCache != null);
-    }
-
-    public void setActive(boolean active) {
-        float i = (float) getItemHandler().getStackInSlot(0).getCount() / getItemHandler().getSlotLimit(0);
-        int stage = (int) (i * 6);
-        level.setBlockAndUpdate(worldPosition, getBlockState()
-                .setValue(ACTIVE, active)
-                .setValue(STAGE, active ? stage : 0));
-        this.active = active;
-    }
-
-    public boolean isActive() {
-        return getBlockState().getValue(ACTIVE) && this.active;
-    }
-
-    @Override
-    public Set<Direction> getLaserOutputs() {
-        Direction direction = getBlockState().getValue(BlockStateProperties.FACING);
-        boolean coreActive = isActive();
-        if (coreActive) {
-            return ObjectSet.of(direction.getOpposite());
-        }
-        return ObjectSet.of();
+        addItemHandler(1, (slot, stack) -> getRecipeForCache(stack) != null);
     }
 
     @Override
     public void commonTick() {
         super.commonTick();
 
-        if (isActive() && nextRecipeCache != null) {
-            Direction direction = getBlockState().getValue(BlockStateProperties.FACING);
-            if (getLaserDistances().getInt(direction.getOpposite()) > 0) {
-                if (duration >= nextRecipeCache.value().duration()) {
-                    duration = 0;
-                    updateRecipe(0);
-                    setActive(this.nextRecipeCache != null);
-                } else {
-                    amount = nextRecipeCache.value().powerAmount() / nextRecipeCache.value().duration();
+        if (isActive()) {
+            if (duration >= currentRecipe.value().duration()) {
+                duration = 0;
+                currentRecipe = null;
+            } else {
+                int distance = getLaserDistances().getInt(getBlockState().getValue(BlockStateProperties.FACING).getOpposite());
+                if (distance > 0) {
+                    int amount = currentRecipe.value().powerAmount() / currentRecipe.value().duration();
                     transmitPower(amount);
-                    setPurity(nextRecipeCache.value().purity());
                     duration++;
                 }
             }
+        } else {
+            currentRecipe = nextRecipe;
+            getItemHandler().extractItem(0, 1, false);
         }
     }
 
-    private @Nullable RecipeHolder<AquaticCatalystChannelingRecipe> getRecipeForCache(ItemStack stack) {
+    public boolean isActive() {
+        return currentRecipe != null;
+    }
+
+    public RecipeHolder<AquaticCatalystChannelingRecipe> getCurrentRecipe() {
+        return currentRecipe;
+    }
+
+    public int getRemainingDuration() {
+        return currentRecipe != null ? currentRecipe.value().duration() - duration : 0;
+    }
+
+    public ItemStack getProcessingItem() {
+        return getItemHandler().getStackInSlot(0);
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    @Override
+    protected void onItemsChanged(int slot) {
+        super.onItemsChanged(slot);
+
+        this.nextRecipe = getRecipeForCache(getItemHandler().getStackInSlot(0));
+        setStage();
+    }
+
+    @Override
+    protected void onLaserDistancesChanged(Direction direction, int prevDistance) {
+        super.onLaserDistancesChanged(direction, prevDistance);
+
+        this.nextRecipe = getRecipeForCache(getItemHandler().getStackInSlot(0));
+    }
+
+    public void setStage() {
+        float i = (float) getItemHandler().getStackInSlot(0).getCount() / getItemHandler().getSlotLimit(0);
+        int stage = (int) (i * 8);
+        level.setBlockAndUpdate(worldPosition, getBlockState()
+                .setValue(AquaticCatalystBlock.STAGE, stage));
+    }
+
+    public RecipeHolder<AquaticCatalystChannelingRecipe> getRecipeForCache(ItemStack stack) {
         return level.getRecipeManager()
                 .getRecipeFor(AquaticCatalystChannelingRecipe.Type.INSTANCE, new SingleRecipeInput(stack), level)
                 .orElse(null);
     }
 
-    public int getPower() {
-        return amount;
+    @Override
+    public Set<Direction> getLaserInputs() {
+        return Set.of();
+    }
+
+    @Override
+    public Set<Direction> getLaserOutputs() {
+        if (isActive()) {
+            return Set.of(getBlockState().getValue(BlockStateProperties.FACING).getOpposite());
+        }
+        return Collections.emptySet();
     }
 
     @Override
     public <T> Map<Direction, Pair<IOActions, int[]>> getSidedInteractions(BlockCapability<T, @Nullable Direction> capability) {
-        if (capability == Capabilities.ItemHandler.BLOCK) {
-            return SidedCapUtils.allInsert(0);
-        }
-        return Map.of();
+        return SidedCapUtils.allInsert(0);
     }
 
     @Override
     protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
         super.loadData(tag, provider);
-        this.duration = tag.getInt("duration");
-        this.active = tag.getBoolean("active");
 
-        Optional<RecipeHolder<?>> recipe1 = level.getRecipeManager().byKey(ResourceLocation.parse(tag.getString("recipe")));
-        recipe1.ifPresent(recipeHolder -> this.nextRecipeCache = (RecipeHolder<AquaticCatalystChannelingRecipe>) recipeHolder);
+        this.duration = tag.getInt("duration");
+        this.currentRecipeId = ResourceLocation.parse(tag.getString("current_recipe"));
+        this.nextRecipeId = ResourceLocation.parse(tag.getString("next_recipe"));
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+
+        this.currentRecipe = loadRecipe(currentRecipeId);
+        this.nextRecipe = loadRecipe(nextRecipeId);
+    }
+
+    private RecipeHolder<AquaticCatalystChannelingRecipe> loadRecipe(ResourceLocation location) {
+        return (RecipeHolder<AquaticCatalystChannelingRecipe>) level.getRecipeManager().byKey(location).orElse(null);
     }
 
     @Override
     protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
         super.saveData(tag, provider);
-        tag.putInt("duration", this.duration);
-        tag.putBoolean("active", this.active);
-        tag.putString("recipe", this.nextRecipeCache != null ? this.nextRecipeCache.toString() : "");
+
+        tag.putInt("duration", duration);
+        if (currentRecipe != null) tag.putString("current_recipe", currentRecipe.toString());
+        if (nextRecipe != null) tag.putString("next_recipe", nextRecipe.toString());
     }
 }

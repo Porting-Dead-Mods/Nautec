@@ -27,7 +27,7 @@
         "type": "modonomicon:none"
       },
       "recipe_id_1": "nautec:aquatic_catalyst",
-      "text": "It can be accomplished by supplying the catalyst with fuel, like for\nexample Kelp and activating it with a Heart Of the Sea.\n\\\nAfter right-clicking the item on the catalyst, a laser beam will shoot\nout of the opposite side as long as it has a target.\n",
+      "text": "It can be accomplished by supplying the catalyst with fuel, like for example some prismarine.\n\\\nAfter right-clicking the item on the catalyst, a laser beam will shoot\nout of the opposite side as long as it has a target.\n",
       "title1": "Aquatic Catalyst",
       "title2": ""
     },
@@ -46,13 +46,13 @@
   "parents": [
     {
       "draw_arrow": true,
-      "entry": "getting_started/structures",
+      "entry": "getting_started/introduction",
       "line_enabled": true,
       "line_reversed": false
     }
   ],
   "show_when_any_parent_unlocked": false,
-  "sort_number": 2,
-  "x": 4,
+  "sort_number": 3,
+  "x": 2,
   "y": 0
 }

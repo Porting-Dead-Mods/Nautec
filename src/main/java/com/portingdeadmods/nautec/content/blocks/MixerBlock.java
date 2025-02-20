@@ -26,6 +26,8 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -76,16 +78,16 @@ public class MixerBlock extends LaserBlock {
     }
 
     @Override
-    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        /*if (level.getBlockEntity(pos) instanceof MixerBlockEntity mixerBE) {
-            IItemHandler itemHandler = mixerBE.getItemHandler();
-            IFluidHandler fluidHandler = mixerBE.getFluidHandler();
-            IFluidHandler secondaryFluidHandler = mixerBE.getSecondaryFluidHandler();
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder.add(BlockStateProperties.HORIZONTAL_FACING));
+    }
 
-            Direction clickedFace = player.getDirection();
-            if (stack.isEmpty()) {
-                return extractItemsSided(player, itemHandler, clickedFace);
-            } else if (stack.getCapability(Capabilities.FluidHandler.ITEM) != null) {
+    @Override
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (level.getBlockEntity(pos) instanceof MixerBlockEntity mixerBE) {
+            IFluidHandler fluidHandler = mixerBE.getFluidHandler();
+
+            if (stack.getCapability(Capabilities.FluidHandler.ITEM) != null) {
                 IFluidHandler itemFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
                 if (mixerBE.getFluidHandler() instanceof FluidTank fluidTank && mixerBE.getSecondaryFluidHandler() instanceof FluidTank secFluidTank) {
                     if (itemFluidHandler.getFluidInTank(0).isEmpty()) {
@@ -95,15 +97,9 @@ public class MixerBlock extends LaserBlock {
                     }
                     return ItemInteractionResult.SUCCESS;
                 }
-            } else {
-                return insertItemsSided(stack, player, hand, itemHandler, clickedFace);
             }
-        }*/
+        }
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
-    }
-
-    private static Component literal(String text) {
-        return Component.literal(text).withStyle(ChatFormatting.WHITE);
     }
 
     private static void insertFluid(Player player, Level level, InteractionHand interactionHand, IFluidHandler fluidHandler, IFluidHandler fluidHandlerItem) {

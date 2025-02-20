@@ -1,22 +1,29 @@
 package com.portingdeadmods.nautec.datagen.loot;
 
+import com.portingdeadmods.nautec.content.blocks.BacterialAnalyzerBlock;
+import com.portingdeadmods.nautec.content.blocks.BacterialAnalyzerTopBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.content.multiblocks.AugmentationStationMultiblock;
+import com.portingdeadmods.nautec.content.multiblocks.BioReactorMultiblock;
+import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
@@ -78,17 +85,119 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
                 8, NTBlocks.AQUARINE_STEEL_BLOCK.get()
         )));
         drainPartDrop(NTBlocks.DRAIN_PART.get());
+        dropSelf(NTBlocks.BACTERIAL_CONTAINMENT_SHIELD.get());
+        dropSelf(NTBlocks.INCUBATOR.get());
+        dropSelf(NTBlocks.MUTATOR.get());
+        dropSelf(NTBlocks.BIO_REACTOR.get());
+        add(NTBlocks.BIO_REACTOR_PART.get(), createStateDrop(NTBlocks.BIO_REACTOR_PART.get(), BioReactorMultiblock.BIO_REACTOR_PART, Map.of(
+                0, NTBlocks.DARK_PRISMARINE_PILLAR.get(),
+                1, NTBlocks.BACTERIAL_CONTAINMENT_SHIELD.get(),
+                2, NTBlocks.DARK_PRISMARINE_PILLAR.get(),
+                3, NTBlocks.BACTERIAL_CONTAINMENT_SHIELD.get(),
+                4, NTBlocks.POLISHED_PRISMARINE.get(),
+                5, NTBlocks.BACTERIAL_CONTAINMENT_SHIELD.get(),
+                6, NTBlocks.DARK_PRISMARINE_PILLAR.get(),
+                7, NTBlocks.BACTERIAL_CONTAINMENT_SHIELD.get(),
+                8, NTBlocks.DARK_PRISMARINE_PILLAR.get()
+        )));
+        dropSelf(NTBlocks.BACTERIAL_ANALYZER.get());
+        dropSelf(NTBlocks.FISHING_STATION.get());
     }
+
+    protected LootTable.Builder createStateDrop(
+            Block block, IntegerProperty property, Map<Integer, Block> drops
+    ) {
+        LootPool.Builder builder = LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1.0F));
+
+        for (Map.Entry<Integer, Block> entry : drops.entrySet()) {
+            builder.add(LootItem.lootTableItem(entry.getValue())
+                    .when(
+                            LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, entry.getKey()))
+                    ));
+        }
+
+        return LootTable.lootTable()
+                .withPool(
+                        this.applyExplosionCondition(
+                                block,
+                                builder
+                        )
+                );
+    }
+
+
+    protected <T extends Comparable<T> & StringRepresentable> LootTable.Builder createStateDrop(
+            Block block, Property<T> property, Map<T, Block> drops
+    ) {
+        LootPool.Builder builder = LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1.0F));
+
+        for (Map.Entry<T, Block> entry : drops.entrySet()) {
+            builder.add(LootItem.lootTableItem(entry.getValue())
+                    .when(
+                            LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, entry.getKey()))
+                    ));
+        }
+
+        return LootTable.lootTable()
+                .withPool(
+                        this.applyExplosionCondition(
+                                block,
+                                builder
+                        )
+                );
+    }
+
 
     protected void prismarineSand(Block prismarineSandOre) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
-        add(prismarineSandOre, this.createSilkTouchDispatchTable(prismarineSandOre, this.applyExplosionDecay(prismarineSandOre, LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
-                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
-        )).withPool(LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(1f))
-                .add(LootItem.lootTableItem(Items.PRISMARINE_SHARD))
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))));
+//        add(
+//            prismarineSandOre,
+//            this.createSilkTouchDispatchTable(
+//                    prismarineSandOre,
+//                    this.applyExplosionDecay(
+//                            Items.AIR,
+//                            LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
+//                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+//                                    .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
+//                    )).withPool(LootPool.lootPool()
+//                            .setRolls(ConstantValue.exactly(1f))
+//                            .add(LootItem.lootTableItem(Items.PRISMARINE_SHARD))
+//                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+//            )
+//        );
+
+        add(
+                prismarineSandOre,
+                LootTable.lootTable()
+                        .withPool(
+                                LootPool.lootPool()
+                                        .add(LootItem.lootTableItem(prismarineSandOre))
+                                        .apply(SetItemCountFunction.setCount(new ConstantValue(1)))
+                                        .when(this.hasSilkTouch())
+                        )
+                        .withPool(
+                                LootPool.lootPool()
+                                        .setRolls(ConstantValue.exactly(1.0F))
+                                        .add(LootItem.lootTableItem(Items.PRISMARINE_SHARD)
+                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+                                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
+                                        )
+                                        .when(this.doesNotHaveSilkTouch())
+                        )
+                        .withPool(
+                                LootPool.lootPool()
+                                        .setRolls(ConstantValue.exactly(1.0F))
+                                        .add(LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
+                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+                                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
+                                        )
+                                        .when(this.doesNotHaveSilkTouch())
+                        )
+        );
     }
 
     protected LootTable.Builder multiblockPartDrop(

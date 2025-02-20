@@ -22,7 +22,7 @@ public class LaserPowerEntry extends EntryProvider {
         this.pageTitle("An Introduction to Laser Power");
         this.pageText("""
                 Lasers are a mysterious technology. Nobody really knows
-                exactly how to create them. However using some prismarine
+                exactly how to create them. However using some prismarine,
                 both dark and light, one is able to create an Aquatic Catalyst.
                 \\
                 While this block itself does not possesses the ability to channel
@@ -32,8 +32,7 @@ public class LaserPowerEntry extends EntryProvider {
                 .withTitle1("Aquatic Catalyst")
                 .withRecipeId1("nautec:aquatic_catalyst")
                 .withText("""
-                        It can be accomplished by supplying the catalyst with fuel, like for
-                        example Kelp and activating it with a Heart Of the Sea.
+                        It can be accomplished by supplying the catalyst with fuel, like for example some prismarine.
                         \\
                         After right-clicking the item on the catalyst, a laser beam will shoot
                         out of the opposite side as long as it has a target.
