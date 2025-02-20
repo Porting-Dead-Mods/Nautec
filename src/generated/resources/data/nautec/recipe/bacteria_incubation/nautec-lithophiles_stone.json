@@ -1,0 +1,12 @@
+{
+  "type": "nautec:bacteria_incubation",
+  "bacteria": "nautec:lithophiles",
+  "consume_chance": 0.05,
+  "growth": {
+    "max": 25,
+    "min": 8
+  },
+  "nutrient": {
+    "item": "minecraft:stone"
+  }
+}

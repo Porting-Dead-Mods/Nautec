@@ -1,0 +1,54 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "aquatic_biology",
+  "description": "book.nautec.nautec_guide.aquatic_biology.bio_reactor.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "nautec:bio_reactor"
+  },
+  "name": "book.nautec.nautec_guide.aquatic_biology.bio_reactor.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "nautec:bio_reactor"
+      },
+      "text": "book.nautec.nautec_guide.aquatic_biology.bio_reactor.bio_reactor.text",
+      "title": "book.nautec.nautec_guide.aquatic_biology.bio_reactor.bio_reactor.title"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "multiblock_id": "bio_reactor",
+      "multiblock_name": "",
+      "show_visualize_button": true,
+      "text": "book.nautec.nautec_guide.aquatic_biology.bio_reactor.bio_reactor_1.text"
+    }
+  ],
+  "parents": [
+    {
+      "draw_arrow": true,
+      "entry": "aquatic_biology/incubator",
+      "line_enabled": true,
+      "line_reversed": false
+    },
+    {
+      "draw_arrow": true,
+      "entry": "aquatic_biology/mutator",
+      "line_enabled": true,
+      "line_reversed": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 6,
+  "x": 8,
+  "y": 0
+}

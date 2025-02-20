@@ -1,0 +1,33 @@
+{
+  "type": "modonomicon:dense",
+  "mapping": {
+    "0": {
+      "type": "modonomicon:block",
+      "block": "nautec:bio_reactor"
+    },
+    "C": {
+      "type": "modonomicon:block",
+      "block": "nautec:bacterial_containment_shield"
+    },
+    "D": {
+      "type": "modonomicon:block",
+      "block": "nautec:dark_prismarine_pillar"
+    },
+    "P": {
+      "type": "modonomicon:block",
+      "block": "nautec:polished_prismarine"
+    }
+  },
+  "pattern": [
+    [
+      "DCD",
+      "C0C",
+      "DCD"
+    ],
+    [
+      "DCD",
+      "CPC",
+      "DCD"
+    ]
+  ]
+}

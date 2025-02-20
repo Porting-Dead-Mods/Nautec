@@ -24,27 +24,28 @@ public class GettingStartedCategory extends CategoryProvider {
                 .generate(new Vec2(0, 0));
         add(introductionEntry);
         BookEntryModel structuresEntry = new StructuresEntry(this)
-                .generate(new Vec2(2, 0));
+                .generate(new Vec2(0, -2));
         add(structuresEntry.withParent(introductionEntry));
+        BookEntryModel cratesEtching = new CratesEtchingEntry(this)
+                .generate(new Vec2(-2, -2));
+        add(cratesEtching.withParent(structuresEntry));
         BookEntryModel laserPowerEntry = new LaserPowerEntry(this)
-                .generate(new Vec2(4, 0));
-        add(laserPowerEntry.withParent(structuresEntry));
+                .generate(new Vec2(2, 0));
+        add(laserPowerEntry.withParent(introductionEntry));
         BookEntryModel itemTransformationEntry = new ItemTransformationEntry(this)
-                .generate(new Vec2(6, 0));
+                .generate(new Vec2(4, 0));
         add(itemTransformationEntry.withParent(laserPowerEntry));
         BookEntryModel monocleEntry = new MonocleEntry(this)
-                .generate(new Vec2(4, 2));
+                .generate(new Vec2(2, 2));
         add(monocleEntry.withParent(laserPowerEntry));
-        BookEntryModel divingGear = new DivingGearEntry(this).generate(new Vec2(2, -2));
+        BookEntryModel divingGear = new DivingGearEntry(this)
+                .generate(new Vec2(0, 2));
         add(divingGear.withParent(introductionEntry));
         BookEntryModel utilitiesEntry = new UtilitiesEntry(this)
-                .generate(new Vec2(6, -2));
-        add(utilitiesEntry.withParent(itemTransformationEntry));
-        BookEntryModel cratesEtching = new CratesEtchingEntry(this)
-                .generate(new Vec2(2, 2));
-        add(cratesEtching.withParent(structuresEntry));
-        BookEntryModel machinePartEntry = new MachinePartEntry(this)
                 .generate(new Vec2(4, -2));
+        add(utilitiesEntry.withParent(itemTransformationEntry));
+        BookEntryModel machinePartEntry = new MachinePartEntry(this)
+                .generate(new Vec2(2, -2));
         add(machinePartEntry.withParent(structuresEntry));
     }
 

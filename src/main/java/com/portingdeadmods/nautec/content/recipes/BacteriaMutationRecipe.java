@@ -6,6 +6,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.content.recipes.inputs.BacteriaRecipeInput;
+import com.portingdeadmods.nautec.registries.NTItems;
+import com.portingdeadmods.nautec.utils.BacteriaHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -15,13 +18,25 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-/**
- * <b><i>THIS CLASS SHOULD ONLY BE USED CLIENT SIDE :3</i></b>
- */
 public record BacteriaMutationRecipe(ResourceKey<Bacteria> inputBacteria, ResourceKey<Bacteria> resultBacteria,
                                      Ingredient catalyst, float chance) implements Recipe<BacteriaRecipeInput> {
     public static final String NAME = "bacteria_mutation";
     public static final RecipeType<BacteriaMutationRecipe> TYPE = RecipeType.simple(Nautec.rl("bacteria_mutation"));
+
+
+    /**
+     * <b><i>THIS METHOD SHOULD ONLY BE USED CLIENT SIDE :3</i></b>
+     */
+    public ItemStack getInputDish() {
+        return BacteriaHelper.getMaxStatDish(inputBacteria, Minecraft.getInstance().level.registryAccess());
+    }
+
+    /**
+     * <b><i>THIS METHOD SHOULD ONLY BE USED CLIENT SIDE :3</i></b>
+     */
+    public ItemStack getOutputDish() {
+        return BacteriaHelper.getMaxStatDish(resultBacteria, Minecraft.getInstance().level.registryAccess());
+    }
 
     @Override
     public boolean matches(BacteriaRecipeInput input, Level level) {

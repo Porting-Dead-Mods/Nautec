@@ -46,7 +46,15 @@ public class BlockTagProvider extends BlockTagsProvider {
                 DRAIN_PART,
                 AUGMENTATION_STATION,
                 AUGMENTATION_STATION_EXTENSION,
-                AUGMENTATION_STATION_PART);
+                AUGMENTATION_STATION_PART,
+                BACTERIAL_ANALYZER,
+                BACTERIAL_ANALYZER_TOP,
+                BACTERIAL_CONTAINMENT_SHIELD,
+                BIO_REACTOR,
+                BIO_REACTOR_PART,
+                MUTATOR,
+                INCUBATOR,
+                FISHING_STATION);
     }
 
     private void tag(TagKey<Block> blockTagKey, Block... blocks) {

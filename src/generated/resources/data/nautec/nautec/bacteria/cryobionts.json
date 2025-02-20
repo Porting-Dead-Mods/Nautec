@@ -1,0 +1,28 @@
+{
+  "type": "nautec:simple",
+  "bacteria": "minecraft:ice",
+  "initial_size": {
+    "max": 420,
+    "min": 220
+  },
+  "stats": {
+    "type": "nautec:simple",
+    "color": -5383962,
+    "growth_rate": {
+      "max": 0.9,
+      "min": 0.4
+    },
+    "lifespan": {
+      "max": 2600,
+      "min": 1400
+    },
+    "mutation_resistance": {
+      "max": 0.05,
+      "min": 0.0
+    },
+    "production_rate": {
+      "max": 0.4,
+      "min": 0.08
+    }
+  }
+}

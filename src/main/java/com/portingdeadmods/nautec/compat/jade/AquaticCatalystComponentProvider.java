@@ -17,11 +17,11 @@ public enum AquaticCatalystComponentProvider implements IBlockComponentProvider 
         if (blockAccessor.getBlockEntity() instanceof AquaticCatalystBlockEntity blockEntity) {
             if (blockEntity.isActive()) {
                 iTooltip.add(Component.literal("Status: Active"));
-                blockEntity.getCurrentRecipe().ifPresent(recipe -> {
+               if (blockEntity.getCurrentRecipe() != null) {
                     iTooltip.add(Component.literal("Processing: ").append(Component.literal(blockEntity.getItemHandler().getStackInSlot(0).getCount() +"x ").append(Component.translatable(blockEntity.getProcessingItem().getDescriptionId()))));
                     iTooltip.add(Component.literal("Remaining Duration: " + blockEntity.getRemainingDuration() + " ticks"));
                     iTooltip.add(Component.literal("Transferring: " + blockEntity.getPower() + "AP/T"));
-                });
+                }
             } else {
                 iTooltip.add(Component.literal("Status: Inactive"));
             }

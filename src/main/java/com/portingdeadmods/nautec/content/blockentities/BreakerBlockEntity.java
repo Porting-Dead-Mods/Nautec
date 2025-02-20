@@ -26,7 +26,7 @@ public class BreakerBlockEntity extends LaserBlockEntity {
     private boolean running;
     private int counter;
     public BreakerBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(NTBlockEntityTypes.BREAKER_BLOCK.get(), blockPos, blockState);
+        super(null /*NTBlockEntityTypes.BREAKER_BLOCK.get()*/, blockPos, blockState);
     }
 
     @Override

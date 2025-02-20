@@ -23,8 +23,8 @@ public class MixerMenu extends NTMachineMenu<MixerBlockEntity> {
 
         addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 4, 29 + 2 * (4 + 18) - 11, 67));
 
-        addFluidHandlerSlot(new SlotFluidHandler(blockEntity.getFluidHandler(), 0, 80, 20, 20, 20));
-        addFluidHandlerSlot(new SlotFluidHandler(blockEntity.getSecondaryFluidHandler(), 0, 80, 60, 20, 20));
+        addFluidHandlerSlot(new SlotFluidHandler(blockEntity.getFluidHandler(), 0, 122, 11, 18, 18));
+        addFluidHandlerSlot(new SlotFluidHandler(blockEntity.getSecondaryFluidHandler(), 0, 122, 66, 18, 18));
     }
 
     @Override

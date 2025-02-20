@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.compat.modonomicon.datagen.book;
 import com.klikli_dev.modonomicon.api.datagen.ModonomiconLanguageProvider;
 import com.klikli_dev.modonomicon.api.datagen.SingleBookSubProvider;
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.AquaticBiologyCategory;
 import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.GettingStartedCategory;
 import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.LaserAugmentationCategory;
 import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.LaserChemistryCategory;
@@ -20,6 +21,7 @@ public class NautecGuide extends SingleBookSubProvider {
     protected void generateCategories() {
         add(new GettingStartedCategory(this).generate());
         add(new LaserChemistryCategory(this).generate());
+        add(new AquaticBiologyCategory(this).generate());
         add(new LaserAugmentationCategory(this).generate());
     }
 

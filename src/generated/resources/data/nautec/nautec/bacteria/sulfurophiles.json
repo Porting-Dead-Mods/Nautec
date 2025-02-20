@@ -1,0 +1,28 @@
+{
+  "type": "nautec:simple",
+  "bacteria": "minecraft:gunpowder",
+  "initial_size": {
+    "max": 530,
+    "min": 250
+  },
+  "stats": {
+    "type": "nautec:simple",
+    "color": -8026747,
+    "growth_rate": {
+      "max": 1.2,
+      "min": 0.55
+    },
+    "lifespan": {
+      "max": 2000,
+      "min": 900
+    },
+    "mutation_resistance": {
+      "max": 0.15,
+      "min": 0.0
+    },
+    "production_rate": {
+      "max": 0.54,
+      "min": 0.14
+    }
+  }
+}

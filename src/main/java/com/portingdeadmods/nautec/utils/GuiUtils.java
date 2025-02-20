@@ -26,4 +26,12 @@ public final class GuiUtils {
             guiGraphics.blit(x + 1, y, 0, 16, 16, sprite, r / 255f, g / 255f, b / 255f, a / 255f);
         }
     }
+
+    public static boolean isHovering(GuiGraphics guiGraphics, int x, int y, int width, int height, int mouseX, int mouseY) {
+        return guiGraphics.containsPointInScissor(mouseX, mouseY)
+                && mouseX > x
+                && mouseY > y
+                && mouseX < x + width
+                && mouseY < y + height;
+    }
 }

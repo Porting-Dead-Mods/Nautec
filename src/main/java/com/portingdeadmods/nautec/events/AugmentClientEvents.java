@@ -31,6 +31,7 @@ public final class AugmentClientEvents {
         for (Augment augment : augments.values()) {
             if (augment instanceof GuardianEyeAugment eyeAugment && eyeAugment.getTargetEntity() != null) {
                 GuardianEyeRenderHelper.render(event.getEntity(), eyeAugment, event.getPartialTick(), event.getPoseStack(), event.getMultiBufferSource());
+                return;
             }
         }
     }

@@ -36,6 +36,11 @@ public abstract class AbstractRange<T extends Number> {
 
     protected abstract Collection<T> collectPossibleValues();
 
+    @Override
+    public String toString() {
+        return min + " - " + max;
+    }
+
     // Constructs a pair out of the range and uses that for encoding
     public static <T extends Number, SELF extends AbstractRange<T>> MapCodec<SELF> rangeMapCodec(Codec<T> codec, BiFunction<T, T, SELF> constructor) {
         return RecordCodecBuilder.mapCodec(instance -> instance.group(

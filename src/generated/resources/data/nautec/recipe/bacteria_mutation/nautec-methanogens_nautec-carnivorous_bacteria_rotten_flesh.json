@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "chance": 5.0,
+  "input_bacteria": "nautec:methanogens",
+  "result_bacteria": "nautec:carnivorous_bacteria"
+}

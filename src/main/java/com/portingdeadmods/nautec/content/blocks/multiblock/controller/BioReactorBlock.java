@@ -4,8 +4,11 @@ import com.mojang.serialization.MapCodec;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.blockentities.LaserBlock;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.part.BioReactorPartBlockEntity;
 import com.portingdeadmods.nautec.content.multiblocks.BioReactorMultiblock;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTMultiblocks;
+import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -61,5 +64,14 @@ public class BioReactorBlock extends LaserBlock {
             return super.useWithoutItem(p_60503_, p_60504_, p_60505_, p_60506_, p_60508_);
         }
         return InteractionResult.FAIL;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock())) {
+            MultiblockHelper.unform(NTMultiblocks.BIO_REACTOR.get(), pos, level);
+        }
+
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 }

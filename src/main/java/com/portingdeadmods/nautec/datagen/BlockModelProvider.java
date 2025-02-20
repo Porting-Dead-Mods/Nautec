@@ -91,15 +91,16 @@ public class BlockModelProvider extends BlockStateProvider {
 
     private void aquaticCatalyst(AquaticCatalystBlock block) {
         VariantBlockStateBuilder builder = getVariantBuilder(block);
-        builder.partialState().with(AquaticCatalystBlock.ACTIVE, false)
-                .modelForState().modelFile(models().cubeAll(name(block), blockTexture(block))).addModel();
-        for (Direction direction : Direction.values()) {
+        for (Direction dir : Direction.values()) {
             for (int stage : AquaticCatalystBlock.STAGE.getPossibleValues()) {
                 builder.partialState()
-                        .with(BlockStateProperties.FACING, direction)
-                        .with(AquaticCatalystBlock.ACTIVE, true)
+                        .with(BlockStateProperties.FACING, dir)
                         .with(AquaticCatalystBlock.STAGE, stage)
-                        .modelForState().modelFile(createActiveACModel(block, direction, stage)).addModel();
+                        .modelForState()
+                        .modelFile(createActiveACModel(block, stage))
+                        .rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
+                        .rotationY(dir.getAxis().isVertical() ? 0 : (((int) dir.toYRot()) + 180) % 360)
+                        .addModel();
             }
         }
     }
@@ -236,16 +237,15 @@ public class BlockModelProvider extends BlockStateProvider {
         return modLoc(ModelProvider.BLOCK_FOLDER + "/multiblock/" + NTRegistries.MULTIBLOCK.getKey(multiblock).getPath() + "/" + name);
     }
 
-    private ModelFile createActiveACModel(AquaticCatalystBlock block, Direction activeSide, int stage) {
-        BlockModelBuilder builder = models().withExistingParent(name(block) + "_" + activeSide.getSerializedName() + "_" + stage, "cube");
-        for (Direction dir : Direction.values()) {
-            if (dir == activeSide) {
-                builder.texture(dir.getName(), extend(blockTexture(block), "_active_" + stage));
-            } else {
-                builder.texture(dir.getName(), blockTexture(block));
-            }
-        }
-        return builder;
+    private ModelFile createActiveACModel(AquaticCatalystBlock block, int stage) {
+        return models().cube(name(block) + (stage != 0 ? ("_" + stage) : ""),
+                blockTexture(block, "_bottom"),
+                extend(blockTexture(block), "_top_" + stage),
+                blockTexture(block, "_side"),
+                blockTexture(block, "_side"),
+                blockTexture(block, "_side"),
+                blockTexture(block, "_side")
+        );
     }
 
     public ResourceLocation blockTexture(Block block, String suffix) {

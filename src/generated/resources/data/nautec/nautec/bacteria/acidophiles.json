@@ -1,0 +1,28 @@
+{
+  "type": "nautec:simple",
+  "bacteria": "minecraft:redstone",
+  "initial_size": {
+    "max": 450,
+    "min": 250
+  },
+  "stats": {
+    "type": "nautec:simple",
+    "color": -65408,
+    "growth_rate": {
+      "max": 0.9,
+      "min": 0.4
+    },
+    "lifespan": {
+      "max": 2000,
+      "min": 900
+    },
+    "mutation_resistance": {
+      "max": 0.2,
+      "min": 0.0
+    },
+    "production_rate": {
+      "max": 0.6,
+      "min": 0.2
+    }
+  }
+}

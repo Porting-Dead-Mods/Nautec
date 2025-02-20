@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:moss_block"
+  },
+  "chance": 5.0,
+  "input_bacteria": "nautec:rhizobacteria",
+  "result_bacteria": "nautec:bryophytophiles"
+}

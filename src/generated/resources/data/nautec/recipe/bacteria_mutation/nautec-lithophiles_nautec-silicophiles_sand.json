@@ -1,0 +1,9 @@
+{
+  "type": "nautec:bacteria_mutation",
+  "catalyst": {
+    "item": "minecraft:sand"
+  },
+  "chance": 5.0,
+  "input_bacteria": "nautec:lithophiles",
+  "result_bacteria": "nautec:silicophiles"
+}
