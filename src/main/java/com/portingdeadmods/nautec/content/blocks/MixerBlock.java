@@ -63,6 +63,11 @@ public class MixerBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return true;
+    }
+
+    @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
         return NTBlockEntityTypes.MIXER.get();
     }

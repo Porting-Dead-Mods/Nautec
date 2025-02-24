@@ -32,6 +32,11 @@ public class PrismarineLaserRelayBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return true;
+    }
+
+    @Override
     protected @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return switch (state.getValue(FACING)) {
             case EAST, WEST -> SHAPE_EW;
@@ -52,11 +57,12 @@ public class PrismarineLaserRelayBlock extends LaserBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        super.createBlockStateDefinition(builder.add(FACING));
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getClickedFace().getOpposite());
+        BlockState state = super.getStateForPlacement(context);
+        return state != null ? state.setValue(FACING, context.getClickedFace().getOpposite()) : null;
     }
 }

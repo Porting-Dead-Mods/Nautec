@@ -14,5 +14,5 @@ public final class NTFluids {
     public static final SaltWaterFluid SALT_WATER = HELPER.registerFluid(new SaltWaterFluid("saltwater"));
     public static final EASFluid EAS = HELPER.registerFluid(new EASFluid("eas"));
     public static final EtchingAcidFluid ETCHING_ACID = HELPER.registerFluid(new EtchingAcidFluid("etching_acid"));
-    public static final EtchingAcidFluid MOLTEN_ATLANTIC_GOLD = HELPER.registerFluid(new EtchingAcidFluid("molten_atlantic_gold"));
+    //public static final EtchingAcidFluid MOLTEN_ATLANTIC_GOLD = HELPER.registerFluid(new EtchingAcidFluid("molten_atlantic_gold"));
 }

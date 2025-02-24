@@ -21,6 +21,11 @@ public class LongDistanceLaserBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return false;
+    }
+
+    @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return simpleCodec(LongDistanceLaserBlock::new);
     }

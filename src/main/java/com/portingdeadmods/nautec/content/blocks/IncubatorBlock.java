@@ -13,6 +13,11 @@ public class IncubatorBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return false;
+    }
+
+    @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
         return NTBlockEntityTypes.INCUBATOR.get();
     }

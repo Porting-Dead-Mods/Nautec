@@ -86,6 +86,10 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         return power;
     }
 
+    public int getPowerToTransfer() {
+        return powerToTransfer;
+    }
+
     public void transmitPower(int amount) {
         this.powerToTransfer = amount;
     }

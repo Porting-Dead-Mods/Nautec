@@ -33,6 +33,11 @@ public class FishingStationBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return true;
+    }
+
+    @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }

@@ -32,6 +32,11 @@ public class AugmentationStationExtensionBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return false;
+    }
+
+    @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
         return NTBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get();
     }

@@ -29,7 +29,6 @@ public class ItemEtchingRecipeCategory implements IRecipeCategory<ItemEtchingRec
     private final IDrawable icon;
     private final IDrawable background;
 
-
     public ItemEtchingRecipeCategory(IGuiHelper helper) {
         this.background = helper.createBlankDrawable(80, 28);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(NTFluids.ETCHING_ACID.getBucket()));

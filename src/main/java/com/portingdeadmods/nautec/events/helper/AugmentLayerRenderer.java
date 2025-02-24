@@ -45,7 +45,9 @@ public class AugmentLayerRenderer extends RenderLayer<AbstractClientPlayer, Play
 
     private void renderAugmentModel(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, Augment augment) {
         AugmentRenderer<Augment> renderer = getRenderer(augment);
-        renderer.render(augment, this, poseStack, bufferSource, packedLight);
+        if (renderer != null) {
+            renderer.render(augment, this, poseStack, bufferSource, packedLight);
+        }
     }
 
     @SuppressWarnings("unchecked")
