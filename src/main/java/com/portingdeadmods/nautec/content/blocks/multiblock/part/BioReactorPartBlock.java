@@ -46,6 +46,11 @@ public class BioReactorPartBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return false;
+    }
+
+    @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
         return NTBlockEntityTypes.BIO_REACTOR_PART.get();
     }

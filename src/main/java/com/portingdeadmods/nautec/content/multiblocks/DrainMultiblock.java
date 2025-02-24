@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 
@@ -71,28 +72,6 @@ public class DrainMultiblock implements Multiblock {
                     .setValue(FORMED, true)
                     .setValue(DRAIN_PART, layerIndex);
         }
-    }
-
-    @Override
-    public void afterFormBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, MultiblockData multiblockData, @Nullable Player player) {
-        level.setBlockAndUpdate(blockPos.above(), NTBlocks.DRAIN_PART.get().defaultBlockState()
-                .setValue(DrainPartBlock.TOP, true)
-                .setValue(FORMED, true)
-                .setValue(DRAIN_PART, layerIndex)
-                .setValue(DrainPartBlock.WATERLOGGED, level.getBlockState(blockPos).getFluidState().is(FluidTags.WATER))
-                .setValue(DrainPartBlock.OPEN, false)
-        );
-        BlockEntity be = level.getBlockEntity(blockPos.above());
-        if (be instanceof SavesControllerPosBlockEntity savesControllerPosBE) {
-            savesControllerPosBE.setControllerPos(controllerPos);
-        }
-    }
-
-    @Override
-    public void afterUnformBlock(Level level, BlockPos blockPos, BlockPos controllerPos, int layerIndex, int layoutIndex, HorizontalDirection direction, @Nullable Player player) {
-        Multiblock.super.afterUnformBlock(level, blockPos, controllerPos, layerIndex, layoutIndex, direction, player);
-        Nautec.LOGGER.debug("unforming");
-        level.removeBlock(blockPos.above(), false);
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.portingdeadmods.nautec.content.blockentities.multiblock.semi.Prismari
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -16,10 +17,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 public class PrismarineCrystalPartBlock extends LaserBlock {
     public static final IntegerProperty INDEX = IntegerProperty.create("index", 0, 5);
+    public static final VoxelShape BOTTOM_SHAPE = Block.box(2, 4, 2, 14, 16, 14);
+    public static final VoxelShape TOP_SHAPE = Block.box(2, 0, 2, 14, 12, 14);
 
     public PrismarineCrystalPartBlock(Properties properties) {
         super(properties);
@@ -27,8 +32,23 @@ public class PrismarineCrystalPartBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return true;
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder.add(INDEX));
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        if (state.getValue(INDEX) == 5) {
+            return BOTTOM_SHAPE;
+        } else if (state.getValue(INDEX) == 0) {
+            return TOP_SHAPE;
+        }
+        return super.getShape(state, level, pos, context);
     }
 
     @Override

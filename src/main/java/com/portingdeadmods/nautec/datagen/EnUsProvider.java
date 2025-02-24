@@ -39,6 +39,7 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem(ATLANTIC_GOLD_NUGGET, "Atlantic Gold Nugget");
         addItem(NTFluids.SALT_WATER.getDeferredBucket(), "Salt Water Bucket");
         addItem(NTFluids.EAS.getDeferredBucket(), "Electrolyte Algae Serum (EAS) Bucket");
+        addItem(NTFluids.OIL.getDeferredBucket(), "Oil Bucket");
         addItem(GLASS_VIAL, "Glass Vial");
         addItem(ELECTROLYTE_ALGAE_SERUM_VIAL, "Electrolyte Algae Serum (EAS) Vial");
         addItem(CROWBAR, "Crowbar");

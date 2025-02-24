@@ -15,6 +15,10 @@ import java.util.Map;
 import java.util.Set;
 
 public class PrismarineCrystalBlockEntity extends LaserBlockEntity {
+    private boolean breaking;
+    private long startTick;
+    private int duration;
+
     public PrismarineCrystalBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.PRISMARINE_CRYSTAL.get(), blockPos, blockState);
     }
@@ -41,5 +45,30 @@ public class PrismarineCrystalBlockEntity extends LaserBlockEntity {
         super.commonTick();
 
         setPurity(3f);
+
+        if (duration > 0 && isBreaking()) {
+            duration--;
+            if (duration == 0) {
+                this.breaking = false;
+            }
+        }
+    }
+
+    public boolean isBreaking() {
+        return breaking;
+    }
+
+    public long getStartTick() {
+        return startTick;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void playBreakAnimation() {
+        this.breaking = true;
+        this.startTick = level.getGameTime();
+        this.duration = 10;
     }
 }

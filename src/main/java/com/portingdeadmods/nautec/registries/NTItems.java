@@ -24,6 +24,7 @@ import java.util.function.Supplier;
 public final class NTItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Nautec.MODID);
     public static final List<ItemLike> CREATIVE_TAB_ITEMS = new ArrayList<>();
+    public static final List<ItemLike> BACTERIA_ITEMS = new ArrayList<>();
     public static final List<Supplier<BlockItem>> BLOCK_ITEMS = new ArrayList<>();
 
     public static final Supplier<Item> NAUTEC_GUIDE;
@@ -96,11 +97,11 @@ public final class NTItems {
     public static final DeferredItem<Item> ELECTROLYTE_ALGAE_SERUM_VIAL = registerItem("eas_vial", Item::new, new Item.Properties());
 
     // BACTERIA
-    public static final DeferredItem<GraftingToolItem> GRAFTING_TOOL = registerItem("grafting_tool", GraftingToolItem::new,
-            () -> new Item.Properties().durability(80));
-    public static final DeferredItem<PetriDishItem> PETRI_DISH = registerItem("petri_dish", PetriDishItem::new, () -> new Item.Properties()
+    public static final DeferredItem<GraftingToolItem> GRAFTING_TOOL = bacteriaItem(registerItem("grafting_tool", GraftingToolItem::new,
+            () -> new Item.Properties().durability(80)));
+    public static final DeferredItem<PetriDishItem> PETRI_DISH = bacteriaItem(registerItem("petri_dish", PetriDishItem::new, () -> new Item.Properties()
             .stacksTo(1)
-            .component(NTDataComponents.BACTERIA, ComponentBacteriaStorage.EMPTY));
+            .component(NTDataComponents.BACTERIA, ComponentBacteriaStorage.EMPTY)));
 
     // ARMOR
     // CURIO ITEMS
@@ -118,7 +119,6 @@ public final class NTItems {
     public static final DeferredItem<AquarineArmorItem> AQUARINE_CHESTPLATE = registerItem("aquarine_steel_chestplate", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final DeferredItem<AquarineArmorItem> AQUARINE_LEGGINGS = registerItem("aquarine_steel_leggings", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final DeferredItem<AquarineArmorItem> AQUARINE_BOOTS = registerItem("aquarine_steel_boots", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.BOOTS, new Item.Properties()));
-
 
     // TOOLS 'N WEAPONS
     public static final DeferredItem<NeptunesTridentItem> NEPTUNES_TRIDENT = registerItem("neptunes_trident",
@@ -138,9 +138,15 @@ public final class NTItems {
     public static final DeferredItem<Item> CROWBAR = registerItem("crowbar",
             Item::new, new Item.Properties().stacksTo(1));
 
+    public static <T extends Item> DeferredItem<T> bacteriaItem(DeferredItem<T> item) {
+        BACTERIA_ITEMS.add(item);
+        return item;
+    }
+
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Item.Properties properties) {
         return registerItem(name, itemConstructor, properties, true);
     }
+
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Supplier<Item.Properties> properties) {
         return registerItem(name, itemConstructor, properties, true);
     }

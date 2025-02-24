@@ -38,6 +38,34 @@ public final class NTCreativeTabs {
             .icon(NTBlocks.AQUATIC_CATALYST::toStack)
             .displayItems((params, output) -> {
                 for (ItemLike item : NTItems.CREATIVE_TAB_ITEMS) {
+                    if (!NTItems.BACTERIA_ITEMS.contains(item)) {
+                        output.accept(item);
+                        if (item.asItem() instanceof IPowerItem) {
+                            addPowered(output, item.asItem());
+                        }
+                    }
+                }
+
+                if (ModList.get().isLoaded("modonomicon")) {
+                    output.accept(ModonomiconCompat.getItemStack());
+                }
+
+                output.accept(NTBlocks.CREATIVE_POWER_SOURCE);
+
+                for (NTFluid fluid : NTFluids.HELPER.getFluids()) {
+                    DeferredItem<BucketItem> deferredBucket = fluid.getDeferredBucket();
+                    Nautec.LOGGER.debug("Bucket: {}", deferredBucket);
+                    output.accept(deferredBucket);
+                }
+
+            })
+            .build());
+
+    public static final Supplier<CreativeModeTab> BACTERIA = CREATIVE_MODE_TABS.register("bacteria", () -> CreativeModeTab.builder()
+            .title(Component.translatable("nautec.creative_tab.bacteria"))
+            .icon(NTBlocks.BACTERIAL_ANALYZER::toStack)
+            .displayItems((params, output) -> {
+                for (ItemLike item : NTItems.BACTERIA_ITEMS) {
                     output.accept(item);
                     if (item.asItem() instanceof IPowerItem) {
                         addPowered(output, item.asItem());
@@ -53,18 +81,6 @@ public final class NTCreativeTabs {
                             });
                         }
                     }
-                }
-
-                if (ModList.get().isLoaded("modonomicon")) {
-                    output.accept(ModonomiconCompat.getItemStack());
-                }
-
-                output.accept(NTBlocks.CREATIVE_POWER_SOURCE);
-
-                for (NTFluid fluid : NTFluids.HELPER.getFluids()) {
-                    DeferredItem<BucketItem> deferredBucket = fluid.getDeferredBucket();
-                    Nautec.LOGGER.debug("Bucket: {}", deferredBucket);
-                    output.accept(deferredBucket);
                 }
 
             })

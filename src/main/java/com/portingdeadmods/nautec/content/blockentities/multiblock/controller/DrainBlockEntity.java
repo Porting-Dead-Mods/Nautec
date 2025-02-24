@@ -2,10 +2,12 @@ package com.portingdeadmods.nautec.content.blockentities.multiblock.controller;
 
 import com.google.common.collect.ImmutableMap;
 import com.portingdeadmods.nautec.NTConfig;
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockEntity;
 import com.portingdeadmods.nautec.api.multiblocks.MultiblockData;
 import com.portingdeadmods.nautec.capabilities.IOActions;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.part.DrainPartBlockEntity;
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.content.multiblocks.DrainMultiblock;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
@@ -62,7 +64,15 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
         level.playSound(null, worldPosition, SoundEvents.IRON_DOOR_CLOSE, SoundSource.BLOCKS, 1, 1f);
 
         // Set top blocks to open
-        setTopOpen(true);
+        setOpen(true);
+    }
+
+    @Override
+    public void onPowerChanged() {
+        super.onPowerChanged();
+
+        updatePowerAndBubbles();
+
     }
 
     public void close() {
@@ -71,12 +81,16 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
         this.closing = true;
     }
 
+    public boolean isMoving() {
+        return lidInUse > 0 || valveInUse > 0;
+    }
+
     public boolean isClosing() {
         return closing;
     }
 
-    private void setTopOpen(boolean value) {
-        BlockPos selfPos = worldPosition.above();
+    private void setOpen(boolean value) {
+        BlockPos selfPos = worldPosition;
         BlockPos[] aroundSelf = BlockUtils.getBlocksAroundSelf3x3(selfPos);
         for (BlockPos blockPos : aroundSelf) {
             level.setBlockAndUpdate(blockPos, level.getBlockState(blockPos).setValue(DrainPartBlock.OPEN, value));
@@ -110,14 +124,29 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
     @Override
     public void commonTick() {
         super.commonTick();
+
+        if (getPower() == 0 && getBlockState().getValue(DrainPartBlock.HAS_POWER)) {
+            updatePowerAndBubbles();
+        }
+
         performRotation();
 
         performDraining();
 
     }
 
+    private void updatePowerAndBubbles() {
+        BlockPos[] aroundSelf = BlockUtils.getBlocksAroundSelfHorizontal(worldPosition);
+        for (BlockPos pos : aroundSelf) {
+            level.setBlockAndUpdate(pos, level.getBlockState(pos).setValue(DrainPartBlock.HAS_POWER, getPower() > 15));
+        }
+        level.setBlockAndUpdate(worldPosition, getBlockState().setValue(DrainPartBlock.HAS_POWER, getPower() > 15));
+
+        updateBubbleColumns();
+    }
+
     private boolean openAndFormed() {
-        BlockState blockState = level.getBlockState(worldPosition.above());
+        BlockState blockState = getBlockState();
         return blockState.hasProperty(DrainPartBlock.OPEN) && blockState.getValue(DrainPartBlock.OPEN) && blockState.getValue(DrainMultiblock.FORMED);
     }
 
@@ -152,7 +181,7 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
                     this.closing = false;
 
                     // Set top blocks to close
-                    setTopOpen(false);
+                    setOpen(false);
                 }
             }
         }
@@ -194,13 +223,15 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
     }
 
     private void updateBubbleColumns() {
-        BlockPos selfPos = worldPosition.above();
-        BlockPos[] aroundSelf = BlockUtils.getBlocksAroundSelfHorizontal(selfPos);
-        for (BlockPos blockPos : aroundSelf) {
-            BlockState blockState = level.getBlockState(blockPos);
-            BubbleColumnBlock.updateColumn(level, blockPos.above(), blockState);
+        if (getPower() > 15) {
+            BlockPos selfPos = worldPosition;
+            BlockPos[] aroundSelf = BlockUtils.getBlocksAroundSelfHorizontal(selfPos);
+            for (BlockPos blockPos : aroundSelf) {
+                BlockState blockState = level.getBlockState(blockPos);
+                BubbleColumnBlock.updateColumn(level, blockPos.above(), blockState);
+            }
+            BubbleColumnBlock.updateColumn(level, selfPos.above(), level.getBlockState(selfPos));
         }
-        BubbleColumnBlock.updateColumn(level, selfPos, level.getBlockState(selfPos));
     }
 
     private float getValveSpeed() {

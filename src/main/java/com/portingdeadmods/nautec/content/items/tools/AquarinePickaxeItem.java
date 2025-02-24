@@ -3,6 +3,8 @@ package com.portingdeadmods.nautec.content.items.tools;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
+import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalBlock;
+import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalPartBlock;
 import com.portingdeadmods.nautec.content.items.tiers.NTToolMaterials;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
@@ -34,7 +36,7 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
     public AquarinePickaxeItem() {
         super(NTToolMaterials.AQUARINE, new Properties()
                 .stacksTo(1)
-                .component(NTDataComponents.IS_INFUSED,false)
+                .component(NTDataComponents.IS_INFUSED, false)
                 .component(NTDataComponents.ABILITY_ENABLED, false)
                 .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200))
                 .attributes(PickaxeItem.createAttributes(NTToolMaterials.AQUARINE, 1.5f, -3.0f)));
@@ -161,9 +163,9 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
         Tooltips.trans(tooltipComponents, "nautec.tool.pickaxe.ability", ChatFormatting.DARK_PURPLE);
-        if(!NTDataComponentsUtils.isInfused(stack)){
+        if (!NTDataComponentsUtils.isInfused(stack)) {
             Tooltips.trans(tooltipComponents, "nautec.tool.infuse-me", ChatFormatting.DARK_GREEN);
-        }else{
+        } else {
             Tooltips.transtrans(tooltipComponents, "nautec.tool.status", NTDataComponentsUtils.isAbilityEnabled(stack) ? "nautec.tool.enabled" : "nautec.tool.disabled", NTDataComponentsUtils.isAbilityEnabled(stack) ? ChatFormatting.GREEN : ChatFormatting.RED);
         }
         Tooltips.transInsert(tooltipComponents, "nautec.tool.power", powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity(), ChatFormatting.DARK_AQUA);
