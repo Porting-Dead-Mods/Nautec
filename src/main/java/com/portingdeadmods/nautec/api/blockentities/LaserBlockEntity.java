@@ -57,12 +57,11 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
 
     public boolean shouldRender(Direction direction) {
         BlockPos pos = worldPosition.relative(direction, this.laserDistances.getInt(direction));
-        boolean b = getLaserOutputs().contains(direction)
+        return getLaserOutputs().contains(direction)
                 && !pos.equals(worldPosition)
                 && level.getBlockEntity(pos) instanceof LaserBlockEntity be
                 && be.getLaserInputs().contains(direction.getOpposite())
                 && (power > 0 || powerToTransfer > 0);
-        return b;
     }
 
     public Object2IntMap<Direction> getLaserDistances() {
@@ -223,7 +222,9 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
                         iterator.remove();
                     } else {
                         activeTransformation.put(cookingItem, cookTime + 1);
-                        ParticleUtils.spawnParticlesAroundItem(cookingItem, level, ParticleTypes.END_ROD);
+                        if (level.isClientSide) {
+                            ParticleUtils.spawnParticlesAroundItem(cookingItem, level, ParticleTypes.END_ROD);
+                        }
                     }
                 }
             }
