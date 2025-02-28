@@ -163,6 +163,8 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         add("nautec.tool.enabled", "Enabled");
         add("nautec.tool.disabled", "Shift + Right Click to Enable");
 
+        add("block.nautec.brown_polymer_block", "Brown Polymer Block");
+
         // Bacteria
         for (ResourceKey<?> key : BACTERIAS) {
             addDirectBacteria(key);
