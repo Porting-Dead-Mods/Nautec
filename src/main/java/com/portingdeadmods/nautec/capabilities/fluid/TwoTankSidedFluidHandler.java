@@ -23,12 +23,12 @@ public record TwoTankSidedFluidHandler(IFluidHandler primaryHandler,
 
     @Override
     public @NotNull FluidStack getFluidInTank(int tank) {
-        return tank == 0 ? primaryHandler.getFluidInTank(0) : secondaryHandler.getFluidInTank(1);
+        return tank == 0 ? primaryHandler.getFluidInTank(0) : secondaryHandler.getFluidInTank(0);
     }
 
     @Override
     public int getTankCapacity(int tank) {
-        return tank == 0 ? primaryHandler.getTankCapacity(0) : secondaryHandler.getTankCapacity(1);
+        return tank == 0 ? primaryHandler.getTankCapacity(0) : secondaryHandler.getTankCapacity(0);
     }
 
     @Override
