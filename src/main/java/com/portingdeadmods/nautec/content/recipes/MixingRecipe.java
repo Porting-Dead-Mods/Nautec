@@ -20,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,13 +28,21 @@ public record MixingRecipe(List<IngredientWithCount> ingredients, FluidStack flu
                            FluidStack fluidResult, int duration) implements Recipe<MixingRecipeInput> {
     public static final String NAME = "mixing";
 
+    public MixingRecipe {
+        // Ensure none of the fields are null
+        ingredients = ingredients != null ? ingredients : new ArrayList<>();
+        fluidIngredient = fluidIngredient != null ? fluidIngredient : FluidStack.EMPTY;
+        result = result != null ? result : ItemStack.EMPTY;
+        fluidResult = fluidResult != null ? fluidResult : FluidStack.EMPTY;
+    }
+
     @Override
     public boolean matches(@NotNull MixingRecipeInput recipeInput, @NotNull Level level) {
-        boolean fluidMatches = recipeInput.fluidStack().is(fluidIngredient.getFluid())
-                && recipeInput.fluidStack().getAmount() >= fluidIngredient.getAmount();
+        boolean fluidMatches = recipeInput.fluidStack() != null && !fluidIngredient.isEmpty() &&
+                recipeInput.fluidStack().is(fluidIngredient.getFluid()) &&
+                recipeInput.fluidStack().getAmount() >= fluidIngredient.getAmount();
         boolean itemsMatch = RecipeUtils.compareItems(recipeInput.items(), this.ingredients);
-        return itemsMatch
-                && fluidMatches;
+        return itemsMatch && fluidMatches;
     }
 
     @Override
@@ -131,4 +140,3 @@ public record MixingRecipe(List<IngredientWithCount> ingredients, FluidStack flu
         return Objects.hash(ingredients, fluidIngredient, result, fluidResult, duration);
     }
 }
-
