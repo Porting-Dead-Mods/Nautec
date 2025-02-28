@@ -13,6 +13,11 @@ public class BreakerBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return false;
+    }
+
+    @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
         return null; //NTBlockEntityTypes.BREAKER_BLOCK.get();
     }

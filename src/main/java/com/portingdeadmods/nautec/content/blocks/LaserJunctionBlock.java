@@ -70,8 +70,13 @@ public class LaserJunctionBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return true;
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(CONNECTION[0], CONNECTION[1], CONNECTION[2], CONNECTION[3], CONNECTION[4], CONNECTION[5]);
+        super.createBlockStateDefinition(builder.add(CONNECTION[0], CONNECTION[1], CONNECTION[2], CONNECTION[3], CONNECTION[4], CONNECTION[5]));
     }
 
     public VoxelShape getShape(int i) {

@@ -42,7 +42,9 @@ public class ItemEtching {
             } else {
                 activeEtching.put(itemEntity, etchingTime + 1);
                 // Optionally spawn particles while etching
-                ParticleUtils.spawnParticlesAroundItem(itemEntity, level, ParticleTypes.FLAME);
+                if (level.isClientSide) {
+                    ParticleUtils.spawnParticlesAroundItem(itemEntity, level, ParticleTypes.FLAME);
+                }
             }
         }
     }

@@ -9,6 +9,9 @@ import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
 import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.semi.PrismarineCrystalBlockEntity;
+import com.portingdeadmods.nautec.content.blockentities.multiblock.semi.PrismarineCrystalPartBlockEntity;
+import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalBlock;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
@@ -19,7 +22,10 @@ import com.portingdeadmods.nautec.registries.NTAttachmentTypes;
 import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
+import com.portingdeadmods.nautec.utils.ParticleUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,6 +36,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -81,6 +88,39 @@ public final class NTEvents {
                 if (!player.getData(NTAttachmentTypes.HAS_NAUTEC_GUIDE.get()) && NTConfig.spawnBookInInventory) {
                     ItemHandlerHelper.giveItemToPlayer(player, ModonomiconCompat.getItemStack());
                     player.setData(NTAttachmentTypes.HAS_NAUTEC_GUIDE.get(), true);
+                }
+            }
+        }
+
+        @SubscribeEvent
+        public static void onPlayerLoggedIn(PlayerInteractEvent.LeftClickBlock event) {
+            Player player = event.getEntity();
+
+            Level level = player.level();
+            BlockPos pos = event.getPos();
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+
+            ItemStack mainHandItem = player.getMainHandItem();
+            if (!player.hasInfiniteMaterials() && mainHandItem.is(NTItems.AQUARINE_PICKAXE) && mainHandItem.get(NTDataComponents.ABILITY_ENABLED)) {
+                PrismarineCrystalBlockEntity be = null;
+                if (blockEntity instanceof PrismarineCrystalPartBlockEntity partBlockEntity) {
+                    be = (PrismarineCrystalBlockEntity) level.getBlockEntity(partBlockEntity.getCrystalPos());
+                } else if (blockEntity instanceof PrismarineCrystalBlockEntity blockEntity1) {
+                    be = blockEntity1;
+                }
+
+                if (be != null && !be.isBreaking()) {
+                    be.playBreakAnimation();
+                    ItemHandlerHelper.giveItemToPlayer(player, NTItems.PRISMARINE_CRYSTAL_SHARD.toStack(level.random.nextInt(1, 3)));
+                    if (level.random.nextInt(0, 4) == 0) {
+                        PrismarineCrystalBlock.removeCrystal(level, player, be.getBlockPos());
+                        if (level.isClientSide) {
+                            ParticleUtils.spawnBreakParticle(be.getBlockPos(), be.getBlockState().getBlock(), 50);
+                        }
+                        level.playSound(null, pos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 4, 0.75f);
+                    } else {
+                        level.playSound(null, pos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1, 0.5f);
+                    }
                 }
             }
         }

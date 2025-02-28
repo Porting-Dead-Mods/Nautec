@@ -45,6 +45,11 @@ public class AquaticCatalystBlock extends LaserBlock implements DisplayBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return false;
+    }
+
+    @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return simpleCodec(AquaticCatalystBlock::new);
     }

@@ -87,7 +87,7 @@ public class ItemInfusion {
                 infusionData.incrementInfusionProgress();
 
                 // Spawn particles at regular intervals
-                if (infusionData.getInfusionProgress() % PARTICLE_INTERVAL == 0) {
+                if (infusionData.getInfusionProgress() % PARTICLE_INTERVAL == 0 && level.isClientSide) {
                     ParticleUtils.spawnParticlesAroundItem(itemEntity, level, ParticleTypes.ENCHANT);  // Infusion particles
                 }
 
@@ -102,7 +102,9 @@ public class ItemInfusion {
 
     private static void spawnCompletionEffects(ItemEntity itemEntity, Level level) {
         // Completion particle effects
-        ParticleUtils.spawnParticlesAroundItem(itemEntity, level, ParticleTypes.DRAGON_BREATH);
+        if (level.isClientSide) {
+            ParticleUtils.spawnParticlesAroundItem(itemEntity, level, ParticleTypes.DRAGON_BREATH);
+        }
 
         // Play completion sound
         level.playSound(null, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(),

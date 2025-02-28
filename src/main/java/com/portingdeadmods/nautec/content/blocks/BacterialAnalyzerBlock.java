@@ -43,6 +43,11 @@ public class BacterialAnalyzerBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return true;
+    }
+
+    @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
@@ -66,14 +71,18 @@ public class BacterialAnalyzerBlock extends LaserBlock {
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
 
-        level.setBlockAndUpdate(pos.above(), NTBlocks.BACTERIAL_ANALYZER_TOP.get().defaultBlockState().setValue(FACING, state.getValue(FACING)));
+        if (!state.is(oldState.getBlock())) {
+            level.setBlockAndUpdate(pos.above(), NTBlocks.BACTERIAL_ANALYZER_TOP.get().defaultBlockState().setValue(FACING, state.getValue(FACING)));
+        }
     }
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         super.onRemove(state, level, pos, newState, movedByPiston);
 
-        level.removeBlock(pos.above(), false);
+        if (!state.is(newState.getBlock())) {
+            level.removeBlock(pos.above(), false);
+        }
     }
 
     @Override
