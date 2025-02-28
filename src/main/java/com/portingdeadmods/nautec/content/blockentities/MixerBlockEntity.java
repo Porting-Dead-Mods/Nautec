@@ -126,7 +126,7 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
     }
 
     private void removeInputs(MixingRecipe mixingRecipe) {
-        if (mixingRecipe == null) {
+        if (mixingRecipe == null || mixingRecipe.ingredients().isEmpty()) {
             return;
         }
 
