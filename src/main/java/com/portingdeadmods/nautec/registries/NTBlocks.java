@@ -63,9 +63,9 @@ public final class NTBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE), true, false);
 
     public static final DeferredBlock<PrismarineCrystalBlock> PRISMARINE_CRYSTAL = registerBlockAndItem("prismarine_crystal", PrismarineCrystalBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(50, 1200), PrismarineCrystalItem::new);
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(-1, 1200), PrismarineCrystalItem::new);
     public static final DeferredBlock<PrismarineCrystalPartBlock> PRISMARINE_CRYSTAL_PART = BLOCKS.registerBlock("prismarine_crystal_part", PrismarineCrystalPartBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(-1, 1200));
     public static final DeferredBlock<AnchorBlock> ANCHOR = registerBlockAndItem("anchor", AnchorBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).sound(SoundType.ANVIL).noOcclusion());
     public static final DeferredBlock<ChargerBlock> CHARGER = registerBlockAndItem("charger", ChargerBlock::new,
@@ -76,16 +76,16 @@ public final class NTBlocks {
     //        BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
 
     // Biology
-    public static final DeferredBlock<MutatorBlock> MUTATOR = registerBlockAndItem("mutator", MutatorBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
-    public static final DeferredBlock<IncubatorBlock> INCUBATOR = registerBlockAndItem("incubator", IncubatorBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
-    public static final DeferredBlock<BioReactorBlock> BIO_REACTOR = registerBlockAndItem("bio_reactor", BioReactorBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+    public static final DeferredBlock<MutatorBlock> MUTATOR = bacteriaBlock(registerBlockAndItem("mutator", MutatorBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
+    public static final DeferredBlock<IncubatorBlock> INCUBATOR = bacteriaBlock(registerBlockAndItem("incubator", IncubatorBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
+    public static final DeferredBlock<BioReactorBlock> BIO_REACTOR = bacteriaBlock(registerBlockAndItem("bio_reactor", BioReactorBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
     public static final DeferredBlock<BioReactorPartBlock> BIO_REACTOR_PART = BLOCKS.registerBlock("bio_reactor_part", BioReactorPartBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
-    public static final DeferredBlock<BacterialAnalyzerBlock> BACTERIAL_ANALYZER = registerBlockAndItem("bacterial_analyzer", BacterialAnalyzerBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), true, false);
+    public static final DeferredBlock<BacterialAnalyzerBlock> BACTERIAL_ANALYZER = bacteriaBlock(registerBlockAndItem("bacterial_analyzer", BacterialAnalyzerBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), true, false));
     public static final DeferredBlock<BacterialAnalyzerTopBlock> BACTERIAL_ANALYZER_TOP = BLOCKS.registerBlock("bacterial_analyzer_top", BacterialAnalyzerTopBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     //public static final DeferredBlock<BacteriaPipeBlock> BACTERIA_PIPE = registerBlockAndItem("bacteria_pipe", BacteriaPipeBlock::new,
@@ -109,8 +109,8 @@ public final class NTBlocks {
             AugmentationStationExtensionBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
 
-    public static final DeferredBlock<Block> BACTERIAL_CONTAINMENT_SHIELD = registerBlockAndItem("bacterial_containment_shield", Block::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE));
+    public static final DeferredBlock<Block> BACTERIAL_CONTAINMENT_SHIELD = bacteriaBlock(registerBlockAndItem("bacterial_containment_shield", Block::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE)));
 
     public static final DeferredBlock<CreativePowerSourceBlock> CREATIVE_POWER_SOURCE = registerBlockAndItem("creative_power_source", CreativePowerSourceBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), false, true);
@@ -121,6 +121,11 @@ public final class NTBlocks {
 
     private static <T extends Block> DeferredBlock<T> registerBlockAndItem(String name, Function<BlockBehaviour.Properties, T> blockConstructor, BlockBehaviour.Properties properties) {
         return registerBlockAndItem(name, blockConstructor, properties, true, true);
+    }
+
+    public static <T extends Block> DeferredBlock<T> bacteriaBlock(DeferredBlock<T> block) {
+        NTItems.BACTERIA_ITEMS.add(block);
+        return block;
     }
 
     // NOTE: This also attempts to generate the item model for the block, when running datagen

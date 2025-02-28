@@ -40,6 +40,11 @@ public class PrismarineCrystalPartBlockEntity extends LaserBlockEntity {
     }
 
     @Override
+    public boolean shouldRender(Direction direction) {
+        return getLaserOutputs().contains(direction) && power > 0;
+    }
+
+    @Override
     public <T> Map<Direction, Pair<IOActions, int[]>> getSidedInteractions(BlockCapability<T, @Nullable Direction> capability) {
         return Map.of();
     }

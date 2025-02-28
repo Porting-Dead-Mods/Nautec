@@ -38,6 +38,11 @@ public class BioReactorBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return false;
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder.add(FACING, Multiblock.FORMED, BioReactorMultiblock.BIO_REACTOR_PART));
     }

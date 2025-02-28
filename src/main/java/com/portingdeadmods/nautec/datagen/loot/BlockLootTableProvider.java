@@ -230,9 +230,7 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
                         this.applyExplosionCondition(
                                 block,
                                 LootPool.lootPool()
-                                        .setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block)
-                                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DrainPartBlock.TOP, false))))
+                                        .setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block))
                         )
                 );
     }

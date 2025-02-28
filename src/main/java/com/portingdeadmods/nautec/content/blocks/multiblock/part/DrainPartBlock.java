@@ -49,66 +49,39 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class DrainPartBlock extends LaserBlock implements SimpleWaterloggedBlock, DisplayBlock {
+public class DrainPartBlock extends LaserBlock implements DisplayBlock {
     public static final VoxelShape[] SHAPES;
 
     public static final BooleanProperty LASER_PORT = BooleanProperty.create("laser_port");
-    public static final BooleanProperty TOP = BooleanProperty.create("top");
     public static final BooleanProperty OPEN = BooleanProperty.create("open");
-    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty HAS_POWER = BooleanProperty.create("enough_power");
 
     public DrainPartBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState()
                 .setValue(LASER_PORT, false)
-                .setValue(TOP, false)
                 .setValue(OPEN, false)
-                .setValue(WATERLOGGED, false)
+                .setValue(HAS_POWER, false)
         );
     }
 
     @Override
-    public boolean canPlaceLiquid(@Nullable Player player, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid) {
-        return SimpleWaterloggedBlock.super.canPlaceLiquid(player, level, pos, state, fluid) && state.getValue(TOP);
+    public boolean waterloggable() {
+        return false;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder.add(DrainMultiblock.DRAIN_PART, Multiblock.FORMED, LASER_PORT, TOP, OPEN, WATERLOGGED));
-    }
-
-    @Override
-    public @NotNull RenderShape getRenderShape(BlockState state) {
-        return state.getValue(TOP) ? RenderShape.INVISIBLE : RenderShape.MODEL;
-    }
-
-    @Override
-    protected @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (state.getValue(OPEN)) {
-            return Shapes.empty();
-        } else if (state.getValue(TOP)) {
-            return SHAPES[state.getValue(DrainMultiblock.DRAIN_PART)];
-        } else {
-            return super.getShape(state, level, pos, context);
-        }
+        super.createBlockStateDefinition(builder.add(DrainMultiblock.DRAIN_PART, Multiblock.FORMED, LASER_PORT, OPEN, HAS_POWER));
     }
 
     @Override
     protected @NotNull BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-        if (state.getValue(WATERLOGGED)) {
-            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        }
-
-        if (facing == Direction.UP && state.getValue(TOP)) {
+        if (facing == Direction.UP && state.getValue(OPEN)) {
             level.scheduleTick(currentPos, this, 20);
         }
 
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
-    }
-
-    @Override
-    protected @NotNull FluidState getFluidState(BlockState state) {
-        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
@@ -123,7 +96,7 @@ public class DrainPartBlock extends LaserBlock implements SimpleWaterloggedBlock
 
     @Override
     protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult p_60508_) {
-        if (player.isShiftKeyDown() && state.getValue(TOP) && state.getValue(DrainMultiblock.DRAIN_PART) == 4 && !state.getValue(OPEN)) {
+        if (player.isShiftKeyDown() && state.getValue(DrainMultiblock.DRAIN_PART) == 4 && !state.getValue(OPEN)) {
             if (level.getBlockEntity(pos) instanceof DrainPartBlockEntity drainPartBlockEntity) {
                 drainPartBlockEntity.open();
                 return InteractionResult.SUCCESS;
@@ -160,22 +133,14 @@ public class DrainPartBlock extends LaserBlock implements SimpleWaterloggedBlock
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (state.getValue(OPEN)) {
+        if (state.getValue(OPEN) && state.getValue(HAS_POWER)) {
             entity.hurt(level.damageSources().drown(), 4.0F);
         }
     }
 
     @Override
-    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        DrainPartBlockEntity be = (DrainPartBlockEntity) level.getBlockEntity(pos);
-        if (be.getPower() > 15 && state.getValue(OPEN) && (state.getValue(DrainMultiblock.DRAIN_PART) == 4 || state.getValue(DrainMultiblock.DRAIN_PART) % 2 != 0)) {
-            BubbleColumnBlock.updateColumn(level, pos.above(), state);
-        }
-    }
-
-    @Override
-    public BubbleColumnDirection getBubbleColumnDirection(BlockState state) {
-        if (state.getValue(OPEN) && (state.getValue(DrainMultiblock.DRAIN_PART) == 4 || state.getValue(DrainMultiblock.DRAIN_PART) % 2 != 0)) {
+    public @NotNull BubbleColumnDirection getBubbleColumnDirection(BlockState state) {
+        if (state.getValue(OPEN) && state.getValue(DrainPartBlock.HAS_POWER) && (state.getValue(DrainMultiblock.DRAIN_PART) == 4 || state.getValue(DrainMultiblock.DRAIN_PART) % 2 != 0)) {
             return BubbleColumnDirection.DOWNWARD;
         }
         return super.getBubbleColumnDirection(state);

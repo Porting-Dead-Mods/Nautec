@@ -5,6 +5,7 @@ import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
 import com.portingdeadmods.nautec.api.blocks.blockentities.ContainerBlock;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.DrainBlockEntity;
+import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.content.multiblocks.DrainMultiblock;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.registries.NTMultiblocks;
@@ -15,6 +16,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -27,6 +29,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.common.enums.BubbleColumnDirection;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
@@ -35,12 +38,16 @@ import org.jetbrains.annotations.NotNull;
 public class DrainBlock extends ContainerBlock {
     public DrainBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(DrainMultiblock.FORMED, false));
+        registerDefaultState(defaultBlockState()
+                .setValue(DrainMultiblock.FORMED, false)
+                .setValue(DrainPartBlock.OPEN, false)
+                .setValue(DrainPartBlock.HAS_POWER, false)
+        );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder.add(DrainMultiblock.DRAIN_PART, Multiblock.FORMED));
+        super.createBlockStateDefinition(builder.add(DrainMultiblock.DRAIN_PART, Multiblock.FORMED, DrainPartBlock.OPEN, DrainPartBlock.HAS_POWER));
     }
 
     @Override
@@ -60,11 +67,17 @@ public class DrainBlock extends ContainerBlock {
 
     @Override
     protected @NotNull InteractionResult useWithoutItem(BlockState p_60503_, Level level, BlockPos pos, Player player, BlockHitResult p_60508_) {
-        if (level.getBlockEntity(pos) instanceof DrainBlockEntity drainBlockEntity ) {
-            if (player.isShiftKeyDown() && !drainBlockEntity.isClosing()) {
-                drainBlockEntity.close();
+        if (level.getBlockEntity(pos) instanceof DrainBlockEntity drainBlockEntity) {
+            if (player.isShiftKeyDown() && !drainBlockEntity.isMoving()) {
+                if (p_60503_.getValue(DrainPartBlock.OPEN)) {
+                    drainBlockEntity.close();
+                } else {
+                    drainBlockEntity.open();
+                }
                 return InteractionResult.SUCCESS;
-            } else  if (p_60503_.getValue(Multiblock.FORMED)) {
+            }
+
+            if (p_60503_.getValue(Multiblock.FORMED)) {
                 ItemStack stack = player.getMainHandItem();
                 IFluidHandler itemFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
                 if (itemFluidHandler != null) {
@@ -72,11 +85,26 @@ public class DrainBlock extends ContainerBlock {
                     return InteractionResult.SUCCESS;
                 }
             }
+
         }
 
         return super.useWithoutItem(p_60503_, level, pos, player, p_60508_);
     }
 
+    @Override
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (state.getValue(DrainPartBlock.OPEN) && state.getValue(DrainPartBlock.HAS_POWER)) {
+            entity.hurt(level.damageSources().drown(), 4.0F);
+        }
+    }
+
+    @Override
+    public BubbleColumnDirection getBubbleColumnDirection(BlockState state) {
+        if (state.getValue(DrainPartBlock.OPEN) && state.getValue(DrainPartBlock.HAS_POWER)) {
+            return BubbleColumnDirection.DOWNWARD;
+        }
+        return super.getBubbleColumnDirection(state);
+    }
 
     private static void extractFluid(Player player, Level level, InteractionHand interactionHand, FluidTank fluidHandler, IFluidHandler fluidHandlerItem) {
         FluidStack fluidInTank = fluidHandler.getFluidInTank(0);

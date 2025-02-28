@@ -140,8 +140,8 @@ public final class NautecClient {
 
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack
-                    itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack
+                    itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel<?> original) {
                 return ArmorModelsHandler.armorModel(ArmorModelsHandler.divingSuit, equipmentSlot);
             }
         }, NTItems.DIVING_HELMET);
@@ -158,7 +158,8 @@ public final class NautecClient {
         event.registerBlockEntityRenderer(NTBlockEntityTypes.PRISMARINE_CRYSTAL_PART.get(), LaserBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(NTBlockEntityTypes.MIXER.get(), MixerBERenderer::new);
         event.registerBlockEntityRenderer(NTBlockEntityTypes.CHARGER.get(), ChargerBERenderer::new);
-        event.registerBlockEntityRenderer(NTBlockEntityTypes.DRAIN_PART.get(), DrainBERenderer::new);
+        event.registerBlockEntityRenderer(NTBlockEntityTypes.DRAIN.get(), DrainBERenderer::new);
+        event.registerBlockEntityRenderer(NTBlockEntityTypes.DRAIN_PART.get(), LaserBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(NTBlockEntityTypes.AUGMENTATION_STATION_EXTENSION.get(), AugmentStationExtensionBERenderer::new);
         event.registerBlockEntityRenderer(NTBlockEntityTypes.ANCHOR.get(), AnchorBERenderer::new);
         event.registerBlockEntityRenderer(NTBlockEntityTypes.BACTERIAL_ANALYZER.get(), BacterialAnalyzerBERenderer::new);

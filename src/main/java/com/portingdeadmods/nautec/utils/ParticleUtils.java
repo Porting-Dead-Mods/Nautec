@@ -1,9 +1,12 @@
 package com.portingdeadmods.nautec.utils;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.TerrainParticle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 
 public final class ParticleUtils {
 
@@ -55,5 +58,12 @@ public final class ParticleUtils {
         }
 
         particleTicks++;
+    }
+
+    public static void spawnBreakParticle(BlockPos pos, Block block, int count) {
+        for (int i = 0; i < count; i++) {
+            Minecraft.getInstance().particleEngine.add(new TerrainParticle(Minecraft.getInstance().level, pos.getX() + 0.5f, pos.above().getY(), pos.getZ() + 0.5f,
+                    0 + ((double) i / 10), 0 + ((double) i / 10), 0 + ((double) i / 10), block.defaultBlockState()));
+        }
     }
 }

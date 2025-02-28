@@ -13,6 +13,11 @@ public class CreativePowerSourceBlock extends LaserBlock {
     }
 
     @Override
+    public boolean waterloggable() {
+        return false;
+    }
+
+    @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
         return NTBlockEntityTypes.CREATIVE_POWER_SOURCE.get();
     }
