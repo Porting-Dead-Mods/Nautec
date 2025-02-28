@@ -111,8 +111,9 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
             if (duration >= recipe.duration()) {
                 duration = 0;
                 this.running = false;
-                setOutputs(recipe);
-                removeInputs(recipe);
+                MixingRecipe currentRecipe = this.recipe;
+                setOutputs(currentRecipe);
+                removeInputs(currentRecipe);
                 this.recipe = getRecipe().orElse(null);
             } else {
                 duration++;
@@ -125,6 +126,10 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
     }
 
     private void removeInputs(MixingRecipe mixingRecipe) {
+        if (mixingRecipe == null) {
+            return;
+        }
+
         IFluidHandler fluidHandler = getFluidHandler();
         IItemHandler itemHandler = getItemHandler();
         List<IngredientWithCount> ingredients = new ArrayList<>(mixingRecipe.ingredients());
@@ -158,6 +163,10 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
     }
 
     private void setOutputs(MixingRecipe mixingRecipe) {
+        if (mixingRecipe == null) {
+            return;
+        }
+
         ItemStackHandler handler = getItemStackHandler();
         int prevCount = handler.getStackInSlot(OUTPUT_SLOT).getCount();
         int newCount = mixingRecipe.result().getCount() + prevCount;
