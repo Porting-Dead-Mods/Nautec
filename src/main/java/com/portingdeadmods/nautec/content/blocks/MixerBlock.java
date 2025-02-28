@@ -123,9 +123,9 @@ public class MixerBlock extends LaserBlock {
 
     private static void extractFluid(Player player, Level level, InteractionHand interactionHand, FluidTank fluidHandler, FluidTank secondaryFluidHandler, IFluidHandler fluidHandlerItem) {
         FluidTank curHandler = secondaryFluidHandler.getFluidInTank(0).isEmpty() ? fluidHandler : secondaryFluidHandler;
-        Nautec.LOGGER.debug("Extracting secondary: {}", curHandler == secondaryFluidHandler);
+        // Nautec.LOGGER.debug("Extracting secondary: {}", curHandler == secondaryFluidHandler);
         FluidStack fluidInTank = curHandler.getFluidInTank(0);
-        if (player.getItemInHand(interactionHand).is(Items.BUCKET)) {
+        if (player.getItemInHand(interactionHand).is(Items.BUCKET) && !fluidInTank.isEmpty()) {
             player.getItemInHand(interactionHand).shrink(1);
             ItemUtils.giveItemToPlayerNoSound(player, fluidInTank.getFluid().getBucket().getDefaultInstance());
             if (fluidInTank.is(Fluids.WATER)) {
