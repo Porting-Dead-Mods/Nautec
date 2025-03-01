@@ -18,6 +18,7 @@ public final class ParticleUtils {
 
     // Method for spawning particles around an item entity
     public static void spawnParticlesAroundItem(ItemEntity itemEntity, Level level, ParticleOptions particlesTypes) {
+        assert level.isClientSide;
         if (particleTicks % PARTICLE_DELAY == 0) {
             for (int i = 0; i < PARTICLE_COUNT; i++) {
                 double theta = level.random.nextDouble() * Math.PI * 2;
@@ -40,6 +41,8 @@ public final class ParticleUtils {
 
     // Method for spawning particles around a block
     public static void spawnParticlesAroundBlock(BlockPos blockPos, Level level, ParticleOptions particlesTypes) {
+        assert level.isClientSide;
+
         if (particleTicks % PARTICLE_DELAY == 0) {
             for (int i = 0; i < PARTICLE_COUNT; i++) {
                 double theta = level.random.nextDouble() * Math.PI * 2;
@@ -61,6 +64,7 @@ public final class ParticleUtils {
     }
 
     public static void spawnBreakParticle(BlockPos pos, Block block, int count) {
+        assert Minecraft.getInstance().level != null && Minecraft.getInstance().level.isClientSide;
         for (int i = 0; i < count; i++) {
             Minecraft.getInstance().particleEngine.add(new TerrainParticle(Minecraft.getInstance().level, pos.getX() + 0.5f, pos.above().getY(), pos.getZ() + 0.5f,
                     0 + ((double) i / 10), 0 + ((double) i / 10), 0 + ((double) i / 10), block.defaultBlockState()));
