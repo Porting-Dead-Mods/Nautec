@@ -16,7 +16,8 @@ public class GrowingPlantHeadBlockMixin {
     private void onGetStateForPlacement(LevelAccessor level, CallbackInfoReturnable<BlockState> cir) {
         BlockState state = cir.getReturnValue();
         if(state != null && state.getBlock() instanceof KelpBlock) {
-            cir.setReturnValue(state.setValue(GrowingPlantHeadBlock.AGE, level.getRandom().nextInt(NTConfig.kelpHeight)));
+            int randomAge = Math.min(level.getRandom().nextInt(NTConfig.kelpHeight), GrowingPlantHeadBlock.MAX_AGE);
+            cir.setReturnValue(state.setValue(GrowingPlantHeadBlock.AGE, randomAge));
         }
     }
 }
