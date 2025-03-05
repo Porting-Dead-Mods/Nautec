@@ -27,8 +27,8 @@
         "type": "modonomicon:none"
       },
       "recipe_id_1": "nautec:aquatic_catalyst",
-      "text": "It can be accomplished by supplying the catalyst with fuel, like for example some prismarine.\n\\\nAfter right-clicking the item on the catalyst, a laser beam will shoot\nout of the opposite side as long as it has a target.\n",
-      "title1": "Aquatic Catalyst",
+      "text": "book.nautec.nautec_guide.getting_started.aquatic_catalyst.text",
+      "title1": "book.nautec.nautec_guide.getting_started.aquatic_catalyst.title",
       "title2": ""
     },
     {
@@ -38,8 +38,8 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "By shooting a laser beam into a crystal, one can increase the lasers purity.\nThe lasers that are created by this shot (top and bottom) now have a purity of 3.0\nthis means they can be used for Item Transformation!\n",
-      "title": "Purity",
+      "text": "book.nautec.nautec_guide.getting_started.purity.text",
+      "title": "book.nautec.nautec_guide.getting_started.purity.title",
       "use_markdown_in_title": false
     }
   ],
