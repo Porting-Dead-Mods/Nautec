@@ -28,10 +28,12 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         curiosIdent("battery", "Battery");
 
         add("nautec.creative_tab.main", "NauTec");
+        add("nautec.creative_tab.bacteria", "NauTec Bacteria");
 
         addFluidType(NTFluids.SALT_WATER.getFluidType(), "Salt Water");
         addFluidType(NTFluids.EAS.getFluidType(), "Electrolyte Algae Serum");
         addFluidType(NTFluids.ETCHING_ACID.getFluidType(), "Etching Acid");
+        addFluidType(NTFluids.OIL.getFluidType(), "Oil");
 
         addItem(PRISM_MONOCLE, "Prism Monocle");
         addItem(AQUARINE_STEEL_INGOT, "Aquarine Steel Ingot");
@@ -80,6 +82,8 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem("cast_iron_ingot", "Cast Iron Ingot");
         addItem("cast_iron_rod", "Cast Iron Rod");
         addItem("cast_iron_nugget", "Cast Iron Nugget");
+        addItem("salt", "Salt");
+        addItem("damaged_aquatic_chip", "Damaged Aquatic Chip");
         addItem(LASER_CHANNELING_COIL, "Laser Channeling Coil");
         addItem(BURNT_COIL, "Burnt Coil");
         addItem(ELDRITCH_HEART, "Eldritch Heart");
@@ -110,6 +114,8 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addBlock("deep_sea_drain", "Deep Sea Drain");
         addBlock("augmentation_station_part", "Augmentation Station");
         addBlock("prismarine_crystal_part", "Prismarine Crystal");
+        addBlock("anchor", "Anchor");
+        addBlock("oil_barrel", "Oil Barrel");
         addBlock(NTBlocks.AUGMENTATION_STATION_EXTENSION, "Augmentation Station Extension");
         addBlock(NTBlocks.CHARGER, "Charger");
         addBlock(NTBlocks.PRISMARINE_SAND, "Prismarine Sand");
