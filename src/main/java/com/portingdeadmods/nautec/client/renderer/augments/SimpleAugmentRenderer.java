@@ -7,11 +7,15 @@ import com.portingdeadmods.nautec.api.client.model.augments.AugmentModel;
 import com.portingdeadmods.nautec.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.events.helper.AugmentSlotsRenderer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.Material;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.function.Function;
 
@@ -28,12 +32,12 @@ public class SimpleAugmentRenderer<T extends Augment> extends AugmentRenderer<T>
     }
 
     @Override
-    public void render(T augment, AugmentLayerRenderer superRenderer, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public <E extends LivingEntity, M extends EntityModel<E>> void render(T augment, AugmentLayerRenderer<E, M> superRenderer, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
         {
             AugmentSlot augmentSlot = augment.getAugmentSlot();
             if (augmentSlot != null) {
-                ModelPart modelPart = AugmentSlotsRenderer.modelPartBySlot(augmentSlot).getModelPart(superRenderer.getParentModel());
+                ModelPart modelPart = AugmentSlotsRenderer.modelPartBySlot(augmentSlot).getModelPart((PlayerModel<AbstractClientPlayer>) superRenderer.getParentModel());
                 if (modelPart != null && moveWithBody) {
                     modelPart.translateAndRotate(poseStack);
                 }
