@@ -7,9 +7,13 @@ import com.portingdeadmods.nautec.client.model.augment.GuardianEyeModel;
 import com.portingdeadmods.nautec.content.augments.GuardianEyeAugment;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.events.helper.AugmentSlotsRenderer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.entity.LivingEntity;
 
 public class GuardianEyeRenderer extends AugmentRenderer<GuardianEyeAugment> {
     private final GuardianEyeModel model;
@@ -20,12 +24,12 @@ public class GuardianEyeRenderer extends AugmentRenderer<GuardianEyeAugment> {
     }
 
     @Override
-    public void render(GuardianEyeAugment augment, AugmentLayerRenderer superRenderer, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public <E extends LivingEntity, M extends EntityModel<E>> void render(GuardianEyeAugment augment, AugmentLayerRenderer<E, M> superRenderer, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
         {
             AugmentSlot augmentSlot = augment.getAugmentSlot();
             if (augmentSlot != null) {
-                ModelPart modelPart = AugmentSlotsRenderer.modelPartBySlot(augmentSlot).getModelPart(superRenderer.getParentModel());
+                ModelPart modelPart = AugmentSlotsRenderer.modelPartBySlot(augmentSlot).getModelPart((PlayerModel<AbstractClientPlayer>) superRenderer.getParentModel());
                 if (modelPart != null) {
                     modelPart.translateAndRotate(poseStack);
                 }

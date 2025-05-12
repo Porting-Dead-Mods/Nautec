@@ -26,10 +26,12 @@ import com.portingdeadmods.nautec.utils.ArmorModelsHandler;
 import com.portingdeadmods.nautec.utils.BacteriaHelper;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceKey;
@@ -38,9 +40,11 @@ import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -73,6 +77,7 @@ public final class NautecClient {
         modEventBus.addListener(this::registerMenus);
         modEventBus.addListener(this::onFMLClientSetupEvent);
         modEventBus.addListener(this::registerColorHandlers);
+        modEventBus.addListener(this::onLayersAdded);
     }
 
     public static final PrismarineCrystalItemRenderer PRISMARINE_CRYSTAL_RENDERER = new PrismarineCrystalItemRenderer();
@@ -196,6 +201,22 @@ public final class NautecClient {
         event.registerLayerDefinition(DolphinFinModel.LAYER_LOCATION, DolphinFinModel::createBodyLayer);
         event.registerLayerDefinition(GuardianEyeModel.LAYER_LOCATION, GuardianEyeModel::createBodyLayer);
         ArmorModelsHandler.registerLayers(event);
+    }
+
+    private void onLayersAdded(EntityRenderersEvent.AddLayers event) {
+        for (var skin : event.getSkins()) {
+            LivingEntityRenderer<? extends Player, ? extends EntityModel<? extends Player>> renderer = event.getSkin(skin);
+            if (renderer != null) {
+                try {
+                    castRenderer(renderer).addLayer(new AugmentLayerRenderer<>(castRenderer(renderer)));
+                } catch (ClassCastException ignored) {
+                }
+            }
+        }
+    }
+
+    private static <T extends LivingEntity, M extends EntityModel<T>> LivingEntityRenderer<T, M> castRenderer(LivingEntityRenderer<? extends LivingEntity, ? extends EntityModel<? extends LivingEntity>> renderer) throws ClassCastException {
+        return (LivingEntityRenderer<T, M>) renderer;
     }
 
     private void registerMenus(RegisterMenuScreensEvent event) {

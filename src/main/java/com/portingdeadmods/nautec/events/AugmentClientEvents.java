@@ -7,16 +7,25 @@ import com.portingdeadmods.nautec.client.renderer.augments.helper.GuardianEyeRen
 import com.portingdeadmods.nautec.content.augments.GuardianEyeAugment;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.events.helper.AugmentSlotsRenderer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RenderPlayerEvent;
 
 import java.util.Map;
 
 @EventBusSubscriber(modid = Nautec.MODID, value = Dist.CLIENT)
 public final class AugmentClientEvents {
+
     @SubscribeEvent
     public static void renderPlayerPart(RenderPlayerEvent.Pre event) {
         AugmentSlotsRenderer.render(event);
@@ -24,8 +33,6 @@ public final class AugmentClientEvents {
 
     @SubscribeEvent
     public static void onRenderPlayer(RenderPlayerEvent.Post event) {
-        PlayerRenderer renderer = event.getRenderer();
-        renderer.addLayer(new AugmentLayerRenderer(renderer));
         // Needs to be outside the augment renderer cuz pose stacks
         Map<AugmentSlot, Augment> augments = AugmentLayerRenderer.AUGMENTS_CACHE;
         for (Augment augment : augments.values()) {
