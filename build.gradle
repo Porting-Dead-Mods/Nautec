@@ -89,6 +89,8 @@ dependencies {
     //runtimeOnly "curse.maven:sinytra-connector-890127:5637280"
     //runtimeOnly "curse.maven:forgified-fabric-api-889079:5620473"
     //runtimeOnly "maven.modrinth:component-viewer:Xh1OCy7O"
+    //runtimeOnly "curse.maven:pipez-443900:5609056"
+    //runtimeOnly "curse.maven:ender-io-64578:6138288"
 }
 
 tasks.withType(ProcessResources).configureEach {
