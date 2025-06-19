@@ -21,11 +21,7 @@ public final class RecipeUtils {
     }
 
     public static @NotNull Ingredient iWCToIngredientSaveCount(IngredientWithCount ingredientWithCount) {
-        Ingredient ingredient = ingredientWithCount.ingredient();
-        for (ItemStack itemStack : ingredient.getItems()) {
-            itemStack.setCount(ingredientWithCount.count());
-        }
-        return ingredient;
+        return Ingredient.of(Stream.of(ingredientWithCount.ingredient().getItems()).map(s -> s.copyWithCount(ingredientWithCount.count())));
     }
 
     public static <T> NonNullList<T> listToNonNullList(List<T> list) {
