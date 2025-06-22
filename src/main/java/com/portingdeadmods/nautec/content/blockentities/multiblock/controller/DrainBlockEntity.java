@@ -93,9 +93,16 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
         BlockPos selfPos = worldPosition;
         BlockPos[] aroundSelf = BlockUtils.getBlocksAroundSelf3x3(selfPos);
         for (BlockPos blockPos : aroundSelf) {
-            level.setBlockAndUpdate(blockPos, level.getBlockState(blockPos).setValue(DrainPartBlock.OPEN, value));
+            BlockState state = level.getBlockState(blockPos);
+            // Only set OPEN property on blocks that have it
+            if (state.hasProperty(DrainPartBlock.OPEN)) {
+                level.setBlockAndUpdate(blockPos, state.setValue(DrainPartBlock.OPEN, value));
+            }
         }
-        level.setBlockAndUpdate(selfPos, level.getBlockState(selfPos).setValue(DrainPartBlock.OPEN, value));
+        BlockState selfState = level.getBlockState(selfPos);
+        if (selfState.hasProperty(DrainPartBlock.OPEN)) {
+            level.setBlockAndUpdate(selfPos, selfState.setValue(DrainPartBlock.OPEN, value));
+        }
     }
 
     private boolean hasWater() {
@@ -137,10 +144,18 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
 
     private void updatePowerAndBubbles() {
         BlockPos[] aroundSelf = BlockUtils.getBlocksAroundSelfHorizontal(worldPosition);
+        boolean hasPower = getPower() > 15;
         for (BlockPos pos : aroundSelf) {
-            level.setBlockAndUpdate(pos, level.getBlockState(pos).setValue(DrainPartBlock.HAS_POWER, getPower() > 15));
+            BlockState state = level.getBlockState(pos);
+            // Only set HAS_POWER property on blocks that have it
+            if (state.hasProperty(DrainPartBlock.HAS_POWER)) {
+                level.setBlockAndUpdate(pos, state.setValue(DrainPartBlock.HAS_POWER, hasPower));
+            }
         }
-        level.setBlockAndUpdate(worldPosition, getBlockState().setValue(DrainPartBlock.HAS_POWER, getPower() > 15));
+        BlockState selfState = getBlockState();
+        if (selfState.hasProperty(DrainPartBlock.HAS_POWER)) {
+            level.setBlockAndUpdate(worldPosition, selfState.setValue(DrainPartBlock.HAS_POWER, hasPower));
+        }
 
         updateBubbleColumns();
     }

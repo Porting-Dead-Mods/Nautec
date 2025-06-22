@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"2": "nautec:block/aquarine_steel_block",
 		"4": "nautec:block/dark_prismarine_pillar_side",

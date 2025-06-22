@@ -1,0 +1,4 @@
+{
+	"render_type": "minecraft:cutout",
+	"parent": "nautec:block/prismarine_crystal"
+}

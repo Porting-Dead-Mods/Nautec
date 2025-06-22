@@ -96,6 +96,10 @@ public final class NTBlockEntityTypes {
             () -> BlockEntityType.Builder.of(PrismarineCrystalPartBlockEntity::new,
                     NTBlocks.PRISMARINE_CRYSTAL_PART.get()).build(null));
 
+    public static final Supplier<BlockEntityType<DecorativePrismarineCrystalBlockEntity>> DECORATIVE_PRISMARINE_CRYSTAL = BLOCK_ENTITIES.register("decorative_prismarine_crystal",
+            () -> BlockEntityType.Builder.of(DecorativePrismarineCrystalBlockEntity::new,
+                    NTBlocks.DECORATIVE_PRISMARINE_CRYSTAL.get()).build(null));
+
     public static final Supplier<BlockEntityType<AugmentationStationBlockEntity>> AUGMENTATION_STATION = BLOCK_ENTITIES.register("augmentation_station",
             () -> BlockEntityType.Builder.of(AugmentationStationBlockEntity::new,
                     NTBlocks.AUGMENTATION_STATION.get()).build(null));

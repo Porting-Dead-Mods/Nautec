@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "index=0,waterlogged=false": {
+      "model": "nautec:block/prismarine_crystal"
+    },
+    "index=0,waterlogged=true": {
+      "model": "nautec:block/prismarine_crystal"
+    },
+    "index=1,waterlogged=false": {
+      "model": "nautec:block/prismarine_crystal"
+    },
+    "index=1,waterlogged=true": {
+      "model": "nautec:block/prismarine_crystal"
+    },
+    "index=2,waterlogged=false": {
+      "model": "nautec:block/prismarine_crystal"
+    },
+    "index=2,waterlogged=true": {
+      "model": "nautec:block/prismarine_crystal"
+    },
+    "index=3,waterlogged=false": {
+      "model": "nautec:block/prismarine_crystal"
+    },
+    "index=3,waterlogged=true": {
+      "model": "nautec:block/prismarine_crystal"
+    },
+    "index=4,waterlogged=false": {
+      "model": "nautec:block/prismarine_crystal"
+    },
+    "index=4,waterlogged=true": {
+      "model": "nautec:block/prismarine_crystal"
+    },
+    "index=5,waterlogged=false": {
+      "model": "nautec:block/prismarine_crystal"
+    },
+    "index=5,waterlogged=true": {
+      "model": "nautec:block/prismarine_crystal"
+    }
+  }
+}

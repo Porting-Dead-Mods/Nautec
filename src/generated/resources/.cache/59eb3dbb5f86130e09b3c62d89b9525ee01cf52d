@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-12T14:12:44.154714255	Loot Tables
+// 1.21.1	2025-06-22T20:56:57.5675263	Loot Tables
 41719eca89c8053e263d78613ee41d3d1597d2f8 data/nautec/loot_table/blocks/aquarine_steel_block.json
 b0138d22def1a787c4e45722fc046c703e36ec05 data/nautec/loot_table/blocks/aquatic_catalyst.json
 0db317348cd6a30700738aad0c4ee8bf13bdda43 data/nautec/loot_table/blocks/augmentation_station.json
@@ -7,10 +7,12 @@ b0138d22def1a787c4e45722fc046c703e36ec05 data/nautec/loot_table/blocks/aquatic_c
 f590095e056ddb51aef96b87bf337447cbb85998 data/nautec/loot_table/blocks/bacterial_analyzer.json
 b4bac023a4f195fa3a312ed980d8a26b459db016 data/nautec/loot_table/blocks/bacterial_containment_shield.json
 5532fca7dd0fb0de5e8e4dac9e513362ac3b5fe3 data/nautec/loot_table/blocks/bio_reactor.json
-f7494d6ca9691a82736b6f66411116c544bf676a data/nautec/loot_table/blocks/bio_reactor_part.json
+06a48c84f087863a71c1ed9f554e7bb14b9c43b3 data/nautec/loot_table/blocks/bio_reactor_part.json
 41b64deb69add5aba548b36fb7de36f1bdcae2ba data/nautec/loot_table/blocks/charger.json
 fcf05cc18fcb8b9624d59dc8c707dc1c5620eb70 data/nautec/loot_table/blocks/chiseled_dark_prismarine.json
 f403acf76ab195da1607916f7678d6a1a79dcf25 data/nautec/loot_table/blocks/dark_prismarine_pillar.json
+cf0f3624f7a0ede4ade7b76e114a2f0cf21a4676 data/nautec/loot_table/blocks/decorative_prismarine_crystal.json
+d921c1b7ac86fd2c2642f6ffdb8b014ce63a9c1a data/nautec/loot_table/blocks/decorative_prismarine_crystal_part.json
 70569a466f470b7160131c892029c4ccc54df2c2 data/nautec/loot_table/blocks/deep_sea_drain.json
 42e084ccc92c50847afd04f1906c864d1cfe8d40 data/nautec/loot_table/blocks/deep_sea_drain_wall.json
 a1d756a3641bf1866701dec2e3ee644811aa7f2a data/nautec/loot_table/blocks/fishing_station.json

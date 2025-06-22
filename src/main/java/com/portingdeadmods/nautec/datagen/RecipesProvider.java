@@ -99,6 +99,15 @@ public class RecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(NTItems.CAST_IRON_NUGGET.get()))
                 .save(pRecipeOutput, Nautec.rl("nautec_guide"));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, NTBlocks.DECORATIVE_PRISMARINE_CRYSTAL.get(), 1)
+                .pattern("CCC")
+                .pattern("CPC")
+                .pattern("CCC")
+                .define('C', Items.PRISMARINE_CRYSTALS)
+                .define('P', Items.PRISMARINE_SHARD)
+                .unlockedBy("has_item", has(Items.PRISMARINE_CRYSTALS))
+                .save(pRecipeOutput, Nautec.rl("decorative_prismarine_crystal"));
+
 
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(NTBlocks.ANCHOR), RecipeCategory.MISC, NTItems.CAST_IRON_INGOT.toStack(11), 0.2f, 400)
                 .unlockedBy("has_item", has(Items.IRON_INGOT))

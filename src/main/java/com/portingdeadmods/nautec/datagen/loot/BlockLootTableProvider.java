@@ -102,6 +102,8 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         )));
         dropSelf(NTBlocks.BACTERIAL_ANALYZER.get());
         dropSelf(NTBlocks.FISHING_STATION.get());
+        dropSelf(NTBlocks.DECORATIVE_PRISMARINE_CRYSTAL.get());
+        add(NTBlocks.DECORATIVE_PRISMARINE_CRYSTAL_PART.get(), noDrop());
     }
 
     protected LootTable.Builder createStateDrop(

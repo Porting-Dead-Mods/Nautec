@@ -103,6 +103,8 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addBlock("long_distance_laser", "Long Distance Laser");
         addBlock("laser_junction", "Laser Junction");
         addBlock("prismarine_crystal", "Prismarine Crystal");
+        addBlock("decorative_prismarine_crystal", "Decorative Prismarine Crystal");
+        addBlock("decorative_prismarine_crystal_part", "Decorative Prismarine Crystal");
         addBlock("deep_sea_drain_wall", "Deep Sea Drain Wall");
         addBlock("augmentation_station", "Augmentation Station");
         addBlock("aquarine_steel_block", "Aquarine Steel Block");
