@@ -17,6 +17,7 @@ public final class NTCommands {
         GetAugmentCommand.register(dispatcher);
         SetAugmentCommand.register(dispatcher);
         ClearAugmentsCommand.register(dispatcher);
+        RemoveAugmentCommand.register(dispatcher);
         GetAugmentCooldownCommand.register(dispatcher);
         SetAugmentCooldownCommand.register(dispatcher);
         ConfigCommand.register(dispatcher);
