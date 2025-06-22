@@ -31,7 +31,7 @@ public class AugmentSlotsRenderer {
         Map<AugmentSlot, Augment> augments = AugmentLayerRenderer.AUGMENTS_CACHE;
         for (AugmentSlot slot : augments.keySet()) {
             Augment augment = augments.get(slot);
-            if (augment.replaceBodyPart()) {
+            if (augment != null && augment.replaceBodyPart()) {
                 ModelPart modelPart = MODEL_PART_GETTERS.get(slot).getModelPart(event.getRenderer().getModel());
                 if (modelPart != null) {
                     modelPart.visible = false;

@@ -6,6 +6,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public final class RecipeUtils {
     public static List<IngredientWithCount> ingredientsToIWC(List<Ingredient> ingredients) {

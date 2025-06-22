@@ -4,8 +4,11 @@ import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.data.NTDataAttachments;
+import com.portingdeadmods.nautec.network.ClearAugmentPayload;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,12 +52,24 @@ public final class AugmentHelper {
 
     public static void removeAugment(Player player, AugmentSlot augmentSlot) {
         Augment augment = getAugmentBySlot(player, augmentSlot);
-        augment.onRemoved(player);
+        if (augment != null) {
+            augment.onRemoved(player);
+        }
         Map<AugmentSlot, Augment> augments = new HashMap<>(getAugments(player));
         Map<AugmentSlot, CompoundTag> augmentsData = new HashMap<>(getAugmentsData(player));
         augments.remove(augmentSlot);
         augmentsData.remove(augmentSlot);
-        player.setData(NTDataAttachments.AUGMENTS.get(), augments);
-        player.setData(NTDataAttachments.AUGMENTS_EXTRA_DATA.get(), augmentsData);
+        player.setData(NTDataAttachments.AUGMENTS, augments);
+        player.setData(NTDataAttachments.AUGMENTS_EXTRA_DATA, augmentsData);
+        
+        // Sync to client if on server
+        if (!player.level().isClientSide() && player instanceof ServerPlayer serverPlayer) {
+            PacketDistributor.sendToPlayer(serverPlayer, new ClearAugmentPayload(augmentSlot));
+        }
+        
+        // Invalidate client cache if on client
+        if (player.level().isClientSide()) {
+            AugmentClientHelper.invalidateCacheFor(player, augmentSlot);
+        }
     }
 }

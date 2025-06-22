@@ -18,8 +18,10 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RenderPlayerEvent;
+import net.neoforged.neoforge.event.level.LevelEvent;
 
 import java.util.Map;
 
@@ -36,10 +38,24 @@ public final class AugmentClientEvents {
         // Needs to be outside the augment renderer cuz pose stacks
         Map<AugmentSlot, Augment> augments = AugmentLayerRenderer.AUGMENTS_CACHE;
         for (Augment augment : augments.values()) {
-            if (augment instanceof GuardianEyeAugment eyeAugment && eyeAugment.getTargetEntity() != null) {
+            if (augment != null && augment instanceof GuardianEyeAugment eyeAugment && eyeAugment.getTargetEntity() != null) {
                 GuardianEyeRenderHelper.render(event.getEntity(), eyeAugment, event.getPartialTick(), event.getPoseStack(), event.getMultiBufferSource());
                 return;
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onClientDisconnect(ClientPlayerNetworkEvent.LoggingOut event) {
+        // Clear augment cache when disconnecting from a server or leaving a world
+        AugmentLayerRenderer.AUGMENTS_CACHE.clear();
+    }
+
+    @SubscribeEvent
+    public static void onLevelUnload(LevelEvent.Unload event) {
+        // Clear augment cache when unloading a level (world change)
+        if (event.getLevel().isClientSide()) {
+            AugmentLayerRenderer.AUGMENTS_CACHE.clear();
         }
     }
 }

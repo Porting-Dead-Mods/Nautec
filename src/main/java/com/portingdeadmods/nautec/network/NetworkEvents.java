@@ -36,5 +36,10 @@ public class NetworkEvents {
                 StartAugmentationPayload.STREAM_CODEC,
                 StartAugmentationPayload::startAugmentation
         );
+        registrar.playBidirectional(
+                ClearAugmentPayload.TYPE,
+                ClearAugmentPayload.STREAM_CODEC,
+                ClearAugmentPayload::clearAugmentAction
+        );
     }
 }

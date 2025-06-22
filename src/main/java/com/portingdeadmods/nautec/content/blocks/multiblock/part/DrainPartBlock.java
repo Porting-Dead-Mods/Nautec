@@ -96,10 +96,13 @@ public class DrainPartBlock extends LaserBlock implements DisplayBlock {
 
     @Override
     protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult p_60508_) {
-        if (player.isShiftKeyDown() && state.getValue(DrainMultiblock.DRAIN_PART) == 4 && !state.getValue(OPEN)) {
-            if (level.getBlockEntity(pos) instanceof DrainPartBlockEntity drainPartBlockEntity) {
-                drainPartBlockEntity.open();
-                return InteractionResult.SUCCESS;
+        if (state.getValue(Multiblock.FORMED) && level.getBlockEntity(pos) instanceof DrainPartBlockEntity drainPartBlockEntity) {
+            BlockPos controllerPos = drainPartBlockEntity.getActualBlockEntityPos();
+            if (controllerPos != null) {
+                // Forward the interaction to the controller block
+                BlockState controllerState = level.getBlockState(controllerPos);
+                BlockHitResult newHitResult = new BlockHitResult(p_60508_.getLocation(), p_60508_.getDirection(), controllerPos, p_60508_.isInside());
+                return controllerState.useWithoutItem(level, player, newHitResult);
             }
         }
         return super.useWithoutItem(state, level, pos, player, p_60508_);
@@ -111,6 +114,20 @@ public class DrainPartBlock extends LaserBlock implements DisplayBlock {
             DrainPartBlock.setLaserPort(pos, level, hitResult.getDirection());
             return ItemInteractionResult.SUCCESS;
         }
+        
+        // Forward fluid container interactions to the controller when formed
+        if (state.getValue(Multiblock.FORMED) && stack.getCapability(Capabilities.FluidHandler.ITEM) != null 
+                && level.getBlockEntity(pos) instanceof DrainPartBlockEntity drainPartBlockEntity) {
+            BlockPos controllerPos = drainPartBlockEntity.getActualBlockEntityPos();
+            if (controllerPos != null) {
+                // Forward the interaction to the controller block
+                BlockState controllerState = level.getBlockState(controllerPos);
+                BlockHitResult newHitResult = new BlockHitResult(hitResult.getLocation(), hitResult.getDirection(), controllerPos, hitResult.isInside());
+                InteractionResult result = controllerState.useWithoutItem(level, player, newHitResult);
+                return result == InteractionResult.SUCCESS ? ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
+        }
+        
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
