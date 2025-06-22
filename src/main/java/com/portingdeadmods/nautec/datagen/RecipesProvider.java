@@ -674,8 +674,9 @@ public class RecipesProvider extends RecipeProvider {
                 .requires(Items.POISONOUS_POTATO)
                 .requires(Items.GUNPOWDER)
                 .requires(Items.BONE_MEAL)
-                .requires(Items.WATER_BUCKET)
+                .requires(Items.SNOW_BLOCK)
                 .requires(Items.PUFFERFISH)
+                .requires(Items.BUCKET)
                 .unlockedBy("has_item", has(Items.POISONOUS_POTATO))
                 .save(pRecipeOutput, Nautec.rl("etching_acid_crafting"));
     }
