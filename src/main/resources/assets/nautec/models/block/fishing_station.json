@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "nautec:block/fishing_station_bottom",
 		"1": "nautec:block/fishing_station_side",

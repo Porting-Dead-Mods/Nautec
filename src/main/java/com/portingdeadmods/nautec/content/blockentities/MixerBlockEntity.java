@@ -187,12 +187,49 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
                 itemHandlerStacksList.add(stack);
             }
         }
+        
+        // Try to find a recipe with all inputs first (original behavior)
         MixingRecipeInput input = new MixingRecipeInput(itemHandlerStacksList, getFluidTank().getFluid());
         Optional<MixingRecipe> recipe = level.getRecipeManager()
                 .getRecipeFor(MixingRecipe.Type.INSTANCE, input, level).map(RecipeHolder::value);
+        
+        // If no recipe found and we have multiple inputs, try with different combinations
+        // to handle overflow scenarios (e.g., single-item recipes with overflow in other slots)
+        if (recipe.isEmpty() && itemHandlerStacksList.size() > 1) {
+            recipe = tryRecipeWithSubsets(itemHandlerStacksList);
+        }
+        
         if (recipe.isPresent() && canInsertItem(recipe.get().result()) && canInsertFluid(recipe.get().fluidResult())) {
             return recipe;
         }
+        return Optional.empty();
+    }
+    
+    private Optional<MixingRecipe> tryRecipeWithSubsets(List<ItemStack> allInputs) {
+        // Try with individual items first (most common overflow case)
+        for (ItemStack singleInput : allInputs) {
+            List<ItemStack> singleInputList = List.of(singleInput);
+            MixingRecipeInput input = new MixingRecipeInput(singleInputList, getFluidTank().getFluid());
+            Optional<MixingRecipe> recipe = level.getRecipeManager()
+                    .getRecipeFor(MixingRecipe.Type.INSTANCE, input, level).map(RecipeHolder::value);
+            if (recipe.isPresent()) {
+                return recipe;
+            }
+        }
+        
+        // Try with combinations of different sizes
+        for (int size = 2; size < allInputs.size(); size++) {
+            for (int start = 0; start <= allInputs.size() - size; start++) {
+                List<ItemStack> subset = allInputs.subList(start, start + size);
+                MixingRecipeInput input = new MixingRecipeInput(subset, getFluidTank().getFluid());
+                Optional<MixingRecipe> recipe = level.getRecipeManager()
+                        .getRecipeFor(MixingRecipe.Type.INSTANCE, input, level).map(RecipeHolder::value);
+                if (recipe.isPresent()) {
+                    return recipe;
+                }
+            }
+        }
+        
         return Optional.empty();
     }
 

@@ -34,9 +34,9 @@ public final class NTBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.SAND));
 
     public static final DeferredBlock<CrateBlock> CRATE = registerBlockAndItem("crate", CrateBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL).noOcclusion());
     public static final DeferredBlock<CrateBlock> RUSTY_CRATE = registerBlockAndItem("rusty_crate", CrateBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.BARREL).noOcclusion());
     public static final DeferredBlock<OilBarrelBlock> OIL_BARREL = registerBlockAndItem("oil_barrel", OilBarrelBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<Block> BROWN_POLYMER_BLOCK = registerBlockAndItem("brown_polymer_block", Block::new,
@@ -56,58 +56,62 @@ public final class NTBlocks {
     public static final DeferredBlock<PrismarineLaserRelayBlock> PRISMARINE_RELAY = registerBlockAndItem("prismarine_laser_relay", PrismarineLaserRelayBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS));
     public static final DeferredBlock<MixerBlock> MIXER = registerBlockAndItem("mixer", MixerBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS).noOcclusion());
     public static final DeferredBlock<LongDistanceLaserBlock> LONG_DISTANCE_LASER = registerBlockAndItem("long_distance_laser", LongDistanceLaserBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).noOcclusion());
     public static final DeferredBlock<LaserJunctionBlock> LASER_JUNCTION = registerBlockAndItem("laser_junction", props -> new LaserJunctionBlock(props, 8),
-            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE), true, false);
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).noOcclusion(), true, false);
 
     public static final DeferredBlock<PrismarineCrystalBlock> PRISMARINE_CRYSTAL = registerBlockAndItem("prismarine_crystal", PrismarineCrystalBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(-1, 1200), PrismarineCrystalItem::new);
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(-1, 1200).noOcclusion(), PrismarineCrystalItem::new);
     public static final DeferredBlock<PrismarineCrystalPartBlock> PRISMARINE_CRYSTAL_PART = BLOCKS.registerBlock("prismarine_crystal_part", PrismarineCrystalPartBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(-1, 1200));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(-1, 1200).noOcclusion());
+    public static final DeferredBlock<DecorativePrismarineCrystalBlock> DECORATIVE_PRISMARINE_CRYSTAL = registerBlockAndItem("decorative_prismarine_crystal", DecorativePrismarineCrystalBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(2.0f, 6.0f).noOcclusion());
+    public static final DeferredBlock<DecorativePrismarineCrystalPartBlock> DECORATIVE_PRISMARINE_CRYSTAL_PART = BLOCKS.registerBlock("decorative_prismarine_crystal_part", DecorativePrismarineCrystalPartBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(2.0f, 6.0f).noOcclusion());
     public static final DeferredBlock<AnchorBlock> ANCHOR = registerBlockAndItem("anchor", AnchorBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).sound(SoundType.ANVIL).noOcclusion());
     public static final DeferredBlock<ChargerBlock> CHARGER = registerBlockAndItem("charger", ChargerBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
     public static final DeferredBlock<FishingStationBlock> FISHING_STATION = registerBlockAndItem("fishing_station", FishingStationBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
     //public static final DeferredBlock<BreakerBlock> BREAKER_BLOCK = registerBlockAndItem("breaker", BreakerBlock::new,
     //        BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
 
     // Biology
     public static final DeferredBlock<MutatorBlock> MUTATOR = bacteriaBlock(registerBlockAndItem("mutator", MutatorBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion()));
     public static final DeferredBlock<IncubatorBlock> INCUBATOR = bacteriaBlock(registerBlockAndItem("incubator", IncubatorBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion()));
     public static final DeferredBlock<BioReactorBlock> BIO_REACTOR = bacteriaBlock(registerBlockAndItem("bio_reactor", BioReactorBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
     public static final DeferredBlock<BioReactorPartBlock> BIO_REACTOR_PART = BLOCKS.registerBlock("bio_reactor_part", BioReactorPartBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<BacterialAnalyzerBlock> BACTERIAL_ANALYZER = bacteriaBlock(registerBlockAndItem("bacterial_analyzer", BacterialAnalyzerBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), true, false));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion(), true, false));
     public static final DeferredBlock<BacterialAnalyzerTopBlock> BACTERIAL_ANALYZER_TOP = BLOCKS.registerBlock("bacterial_analyzer_top", BacterialAnalyzerTopBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
     //public static final DeferredBlock<BacteriaPipeBlock> BACTERIA_PIPE = registerBlockAndItem("bacteria_pipe", BacteriaPipeBlock::new,
     //        BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS), true, false);
 
     // MULTIBLOCKS
     public static final DeferredBlock<DrainBlock> DRAIN = registerBlockAndItem("deep_sea_drain", DrainBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
     public static final DeferredBlock<Block> DRAIN_WALL = registerBlockAndItem("deep_sea_drain_wall", Block::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<DrainPartBlock> DRAIN_PART = BLOCKS.registerBlock("deep_sea_drain_part", DrainPartBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
 
     public static final DeferredBlock<AugmentationStationBlock> AUGMENTATION_STATION = registerBlockAndItem("augmentation_station",
             AugmentationStationBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).noOcclusion());
     public static final DeferredBlock<AugmentationStationPartBlock> AUGMENTATION_STATION_PART = BLOCKS.registerBlock("augmentation_station_part",
             AugmentationStationPartBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).noOcclusion());
     public static final DeferredBlock<AugmentationStationExtensionBlock> AUGMENTATION_STATION_EXTENSION = registerBlockAndItem("augmentation_station_extension",
             AugmentationStationExtensionBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).noOcclusion());
 
     public static final DeferredBlock<Block> BACTERIAL_CONTAINMENT_SHIELD = bacteriaBlock(registerBlockAndItem("bacterial_containment_shield", Block::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE)));

@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-28T13:48:31.5740241	Item Models: nautec
+// 1.21.1	2025-06-22T20:50:24.0607124	Item Models: nautec
 53692692f57914fc54eb6ebf416ce1cb7789e57b assets/nautec/models/item/air_bottle.json
 cc6ee3887ec6e0c53216dc681ac7b32b34182253 assets/nautec/models/item/anchor.json
 2e336fce57acffa1d0eb621baa30a26f665b4924 assets/nautec/models/item/aquarine_steel_axe.json
@@ -45,6 +45,7 @@ f265d14b36a179870fb0d210c3677f6235e11ed8 assets/nautec/models/item/cast_iron_blo
 3877f32e28dc1c15c50bf3a2b3b9a1b42d1efc11 assets/nautec/models/item/crowbar.json
 3794c8e4c69bb20196ba6e78e9aa74d23f06f344 assets/nautec/models/item/damaged_aquatic_chip.json
 93a27b412d5f8766eaadc9a39bbb9a8e7ad49ea5 assets/nautec/models/item/dark_prismarine_pillar.json
+d8b66d2f1aa0ad238be2a2bc53833a15851ddba3 assets/nautec/models/item/decorative_prismarine_crystal.json
 c95e02a32277b2e96affe68a0da13193f11732be assets/nautec/models/item/deep_sea_drain.json
 ac0134bed989261df9ae23ec069cae59592681e9 assets/nautec/models/item/deep_sea_drain_wall.json
 ed25e860594336997f83adfb9143324db4569abc assets/nautec/models/item/diving_boots.json

@@ -9,6 +9,10 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
@@ -73,5 +77,55 @@ public class LaserJunctionBlockEntity extends LaserBlockEntity {
     public void commonTick() {
         super.commonTick();
         transmitPower(this.power);
+    }
+
+    @Override
+    protected void saveData(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveData(tag, registries);
+
+        // Save input directions
+        ListTag inputList = new ListTag();
+        for (Direction direction : inputDirections) {
+            inputList.add(StringTag.valueOf(direction.getName()));
+        }
+        tag.put("InputDirections", inputList);
+
+        // Save output directions
+        ListTag outputList = new ListTag();
+        for (Direction direction : outputDirections) {
+            outputList.add(StringTag.valueOf(direction.getName()));
+        }
+        tag.put("OutputDirections", outputList);
+    }
+
+    @Override
+    protected void loadData(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadData(tag, registries);
+        
+        // Load input directions
+        inputDirections.clear();
+        if (tag.contains("InputDirections")) {
+            ListTag inputList = tag.getList("InputDirections", 8); // 8 = StringTag
+            for (int i = 0; i < inputList.size(); i++) {
+                String directionName = inputList.getString(i);
+                Direction direction = Direction.byName(directionName);
+                if (direction != null) {
+                    inputDirections.add(direction);
+                }
+            }
+        }
+        
+        // Load output directions
+        outputDirections.clear();
+        if (tag.contains("OutputDirections")) {
+            ListTag outputList = tag.getList("OutputDirections", 8); // 8 = StringTag
+            for (int i = 0; i < outputList.size(); i++) {
+                String directionName = outputList.getString(i);
+                Direction direction = Direction.byName(directionName);
+                if (direction != null) {
+                    outputDirections.add(direction);
+                }
+            }
+        }
     }
 }

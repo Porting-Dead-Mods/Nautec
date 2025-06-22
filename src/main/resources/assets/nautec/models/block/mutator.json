@@ -1,6 +1,6 @@
 {
 	"parent": "block/block",
-	"render_type": "cutout",
+	"render_type": "minecraft:cutout",
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "nautec:block/mutator_bottom",
