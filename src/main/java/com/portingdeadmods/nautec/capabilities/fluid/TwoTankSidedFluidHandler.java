@@ -44,11 +44,32 @@ public record TwoTankSidedFluidHandler(IFluidHandler primaryHandler,
 
     @Override
     public @NotNull FluidStack drain(FluidStack resource, FluidAction fAction) {
-        return action == IOActions.EXTRACT || action == IOActions.BOTH ? secondaryHandler.drain(resource, fAction) : FluidStack.EMPTY;
+        if (action != IOActions.EXTRACT && action != IOActions.BOTH) {
+            return FluidStack.EMPTY;
+        }
+        
+        // Check if we have enough fluid to drain the requested amount
+        FluidStack currentFluid = secondaryHandler.getFluidInTank(0);
+        if (currentFluid.isEmpty() || !currentFluid.is(resource.getFluid()) || 
+            currentFluid.getAmount() < resource.getAmount()) {
+            return FluidStack.EMPTY;
+        }
+        
+        return secondaryHandler.drain(resource, fAction);
     }
 
     @Override
     public @NotNull FluidStack drain(int maxDrain, FluidAction fAction) {
-        return action == IOActions.EXTRACT || action == IOActions.BOTH ? secondaryHandler.drain(maxDrain, fAction) : FluidStack.EMPTY;
+        if (action != IOActions.EXTRACT && action != IOActions.BOTH) {
+            return FluidStack.EMPTY;
+        }
+        
+        // Check if we have enough fluid to drain the requested amount
+        FluidStack currentFluid = secondaryHandler.getFluidInTank(0);
+        if (currentFluid.isEmpty() || currentFluid.getAmount() < maxDrain) {
+            return FluidStack.EMPTY;
+        }
+        
+        return secondaryHandler.drain(maxDrain, fAction);
     }
 }

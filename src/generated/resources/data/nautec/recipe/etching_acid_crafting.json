@@ -12,10 +12,13 @@
       "item": "minecraft:bone_meal"
     },
     {
-      "item": "minecraft:water_bucket"
+      "item": "minecraft:snow_block"
     },
     {
       "item": "minecraft:pufferfish"
+    },
+    {
+      "item": "minecraft:bucket"
     }
   ],
   "result": {
