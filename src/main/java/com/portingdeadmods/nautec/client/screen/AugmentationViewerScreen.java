@@ -58,9 +58,9 @@ public class AugmentationViewerScreen extends Screen {
         List<AugmentSlot> fullSlots = new ArrayList<>();
 
         for (AugmentSlot augmentSlot : augments.keySet()) {
+            if (augmentSlot == null) continue;
             Augment augment = augments.get(augmentSlot);
             if (augment == null) {
-                // TODO : Switch from the getAugments because that doesn't contain the null augments in empty slots
                 emptySlots.add(augmentSlot);
             } else {
                 fullSlots.add(augmentSlot);

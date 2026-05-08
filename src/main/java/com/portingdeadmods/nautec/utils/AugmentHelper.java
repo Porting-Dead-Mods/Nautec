@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.utils;
 
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
@@ -27,12 +28,20 @@ public final class AugmentHelper {
     }
 
     public static void setAugment(Player player, AugmentSlot augmentSlot, Augment augment) {
+        if (augmentSlot == null) {
+            Nautec.LOGGER.warn("Refusing to write null AugmentSlot key for player {}", player.getName().getString());
+            return;
+        }
         Map<AugmentSlot, Augment> augments = new HashMap<>(getAugments(player));
         augments.put(augmentSlot, augment);
         player.setData(NTDataAttachments.AUGMENTS, augments);
     }
 
     public static void setAugmentExtraData(Player player, AugmentSlot augmentSlot, CompoundTag tag) {
+        if (augmentSlot == null) {
+            Nautec.LOGGER.warn("Refusing to write null AugmentSlot key (extra data) for player {}", player.getName().getString());
+            return;
+        }
         Map<AugmentSlot, CompoundTag> augments = new HashMap<>(getAugmentsData(player));
         augments.put(augmentSlot, tag);
         player.setData(NTDataAttachments.AUGMENTS_EXTRA_DATA, augments);

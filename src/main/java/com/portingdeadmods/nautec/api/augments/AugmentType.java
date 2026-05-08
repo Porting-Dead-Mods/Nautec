@@ -31,7 +31,8 @@ public class AugmentType<T extends Augment> {
 
     @Override
     public String toString() {
-        return NTRegistries.AUGMENT_TYPE.getKey(this).toString();
+        var id = NTRegistries.AUGMENT_TYPE.getKey(this);
+        return id != null ? id.toString() : "nautec:unknown";
     }
 
     @FunctionalInterface

@@ -173,6 +173,11 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
 
         add("block.nautec.brown_polymer_block", "Brown Polymer Block");
 
+        // Jade plugin config entries
+        add("config.jade.plugin_nautec.mixer", "Mixer");
+        add("config.jade.plugin_nautec.aquatic_catalyst", "Aquatic Catalyst");
+        add("config.jade.plugin_nautec.laser_junction", "Laser Junction");
+
         // Bacteria
         for (ResourceKey<?> key : BACTERIAS) {
             addDirectBacteria(key);
