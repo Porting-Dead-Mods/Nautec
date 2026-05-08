@@ -18,7 +18,7 @@ public class LaserManipulationEntry extends EntryProvider {
     protected void generatePages() {
         this.page("laser_relay", () -> BookCraftingRecipePageModel.create()
                 .withTitle1("Prismarine Laser Relay")
-                .withRecipeId1("nautec:prismarine_laser_relay")
+                .withRecipeId1("nautec:prismarine_relay")
                 .withText(this.context().pageText()));
         this.pageText("""
                 The Prismarine Laser Relay is a block that allows you to extend the range of your lasers.

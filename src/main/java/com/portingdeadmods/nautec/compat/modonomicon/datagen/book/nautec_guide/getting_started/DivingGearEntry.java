@@ -29,7 +29,7 @@ public class DivingGearEntry extends EntryProvider {
                 """);
         this.page("oxygen_recipe", () -> BookCraftingRecipePageModel.create()
                 .withTitle2("Filling the tanks")
-                .withRecipeId2("minecraft:diving_chestplate_oxygen")
+                .withRecipeId2("nautec:diving_chestplate_oxygen")
                 .withTitle1("Brown Polymer")
                 .withRecipeId1("nautec:brown_polymer"));
     }

@@ -28,7 +28,7 @@ public class UtilitiesEntry extends EntryProvider {
                 """);
         this.page("wrench",()-> BookCraftingRecipePageModel.create()
                 .withTitle1("Wrench Recipe")
-                .withRecipeId1("nautec:aquarine_steel_wrench")
+                .withRecipeId1("nautec:aquarine_wrench")
                 .withTitle2("Crowbar Recipe")
                 .withRecipeId2("nautec:crowbar"));
     }

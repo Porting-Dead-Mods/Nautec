@@ -15,7 +15,7 @@
       "condition": {
         "type": "modonomicon:none"
       },
-      "recipe_id_1": "nautec:prismarine_laser_relay",
+      "recipe_id_1": "nautec:prismarine_relay",
       "text": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.laser_relay.text",
       "title1": "Prismarine Laser Relay",
       "title2": ""

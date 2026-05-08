@@ -29,7 +29,7 @@ public class CratesEtchingEntry extends EntryProvider {
                 """);
         this.page("etching_acid_recipe", () -> BookCraftingRecipePageModel.create()
                 .withTitle1("Etching Acid Recipe")
-                .withRecipeId1("nautec:etching_acid_bucket"));
+                .withRecipeId1("nautec:etching_acid_crafting"));
     }
 
     @Override

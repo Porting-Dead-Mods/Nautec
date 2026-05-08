@@ -26,7 +26,7 @@
       "condition": {
         "type": "modonomicon:none"
       },
-      "recipe_id_1": "nautec:aquarine_steel_wrench",
+      "recipe_id_1": "nautec:aquarine_wrench",
       "recipe_id_2": "nautec:crowbar",
       "text": "",
       "title1": "Wrench Recipe",

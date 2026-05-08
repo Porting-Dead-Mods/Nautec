@@ -30,15 +30,15 @@ public class ArmorEntry extends EntryProvider {
                 """);
         this.page("asa_recipes0", () -> BookCraftingRecipePageModel.create()
                 .withTitle1("Aquarine Steel Helmet")
-                .withRecipeId1("nautec:aquarine_steel_helmet")
+                .withRecipeId1("nautec:aquarine_helmet")
                 .withTitle2("Aquarine Steel Chestplate")
-                .withRecipeId2("nautec:aquarine_steel_chestplate"));
+                .withRecipeId2("nautec:aquarine_chestplate"));
 
         this.page("asa_recipes1", () -> BookCraftingRecipePageModel.create()
                 .withTitle1("Aquarine Steel Leggings")
-                .withRecipeId1("nautec:aquarine_steel_leggings")
+                .withRecipeId1("nautec:aquarine_leggings")
                 .withTitle2("Aquarine Steel Boots")
-                .withRecipeId2("nautec:aquarine_steel_boots"));
+                .withRecipeId2("nautec:aquarine_boots"));
     }
 
     @Override

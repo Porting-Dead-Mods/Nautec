@@ -31,19 +31,19 @@ public class ToolsEntry extends EntryProvider {
                 """);
         this.page("tools_recipe", () -> BookCraftingRecipePageModel.create()
                 .withTitle1("Sword Recipe")
-                .withRecipeId1("nautec:aquarine_steel_sword")
+                .withRecipeId1("nautec:aquarine_sword")
                 .withTitle2("Pickaxe Recipe")
-                .withRecipeId2("nautec:aquarine_steel_pickaxe"));
+                .withRecipeId2("nautec:aquarine_pickaxe"));
 
         this.page("tools_recipe_2", () -> BookCraftingRecipePageModel.create()
                 .withTitle1("Axe Recipe")
-                .withRecipeId1("nautec:aquarine_steel_axe")
+                .withRecipeId1("nautec:aquarine_axe")
                 .withTitle2("Shovel Recipe")
-                .withRecipeId2("nautec:aquarine_steel_shovel"));
+                .withRecipeId2("nautec:aquarine_shovel"));
 
         this.page("tools_recipe_3", () -> BookCraftingRecipePageModel.create()
                 .withTitle1("Hoe Recipe")
-                .withRecipeId1("nautec:aquarine_steel_hoe"));
+                .withRecipeId1("nautec:aquarine_hoe"));
 
 
     }

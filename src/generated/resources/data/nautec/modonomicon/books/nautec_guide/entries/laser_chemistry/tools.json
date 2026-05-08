@@ -26,8 +26,8 @@
       "condition": {
         "type": "modonomicon:none"
       },
-      "recipe_id_1": "nautec:aquarine_steel_sword",
-      "recipe_id_2": "nautec:aquarine_steel_pickaxe",
+      "recipe_id_1": "nautec:aquarine_sword",
+      "recipe_id_2": "nautec:aquarine_pickaxe",
       "text": "",
       "title1": "Sword Recipe",
       "title2": "Pickaxe Recipe"
@@ -38,8 +38,8 @@
       "condition": {
         "type": "modonomicon:none"
       },
-      "recipe_id_1": "nautec:aquarine_steel_axe",
-      "recipe_id_2": "nautec:aquarine_steel_shovel",
+      "recipe_id_1": "nautec:aquarine_axe",
+      "recipe_id_2": "nautec:aquarine_shovel",
       "text": "",
       "title1": "Axe Recipe",
       "title2": "Shovel Recipe"
@@ -50,7 +50,7 @@
       "condition": {
         "type": "modonomicon:none"
       },
-      "recipe_id_1": "nautec:aquarine_steel_hoe",
+      "recipe_id_1": "nautec:aquarine_hoe",
       "text": "",
       "title1": "Hoe Recipe",
       "title2": ""
