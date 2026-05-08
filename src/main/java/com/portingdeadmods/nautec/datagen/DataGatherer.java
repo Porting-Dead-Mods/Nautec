@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.datagen;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.compat.modonomicon.datagen.ModonomiconDatagen;
 import com.portingdeadmods.nautec.datagen.loot.BlockLootTableProvider;
+import com.portingdeadmods.nautec.datagen.loot.ChestLootTableProvider;
 import com.portingdeadmods.nautec.datagen.loot.LootModifierProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -35,7 +36,8 @@ public class DataGatherer {
         generator.addProvider(event.includeClient(), new BlockModelProvider(output, existingFileHelper));
         generator.addProvider(event.includeClient(), new RecipesProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new LootTableProvider(output, Collections.emptySet(), List.of(
-                new LootTableProvider.SubProviderEntry(BlockLootTableProvider::new, LootContextParamSets.BLOCK)
+                new LootTableProvider.SubProviderEntry(BlockLootTableProvider::new, LootContextParamSets.BLOCK),
+                new LootTableProvider.SubProviderEntry(provider -> new ChestLootTableProvider(), LootContextParamSets.CHEST)
         ), lookupProvider));
         BlockTagProvider blockTagProvider = new BlockTagProvider(output, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeClient(), blockTagProvider);
