@@ -150,6 +150,25 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         add("augment_type.nautec.drowned_lung", "Drowned Lung");
         add("augment_type.nautec.guardian_eye", "Guardian Eye");
         add("augment_type.nautec.dolphin_fin", "Dolphin Fin");
+        add("augment_type.nautec.eldritch_heart", "Eldritch Heart");
+        add("augment_type.nautec.throw_random_potion", "Random Potion Throwing");
+        add("augment_type.nautec.throw_bouncing_trident", "Bouncing Trident");
+        add("augment_type.nautec.spreading_trident", "Spreading Trident");
+        add("augment_type.nautec.leap", "Leap");
+        add("augment_type.nautec.prevent_fall_damage", "Prevent Fall Damage");
+        add("augment_type.nautec.step_up", "Step Up");
+        add("augment_type.nautec.underwater_mining_speed", "Underwater Mining Speed");
+        add("augment_type.nautec.bonus_hearts", "Bonus Hearts");
+        add("augment_type.nautec.creative_flight", "Creative Flight");
+        add("augment_type.nautec.walking_speed", "Walking Speed");
+        add("augment_type.nautec.magnet", "Magnet");
+        add("augment_type.nautec.ender_magnet", "Ender Magnet");
+
+        // Fluid block names (FluidRegistrationHelper registers each fluid as <name>_fluid block)
+        addBlock("oil_fluid", "Oil");
+        addBlock("saltwater_fluid", "Salt Water");
+        addBlock("eas_fluid", "Electrolyte Algae Serum");
+        addBlock("etching_acid_fluid", "Etching Acid");
 
         add("nautec.air_bottle.fill","Right click a glass bottle on a bubble column to fill with pressurized air");
         add("nautec.air_bottle.craft_msg","Either Craft with Chestplate or drink while wearing chestplate to increase oxygen level");

@@ -57,7 +57,7 @@ public class MobAugmentEntry extends EntryProvider {
                 .withTitle(this.context().pageTitle())
                 .withItem(NTItems.ELDRITCH_HEART)
                 .withText(this.context().pageText()));
-        this.pageTitle("Eldritch_heart");
+        this.pageTitle("Eldritch Heart");
         this.pageText("""
                 The Eldritch Heart will increase your Regeneration under water.
                 \\
