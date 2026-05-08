@@ -4,6 +4,7 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import com.portingdeadmods.nautec.utils.GuiUtils;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
@@ -31,10 +32,18 @@ public abstract class BacteriaCategory<T> implements IRecipeCategory<T> {
             for (BacteriaSlot slot : slots) {
                 guiGraphics.blitSprite(BACTERIA_SLOT_SPRITE, slot.x, slot.y, 18, 18);
                 GuiUtils.renderBacteria(guiGraphics, slot.bacteria, slot.x, slot.y);
+            }
+        }
+    }
 
-                if (GuiUtils.isHovering(guiGraphics, slot.x, slot.y, 18, 18, (int) mouseX, (int) mouseY)) {
-                    guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, slot.bacteria.getTooltip(), (int) mouseX, (int) mouseY);
-                }
+    @Override
+    public void getTooltip(ITooltipBuilder tooltip, T recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+        List<BacteriaSlot> slots = this.slots.get(recipe);
+        if (slots == null) return;
+        for (BacteriaSlot slot : slots) {
+            if (mouseX >= slot.x && mouseX < slot.x + 18 && mouseY >= slot.y && mouseY < slot.y + 18) {
+                tooltip.addAll(slot.bacteria.getTooltip());
+                return;
             }
         }
     }
