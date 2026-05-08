@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.events;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.client.screen.AugmentationViewerScreen;
+import com.portingdeadmods.nautec.compat.curio.CurioCompat;
 import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.registries.NTKeybinds;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
@@ -23,8 +24,10 @@ public final class NTClientEvents {
         @SubscribeEvent
         public static void onRenderFog(ViewportEvent.RenderFog event) {
             Entity cameraEntity = Minecraft.getInstance().cameraEntity;
-            if (cameraEntity instanceof Player player) {
-                if (cameraEntity.isUnderWater() && player.getItemBySlot(EquipmentSlot.HEAD).is(NTItems.DIVING_HELMET.get())) {
+            if (cameraEntity instanceof Player player && cameraEntity.isUnderWater()) {
+                if (player.getItemBySlot(EquipmentSlot.HEAD).is(NTItems.DIVING_HELMET.get())
+                        || player.getItemBySlot(EquipmentSlot.HEAD).is(NTItems.PRISM_MONOCLE.get())
+                        || !CurioCompat.getStackInSlot(player, NTItems.PRISM_MONOCLE.get()).isEmpty()) {
                     event.setNearPlaneDistance(-8.0f);
                     event.setFarPlaneDistance(250.0f);
                     event.setFogShape(FogShape.CYLINDER);
