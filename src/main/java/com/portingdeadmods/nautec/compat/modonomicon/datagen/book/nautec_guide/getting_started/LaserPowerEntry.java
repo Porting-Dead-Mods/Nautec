@@ -31,19 +31,22 @@ public class LaserPowerEntry extends EntryProvider {
         this.page("aquatic_catalyst_recipe", () -> BookCraftingRecipePageModel.create()
                 .withTitle1("Aquatic Catalyst")
                 .withRecipeId1("nautec:aquatic_catalyst")
-                .withText("""
-                        It can be accomplished by supplying the catalyst with fuel, like for example some prismarine.
-                        \\
-                        After right-clicking the item on the catalyst, a laser beam will shoot
-                        out of the opposite side as long as it has a target.
-                        """));
+                .withText(this.context().pageText()));
+        this.pageText("""
+                It can be accomplished by supplying the catalyst with fuel, like for example some prismarine.
+                \\
+                After right-clicking the item on the catalyst, a laser beam will shoot
+                out of the opposite side as long as it has a target.
+                """);
         this.page("purity", () -> BookTextPageModel.create()
-                .withTitle("Purity")
-                .withText("""
-                        By shooting a laser beam into a crystal, one can increase the lasers purity.
-                        The lasers that are created by this shot (top and bottom) now have a purity of 3.0
-                        this means they can be used for Item Transformation!
-                        """));
+                .withTitle(this.context().pageTitle())
+                .withText(this.context().pageText()));
+        this.pageTitle("Purity");
+        this.pageText("""
+                By shooting a laser beam into a crystal, one can increase the lasers purity.
+                The lasers that are created by this shot (top and bottom) now have a purity of 3.0
+                this means they can be used for Item Transformation!
+                """);
     }
 
     @Override
