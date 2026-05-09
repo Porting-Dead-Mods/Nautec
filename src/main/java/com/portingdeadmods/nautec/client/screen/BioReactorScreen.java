@@ -25,7 +25,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 public class BioReactorScreen extends NTMachineScreen<BioReactorBlockEntity> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/bio_reactor.png");
+    public static final ResourceLocation TEXTURE = Nautec.rl("textures/gui/bio_reactor.png");
     public static final ResourceLocation PROGRESS_ARROW = Nautec.rl("container/bio_reactor/progress_arrow");
 
     public BioReactorScreen(NTMachineMenu<BioReactorBlockEntity> menu, Inventory playerInventory, Component title) {

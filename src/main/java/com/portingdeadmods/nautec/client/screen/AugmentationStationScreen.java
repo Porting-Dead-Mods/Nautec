@@ -20,9 +20,9 @@ import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class AugmentationStationScreen extends Screen {
-    public static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/augment_station.png");
-    public static final ResourceLocation SELECTED_SLOT_IN = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/selected_slot_in.png");
-    public static final ResourceLocation SELECTED_SLOT_OUT = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/selected_slot_out.png");
+    public static final ResourceLocation BACKGROUND_TEXTURE = Nautec.rl("textures/gui/augment_station.png");
+    public static final ResourceLocation SELECTED_SLOT_IN = Nautec.rl("textures/gui/selected_slot_in.png");
+    public static final ResourceLocation SELECTED_SLOT_OUT = Nautec.rl("textures/gui/selected_slot_out.png");
 
     private final int imageWidth;
     private final int imageHeight;

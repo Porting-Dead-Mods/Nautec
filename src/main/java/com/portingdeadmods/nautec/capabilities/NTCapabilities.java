@@ -24,6 +24,6 @@ public final class NTCapabilities {
     }
 
     private static ResourceLocation create(String path) {
-        return ResourceLocation.fromNamespaceAndPath(Nautec.MODID, path);
+        return Nautec.rl(path);
     }
 }

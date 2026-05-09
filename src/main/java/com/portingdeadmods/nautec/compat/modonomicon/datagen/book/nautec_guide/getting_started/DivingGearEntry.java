@@ -1,17 +1,15 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.getting_started;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTItems;
 
-public class DivingGearEntry extends EntryProvider {
+public class DivingGearEntry extends BaseNautecEntry {
     public DivingGearEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "diving_gear", "Diving Suit and Oxygen", "Explore the depths of the ocean", BookIconModel.create(NTItems.DIVING_HELMET.get()));
     }
 
     @Override
@@ -32,30 +30,5 @@ public class DivingGearEntry extends EntryProvider {
                 .withRecipeId2("nautec:diving_chestplate_oxygen")
                 .withTitle1("Brown Polymer")
                 .withRecipeId1("nautec:brown_polymer"));
-    }
-
-    @Override
-    protected String entryName() {
-        return "Diving Suit and Oxygen";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Explore the depths of the ocean";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTItems.DIVING_HELMET.get());
-    }
-
-    @Override
-    protected String entryId() {
-        return "diving_gear";
     }
 }

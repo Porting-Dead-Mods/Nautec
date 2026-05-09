@@ -1,17 +1,15 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.getting_started;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 
-public class LaserPowerEntry extends EntryProvider {
+public class LaserPowerEntry extends BaseNautecEntry {
     public LaserPowerEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "laser_power", "Laser Power", "Whoooooooosh", BookIconModel.create(NTBlocks.AQUATIC_CATALYST));
     }
 
     @Override
@@ -47,30 +45,5 @@ public class LaserPowerEntry extends EntryProvider {
                 The lasers that are created by this shot (top and bottom) now have a purity of 3.0
                 this means they can be used for Item Transformation!
                 """);
-    }
-
-    @Override
-    protected String entryName() {
-        return "Laser Power";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Whoooooooosh";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTBlocks.AQUATIC_CATALYST);
-    }
-
-    @Override
-    protected String entryId() {
-        return "laser_power";
     }
 }

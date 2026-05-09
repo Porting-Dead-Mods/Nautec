@@ -13,7 +13,7 @@ public final class NTTags {
         public static final TagKey<Item> CORALS = ntTag("corals");
 
         private static TagKey<Item> ntTag(String name) {
-            return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, name));
+            return TagKey.create(Registries.ITEM, Nautec.rl(name));
         }
     }
 }

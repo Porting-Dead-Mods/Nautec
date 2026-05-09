@@ -1,17 +1,15 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_chemistry;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 
-public class LaserManipulationEntry extends EntryProvider {
+public class LaserManipulationEntry extends BaseNautecEntry {
     public LaserManipulationEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "laser_manipulation", "Laser Manipulation", "Playing with Lasers !", BookIconModel.create(NTBlocks.LASER_JUNCTION));
     }
 
     @Override
@@ -40,30 +38,5 @@ public class LaserManipulationEntry extends EntryProvider {
                 Right-click or Shift-right-click to toggle input output on the blocks side.
                 While this block is quite expensive, it is also a useful and very powerful block to have.
                 """);
-    }
-
-    @Override
-    protected String entryName() {
-        return "Laser Manipulation";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Playing with Lasers !";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTBlocks.LASER_JUNCTION);
-    }
-
-    @Override
-    protected String entryId() {
-        return "laser_manipulation";
     }
 }

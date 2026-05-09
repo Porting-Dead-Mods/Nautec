@@ -16,7 +16,7 @@ import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
 public class MutatorScreen extends NTMachineScreen<MutatorBlockEntity> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/mutator.png");
+    public static final ResourceLocation TEXTURE = Nautec.rl("textures/gui/mutator.png");
     public static final ResourceLocation PROGRESS_ARROW = Nautec.rl("container/mutator/progress_arrow");
 
     public MutatorScreen(NTMachineMenu<MutatorBlockEntity> menu, Inventory playerInventory, Component title) {

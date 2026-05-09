@@ -40,6 +40,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -65,6 +66,13 @@ public final class NTEvents {
                 if (itemEntity.isInFluidType(NTFluids.EAS.getFluidType().get()) || level.getBlockState(itemEntity.blockPosition().below()).getFluidState().is(NTFluids.EAS.getStillFluid())) {
                     ItemInfusion.processPowerItemInfusion(itemEntity, level);
                 }
+            }
+        }
+
+        @SubscribeEvent
+        public static void onEntityLeaveLevel(EntityLeaveLevelEvent event) {
+            if (event.getEntity() instanceof ItemEntity itemEntity) {
+                ItemEtching.onEntityLeave(itemEntity);
             }
         }
 

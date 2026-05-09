@@ -1,17 +1,15 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.getting_started;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTItems;
 
-public class MachinePartEntry extends EntryProvider {
+public class MachinePartEntry extends BaseNautecEntry {
     public MachinePartEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "machine_part", "Ancient Machine Parts", "All over the place", BookIconModel.create(NTItems.ANCIENT_VALVE));
     }
 
     @Override
@@ -36,30 +34,5 @@ public class MachinePartEntry extends EntryProvider {
         this.page("machine_part_examples", () -> BookSpotlightPageModel.create()
                 .withTitle(this.context().pageTitle())
                 .withItem(NTItems.BURNT_COIL));
-    }
-
-    @Override
-    protected String entryName() {
-        return "Ancient Machine Parts";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "All over the place";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTItems.ANCIENT_VALVE);
-    }
-
-    @Override
-    protected String entryId() {
-        return "machine_part";
     }
 }

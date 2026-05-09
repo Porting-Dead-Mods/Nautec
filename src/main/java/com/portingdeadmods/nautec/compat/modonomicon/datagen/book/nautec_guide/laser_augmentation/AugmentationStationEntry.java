@@ -1,17 +1,15 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_augmentation;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookMultiblockPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 
-public class AugmentationStationEntry extends EntryProvider {
+public class AugmentationStationEntry extends BaseNautecEntry {
     public AugmentationStationEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "augmentation_station", "Augmentation Station", "Its getting serious", BookIconModel.create(NTBlocks.AUGMENTATION_STATION));
     }
 
     @Override
@@ -42,30 +40,5 @@ public class AugmentationStationEntry extends EntryProvider {
                 Make sure, the augmentation station extension with
                 a robot arm is supplied with at least 15 power.
                 """);
-    }
-
-    @Override
-    protected String entryName() {
-        return "Augmentation Station";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Its getting serious";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTBlocks.AUGMENTATION_STATION);
-    }
-
-    @Override
-    protected String entryId() {
-        return "augmentation_station";
     }
 }

@@ -4,7 +4,6 @@ import com.portingdeadmods.nautec.Nautec;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,14 +17,23 @@ public interface NTRecipeBuilder extends RecipeBuilder {
 
     String getName();
 
+    static String ingredientPathSuffix(Ingredient ingredient) {
+        StringBuilder out = new StringBuilder();
+        for (Ingredient.Value value : ingredient.getValues()) {
+            for (ItemStack stack : value.getItems()) {
+                out.append('_').append(BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath().replace(':', '-'));
+            }
+        }
+        return out.toString();
+    }
+
     @Override
     default void save(RecipeOutput recipeOutput) {
         StringBuilder builder = new StringBuilder();
         for (Ingredient ingredient : getIngredients()) {
             for (Ingredient.Value value : ingredient.getValues()) {
                 if (value instanceof Ingredient.ItemValue(ItemStack item)) {
-                    ResourceLocation itemLocation = BuiltInRegistries.ITEM.getKey(item.getItem());
-                    builder.append(itemLocation.getPath()).append("_");
+                    builder.append(BuiltInRegistries.ITEM.getKey(item.getItem()).getPath()).append("_");
                 } else if (value instanceof Ingredient.TagValue(TagKey<Item> tag)) {
                     builder.append(tag.location().getPath()).append("_");
                 }
@@ -37,6 +45,6 @@ public interface NTRecipeBuilder extends RecipeBuilder {
         } else {
             builder.deleteCharAt(builder.length() - 1);
         }
-        save(recipeOutput, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, getName() + "/" + builder));
+        save(recipeOutput, Nautec.rl(getName() + "/" + builder));
     }
 }

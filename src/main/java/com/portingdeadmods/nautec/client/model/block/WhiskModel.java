@@ -15,9 +15,9 @@ import net.minecraft.world.inventory.InventoryMenu;
 
 public class WhiskModel extends Model {
     public static final Material WHISK_LOCATION = new Material(
-            InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "entity/whisk")
+            InventoryMenu.BLOCK_ATLAS, Nautec.rl("entity/whisk")
     );
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "custommodel"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Nautec.rl("custommodel"), "main");
     private final ModelPart main;
 
     public WhiskModel(ModelPart root) {

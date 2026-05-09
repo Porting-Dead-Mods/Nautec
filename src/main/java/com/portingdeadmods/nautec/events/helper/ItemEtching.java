@@ -3,8 +3,8 @@ package com.portingdeadmods.nautec.events.helper;
 import com.portingdeadmods.nautec.content.recipes.ItemEtchingRecipe;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.utils.ParticleUtils;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Reference2IntMap;
+import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
@@ -20,7 +20,11 @@ import net.minecraft.world.level.block.Blocks;
 import java.util.Optional;
 
 public class ItemEtching {
-    private static final Object2IntMap<ItemEntity> activeEtching = new Object2IntOpenHashMap<>();
+    private static final Reference2IntMap<ItemEntity> activeEtching = new Reference2IntOpenHashMap<>();
+
+    public static void onEntityLeave(ItemEntity itemEntity) {
+        activeEtching.removeInt(itemEntity);
+    }
 
     public static void processItemEtching(ItemEntity itemEntity, Level level) {
         ItemStack stack = itemEntity.getItem();

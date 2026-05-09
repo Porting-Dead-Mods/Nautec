@@ -1,17 +1,15 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_chemistry;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTFluids;
 
-public class ChemistryIntroductionEntry extends EntryProvider {
+public class ChemistryIntroductionEntry extends BaseNautecEntry {
     public ChemistryIntroductionEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "chemistry_introduction", "Introduction to Chemistry", "It's not gregtech, I swear", BookIconModel.create(NTFluids.EAS.getBucket()));
     }
 
     @Override
@@ -56,30 +54,5 @@ public class ChemistryIntroductionEntry extends EntryProvider {
                 will turn it into salt water. In the future there are even more powerful ways
                 to gather it, so stay tuned!
                 """);
-    }
-
-    @Override
-    protected String entryName() {
-        return "Introduction to Chemistry";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "It's not gregtech, I swear";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTFluids.EAS.getBucket());
-    }
-
-    @Override
-    protected String entryId() {
-        return "chemistry_introduction";
     }
 }

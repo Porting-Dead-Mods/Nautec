@@ -46,7 +46,7 @@ public final class ArmorModelsHandler {
     }
 
     private static ModelLayerLocation addLayer(String name, Layer layer) {
-        ModelLayerLocation loc = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, name), "main");
+        ModelLayerLocation loc = new ModelLayerLocation(Nautec.rl(name), "main");
         LAYERS.put(loc, layer);
         return loc;
     }

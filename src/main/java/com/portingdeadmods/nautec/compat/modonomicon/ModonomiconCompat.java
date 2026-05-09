@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 
 public class ModonomiconCompat {
     public static ItemStack getItemStack() {
-        ResourceLocation id = BookDataManager.get().getBook(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "nautec_guide")).getId();
+        ResourceLocation id = BookDataManager.get().getBook(Nautec.rl("nautec_guide")).getId();
         ItemStack itemStack = new ItemStack(NTItems.NAUTEC_GUIDE.get());
         itemStack.set(DataComponentRegistry.BOOK_ID, id);
         return itemStack;

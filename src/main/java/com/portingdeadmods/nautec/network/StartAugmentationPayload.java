@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.UUID;
 
 public record StartAugmentationPayload(BlockPos pos, AugmentSlot slot, UUID playerUUID) implements CustomPacketPayload {
-    public static final Type<StartAugmentationPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "start_augmentation_payload"));
+    public static final Type<StartAugmentationPayload> TYPE = new Type<>(Nautec.rl("start_augmentation_payload"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, StartAugmentationPayload> STREAM_CODEC = StreamCodec.composite(
             BlockPos.STREAM_CODEC,

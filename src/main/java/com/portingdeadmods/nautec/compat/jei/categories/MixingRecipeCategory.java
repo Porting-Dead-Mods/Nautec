@@ -27,7 +27,7 @@ import org.joml.Vector2i;
 public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
     static final ResourceLocation SINGLE_SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"container/furnace/empty_slot");
     static final ResourceLocation DOWN_ARROW_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"container/furnace/down_arrow");
-    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, MixingRecipe.NAME);
+    public static final ResourceLocation UID = Nautec.rl(MixingRecipe.NAME);
     public static final RecipeType<MixingRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, MixingRecipe.class);
 
@@ -46,7 +46,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
 
     @Override
     public Component getTitle() {
-        return Component.literal("Mixing");
+        return Component.translatable("nautec.jei.category.mixing");
     }
 
     @Override

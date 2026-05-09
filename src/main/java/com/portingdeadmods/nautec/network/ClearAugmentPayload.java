@@ -21,7 +21,7 @@ import java.util.Map;
 
 public record ClearAugmentPayload(AugmentSlot augmentSlot) implements CustomPacketPayload {
 
-    public static final Type<ClearAugmentPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "clear_augment_payload"));
+    public static final Type<ClearAugmentPayload> TYPE = new Type<>(Nautec.rl("clear_augment_payload"));
     public static final StreamCodec<RegistryFriendlyByteBuf, ClearAugmentPayload> STREAM_CODEC = StreamCodec.composite(
             AugmentCodecs.AUGMENT_SLOT_STREAM_CODEC,
             ClearAugmentPayload::augmentSlot,

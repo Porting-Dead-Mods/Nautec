@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
 public class AugmentationStationExtensionScreen extends NTAbstractContainerScreen<AugmentationStationExtensionBlockEntity> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/augment_station_extension.png");
+    public static final ResourceLocation TEXTURE = Nautec.rl("textures/gui/augment_station_extension.png");
 
     public AugmentationStationExtensionScreen(NTAbstractContainerMenu<AugmentationStationExtensionBlockEntity> menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

@@ -197,6 +197,16 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         add("config.jade.plugin_nautec.aquatic_catalyst", "Aquatic Catalyst");
         add("config.jade.plugin_nautec.laser_junction", "Laser Junction");
 
+        add("nautec.jei.category.aquatic_catalyst_channeling", "Aquatic Catalyst Channeling");
+        add("nautec.jei.category.augmentation_effects", "Augmentation Effects");
+        add("nautec.jei.category.bacteria_grafting", "Bacteria Grafting");
+        add("nautec.jei.category.bacteria_incubation", "Bacteria Incubation");
+        add("nautec.jei.category.bacteria_mutations", "Bacteria Mutations");
+        add("nautec.jei.category.bio_reactor", "Bio Reactor");
+        add("nautec.jei.category.item_etching", "Item Etching");
+        add("nautec.jei.category.item_transformation", "Item Transformation");
+        add("nautec.jei.category.mixing", "Mixing");
+
         // Bacteria
         for (ResourceKey<?> key : BACTERIAS) {
             addDirectBacteria(key);

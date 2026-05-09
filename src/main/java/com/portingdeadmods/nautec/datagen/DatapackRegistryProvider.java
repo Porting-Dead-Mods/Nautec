@@ -31,10 +31,10 @@ import java.util.concurrent.CompletableFuture;
 public class DatapackRegistryProvider extends DatapackBuiltinEntriesProvider {
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerConfigKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, Nautec.rl(name));
     }
     public static ResourceKey<PlacedFeature> registerPlaceKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, Nautec.rl(name));
     }
 
     public DatapackRegistryProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

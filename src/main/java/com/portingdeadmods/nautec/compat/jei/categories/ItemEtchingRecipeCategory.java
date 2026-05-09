@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemEtchingRecipeCategory implements IRecipeCategory<ItemEtchingRecipe> {
     static final ResourceLocation BURN_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"container/furnace/empty_arrow");
-    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "item_etching");
+    public static final ResourceLocation UID = Nautec.rl("item_etching");
     public static final RecipeType<ItemEtchingRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, ItemEtchingRecipe.class);
 
@@ -41,7 +41,7 @@ public class ItemEtchingRecipeCategory implements IRecipeCategory<ItemEtchingRec
 
     @Override
     public Component getTitle() {
-        return Component.literal("Item Etching");
+        return Component.translatable("nautec.jei.category.item_etching");
     }
 
     @Override

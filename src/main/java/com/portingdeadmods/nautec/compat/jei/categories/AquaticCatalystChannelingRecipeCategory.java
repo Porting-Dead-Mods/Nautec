@@ -22,7 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 public class AquaticCatalystChannelingRecipeCategory implements IRecipeCategory<AquaticCatalystChannelingRecipe> {
-    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "aquatic_catalyst_channeling");
+    public static final ResourceLocation UID = Nautec.rl("aquatic_catalyst_channeling");
     public static final RecipeType<AquaticCatalystChannelingRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, AquaticCatalystChannelingRecipe.class);
     private final IDrawable icon;
@@ -41,7 +41,7 @@ public class AquaticCatalystChannelingRecipeCategory implements IRecipeCategory<
 
     @Override
     public Component getTitle() {
-        return Component.literal("Aquatic Catalyst Channeling");
+        return Component.translatable("nautec.jei.category.aquatic_catalyst_channeling");
     }
 
     @Override

@@ -1,17 +1,15 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.aquatic_biology;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 
-public class IncubatorEntry extends EntryProvider {
+public class IncubatorEntry extends BaseNautecEntry {
     public IncubatorEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "incubator", "Incubator", "Incubating the colony", BookIconModel.create(NTBlocks.INCUBATOR));
     }
 
     @Override
@@ -49,30 +47,5 @@ public class IncubatorEntry extends EntryProvider {
                 a high growth rate.
                 Look at JEI for all recipes
                 """);
-    }
-
-    @Override
-    protected String entryName() {
-        return "Incubator";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Incubating the colony";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTBlocks.INCUBATOR);
-    }
-
-    @Override
-    protected String entryId() {
-        return "incubator";
     }
 }

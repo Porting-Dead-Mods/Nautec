@@ -1,18 +1,16 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.aquatic_biology;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookMultiblockPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 
-public class BioReactorEntry extends EntryProvider {
+public class BioReactorEntry extends BaseNautecEntry {
     public BioReactorEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "bio_reactor", "Bio Reactor", "Doesn't produce power", BookIconModel.create(NTBlocks.BIO_REACTOR));
     }
 
     @Override
@@ -39,30 +37,5 @@ public class BioReactorEntry extends EntryProvider {
         this.pageText("""
                 All production recipes can be viewed in JEI.
                 """);
-    }
-
-    @Override
-    protected String entryName() {
-        return "Bio Reactor";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Doesn't produce power";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTBlocks.BIO_REACTOR);
-    }
-
-    @Override
-    protected String entryId() {
-        return "bio_reactor";
     }
 }

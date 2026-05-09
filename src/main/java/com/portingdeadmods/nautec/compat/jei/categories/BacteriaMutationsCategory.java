@@ -33,8 +33,8 @@ import java.util.List;
 public class BacteriaMutationsCategory extends BacteriaCategory<BacteriaMutationRecipe> {
     static final ResourceLocation SINGLE_SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"container/furnace/empty_slot");
     static final ResourceLocation BACTERIA_SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"container/bacteria_slot");
-    static final ResourceLocation RIGHT_ARROW_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "container/mutator/progress_arrow_off");
-    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, BacteriaMutationRecipe.NAME);
+    static final ResourceLocation RIGHT_ARROW_SPRITE = Nautec.rl("container/mutator/progress_arrow_off");
+    public static final ResourceLocation UID = Nautec.rl(BacteriaMutationRecipe.NAME);
     public static final RecipeType<BacteriaMutationRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, BacteriaMutationRecipe.class);
 
@@ -65,7 +65,7 @@ public class BacteriaMutationsCategory extends BacteriaCategory<BacteriaMutation
 
     @Override
     public Component getTitle() {
-        return Component.literal("Bacteria Mutations");
+        return Component.translatable("nautec.jei.category.bacteria_mutations");
     }
 
     @Override

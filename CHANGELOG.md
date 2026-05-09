@@ -1,5 +1,55 @@
 # Changelog
 
+## [0.4.0]
+
+### Added
+- Prism Monocle now also clears underwater fog (works in the head slot or in
+  its curio slot). The Diving Helmet keeps its existing behavior. ([#27])
+
+### Fixed
+- Crates obtained from shipwrecks, ocean ruins, and ocean archaeology now
+  generate loot when opened. ([#44])
+- Game no longer crashes when reaching any GUI screen because Jade was missing
+  translation entries for the mixer / aquatic catalyst / laser junction
+  tooltip-config keys.
+- Bio Reactor, Bacteria Incubation, and Bacteria Mutations recipe screens no
+  longer show clipped or hidden tooltips when hovering bacteria slots
+  (especially under EMI and TMRV). ([#41])
+- Book recipe pages now show the correct recipes — fixed 13 stale recipe IDs
+  across the Aquarine Steel tools and armor, Wrench, Prismarine Relay, Diving
+  Chestplate Oxygen, and Etching Acid entries. ([#40])
+- Last two pages of the Laser Power book entry now render their text and
+  recipe contents. ([#39])
+- Filled in missing display names for fluid blocks (Oil, Salt Water, EAS,
+  Etching Acid) and for 13 augment types (Eldritch Heart, Magnet, Creative
+  Flight, …). Fixed the "Eldritch_heart" book title typo. ([#38])
+- Mixer Jade tooltip no longer prints an empty fluid line when a tank is
+  empty.
+
+### Performance / stability
+- Fixed a memory leak in the etching-acid item processor; tracked entries are
+  now evicted when the item entity leaves the level.
+- Hardened null-safety in the Prism Monocle HUD overlay and the Crate block
+  entity around world-transition / chunk-unload edge cases.
+
+### Internal
+- Refactored 30 Modonomicon book entries onto a shared `BaseNautecEntry` base
+  class (~700 LoC of boilerplate removed).
+- Standardized on `Nautec.rl(...)` for resource-location construction (83
+  call-sites across 46 files).
+- JEI recipe-category titles are now localizable.
+- Added a gametest that validates every book recipe-id reference resolves to
+  a real recipe.
+- Removed dead code in `NTLootTables` and de-duplicated the
+  Incubation / Mutation recipe builders.
+
+[#27]: https://github.com/Porting-Dead-Mods/Nautec/issues/27
+[#38]: https://github.com/Porting-Dead-Mods/Nautec/issues/38
+[#39]: https://github.com/Porting-Dead-Mods/Nautec/issues/39
+[#40]: https://github.com/Porting-Dead-Mods/Nautec/issues/40
+[#41]: https://github.com/Porting-Dead-Mods/Nautec/issues/41
+[#44]: https://github.com/Porting-Dead-Mods/Nautec/issues/44
+
 ## [0.3.3]
 
 ### Fixed

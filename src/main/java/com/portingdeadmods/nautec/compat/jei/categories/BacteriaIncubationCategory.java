@@ -30,8 +30,8 @@ import java.util.List;
 
 public class BacteriaIncubationCategory extends BacteriaCategory<BacteriaIncubationRecipe> {
     static final ResourceLocation SINGLE_SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"container/furnace/empty_slot");
-    static final ResourceLocation RIGHT_ARROW_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "container/incubator/progress_arrow_off");
-    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, BacteriaIncubationRecipe.NAME);
+    static final ResourceLocation RIGHT_ARROW_SPRITE = Nautec.rl("container/incubator/progress_arrow_off");
+    public static final ResourceLocation UID = Nautec.rl(BacteriaIncubationRecipe.NAME);
     public static final RecipeType<BacteriaIncubationRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, BacteriaIncubationRecipe.class);
 
@@ -59,7 +59,7 @@ public class BacteriaIncubationCategory extends BacteriaCategory<BacteriaIncubat
 
     @Override
     public Component getTitle() {
-        return Component.literal("Bacteria Incubation");
+        return Component.translatable("nautec.jei.category.bacteria_incubation");
     }
 
     @Override

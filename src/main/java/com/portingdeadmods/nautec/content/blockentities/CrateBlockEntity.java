@@ -102,21 +102,21 @@ public class CrateBlockEntity extends RandomizableContainerBlockEntity {
 
     @Override
     public void startOpen(Player player) {
-        if (!this.remove && !player.isSpectator()) {
-            this.openersCounter.incrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+        if (!this.remove && !player.isSpectator() && this.level != null) {
+            this.openersCounter.incrementOpeners(player, this.level, this.getBlockPos(), this.getBlockState());
         }
     }
 
     @Override
     public void stopOpen(Player player) {
-        if (!this.remove && !player.isSpectator()) {
-            this.openersCounter.decrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+        if (!this.remove && !player.isSpectator() && this.level != null) {
+            this.openersCounter.decrementOpeners(player, this.level, this.getBlockPos(), this.getBlockState());
         }
     }
 
     public void recheckOpen() {
-        if (!this.remove) {
-            this.openersCounter.recheckOpeners(this.getLevel(), this.getBlockPos(), this.getBlockState());
+        if (!this.remove && this.level != null) {
+            this.openersCounter.recheckOpeners(this.level, this.getBlockPos(), this.getBlockState());
         }
     }
 
@@ -131,9 +131,10 @@ public class CrateBlockEntity extends RandomizableContainerBlockEntity {
     }
 
     public void playSound(BlockState state, SoundEvent sound) {
-        double d0 = (double)this.worldPosition.getX() + 0.5;
-        double d1 = (double)this.worldPosition.getY() + 0.5;
-        double d2 = (double)this.worldPosition.getZ() + 0.5;
+        if (this.level == null) return;
+        double d0 = (double) this.worldPosition.getX() + 0.5;
+        double d1 = (double) this.worldPosition.getY() + 0.5;
+        double d2 = (double) this.worldPosition.getZ() + 0.5;
         this.level.playSound(null, d0, d1, d2, sound, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
     }
 }

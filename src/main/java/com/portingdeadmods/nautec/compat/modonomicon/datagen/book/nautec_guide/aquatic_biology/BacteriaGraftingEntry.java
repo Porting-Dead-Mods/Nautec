@@ -1,17 +1,15 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.aquatic_biology;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTItems;
 
-public class BacteriaGraftingEntry extends EntryProvider {
+public class BacteriaGraftingEntry extends BaseNautecEntry {
     public BacteriaGraftingEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "bacteria_grafting", "Bacteria Grafting", "Crafting the Grafting", BookIconModel.create(NTItems.GRAFTING_TOOL));
     }
 
     @Override
@@ -40,30 +38,5 @@ public class BacteriaGraftingEntry extends EntryProvider {
                 information about its stats or the colony's size.
                 For this you need to analyze the bacteria.
                 """);
-    }
-
-    @Override
-    protected String entryName() {
-        return "Bacteria Grafting";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Crafting the Grafting";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTItems.GRAFTING_TOOL);
-    }
-
-    @Override
-    protected String entryId() {
-        return "bacteria_grafting";
     }
 }

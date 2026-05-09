@@ -28,6 +28,6 @@ public enum CrateComponentProvider implements IBlockComponentProvider {
 
     @Override
     public ResourceLocation getUid() {
-        return ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "crate");
+        return Nautec.rl("crate");
     }
 }

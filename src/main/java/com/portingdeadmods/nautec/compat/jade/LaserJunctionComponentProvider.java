@@ -23,6 +23,6 @@ public enum LaserJunctionComponentProvider implements IBlockComponentProvider {
 
     @Override
     public ResourceLocation getUid() {
-        return ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "laser_junction");
+        return Nautec.rl("laser_junction");
     }
 }

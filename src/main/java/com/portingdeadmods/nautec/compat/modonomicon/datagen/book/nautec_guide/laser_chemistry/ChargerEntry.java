@@ -1,17 +1,15 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_chemistry;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 
-public class ChargerEntry extends EntryProvider {
+public class ChargerEntry extends BaseNautecEntry {
     public ChargerEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "charger", "Charger", "Laser Charging ????", BookIconModel.create(NTBlocks.CHARGER));
     }
 
     @Override
@@ -30,30 +28,5 @@ public class ChargerEntry extends EntryProvider {
         this.page("charger_recipe", () -> BookCraftingRecipePageModel.create()
                 .withTitle1("Charger Recipe")
                 .withRecipeId1("nautec:charger"));
-    }
-
-    @Override
-    protected String entryName() {
-        return "Charger";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Laser Charging ????";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTBlocks.CHARGER);
-    }
-
-    @Override
-    protected String entryId() {
-        return "charger";
     }
 }

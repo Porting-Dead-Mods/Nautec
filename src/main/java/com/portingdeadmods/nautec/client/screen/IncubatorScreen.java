@@ -15,7 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
 public class IncubatorScreen extends NTMachineScreen<IncubatorBlockEntity> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/incubator.png");
+    public static final ResourceLocation TEXTURE = Nautec.rl("textures/gui/incubator.png");
     public static final ResourceLocation PROGRESS_ARROW = Nautec.rl("container/incubator/progress_arrow");
 
     public IncubatorScreen(NTMachineMenu<IncubatorBlockEntity> menu, Inventory playerInventory, Component title) {

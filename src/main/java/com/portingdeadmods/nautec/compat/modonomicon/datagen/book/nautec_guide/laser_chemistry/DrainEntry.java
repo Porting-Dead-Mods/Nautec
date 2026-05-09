@@ -1,17 +1,15 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_chemistry;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookMultiblockPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 
-public class DrainEntry extends EntryProvider {
+public class DrainEntry extends BaseNautecEntry {
     public DrainEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "drain", "Deep Sea Drain", "Sucks in everything", BookIconModel.create(NTBlocks.DRAIN));
     }
 
     @Override
@@ -45,30 +43,5 @@ public class DrainEntry extends EntryProvider {
                 \\
                 Be Careful: The drain will suck in any entity! Even items
                 """);
-    }
-
-    @Override
-    protected String entryName() {
-        return "Deep Sea Drain";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Sucks in everything";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTBlocks.DRAIN);
-    }
-
-    @Override
-    protected String entryId() {
-        return "drain";
     }
 }

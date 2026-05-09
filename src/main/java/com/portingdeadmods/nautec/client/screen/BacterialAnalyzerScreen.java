@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
 public class BacterialAnalyzerScreen extends NTAbstractContainerScreen<BacterialAnalyzerBlockEntity> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/bacterial_analyzer.png");
+    public static final ResourceLocation TEXTURE = Nautec.rl("textures/gui/bacterial_analyzer.png");
     public static final ResourceLocation PROGRESS_ARROW = Nautec.rl("container/bacterial_analyzer/progress_arrow");
 
     public BacterialAnalyzerScreen(NTAbstractContainerMenu<BacterialAnalyzerBlockEntity> menu, Inventory playerInventory, Component title) {

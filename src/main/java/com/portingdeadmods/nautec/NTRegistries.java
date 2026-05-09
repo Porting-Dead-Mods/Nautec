@@ -13,17 +13,17 @@ import net.neoforged.neoforge.registries.RegistryBuilder;
 
 public final class NTRegistries {
     public static final ResourceKey<Registry<AugmentType<?>>> AUGMENT_TYPE_KEY =
-            ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "augment_type"));
+            ResourceKey.createRegistryKey(Nautec.rl("augment_type"));
     public static final ResourceKey<Registry<AugmentSlot>> AUGMENT_SLOT_KEY =
-            ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "augment_slot"));
+            ResourceKey.createRegistryKey(Nautec.rl("augment_slot"));
     private static final ResourceKey<Registry<Multiblock>> MULTIBLOCK_KEY =
-            ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "multiblock"));
+            ResourceKey.createRegistryKey(Nautec.rl("multiblock"));
     public static final ResourceKey<Registry<BacteriaSerializer<?>>> BACTERIA_SERIALIZER_KEY =
-            ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "bacteria_serializer"));
+            ResourceKey.createRegistryKey(Nautec.rl("bacteria_serializer"));
     public static final ResourceKey<Registry<BacteriaStatsSerializer<?, ?>>> BACTERIA_STATS_SERIALIZER_KEY =
-            ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "bacteria_stats_serializer"));
+            ResourceKey.createRegistryKey(Nautec.rl("bacteria_stats_serializer"));
     public static final ResourceKey<Registry<Bacteria>> BACTERIA_KEY =
-            ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "bacteria"));
+            ResourceKey.createRegistryKey(Nautec.rl("bacteria"));
 
     public static final Registry<AugmentType<?>> AUGMENT_TYPE = new RegistryBuilder<>(AUGMENT_TYPE_KEY).sync(true).create();
     public static final Registry<AugmentSlot> AUGMENT_SLOT = new RegistryBuilder<>(AUGMENT_SLOT_KEY).sync(true).create();

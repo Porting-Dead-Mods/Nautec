@@ -16,9 +16,9 @@ import net.minecraft.world.inventory.InventoryMenu;
 
 public class RobotArmModel extends Model {
     public static final Material ROBOT_ARM_LOCATION = new Material(
-            InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "entity/robot_arm")
+            InventoryMenu.BLOCK_ATLAS, Nautec.rl("entity/robot_arm")
     );
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "robot_arm"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Nautec.rl("robot_arm"), "main");
     private final ModelPart main;
     private final ModelPart bottom;
     private final ModelPart middle;

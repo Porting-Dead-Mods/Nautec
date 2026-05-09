@@ -133,7 +133,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
     public void petriDishItem(Item item) {
         ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
-        ResourceLocation hasBacteria = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "has_bacteria");
+        ResourceLocation hasBacteria = Nautec.rl("has_bacteria");
         getBuilder(location.toString())
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .override()
@@ -150,7 +150,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
     public void aquarineSteelTool(Item item) {
         ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
-        ResourceLocation enabled = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "enabled");
+        ResourceLocation enabled = Nautec.rl("enabled");
         getBuilder(location.toString())
                 .parent(new ModelFile.UncheckedModelFile("item/handheld"))
                 .override()

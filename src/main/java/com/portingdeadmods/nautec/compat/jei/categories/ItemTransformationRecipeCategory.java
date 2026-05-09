@@ -22,8 +22,8 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemTransformationRecipeCategory implements IRecipeCategory<ItemTransformationRecipe> {
-    static final ResourceLocation BURN_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "container/furnace/empty_arrow");
-    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "item_transformation");
+    static final ResourceLocation BURN_PROGRESS_SPRITE = Nautec.rl("container/furnace/empty_arrow");
+    public static final ResourceLocation UID = Nautec.rl("item_transformation");
     public static final RecipeType<ItemTransformationRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, ItemTransformationRecipe.class);
 
@@ -43,7 +43,7 @@ public class ItemTransformationRecipeCategory implements IRecipeCategory<ItemTra
 
     @Override
     public Component getTitle() {
-        return Component.literal("Item Transformation");
+        return Component.translatable("nautec.jei.category.item_transformation");
     }
 
     @Override

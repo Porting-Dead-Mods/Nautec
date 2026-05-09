@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public record SyncAugmentPayload(Augment augment, CompoundTag extraData) implements CustomPacketPayload {
 
-    public static final Type<SyncAugmentPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "augment_data_payload"));
+    public static final Type<SyncAugmentPayload> TYPE = new Type<>(Nautec.rl("augment_data_payload"));
     public static final StreamCodec<RegistryFriendlyByteBuf, SyncAugmentPayload> STREAM_CODEC = StreamCodec.composite(
             AugmentCodecs.AUGMENT_STREAM_CODEC,
             SyncAugmentPayload::augment,

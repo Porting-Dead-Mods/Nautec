@@ -10,7 +10,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
 public record SetCooldownPayload (int cooldown, int slot)implements CustomPacketPayload {
-    public static final Type<SetCooldownPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "augment_cooldown_payload"));
+    public static final Type<SetCooldownPayload> TYPE = new Type<>(Nautec.rl("augment_cooldown_payload"));
     public static final StreamCodec<RegistryFriendlyByteBuf, SetCooldownPayload> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT,
             SetCooldownPayload::cooldown,

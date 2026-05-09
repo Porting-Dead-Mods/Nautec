@@ -28,7 +28,7 @@ import java.util.List;
 
 public class AugmentationRecipeCategory implements IRecipeCategory<AugmentationRecipe> {
     static final ResourceLocation SINGLE_SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"container/furnace/empty_slot");
-    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "augmentation");
+    public static final ResourceLocation UID = Nautec.rl("augmentation");
     public static final RecipeType<AugmentationRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, AugmentationRecipe.class);
     private final IDrawable icon;
@@ -47,7 +47,7 @@ public class AugmentationRecipeCategory implements IRecipeCategory<AugmentationR
 
     @Override
     public Component getTitle() {
-        return Component.literal("Augmentation Effects");
+        return Component.translatable("nautec.jei.category.augmentation_effects");
     }
 
     @Override

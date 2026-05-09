@@ -40,7 +40,7 @@ public class NTJeiPlugin implements IModPlugin {
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
-        return ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "jei_plugin");
+        return Nautec.rl("jei_plugin");
     }
 
     @Override

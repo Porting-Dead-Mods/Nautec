@@ -1,16 +1,14 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.aquatic_biology;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTItems;
 
-public class BacteriaStatsEntry extends EntryProvider {
+public class BacteriaStatsEntry extends BaseNautecEntry {
     public BacteriaStatsEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "bacteria_stats", "Bacteria Stats", "Statistics raaaaaaawr", BookIconModel.create(NTItems.PETRI_DISH));
     }
 
     @Override
@@ -34,30 +32,5 @@ public class BacteriaStatsEntry extends EntryProvider {
                 \
                 - Lifespan, The Time it takes for a colony to shrink when producing resources
                 """);
-    }
-
-    @Override
-    protected String entryName() {
-        return "Bacteria Stats";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Statistics raaaaaaawr";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTItems.PETRI_DISH);
-    }
-
-    @Override
-    protected String entryId() {
-        return "bacteria_stats";
     }
 }

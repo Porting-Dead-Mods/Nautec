@@ -1,16 +1,14 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.aquatic_biology;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTItems;
 
-public class BacteriaIntroductionEntry extends EntryProvider {
+public class BacteriaIntroductionEntry extends BaseNautecEntry {
     public BacteriaIntroductionEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "bacteria_introduction", "Bacteria Introduction", "Exponential Growth", BookIconModel.create(NTItems.PRISMARINE_LENS));
     }
 
     @Override
@@ -36,30 +34,5 @@ public class BacteriaIntroductionEntry extends EntryProvider {
                 Bacteria also has a variety of stats which
                 will be explained in greater detail later on.
                 """);
-    }
-
-    @Override
-    protected String entryName() {
-        return "Bacteria Introduction";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Exponential Growth";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTItems.PRISMARINE_LENS);
-    }
-
-    @Override
-    protected String entryId() {
-        return "bacteria_introduction";
     }
 }

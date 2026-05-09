@@ -16,7 +16,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 public class FishingNetModel extends Model {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("modid", "fishing_net"), "main");
     public static final Material MATERIAL = new Material(
-            InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "entity/fishing_net_1")
+            InventoryMenu.BLOCK_ATLAS, Nautec.rl("entity/fishing_net_1")
     );
     private final ModelPart main;
     private final ModelPart fishing_net;

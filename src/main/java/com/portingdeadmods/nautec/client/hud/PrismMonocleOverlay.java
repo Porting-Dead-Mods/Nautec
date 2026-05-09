@@ -17,11 +17,13 @@ import net.minecraft.world.phys.BlockHitResult;
 public final class PrismMonocleOverlay {
     public static final LayeredDraw.Layer HUD = (guiGraphics, delta) -> {
         Minecraft mc = Minecraft.getInstance();
+        Level level = mc.level;
+        Player player = mc.player;
+        if (level == null || player == null) return;
+
         int lineOffset = 0;
         int x = guiGraphics.guiWidth() / 2;
         int y = guiGraphics.guiHeight() / 2;
-        Level level = mc.level;
-        Player player = mc.player;
         ItemStack item = player.getItemBySlot(EquipmentSlot.HEAD);
 
         ItemStack slotResult = CurioCompat.getStackInSlot(player, NTItems.PRISM_MONOCLE.get());

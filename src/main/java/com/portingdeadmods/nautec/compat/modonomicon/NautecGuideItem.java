@@ -18,7 +18,7 @@ import java.util.List;
 
 public class NautecGuideItem extends ModonomiconItem {
     public NautecGuideItem(Properties pProperties) {
-        super(pProperties.component(DataComponentRegistry.BOOK_ID, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "nautec_guide")));
+        super(pProperties.component(DataComponentRegistry.BOOK_ID, Nautec.rl("nautec_guide")));
     }
 
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
@@ -32,7 +32,7 @@ public class NautecGuideItem extends ModonomiconItem {
 
     @Override
     public void onCraftedBy(ItemStack itemStack, Level level, Player player) {
-        ResourceLocation id = BookDataManager.get().getBook(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "nautec_guide")).getId();
+        ResourceLocation id = BookDataManager.get().getBook(Nautec.rl("nautec_guide")).getId();
         itemStack.set(DataComponentRegistry.BOOK_ID, id);
     }
 

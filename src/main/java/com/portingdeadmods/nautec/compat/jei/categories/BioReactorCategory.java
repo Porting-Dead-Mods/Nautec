@@ -23,8 +23,8 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 public class BioReactorCategory extends BacteriaCategory<BioReactorCategory.BioReactorRecipe> {
-    static final ResourceLocation RIGHT_ARROW_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "container/bio_reactor/progress_arrow_off");
-    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, BioReactorRecipe.NAME);
+    static final ResourceLocation RIGHT_ARROW_SPRITE = Nautec.rl("container/bio_reactor/progress_arrow_off");
+    public static final ResourceLocation UID = Nautec.rl(BioReactorRecipe.NAME);
     public static final RecipeType<BioReactorRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, BioReactorRecipe.class);
 
@@ -43,7 +43,7 @@ public class BioReactorCategory extends BacteriaCategory<BioReactorCategory.BioR
 
     @Override
     public Component getTitle() {
-        return Component.literal("Bio Reactor");
+        return Component.translatable("nautec.jei.category.bio_reactor");
     }
 
     @Override

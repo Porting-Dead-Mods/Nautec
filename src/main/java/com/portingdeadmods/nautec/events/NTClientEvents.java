@@ -40,9 +40,8 @@ public final class NTClientEvents {
         public static void onClientTick(ClientTickEvent.Post event) {
             Minecraft mc = Minecraft.getInstance();
             if (NTKeybinds.AUGMENT_SCREEN_KEYBIND.get().consumeClick()) {
-                if (Minecraft.getInstance().screen == null || mc.player != null) {
-                    if (!AugmentHelper.getAugments(mc.player).isEmpty())
-                        Minecraft.getInstance().setScreen(new AugmentationViewerScreen(Component.literal("test"), Minecraft.getInstance().player));
+                if (mc.screen == null && mc.player != null && !AugmentHelper.getAugments(mc.player).isEmpty()) {
+                    mc.setScreen(new AugmentationViewerScreen(Component.literal("test"), mc.player));
                 }
             }
         }

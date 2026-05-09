@@ -85,8 +85,8 @@ public final class NautecClient {
     public static final AnchorItemRenderer ANCHOR_RENDERER = new AnchorItemRenderer();
 
     private void registerGuiOverlays(RegisterGuiLayersEvent event) {
-        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "scanner_info_overlay"), PrismMonocleOverlay.HUD);
-        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "diving_suit_overlay"), DivingSuitOverlay::render);
+        event.registerAboveAll(Nautec.rl("scanner_info_overlay"), PrismMonocleOverlay.HUD);
+        event.registerAboveAll(Nautec.rl("diving_suit_overlay"), DivingSuitOverlay::render);
     }
 
     private void registerClientExtensions(RegisterClientExtensionsEvent event) {
@@ -242,17 +242,17 @@ public final class NautecClient {
 
     private void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ItemProperties.register(NTItems.AQUARINE_SWORD.get(), ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "enabled"),
+            ItemProperties.register(NTItems.AQUARINE_SWORD.get(), Nautec.rl("enabled"),
                     (stack, level, living, id) -> NTDataComponentsUtils.isAbilityEnabledNBT(stack));
-            ItemProperties.register(NTItems.AQUARINE_PICKAXE.get(), ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "enabled"),
+            ItemProperties.register(NTItems.AQUARINE_PICKAXE.get(), Nautec.rl("enabled"),
                     (stack, level, living, id) -> NTDataComponentsUtils.isAbilityEnabledNBT(stack));
-            ItemProperties.register(NTItems.AQUARINE_AXE.get(), ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "enabled"),
+            ItemProperties.register(NTItems.AQUARINE_AXE.get(), Nautec.rl("enabled"),
                     (stack, level, living, id) -> NTDataComponentsUtils.isAbilityEnabledNBT(stack));
-            ItemProperties.register(NTItems.AQUARINE_SHOVEL.get(), ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "enabled"),
+            ItemProperties.register(NTItems.AQUARINE_SHOVEL.get(), Nautec.rl("enabled"),
                     (stack, level, living, id) -> NTDataComponentsUtils.isAbilityEnabledNBT(stack));
-            ItemProperties.register(NTItems.AQUARINE_HOE.get(), ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "enabled"),
+            ItemProperties.register(NTItems.AQUARINE_HOE.get(), Nautec.rl("enabled"),
                     (stack, level, living, id) -> NTDataComponentsUtils.isAbilityEnabledNBT(stack));
-            ItemProperties.register(NTItems.PETRI_DISH.get(), ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "has_bacteria"),
+            ItemProperties.register(NTItems.PETRI_DISH.get(), Nautec.rl("has_bacteria"),
                     (stack, level, living, id) -> NTDataComponentsUtils.hasBacteria(stack));
         });
     }

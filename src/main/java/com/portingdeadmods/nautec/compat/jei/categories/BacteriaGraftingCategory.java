@@ -31,7 +31,7 @@ import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 
 public class BacteriaGraftingCategory implements IRecipeCategory<BacteriaGraftingCategory.GraftingRecipe> {
-    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, GraftingRecipe.NAME);
+    public static final ResourceLocation UID = Nautec.rl(GraftingRecipe.NAME);
     public static final RecipeType<GraftingRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, GraftingRecipe.class);
 
@@ -50,7 +50,7 @@ public class BacteriaGraftingCategory implements IRecipeCategory<BacteriaGraftin
 
     @Override
     public Component getTitle() {
-        return Component.literal("Bacteria Grafting");
+        return Component.translatable("nautec.jei.category.bacteria_grafting");
     }
 
     @Override

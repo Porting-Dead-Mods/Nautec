@@ -17,9 +17,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.InventoryMenu;
 
 public class DolphinFinModel extends AugmentModel<DolphinFinAugment> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "dolphin_fin"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Nautec.rl("dolphin_fin"), "main");
     public static final Material MATERIAL = new Material(
-            InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "augments/dolphin_fin")
+            InventoryMenu.BLOCK_ATLAS, Nautec.rl("augments/dolphin_fin")
     );
 
     private final ModelPart main;

@@ -1,16 +1,14 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_augmentation;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTItems;
 
-public class AugmentationEntry extends EntryProvider {
+public class AugmentationEntry extends BaseNautecEntry {
     public AugmentationEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "augmentation", "Player Augmentation", "Infinite Possibilities", BookIconModel.create(NTItems.CLAW_ROBOT_ARM));
     }
 
     @Override
@@ -37,30 +35,5 @@ public class AugmentationEntry extends EntryProvider {
                 To view your active augments, there is a screen that can be opened
                 using a keybind (typically 'B')
                 """);
-    }
-
-    @Override
-    protected String entryName() {
-        return "Player Augmentation";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Infinite Possibilities";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTItems.CLAW_ROBOT_ARM);
-    }
-
-    @Override
-    protected String entryId() {
-        return "augmentation";
     }
 }

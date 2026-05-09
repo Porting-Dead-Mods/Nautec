@@ -1,17 +1,15 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_chemistry;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 
-public class MixerEntry extends EntryProvider {
+public class MixerEntry extends BaseNautecEntry {
     public MixerEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "mixer", "The Mixer", "Mixing my way through the ocean", BookIconModel.create(NTBlocks.MIXER));
     }
 
     @Override
@@ -34,30 +32,5 @@ public class MixerEntry extends EntryProvider {
         pageText("""
                 Its main purpose is to mix ingredients into chemicals like EAS or Etching Acid, used to infuse tools to unlock their full potential.
                 """);
-    }
-
-    @Override
-    protected String entryName() {
-        return "The Mixer";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Mixing my way through the ocean";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTBlocks.MIXER);
-    }
-
-    @Override
-    protected String entryId() {
-        return "mixer";
     }
 }

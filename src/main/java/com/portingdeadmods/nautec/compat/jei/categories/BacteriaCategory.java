@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class BacteriaCategory<T> implements IRecipeCategory<T> {
-    private static final ResourceLocation BACTERIA_SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "container/bacteria_slot");
+    private static final ResourceLocation BACTERIA_SLOT_SPRITE = Nautec.rl("container/bacteria_slot");
     private final Map<T, List<BacteriaSlot>> slots;
 
     public BacteriaCategory() {

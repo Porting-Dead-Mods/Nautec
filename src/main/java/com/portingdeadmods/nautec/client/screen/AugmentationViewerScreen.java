@@ -22,7 +22,7 @@ public class AugmentationViewerScreen extends Screen {
     private int leftPos;
     private int topPos;
     private final Player player;
-    public static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "textures/gui/augments.png");
+    public static final ResourceLocation BACKGROUND = Nautec.rl("textures/gui/augments.png");
 
     public AugmentationViewerScreen(Component title, Player player) {
         super(title);

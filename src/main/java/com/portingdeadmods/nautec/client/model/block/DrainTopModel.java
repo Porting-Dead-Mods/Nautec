@@ -15,10 +15,10 @@ import net.minecraft.world.inventory.InventoryMenu;
 
 public class DrainTopModel extends Model {
     public static final Material DRAIN_TOP_LOCATION = new Material(
-            InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "entity/drain_top")
+            InventoryMenu.BLOCK_ATLAS, Nautec.rl("entity/drain_top")
     );
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "drain_top"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Nautec.rl("drain_top"), "main");
     private final ModelPart top;
     private final ModelPart valve;
 

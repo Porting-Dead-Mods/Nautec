@@ -1,17 +1,15 @@
 package com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.getting_started;
 
+import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.BaseNautecEntry;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProviderBase;
-import com.klikli_dev.modonomicon.api.datagen.EntryBackground;
-import com.klikli_dev.modonomicon.api.datagen.EntryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookCraftingRecipePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
-import com.mojang.datafixers.util.Pair;
 import com.portingdeadmods.nautec.registries.NTItems;
 
-public class UtilitiesEntry extends EntryProvider {
+public class UtilitiesEntry extends BaseNautecEntry {
     public UtilitiesEntry(CategoryProviderBase parent) {
-        super(parent);
+        super(parent, "utilities", "Tools and Utilities", "Various QoL utilities", BookIconModel.create(NTItems.AQUARINE_WRENCH));
     }
 
     @Override
@@ -31,30 +29,5 @@ public class UtilitiesEntry extends EntryProvider {
                 .withRecipeId1("nautec:aquarine_wrench")
                 .withTitle2("Crowbar Recipe")
                 .withRecipeId2("nautec:crowbar"));
-    }
-
-    @Override
-    protected String entryName() {
-        return "Tools and Utilities";
-    }
-
-    @Override
-    protected String entryDescription() {
-        return "Various QoL utilities";
-    }
-
-    @Override
-    protected Pair<Integer, Integer> entryBackground() {
-        return EntryBackground.DEFAULT;
-    }
-
-    @Override
-    protected BookIconModel entryIcon() {
-        return BookIconModel.create(NTItems.AQUARINE_WRENCH);
-    }
-
-    @Override
-    protected String entryId() {
-        return "utilities";
     }
 }

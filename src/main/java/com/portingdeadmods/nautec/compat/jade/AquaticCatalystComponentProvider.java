@@ -31,6 +31,6 @@ public enum AquaticCatalystComponentProvider implements IBlockComponentProvider 
 
     @Override
     public ResourceLocation getUid() {
-        return ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "aquatic_catalyst");
+        return Nautec.rl("aquatic_catalyst");
     }
 }

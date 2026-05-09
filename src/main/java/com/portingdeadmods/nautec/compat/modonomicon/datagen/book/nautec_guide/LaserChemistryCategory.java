@@ -66,6 +66,6 @@ public class LaserChemistryCategory extends CategoryProvider {
 
     @Override
     protected BookEntryParentModel parent(BookEntryModel parentEntry) {
-        return BookEntryParentModel.create(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "getting_started"));
+        return BookEntryParentModel.create(Nautec.rl("getting_started"));
     }
 }

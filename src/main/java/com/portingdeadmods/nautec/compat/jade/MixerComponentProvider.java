@@ -17,31 +17,32 @@ public enum MixerComponentProvider implements IBlockComponentProvider {
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
         if (blockAccessor.getBlockEntity() instanceof MixerBlockEntity blockEntity) {
-            // Display the input fluid and its amount
             FluidStack inputFluid = blockEntity.getInputFluid();
-            iTooltip.add(Component.literal("Fluid Input: ")
-                    .append(Component.translatable(inputFluid.getFluid().getFluidType().getDescriptionId()))
-                    .append(" - " + blockEntity.getInputFluidAmount() + " mB"));
+            if (!inputFluid.isEmpty()) {
+                iTooltip.add(Component.literal("Fluid Input: ")
+                        .append(inputFluid.getHoverName())
+                        .append(" - " + blockEntity.getInputFluidAmount() + " mB"));
+            }
 
-            // Display the output fluid and its amount
             FluidStack outputFluid = blockEntity.getOutputFluid();
-            iTooltip.add(Component.literal("Fluid Output: ")
-                    .append(Component.translatable(outputFluid.getFluid().getFluidType().getDescriptionId()))
-                    .append(" - " + blockEntity.getOutputFluidAmount() + " mB"));
+            if (!outputFluid.isEmpty()) {
+                iTooltip.add(Component.literal("Fluid Output: ")
+                        .append(outputFluid.getHoverName())
+                        .append(" - " + blockEntity.getOutputFluidAmount() + " mB"));
+            }
 
-
-            // Display the current duration and max duration of the mixing process
             int duration = blockEntity.getDuration();
             int maxDuration = blockEntity.getMaxDuration();
-            iTooltip.add(Component.literal("Mixing Progress: " + duration + " / " + maxDuration + " ticks"));
+            if (duration > 0 && maxDuration > 0) {
+                iTooltip.add(Component.literal("Mixing Progress: " + duration + " / " + maxDuration + " ticks"));
+            }
 
             iTooltip.add(Component.literal("Energy: " + blockEntity.getPower() + " AP"));
-
         }
     }
 
     @Override
     public ResourceLocation getUid() {
-        return ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "mixer");
+        return Nautec.rl("mixer");
     }
 }

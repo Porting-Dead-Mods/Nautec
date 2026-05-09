@@ -14,8 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 
 public class AnchorModel extends Model {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "anchor"), "main");
-    public static final Material MATERIAL = new Material(InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "entity/anchor"));
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Nautec.rl("anchor"), "main");
+    public static final Material MATERIAL = new Material(InventoryMenu.BLOCK_ATLAS, Nautec.rl("entity/anchor"));
     private final ModelPart anchor;
     private final ModelPart rod;
     private final ModelPart bottom;

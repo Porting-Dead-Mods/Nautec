@@ -15,9 +15,9 @@ import net.minecraft.world.inventory.InventoryMenu;
 
 public class PrismarineCrystalModel extends Model {
     public static final Material PRISMARINE_CRYSTAL_LOCATION = new Material(
-            InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "entity/prismarine_crystal")
+            InventoryMenu.BLOCK_ATLAS, Nautec.rl("entity/prismarine_crystal")
     );
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Nautec.MODID, "prismarine_crystal"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Nautec.rl("prismarine_crystal"), "main");
     private final ModelPart main;
 
     public PrismarineCrystalModel(ModelPart root) {
