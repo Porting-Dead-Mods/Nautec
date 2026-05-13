@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec.client.screen;
 
 import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.AugmentationStationBlockEntity;
 import com.portingdeadmods.nautec.content.recipes.AugmentationRecipe;
 import com.portingdeadmods.nautec.network.StartAugmentationPayload;
@@ -29,6 +30,7 @@ public class AugmentationStationScreen extends Screen {
     private final Player player;
     private final AugmentationStationBlockEntity blockEntity;
     private AugmentationStationDataPanel dataPanel;
+    private Button applyButton;
 
     private final AugmentationRecipe recipe;
 
@@ -53,11 +55,25 @@ public class AugmentationStationScreen extends Screen {
         this.dataPanel = new AugmentationStationDataPanel(Minecraft.getInstance(), width / 3 - 10, height - 50, y + 18, x + imageWidth - 58);
         addRenderableWidget(this.dataPanel);
         this.dataPanel.setAugmentSlots(recipe != null ? recipe.resultAugment().getAugmentSlots() : NTRegistries.AUGMENT_SLOT.stream().toList());
+
+        this.applyButton = addRenderableWidget(Button.builder(Component.literal("Apply"), btn -> {
+            AugmentSlot selected = dataPanel.getSelectedSlot();
+            if (selected == null) return;
+            blockEntity.startAugmentation(player, selected);
+            PacketDistributor.sendToServer(new StartAugmentationPayload(blockEntity.getBlockPos(), selected, player.getUUID()));
+            Minecraft.getInstance().setScreen(null);
+        }).bounds(x + imageWidth / 2 - 40, y + imageHeight - 55, 50, 15).build());
+        this.applyButton.active = false;
     }
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
+
+        if (this.applyButton != null) {
+            this.applyButton.active = dataPanel != null && dataPanel.getSelectedSlot() != null;
+        }
+
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
@@ -99,12 +115,6 @@ public class AugmentationStationScreen extends Screen {
                 guiGraphics.blit(SELECTED_SLOT_OUT, augmentX - 4, augmentY - 4, 0, 0, 24, 24, 24, 24);
             }
         }
-
-        addRenderableWidget(Button.builder(Component.literal("Apply"), btn -> {
-            blockEntity.startAugmentation(player, dataPanel.getSelectedSlot());
-            PacketDistributor.sendToServer(new StartAugmentationPayload(blockEntity.getBlockPos(), dataPanel.getSelectedSlot(), player.getUUID()));
-            Minecraft.getInstance().setScreen(null);
-        }).bounds(x + imageWidth / 2 - 40, y + imageHeight - 55, 50, 15).build());
 
         int xOffset = 60;
         int yOffset = 20;

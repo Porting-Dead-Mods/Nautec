@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.4.1]
+
+### Fixed
+- Augmentation Station no longer disconnects the player when clicking Apply
+  without first selecting an augment slot. The Apply button is now disabled
+  until a slot is highlighted in the side panel. ([FTB#12158])
+
+### Internal
+- Moved the Augmentation Station's Apply button into `init()` so it is built
+  once per screen open instead of being re-added every render frame.
+
+[FTB#12158]: https://github.com/FTBTeam/FTB-Modpack-Issues/issues/12158
+
 ## [0.4.0]
 
 ### Added
