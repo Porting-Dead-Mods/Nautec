@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "wrench",
+  "recipe_id_1": "nautec:aquarine_wrench",
+  "recipe_id_2": "nautec:crowbar",
+  "sort_number": 1,
+  "title1": "Wrench Recipe",
+  "title2": "Crowbar Recipe"
+}

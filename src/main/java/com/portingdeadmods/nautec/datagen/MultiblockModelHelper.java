@@ -8,12 +8,15 @@ import com.portingdeadmods.nautec.content.multiblocks.BioReactorMultiblock;
 import com.portingdeadmods.nautec.content.multiblocks.DrainMultiblock;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTMultiblocks;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
 import org.apache.commons.lang3.IntegerRange;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,175 +28,165 @@ public class MultiblockModelHelper {
     }
 
     public void augmentationStationController(AugmentationStationBlock augmentationStationBlock) {
-        ModelFile formedModel = bmp.models().getExistingFile(bmp.existingModelFile("multiblock/augmentation_station_4"));
-        bmp.getVariantBuilder(augmentationStationBlock).partialState().with(Multiblock.FORMED, true)
-                .modelForState().modelFile(formedModel).addModel()
-                .partialState().with(Multiblock.FORMED, false)
-                .modelForState().modelFile(unformedAugmentationStationPart(augmentationStationBlock, "controller")).addModel();
+        MultiVariant formedModel = BlockModelGenerators.plainVariant(bmp.existingModelFile("multiblock/augmentation_station_4"));
+        MultiVariant unformedModel = BlockModelGenerators.plainVariant(unformedAugmentationStationPart(augmentationStationBlock, "controller"));
+        bmp.blockModels().blockStateOutput.accept(MultiVariantGenerator.dispatch(augmentationStationBlock)
+                .with(BlockModelGenerators.createBooleanModelDispatch(Multiblock.FORMED, formedModel, unformedModel)));
     }
 
     public void augmentationStationExtension(Block augmentationStationExtensionBlock) {
-        VariantBlockStateBuilder builder = bmp.getVariantBuilder(augmentationStationExtensionBlock);
-        builder
-                .partialState().with(Multiblock.FORMED, false)
-                .modelForState().modelFile(unformedAugmentationStationPart(augmentationStationExtensionBlock, "extension")).addModel();
+        MultiVariant unformedModel = BlockModelGenerators.plainVariant(unformedAugmentationStationPart(augmentationStationExtensionBlock, "extension"));
+        MultiVariant formedModel = BlockModelGenerators.plainVariant(bmp.existingModelFile("multiblock/augmentation_station_extension"));
+        PropertyDispatch.C2<MultiVariant, Boolean, Direction> dispatch = PropertyDispatch.initial(Multiblock.FORMED, BlockStateProperties.HORIZONTAL_FACING);
         for (Direction dir : BlockStateProperties.HORIZONTAL_FACING.getPossibleValues()) {
-            builder.partialState().with(Multiblock.FORMED, true).with(BlockStateProperties.HORIZONTAL_FACING, dir)
-                    .modelForState().modelFile(bmp.models().getExistingFile(bmp.existingModelFile("multiblock/augmentation_station_extension")))
-                    .rotationY(((int) dir.toYRot() + 180) % 360).addModel();
+            dispatch = dispatch
+                    .select(false, dir, unformedModel)
+                    .select(true, dir, BlockModelProvider.rotated(formedModel, 0, ((int) dir.toYRot() + 180) % 360));
         }
+        bmp.blockModels().blockStateOutput.accept(MultiVariantGenerator.dispatch(augmentationStationExtensionBlock).with(dispatch));
     }
 
     public void augmentationStationPart(Block augmentationStationPartBlock, IntegerRange range) {
-        VariantBlockStateBuilder builder = bmp.getVariantBuilder(augmentationStationPartBlock);
-        builder.partialState().with(Multiblock.FORMED, false)
-                .modelForState().modelFile(drainPartModel(augmentationStationPartBlock, 0, false)).addModel();
+        MultiVariant unformedModel = BlockModelGenerators.plainVariant(drainPartModel(augmentationStationPartBlock, 0, false));
+        PropertyDispatch.C2<MultiVariant, Boolean, Integer> dispatch = PropertyDispatch.initial(Multiblock.FORMED, AugmentationStationMultiblock.AS_PART);
+        for (int i : AugmentationStationMultiblock.AS_PART.getPossibleValues()) {
+            dispatch = dispatch.select(false, i, unformedModel);
+        }
         for (int i = range.getMinimum(); i <= range.getMaximum(); i++) {
-            ModelFile formedModel = bmp.models().getExistingFile(bmp.existingModelFile("multiblock/augmentation_station_" + (8 - i)));
+            MultiVariant formedModel = BlockModelGenerators.plainVariant(bmp.existingModelFile("multiblock/augmentation_station_" + (8 - i)));
             int index = i;
             if (i == 0 || i == 3 || i == 6) {
                 index += 2;
             } else if (i == 2 || i == 5 || i == 8) {
                 index -= 2;
             }
-            builder.partialState().with(Multiblock.FORMED, true).with(AugmentationStationMultiblock.AS_PART, index)
-                    .modelForState().modelFile(formedModel).addModel();
+            dispatch = dispatch.select(true, index, formedModel);
         }
+        bmp.blockModels().blockStateOutput.accept(MultiVariantGenerator.dispatch(augmentationStationPartBlock).with(dispatch));
     }
 
-    public @NotNull BlockModelBuilder unformedAugmentationStationPart(Block augmentationStationController, String part) {
+    public @NotNull Identifier unformedAugmentationStationPart(Block augmentationStationController, String part) {
         Multiblock multiblock = NTMultiblocks.AUGMENTATION_STATION.get();
-        BlockModelBuilder builder = bmp.models().withExistingParent(bmp.name(augmentationStationController), "cube");
-        builder.texture("up", bmp.multiblockTexture(multiblock, "unformed/" + part + "_top"))
-                .texture("down", bmp.multiblockTexture(multiblock, "unformed/" + part + "_bottom"))
-                .texture("north", bmp.multiblockTexture(multiblock, "unformed/" + part + "_side"))
-                .texture("east", bmp.multiblockTexture(multiblock, "unformed/" + part + "_side"))
-                .texture("south", bmp.multiblockTexture(multiblock, "unformed/" + part + "_side"))
-                .texture("west", bmp.multiblockTexture(multiblock, "unformed/" + part + "_side"));
-        return builder;
+        return bmp.cube(bmp.name(augmentationStationController),
+                bmp.multiblockTexture(multiblock, "unformed/" + part + "_bottom"),
+                bmp.multiblockTexture(multiblock, "unformed/" + part + "_top"),
+                bmp.multiblockTexture(multiblock, "unformed/" + part + "_side"),
+                bmp.multiblockTexture(multiblock, "unformed/" + part + "_side"),
+                bmp.multiblockTexture(multiblock, "unformed/" + part + "_side"),
+                bmp.multiblockTexture(multiblock, "unformed/" + part + "_side"),
+                bmp.multiblockTexture(multiblock, "unformed/" + part + "_side"));
     }
 
     public void drainController(Block drainController) {
         Multiblock multiblock = NTMultiblocks.DRAIN.get();
-        ModelFile unformedModel = drainControllerModel(drainController, multiblock, false);
-        bmp.getVariantBuilder(drainController).partialState().with(DrainMultiblock.FORMED, false)
-                .modelForState().modelFile(unformedModel).addModel();
-        ModelFile formedModel = drainControllerModel(drainController, multiblock, true);
-        bmp.getVariantBuilder(drainController).partialState().with(DrainMultiblock.FORMED, true)
-                .modelForState().modelFile(formedModel).addModel();
+        MultiVariant unformedModel = BlockModelGenerators.plainVariant(drainControllerModel(drainController, multiblock, false));
+        MultiVariant formedModel = BlockModelGenerators.plainVariant(drainControllerModel(drainController, multiblock, true));
+        bmp.blockModels().blockStateOutput.accept(MultiVariantGenerator.dispatch(drainController)
+                .with(BlockModelGenerators.createBooleanModelDispatch(DrainMultiblock.FORMED, formedModel, unformedModel)));
     }
 
-    public @NotNull BlockModelBuilder drainControllerModel(Block drainController, Multiblock multiblock, boolean formed) {
-        BlockModelBuilder builder = bmp.models().withExistingParent(bmp.name(drainController) + (formed ? "_formed" : ""), "cube");
-        builder.texture("up", bmp.multiblockTexture(multiblock, formed ? "top_4" : "drain_top_unformed"))
-                .texture("down", bmp.multiblockTexture(multiblock, formed ? "bottom_4" : "drain_bottom_unformed"))
-                .texture("north", bmp.multiblockTexture(multiblock, "drain_side_unformed"))
-                .texture("east", bmp.multiblockTexture(multiblock, "drain_side_unformed"))
-                .texture("south", bmp.multiblockTexture(multiblock, "drain_side_unformed"))
-                .texture("west", bmp.multiblockTexture(multiblock, "drain_side_unformed"));
-        return builder;
+    public @NotNull Identifier drainControllerModel(Block drainController, Multiblock multiblock, boolean formed) {
+        return bmp.cube(bmp.name(drainController) + (formed ? "_formed" : ""),
+                bmp.multiblockTexture(multiblock, formed ? "bottom_4" : "drain_bottom_unformed"),
+                bmp.multiblockTexture(multiblock, formed ? "top_4" : "drain_top_unformed"),
+                bmp.multiblockTexture(multiblock, "drain_side_unformed"),
+                bmp.multiblockTexture(multiblock, "drain_side_unformed"),
+                bmp.multiblockTexture(multiblock, "drain_side_unformed"),
+                bmp.multiblockTexture(multiblock, "drain_side_unformed"),
+                bmp.multiblockTexture(multiblock, "drain_side_unformed"));
     }
 
     public void drainPart(Block drainPartBlock, IntegerRange range) {
-        VariantBlockStateBuilder builder = bmp.getVariantBuilder(drainPartBlock);
-        builder.partialState().with(DrainMultiblock.FORMED, false)
-                .modelForState().modelFile(drainPartModel(drainPartBlock, 0, false)).addModel();
-        for (int i = range.getMinimum(); i <= range.getMaximum(); i++) {
-            builder.partialState().with(DrainMultiblock.DRAIN_PART, i).with(DrainMultiblock.FORMED, true).with(DrainPartBlock.LASER_PORT, false)
-                    .modelForState().modelFile(drainPartModel(drainPartBlock, i, false)).addModel();
-            builder.partialState().with(DrainMultiblock.DRAIN_PART, i).with(DrainMultiblock.FORMED, true).with(DrainPartBlock.LASER_PORT, true)
-                    .modelForState().modelFile(drainPartModel(drainPartBlock, i, true)).addModel();
+        MultiVariant unformedModel = BlockModelGenerators.plainVariant(drainPartModel(drainPartBlock, 0, false));
+        PropertyDispatch.C3<MultiVariant, Boolean, Integer, Boolean> dispatch = PropertyDispatch.initial(DrainMultiblock.FORMED, DrainMultiblock.DRAIN_PART, DrainPartBlock.LASER_PORT);
+        for (int i : DrainMultiblock.DRAIN_PART.getPossibleValues()) {
+            dispatch = dispatch
+                    .select(false, i, false, unformedModel)
+                    .select(false, i, true, unformedModel);
         }
+        for (int i = range.getMinimum(); i <= range.getMaximum(); i++) {
+            dispatch = dispatch
+                    .select(true, i, false, BlockModelGenerators.plainVariant(drainPartModel(drainPartBlock, i, false)))
+                    .select(true, i, true, BlockModelGenerators.plainVariant(drainPartModel(drainPartBlock, i, true)));
+        }
+        bmp.blockModels().blockStateOutput.accept(MultiVariantGenerator.dispatch(drainPartBlock).with(dispatch));
     }
 
-    public ModelFile drainPartModel(Block drainPartBlock, int index, boolean laserPort) {
+    public Identifier drainPartModel(Block drainPartBlock, int index, boolean laserPort) {
         String postfix = laserPort ? "_open" : "";
-        BlockModelBuilder builder = bmp.models().withExistingParent(bmp.name(drainPartBlock) + "_" + index + postfix, "cube");
+        String name = bmp.name(drainPartBlock) + "_" + index + postfix;
         Multiblock multiblock = NTMultiblocks.DRAIN.get();
         // TODO: Clean up
+        Material up = bmp.multiblockTexture(multiblock, "top_" + index);
+        Material down = bmp.multiblockTexture(multiblock, "bottom_" + index);
+        Material north;
+        Material east;
+        Material south;
+        Material west;
         if (index % 2 != 0) {
-            builder.texture("up", bmp.multiblockTexture(multiblock, "top_" + index))
-                    .texture("down", bmp.multiblockTexture(multiblock, "bottom_" + index))
-                    .texture("north", bmp.multiblockTexture(multiblock, "side_1" + postfix))
-                    .texture("east", bmp.multiblockTexture(multiblock, "side_1" + postfix))
-                    .texture("south", bmp.multiblockTexture(multiblock, "side_1" + postfix))
-                    .texture("west", bmp.multiblockTexture(multiblock, "side_1" + postfix));
+            north = bmp.multiblockTexture(multiblock, "side_1" + postfix);
+            east = north;
+            south = north;
+            west = north;
         } else if (index == 0 || index == 2) {
-            builder.texture("up", bmp.multiblockTexture(multiblock, "top_" + index))
-                    .texture("down", bmp.multiblockTexture(multiblock, "bottom_" + index))
-                    .texture("north", bmp.multiblockTexture(multiblock, "side_" + (2 - index % 3)))
-                    .texture("east", bmp.multiblockTexture(multiblock, "side_" + index % 3))
-                    .texture("south", bmp.multiblockTexture(multiblock, "side_" + (2 - index % 3)))
-                    .texture("west", bmp.multiblockTexture(multiblock, "side_" + index % 3));
+            north = bmp.multiblockTexture(multiblock, "side_" + (2 - index % 3));
+            east = bmp.multiblockTexture(multiblock, "side_" + index % 3);
+            south = north;
+            west = east;
         } else {
-            builder.texture("up", bmp.multiblockTexture(multiblock, "top_" + index))
-                    .texture("down", bmp.multiblockTexture(multiblock, "bottom_" + index))
-                    .texture("north", bmp.multiblockTexture(multiblock, "side_" + index % 3))
-                    .texture("east", bmp.multiblockTexture(multiblock, "side_" + (2 - index % 3)))
-                    .texture("south", bmp.multiblockTexture(multiblock, "side_" + index % 3))
-                    .texture("west", bmp.multiblockTexture(multiblock, "side_" + (2 - index % 3)));
+            north = bmp.multiblockTexture(multiblock, "side_" + index % 3);
+            east = bmp.multiblockTexture(multiblock, "side_" + (2 - index % 3));
+            south = north;
+            west = east;
         }
-        return builder;
+        return bmp.cube(name, down, up, north, south, east, west, north);
     }
 
     public void bioReactorPart(Block block) {
-        VariantBlockStateBuilder builder = bmp.getVariantBuilder(block);
+        PropertyDispatch.C4<MultiVariant, Integer, Boolean, Boolean, Boolean> dispatch = PropertyDispatch.initial(
+                BioReactorMultiblock.BIO_REACTOR_PART, BioReactorMultiblock.FORMED, BioReactorMultiblock.TOP, BioReactorMultiblock.HATCH);
         for (int i : BioReactorMultiblock.BIO_REACTOR_PART.getPossibleValues()) {
-            builder.partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, true)
-                    .with(BioReactorMultiblock.TOP, true).with(BioReactorMultiblock.HATCH, true)
-                    .modelForState().modelFile(bioReactorPartModel(block, i, true, true)).addModel()
-                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, false)
-                    .with(BioReactorMultiblock.TOP, true).with(BioReactorMultiblock.HATCH, true)
-                    .modelForState().modelFile(bioReactorPartModel(block, i, true, true)).addModel()
-                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, true)
-                    .with(BioReactorMultiblock.TOP, false).with(BioReactorMultiblock.HATCH, true)
-                    .modelForState().modelFile(bioReactorPartModel(block, i, false, true)).addModel()
-                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, false)
-                    .with(BioReactorMultiblock.TOP, false).with(BioReactorMultiblock.HATCH, true)
-                    .modelForState().modelFile(bioReactorPartModel(block, i, false, true)).addModel()
-                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, true)
-                    .with(BioReactorMultiblock.TOP, true).with(BioReactorMultiblock.HATCH, false)
-                    .modelForState().modelFile(bioReactorPartModel(block, i, true, false)).addModel()
-                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, false)
-                    .with(BioReactorMultiblock.TOP, true).with(BioReactorMultiblock.HATCH, false)
-                    .modelForState().modelFile(bioReactorPartModel(block, i, true, false)).addModel()
-                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, true)
-                    .with(BioReactorMultiblock.TOP, false).with(BioReactorMultiblock.HATCH, false)
-                    .modelForState().modelFile(bioReactorPartModel(block, i, false, false)).addModel()
-                    .partialState().with(BioReactorMultiblock.BIO_REACTOR_PART, i).with(BioReactorMultiblock.FORMED, false)
-                    .with(BioReactorMultiblock.TOP, false).with(BioReactorMultiblock.HATCH, false)
-                    .modelForState().modelFile(bioReactorPartModel(block, i, false, false)).addModel();
+            for (boolean formed : new boolean[]{false, true}) {
+                for (boolean top : new boolean[]{false, true}) {
+                    for (boolean hatch : new boolean[]{false, true}) {
+                        dispatch = dispatch.select(i, formed, top, hatch,
+                                BlockModelGenerators.plainVariant(bioReactorPartModel(block, i, top, hatch)));
+                    }
+                }
+            }
         }
+        bmp.blockModels().blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(dispatch));
     }
 
-    private ModelFile bioReactorPartModel(Block block, int index, boolean top, boolean hatch) {
+    private Identifier bioReactorPartModel(Block block, int index, boolean top, boolean hatch) {
         Multiblock multiblock = NTMultiblocks.BIO_REACTOR.get();
         String middleFix = top ? "top" : "bottom";
-        BlockModelBuilder builder = bmp.models().withExistingParent(bmp.name(block) + "_" + index + "_" + middleFix + (hatch ? "_hatch" : ""), "cube");
+        String name = bmp.name(block) + "_" + index + "_" + middleFix + (hatch ? "_hatch" : "");
         // TODO: Clean up
-
+        Material up = hatch && index % 2 != 0
+                ? bmp.multiblockTexture(multiblock, "top_" + index + "_hatch")
+                : bmp.multiblockTexture(multiblock, "top_" + index);
+        Material down = bmp.blockTexture(NTBlocks.POLISHED_PRISMARINE.get());
+        Material north;
+        Material east;
+        Material south;
+        Material west;
         if (index % 2 != 0) {
-            builder.texture("up", hatch ? bmp.multiblockTexture(multiblock, "top_" + index + "_hatch") : bmp.multiblockTexture(multiblock, "top_" + index))
-                    .texture("down", bmp.blockTexture(NTBlocks.POLISHED_PRISMARINE.get()))
-                    .texture("north", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_1"))
-                    .texture("east", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_1"))
-                    .texture("south", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_1"))
-                    .texture("west", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_1"));
+            north = bmp.multiblockTexture(multiblock, "side_" + middleFix + "_1");
+            east = north;
+            south = north;
+            west = north;
         } else if (index == 0 || index == 2) {
-            builder.texture("up", bmp.multiblockTexture(multiblock, "top_" + index))
-                    .texture("down", bmp.blockTexture(NTBlocks.POLISHED_PRISMARINE.get()))
-                    .texture("north", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_" + (2 - index % 3)))
-                    .texture("east", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_" + index % 3))
-                    .texture("south", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_" + (2 - index % 3)))
-                    .texture("west", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_" + index % 3));
+            north = bmp.multiblockTexture(multiblock, "side_" + middleFix + "_" + (2 - index % 3));
+            east = bmp.multiblockTexture(multiblock, "side_" + middleFix + "_" + index % 3);
+            south = north;
+            west = east;
         } else {
-            builder.texture("up", bmp.multiblockTexture(multiblock, "top_" + index))
-                    .texture("down", bmp.blockTexture(NTBlocks.POLISHED_PRISMARINE.get()))
-                    .texture("north", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_" + index % 3))
-                    .texture("east", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_" + (2 - index % 3)))
-                    .texture("south", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_" + index % 3))
-                    .texture("west", bmp.multiblockTexture(multiblock, "side_" + middleFix + "_" + (2 - index % 3)));
+            north = bmp.multiblockTexture(multiblock, "side_" + middleFix + "_" + index % 3);
+            east = bmp.multiblockTexture(multiblock, "side_" + middleFix + "_" + (2 - index % 3));
+            south = north;
+            west = east;
         }
-        return builder;
+        return bmp.cube(name, down, up, north, south, east, west, north);
     }
 }

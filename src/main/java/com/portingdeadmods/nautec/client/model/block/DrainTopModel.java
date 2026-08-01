@@ -1,29 +1,24 @@
 package com.portingdeadmods.nautec.client.model.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.portingdeadmods.nautec.Nautec;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class DrainTopModel extends Model {
-    public static final Material DRAIN_TOP_LOCATION = new Material(
-            InventoryMenu.BLOCK_ATLAS, Nautec.rl("entity/drain_top")
-    );
-    // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
+public class DrainTopModel extends Model.Simple {
+    public static final RenderType RENDER_TYPE = RenderTypes.entityTranslucent(Nautec.rl("textures/entity/drain_top.png"));
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Nautec.rl("drain_top"), "main");
     private final ModelPart top;
     private final ModelPart valve;
 
     public DrainTopModel(ModelPart root) {
-        super(RenderType::entityTranslucent);
+        super(root, RenderTypes::entityTranslucent);
         this.top = root.getChild("top");
         this.valve = root.getChild("valve");
     }
@@ -49,27 +44,20 @@ public class DrainTopModel extends Model {
         return LayerDefinition.create(meshdefinition, 256, 256);
     }
 
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        renderLid(poseStack, buffer, packedLight, packedOverlay);
-
-        renderValve(poseStack, buffer, packedLight, packedOverlay);
-    }
-
-    public void renderLid(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay) {
+    public void submitLid(PoseStack poseStack, SubmitNodeCollector collector, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         {
             poseStack.translate(1, -1, 1);
-            this.top.render(poseStack, buffer, packedLight, packedOverlay, -1);
+            collector.submitModelPart(this.top, poseStack, RENDER_TYPE, packedLight, packedOverlay, null);
         }
         poseStack.popPose();
     }
 
-    public void renderValve(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay) {
+    public void submitValve(PoseStack poseStack, SubmitNodeCollector collector, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         {
             poseStack.translate(0.5, 0, 0.5);
-            this.valve.render(poseStack, buffer, packedLight, packedOverlay, -1);
+            collector.submitModelPart(this.valve, poseStack, RENDER_TYPE, packedLight, packedOverlay, null);
         }
         poseStack.popPose();
     }

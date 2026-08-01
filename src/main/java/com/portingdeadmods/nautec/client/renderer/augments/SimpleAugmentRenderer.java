@@ -7,42 +7,39 @@ import com.portingdeadmods.nautec.api.client.model.augments.AugmentModel;
 import com.portingdeadmods.nautec.api.client.renderer.augments.AugmentRenderer;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.events.helper.AugmentSlotsRenderer;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.model.player.PlayerModel;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.world.entity.LivingEntity;
 
 import java.util.function.Function;
 
 public class SimpleAugmentRenderer<T extends Augment> extends AugmentRenderer<T> {
     private final AugmentModel<T> model;
-    private final Material material;
+    private final RenderType renderType;
     private final boolean moveWithBody;
 
-    public SimpleAugmentRenderer(Function<ModelPart, AugmentModel<T>> model, ModelLayerLocation layerLocation, Material material, boolean moveWithBody, Context ctx) {
+    public SimpleAugmentRenderer(Function<ModelPart, AugmentModel<T>> model, ModelLayerLocation layerLocation, RenderType renderType, boolean moveWithBody, Context ctx) {
         super(ctx);
-        this.material = material;
+        this.renderType = renderType;
         this.model = model.apply(ctx.entityModelSet().bakeLayer(layerLocation));
         this.moveWithBody = moveWithBody;
     }
 
     @Override
-    public <E extends LivingEntity, M extends EntityModel<E>> void render(T augment, AugmentLayerRenderer<E, M> superRenderer, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public void render(T augment, AugmentLayerRenderer<?, ?> superRenderer, PoseStack poseStack, SubmitNodeCollector collector, int packedLight) {
         poseStack.pushPose();
         {
             AugmentSlot augmentSlot = augment.getAugmentSlot();
             if (augmentSlot != null) {
-                ModelPart modelPart = AugmentSlotsRenderer.modelPartBySlot(augmentSlot).getModelPart((PlayerModel<AbstractClientPlayer>) superRenderer.getParentModel());
+                ModelPart modelPart = AugmentSlotsRenderer.modelPartBySlot(augmentSlot).getModelPart((PlayerModel) superRenderer.getParentModel());
                 if (modelPart != null && moveWithBody) {
                     modelPart.translateAndRotate(poseStack);
                 }
             }
-            this.model.renderToBuffer(poseStack, material.buffer(bufferSource, model::renderType), packedLight, OverlayTexture.NO_OVERLAY);
+            this.model.submit(poseStack, collector, renderType, packedLight, OverlayTexture.NO_OVERLAY);
         }
         poseStack.popPose();
     }

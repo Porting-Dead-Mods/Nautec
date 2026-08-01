@@ -1,7 +1,7 @@
 {
   "variants": {
     "axis=x": {
-      "model": "nautec:block/dark_prismarine_pillar_horizontal",
+      "model": "nautec:block/dark_prismarine_pillar",
       "x": 90,
       "y": 90
     },
@@ -9,7 +9,7 @@
       "model": "nautec:block/dark_prismarine_pillar"
     },
     "axis=z": {
-      "model": "nautec:block/dark_prismarine_pillar_horizontal",
+      "model": "nautec:block/dark_prismarine_pillar",
       "x": 90
     }
   }

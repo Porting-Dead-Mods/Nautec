@@ -2,16 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {
-      "item": "nautec:brown_polymer"
-    }
+    "B": "nautec:brown_polymer"
   },
   "pattern": [
     "BB",
     "BB"
   ],
   "result": {
-    "count": 1,
     "id": "nautec:brown_polymer_block"
   }
 }

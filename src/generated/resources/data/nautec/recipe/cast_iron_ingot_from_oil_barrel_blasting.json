@@ -3,9 +3,7 @@
   "category": "misc",
   "cookingtime": 400,
   "experience": 0.2,
-  "ingredient": {
-    "item": "nautec:oil_barrel"
-  },
+  "ingredient": "nautec:oil_barrel",
   "result": {
     "count": 5,
     "id": "nautec:cast_iron_ingot"

@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "nautec:aquarine_steel_ingot"
-    },
-    "C": {
-      "item": "nautec:laser_channeling_coil"
-    },
-    "G": {
-      "item": "nautec:gear"
-    },
-    "R": {
-      "item": "nautec:cast_iron_rod"
-    }
+    "A": "nautec:aquarine_steel_ingot",
+    "C": "nautec:laser_channeling_coil",
+    "G": "nautec:gear",
+    "R": "nautec:cast_iron_rod"
   },
   "pattern": [
     "AGA",
@@ -21,7 +13,6 @@
     " R "
   ],
   "result": {
-    "count": 1,
     "id": "nautec:aquarine_steel_pickaxe"
   }
 }

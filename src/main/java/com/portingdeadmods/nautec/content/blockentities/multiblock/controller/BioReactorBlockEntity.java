@@ -9,12 +9,13 @@ import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.capabilities.bacteria.IBacteriaStorage;
 import com.portingdeadmods.nautec.content.menus.BioReactorMenu;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTMultiblocks;
 import com.portingdeadmods.nautec.utils.BacteriaHelper;
+import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
@@ -24,6 +25,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,7 +62,7 @@ public class BioReactorBlockEntity extends LaserBlockEntity implements MenuProvi
                         Bacteria.Resource resource = bacteria1.resource();
 
                         if (resource instanceof Bacteria.Resource.ItemResource(Item item)) {
-                            getItemHandler().insertItem(i, item.getDefaultInstance(), false);
+                            getItemStackHandler().insertItem(i, item.getDefaultInstance(), false);
                         }
                         this.progress[i] = 0;
                     } else {
@@ -110,17 +113,29 @@ public class BioReactorBlockEntity extends LaserBlockEntity implements MenuProvi
     }
 
     @Override
-    protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.saveData(tag, provider);
-        tag.put("multiblockData", saveMBData());
-        tag.putIntArray("progress", progress);
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        if (MultiblockEntity.UNFORMING.compareAndSet(false, true)) {
+            try {
+                MultiblockHelper.unform(NTMultiblocks.BIO_REACTOR.get(), pos, level);
+            } finally {
+                MultiblockEntity.UNFORMING.set(false);
+            }
+        }
+        super.preRemoveSideEffects(pos, state);
     }
 
     @Override
-    protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.loadData(tag, provider);
-        this.multiblockData = loadMBData(tag.getCompound("multiblockData"));
-        int[] progress = tag.getIntArray("progress");
+    protected void saveData(ValueOutput out) {
+        super.saveData(out);
+        out.store("multiblockData", CompoundTag.CODEC, saveMBData());
+        out.putIntArray("progress", progress);
+    }
+
+    @Override
+    protected void loadData(ValueInput in) {
+        super.loadData(in);
+        this.multiblockData = loadMBData(in.read("multiblockData", CompoundTag.CODEC).orElseGet(CompoundTag::new));
+        int[] progress = in.getIntArray("progress").orElse(new int[0]);
         for (int i = 0; i < this.progress.length; i++) {
             if (i < progress.length) {
                 this.progress[i] = progress[i];

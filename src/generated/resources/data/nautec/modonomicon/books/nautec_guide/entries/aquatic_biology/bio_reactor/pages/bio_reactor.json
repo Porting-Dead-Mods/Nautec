@@ -1,0 +1,13 @@
+{
+  "type": "modonomicon:spotlight",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "bio_reactor",
+  "item": {
+    "id": "nautec:bio_reactor"
+  },
+  "sort_number": 0,
+  "text": "book.nautec.nautec_guide.aquatic_biology.bio_reactor.bio_reactor.text",
+  "title": "book.nautec.nautec_guide.aquatic_biology.bio_reactor.bio_reactor.title"
+}

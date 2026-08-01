@@ -46,17 +46,6 @@ public abstract class ContainerBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof ContainerBlockEntity containerBE) {
-            if (!state.is(newState.getBlock())) {
-                containerBE.drop();
-            }
-        }
-        super.onRemove(state, level, pos, newState, movedByPiston);
-    }
-
-    @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MenuProvider menuProvider) {

@@ -1,26 +1,25 @@
 package com.portingdeadmods.nautec.api.client.model.armor;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.HumanoidArmorModel;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 
 import java.util.function.Consumer;
 
-public class NTArmorModel extends HumanoidArmorModel<LivingEntity> {
+public class NTArmorModel extends HumanoidModel<HumanoidRenderState> {
 
     private final EquipmentSlot slot;
 
     public NTArmorModel(ModelPart root, EquipmentSlot slot) {
         super(root);
         this.slot = slot;
+        setPartVisibility(slot);
     }
 
     public static LayerDefinition createLayer(int textureWidth, int textureHeight, Consumer<PartsDefinition> partsConsumer) {
@@ -40,19 +39,18 @@ public class NTArmorModel extends HumanoidArmorModel<LivingEntity> {
         return LayerDefinition.create(mesh, textureWidth, textureHeight);
     }
 
-    @Override
-    public void setupAnim(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        setPartVisibility(slot);
-        super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, color);
+    public EquipmentSlot getSlot() {
+        return slot;
     }
 
     protected void setPartVisibility(EquipmentSlot slot) {
-        setAllVisible(false);
+        head.visible = false;
+        hat.visible = false;
+        body.visible = false;
+        leftArm.visible = false;
+        rightArm.visible = false;
+        leftLeg.visible = false;
+        rightLeg.visible = false;
         switch (slot) {
             case HEAD -> {
                 head.visible = true;

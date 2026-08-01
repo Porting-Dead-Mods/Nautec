@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "nautec:item/aquarine_steel_hoe"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "nautec:item/aquarine_steel_hoe_enabled"
+    },
+    "property": "nautec:ability_enabled"
+  }
+}

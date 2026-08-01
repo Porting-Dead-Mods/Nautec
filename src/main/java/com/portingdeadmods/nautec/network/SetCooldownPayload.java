@@ -5,7 +5,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +25,5 @@ public record SetCooldownPayload (int cooldown, int slot)implements CustomPacket
     }
 
     public static void setCooldownAction(SetCooldownPayload payload, IPayloadContext context){
-//        context.enqueueWork(()-> AugmentHelper.setCooldown(context.player(), AugmentSlots.getValue(payload.slot()), payload.cooldown()));
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -54,6 +55,12 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     public abstract Set<Direction> getLaserInputs();
 
     public abstract Set<Direction> getLaserOutputs();
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+        drop();
+    }
 
     public boolean shouldRender(Direction direction) {
         BlockPos pos = worldPosition.relative(direction, this.laserDistances.getInt(direction));
@@ -176,12 +183,14 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
     }
 
     private Optional<ItemTransformationRecipe> getCurrentRecipe(ItemStack itemStack) {
+        if (!(this.level instanceof ServerLevel serverLevel)) {
+            return Optional.empty();
+        }
         ItemTransformationRecipeInput recipeInput = new ItemTransformationRecipeInput(itemStack, getPurity());
-        return this.level.getRecipeManager().getRecipeFor(ItemTransformationRecipe.Type.INSTANCE, recipeInput, level).map(RecipeHolder::value);
+        return serverLevel.recipeAccess().getRecipeFor(ItemTransformationRecipe.Type.INSTANCE, recipeInput, level).map(RecipeHolder::value);
     }
 
     private void processItemCrafting(AABB box, Direction direction) {
-        // Get all item entities within the box
         List<ItemEntity> itemEntities = level.getEntitiesOfClass(ItemEntity.class, box);
 
         for (ItemEntity itemEntity : itemEntities) {
@@ -222,7 +231,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
                         iterator.remove();
                     } else {
                         activeTransformation.put(cookingItem, cookTime + 1);
-                        if (level.isClientSide) {
+                        if (level.isClientSide()) {
                             ParticleUtils.spawnParticlesAroundItem(cookingItem, level, ParticleTypes.END_ROD);
                         }
                     }

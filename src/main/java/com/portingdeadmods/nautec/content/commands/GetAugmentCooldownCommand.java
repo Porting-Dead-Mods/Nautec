@@ -13,11 +13,11 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
-// /modjam augments get <slot>
+// /nautec augments cooldown get <slot>
 public class GetAugmentCooldownCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         LiteralArgumentBuilder<CommandSourceStack> nautecCommand = Commands.literal(Nautec.MODID)
-                .requires(player -> player.hasPermission(2));
+                .requires(source -> Commands.LEVEL_GAMEMASTERS.check(source.permissions()));
 
         dispatcher.register(nautecCommand
                 .then(Commands.literal("augments")

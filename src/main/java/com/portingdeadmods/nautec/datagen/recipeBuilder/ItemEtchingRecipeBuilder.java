@@ -4,11 +4,13 @@ import com.portingdeadmods.nautec.content.recipes.ItemEtchingRecipe;
 import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,17 +19,15 @@ import java.util.List;
 
 public class ItemEtchingRecipeBuilder implements NTRecipeBuilder {
     @NotNull
-    private final ItemStack result;
-    @NotNull
+    private final ItemStackTemplate result;
     private IngredientWithCount ingredient;
     private int duration;
 
-    private ItemEtchingRecipeBuilder(@NotNull ItemStack result) {
-        this.ingredient = IngredientWithCount.EMPTY;
+    private ItemEtchingRecipeBuilder(@NotNull ItemStackTemplate result) {
         this.result = result;
     }
 
-    public static ItemEtchingRecipeBuilder newRecipe(ItemStack result) {
+    public static ItemEtchingRecipeBuilder newRecipe(ItemStackTemplate result) {
         return new ItemEtchingRecipeBuilder(result);
     }
 
@@ -68,13 +68,13 @@ public class ItemEtchingRecipeBuilder implements NTRecipeBuilder {
 
     @Override
     public @NotNull Item getResult() {
-        return result.getItem();
+        return result.item().value();
     }
 
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
+    public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> key) {
         ItemEtchingRecipe recipe = new ItemEtchingRecipe(this.ingredient, this.result, this.duration);
-        recipeOutput.accept(resourceLocation, recipe, null);
+        recipeOutput.accept(key, recipe, null);
     }
 
     @Override

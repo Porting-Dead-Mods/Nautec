@@ -9,6 +9,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.function.BiFunction;
 
 public abstract class AbstractRange<T extends Number> {
@@ -41,7 +42,19 @@ public abstract class AbstractRange<T extends Number> {
         return min + " - " + max;
     }
 
-    // Constructs a pair out of the range and uses that for encoding
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        AbstractRange<?> other = (AbstractRange<?>) obj;
+        return Objects.equals(min, other.min) && Objects.equals(max, other.max);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getClass(), min, max);
+    }
+
     public static <T extends Number, SELF extends AbstractRange<T>> MapCodec<SELF> rangeMapCodec(Codec<T> codec, BiFunction<T, T, SELF> constructor) {
         return RecordCodecBuilder.mapCodec(instance -> instance.group(
                 codec.fieldOf("min").forGetter(SELF::getMin),

@@ -8,7 +8,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.compat.modonomicon.datagen.book.nautec_guide.laser_chemistry.*;
 import com.portingdeadmods.nautec.registries.NTItems;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec2;
 
 public class LaserChemistryCategory extends CategoryProvider {

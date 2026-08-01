@@ -6,17 +6,15 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
-import net.neoforged.neoforge.common.util.INBTSerializable;
-import org.jetbrains.annotations.UnknownNullability;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.util.ValueIOSerializable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BacteriaStorage implements IBacteriaStorage, INBTSerializable<Tag> {
+public class BacteriaStorage implements IBacteriaStorage, ValueIOSerializable {
     private static final Codec<BacteriaStorage> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BacteriaInstance.CODEC.listOf().fieldOf("bacteria").forGetter(BacteriaStorage::getBacteria),
             Codec.INT.fieldOf("slots").forGetter(BacteriaStorage::getBacteriaSlots)
@@ -39,25 +37,16 @@ public class BacteriaStorage implements IBacteriaStorage, INBTSerializable<Tag> 
     }
 
     @Override
-    public @UnknownNullability Tag serializeNBT(HolderLookup.Provider provider) {
-        DataResult<Tag> tagDataResult = CODEC.encodeStart(NbtOps.INSTANCE, this);
-        if (tagDataResult.isSuccess()) {
-            return tagDataResult.result().get();
-        }
-        Nautec.LOGGER.error("Error encoding BacteriaStorage: {}", tagDataResult.error().get().message());
-        return null;
+    public void serialize(ValueOutput out) {
+        out.store("data", CODEC, this);
     }
 
     @Override
-    public void deserializeNBT(HolderLookup.Provider provider, Tag nbt) {
-        DataResult<Pair<BacteriaStorage, Tag>> dataResult = CODEC.decode(NbtOps.INSTANCE, nbt);
-        if (dataResult.isSuccess()) {
-            BacteriaStorage newThis = dataResult.getOrThrow().getFirst();
+    public void deserialize(ValueInput in) {
+        in.read("data", CODEC).ifPresent(newThis -> {
             this.bacteria = newThis.bacteria;
             this.slots = newThis.slots;
-        } else {
-            Nautec.LOGGER.error("Error decoding BacteriaStorage: {}", dataResult.error().get().message());
-        }
+        });
     }
 
     public NonNullList<BacteriaInstance> getBacteria() {

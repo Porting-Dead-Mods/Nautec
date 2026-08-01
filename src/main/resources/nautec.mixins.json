@@ -5,8 +5,10 @@
   "mixins": [
     "BottleItemMixin",
     "BucketItemMixin",
-    "ItemStorageProviderMixin",
     "StructurePieceMixin"
+  ],
+  "client": [
+    "ItemStorageProviderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

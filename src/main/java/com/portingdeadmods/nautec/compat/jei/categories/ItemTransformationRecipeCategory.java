@@ -2,84 +2,58 @@ package com.portingdeadmods.nautec.compat.jei.categories;
 
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.recipes.ItemTransformationRecipe;
-import com.portingdeadmods.nautec.content.recipes.utils.RecipeUtils;
 import com.portingdeadmods.nautec.registries.NTBlocks;
-import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.gui.placement.HorizontalAlignment;
+import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.category.AbstractRecipeCategory;
+import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
 
-public class ItemTransformationRecipeCategory implements IRecipeCategory<ItemTransformationRecipe> {
-    static final ResourceLocation BURN_PROGRESS_SPRITE = Nautec.rl("container/furnace/empty_arrow");
-    public static final ResourceLocation UID = Nautec.rl("item_transformation");
-    public static final RecipeType<ItemTransformationRecipe> RECIPE_TYPE =
-            new RecipeType<>(UID, ItemTransformationRecipe.class);
-
-    private final IDrawable icon;
-    private final IDrawable background;
-
+public class ItemTransformationRecipeCategory extends AbstractRecipeCategory<ItemTransformationRecipe> {
+    static final Identifier BURN_PROGRESS_SPRITE = Nautec.rl("container/furnace/empty_arrow");
+    public static final Identifier UID = Nautec.rl("item_transformation");
+    public static final IRecipeType<ItemTransformationRecipe> RECIPE_TYPE =
+            IRecipeType.create(UID, ItemTransformationRecipe.class);
 
     public ItemTransformationRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createBlankDrawable(80, 28);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(NTBlocks.PRISMARINE_RELAY.get()));
+        super(RECIPE_TYPE,
+                Component.translatable("nautec.jei.category.item_transformation"),
+                helper.createDrawableItemStack(new ItemStack(NTBlocks.PRISMARINE_RELAY.get())),
+                80,
+                28);
     }
 
     @Override
-    public RecipeType<ItemTransformationRecipe> getRecipeType() {
-        return RECIPE_TYPE;
+    public void draw(ItemTransformationRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+        NTJeiUtil.blitSprite(guiGraphics, BURN_PROGRESS_SPRITE, 28, 0, 24, 16);
     }
 
     @Override
-    public Component getTitle() {
-        return Component.translatable("nautec.jei.category.item_transformation");
-    }
-
-    @Override
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
-    public @Nullable IDrawable getIcon() {
-        return this.icon;
-    }
-
-    @Override
-    public void draw(ItemTransformationRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        guiGraphics.blitSprite(BURN_PROGRESS_SPRITE, 28, 0, 24, 16);
-        Font font = Minecraft.getInstance().font;
-        guiGraphics.drawString(font, ((float) recipe.duration() / 20)+"s", 0, 20, 0xFF808080, false);
-        String purityString = recipe.purity() + " purity";
-        int width = font.width(purityString);
-        guiGraphics.drawString(font, purityString, getWidth()-width, 20, 0xFF808080, false);
+    public void createRecipeExtras(IRecipeExtrasBuilder builder, ItemTransformationRecipe recipe, IFocusGroup focuses) {
+        int fontSize = Minecraft.getInstance().font.lineHeight;
+        builder.addText(Component.literal(((float) recipe.duration() / 20) + "s"), getWidth() / 2, fontSize)
+                .setPosition(0, 20)
+                .setColor(0xFF808080)
+                .setShadow(false);
+        builder.addText(Component.literal(recipe.purity() + " purity"), getWidth(), fontSize)
+                .setPosition(0, 20)
+                .setTextAlignment(HorizontalAlignment.RIGHT)
+                .setColor(0xFF808080)
+                .setShadow(false);
     }
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, ItemTransformationRecipe recipe, IFocusGroup focuses) {
-        //Just one input slot, an arrow and an output slot
-        builder.addSlot(RecipeIngredientRole.INPUT, 0, 0).addIngredients(RecipeUtils.iWCToIngredientSaveCount(recipe.ingredient()));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 64, 0).addItemStack(recipe.getResultItem(null));
-    }
-
-    private boolean shouldRenderTooltip(double mouseX, double mouseY) {
-        int width = 24;
-        int height = 16;
-        int x = 28;
-        int y = 0;
-        boolean matchesOnX = mouseX > x && mouseX < x + width;
-        boolean matchesOnY = mouseY > y && mouseY < y + height;
-        return matchesOnX && matchesOnY;
+        NTJeiUtil.addIngredientWithCount(builder.addSlot(RecipeIngredientRole.INPUT, 0, 0), recipe.ingredient());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 64, 0).add(recipe.result());
     }
 }

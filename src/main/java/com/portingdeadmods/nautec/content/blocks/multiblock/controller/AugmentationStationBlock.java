@@ -50,15 +50,6 @@ public class AugmentationStationBlock extends ContainerBlock {
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock())) {
-            Nautec.LOGGER.debug("unformingc");
-            MultiblockHelper.unform(NTMultiblocks.AUGMENTATION_STATION.get(), pos, level);
-        }
-        super.onRemove(state, level, pos, newState, movedByPiston);
-    }
-
-    @Override
     protected @NotNull InteractionResult useWithoutItem(BlockState p_60503_, Level p_60504_, BlockPos p_60505_, Player p_60506_, BlockHitResult p_60508_) {
         return InteractionResult.PASS;
     }

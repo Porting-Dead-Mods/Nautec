@@ -5,6 +5,7 @@ import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.blockentities.ContainerBlockEntity;
+import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.api.items.IBacteriaItem;
 import com.portingdeadmods.nautec.api.items.ICurioItem;
 import com.portingdeadmods.nautec.api.items.IFluidItem;
@@ -12,6 +13,7 @@ import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.bacteria.ItemBacteriaWrapper;
 import com.portingdeadmods.nautec.capabilities.power.ItemPowerWrapper;
+import com.portingdeadmods.nautec.capabilities.power.LaserPowerView;
 import com.portingdeadmods.nautec.compat.duradisplay.DuraDisplayCompat;
 import com.portingdeadmods.nautec.content.commands.arguments.AugmentSlotArgumentType;
 import com.portingdeadmods.nautec.content.commands.arguments.AugmentTypeArgumentType;
@@ -23,7 +25,7 @@ import com.portingdeadmods.nautec.utils.NTProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -36,7 +38,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
+import net.neoforged.neoforge.transfer.fluid.ItemAccessFluidHandler;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
@@ -95,8 +97,6 @@ public final class Nautec {
         modEventBus.addListener(this::registerCapabilities);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, NTConfig.SPEC);
-        //Must run only when config is loaded
-        //NTProperties.initProperties();
 
 
         if (ModList.get().isLoaded("duradisplay")) {
@@ -132,7 +132,7 @@ public final class Nautec {
             }
 
             if (item instanceof IFluidItem fluidItem) {
-                event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidHandlerItemStack(NTDataComponents.FLUID, stack, fluidItem.getFluidCapacity()), item);
+                event.registerItem(Capabilities.Fluid.ITEM, (stack, access) -> new ItemAccessFluidHandler(access, NTDataComponents.FLUID.get(), fluidItem.getFluidCapacity()), item);
             }
 
             if (item instanceof IBacteriaItem) {
@@ -161,16 +161,18 @@ public final class Nautec {
             Block validBlock = be.get().getValidBlocks().stream().iterator().next();
             BlockEntity testBE = be.get().create(BlockPos.ZERO, validBlock.defaultBlockState());
             if (testBE instanceof ContainerBlockEntity containerBE) {
-                if (containerBE.getPowerStorage() != null) {
+                if (containerBE instanceof LaserBlockEntity) {
+                    event.registerBlockEntity(NTCapabilities.PowerStorage.BLOCK, be.get(), (blockEntity, dir) -> new LaserPowerView((LaserBlockEntity) blockEntity));
+                } else if (containerBE.getPowerStorage() != null) {
                     event.registerBlockEntity(NTCapabilities.PowerStorage.BLOCK, be.get(), (blockEntity, dir) -> ((ContainerBlockEntity) blockEntity).getPowerStorage());
                 }
 
                 if (containerBE.getItemHandler() != null) {
-                    event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, be.get(), (blockEntity, dir) -> ((ContainerBlockEntity) blockEntity).getItemHandlerOnSide(dir));
+                    event.registerBlockEntity(Capabilities.Item.BLOCK, be.get(), (blockEntity, dir) -> ((ContainerBlockEntity) blockEntity).getItemHandlerOnSide(dir));
                 }
 
                 if (containerBE.getFluidHandler() != null) {
-                    event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, be.get(), (blockEntity, dir) -> ((ContainerBlockEntity) blockEntity).getFluidHandlerOnSide(dir));
+                    event.registerBlockEntity(Capabilities.Fluid.BLOCK, be.get(), (blockEntity, dir) -> ((ContainerBlockEntity) blockEntity).getFluidHandlerOnSide(dir));
                 }
 
                 if (containerBE.getBacteriaStorage() != null){
@@ -180,7 +182,7 @@ public final class Nautec {
         }
     }
 
-    public static ResourceLocation rl(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    public static Identifier rl(String path) {
+        return Identifier.fromNamespaceAndPath(MODID, path);
     }
 }

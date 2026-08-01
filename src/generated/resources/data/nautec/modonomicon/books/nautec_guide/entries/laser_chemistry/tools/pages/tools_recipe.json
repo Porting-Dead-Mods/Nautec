@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "tools_recipe",
+  "recipe_id_1": "nautec:aquarine_sword",
+  "recipe_id_2": "nautec:aquarine_pickaxe",
+  "sort_number": 1,
+  "title1": "Sword Recipe",
+  "title2": "Pickaxe Recipe"
+}

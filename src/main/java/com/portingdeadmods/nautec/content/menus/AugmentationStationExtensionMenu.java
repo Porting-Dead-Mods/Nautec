@@ -5,7 +5,7 @@ import com.portingdeadmods.nautec.content.blockentities.multiblock.part.Augmenta
 import com.portingdeadmods.nautec.registries.NTMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import org.jetbrains.annotations.NotNull;
 
 public class AugmentationStationExtensionMenu extends NTAbstractContainerMenu<AugmentationStationExtensionBlockEntity> {
@@ -16,9 +16,9 @@ public class AugmentationStationExtensionMenu extends NTAbstractContainerMenu<Au
     public AugmentationStationExtensionMenu(int containerId, @NotNull Inventory inv, @NotNull AugmentationStationExtensionBlockEntity blockEntity) {
         super(NTMenuTypes.AUGMENT_STATION_EXTENSION.get(), containerId, inv, blockEntity);
         // Augment
-        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 176 / 2 - 8, 48));
+        addSlot(new ResourceHandlerSlot(blockEntity.getItemStackHandler(), blockEntity.getItemStackHandler()::set, 0, 176 / 2 - 8, 48));
         // Robot Arm
-        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 1, 176 / 2 - 8, 26));
+        addSlot(new ResourceHandlerSlot(blockEntity.getItemStackHandler(), blockEntity.getItemStackHandler()::set, 1, 176 / 2 - 8, 26));
         addPlayerInventory(inv, 84);
         addPlayerHotbar(inv, 142);
     }

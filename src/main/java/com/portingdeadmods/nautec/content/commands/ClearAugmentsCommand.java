@@ -21,11 +21,11 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.HashMap;
 import java.util.Map;
 
-// /modjam augments clear
+// /nautec augments clear
 public class ClearAugmentsCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         LiteralArgumentBuilder<CommandSourceStack> nautecCommand = Commands.literal(Nautec.MODID)
-                .requires(player -> player.hasPermission(2));
+                .requires(source -> Commands.LEVEL_GAMEMASTERS.check(source.permissions()));
 
         dispatcher.register(nautecCommand
                 .then(Commands.literal("augments")
@@ -36,10 +36,8 @@ public class ClearAugmentsCommand {
         ServerPlayer player = (ServerPlayer) ctx.getSource().getPlayer();
         if (player == null) return 0;
         
-        // Get all current augments before clearing
         Map<AugmentSlot, Augment> currentAugments = new HashMap<>(AugmentHelper.getAugments(player));
         
-        // Call onRemoved for each augment
         for (Map.Entry<AugmentSlot, Augment> entry : currentAugments.entrySet()) {
             Augment augment = entry.getValue();
             if (augment != null) {
@@ -47,11 +45,9 @@ public class ClearAugmentsCommand {
             }
         }
         
-        // Clear the augments on server
         player.setData(NTDataAttachments.AUGMENTS, new HashMap<>());
         player.setData(NTDataAttachments.AUGMENTS_EXTRA_DATA, new HashMap<>());
         
-        // Send clear packets to client for each slot that had an augment
         for (AugmentSlot slot : currentAugments.keySet()) {
             PacketDistributor.sendToPlayer(player, new ClearAugmentPayload(slot));
         }

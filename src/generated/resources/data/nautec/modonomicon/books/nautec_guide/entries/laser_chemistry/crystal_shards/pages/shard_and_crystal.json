@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:text",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "shard_and_crystal",
+  "show_title_separator": true,
+  "sort_number": 1,
+  "text": "book.nautec.nautec_guide.laser_chemistry.crystal_shards.shard_and_crystal.text",
+  "title": ""
+}

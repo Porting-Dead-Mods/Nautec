@@ -6,7 +6,5 @@
     "max": 30,
     "min": 10
   },
-  "nutrient": {
-    "item": "minecraft:crimson_nylium"
-  }
+  "nutrient": "minecraft:crimson_nylium"
 }

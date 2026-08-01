@@ -226,14 +226,14 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
     }
 
     private void addBacteria(ResourceKey<?> key, String val) {
-        add(key.registry().getPath() + "." + key.location().getNamespace() + "." + key.location().getPath(), val);
+        add(key.registry().getPath() + "." + key.identifier().getNamespace() + "." + key.identifier().getPath(), val);
     }
 
     private void addDirectBacteria(ResourceKey<?> key) {
-        String[] name = key.location().getPath().split("_");
+        String[] name = key.identifier().getPath().split("_");
         String val = Arrays.stream(name).map(s -> s.substring(0, 1).toUpperCase() + s.substring(1)).reduce((s1, s2) -> s1 + " " + s2).orElse("");
 
-        add(key.registry().getPath() + "." + key.location().getNamespace() + "." + key.location().getPath(), val);
+        add(key.registry().getPath() + "." + key.identifier().getNamespace() + "." + key.identifier().getPath(), val);
     }
 
     private void addBlock(String key, String val) {

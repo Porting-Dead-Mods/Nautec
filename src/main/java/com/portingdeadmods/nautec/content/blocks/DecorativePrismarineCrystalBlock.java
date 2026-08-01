@@ -38,7 +38,7 @@ public class DecorativePrismarineCrystalBlock extends BaseEntityBlock {
 
     @Override
     protected @NotNull RenderShape getRenderShape(BlockState state) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+        return RenderShape.INVISIBLE;
     }
 
     @Override
@@ -55,14 +55,11 @@ public class DecorativePrismarineCrystalBlock extends BaseEntityBlock {
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         super.setPlacedBy(level, pos, state, placer, stack);
-        // Place the crystal at the bottom (pos) and build upward
         for (int i = 0; i < 6; i++) {
             BlockPos curPos = pos.above(i);
             if (i == 0) {
-                // Bottom block stays as the main decorative crystal
                 level.setBlockAndUpdate(curPos, NTBlocks.DECORATIVE_PRISMARINE_CRYSTAL.get().defaultBlockState());
             } else {
-                // Other blocks become parts
                 level.setBlockAndUpdate(curPos, NTBlocks.DECORATIVE_PRISMARINE_CRYSTAL_PART.get().defaultBlockState()
                         .setValue(DecorativePrismarineCrystalPartBlock.INDEX, i));
             }
@@ -70,14 +67,13 @@ public class DecorativePrismarineCrystalBlock extends BaseEntityBlock {
     }
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, ItemStack tool, boolean willHarvest, FluidState fluid) {
         removeCrystal(level, player, pos);
         return true;
     }
 
     public static void removeCrystal(Level level, Player player, BlockPos thisPos) {
         if (thisPos != null) {
-            // Remove 6 blocks starting from the bottom
             for (int i = 0; i < 6; i++) {
                 BlockPos curPos = thisPos.above(i);
                 level.removeBlock(curPos, false);

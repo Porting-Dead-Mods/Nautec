@@ -1,47 +1,25 @@
 {
-  "background_u_index": 0,
-  "background_v_index": 0,
-  "category": "getting_started",
-  "description": "book.nautec.nautec_guide.getting_started.utilities.description",
-  "hide_while_locked": false,
-  "icon": {
-    "item": "nautec:aquarine_steel_wrench"
+  "type": "modonomicon:content",
+  "background": {
+    "height": 26,
+    "sprite": "modonomicon:modonomicon/themes/default/node/entry_backgrounds/square_gold",
+    "width": 26
   },
+  "category": "nautec:getting_started",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "description": "book.nautec.nautec_guide.getting_started.utilities.description",
+  "icon": {
+    "id": "nautec:aquarine_steel_wrench"
+  },
+  "id": "nautec:getting_started/utilities",
   "name": "book.nautec.nautec_guide.getting_started.utilities.name",
-  "pages": [
-    {
-      "type": "modonomicon:text",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.getting_started.utilities.utilities.text",
-      "title": "book.nautec.nautec_guide.getting_started.utilities.utilities.title",
-      "use_markdown_in_title": false
-    },
-    {
-      "type": "modonomicon:crafting_recipe",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "recipe_id_1": "nautec:aquarine_wrench",
-      "recipe_id_2": "nautec:crowbar",
-      "text": "",
-      "title1": "Wrench Recipe",
-      "title2": "Crowbar Recipe"
-    }
-  ],
   "parents": [
     {
-      "draw_arrow": true,
-      "entry": "getting_started/item_transformation",
-      "line_enabled": true,
-      "line_reversed": false
+      "entry": "nautec:getting_started/item_transformation"
     }
   ],
-  "show_when_any_parent_unlocked": false,
   "sort_number": 7,
   "x": 4,
   "y": -2

@@ -72,7 +72,7 @@ public final class NTCreativeTabs {
                     }
 
                     if (item.asItem() instanceof IBacteriaItem) {
-                        Optional<HolderLookup.RegistryLookup<Bacteria>> lookup = params.holders().lookup(NTRegistries.BACTERIA_KEY);
+                        Optional<? extends HolderLookup.RegistryLookup<Bacteria>> lookup = params.holders().lookup(NTRegistries.BACTERIA_KEY);
                         if (lookup.isPresent()) {
                             Stream<ResourceKey<Bacteria>> resourceKeyStream = lookup.get().listElementIds();
                             resourceKeyStream.forEach(elem -> {
@@ -90,7 +90,7 @@ public final class NTCreativeTabs {
         if (elem != NTBacterias.EMPTY) {
             ItemStack stack = new ItemStack(item);
 
-            Holder<Bacteria> bacteria = lookup.holderOrThrow(elem);
+            Holder<Bacteria> bacteria = lookup.lookupOrThrow(NTRegistries.BACTERIA_KEY).getOrThrow(elem);
             BacteriaInstance bacteriaInstance = new BacteriaInstance(bacteria.getKey(), bacteria.value().maxInitialSize(), bacteria.value().stats().collapseMaxStats(), analyzed);
 
             stack.set(NTDataComponents.BACTERIA, new ComponentBacteriaStorage(bacteriaInstance));

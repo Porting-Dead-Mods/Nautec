@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "oxygen_recipe",
+  "recipe_id_1": "nautec:brown_polymer",
+  "recipe_id_2": "nautec:diving_chestplate_oxygen",
+  "sort_number": 1,
+  "title1": "Brown Polymer",
+  "title2": "Filling the tanks"
+}

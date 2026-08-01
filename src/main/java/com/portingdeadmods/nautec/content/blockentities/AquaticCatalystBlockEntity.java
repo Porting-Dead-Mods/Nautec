@@ -9,14 +9,17 @@ import com.portingdeadmods.nautec.utils.SidedCapUtils;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,8 +31,8 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     private RecipeHolder<AquaticCatalystChannelingRecipe> currentRecipe;
     private RecipeHolder<AquaticCatalystChannelingRecipe> nextRecipe;
     private int duration;
-    private ResourceLocation currentRecipeId;
-    private ResourceLocation nextRecipeId;
+    private Identifier currentRecipeId;
+    private Identifier nextRecipeId;
 
     public AquaticCatalystBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.AQUATIC_CATALYST.get(), blockPos, blockState);
@@ -44,17 +47,24 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
             if (duration >= currentRecipe.value().duration()) {
                 duration = 0;
                 currentRecipe = null;
+                setPurity(0);
             } else {
                 int distance = getLaserDistances().getInt(getBlockState().getValue(BlockStateProperties.FACING).getOpposite());
                 if (distance > 0) {
                     int amount = currentRecipe.value().powerAmount() / currentRecipe.value().duration();
                     transmitPower(amount);
+                    setPurity(currentRecipe.value().purity());
                     duration++;
                 }
             }
         } else {
-            currentRecipe = nextRecipe;
-            getItemHandler().extractItem(0, 1, false);
+            if (nextRecipe == null && !getItemStackHandler().getStackInSlot(0).isEmpty()) {
+                nextRecipe = getRecipeForCache(getItemStackHandler().getStackInSlot(0));
+            }
+            if (nextRecipe != null) {
+                currentRecipe = nextRecipe;
+                getItemStackHandler().extractItem(0, 1, false);
+            }
         }
     }
 
@@ -71,7 +81,7 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     }
 
     public ItemStack getProcessingItem() {
-        return getItemHandler().getStackInSlot(0);
+        return getItemStackHandler().getStackInSlot(0);
     }
 
     public int getDuration() {
@@ -82,7 +92,7 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     protected void onItemsChanged(int slot) {
         super.onItemsChanged(slot);
 
-        this.nextRecipe = getRecipeForCache(getItemHandler().getStackInSlot(0));
+        this.nextRecipe = getRecipeForCache(getItemStackHandler().getStackInSlot(0));
         setStage();
     }
 
@@ -90,18 +100,21 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     protected void onLaserDistancesChanged(Direction direction, int prevDistance) {
         super.onLaserDistancesChanged(direction, prevDistance);
 
-        this.nextRecipe = getRecipeForCache(getItemHandler().getStackInSlot(0));
+        this.nextRecipe = getRecipeForCache(getItemStackHandler().getStackInSlot(0));
     }
 
     public void setStage() {
-        float i = (float) getItemHandler().getStackInSlot(0).getCount() / getItemHandler().getSlotLimit(0);
+        float i = (float) getItemStackHandler().getStackInSlot(0).getCount() / getItemStackHandler().getSlotLimit(0);
         int stage = (int) (i * 8);
         level.setBlockAndUpdate(worldPosition, getBlockState()
                 .setValue(AquaticCatalystBlock.STAGE, stage));
     }
 
     public RecipeHolder<AquaticCatalystChannelingRecipe> getRecipeForCache(ItemStack stack) {
-        return level.getRecipeManager()
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return null;
+        }
+        return serverLevel.recipeAccess()
                 .getRecipeFor(AquaticCatalystChannelingRecipe.Type.INSTANCE, new SingleRecipeInput(stack), level)
                 .orElse(null);
     }
@@ -125,12 +138,12 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
     }
 
     @Override
-    protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.loadData(tag, provider);
+    protected void loadData(ValueInput in) {
+        super.loadData(in);
 
-        this.duration = tag.getInt("duration");
-        this.currentRecipeId = ResourceLocation.parse(tag.getString("current_recipe"));
-        this.nextRecipeId = ResourceLocation.parse(tag.getString("next_recipe"));
+        this.duration = in.getIntOr("duration", 0);
+        this.currentRecipeId = in.getString("current_recipe").map(Identifier::parse).orElse(null);
+        this.nextRecipeId = in.getString("next_recipe").map(Identifier::parse).orElse(null);
     }
 
     @Override
@@ -141,16 +154,21 @@ public class AquaticCatalystBlockEntity extends LaserBlockEntity {
         this.nextRecipe = loadRecipe(nextRecipeId);
     }
 
-    private RecipeHolder<AquaticCatalystChannelingRecipe> loadRecipe(ResourceLocation location) {
-        return (RecipeHolder<AquaticCatalystChannelingRecipe>) level.getRecipeManager().byKey(location).orElse(null);
+    private RecipeHolder<AquaticCatalystChannelingRecipe> loadRecipe(Identifier location) {
+        if (location == null || !(level instanceof ServerLevel serverLevel)) {
+            return null;
+        }
+        return (RecipeHolder<AquaticCatalystChannelingRecipe>) serverLevel.recipeAccess()
+                .byKey(ResourceKey.create(Registries.RECIPE, location))
+                .orElse(null);
     }
 
     @Override
-    protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.saveData(tag, provider);
+    protected void saveData(ValueOutput out) {
+        super.saveData(out);
 
-        tag.putInt("duration", duration);
-        if (currentRecipe != null) tag.putString("current_recipe", currentRecipe.toString());
-        if (nextRecipe != null) tag.putString("next_recipe", nextRecipe.toString());
+        out.putInt("duration", duration);
+        if (currentRecipe != null) out.putString("current_recipe", currentRecipe.id().identifier().toString());
+        if (nextRecipe != null) out.putString("next_recipe", nextRecipe.id().identifier().toString());
     }
 }

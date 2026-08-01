@@ -8,6 +8,7 @@ import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.registries.NTKeybinds;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 // TODO: Implement this
@@ -24,7 +25,7 @@ public class ThrowBouncingTridentAugment extends Augment {
     @Override
     public void clientTick(PlayerTickEvent.Post event) {
         if (NTKeybinds.THROW_TRIDENT_KEYBIND.get().consumeClick() && !isOnCooldown()) {
-            PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
+            ClientPacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
             handleKeybindPress();
         }
     }
@@ -36,6 +37,6 @@ public class ThrowBouncingTridentAugment extends Augment {
             trident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 1.5f, 0.0f);
             player.level().addFreshEntity(trident);
         }
-        setCooldown(20); // Set the cooldown, which decrements by 1 every tick
+        setCooldown(20);
     }
 }

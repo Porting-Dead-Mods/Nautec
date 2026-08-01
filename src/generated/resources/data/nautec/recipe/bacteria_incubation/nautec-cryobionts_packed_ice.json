@@ -6,7 +6,5 @@
     "max": 15,
     "min": 5
   },
-  "nutrient": {
-    "item": "minecraft:packed_ice"
-  }
+  "nutrient": "minecraft:packed_ice"
 }

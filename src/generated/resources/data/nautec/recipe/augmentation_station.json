@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "nautec:aquarine_steel_ingot"
-    },
-    "C": {
-      "item": "nautec:prismarine_crystal_shard"
-    },
-    "E": {
-      "item": "nautec:eldritch_heart"
-    },
-    "P": {
-      "item": "nautec:polished_prismarine"
-    }
+    "A": "nautec:aquarine_steel_ingot",
+    "C": "nautec:prismarine_crystal_shard",
+    "E": "nautec:eldritch_heart",
+    "P": "nautec:polished_prismarine"
   },
   "pattern": [
     "ACA",
@@ -21,7 +13,6 @@
     "AAA"
   ],
   "result": {
-    "count": 1,
     "id": "nautec:augmentation_station"
   }
 }

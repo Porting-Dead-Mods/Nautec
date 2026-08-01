@@ -2,24 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "nautec:broken_whisk"
-    },
-    {
-      "item": "nautec:cast_iron_nugget"
-    },
-    {
-      "item": "nautec:cast_iron_nugget"
-    },
-    {
-      "item": "nautec:cast_iron_nugget"
-    },
-    {
-      "item": "nautec:cast_iron_nugget"
-    }
+    "nautec:broken_whisk",
+    "nautec:cast_iron_nugget",
+    "nautec:cast_iron_nugget",
+    "nautec:cast_iron_nugget",
+    "nautec:cast_iron_nugget"
   ],
   "result": {
-    "count": 1,
     "id": "nautec:whisk"
   }
 }

@@ -71,12 +71,10 @@ public final class AugmentHelper {
         player.setData(NTDataAttachments.AUGMENTS, augments);
         player.setData(NTDataAttachments.AUGMENTS_EXTRA_DATA, augmentsData);
         
-        // Sync to client if on server
         if (!player.level().isClientSide() && player instanceof ServerPlayer serverPlayer) {
             PacketDistributor.sendToPlayer(serverPlayer, new ClearAugmentPayload(augmentSlot));
         }
         
-        // Invalidate client cache if on client
         if (player.level().isClientSide()) {
             AugmentClientHelper.invalidateCacheFor(player, augmentSlot);
         }

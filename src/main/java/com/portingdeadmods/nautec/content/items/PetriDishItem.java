@@ -14,8 +14,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class PetriDishItem extends Item implements IBacteriaItem {
     public PetriDishItem(Properties properties) {
@@ -23,8 +24,8 @@ public class PetriDishItem extends Item implements IBacteriaItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         BacteriaInstance bacteria = stack.get(NTDataComponents.BACTERIA).bacteriaInstance();
-        tooltipComponents.addAll(bacteria.getExpandableTooltip(tooltipFlag.hasShiftDown(), tooltipFlag.hasControlDown()));
+        bacteria.getExpandableTooltip(tooltipFlag.hasShiftDown(), tooltipFlag.hasControlDown()).forEach(tooltipComponents);
     }
 }

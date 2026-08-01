@@ -5,7 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrownTrident;
+import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -64,7 +64,7 @@ public class ThrownSpreadingTrident extends ThrownTrident {
     private void bounce(BlockHitResult result) {
         Direction face = result.getDirection();
 
-        Vec3 normal = new Vec3(face.getNormal().getX(), face.getNormal().getY(), face.getNormal().getZ());
+        Vec3 normal = new Vec3(face.getUnitVec3i().getX(), face.getUnitVec3i().getY(), face.getUnitVec3i().getZ());
         Vec3 motion = getDeltaMovement();
         double dot = motion.dot(normal) * 2.0D;
         Vec3 reflect = motion.subtract(normal.scale(dot));

@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.compat.jade;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.blockentities.LaserJunctionBlockEntity;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.ITooltip;
@@ -22,7 +22,7 @@ public enum LaserJunctionComponentProvider implements IBlockComponentProvider {
     }
 
     @Override
-    public ResourceLocation getUid() {
+    public Identifier getUid() {
         return Nautec.rl("laser_junction");
     }
 }

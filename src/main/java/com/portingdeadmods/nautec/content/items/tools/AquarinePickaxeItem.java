@@ -3,8 +3,6 @@ package com.portingdeadmods.nautec.content.items.tools;
 import com.portingdeadmods.nautec.api.items.IPowerItem;
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.capabilities.power.IPowerStorage;
-import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalBlock;
-import com.portingdeadmods.nautec.content.blocks.multiblock.semi.PrismarineCrystalPartBlock;
 import com.portingdeadmods.nautec.content.items.tiers.NTToolMaterials;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
@@ -20,26 +18,27 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-import java.util.List;
+import java.util.function.Consumer;
 
-public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
+public class AquarinePickaxeItem extends Item implements IPowerItem {
     private static final int POWER_PER_BLOCK = 2;
 
-    public AquarinePickaxeItem() {
-        super(NTToolMaterials.AQUARINE, new Properties()
+    public AquarinePickaxeItem(Properties properties) {
+        super(properties
+                .pickaxe(NTToolMaterials.AQUARINE, 1.5f, -3.0f)
                 .stacksTo(1)
                 .component(NTDataComponents.IS_INFUSED, false)
                 .component(NTDataComponents.ABILITY_ENABLED, false)
-                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200))
-                .attributes(PickaxeItem.createAttributes(NTToolMaterials.AQUARINE, 1.5f, -3.0f)));
+                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200)));
     }
 
     @Override
@@ -73,9 +72,8 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
 
         if (powerStorage.getPowerStored() > 0) {
-            int blocksToBreak = powerStorage.getPowerStored() / POWER_PER_BLOCK; // Calculate how many blocks we can break
+            int blocksToBreak = powerStorage.getPowerStored() / POWER_PER_BLOCK;
 
-            // Adjust the 3x3 mining area based on the hit face
             Iterable<BlockPos> blocksToMine = get3x3MiningArea(pos, hitFace);
 
             for (BlockPos targetPos : blocksToMine) {
@@ -86,7 +84,6 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
         }
     }
 
-    // Method to get the 3x3 mining area based on the face the player hit
     private Iterable<BlockPos> get3x3MiningArea(BlockPos center, Direction hitFace) {
         return switch (hitFace) {
             case NORTH, SOUTH -> BlockPos.betweenClosed(center.offset(-1, -1, 0), center.offset(1, 1, 0));
@@ -106,16 +103,16 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
             return blocksToBreak;
         }
 
-        level.destroyBlock(pos, true); // Break the block
-        powerStorage.tryDrainPower(POWER_PER_BLOCK, false); // Drain power for this block
+        level.destroyBlock(pos, true);
+        powerStorage.tryDrainPower(POWER_PER_BLOCK, false);
         return --blocksToBreak;
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         IPowerStorage powerStorage = attacker.getItemInHand(InteractionHand.MAIN_HAND).getCapability(NTCapabilities.PowerStorage.ITEM);
         powerStorage.tryDrainPower(1, false);
-        return super.hurtEnemy(stack, target, attacker);
+        super.hurtEnemy(stack, target, attacker);
     }
 
     @Override
@@ -159,8 +156,8 @@ public class AquarinePickaxeItem extends PickaxeItem implements IPowerItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, display, tooltipComponents, tooltipFlag);
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
         Tooltips.trans(tooltipComponents, "nautec.tool.pickaxe.ability", ChatFormatting.DARK_PURPLE);
         if (!NTDataComponentsUtils.isInfused(stack)) {

@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "laser_relay",
+  "recipe_id_1": "nautec:prismarine_relay",
+  "sort_number": 0,
+  "text": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.laser_relay.text",
+  "title1": "Prismarine Laser Relay"
+}

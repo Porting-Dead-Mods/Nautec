@@ -2,12 +2,12 @@ package com.portingdeadmods.nautec.events.helper;
 
 import com.portingdeadmods.nautec.content.recipes.ItemEtchingRecipe;
 import com.portingdeadmods.nautec.registries.NTBlocks;
-import com.portingdeadmods.nautec.utils.ParticleUtils;
 import it.unimi.dsi.fastutil.objects.Reference2IntMap;
 import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
@@ -45,18 +45,20 @@ public class ItemEtching {
                 activeEtching.removeInt(itemEntity);
             } else {
                 activeEtching.put(itemEntity, etchingTime + 1);
-                // Optionally spawn particles while etching
-                if (level.isClientSide) {
-                    ParticleUtils.spawnParticlesAroundItem(itemEntity, level, ParticleTypes.FLAME);
+                if (level instanceof ServerLevel serverLevel && etchingTime % 5 == 0) {
+                    serverLevel.sendParticles(ParticleTypes.FLAME, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), 20, 0.5, 0.5, 0.5, 0);
                 }
             }
         }
     }
 
     private static Optional<ItemEtchingRecipe> getEtchingRecipe(ItemStack stack, Level level) {
-        return level.getRecipeManager()
-                .getRecipeFor(ItemEtchingRecipe.Type.INSTANCE, new SingleRecipeInput(stack), level)
-                .map(RecipeHolder::value);
+        if (level instanceof ServerLevel serverLevel) {
+            return serverLevel.recipeAccess()
+                    .getRecipeFor(ItemEtchingRecipe.Type.INSTANCE, new SingleRecipeInput(stack), level)
+                    .map(RecipeHolder::value);
+        }
+        return Optional.empty();
     }
 
     private static void transformItem(ItemEntity itemEntity, ItemEtchingRecipe recipe, Level level) {
@@ -74,7 +76,7 @@ public class ItemEtching {
 
         itemEntity.discard();
 
-        int rand = level.random.nextInt(0, 3);
+        int rand = level.getRandom().nextInt(0, 3);
         if (rand == 2) {
             level.setBlock(itemEntity.getOnPos(), Blocks.AIR.defaultBlockState(), 11);
         }

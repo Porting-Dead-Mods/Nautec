@@ -3,6 +3,8 @@ package com.portingdeadmods.nautec.content.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.content.recipes.utils.RecipeUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -12,6 +14,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public record AquaticCatalystChannelingRecipe(Ingredient ingredient, int powerAmount, float purity, int duration) implements Recipe<SingleRecipeInput> {
     public static final String NAME = "aquatic_catalyst_channeling";
@@ -22,37 +27,49 @@ public record AquaticCatalystChannelingRecipe(Ingredient ingredient, int powerAm
     }
 
     @Override
-    public @NotNull ItemStack assemble(@NotNull SingleRecipeInput input, HolderLookup.@NotNull Provider registries) {
+    public @NotNull ItemStack assemble(@NotNull SingleRecipeInput input) {
+        return ItemStack.EMPTY;
+    }
+
+    public @NotNull ItemStack getResultItem(HolderLookup.@Nullable Provider registries) {
         return ItemStack.EMPTY;
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
+    public @NotNull String group() {
+        return "";
     }
 
     @Override
-    public @NotNull ItemStack getResultItem(HolderLookup.@NotNull Provider registries) {
-        return ItemStack.EMPTY;
+    public boolean showNotification() {
+        return false;
     }
 
     @Override
-    public @NotNull RecipeSerializer<?> getSerializer() {
+    public @NotNull RecipeSerializer<? extends Recipe<SingleRecipeInput>> getSerializer() {
         return Serializer.INSTANCE;
     }
 
     @Override
-    public @NotNull RecipeType<?> getType() {
+    public @NotNull RecipeType<? extends Recipe<SingleRecipeInput>> getType() {
         return Type.INSTANCE;
     }
 
     @Override
-    public @NotNull NonNullList<Ingredient> getIngredients() {
-        return NonNullList.of(Ingredient.EMPTY, ingredient);
+    public @NotNull PlacementInfo placementInfo() {
+        return PlacementInfo.NOT_PLACEABLE;
     }
 
-    public static class Serializer implements RecipeSerializer<AquaticCatalystChannelingRecipe> {
-        public static final AquaticCatalystChannelingRecipe.Serializer INSTANCE = new AquaticCatalystChannelingRecipe.Serializer();
+    @Override
+    public @NotNull RecipeBookCategory recipeBookCategory() {
+        return RecipeBookCategories.CRAFTING_MISC;
+    }
+
+    public @NotNull NonNullList<Ingredient> getIngredients() {
+        return RecipeUtils.listToNonNullList(List.of(ingredient));
+    }
+
+    public static class Serializer {
         private static final MapCodec<AquaticCatalystChannelingRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec((builder) -> builder.group(
                 Ingredient.CODEC.fieldOf("ingredient").forGetter(AquaticCatalystChannelingRecipe::ingredient),
                 Codec.INT.fieldOf("power_amount").forGetter(AquaticCatalystChannelingRecipe::powerAmount),
@@ -70,30 +87,16 @@ public record AquaticCatalystChannelingRecipe(Ingredient ingredient, int powerAm
                 AquaticCatalystChannelingRecipe::duration,
                 AquaticCatalystChannelingRecipe::new
         );
+        public static final RecipeSerializer<AquaticCatalystChannelingRecipe> INSTANCE = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
 
         private Serializer() {
         }
-
-        @Override
-        public @NotNull MapCodec<AquaticCatalystChannelingRecipe> codec() {
-            return MAP_CODEC;
-        }
-
-        @Override
-        public @NotNull StreamCodec<RegistryFriendlyByteBuf, AquaticCatalystChannelingRecipe> streamCodec() {
-            return STREAM_CODEC;
-        }
     }
 
-    public static class Type implements RecipeType<AquaticCatalystChannelingRecipe> {
-        public static final AquaticCatalystChannelingRecipe.Type INSTANCE = new AquaticCatalystChannelingRecipe.Type();
+    public static class Type {
+        public static final RecipeType<AquaticCatalystChannelingRecipe> INSTANCE = RecipeType.simple(Nautec.rl(NAME));
 
         private Type() {
-        }
-
-        @Override
-        public String toString() {
-            return AquaticCatalystChannelingRecipe.NAME;
         }
     }
 }

@@ -19,22 +19,22 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class AquarineAxeItem extends AxeItem implements IPowerItem {
     private static final int POWER_PER_BLOCK = 2;
 
-    public AquarineAxeItem() {
-        super(NTToolMaterials.AQUARINE, new Properties()
+    public AquarineAxeItem(Properties properties) {
+        super(NTToolMaterials.AQUARINE, 3.0f, -3.0f, properties
                 .stacksTo(1)
                 .component(NTDataComponents.IS_INFUSED,false)
                 .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200))
                 .component(NTDataComponents.ABILITY_ENABLED,false)
-                .attributes(AxeItem.createAttributes(NTToolMaterials.AQUARINE, 3.0f, -3.0f))
         );
     }
 
@@ -63,10 +63,10 @@ public class AquarineAxeItem extends AxeItem implements IPowerItem {
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         IPowerStorage powerStorage = attacker.getItemInHand(InteractionHand.MAIN_HAND).getCapability(NTCapabilities.PowerStorage.ITEM);
         powerStorage.tryDrainPower(1, false);
-        return super.hurtEnemy(stack, target, attacker);
+        super.hurtEnemy(stack, target, attacker);
     }
 
     @Override
@@ -110,8 +110,8 @@ public class AquarineAxeItem extends AxeItem implements IPowerItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, display, tooltipComponents, tooltipFlag);
         Tooltips.trans(tooltipComponents, "nautec.tool.axe.ability", ChatFormatting.DARK_PURPLE);
         if(!NTDataComponentsUtils.isInfused(stack)){
             Tooltips.trans(tooltipComponents, "nautec.tool.infuse-me", ChatFormatting.DARK_GREEN);
@@ -122,38 +122,31 @@ public class AquarineAxeItem extends AxeItem implements IPowerItem {
         Tooltips.transInsert(tooltipComponents, "nautec.tool.power", powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity(), ChatFormatting.DARK_AQUA);
     }
 
-    // Tree chopping logic
     private void chopTree(Level level, BlockPos pos, LivingEntity player, ItemStack stack) {
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
 
         if (isLog(level,pos,level.getBlockState(pos)) && powerStorage.getPowerStored() > 0) {
-            int blocksToBreak = powerStorage.getPowerStored() / POWER_PER_BLOCK; // Calculate how many blocks we can break
+            int blocksToBreak = powerStorage.getPowerStored() / POWER_PER_BLOCK;
             breakTree(level, pos, stack, player, powerStorage, blocksToBreak);
         }
     }
 
-    // Helper function to detect logs
     private boolean isLog(Level level, BlockPos pos, BlockState state) {
         return state.is(BlockTags.LOGS) && level.getBlockEntity(pos) == null;
     }
 
-    // Recursive function to break the tree
     private int breakTree(Level level, BlockPos pos, ItemStack stack, LivingEntity player, IPowerStorage powerStorage, int blocksToBreak) {
         BlockState state = level.getBlockState(pos);
 
-        // Stop if it's not a log or if we've reached the block limit or run out of power
         if (!isLog(level,pos,state) || blocksToBreak <= 0 || powerStorage.getPowerStored() < POWER_PER_BLOCK) {
             return blocksToBreak;
         }
 
-        // Break the block
         level.destroyBlock(pos, true);
 
-        // Drain power for this block
         powerStorage.tryDrainPower(POWER_PER_BLOCK, false);
         blocksToBreak--;
 
-        // Recursively break adjacent logs
         for (BlockPos adjacentPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
             if (!adjacentPos.equals(pos) && blocksToBreak > 0) {
                 blocksToBreak = breakTree(level, adjacentPos, stack, player, powerStorage, blocksToBreak);

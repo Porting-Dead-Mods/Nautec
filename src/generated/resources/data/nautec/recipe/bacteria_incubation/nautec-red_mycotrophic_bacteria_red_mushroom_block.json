@@ -6,7 +6,5 @@
     "max": 30,
     "min": 10
   },
-  "nutrient": {
-    "item": "minecraft:red_mushroom_block"
-  }
+  "nutrient": "minecraft:red_mushroom_block"
 }

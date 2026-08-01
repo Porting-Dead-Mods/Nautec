@@ -7,7 +7,7 @@ import com.portingdeadmods.nautec.content.blockentities.MutatorBlockEntity;
 import com.portingdeadmods.nautec.registries.NTMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import org.jetbrains.annotations.NotNull;
 
 public class MutatorMenu extends NTMachineMenu<MutatorBlockEntity> {
@@ -24,7 +24,7 @@ public class MutatorMenu extends NTMachineMenu<MutatorBlockEntity> {
         addBacteriaStorageSlot(new SlotBacteriaStorage(blockEntity.getBacteriaStorage(), 1, 126, 33));
 
         // Catalyst
-        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 79, 61));
+        addSlot(new ResourceHandlerSlot(blockEntity.getItemStackHandler(), blockEntity.getItemStackHandler()::set, 0, 79, 61));
     }
 
     @Override

@@ -21,23 +21,23 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class AquarineShovelItem extends ShovelItem implements IPowerItem {
     private static final int POWER_PER_BLOCK = 2;
 
-    public AquarineShovelItem() {
-        super(NTToolMaterials.AQUARINE, new Properties()
+    public AquarineShovelItem(Properties properties) {
+        super(NTToolMaterials.AQUARINE, 1.5f, -3.0f, properties
                 .stacksTo(1)
                 .component(NTDataComponents.IS_INFUSED,false)
                 .component(NTDataComponents.ABILITY_ENABLED, false)
                 .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200))
-                .attributes(ShovelItem.createAttributes(NTToolMaterials.AQUARINE, 1.5f, -3.0f))
         );
     }
 
@@ -70,10 +70,10 @@ public class AquarineShovelItem extends ShovelItem implements IPowerItem {
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         IPowerStorage powerStorage = attacker.getItemInHand(InteractionHand.MAIN_HAND).getCapability(NTCapabilities.PowerStorage.ITEM);
         powerStorage.tryDrainPower(1, false);
-        return super.hurtEnemy(stack, target, attacker);
+        super.hurtEnemy(stack, target, attacker);
     }
 
     @Override
@@ -117,8 +117,8 @@ public class AquarineShovelItem extends ShovelItem implements IPowerItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, display, tooltipComponents, tooltipFlag);
         Tooltips.trans(tooltipComponents, "nautec.tool.shovel.ability", ChatFormatting.DARK_PURPLE);
         if(!NTDataComponentsUtils.isInfused(stack)){
             Tooltips.trans(tooltipComponents, "nautec.tool.infuse-me", ChatFormatting.DARK_GREEN);
@@ -133,10 +133,9 @@ public class AquarineShovelItem extends ShovelItem implements IPowerItem {
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
 
         if (powerStorage.getPowerStored() > 0) {
-            int blocksToBreak = powerStorage.getPowerStored() / POWER_PER_BLOCK; // Calculate how many blocks we can break
-            Direction faceDirection = player.getDirection(); // Get the direction the player is facing
+            int blocksToBreak = powerStorage.getPowerStored() / POWER_PER_BLOCK;
+            Direction faceDirection = player.getDirection();
 
-            // Adjust the 3x3 mining area based on the player's facing direction
             Iterable<BlockPos> blocksToMine = get3x3MiningArea(pos, faceDirection);
 
             for (BlockPos targetPos : blocksToMine) {
@@ -147,20 +146,15 @@ public class AquarineShovelItem extends ShovelItem implements IPowerItem {
         }
     }
 
-    // Method to get the 3x3 mining area based on the face the player hit
     private Iterable<BlockPos> get3x3MiningArea(BlockPos center, Direction hitFace) {
         return switch (hitFace) {
             case UP, DOWN ->
-                // If the player is facing up or down, mine the horizontal plane (X-Z plane)
                     BlockPos.betweenClosed(center.offset(-1, 0, -1), center.offset(1, 0, 1));
             case NORTH, SOUTH ->
-                // If the player is facing north or south, mine in the X-Y plane
                     BlockPos.betweenClosed(center.offset(-1, -1, 0), center.offset(1, 1, 0));
             case EAST, WEST ->
-                // If the player is facing east or west, mine in the Z-Y plane
                     BlockPos.betweenClosed(center.offset(0, -1, -1), center.offset(0, 1, 1));
             default ->
-                // Default to the horizontal plane if somehow no direction is provided
                     BlockPos.betweenClosed(center.offset(-1, 0, -1), center.offset(1, 0, 1));
         };
     }
@@ -178,8 +172,8 @@ public class AquarineShovelItem extends ShovelItem implements IPowerItem {
             return blocksToBreak;
         }
 
-        level.destroyBlock(pos, true); // Break the block
-        powerStorage.tryDrainPower(POWER_PER_BLOCK, false); // Drain power for this block
+        level.destroyBlock(pos, true);
+        powerStorage.tryDrainPower(POWER_PER_BLOCK, false);
         return --blocksToBreak;
     }
 }

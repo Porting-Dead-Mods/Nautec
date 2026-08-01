@@ -1,35 +1,25 @@
 {
-  "background_u_index": 0,
-  "background_v_index": 0,
-  "category": "aquatic_biology",
-  "description": "book.nautec.nautec_guide.aquatic_biology.bacteria_stats.description",
-  "hide_while_locked": false,
-  "icon": {
-    "item": "nautec:petri_dish"
+  "type": "modonomicon:content",
+  "background": {
+    "height": 26,
+    "sprite": "modonomicon:modonomicon/themes/default/node/entry_backgrounds/square_gold",
+    "width": 26
   },
+  "category": "nautec:aquatic_biology",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "description": "book.nautec.nautec_guide.aquatic_biology.bacteria_stats.description",
+  "icon": {
+    "id": "nautec:petri_dish"
+  },
+  "id": "nautec:aquatic_biology/bacteria_stats",
   "name": "book.nautec.nautec_guide.aquatic_biology.bacteria_stats.name",
-  "pages": [
-    {
-      "type": "modonomicon:text",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.aquatic_biology.bacteria_stats.bacteria_stats.text",
-      "title": "book.nautec.nautec_guide.aquatic_biology.bacteria_stats.bacteria_stats.title",
-      "use_markdown_in_title": false
-    }
-  ],
   "parents": [
     {
-      "draw_arrow": true,
-      "entry": "aquatic_biology/bacterial_analyzer",
-      "line_enabled": true,
-      "line_reversed": false
+      "entry": "nautec:aquatic_biology/bacterial_analyzer"
     }
   ],
-  "show_when_any_parent_unlocked": false,
   "sort_number": 3,
   "x": 4,
   "y": -2

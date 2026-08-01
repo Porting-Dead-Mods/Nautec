@@ -1,8 +1,6 @@
 {
   "type": "nautec:bacteria_mutation",
-  "catalyst": {
-    "item": "minecraft:melon_slice"
-  },
+  "catalyst": "minecraft:melon_slice",
   "chance": 10.0,
   "input_bacteria": "nautec:cucurbitophiles",
   "result_bacteria": "nautec:melophages"

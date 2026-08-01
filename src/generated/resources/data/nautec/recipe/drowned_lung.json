@@ -4,7 +4,7 @@
   "desc": "Unlimited underwater breathing",
   "ingredients": [
     {
-      "item": "nautec:drowned_lungs"
+      "ingredient": "nautec:drowned_lungs"
     }
   ],
   "resultAugment": "nautec:drowned_lung"

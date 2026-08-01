@@ -4,8 +4,11 @@ import com.google.common.collect.ImmutableMap;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.FakeBlockEntity;
+import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.SavesControllerPosBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
+import com.portingdeadmods.nautec.registries.NTMultiblocks;
+import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.DrainBlockEntity;
 import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
@@ -14,9 +17,9 @@ import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
 
@@ -80,31 +83,31 @@ public class DrainPartBlockEntity extends LaserBlockEntity implements FakeBlockE
     }
 
     @Override
-    protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.loadData(tag, provider);
-        boolean hasControllerPos = tag.getBoolean("hasControllerPos");
-        boolean hasLaserPort = tag.getBoolean("hasLaserPort");
+    protected void loadData(ValueInput in) {
+        super.loadData(in);
+        boolean hasControllerPos = in.getBooleanOr("hasControllerPos", false);
+        boolean hasLaserPort = in.getBooleanOr("hasLaserPort", false);
         if (hasControllerPos) {
-            this.controllerPos = BlockPos.of(tag.getLong("controllerPos"));
+            this.controllerPos = BlockPos.of(in.getLongOr("controllerPos", 0));
         }
 
         if (hasLaserPort) {
-            this.laserPort = Direction.values()[tag.getInt("laserPort")];
+            this.laserPort = Direction.values()[in.getIntOr("laserPort", 0)];
         }
     }
 
     @Override
-    protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.saveData(tag, provider);
-        tag.putBoolean("hasControllerPos", this.controllerPos != null);
-        tag.putBoolean("hasLaserPort", this.laserPort != null);
+    protected void saveData(ValueOutput out) {
+        super.saveData(out);
+        out.putBoolean("hasControllerPos", this.controllerPos != null);
+        out.putBoolean("hasLaserPort", this.laserPort != null);
 
         if (this.controllerPos != null) {
-            tag.putLong("controllerPos", this.controllerPos.asLong());
+            out.putLong("controllerPos", this.controllerPos.asLong());
         }
 
         if (this.laserPort != null) {
-            tag.putInt("laserPort", this.laserPort.ordinal());
+            out.putInt("laserPort", this.laserPort.ordinal());
         }
     }
 
@@ -112,5 +115,18 @@ public class DrainPartBlockEntity extends LaserBlockEntity implements FakeBlockE
     public void commonTick() {
         super.commonTick();
         transmitPower(getPower());
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        BlockPos actualBlockEntityPos = getActualBlockEntityPos();
+        if (actualBlockEntityPos != null && MultiblockEntity.UNFORMING.compareAndSet(false, true)) {
+            try {
+                MultiblockHelper.unform(NTMultiblocks.DRAIN.get(), actualBlockEntityPos, level, null);
+            } finally {
+                MultiblockEntity.UNFORMING.set(false);
+            }
+        }
+        super.preRemoveSideEffects(pos, state);
     }
 }

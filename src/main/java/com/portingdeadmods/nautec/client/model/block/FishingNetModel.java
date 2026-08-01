@@ -1,28 +1,23 @@
 package com.portingdeadmods.nautec.client.model.block;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.portingdeadmods.nautec.Nautec;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.resources.Identifier;
 
-public class FishingNetModel extends Model {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("modid", "fishing_net"), "main");
-    public static final Material MATERIAL = new Material(
-            InventoryMenu.BLOCK_ATLAS, Nautec.rl("entity/fishing_net_1")
-    );
+public class FishingNetModel extends Model.Simple {
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath("modid", "fishing_net"), "main");
+    public static final RenderType RENDER_TYPE = RenderTypes.entityCutout(Nautec.rl("textures/entity/fishing_net_1.png"));
     private final ModelPart main;
     private final ModelPart fishing_net;
 
     public FishingNetModel(ModelPart root) {
-        super(RenderType::entityCutout);
+        super(root, RenderTypes::entityCutout);
         this.main = root.getChild("main");
         this.fishing_net = this.main.getChild("fishing_net");
     }
@@ -49,10 +44,5 @@ public class FishingNetModel extends Model {
         main.x = 0;
         main.y = 0;
         main.z = 0;
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-        main.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

@@ -1,12 +1,11 @@
 package com.portingdeadmods.nautec.capabilities.power;
 
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.neoforged.neoforge.common.util.INBTSerializable;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.util.ValueIOSerializable;
 import org.jetbrains.annotations.Range;
-import org.jetbrains.annotations.UnknownNullability;
 
-public class PowerStorage implements IPowerStorage, INBTSerializable<CompoundTag> {
+public class PowerStorage implements IPowerStorage, ValueIOSerializable {
     private int powerStored;
     private int powerCapacity;
     private float purity;
@@ -52,18 +51,16 @@ public class PowerStorage implements IPowerStorage, INBTSerializable<CompoundTag
     }
 
     @Override
-    public @UnknownNullability CompoundTag serializeNBT(HolderLookup.Provider provider) {
-        CompoundTag tag = new CompoundTag();
-        tag.putInt("power_stored", this.powerStored);
-        tag.putInt("power_capacity", this.powerCapacity);
-        tag.putFloat("purity", this.purity);
-        return tag;
+    public void serialize(ValueOutput out) {
+        out.putInt("power_stored", this.powerStored);
+        out.putInt("power_capacity", this.powerCapacity);
+        out.putFloat("purity", this.purity);
     }
 
     @Override
-    public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-        this.powerStored = nbt.getInt("power_stored");
-        this.powerCapacity = nbt.getInt("power_capacity");
-        this.purity = nbt.getFloat("purity");
+    public void deserialize(ValueInput in) {
+        this.powerStored = in.getIntOr("power_stored", 0);
+        this.powerCapacity = in.getIntOr("power_capacity", 0);
+        this.purity = in.getFloatOr("purity", 0F);
     }
 }

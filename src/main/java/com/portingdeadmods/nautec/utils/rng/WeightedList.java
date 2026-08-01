@@ -10,7 +10,6 @@ import java.util.Random;
 /**
  * A list composed of {@link WeightedElement}<br>
  * Allows weighted random selection of elements
- * @param <T>
  */
 public class WeightedList<T> {
     private final List<WeightedElement<? extends T>> elements = new ArrayList<>();

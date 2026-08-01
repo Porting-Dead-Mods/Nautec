@@ -1,7 +1,5 @@
 package com.portingdeadmods.nautec.api.menu.slots;
 
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-
 public abstract class AbstractSlot {
     protected final int slot;
     public int index;

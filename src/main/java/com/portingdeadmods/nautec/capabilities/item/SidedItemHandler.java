@@ -4,44 +4,49 @@ import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.utils.Utils;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.ints.IntList;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.IItemHandler;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 
-public record SidedItemHandler(IItemHandler innerHandler,
+public record SidedItemHandler(ResourceHandler<ItemResource> innerHandler,
                                IOActions action,
-                               IntList slots) implements IItemHandler {
-    public SidedItemHandler(IItemHandler innerHandler, Pair<IOActions, int[]> actionSlotsPair) {
+                               IntList slots) implements ResourceHandler<ItemResource> {
+    public SidedItemHandler(ResourceHandler<ItemResource> innerHandler, Pair<IOActions, int[]> actionSlotsPair) {
         this(innerHandler, actionSlotsPair != null ? actionSlotsPair.left() : IOActions.NONE, actionSlotsPair != null ? Utils.intArrayToList(actionSlotsPair.right()) : IntList.of());
     }
 
     @Override
-    public int getSlots() {
-        return innerHandler.getSlots();
+    public int size() {
+        return innerHandler.size();
     }
 
     @Override
-    public @NotNull ItemStack getStackInSlot(int i) {
-        return innerHandler.getStackInSlot(i);
+    public ItemResource getResource(int index) {
+        return innerHandler.getResource(index);
     }
 
     @Override
-    public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack itemStack, boolean simulate) {
-        return action == IOActions.INSERT || action == IOActions.BOTH && slots.contains(slot) ? innerHandler.insertItem(slot, itemStack, simulate) : itemStack;
+    public long getAmountAsLong(int index) {
+        return innerHandler.getAmountAsLong(index);
     }
 
     @Override
-    public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
-        return action == IOActions.EXTRACT || action == IOActions.BOTH && slots.contains(slot) ? innerHandler.extractItem(slot, amount, simulate) : ItemStack.EMPTY;
+    public long getCapacityAsLong(int index, ItemResource resource) {
+        return innerHandler.getCapacityAsLong(index, resource);
     }
 
     @Override
-    public int getSlotLimit(int i) {
-        return innerHandler.getSlotLimit(i);
+    public boolean isValid(int index, ItemResource resource) {
+        return (action == IOActions.INSERT || action == IOActions.BOTH) && slots.contains(index) && innerHandler.isValid(index, resource);
     }
 
     @Override
-    public boolean isItemValid(int slot, @NotNull ItemStack itemStack) {
-        return action == IOActions.INSERT || action == IOActions.BOTH && slots.contains(slot) && innerHandler.isItemValid(slot, itemStack);
+    public int insert(int index, ItemResource resource, int amount, TransactionContext transaction) {
+        return (action == IOActions.INSERT || action == IOActions.BOTH) && slots.contains(index) ? innerHandler.insert(index, resource, amount, transaction) : 0;
+    }
+
+    @Override
+    public int extract(int index, ItemResource resource, int amount, TransactionContext transaction) {
+        return (action == IOActions.EXTRACT || action == IOActions.BOTH) && slots.contains(index) ? innerHandler.extract(index, resource, amount, transaction) : 0;
     }
 }

@@ -65,19 +65,17 @@ public final class NTBlocks {
     public static final DeferredBlock<PrismarineCrystalBlock> PRISMARINE_CRYSTAL = registerBlockAndItem("prismarine_crystal", PrismarineCrystalBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(-1, 1200).noOcclusion(), PrismarineCrystalItem::new);
     public static final DeferredBlock<PrismarineCrystalPartBlock> PRISMARINE_CRYSTAL_PART = BLOCKS.registerBlock("prismarine_crystal_part", PrismarineCrystalPartBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(-1, 1200).noOcclusion());
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(-1, 1200).noOcclusion());
     public static final DeferredBlock<DecorativePrismarineCrystalBlock> DECORATIVE_PRISMARINE_CRYSTAL = registerBlockAndItem("decorative_prismarine_crystal", DecorativePrismarineCrystalBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(2.0f, 6.0f).noOcclusion());
     public static final DeferredBlock<DecorativePrismarineCrystalPartBlock> DECORATIVE_PRISMARINE_CRYSTAL_PART = BLOCKS.registerBlock("decorative_prismarine_crystal_part", DecorativePrismarineCrystalPartBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(2.0f, 6.0f).noOcclusion());
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN).strength(2.0f, 6.0f).noOcclusion());
     public static final DeferredBlock<AnchorBlock> ANCHOR = registerBlockAndItem("anchor", AnchorBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).sound(SoundType.ANVIL).noOcclusion());
     public static final DeferredBlock<ChargerBlock> CHARGER = registerBlockAndItem("charger", ChargerBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
     public static final DeferredBlock<FishingStationBlock> FISHING_STATION = registerBlockAndItem("fishing_station", FishingStationBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
-    //public static final DeferredBlock<BreakerBlock> BREAKER_BLOCK = registerBlockAndItem("breaker", BreakerBlock::new,
-    //        BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
 
     // Biology
     public static final DeferredBlock<MutatorBlock> MUTATOR = bacteriaBlock(registerBlockAndItem("mutator", MutatorBlock::new,
@@ -87,13 +85,11 @@ public final class NTBlocks {
     public static final DeferredBlock<BioReactorBlock> BIO_REACTOR = bacteriaBlock(registerBlockAndItem("bio_reactor", BioReactorBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)));
     public static final DeferredBlock<BioReactorPartBlock> BIO_REACTOR_PART = BLOCKS.registerBlock("bio_reactor_part", BioReactorPartBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<BacterialAnalyzerBlock> BACTERIAL_ANALYZER = bacteriaBlock(registerBlockAndItem("bacterial_analyzer", BacterialAnalyzerBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion(), true, false));
     public static final DeferredBlock<BacterialAnalyzerTopBlock> BACTERIAL_ANALYZER_TOP = BLOCKS.registerBlock("bacterial_analyzer_top", BacterialAnalyzerTopBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
-    //public static final DeferredBlock<BacteriaPipeBlock> BACTERIA_PIPE = registerBlockAndItem("bacteria_pipe", BacteriaPipeBlock::new,
-    //        BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS), true, false);
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
 
     // MULTIBLOCKS
     public static final DeferredBlock<DrainBlock> DRAIN = registerBlockAndItem("deep_sea_drain", DrainBlock::new,
@@ -101,14 +97,14 @@ public final class NTBlocks {
     public static final DeferredBlock<Block> DRAIN_WALL = registerBlockAndItem("deep_sea_drain_wall", Block::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK));
     public static final DeferredBlock<DrainPartBlock> DRAIN_PART = BLOCKS.registerBlock("deep_sea_drain_part", DrainPartBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).noOcclusion());
 
     public static final DeferredBlock<AugmentationStationBlock> AUGMENTATION_STATION = registerBlockAndItem("augmentation_station",
             AugmentationStationBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).noOcclusion());
     public static final DeferredBlock<AugmentationStationPartBlock> AUGMENTATION_STATION_PART = BLOCKS.registerBlock("augmentation_station_part",
             AugmentationStationPartBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).noOcclusion());
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).noOcclusion());
     public static final DeferredBlock<AugmentationStationExtensionBlock> AUGMENTATION_STATION_EXTENSION = registerBlockAndItem("augmentation_station_extension",
             AugmentationStationExtensionBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_PRISMARINE).noOcclusion());
@@ -134,8 +130,8 @@ public final class NTBlocks {
 
     // NOTE: This also attempts to generate the item model for the block, when running datagen
     private static <T extends Block> DeferredBlock<T> registerBlockAndItem(String name, Function<BlockBehaviour.Properties, T> blockConstructor, BlockBehaviour.Properties properties, boolean addToTab, boolean genItemModel) {
-        DeferredBlock<T> block = BLOCKS.registerBlock(name, blockConstructor, properties);
-        DeferredItem<BlockItem> blockItem = NTItems.registerItem(name, props -> new BlockItem(block.get(), props), new Item.Properties(), addToTab);
+        DeferredBlock<T> block = BLOCKS.registerBlock(name, blockConstructor, () -> properties);
+        DeferredItem<BlockItem> blockItem = NTItems.registerItem(name, props -> new BlockItem(block.get(), props), new Item.Properties().useBlockDescriptionPrefix(), addToTab);
         if (genItemModel) {
             NTItems.BLOCK_ITEMS.add(blockItem);
         }
@@ -143,8 +139,8 @@ public final class NTBlocks {
     }
 
     private static <T extends Block> DeferredBlock<T> registerBlockAndItem(String name, Function<BlockBehaviour.Properties, T> blockConstructor, BlockBehaviour.Properties properties, BiFunction<T, Item.Properties, BlockItem> blockItemConstructor) {
-        DeferredBlock<T> block = BLOCKS.registerBlock(name, blockConstructor, properties);
-        DeferredItem<BlockItem> blockItem = NTItems.registerItem(name, props -> blockItemConstructor.apply(block.get(), props), new Item.Properties());
+        DeferredBlock<T> block = BLOCKS.registerBlock(name, blockConstructor, () -> properties);
+        DeferredItem<BlockItem> blockItem = NTItems.registerItem(name, props -> blockItemConstructor.apply(block.get(), props), new Item.Properties().useBlockDescriptionPrefix());
         NTItems.BLOCK_ITEMS.add(blockItem);
         return block;
     }

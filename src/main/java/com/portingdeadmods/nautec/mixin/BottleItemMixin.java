@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BottleItem;
 import net.minecraft.world.item.Item;
@@ -21,6 +21,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import com.portingdeadmods.nautec.utils.ItemUtils;
 
 @Mixin(BottleItem.class)
 public abstract class BottleItemMixin extends Item {
@@ -30,7 +31,7 @@ public abstract class BottleItemMixin extends Item {
     }
 
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getFluidState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/material/FluidState;", ordinal = 0), cancellable = true)
-    private void onUse(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
+    private void onUse(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         if (NTConfig.collectAirWithBottle) {
             BlockHitResult blockHitResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
             if (blockHitResult.getType() == HitResult.Type.BLOCK) {
@@ -41,10 +42,10 @@ public abstract class BottleItemMixin extends Item {
 
                     level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
                     level.gameEvent(player, GameEvent.FLUID_PICKUP, blockPos);
-                    com.portingdeadmods.nautec.utils.ItemUtils.giveItemToPlayerNoSound(player, airBottleStack);
+                    ItemUtils.giveItemToPlayerNoSound(player, airBottleStack);
                     ItemStack itemInHand = player.getItemInHand(hand);
                     itemInHand.shrink(1);
-                    cir.setReturnValue(InteractionResultHolder.sidedSuccess(itemInHand, level.isClientSide()));
+                    cir.setReturnValue(InteractionResult.SUCCESS);
                 }
             }
         }

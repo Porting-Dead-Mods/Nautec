@@ -9,7 +9,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
@@ -32,7 +32,7 @@ import static net.minecraft.world.item.Item.getPlayerPOVHitResult;
 public abstract class BucketItemMixin {
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    private void onUse(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
+    private void onUse(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         if (NTConfig.collectSaltWater) {
 
             ItemStack itemStack = player.getItemInHand(hand);
@@ -58,11 +58,11 @@ public abstract class BucketItemMixin {
                                     level.playSound(player, blockPos, soundEvent, SoundSource.BLOCKS, 1.0F, 1.0F)
                             );
 
-                            if (!level.isClientSide) {
+                            if (!level.isClientSide()) {
                                 CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, filledBucket);
                             }
 
-                            cir.setReturnValue(InteractionResultHolder.sidedSuccess(ItemUtils.createFilledResult(itemStack, player, filledBucket), level.isClientSide()));
+                            cir.setReturnValue(InteractionResult.SUCCESS.heldItemTransformedTo(ItemUtils.createFilledResult(itemStack, player, filledBucket)));
                             cir.cancel();
                         }
                     }

@@ -1,23 +1,18 @@
 package com.portingdeadmods.nautec.client.model.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import com.portingdeadmods.nautec.Nautec;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class RobotArmModel extends Model {
-    public static final Material ROBOT_ARM_LOCATION = new Material(
-            InventoryMenu.BLOCK_ATLAS, Nautec.rl("entity/robot_arm")
-    );
+public class RobotArmModel extends Model.Simple {
+    public static final RenderType RENDER_TYPE = RenderTypes.entitySolid(Nautec.rl("textures/entity/robot_arm.png"));
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Nautec.rl("robot_arm"), "main");
     private final ModelPart main;
     private final ModelPart bottom;
@@ -25,7 +20,7 @@ public class RobotArmModel extends Model {
     private final ModelPart tip;
 
     public RobotArmModel(ModelPart root) {
-        super(RenderType::entitySolid);
+        super(root, RenderTypes::entitySolid);
         this.main = root.getChild("main");
         this.bottom = main.getChild("bottom");
         this.middle = main.getChild("middle");
@@ -51,25 +46,12 @@ public class RobotArmModel extends Model {
         return LayerDefinition.create(meshdefinition, 32, 32);
     }
 
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        poseStack.pushPose();
-        {
-            poseStack.translate(0.5, 0.625, 0.5);
-            poseStack.mulPose(Axis.XP.rotation((float) Math.toRadians(180)));
-            tip.render(poseStack, buffer, packedLight, packedOverlay);
-            middle.render(poseStack, buffer, packedLight, packedOverlay);
-            bottom.render(poseStack, buffer, packedLight, packedOverlay);
-        }
-        poseStack.popPose();
-    }
-
-    public void renderPart(RobotArmParts part, PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay) {
-        (switch (part) {
+    public void submitPart(RobotArmParts part, PoseStack poseStack, SubmitNodeCollector collector, int packedLight, int packedOverlay) {
+        collector.submitModelPart((switch (part) {
             case BOTTOM -> bottom;
             case MIDDLE -> middle;
             case TIP -> tip;
-        }).render(poseStack, buffer, packedLight, packedOverlay);
+        }), poseStack, RENDER_TYPE, packedLight, packedOverlay, null);
     }
 
     public enum RobotArmParts {

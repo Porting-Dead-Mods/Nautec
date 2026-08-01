@@ -10,7 +10,7 @@ import com.portingdeadmods.nautec.utils.ranges.IntRange;
 import com.portingdeadmods.nautec.utils.ranges.LongRange;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.FastColor;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
@@ -91,7 +91,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1200, 2400))
                 .growthRate(FloatRange.of(0.5F, 1F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(50, 255, 255)));
+                .color(ARGB.color(50, 255, 255)));
         register(context, HALOBACTERIA, SimpleBacteria.of()
                 .initialSize(LongRange.of(480, 560))
                 .resource(Items.AIR)
@@ -99,7 +99,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1200, 2400))
                 .growthRate(FloatRange.of(0.5F, 1F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(255, 229, 0)));
+                .color(ARGB.color(255, 229, 0)));
         register(context, THERMOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(120, 230))
                 .resource(Items.AIR)
@@ -107,7 +107,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1200, 2400))
                 .growthRate(FloatRange.of(0.5F, 1F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(255, 0, 0)));
+                .color(ARGB.color(255, 0, 0)));
         register(context, METHANOGENS, SimpleBacteria.of()
                 .initialSize(LongRange.of(240, 600))
                 .resource(Items.AIR)
@@ -115,7 +115,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1200, 2400))
                 .growthRate(FloatRange.of(0.5F, 1F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(235, 186, 237)));
+                .color(ARGB.color(235, 186, 237)));
 
         // Plants
         register(context, PHOTOTROPHS, SimpleBacteria.of()
@@ -125,7 +125,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(149, 242, 67)));
+                .color(ARGB.color(149, 242, 67)));
         register(context, CALCIOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(260, 500))
                 .resource(Items.BONE_MEAL)
@@ -133,7 +133,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.45F, 1.0F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(245, 245, 220)));
+                .color(ARGB.color(245, 245, 220)));
         register(context, CRIMSON_MICROBES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.CRIMSON_FUNGUS)
@@ -141,7 +141,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(146, 24, 24)));
+                .color(ARGB.color(146, 24, 24)));
         register(context, WARPED_MICROBES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.WARPED_FUNGUS)
@@ -149,7 +149,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(20, 178, 131)));
+                .color(ARGB.color(20, 178, 131)));
         register(context, RED_MYCOTROPHIC_BACTERIA, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.RED_MUSHROOM)
@@ -157,7 +157,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(255, 0, 0)));
+                .color(ARGB.color(255, 0, 0)));
         register(context, BROWN_MYCOTROPHIC_BACTERIA, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.BROWN_MUSHROOM)
@@ -165,7 +165,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(139, 69, 19)));
+                .color(ARGB.color(139, 69, 19)));
         register(context, HALOTROPHS, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.KELP)
@@ -173,7 +173,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(88, 169, 47)));
+                .color(ARGB.color(88, 169, 47)));
         register(context, BRYOPHYTOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.MOSS_BLOCK)
@@ -181,7 +181,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(0, 100, 0)));
+                .color(ARGB.color(0, 100, 0)));
         register(context, ALGAEFORMERS, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.SEAGRASS)
@@ -189,7 +189,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(0, 255, 25)));
+                .color(ARGB.color(0, 255, 25)));
         register(context, RHIZOBACTERIA, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.WHEAT)
@@ -197,7 +197,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(217, 185, 100)));
+                .color(ARGB.color(217, 185, 100)));
         register(context, SOLANOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.POTATO)
@@ -205,7 +205,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(223, 195, 90)));
+                .color(ARGB.color(223, 195, 90)));
         register(context, BAMBOOPHAGES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.BAMBOO)
@@ -213,7 +213,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(93, 136, 36)));
+                .color(ARGB.color(93, 136, 36)));
         register(context, CACTOPHYLES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.CACTUS)
@@ -221,7 +221,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(10, 240, 30)));
+                .color(ARGB.color(10, 240, 30)));
         register(context, CAROTOPHYLES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.CARROT)
@@ -229,7 +229,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(252, 140, 9)));
+                .color(ARGB.color(252, 140, 9)));
         register(context, CUCURBITOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.PUMPKIN)
@@ -237,7 +237,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(255, 165, 0)));
+                .color(ARGB.color(255, 165, 0)));
         register(context, BETA_PHYLOBACTERIA, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.BEETROOT)
@@ -245,7 +245,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(255, 0, 0)));
+                .color(ARGB.color(255, 0, 0)));
         register(context, MELOPHAGES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.MELON_SLICE)
@@ -253,7 +253,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(0, 255, 0)));
+                .color(ARGB.color(0, 255, 0)));
         register(context, COCOAPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.COCOA_BEANS)
@@ -261,7 +261,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(84, 60, 33)));
+                .color(ARGB.color(84, 60, 33)));
 
 
         // Wood
@@ -272,7 +272,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(171, 92, 49)));
+                .color(ARGB.color(171, 92, 49)));
         register(context, DARK_LIGNOCYTES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.DARK_OAK_LOG)
@@ -280,7 +280,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(78, 49, 24)));
+                .color(ARGB.color(78, 49, 24)));
         register(context, JUNGLOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.JUNGLE_LOG)
@@ -288,7 +288,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(168, 120, 83)));
+                .color(ARGB.color(168, 120, 83)));
         register(context, BOREOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.SPRUCE_LOG)
@@ -296,7 +296,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(121, 89, 51)));
+                .color(ARGB.color(121, 89, 51)));
         register(context, LIGNOCYTES, SimpleBacteria.of()
                 .initialSize(LongRange.of(280, 490))
                 .resource(Items.OAK_LOG)
@@ -304,7 +304,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1300, 2500))
                 .growthRate(FloatRange.of(0.5F, 1.0F))
                 .mutationResistance(FloatRange.of(0F, 0.08F))
-                .color(FastColor.ARGB32.color(173, 141, 84)));
+                .color(ARGB.color(173, 141, 84)));
         register(context, BETULOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.BIRCH_LOG)
@@ -312,7 +312,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(198, 181, 121)));
+                .color(ARGB.color(198, 181, 121)));
         register(context, CRIMSON_LIGNOCYTES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.CRIMSON_STEM)
@@ -320,7 +320,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(132, 61, 89)));
+                .color(ARGB.color(132, 61, 89)));
         register(context, WARPED_LIGNOCYTES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.WARPED_STEM)
@@ -328,7 +328,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(39, 111, 102)));
+                .color(ARGB.color(39, 111, 102)));
         register(context, RHIZOPHORA_LIGNOCYTES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.MANGROVE_LOG)
@@ -336,7 +336,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(110, 41, 44)));
+                .color(ARGB.color(110, 41, 44)));
         register(context, PRUNUS_LIGNOCYTES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.CHERRY_LOG)
@@ -344,7 +344,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(227, 179, 171)));
+                .color(ARGB.color(227, 179, 171)));
 
         // Ores and minerals
         register(context, LITHOPHILES, SimpleBacteria.of()
@@ -354,7 +354,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1200, 2400))
                 .growthRate(FloatRange.of(0.5F, 1F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(180, 180, 190)));
+                .color(ARGB.color(180, 180, 190)));
         register(context, SILICOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(280, 520))
                 .resource(Items.SAND)
@@ -362,7 +362,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1200, 2400))
                 .growthRate(FloatRange.of(0.5F, 1F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(210, 180, 140)));
+                .color(ARGB.color(210, 180, 140)));
         register(context, CARBOPHAGES, SimpleBacteria.of()
                 .initialSize(LongRange.of(300, 500))
                 .resource(Items.COAL)
@@ -370,7 +370,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(45, 45, 45)));
+                .color(ARGB.color(45, 45, 45)));
         register(context, METALLOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(280, 480))
                 .resource(Items.COPPER_INGOT)
@@ -378,7 +378,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1000, 2100))
                 .growthRate(FloatRange.of(0.45F, 1.0F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(184, 115, 51)));
+                .color(ARGB.color(184, 115, 51)));
         register(context, ACIDOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(250, 450))
                 .resource(Items.REDSTONE)
@@ -386,7 +386,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(900, 2000))
                 .growthRate(FloatRange.of(0.4F, 0.9F))
                 .mutationResistance(FloatRange.of(0F, 0.2F))
-                .color(FastColor.ARGB32.color(255, 0, 128)));
+                .color(ARGB.color(255, 0, 128)));
         register(context, AZURITOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(250, 450))
                 .resource(Items.LAPIS_LAZULI)
@@ -394,7 +394,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(0, 0, 255)));
+                .color(ARGB.color(0, 0, 255)));
         register(context, FERROPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(225, 425))
                 .resource(Items.IRON_INGOT)
@@ -402,7 +402,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1000, 2100))
                 .growthRate(FloatRange.of(0.45F, 1.0F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(184, 115, 51)));
+                .color(ARGB.color(184, 115, 51)));
         register(context, AURROPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(200, 400))
                 .resource(Items.GOLD_INGOT)
@@ -410,7 +410,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1000, 2100))
                 .growthRate(FloatRange.of(0.45F, 1.0F))
                 .mutationResistance(FloatRange.of(0F, 0.1F))
-                .color(FastColor.ARGB32.color(184, 115, 51)));
+                .color(ARGB.color(184, 115, 51)));
         register(context, ADAMANTOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(150, 275))
                 .resource(Items.DIAMOND)
@@ -418,7 +418,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(0, 255, 255)));
+                .color(ARGB.color(0, 255, 255)));
         register(context, SMARAGDOPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(125, 225))
                 .resource(Items.EMERALD)
@@ -426,7 +426,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(0, 255, 0)));
+                .color(ARGB.color(0, 255, 0)));
 
         // Misc
         register(context, CARNIVOROUS_BACTERIA, SimpleBacteria.of()
@@ -436,7 +436,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1100, 2300))
                 .growthRate(FloatRange.of(0.5F, 1.1F))
                 .mutationResistance(FloatRange.of(0F, 0.12F))
-                .color(FastColor.ARGB32.color(178, 67, 32)));
+                .color(ARGB.color(178, 67, 32)));
         register(context, SULFUROPHILES, SimpleBacteria.of()
                 .initialSize(LongRange.of(250, 530))
                 .resource(Items.GUNPOWDER)
@@ -444,7 +444,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(900, 2000))
                 .growthRate(FloatRange.of(0.55F, 1.2F))
                 .mutationResistance(FloatRange.of(0F, 0.15F))
-                .color(FastColor.ARGB32.color(133, 133, 133)));
+                .color(ARGB.color(133, 133, 133)));
         register(context, CRYOBIONTS, SimpleBacteria.of()
                 .initialSize(LongRange.of(220, 420))
                 .resource(Items.ICE)
@@ -452,7 +452,7 @@ public final class NTBacterias {
                 .lifespan(IntRange.of(1400, 2600))
                 .growthRate(FloatRange.of(0.4F, 0.9F))
                 .mutationResistance(FloatRange.of(0F, 0.05F))
-                .color(FastColor.ARGB32.color(173, 216, 230)));
+                .color(ARGB.color(173, 216, 230)));
     }
 
     private static void register(BootstrapContext<Bacteria> context, ResourceKey<Bacteria> key, Bacteria.Builder<?> builder) {

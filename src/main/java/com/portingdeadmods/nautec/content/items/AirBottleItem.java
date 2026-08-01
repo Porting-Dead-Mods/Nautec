@@ -4,7 +4,6 @@ import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.utils.Tooltips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -15,24 +14,22 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class AirBottleItem extends Item {
     public AirBottleItem(Properties properties) {
         super(properties
-                .food(new FoodProperties.Builder().alwaysEdible().build()));
-    }
-
-    @Override
-    public SoundEvent getEatingSound() {
-        return Items.HONEY_BOTTLE.getEatingSound();
+                .food(new FoodProperties.Builder().alwaysEdible().build(), Consumables.HONEY_BOTTLE)
+                .craftRemainder(Items.GLASS_BOTTLE));
     }
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             entity.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 200, 0));
             stack.shrink(1);
             if (entity instanceof Player player) {
@@ -47,14 +44,9 @@ public class AirBottleItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         Tooltips.trans(tooltipComponents, "nautec.air_bottle.fill", ChatFormatting.GRAY);
         Tooltips.trans(tooltipComponents,"nautec.air_bottle.craft_msg", ChatFormatting.GRAY);
         Tooltips.trans(tooltipComponents,"nautec.edible",ChatFormatting.GRAY, ChatFormatting.ITALIC);
-    }
-
-    @Override
-    public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
-        return Items.GLASS_BOTTLE.getDefaultInstance();
     }
 }

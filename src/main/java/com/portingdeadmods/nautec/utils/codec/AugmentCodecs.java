@@ -11,34 +11,34 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.Map;
 
 public final class AugmentCodecs {
-    public static final Codec<AugmentSlot> AUGMENT_SLOT_CODEC = ResourceLocation.CODEC.flatXmap(
+    public static final Codec<AugmentSlot> AUGMENT_SLOT_CODEC = Identifier.CODEC.flatXmap(
             id -> {
-                AugmentSlot slot = NTRegistries.AUGMENT_SLOT.get(id);
+                AugmentSlot slot = NTRegistries.AUGMENT_SLOT.getValue(id);
                 return slot != null
                         ? DataResult.success(slot)
                         : DataResult.error(() -> "Unknown augment slot: " + id);
             },
             slot -> {
-                ResourceLocation id = NTRegistries.AUGMENT_SLOT.getKey(slot);
+                Identifier id = NTRegistries.AUGMENT_SLOT.getKey(slot);
                 return id != null
                         ? DataResult.success(id)
                         : DataResult.error(() -> "Unregistered augment slot instance: " + slot);
             }
     );
-    public static final Codec<AugmentType<?>> AUGMENT_TYPE_CODEC = ResourceLocation.CODEC.flatXmap(
+    public static final Codec<AugmentType<?>> AUGMENT_TYPE_CODEC = Identifier.CODEC.flatXmap(
             id -> {
-                AugmentType<?> type = NTRegistries.AUGMENT_TYPE.get(id);
+                AugmentType<?> type = NTRegistries.AUGMENT_TYPE.getValue(id);
                 return type != null
                         ? DataResult.success(type)
                         : DataResult.error(() -> "Unknown augment type: " + id);
             },
             type -> {
-                ResourceLocation id = NTRegistries.AUGMENT_TYPE.getKey(type);
+                Identifier id = NTRegistries.AUGMENT_TYPE.getKey(type);
                 return id != null
                         ? DataResult.success(id)
                         : DataResult.error(() -> "Unregistered augment type instance: " + type);

@@ -21,14 +21,14 @@ public record MultiblockData(boolean valid, HorizontalDirection direction, Multi
     }
 
     public static MultiblockData deserializeNBT(CompoundTag nbt) {
-        int layersLength = nbt.getInt("layersLength");
-        CompoundTag listTag = nbt.getCompound("layersList");
+        int layersLength = nbt.getIntOr("layersLength", 0);
+        CompoundTag listTag = nbt.getCompoundOrEmpty("layersList");
         MultiblockLayer[] layers = new MultiblockLayer[layersLength];
         for (int i = 0; i < layers.length; i++) {
-            layers[i] = MultiblockLayer.load(listTag.getCompound(String.valueOf(i)));
+            layers[i] = MultiblockLayer.load(listTag.getCompoundOrEmpty(String.valueOf(i)));
         }
-        HorizontalDirection direction = HorizontalDirection.values()[nbt.getInt("direction")];
-        boolean valid = nbt.getBoolean("valid");
+        HorizontalDirection direction = HorizontalDirection.values()[nbt.getIntOr("direction", 0)];
+        boolean valid = nbt.getBooleanOr("valid", false);
         return new MultiblockData(valid, direction, layers);
     }
 }

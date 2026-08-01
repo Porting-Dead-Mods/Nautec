@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "asa_recipes1",
+  "recipe_id_1": "nautec:aquarine_leggings",
+  "recipe_id_2": "nautec:aquarine_boots",
+  "sort_number": 2,
+  "title1": "Aquarine Steel Leggings",
+  "title2": "Aquarine Steel Boots"
+}

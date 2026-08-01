@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:multiblock",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "augmentation_station_multiblock",
+  "multiblock_id": "nautec:aumgentation_station",
+  "multiblock_name": "",
+  "show_visualize_button": true,
+  "sort_number": 1,
+  "text": "book.nautec.nautec_guide.laser_augmentation.augmentation_station.augmentation_station_multiblock.text"
+}

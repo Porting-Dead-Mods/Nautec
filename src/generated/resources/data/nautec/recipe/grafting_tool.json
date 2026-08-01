@@ -2,19 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "R": {
-      "item": "nautec:cast_iron_rod"
-    }
+    "I": "#c:ingots/iron",
+    "R": "nautec:cast_iron_rod"
   },
   "pattern": [
     " R",
     "I "
   ],
   "result": {
-    "count": 1,
     "id": "nautec:grafting_tool"
   }
 }

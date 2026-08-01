@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:text",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "aquarine_steel_armor",
+  "show_title_separator": true,
+  "sort_number": 0,
+  "text": "book.nautec.nautec_guide.laser_augmentation.aquarine_steel_armor.aquarine_steel_armor.text",
+  "title": "book.nautec.nautec_guide.laser_augmentation.aquarine_steel_armor.aquarine_steel_armor.title"
+}

@@ -1,16 +1,16 @@
 package com.portingdeadmods.nautec.client.renderer.robotArms;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import com.portingdeadmods.nautec.api.client.renderer.robotArms.RobotArmRenderState;
 import com.portingdeadmods.nautec.api.client.renderer.robotArms.RobotArmRenderer;
 import com.portingdeadmods.nautec.client.model.block.RobotArmModel;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.part.AugmentationStationExtensionBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -26,13 +26,26 @@ public class ClawRobotArmRenderer extends RobotArmRenderer {
     }
 
     @Override
-    public void render(AugmentationStationExtensionBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        int light = LevelRenderer.getLightColor(blockEntity.getLevel(), blockEntity.getBlockPos().above());
+    public void extractRenderState(AugmentationStationExtensionBlockEntity blockEntity, RobotArmRenderState state, float partialTick) {
+        state.partialTick = partialTick;
+        state.facing = blockEntity.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+        state.lightAbove = blockEntity.getLevel() != null
+                ? LevelRenderer.getLightCoords(blockEntity.getLevel(), blockEntity.getBlockPos().above())
+                : 15728880;
+        state.middleAngle = blockEntity.getMiddleIndependentAngle(partialTick);
+        state.prevMiddleAngle = blockEntity.getPrevMiddleIndependentAngle(partialTick);
+        state.tipAngle = blockEntity.getTipIndependentAngle(partialTick);
+        state.prevTipAngle = blockEntity.getPrevTipIndependentAngle(partialTick);
 
-        Direction direction = blockEntity.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+        ItemStack item = blockEntity.getItemStackHandler().getStackInSlot(0);
+        Minecraft.getInstance().getItemModelResolver().updateForTopItem(state.heldItem, item, ItemDisplayContext.NONE, blockEntity.getLevel(), null, 1);
+    }
 
-        VertexConsumer consumer = RobotArmModel.ROBOT_ARM_LOCATION.buffer(bufferSource, RenderType::entitySolid);
-        // Bottom
+    @Override
+    public void submit(RobotArmRenderState state, PoseStack poseStack, SubmitNodeCollector collector) {
+        int light = state.lightAbove;
+        Direction direction = state.facing;
+
         poseStack.pushPose();
         {
             poseStack.translate(0.5, 0, 0.5);
@@ -40,18 +53,14 @@ public class ClawRobotArmRenderer extends RobotArmRenderer {
                     ? direction.getCounterClockWise()
                     : direction.getClockWise()).toYRot()));
             poseStack.translate(-0.5, 0, -0.5);
-            renderArmBottom(poseStack, packedOverlay, consumer, light);
-            // Middle
+            renderArmBottom(poseStack, collector, light);
             poseStack.pushPose();
             {
-                float middleIndependentAngle = blockEntity.getMiddleIndependentAngle(partialTick);
-                renderArmMiddle(poseStack, packedOverlay, consumer, light, Mth.lerp(partialTick, blockEntity.getPrevMiddleIndependentAngle(partialTick), middleIndependentAngle));
-                // Tip
+                renderArmMiddle(poseStack, collector, light, Mth.lerp(state.partialTick, state.prevMiddleAngle, state.middleAngle));
                 poseStack.pushPose();
                 {
-                    float tipIndependentAngle = blockEntity.getTipIndependentAngle(partialTick);
-                    renderArmTip(poseStack, packedOverlay, consumer, light, Mth.lerp(partialTick, blockEntity.getPrevTipIndependentAngle(partialTick), tipIndependentAngle));
-                    renderItem(blockEntity, poseStack, bufferSource, packedLight, packedOverlay);
+                    renderArmTip(poseStack, collector, light, Mth.lerp(state.partialTick, state.prevTipAngle, state.tipAngle));
+                    submitItem(state, poseStack, collector);
                 }
                 poseStack.popPose();
             }
@@ -61,49 +70,39 @@ public class ClawRobotArmRenderer extends RobotArmRenderer {
 
     }
 
-    private static void renderItem(AugmentationStationExtensionBlockEntity blockEntity, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        ItemStack item = blockEntity.getItemHandler().getStackInSlot(0);
-        if (!item.isEmpty()) {
+    private static void submitItem(RobotArmRenderState state, PoseStack poseStack, SubmitNodeCollector collector) {
+        if (!state.heldItem.isEmpty()) {
             poseStack.translate(0, -3, 0);
             poseStack.scale(0.5f, 0.5f, 0.5f);
             poseStack.mulPose(Axis.YP.rotationDegrees(90));
-            Minecraft.getInstance().getItemRenderer().renderStatic(
-                    item,
-                    ItemDisplayContext.NONE,
-                    packedLight,
-                    packedOverlay,
-                    poseStack,
-                    bufferSource,
-                    blockEntity.getLevel(),
-                    1
-            );
+            state.heldItem.submit(poseStack, collector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
         }
     }
 
-    private void renderArmBottom(PoseStack poseStack, int packedOverlay, VertexConsumer consumer, int light) {
+    private void renderArmBottom(PoseStack poseStack, SubmitNodeCollector collector, int light) {
         poseStack.translate(0.5, 0.625, 0.5);
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
         poseStack.mulPose(Axis.YP.rotationDegrees(0));
-        model.renderPart(RobotArmModel.RobotArmParts.BOTTOM, poseStack, consumer, light, packedOverlay);
+        model.submitPart(RobotArmModel.RobotArmParts.BOTTOM, poseStack, collector, light, OverlayTexture.NO_OVERLAY);
     }
 
-    private void renderArmMiddle(PoseStack poseStack, int packedOverlay, VertexConsumer consumer, int light, float rotation) {
+    private void renderArmMiddle(PoseStack poseStack, SubmitNodeCollector collector, int light, float rotation) {
         poseStack.translate(0, 0.625, 0);
 
         poseStack.translate(0, -1.625, 0);
         poseStack.mulPose(Axis.ZP.rotationDegrees(25));
         poseStack.mulPose(Axis.ZP.rotation(rotation));
         poseStack.translate(0, 1.03125, 0);
-        model.renderPart(RobotArmModel.RobotArmParts.MIDDLE, poseStack, consumer, light, packedOverlay);
+        model.submitPart(RobotArmModel.RobotArmParts.MIDDLE, poseStack, collector, light, OverlayTexture.NO_OVERLAY);
     }
 
-    private void renderArmTip(PoseStack poseStack, int packedOverlay, VertexConsumer consumer, int light, float rotation) {
+    private void renderArmTip(PoseStack poseStack, SubmitNodeCollector collector, int light, float rotation) {
         poseStack.translate(0, 0.375 + 0.125, 0);
 
         poseStack.translate(0, -3 - 0.125, 0);
         poseStack.mulPose(Axis.ZP.rotationDegrees(80));
         poseStack.mulPose(Axis.ZN.rotation(rotation));
         poseStack.translate(0, 2.5 + 0.0625 + 0.125, 0);
-        model.renderPart(RobotArmModel.RobotArmParts.TIP, poseStack, consumer, light, packedOverlay);
+        model.submitPart(RobotArmModel.RobotArmParts.TIP, poseStack, collector, light, OverlayTexture.NO_OVERLAY);
     }
 }

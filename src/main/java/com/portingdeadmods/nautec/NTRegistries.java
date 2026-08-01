@@ -8,7 +8,7 @@ import com.portingdeadmods.nautec.api.bacteria.BacteriaStatsSerializer;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.registries.RegistryBuilder;
 
 public final class NTRegistries {

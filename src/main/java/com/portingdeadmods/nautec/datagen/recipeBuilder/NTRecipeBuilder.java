@@ -1,14 +1,17 @@
 package com.portingdeadmods.nautec.datagen.recipeBuilder;
 
 import com.portingdeadmods.nautec.Nautec;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.tags.TagKey;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.List;
 
@@ -17,27 +20,40 @@ public interface NTRecipeBuilder extends RecipeBuilder {
 
     String getName();
 
+    Item getResult();
+
     static String ingredientPathSuffix(Ingredient ingredient) {
         StringBuilder out = new StringBuilder();
-        for (Ingredient.Value value : ingredient.getValues()) {
-            for (ItemStack stack : value.getItems()) {
-                out.append('_').append(BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath().replace(':', '-'));
-            }
-        }
+        ingredient.getValues().unwrap()
+                .ifLeft(tag -> out.append('_').append(tag.location().getPath().replace(':', '-')))
+                .ifRight(holders -> {
+                    for (Holder<Item> holder : holders) {
+                        out.append('_').append(BuiltInRegistries.ITEM.getKey(holder.value()).getPath().replace(':', '-'));
+                    }
+                });
         return out.toString();
+    }
+
+    @Override
+    default ResourceKey<Recipe<?>> defaultId() {
+        return ResourceKey.create(Registries.RECIPE, Nautec.rl(getName()));
+    }
+
+    default void save(RecipeOutput recipeOutput, Identifier id) {
+        save(recipeOutput, ResourceKey.create(Registries.RECIPE, id));
     }
 
     @Override
     default void save(RecipeOutput recipeOutput) {
         StringBuilder builder = new StringBuilder();
         for (Ingredient ingredient : getIngredients()) {
-            for (Ingredient.Value value : ingredient.getValues()) {
-                if (value instanceof Ingredient.ItemValue(ItemStack item)) {
-                    builder.append(BuiltInRegistries.ITEM.getKey(item.getItem()).getPath()).append("_");
-                } else if (value instanceof Ingredient.TagValue(TagKey<Item> tag)) {
-                    builder.append(tag.location().getPath()).append("_");
-                }
-            }
+            ingredient.getValues().unwrap()
+                    .ifLeft(tag -> builder.append(tag.location().getPath()).append("_"))
+                    .ifRight(holders -> {
+                        for (Holder<Item> holder : holders) {
+                            builder.append(BuiltInRegistries.ITEM.getKey(holder.value()).getPath()).append("_");
+                        }
+                    });
         }
         Item result = getResult();
         if (result != Items.AIR) {

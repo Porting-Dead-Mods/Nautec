@@ -41,7 +41,7 @@ public class EnergyConverterBlockEntity extends LaserBlockEntity implements IEne
 
     @Override
     public void commonTick() {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             Direction[] directions = Direction.values();
             for (Direction direction : directions) {
                 BlockPos pos = worldPosition.relative(direction);

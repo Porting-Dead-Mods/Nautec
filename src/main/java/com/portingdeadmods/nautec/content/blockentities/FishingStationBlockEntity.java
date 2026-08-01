@@ -9,8 +9,6 @@ import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
@@ -27,6 +25,8 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
@@ -85,7 +85,7 @@ public class FishingStationBlockEntity extends LaserBlockEntity implements MenuP
                     List<ItemStack> items = spawnLoot();
                     itemsLoop:
                     for (ItemStack stack : items) {
-                        for (int i = 0; i < getItemHandler().getSlots(); i++) {
+                        for (int i = 0; i < getItemStackHandler().getSlots(); i++) {
                             ItemStack itemStack = forceInsertItem(i, stack.copy(), false);
                             if (itemStack.isEmpty()) {
                                 continue itemsLoop;
@@ -140,17 +140,17 @@ public class FishingStationBlockEntity extends LaserBlockEntity implements MenuP
     }
 
     @Override
-    protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.loadData(tag, provider);
-        this.independentAngle = tag.getFloat("angle");
-        this.progress = tag.getInt("progress");
+    protected void loadData(ValueInput in) {
+        super.loadData(in);
+        this.independentAngle = in.getFloatOr("angle", 0);
+        this.progress = in.getIntOr("progress", 0);
     }
 
     @Override
-    protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.saveData(tag, provider);
-        tag.putFloat("angle", this.independentAngle);
-        tag.putInt("progress", this.progress);
+    protected void saveData(ValueOutput out) {
+        super.saveData(out);
+        out.putFloat("angle", this.independentAngle);
+        out.putInt("progress", this.progress);
     }
 
     @Override

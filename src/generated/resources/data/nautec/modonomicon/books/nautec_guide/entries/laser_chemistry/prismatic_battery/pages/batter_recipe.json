@@ -1,0 +1,10 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "batter_recipe",
+  "recipe_id_1": "nautec:prismatic_battery",
+  "sort_number": 1,
+  "title1": "Prismatic Battery Recipe"
+}

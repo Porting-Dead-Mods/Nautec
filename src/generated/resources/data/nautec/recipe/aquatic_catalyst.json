@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "C": {
-      "item": "minecraft:prismarine_crystals"
-    },
-    "P": {
-      "item": "nautec:polished_prismarine"
-    }
+    "C": "minecraft:prismarine_crystals",
+    "P": "nautec:polished_prismarine"
   },
   "pattern": [
     "PCP",
@@ -15,7 +11,6 @@
     "PCP"
   ],
   "result": {
-    "count": 1,
     "id": "nautec:aquatic_catalyst"
   }
 }

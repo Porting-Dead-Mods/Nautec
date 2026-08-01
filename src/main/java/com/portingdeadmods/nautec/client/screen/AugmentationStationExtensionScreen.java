@@ -5,12 +5,12 @@ import com.portingdeadmods.nautec.api.client.screen.NTAbstractContainerScreen;
 import com.portingdeadmods.nautec.api.menu.NTAbstractContainerMenu;
 import com.portingdeadmods.nautec.content.blockentities.multiblock.part.AugmentationStationExtensionBlockEntity;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
 public class AugmentationStationExtensionScreen extends NTAbstractContainerScreen<AugmentationStationExtensionBlockEntity> {
-    public static final ResourceLocation TEXTURE = Nautec.rl("textures/gui/augment_station_extension.png");
+    public static final Identifier TEXTURE = Nautec.rl("textures/gui/augment_station_extension.png");
 
     public AugmentationStationExtensionScreen(NTAbstractContainerMenu<AugmentationStationExtensionBlockEntity> menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -18,7 +18,7 @@ public class AugmentationStationExtensionScreen extends NTAbstractContainerScree
     }
 
     @Override
-    public @NotNull ResourceLocation getBackgroundTexture() {
+    public @NotNull Identifier getBackgroundTexture() {
         return TEXTURE;
     }
 }

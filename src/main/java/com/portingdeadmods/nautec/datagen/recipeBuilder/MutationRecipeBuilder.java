@@ -7,10 +7,10 @@ import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -33,15 +33,15 @@ public record MutationRecipeBuilder(ResourceKey<Bacteria> inputBacteria, Resourc
     }
 
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
+    public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> key) {
         BacteriaMutationRecipe recipe = new BacteriaMutationRecipe(inputBacteria, resultBacteria, catalyst, chance);
-        recipeOutput.accept(resourceLocation, recipe, null);
+        recipeOutput.accept(key, recipe, null);
     }
 
     @Override
     public void save(RecipeOutput recipeOutput) {
-        String path = inputBacteria.location().toString().replace(':', '-')
-                + "_" + resultBacteria.location().toString().replace(':', '-')
+        String path = inputBacteria.identifier().toString().replace(':', '-')
+                + "_" + resultBacteria.identifier().toString().replace(':', '-')
                 + NTRecipeBuilder.ingredientPathSuffix(catalyst);
         save(recipeOutput, Nautec.rl(getName() + "/" + path));
     }

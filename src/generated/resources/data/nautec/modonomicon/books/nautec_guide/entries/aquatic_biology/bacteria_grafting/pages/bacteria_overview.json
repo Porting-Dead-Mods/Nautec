@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:text",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "bacteria_overview",
+  "show_title_separator": true,
+  "sort_number": 1,
+  "text": "book.nautec.nautec_guide.aquatic_biology.bacteria_grafting.bacteria_overview.text",
+  "title": "book.nautec.nautec_guide.aquatic_biology.bacteria_grafting.bacteria_overview.title"
+}

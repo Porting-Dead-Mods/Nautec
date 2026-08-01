@@ -1,0 +1,13 @@
+{
+  "type": "modonomicon:spotlight",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "bacteria_analyzer",
+  "item": {
+    "id": "nautec:bacterial_analyzer"
+  },
+  "sort_number": 0,
+  "text": "book.nautec.nautec_guide.aquatic_biology.bacterial_analyzer.bacteria_analyzer.text",
+  "title": "book.nautec.nautec_guide.aquatic_biology.bacterial_analyzer.bacteria_analyzer.title"
+}

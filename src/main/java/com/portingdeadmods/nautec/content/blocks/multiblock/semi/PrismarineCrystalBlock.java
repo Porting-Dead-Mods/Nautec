@@ -39,7 +39,7 @@ public class PrismarineCrystalBlock extends LaserBlock {
 
     @Override
     public @NotNull RenderShape getRenderShape(BlockState p_49232_) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+        return RenderShape.INVISIBLE;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class PrismarineCrystalBlock extends LaserBlock {
     }
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, ItemStack tool, boolean willHarvest, FluidState fluid) {
         removeCrystal(level, player, pos);
         return true;
     }
@@ -87,7 +87,7 @@ public class PrismarineCrystalBlock extends LaserBlock {
                     && Boolean.TRUE.equals(mainHandItem.get(NTDataComponents.ABILITY_ENABLED))
                     && capability.getPowerStored() >= 100
                     && !player.hasInfiniteMaterials()) {
-                Containers.dropItemStack(level, thisPos.getX(), thisPos.getY(), thisPos.getZ(), new ItemStack(NTItems.PRISMARINE_CRYSTAL_SHARD.get(), level.random.nextInt(3, 8)));
+                Containers.dropItemStack(level, thisPos.getX(), thisPos.getY(), thisPos.getZ(), new ItemStack(NTItems.PRISMARINE_CRYSTAL_SHARD.get(), level.getRandom().nextInt(3, 8)));
                 capability.tryDrainPower(100, false);
                 level.playSound(null, thisPos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS);
             }

@@ -3,14 +3,13 @@ package com.portingdeadmods.nautec.registries;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.compat.modonomicon.ModonomiconCompat;
 import com.portingdeadmods.nautec.content.items.*;
-import com.portingdeadmods.nautec.content.items.tiers.NTArmorMaterials;
 import com.portingdeadmods.nautec.content.items.tools.*;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -89,8 +88,6 @@ public final class NTItems {
     // Robot Arms
     public static final DeferredItem<RobotArmItem> CLAW_ROBOT_ARM = registerItem("claw_robot_arm",
             RobotArmItem::new, new Item.Properties());
-//    public static final DeferredItem<RobotArmItem> SYRINGE_ROBOT_ARM = registerItem("syringe_robot_arm",
-//            RobotArmItem::new, new Item.Properties());
 
     // VIALS
     public static final DeferredItem<Item> GLASS_VIAL = registerItem("glass_vial", Item::new, new Item.Properties());
@@ -110,15 +107,15 @@ public final class NTItems {
     public static final DeferredItem<PrismMonocleItem> PRISM_MONOCLE = registerItem("prism_monocle",
             PrismMonocleItem::new, new Item.Properties().stacksTo(1));
 
-    public static final DeferredItem<DivingSuitArmorItem> DIVING_HELMET = registerItem("diving_helmet", () -> new DivingSuitArmorItem(NTArmorMaterials.DIVING_SUIT, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final DeferredItem<DivingSuitArmorItem> DIVING_CHESTPLATE = registerItem("diving_chestplate", () -> new DivingSuitArmorItem(NTArmorMaterials.DIVING_SUIT, ArmorItem.Type.CHESTPLATE, new Item.Properties().component(NTDataComponents.OXYGEN, 0)));
-    public static final DeferredItem<DivingSuitArmorItem> DIVING_LEGGINGS = registerItem("diving_leggings", () -> new DivingSuitArmorItem(NTArmorMaterials.DIVING_SUIT, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static final DeferredItem<DivingSuitArmorItem> DIVING_BOOTS = registerItem("diving_boots", () -> new DivingSuitArmorItem(NTArmorMaterials.DIVING_SUIT, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_HELMET = registerItem("diving_helmet", props -> new DivingSuitArmorItem(ArmorType.HELMET, props), new Item.Properties());
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_CHESTPLATE = registerItem("diving_chestplate", props -> new DivingSuitArmorItem(ArmorType.CHESTPLATE, props), () -> new Item.Properties().component(NTDataComponents.OXYGEN, 0));
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_LEGGINGS = registerItem("diving_leggings", props -> new DivingSuitArmorItem(ArmorType.LEGGINGS, props), new Item.Properties());
+    public static final DeferredItem<DivingSuitArmorItem> DIVING_BOOTS = registerItem("diving_boots", props -> new DivingSuitArmorItem(ArmorType.BOOTS, props), new Item.Properties());
 
-    public static final DeferredItem<AquarineArmorItem> AQUARINE_HELMET = registerItem("aquarine_steel_helmet", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final DeferredItem<AquarineArmorItem> AQUARINE_CHESTPLATE = registerItem("aquarine_steel_chestplate", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-    public static final DeferredItem<AquarineArmorItem> AQUARINE_LEGGINGS = registerItem("aquarine_steel_leggings", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static final DeferredItem<AquarineArmorItem> AQUARINE_BOOTS = registerItem("aquarine_steel_boots", () -> new AquarineArmorItem(NTArmorMaterials.AQUARINE_STEEL, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final DeferredItem<AquarineArmorItem> AQUARINE_HELMET = registerItem("aquarine_steel_helmet", props -> new AquarineArmorItem(ArmorType.HELMET, props), new Item.Properties());
+    public static final DeferredItem<AquarineArmorItem> AQUARINE_CHESTPLATE = registerItem("aquarine_steel_chestplate", props -> new AquarineArmorItem(ArmorType.CHESTPLATE, props), new Item.Properties());
+    public static final DeferredItem<AquarineArmorItem> AQUARINE_LEGGINGS = registerItem("aquarine_steel_leggings", props -> new AquarineArmorItem(ArmorType.LEGGINGS, props), new Item.Properties());
+    public static final DeferredItem<AquarineArmorItem> AQUARINE_BOOTS = registerItem("aquarine_steel_boots", props -> new AquarineArmorItem(ArmorType.BOOTS, props), new Item.Properties());
 
     // TOOLS 'N WEAPONS
     public static final DeferredItem<NeptunesTridentItem> NEPTUNES_TRIDENT = registerItem("neptunes_trident",
@@ -126,11 +123,11 @@ public final class NTItems {
                     .attributes(NeptunesTridentItem.createAttributes())
                     .component(DataComponents.TOOL, NeptunesTridentItem.createToolProperties()));
 
-    public static final DeferredItem<AquarineSwordItem> AQUARINE_SWORD = registerItem("aquarine_steel_sword", AquarineSwordItem::new);
-    public static final DeferredItem<AquarineAxeItem> AQUARINE_AXE = registerItem("aquarine_steel_axe", AquarineAxeItem::new);
-    public static final DeferredItem<AquarineHoeItem> AQUARINE_HOE = registerItem("aquarine_steel_hoe", AquarineHoeItem::new);
-    public static final DeferredItem<AquarinePickaxeItem> AQUARINE_PICKAXE = registerItem("aquarine_steel_pickaxe", AquarinePickaxeItem::new);
-    public static final DeferredItem<AquarineShovelItem> AQUARINE_SHOVEL = registerItem("aquarine_steel_shovel", AquarineShovelItem::new);
+    public static final DeferredItem<AquarineSwordItem> AQUARINE_SWORD = registerItem("aquarine_steel_sword", AquarineSwordItem::new, new Item.Properties());
+    public static final DeferredItem<AquarineAxeItem> AQUARINE_AXE = registerItem("aquarine_steel_axe", AquarineAxeItem::new, new Item.Properties());
+    public static final DeferredItem<AquarineHoeItem> AQUARINE_HOE = registerItem("aquarine_steel_hoe", AquarineHoeItem::new, new Item.Properties());
+    public static final DeferredItem<AquarinePickaxeItem> AQUARINE_PICKAXE = registerItem("aquarine_steel_pickaxe", AquarinePickaxeItem::new, new Item.Properties());
+    public static final DeferredItem<AquarineShovelItem> AQUARINE_SHOVEL = registerItem("aquarine_steel_shovel", AquarineShovelItem::new, new Item.Properties());
 
     // TOOLS
     public static final DeferredItem<AquarineWrenchItem> AQUARINE_WRENCH = registerItem("aquarine_steel_wrench",
@@ -162,7 +159,7 @@ public final class NTItems {
     }
 
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Item.Properties properties, boolean addToTab) {
-        DeferredItem<T> toReturn = ITEMS.registerItem(name, itemConstructor, properties);
+        DeferredItem<T> toReturn = ITEMS.registerItem(name, itemConstructor, () -> properties);
         if (addToTab) {
             CREATIVE_TAB_ITEMS.add(toReturn);
         }
@@ -170,7 +167,7 @@ public final class NTItems {
     }
 
     public static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> itemConstructor, Supplier<Item.Properties> properties, boolean addToTab) {
-        DeferredItem<T> toReturn = ITEMS.register(name,  () -> itemConstructor.apply(properties.get()));
+        DeferredItem<T> toReturn = ITEMS.registerItem(name, itemConstructor, properties);
         if (addToTab) {
             CREATIVE_TAB_ITEMS.add(toReturn);
         }

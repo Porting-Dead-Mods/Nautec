@@ -1,27 +1,23 @@
 package com.portingdeadmods.nautec.client.model.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.portingdeadmods.nautec.Nautec;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class PrismarineCrystalModel extends Model {
-    public static final Material PRISMARINE_CRYSTAL_LOCATION = new Material(
-            InventoryMenu.BLOCK_ATLAS, Nautec.rl("entity/prismarine_crystal")
-    );
+public class PrismarineCrystalModel extends Model.Simple {
+    public static final RenderType RENDER_TYPE = RenderTypes.entitySolid(Nautec.rl("textures/entity/prismarine_crystal.png"));
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Nautec.rl("prismarine_crystal"), "main");
     private final ModelPart main;
 
     public PrismarineCrystalModel(ModelPart root) {
-        super(RenderType::entitySolid);
+        super(root, RenderTypes::entitySolid);
         this.main = root.getChild("main");
     }
 
@@ -54,16 +50,11 @@ public class PrismarineCrystalModel extends Model {
         main.z = 0;
     }
 
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        main.render(poseStack, buffer, packedLight, packedOverlay, color);
-    }
-
-    public void render(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay) {
+    public void submit(PoseStack poseStack, SubmitNodeCollector collector, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         {
             poseStack.translate(0.5, 0, 0.5);
-            this.main.render(poseStack, buffer, packedLight, packedOverlay, -1);
+            collector.submitModelPart(this.main, poseStack, RENDER_TYPE, packedLight, packedOverlay, null);
         }
         poseStack.popPose();
     }

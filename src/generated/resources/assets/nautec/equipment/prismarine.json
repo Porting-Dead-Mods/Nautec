@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "nautec:prismarine"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "nautec:prismarine"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "nautec:prismarine"
+      }
+    ]
+  }
+}

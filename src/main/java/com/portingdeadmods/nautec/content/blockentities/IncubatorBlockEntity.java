@@ -15,10 +15,8 @@ import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -26,6 +24,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
 
@@ -58,10 +58,13 @@ public class IncubatorBlockEntity extends LaserBlockEntity implements MenuProvid
     }
 
     private void checkRecipe() {
-        ItemStack stack = getItemHandler().getStackInSlot(0);
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return;
+        }
+        ItemStack stack = getItemStackHandler().getStackInSlot(0);
         BacteriaInstance instance = getBacteriaStorage().getBacteria(0);
         this.recipe = instance.getSize() < NTConfig.bacteriaColonySizeCap
-                ? level.getRecipeManager().getRecipeFor(BacteriaIncubationRecipe.TYPE, new BacteriaRecipeInput(instance, stack), level).map(RecipeHolder::value).orElse(null)
+                ? serverLevel.recipeAccess().getRecipeFor(BacteriaIncubationRecipe.TYPE, new BacteriaRecipeInput(instance, stack), level).map(RecipeHolder::value).orElse(null)
                 : null;
     }
 
@@ -74,7 +77,7 @@ public class IncubatorBlockEntity extends LaserBlockEntity implements MenuProvid
                 if (progress >= MAX_PROGRESS) {
                     IntRange growth = recipe.growth();
                     if (level.getRandom().nextFloat() < recipe.consumeChance()) {
-                        getItemHandler().extractItem(0, 1, false);
+                        getItemStackHandler().extractItem(0, 1, false);
                     }
 
                     BacteriaInstance bacteria = getBacteriaStorage().getBacteria(0);
@@ -121,14 +124,14 @@ public class IncubatorBlockEntity extends LaserBlockEntity implements MenuProvid
     }
 
     @Override
-    protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.loadData(tag, provider);
-        this.progress = tag.getInt("progress");
+    protected void loadData(ValueInput in) {
+        super.loadData(in);
+        this.progress = in.getIntOr("progress", 0);
     }
 
     @Override
-    protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.saveData(tag, provider);
-        tag.putInt("progress", this.progress);
+    protected void saveData(ValueOutput out) {
+        super.saveData(out);
+        out.putInt("progress", this.progress);
     }
 }

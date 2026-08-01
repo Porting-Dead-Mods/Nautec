@@ -8,7 +8,7 @@ import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -52,9 +52,9 @@ public class ChargerBlock extends LaserBlock {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (level.getBlockEntity(pos) instanceof ChargerBlockEntity be) {
-            IItemHandler itemHandler = be.getItemHandler();
+            IItemHandler itemHandler = IItemHandler.of(be.getItemHandler());
 
             Direction clickedFace = player.getDirection();
             if (stack.isEmpty()) {
@@ -66,25 +66,25 @@ public class ChargerBlock extends LaserBlock {
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
-    private ItemInteractionResult extractItemsSided(Player player, IItemHandler itemHandler, Direction clickedFace) {
+    private InteractionResult extractItemsSided(Player player, IItemHandler itemHandler, Direction clickedFace) {
         ItemStack stackInSlot = itemHandler.getStackInSlot(0);
         ItemStack itemStack = itemHandler.extractItem(0, stackInSlot.getMaxStackSize(), false);
         if (!itemStack.isEmpty()) {
             ItemHandlerHelper.giveItemToPlayer(player, itemStack);
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.TRY_WITH_EMPTY_HAND;
     }
 
-    private ItemInteractionResult insertItemsSided(ItemStack stack, Player player, InteractionHand hand, IItemHandler itemHandler, Direction clickedFace) {
+    private InteractionResult insertItemsSided(ItemStack stack, Player player, InteractionHand hand, IItemHandler itemHandler, Direction clickedFace) {
         ItemStack stackInSlot = itemHandler.getStackInSlot(0);
 
         if (canInsert(stack, itemHandler, stackInSlot, 0)) {
             ItemStack itemStack = itemHandler.insertItem(0, stack, false);
             player.setItemInHand(hand, itemStack);
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.TRY_WITH_EMPTY_HAND;
     }
 
     private static boolean canInsert(ItemStack stack, IItemHandler itemHandler, ItemStack stackInSlot, int slot) {

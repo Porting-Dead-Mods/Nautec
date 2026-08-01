@@ -7,7 +7,7 @@ import com.portingdeadmods.nautec.content.blockentities.multiblock.controller.Bi
 import com.portingdeadmods.nautec.registries.NTMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import org.jetbrains.annotations.NotNull;
 
 public class BioReactorMenu extends NTMachineMenu<BioReactorBlockEntity> {
@@ -20,7 +20,7 @@ public class BioReactorMenu extends NTMachineMenu<BioReactorBlockEntity> {
 
         for (int i = 0; i < 3; i++) {
             addBacteriaStorageSlot(new SlotBacteriaStorage(blockEntity.getBacteriaStorage(), i, 52, 11 + i * 22));
-            addSlot(new SlotItemHandler(blockEntity.getItemHandler(), i, 107, 12 + i * 22));
+            addSlot(new ResourceHandlerSlot(blockEntity.getItemStackHandler(), blockEntity.getItemStackHandler()::set, i, 107, 12 + i * 22));
         }
     }
 

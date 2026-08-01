@@ -6,7 +6,5 @@
     "max": 30,
     "min": 10
   },
-  "nutrient": {
-    "item": "minecraft:birch_log"
-  }
+  "nutrient": "minecraft:birch_log"
 }

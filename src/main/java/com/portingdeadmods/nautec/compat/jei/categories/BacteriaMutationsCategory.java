@@ -1,107 +1,76 @@
 package com.portingdeadmods.nautec.compat.jei.categories;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.api.bacteria.Bacteria;
-import com.portingdeadmods.nautec.api.bacteria.BacteriaInstance;
 import com.portingdeadmods.nautec.content.recipes.BacteriaMutationRecipe;
 import com.portingdeadmods.nautec.registries.NTBlocks;
-import com.portingdeadmods.nautec.registries.NTItems;
-import com.portingdeadmods.nautec.utils.GuiUtils;
-import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BacteriaMutationsCategory extends BacteriaCategory<BacteriaMutationRecipe> {
-    static final ResourceLocation SINGLE_SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"container/furnace/empty_slot");
-    static final ResourceLocation BACTERIA_SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"container/bacteria_slot");
-    static final ResourceLocation RIGHT_ARROW_SPRITE = Nautec.rl("container/mutator/progress_arrow_off");
-    public static final ResourceLocation UID = Nautec.rl(BacteriaMutationRecipe.NAME);
-    public static final RecipeType<BacteriaMutationRecipe> RECIPE_TYPE =
-            new RecipeType<>(UID, BacteriaMutationRecipe.class);
+    static final Identifier SINGLE_SLOT_SPRITE = Identifier.fromNamespaceAndPath(Nautec.MODID, "container/furnace/empty_slot");
+    static final Identifier RIGHT_ARROW_SPRITE = Nautec.rl("container/mutator/progress_arrow_off");
+    public static final Identifier UID = Nautec.rl(BacteriaMutationRecipe.NAME);
+    public static final IRecipeType<BacteriaMutationRecipe> RECIPE_TYPE =
+            IRecipeType.create(UID, BacteriaMutationRecipe.class);
 
-    private final IDrawable background;
-    private final IDrawable icon;
+    private static final int GAP = 5;
+    private static final int SLOT_SIZE = 18;
+    private static final int ARROW_WIDTH = 62;
+    private static final int ARROW_HEIGHT = 14;
+    private static final int Y_GAP_BETWEEN_IN_CATA = 29;
+    private static final int GAP_BETWEEN_SLOT_ARROW = 3;
 
-    private final int gap = 5;
-    private final int slotSize = 18;
-    private final int arrowWidth = 62;
-    private final int arrowHeight = 14;
-    private final int YGapBetweenInCata = 29;
-    private final int gapBetweenSlotArrow = 3;
-
-    private final int drawableWidth = gap * 2 + slotSize * 2 + arrowWidth + gapBetweenSlotArrow * 2; // 2 Slots + Arrow
-    private final int drawableHeight = gap * 2 + slotSize + YGapBetweenInCata + 8; // 8 Reserved for the Chance text
-
-    private final int gapBetweenInOut = drawableHeight - 2 * gap - slotSize * 2 + 2 * gapBetweenSlotArrow;
+    private static final int DRAWABLE_WIDTH = GAP * 2 + SLOT_SIZE * 2 + ARROW_WIDTH + GAP_BETWEEN_SLOT_ARROW * 2;
+    private static final int DRAWABLE_HEIGHT = GAP * 2 + SLOT_SIZE + Y_GAP_BETWEEN_IN_CATA + 8;
 
     public BacteriaMutationsCategory(IGuiHelper helper) {
-        this.background = helper.createBlankDrawable(drawableWidth, drawableHeight);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(NTBlocks.MUTATOR.get()));
-    }
-
-    @Override
-    public RecipeType<BacteriaMutationRecipe> getRecipeType() {
-        return RECIPE_TYPE;
-    }
-
-    @Override
-    public Component getTitle() {
-        return Component.translatable("nautec.jei.category.bacteria_mutations");
-    }
-
-    @Override
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
-    public @Nullable IDrawable getIcon() {
-        return icon;
+        super(RECIPE_TYPE,
+                Component.translatable("nautec.jei.category.bacteria_mutations"),
+                helper.createDrawableItemStack(new ItemStack(NTBlocks.MUTATOR.get())),
+                DRAWABLE_WIDTH,
+                DRAWABLE_HEIGHT);
     }
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, BacteriaMutationRecipe recipe, IFocusGroup focuses) {
+        addBacteriaSlot(recipe, GAP - 1, GAP + 7, recipe.inputBacteria());
+        addBacteriaSlot(recipe, DRAWABLE_WIDTH - GAP - SLOT_SIZE, GAP + 7, recipe.resultBacteria());
 
-        addBacteriaSlot(recipe, gap - 1, gap + 7, recipe.inputBacteria());
-        addBacteriaSlot(recipe, drawableWidth - gap - slotSize, gap + 7, recipe.resultBacteria());
+        builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).add(recipe.getInputDish());
 
-        builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(recipe.getInputDish());
-
-        builder.addSlot(RecipeIngredientRole.INPUT, drawableWidth / 2 - slotSize / 2 + 1, gap + 8 + YGapBetweenInCata)
-                .addIngredients(recipe.catalyst());
+        builder.addSlot(RecipeIngredientRole.INPUT, DRAWABLE_WIDTH / 2 - SLOT_SIZE / 2 + 1, GAP + 8 + Y_GAP_BETWEEN_IN_CATA)
+                .setBackground(NTJeiUtil.sprite(SINGLE_SLOT_SPRITE, 18, 18), -1, -1)
+                .add(recipe.catalyst());
     }
 
     @Override
-    public void draw(@NotNull BacteriaMutationRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        guiGraphics.blitSprite(RIGHT_ARROW_SPRITE, gap + slotSize + gapBetweenSlotArrow, gap + 8 - 1, arrowWidth, arrowHeight);
+    public void draw(@NotNull BacteriaMutationRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+        NTJeiUtil.blitSprite(guiGraphics, RIGHT_ARROW_SPRITE, GAP + SLOT_SIZE + GAP_BETWEEN_SLOT_ARROW, GAP + 8 - 1, ARROW_WIDTH, ARROW_HEIGHT);
 
-        guiGraphics.blitSprite(SINGLE_SLOT_SPRITE, drawableWidth / 2 - slotSize / 2 - 1 + 1, gap + 8 + YGapBetweenInCata - 1, 18, 18);
+        super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
+    }
 
+    @Override
+    public void createRecipeExtras(IRecipeExtrasBuilder builder, BacteriaMutationRecipe recipe, IFocusGroup focuses) {
         Font font = Minecraft.getInstance().font;
         String purityString = recipe.chance() + "%";
 
         int width = font.width(purityString);
-        guiGraphics.drawString(font, purityString, drawableWidth - gap - slotSize - (width - 18) / 2, gap + 8 - 3 - font.lineHeight, 0xFF808080, false);
-
-        super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
+        builder.addText(Component.literal(purityString), width, font.lineHeight)
+                .setPosition(DRAWABLE_WIDTH - GAP - SLOT_SIZE - (width - 18) / 2, GAP + 8 - 3 - font.lineHeight)
+                .setColor(0xFF808080)
+                .setShadow(false);
     }
 }

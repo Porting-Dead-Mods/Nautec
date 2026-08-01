@@ -1,27 +1,23 @@
 package com.portingdeadmods.nautec.client.model.block;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.portingdeadmods.nautec.Nautec;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class AnchorModel extends Model {
+public class AnchorModel extends Model.Simple {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Nautec.rl("anchor"), "main");
-    public static final Material MATERIAL = new Material(InventoryMenu.BLOCK_ATLAS, Nautec.rl("entity/anchor"));
+    public static final RenderType RENDER_TYPE = RenderTypes.entitySolid(Nautec.rl("textures/entity/anchor.png"));
     private final ModelPart anchor;
     private final ModelPart rod;
     private final ModelPart bottom;
 
     public AnchorModel(ModelPart root) {
-        super(RenderType::entitySolid);
+        super(root, RenderTypes::entitySolid);
         this.anchor = root.getChild("anchor");
         this.rod = this.anchor.getChild("rod");
         this.bottom = this.anchor.getChild("bottom");
@@ -57,10 +53,5 @@ public class AnchorModel extends Model {
         anchor.x = 0;
         anchor.y = 0;
         anchor.z = 0;
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-        anchor.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

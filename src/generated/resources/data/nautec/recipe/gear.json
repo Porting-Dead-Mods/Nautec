@@ -2,10 +2,9 @@
   "type": "nautec:item_etching",
   "duration": 160,
   "ingredient": {
-    "item": "nautec:rusty_gear"
+    "ingredient": "nautec:rusty_gear"
   },
   "result": {
-    "count": 1,
     "id": "nautec:gear"
   }
 }

@@ -15,7 +15,6 @@ import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -28,12 +27,12 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class BioReactorPartBlock extends LaserBlock {
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public BioReactorPartBlock(Properties properties) {
         super(properties);
@@ -82,17 +81,4 @@ public class BioReactorPartBlock extends LaserBlock {
         return new BioReactorPartBlockEntity(pos, state);
     }
 
-    @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock())) {
-            if (level.getBlockEntity(pos) instanceof BioReactorPartBlockEntity be) {
-                BlockPos controllerPos = be.getControllerPos();
-                if (controllerPos != null) {
-                    MultiblockHelper.unform(NTMultiblocks.BIO_REACTOR.get(), controllerPos, level);
-                }
-            }
-        }
-
-        super.onRemove(state, level, pos, newState, movedByPiston);
-    }
 }

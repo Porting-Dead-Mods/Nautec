@@ -15,6 +15,10 @@ out
 .idea
 
 src/generated/resources/.cache/*
+*.md
+!README.md
+!CHANGELOG.md
+!LICENSE.md
 
 # gradle
 build
@@ -27,3 +31,4 @@ runs
 run-data
 
 repo
+*.log

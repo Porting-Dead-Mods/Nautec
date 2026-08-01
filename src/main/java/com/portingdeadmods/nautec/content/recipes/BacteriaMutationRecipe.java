@@ -6,7 +6,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.content.recipes.inputs.BacteriaRecipeInput;
-import com.portingdeadmods.nautec.registries.NTItems;
 import com.portingdeadmods.nautec.utils.BacteriaHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
@@ -44,32 +43,45 @@ public record BacteriaMutationRecipe(ResourceKey<Bacteria> inputBacteria, Resour
     }
 
     @Override
-    public ItemStack assemble(BacteriaRecipeInput input, HolderLookup.Provider registries) {
+    public ItemStack assemble(BacteriaRecipeInput input) {
         return ItemStack.EMPTY;
     }
 
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
-    }
-
-    @Override
     public ItemStack getResultItem(HolderLookup.Provider registries) {
         return ItemStack.EMPTY;
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public String group() {
+        return "";
+    }
+
+    @Override
+    public boolean showNotification() {
+        return false;
+    }
+
+    @Override
+    public RecipeSerializer<? extends Recipe<BacteriaRecipeInput>> getSerializer() {
         return Serializer.INSTANCE;
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public RecipeType<? extends Recipe<BacteriaRecipeInput>> getType() {
         return TYPE;
     }
 
-    public static final class Serializer implements RecipeSerializer<BacteriaMutationRecipe> {
-        public static final Serializer INSTANCE = new Serializer();
+    @Override
+    public PlacementInfo placementInfo() {
+        return PlacementInfo.NOT_PLACEABLE;
+    }
+
+    @Override
+    public RecipeBookCategory recipeBookCategory() {
+        return RecipeBookCategories.CRAFTING_MISC;
+    }
+
+    public static final class Serializer {
         public static final MapCodec<BacteriaMutationRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
                 Bacteria.BACTERIA_TYPE_CODEC.fieldOf("input_bacteria").forGetter(BacteriaMutationRecipe::inputBacteria),
                 Bacteria.BACTERIA_TYPE_CODEC.fieldOf("result_bacteria").forGetter(BacteriaMutationRecipe::resultBacteria),
@@ -87,19 +99,9 @@ public record BacteriaMutationRecipe(ResourceKey<Bacteria> inputBacteria, Resour
                 BacteriaMutationRecipe::chance,
                 BacteriaMutationRecipe::new
         );
+        public static final RecipeSerializer<BacteriaMutationRecipe> INSTANCE = new RecipeSerializer<>(CODEC, STREAM_CODEC);
 
         private Serializer() {
         }
-
-        @Override
-        public MapCodec<BacteriaMutationRecipe> codec() {
-            return CODEC;
-        }
-
-        @Override
-        public StreamCodec<RegistryFriendlyByteBuf, BacteriaMutationRecipe> streamCodec() {
-            return STREAM_CODEC;
-        }
     }
 }
-

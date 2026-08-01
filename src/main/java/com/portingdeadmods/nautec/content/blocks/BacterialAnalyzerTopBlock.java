@@ -4,6 +4,7 @@ import com.portingdeadmods.nautec.content.blockentities.BacterialAnalyzerBlockEn
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -26,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 public class BacterialAnalyzerTopBlock extends Block {
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final VoxelShape SHAPE_N = Stream.of(
             Block.box(5, 0, 5, 11, 2, 12),
             Block.box(7, 2, 10, 9, 12, 12),
@@ -56,7 +57,7 @@ public class BacterialAnalyzerTopBlock extends Block {
     ).reduce(Shapes::or).get();
 
     public BacterialAnalyzerTopBlock(Properties properties) {
-        super(properties);
+        super(properties.pushReaction(PushReaction.BLOCK));
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH));
     }
 
@@ -71,7 +72,7 @@ public class BacterialAnalyzerTopBlock extends Block {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+    protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
         return NTBlocks.BACTERIAL_ANALYZER.toStack();
     }
 
@@ -92,16 +93,8 @@ public class BacterialAnalyzerTopBlock extends Block {
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        super.onRemove(state, level, pos, newState, movedByPiston);
-
-        if (!state.is(newState.getBlock())) {
-            level.removeBlock(pos.below(), false);
-        }
-    }
-
-    @Override
-    public @Nullable PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.BLOCK;
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
+        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+        level.removeBlock(pos.below(), false);
     }
 }

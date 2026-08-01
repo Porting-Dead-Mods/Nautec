@@ -1,47 +1,25 @@
 {
-  "background_u_index": 0,
-  "background_v_index": 0,
-  "category": "getting_started",
-  "description": "book.nautec.nautec_guide.getting_started.diving_gear.description",
-  "hide_while_locked": false,
-  "icon": {
-    "item": "nautec:diving_helmet"
+  "type": "modonomicon:content",
+  "background": {
+    "height": 26,
+    "sprite": "modonomicon:modonomicon/themes/default/node/entry_backgrounds/square_gold",
+    "width": 26
   },
+  "category": "nautec:getting_started",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "description": "book.nautec.nautec_guide.getting_started.diving_gear.description",
+  "icon": {
+    "id": "nautec:diving_helmet"
+  },
+  "id": "nautec:getting_started/diving_gear",
   "name": "book.nautec.nautec_guide.getting_started.diving_gear.name",
-  "pages": [
-    {
-      "type": "modonomicon:text",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.getting_started.diving_gear.diving.text",
-      "title": "book.nautec.nautec_guide.getting_started.diving_gear.diving.title",
-      "use_markdown_in_title": false
-    },
-    {
-      "type": "modonomicon:crafting_recipe",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "recipe_id_1": "nautec:brown_polymer",
-      "recipe_id_2": "nautec:diving_chestplate_oxygen",
-      "text": "",
-      "title1": "Brown Polymer",
-      "title2": "Filling the tanks"
-    }
-  ],
   "parents": [
     {
-      "draw_arrow": true,
-      "entry": "getting_started/introduction",
-      "line_enabled": true,
-      "line_reversed": false
+      "entry": "nautec:getting_started/introduction"
     }
   ],
-  "show_when_any_parent_unlocked": false,
   "sort_number": 6,
   "x": 0,
   "y": 2

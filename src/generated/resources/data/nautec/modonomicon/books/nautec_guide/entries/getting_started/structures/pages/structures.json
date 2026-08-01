@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:text",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "structures",
+  "show_title_separator": true,
+  "sort_number": 0,
+  "text": "book.nautec.nautec_guide.getting_started.structures.structures.text",
+  "title": "book.nautec.nautec_guide.getting_started.structures.structures.title"
+}

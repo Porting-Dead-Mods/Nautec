@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.compat.jade;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.blockentities.AquaticCatalystBlockEntity;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.ITooltip;
@@ -18,7 +18,7 @@ public enum AquaticCatalystComponentProvider implements IBlockComponentProvider 
             if (blockEntity.isActive()) {
                 iTooltip.add(Component.literal("Status: Active"));
                if (blockEntity.getCurrentRecipe() != null) {
-                    iTooltip.add(Component.literal("Processing: ").append(Component.literal(blockEntity.getItemHandler().getStackInSlot(0).getCount() +"x ").append(Component.translatable(blockEntity.getProcessingItem().getDescriptionId()))));
+                    iTooltip.add(Component.literal("Processing: ").append(Component.literal(blockEntity.getItemStackHandler().getStackInSlot(0).getCount() +"x ").append(blockEntity.getProcessingItem().getHoverName())));
                     iTooltip.add(Component.literal("Remaining Duration: " + blockEntity.getRemainingDuration() + " ticks"));
                     iTooltip.add(Component.literal("Transferring: " + blockEntity.getPowerToTransfer() + "AP/T"));
                 }
@@ -30,7 +30,7 @@ public enum AquaticCatalystComponentProvider implements IBlockComponentProvider 
 
 
     @Override
-    public ResourceLocation getUid() {
+    public Identifier getUid() {
         return Nautec.rl("aquatic_catalyst");
     }
 }

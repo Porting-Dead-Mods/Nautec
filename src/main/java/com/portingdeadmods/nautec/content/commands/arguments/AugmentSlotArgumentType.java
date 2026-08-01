@@ -13,7 +13,7 @@ import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,9 +35,9 @@ public class AugmentSlotArgumentType implements ArgumentType<AugmentSlot> {
 
     @Override
     public AugmentSlot parse(StringReader reader) throws CommandSyntaxException {
-        ResourceLocation read = ResourceLocation.read(reader);
+        Identifier read = Identifier.read(reader);
         Nautec.LOGGER.debug("Res: {}", read);
-        AugmentSlot augmentSlot = NTRegistries.AUGMENT_SLOT.get(ResourceKey.create(NTRegistries.AUGMENT_SLOT_KEY, read));
+        AugmentSlot augmentSlot = NTRegistries.AUGMENT_SLOT.getValue(ResourceKey.create(NTRegistries.AUGMENT_SLOT_KEY, read));
         if (augmentSlot != null) {
             return augmentSlot;
         }

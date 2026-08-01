@@ -4,6 +4,7 @@
     "down": "nautec:block/multiblock/drain/bottom_4",
     "east": "nautec:block/multiblock/drain/drain_side_unformed",
     "north": "nautec:block/multiblock/drain/drain_side_unformed",
+    "particle": "nautec:block/multiblock/drain/drain_side_unformed",
     "south": "nautec:block/multiblock/drain/drain_side_unformed",
     "up": "nautec:block/multiblock/drain/top_4",
     "west": "nautec:block/multiblock/drain/drain_side_unformed"

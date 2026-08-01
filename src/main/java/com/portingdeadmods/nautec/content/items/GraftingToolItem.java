@@ -30,7 +30,7 @@ public class GraftingToolItem extends Item {
         BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
         BlockState blockState = level.getBlockState(pos);
-        BacteriaObtainValue data = blockState.getBlockHolder().getData(NTDataMaps.BACTERIA_OBTAINING);
+        BacteriaObtainValue data = blockState.typeHolder().getData(NTDataMaps.BACTERIA_OBTAINING);
         Player player = context.getPlayer();
         if (player != null && data != null && level.getBiome(pos).is(data.biome())) {
             ItemStack offhandItem = player.getOffhandItem();

@@ -52,18 +52,18 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.Map;
 
 public final class NTEvents {
-    @EventBusSubscriber(modid = Nautec.MODID, bus = EventBusSubscriber.Bus.GAME)
+    @EventBusSubscriber(modid = Nautec.MODID)
     public static class Game {
         @SubscribeEvent
         public static void onItemEntityTick(EntityTickEvent.Post event) {
             if (event.getEntity() instanceof ItemEntity itemEntity) {
                 Level level = itemEntity.level();
 
-                if (itemEntity.isInFluidType(NTFluids.ETCHING_ACID.getFluidType().get())) {
+                if (level.getFluidState(itemEntity.blockPosition()).getFluidType() == NTFluids.ETCHING_ACID.getFluidType().get()) {
                     ItemEtching.processItemEtching(itemEntity, level);
                 }
 
-                if (itemEntity.isInFluidType(NTFluids.EAS.getFluidType().get()) || level.getBlockState(itemEntity.blockPosition().below()).getFluidState().is(NTFluids.EAS.getStillFluid())) {
+                if (level.getFluidState(itemEntity.blockPosition()).getFluidType() == NTFluids.EAS.getFluidType().get() || level.getBlockState(itemEntity.blockPosition().below()).getFluidState().is(NTFluids.EAS.getStillFluid())) {
                     ItemInfusion.processPowerItemInfusion(itemEntity, level);
                 }
             }
@@ -91,7 +91,6 @@ public final class NTEvents {
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncAugmentPayload(augment, nbt != null ? nbt : new CompoundTag()));
             }
 
-            // Add the Nautec Guide attachment to the player
             if (ModList.get().isLoaded("modonomicon")) {
                 if (!player.getData(NTAttachmentTypes.HAS_NAUTEC_GUIDE.get()) && NTConfig.spawnBookInInventory) {
                     ItemHandlerHelper.giveItemToPlayer(player, ModonomiconCompat.getItemStack());
@@ -119,10 +118,10 @@ public final class NTEvents {
 
                 if (be != null && !be.isBreaking()) {
                     be.playBreakAnimation();
-                    ItemHandlerHelper.giveItemToPlayer(player, NTItems.PRISMARINE_CRYSTAL_SHARD.toStack(level.random.nextInt(1, 3)));
-                    if (level.random.nextInt(0, 4) == 0) {
+                    ItemHandlerHelper.giveItemToPlayer(player, NTItems.PRISMARINE_CRYSTAL_SHARD.toStack(level.getRandom().nextInt(1, 3)));
+                    if (level.getRandom().nextInt(0, 4) == 0) {
                         PrismarineCrystalBlock.removeCrystal(level, player, be.getBlockPos());
-                        if (level.isClientSide) {
+                        if (level.isClientSide()) {
                             ParticleUtils.spawnBreakParticle(be.getBlockPos(), be.getBlockState().getBlock(), 50);
                         }
                         level.playSound(null, pos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 4, 0.75f);
@@ -165,7 +164,7 @@ public final class NTEvents {
                 IPowerStorage powerStorage = event.getEntity().getMainHandItem().getCapability(NTCapabilities.PowerStorage.ITEM);
                 if (powerStorage.getPowerStored() <= 0 && event.getTarget() instanceof LivingEntity) {
                     event.setCanceled(true);
-                    event.getEntity().displayClientMessage(Component.literal("Not Enough Power !"), true);
+                    event.getEntity().sendOverlayMessage(Component.literal("Not Enough Power !"));
                 }
             }
         }
@@ -182,8 +181,8 @@ public final class NTEvents {
                     if (NTDataComponentsUtils.isInfused(stack)) {
                         boolean enabled = NTDataComponentsUtils.isAbilityEnabled(stack);
                         NTDataComponentsUtils.setAbilityStatus(stack, !enabled);
-                        event.getEntity().displayClientMessage(Component.literal("Ability " + (enabled ? "Disabled" : "Enabled")).withStyle((enabled ? ChatFormatting.RED : ChatFormatting.GREEN)), true);
-                        if (event.getLevel().isClientSide) {
+                        event.getEntity().sendOverlayMessage(Component.literal("Ability " + (enabled ? "Disabled" : "Enabled")).withStyle((enabled ? ChatFormatting.RED : ChatFormatting.GREEN)));
+                        if (event.getLevel().isClientSide()) {
                             Player player = event.getEntity();
                             Level level = event.getLevel();
                             if (enabled) {
@@ -193,7 +192,7 @@ public final class NTEvents {
                             }
                         }
                     } else {
-                        if (event.getLevel().isClientSide) {
+                        if (event.getLevel().isClientSide()) {
                             event.getEntity().sendSystemMessage(Component.literal("Infuse in Algae Serum to unlock Abilities").withStyle(ChatFormatting.RED));
                         }
                     }

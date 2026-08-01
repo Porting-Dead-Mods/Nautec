@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.utils;
 import com.portingdeadmods.nautec.api.fluids.NTFluid;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -44,11 +45,11 @@ public final class FluidRegistrationHelper {
         fluid.flowingFluid = getFluidRegister().register(flowing(fluid.getName()), fluid.flowingFluid);
         fluid.fluidType = getFluidTypeRegister().register(fluid.getName(), fluid.fluidType);
 
-        fluid.block = () -> new LiquidBlock(fluid.stillFluid.get(), fluid.blockProperties());
+        fluid.block = getBlockRegister().register(fluid(fluid.getName()),
+                id -> new LiquidBlock(fluid.stillFluid.get(), fluid.blockProperties().setId(ResourceKey.create(Registries.BLOCK, id))));
 
-        fluid.block = getBlockRegister().register(fluid(fluid.getName()), fluid.block);
-
-        fluid.deferredBucket = getItemRegister().register(bucket(fluid.getName()), () -> new BucketItem(fluid.stillFluid.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+        fluid.deferredBucket = getItemRegister().register(bucket(fluid.getName()),
+                id -> new BucketItem(fluid.stillFluid.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).setId(ResourceKey.create(Registries.ITEM, id))));
 
         this.fluids.add(fluid);
         return fluid;

@@ -111,7 +111,6 @@ public abstract class NTAbstractContainerMenu<T extends ContainerBlockEntity> ex
     protected boolean performMerge(int index, ItemStack stack) {
         // TODO: Consider reverting or allowing augment shift-click in some cases.
         int invBase = getMergeableSlotCount();
-        // int invBase = getSizeInventory() - getNumAugmentSlots();
         int invFull = slots.size();
         int invHotbar = invFull - 9;
         int invPlayer = invHotbar - 27;

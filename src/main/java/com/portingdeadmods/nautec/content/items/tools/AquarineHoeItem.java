@@ -22,19 +22,20 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class AquarineHoeItem extends HoeItem implements IPowerItem {
-    private static final int POWER_PER_BLOCK = 2; // Adjust this value to fit the power requirement per block tilled
+    private static final int POWER_PER_BLOCK = 2;
 
-    public AquarineHoeItem() {
-        super(NTToolMaterials.AQUARINE, new Properties().stacksTo(1).component(NTDataComponents.ABILITY_ENABLED, false)
-                .component(NTDataComponents.IS_INFUSED,false).component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(700)).attributes(HoeItem.createAttributes(NTToolMaterials.AQUARINE, 0, -3.0f)));
+    public AquarineHoeItem(Properties properties) {
+        super(NTToolMaterials.AQUARINE, 0, -3.0f, properties.stacksTo(1).component(NTDataComponents.ABILITY_ENABLED, false)
+                .component(NTDataComponents.IS_INFUSED,false).component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(700)));
     }
 
     @Override
@@ -56,32 +57,31 @@ public class AquarineHoeItem extends HoeItem implements IPowerItem {
     private void createFarmland3x3(Level level, BlockPos center, Player player, ItemStack stack) {
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
         int availablePower = powerStorage.getPowerStored();
-        int blocksToTill = availablePower / POWER_PER_BLOCK; // Calculate how many blocks can be tilled
+        int blocksToTill = availablePower / POWER_PER_BLOCK;
 
-        // Iterate over the 3x3 area
         for (BlockPos targetPos : BlockPos.betweenClosed(center.offset(-1, 0, -1), center.offset(1, 0, 1))) {
             BlockState targetState = level.getBlockState(targetPos);
 
             if (blocksToTill > 0 && canTill(level, targetPos, targetState)) {
                 tillBlock(level, targetPos, player, stack, powerStorage);
-                blocksToTill--; // Reduce the block count
+                blocksToTill--;
             }
         }
-        if(level.isClientSide){
+        if(level.isClientSide()){
             level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1f, 1f);
         }
     }
 
     private boolean canTill(Level level, BlockPos pos, BlockState state) {
-        return state.is(BlockTags.DIRT) || state.is(Blocks.GRASS_BLOCK); // Can only till dirt or grass blocks
+        return state.is(BlockTags.DIRT) || state.is(Blocks.GRASS_BLOCK);
     }
 
     private void tillBlock(Level level, BlockPos pos, Player player, ItemStack stack, IPowerStorage powerStorage) {
         BlockState currentState = level.getBlockState(pos);
 
         if (currentState.is(BlockTags.DIRT) || currentState.is(Blocks.GRASS_BLOCK)) {
-            level.setBlock(pos, Blocks.FARMLAND.defaultBlockState(), 3); // Convert the block to farmland
-            powerStorage.tryDrainPower(POWER_PER_BLOCK, false); // Drain power
+            level.setBlock(pos, Blocks.FARMLAND.defaultBlockState(), 3);
+            powerStorage.tryDrainPower(POWER_PER_BLOCK, false);
         }
     }
 
@@ -93,10 +93,10 @@ public class AquarineHoeItem extends HoeItem implements IPowerItem {
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         IPowerStorage powerStorage = attacker.getItemInHand(InteractionHand.MAIN_HAND).getCapability(NTCapabilities.PowerStorage.ITEM);
         powerStorage.tryDrainPower(1, false);
-        return super.hurtEnemy(stack, target, attacker);
+        super.hurtEnemy(stack, target, attacker);
     }
 
     @Override
@@ -140,8 +140,8 @@ public class AquarineHoeItem extends HoeItem implements IPowerItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, display, tooltipComponents, tooltipFlag);
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
         Tooltips.trans(tooltipComponents, "nautec.tool.hoe.ability", ChatFormatting.DARK_PURPLE);
         if(!NTDataComponentsUtils.isInfused(stack)){

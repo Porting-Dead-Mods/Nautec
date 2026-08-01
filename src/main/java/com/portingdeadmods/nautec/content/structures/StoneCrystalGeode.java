@@ -6,7 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.portingdeadmods.nautec.registries.NTStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.WorldGenerationContext;
@@ -26,7 +26,7 @@ public class StoneCrystalGeode extends Structure {
     public static final MapCodec<StoneCrystalGeode> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(Ruins1.settingsCodec(instance),
                     StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
-                    ResourceLocation.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(structure -> structure.startJigsawName),
+                    Identifier.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(structure -> structure.startJigsawName),
                     Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),
                     HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
                     Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
@@ -36,7 +36,7 @@ public class StoneCrystalGeode extends Structure {
             ).apply(instance, StoneCrystalGeode::new));
 
     private final Holder<StructureTemplatePool> startPool;
-    private final Optional<ResourceLocation> startJigsawName;
+    private final Optional<Identifier> startJigsawName;
     private final int size;
     private final HeightProvider startHeight;
     private final Optional<Heightmap.Types> projectStartToHeightmap;
@@ -46,7 +46,7 @@ public class StoneCrystalGeode extends Structure {
 
     public StoneCrystalGeode(Structure.StructureSettings config,
                              Holder<StructureTemplatePool> startPool,
-                             Optional<ResourceLocation> startJigsawName,
+                             Optional<Identifier> startJigsawName,
                              int size,
                              HeightProvider startHeight,
                              Optional<Heightmap.Types> projectStartToHeightmap,
@@ -66,11 +66,8 @@ public class StoneCrystalGeode extends Structure {
     }
 
     private static boolean extraSpawningChecks(Structure.GenerationContext context) {
-        // Grabs the chunk position we are at
         ChunkPos chunkpos = context.chunkPos();
 
-        // Checks to make sure our structure does not spawn above land that's higher than y = 150
-        // to demonstrate how this method is good for checking extra conditions for spawning
         return context.chunkGenerator().getFirstOccupiedHeight(
                 chunkpos.getMinBlockX(),
                 chunkpos.getMinBlockZ(),
@@ -94,20 +91,17 @@ public class StoneCrystalGeode extends Structure {
 
         Optional<Structure.GenerationStub> structurePiecesGenerator =
                 JigsawPlacement.addPieces(
-                        context, // Used for JigsawPlacement to get all the proper behaviors done.
-                        this.startPool, // The starting pool to use to create the structure layout from
-                        this.startJigsawName, // Can be used to only spawn from one Jigsaw block. But we don't need to worry about this.
-                        this.size, // How deep a branch of pieces can go away from center piece. (5 means branches cannot be longer than 5 pieces from center piece)
-                        blockPos, // Where to spawn the structure.
-                        false, // "useExpansionHack" This is for legacy villages to generate properly. You should keep this false always.
-                        this.projectStartToHeightmap, // Adds the terrain height's y value to the passed in blockpos's y value. (This uses WORLD_SURFACE_WG heightmap which stops at top water too)
-                        // Here, blockpos's y value is 60 which means the structure spawn 60 blocks above terrain height.
-                        // Set this to false for structure to be place only at the passed in blockpos's Y value instead.
-                        // Definitely keep this false when placing structures in the nether as otherwise, heightmap placing will put the structure on the Bedrock roof.
-                        this.maxDistanceFromCenter, // Maximum limit for how far pieces can spawn from center. You cannot set this bigger than 128 or else pieces gets cutoff.
-                        PoolAliasLookup.EMPTY, // Optional thing that allows swapping a template pool with another per structure json instance. We don't need this but see vanilla JigsawStructure class for how to wire it up if you want it.
-                        this.dimensionPadding, // Optional thing to prevent generating too close to the bottom or top of the dimension.
-                        this.liquidSettings); // Optional thing to control whether the structure will be waterlogged when replacing pre-existing water in the world.
+                        context,
+                        this.startPool,
+                        this.startJigsawName,
+                        this.size,
+                        blockPos,
+                        false, // useExpansionHack; keep false
+                        this.projectStartToHeightmap,
+                        new JigsawStructure.MaxDistance(this.maxDistanceFromCenter), // values above 128 cut off pieces
+                        PoolAliasLookup.EMPTY,
+                        this.dimensionPadding,
+                        this.liquidSettings);
 
         return structurePiecesGenerator;
     }

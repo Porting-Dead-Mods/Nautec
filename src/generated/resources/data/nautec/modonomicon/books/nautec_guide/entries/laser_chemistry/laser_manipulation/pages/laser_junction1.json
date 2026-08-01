@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:text",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "laser_junction1",
+  "show_title_separator": true,
+  "sort_number": 2,
+  "text": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.laser_junction1.text",
+  "title": ""
+}

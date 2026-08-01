@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "nautec:cast_iron_ingot"
-    }
+    "nautec:cast_iron_ingot"
   ],
   "result": {
     "count": 9,

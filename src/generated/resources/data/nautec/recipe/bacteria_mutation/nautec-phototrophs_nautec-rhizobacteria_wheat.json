@@ -1,8 +1,6 @@
 {
   "type": "nautec:bacteria_mutation",
-  "catalyst": {
-    "item": "minecraft:wheat"
-  },
+  "catalyst": "minecraft:wheat",
   "chance": 5.0,
   "input_bacteria": "nautec:phototrophs",
   "result_bacteria": "nautec:rhizobacteria"

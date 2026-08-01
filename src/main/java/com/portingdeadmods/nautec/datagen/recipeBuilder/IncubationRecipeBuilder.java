@@ -8,10 +8,10 @@ import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -34,14 +34,14 @@ public record IncubationRecipeBuilder(ResourceKey<Bacteria> bacteria, Ingredient
     }
 
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
+    public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> key) {
         BacteriaIncubationRecipe recipe = new BacteriaIncubationRecipe(bacteria, nutrient, growth, consumeChance);
-        recipeOutput.accept(resourceLocation, recipe, null);
+        recipeOutput.accept(key, recipe, null);
     }
 
     @Override
     public void save(RecipeOutput output) {
-        String path = bacteria.location().toString().replace(':', '-') + NTRecipeBuilder.ingredientPathSuffix(nutrient);
+        String path = bacteria.identifier().toString().replace(':', '-') + NTRecipeBuilder.ingredientPathSuffix(nutrient);
         save(output, Nautec.rl(getName() + "/" + path));
     }
 

@@ -11,7 +11,7 @@ import snownee.jade.api.Accessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-@Mixin(ItemStorageProvider.class)
+@Mixin(ItemStorageProvider.Client.class)
 public class ItemStorageProviderMixin {
     @Inject(method = "append", at = @At("HEAD"), cancellable = true)
     private static void onAppend(ITooltip tooltip, Accessor<?> accessor, IPluginConfig config, CallbackInfo ci) {

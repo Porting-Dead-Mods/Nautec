@@ -1,8 +1,6 @@
 {
   "type": "nautec:bacteria_mutation",
-  "catalyst": {
-    "item": "minecraft:stone"
-  },
+  "catalyst": "minecraft:stone",
   "chance": 5.0,
   "input_bacteria": "nautec:thermophiles",
   "result_bacteria": "nautec:lithophiles"

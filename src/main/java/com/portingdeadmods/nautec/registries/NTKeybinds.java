@@ -10,13 +10,13 @@ import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.util.Lazy;
 import org.lwjgl.glfw.GLFW;
 
-@EventBusSubscriber(modid = Nautec.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Nautec.MODID, value = Dist.CLIENT)
 public final class NTKeybinds {
+    public static final KeyMapping.Category NAUTEC_CATEGORY = new KeyMapping.Category(Nautec.rl("main"));
+
     public static final Lazy<KeyMapping> AUGMENT_SCREEN_KEYBIND = keyBind(
             "Open the Augmentation Screen", GLFW.GLFW_KEY_B);
 
-    // public static final Lazy<KeyMapping> GIVE_DIAMOND_KEYBIND = keyBind(
-    //         "Give Diamond", GLFW.GLFW_KEY_N);
 
     public static final Lazy<KeyMapping> THROW_TRIDENT_KEYBIND = keyBind(
             "Throw Trident", GLFW.GLFW_KEY_Y);
@@ -35,12 +35,12 @@ public final class NTKeybinds {
 
 
     public static Lazy<KeyMapping> keyBind(String name, int key) {
-        return Lazy.of(() -> new KeyMapping(name, InputConstants.Type.KEYSYM, key, Nautec.MODNAME));
+        return Lazy.of(() -> new KeyMapping(name, InputConstants.Type.KEYSYM, key, NAUTEC_CATEGORY));
     }
     @SubscribeEvent
     public static void registerBindings(RegisterKeyMappingsEvent event) {
+        event.registerCategory(NAUTEC_CATEGORY);
         event.register(AUGMENT_SCREEN_KEYBIND.get());
-        //event.register(GIVE_DIAMOND_KEYBIND.get());
         event.register(THROW_TRIDENT_KEYBIND.get());
         event.register(LEAP_KEYBIND.get());
         event.register(THROW_POTION_KEYBIND.get());

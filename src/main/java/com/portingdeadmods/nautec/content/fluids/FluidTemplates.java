@@ -2,7 +2,7 @@ package com.portingdeadmods.nautec.content.fluids;
 
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.fluids.FluidTemplate;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public enum FluidTemplates implements FluidTemplate {
     MOLTEN_METAL(Nautec.rl("fluid/molten_fluid_still"),
@@ -17,36 +17,36 @@ public enum FluidTemplates implements FluidTemplate {
     ETCHING_ACID(modFluidTexture("etching_acid"),
             modFluidTexture("etching_acid"),
             Nautec.rl("misc/in_water")),
-    WATER(ResourceLocation.parse("block/water_still"),
-            ResourceLocation.parse("block/water_flow"),
+    WATER(Identifier.parse("block/water_still"),
+            Identifier.parse("block/water_flow"),
             Nautec.rl("misc/in_soap_water"));
 
-    private final ResourceLocation still;
-    private final ResourceLocation flowing;
-    private final ResourceLocation overlay;
+    private final Identifier still;
+    private final Identifier flowing;
+    private final Identifier overlay;
 
-    FluidTemplates(ResourceLocation still, ResourceLocation flowing, ResourceLocation overlay) {
+    FluidTemplates(Identifier still, Identifier flowing, Identifier overlay) {
         this.still = still;
         this.flowing = flowing;
         this.overlay = overlay;
     }
 
     @Override
-    public ResourceLocation getStillTexture() {
+    public Identifier getStillTexture() {
         return still;
     }
 
     @Override
-    public ResourceLocation getFlowingTexture() {
+    public Identifier getFlowingTexture() {
         return flowing;
     }
 
     @Override
-    public ResourceLocation getOverlayTexture() {
+    public Identifier getOverlayTexture() {
         return overlay;
     }
 
-    private static ResourceLocation modFluidTexture(String name) {
+    private static Identifier modFluidTexture(String name) {
         return Nautec.rl("fluid/" + name);
     }
 }

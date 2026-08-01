@@ -14,7 +14,10 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeBookCategories;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -29,32 +32,45 @@ public record BacteriaIncubationRecipe(ResourceKey<Bacteria> bacteria, Ingredien
     }
 
     @Override
-    public ItemStack assemble(BacteriaRecipeInput input, HolderLookup.Provider registries) {
+    public ItemStack assemble(BacteriaRecipeInput input) {
         return ItemStack.EMPTY;
     }
 
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
-    }
-
-    @Override
     public ItemStack getResultItem(HolderLookup.Provider registries) {
         return ItemStack.EMPTY;
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public String group() {
+        return "";
+    }
+
+    @Override
+    public boolean showNotification() {
+        return false;
+    }
+
+    @Override
+    public RecipeSerializer<? extends Recipe<BacteriaRecipeInput>> getSerializer() {
         return Serializer.INSTANCE;
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public RecipeType<? extends Recipe<BacteriaRecipeInput>> getType() {
         return TYPE;
     }
 
-    public static final class Serializer implements RecipeSerializer<BacteriaIncubationRecipe> {
-        public static final Serializer INSTANCE = new Serializer();
+    @Override
+    public PlacementInfo placementInfo() {
+        return PlacementInfo.NOT_PLACEABLE;
+    }
+
+    @Override
+    public RecipeBookCategory recipeBookCategory() {
+        return RecipeBookCategories.CRAFTING_MISC;
+    }
+
+    public static final class Serializer {
         public static final MapCodec<BacteriaIncubationRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
                 Bacteria.BACTERIA_TYPE_CODEC.fieldOf("bacteria").forGetter(BacteriaIncubationRecipe::bacteria),
                 Ingredient.CODEC.fieldOf("nutrient").forGetter(BacteriaIncubationRecipe::nutrient),
@@ -72,18 +88,9 @@ public record BacteriaIncubationRecipe(ResourceKey<Bacteria> bacteria, Ingredien
                 BacteriaIncubationRecipe::consumeChance,
                 BacteriaIncubationRecipe::new
         );
+        public static final RecipeSerializer<BacteriaIncubationRecipe> INSTANCE = new RecipeSerializer<>(CODEC, STREAM_CODEC);
 
         private Serializer() {
-        }
-
-        @Override
-        public MapCodec<BacteriaIncubationRecipe> codec() {
-            return CODEC;
-        }
-
-        @Override
-        public StreamCodec<RegistryFriendlyByteBuf, BacteriaIncubationRecipe> streamCodec() {
-            return STREAM_CODEC;
         }
     }
 }

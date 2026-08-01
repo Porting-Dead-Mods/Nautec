@@ -11,7 +11,7 @@ import com.portingdeadmods.nautec.NTRegistries;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,8 +38,8 @@ public class AugmentTypeArgumentType implements ArgumentType<AugmentType<?>> {
 
     @Override
     public AugmentType<?> parse(StringReader reader) throws CommandSyntaxException {
-        ResourceLocation read = ResourceLocation.read(reader);
-        AugmentType<?> augmentType = NTRegistries.AUGMENT_TYPE.get(read);
+        Identifier read = Identifier.read(reader);
+        AugmentType<?> augmentType = NTRegistries.AUGMENT_TYPE.getValue(read);
         if (augmentType != null) {
             return augmentType;
         }

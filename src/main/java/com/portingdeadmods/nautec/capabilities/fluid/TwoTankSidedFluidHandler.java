@@ -4,72 +4,57 @@ import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.utils.Utils;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.ints.IntList;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 
-public record TwoTankSidedFluidHandler(IFluidHandler primaryHandler,
-                                       IFluidHandler secondaryHandler,
+public record TwoTankSidedFluidHandler(ResourceHandler<FluidResource> primaryHandler,
+                                       ResourceHandler<FluidResource> secondaryHandler,
                                        IOActions action,
-                                       IntList tanks) implements IFluidHandler {
-    public TwoTankSidedFluidHandler(IFluidHandler primaryHandler, IFluidHandler secondaryHandler, Pair<IOActions, int[]> actionSlotsPair) {
+                                       IntList tanks) implements ResourceHandler<FluidResource> {
+    public TwoTankSidedFluidHandler(ResourceHandler<FluidResource> primaryHandler, ResourceHandler<FluidResource> secondaryHandler, Pair<IOActions, int[]> actionSlotsPair) {
         this(primaryHandler, secondaryHandler, actionSlotsPair != null ? actionSlotsPair.left() : IOActions.NONE, actionSlotsPair != null ? Utils.intArrayToList(actionSlotsPair.right()) : IntList.of());
     }
 
     @Override
-    public int getTanks() {
+    public int size() {
         return 2;
     }
 
     @Override
-    public @NotNull FluidStack getFluidInTank(int tank) {
-        return tank == 0 ? primaryHandler.getFluidInTank(0) : secondaryHandler.getFluidInTank(0);
+    public FluidResource getResource(int index) {
+        return index == 0 ? primaryHandler.getResource(0) : secondaryHandler.getResource(0);
     }
 
     @Override
-    public int getTankCapacity(int tank) {
-        return tank == 0 ? primaryHandler.getTankCapacity(0) : secondaryHandler.getTankCapacity(0);
+    public long getAmountAsLong(int index) {
+        return index == 0 ? primaryHandler.getAmountAsLong(0) : secondaryHandler.getAmountAsLong(0);
     }
 
     @Override
-    public boolean isFluidValid(int tank, @NotNull FluidStack stack) {
-        return (action == IOActions.INSERT || action == IOActions.BOTH) && tanks.contains(tank)
-                && (tank == 0 ? primaryHandler.isFluidValid(0, stack) : secondaryHandler.isFluidValid(0, stack));
+    public long getCapacityAsLong(int index, FluidResource resource) {
+        return index == 0 ? primaryHandler.getCapacityAsLong(0, resource) : secondaryHandler.getCapacityAsLong(0, resource);
     }
 
     @Override
-    public int fill(FluidStack resource, FluidAction fAction) {
-        return (action == IOActions.INSERT || action == IOActions.BOTH) ? primaryHandler.fill(resource, fAction) : 0;
+    public boolean isValid(int index, FluidResource resource) {
+        return (action == IOActions.INSERT || action == IOActions.BOTH) && tanks.contains(index)
+                && (index == 0 ? primaryHandler.isValid(0, resource) : secondaryHandler.isValid(0, resource));
     }
 
     @Override
-    public @NotNull FluidStack drain(FluidStack resource, FluidAction fAction) {
+    public int insert(int index, FluidResource resource, int amount, TransactionContext transaction) {
+        if (action != IOActions.INSERT && action != IOActions.BOTH) {
+            return 0;
+        }
+        return index == 0 ? primaryHandler.insert(0, resource, amount, transaction) : 0;
+    }
+
+    @Override
+    public int extract(int index, FluidResource resource, int amount, TransactionContext transaction) {
         if (action != IOActions.EXTRACT && action != IOActions.BOTH) {
-            return FluidStack.EMPTY;
+            return 0;
         }
-        
-        // Check if we have enough fluid to drain the requested amount
-        FluidStack currentFluid = secondaryHandler.getFluidInTank(0);
-        if (currentFluid.isEmpty() || !currentFluid.is(resource.getFluid()) || 
-            currentFluid.getAmount() < resource.getAmount()) {
-            return FluidStack.EMPTY;
-        }
-        
-        return secondaryHandler.drain(resource, fAction);
-    }
-
-    @Override
-    public @NotNull FluidStack drain(int maxDrain, FluidAction fAction) {
-        if (action != IOActions.EXTRACT && action != IOActions.BOTH) {
-            return FluidStack.EMPTY;
-        }
-        
-        // Check if we have enough fluid to drain the requested amount
-        FluidStack currentFluid = secondaryHandler.getFluidInTank(0);
-        if (currentFluid.isEmpty() || currentFluid.getAmount() < maxDrain) {
-            return FluidStack.EMPTY;
-        }
-        
-        return secondaryHandler.drain(maxDrain, fAction);
+        return index == 1 ? secondaryHandler.extract(0, resource, amount, transaction) : 0;
     }
 }

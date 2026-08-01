@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:text",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "geode",
+  "show_title_separator": true,
+  "sort_number": 1,
+  "text": "book.nautec.nautec_guide.getting_started.structures.geode.text",
+  "title": "book.nautec.nautec_guide.getting_started.structures.geode.title"
+}

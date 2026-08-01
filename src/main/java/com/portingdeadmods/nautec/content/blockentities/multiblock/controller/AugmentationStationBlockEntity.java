@@ -12,14 +12,16 @@ import com.portingdeadmods.nautec.content.blockentities.multiblock.part.Augmenta
 import com.portingdeadmods.nautec.content.recipes.AugmentationRecipe;
 import com.portingdeadmods.nautec.content.recipes.inputs.AugmentationRecipeInput;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
+import com.portingdeadmods.nautec.registries.NTMultiblocks;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
+import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import com.portingdeadmods.nautec.utils.PlayerUtils;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -27,6 +29,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.NotNull;
@@ -93,8 +97,11 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
     }
 
     public @NotNull Optional<AugmentationRecipe> getRecipe() {
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return Optional.empty();
+        }
         List<ItemStack> ingredients = collectInputItems();
-        return level.getRecipeManager()
+        return serverLevel.recipeAccess()
                 .getRecipeFor(AugmentationRecipe.Type.INSTANCE, new AugmentationRecipeInput(ingredients, 100), level)
                 .map(RecipeHolder::value);
     }
@@ -158,7 +165,7 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
                         for (BlockPos pos : augmentItems.keySet()) {
                             AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
 
-                            be.getItemHandler().extractItem(0, 1, false);
+                            be.getItemStackHandler().extractItem(0, 1, false);
                         }
 
                         restorePlayerAttributes();
@@ -202,14 +209,27 @@ public class AugmentationStationBlockEntity extends ContainerBlockEntity impleme
     }
 
     @Override
-    protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.loadData(tag, provider);
-        this.multiblockData = loadMBData(tag.getCompound("multiblockData"));
+    protected void loadData(ValueInput in) {
+        super.loadData(in);
+        this.multiblockData = loadMBData(in.read("multiblockData", CompoundTag.CODEC).orElseGet(CompoundTag::new));
     }
 
     @Override
-    protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.saveData(tag, provider);
-        tag.put("multiblockData", saveMBData());
+    protected void saveData(ValueOutput out) {
+        super.saveData(out);
+        out.store("multiblockData", CompoundTag.CODEC, saveMBData());
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        if (MultiblockEntity.UNFORMING.compareAndSet(false, true)) {
+            try {
+                MultiblockHelper.unform(NTMultiblocks.AUGMENTATION_STATION.get(), pos, level);
+            } finally {
+                MultiblockEntity.UNFORMING.set(false);
+            }
+        }
+        super.preRemoveSideEffects(pos, state);
+        drop();
     }
 }

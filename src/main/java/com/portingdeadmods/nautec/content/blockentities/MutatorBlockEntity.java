@@ -15,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -49,10 +50,13 @@ public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider
     }
 
     private void checkRecipe() {
-        ItemStack catalyst = getItemHandler().getStackInSlot(0);
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return;
+        }
+        ItemStack catalyst = getItemStackHandler().getStackInSlot(0);
         BacteriaInstance inputBacteria = getBacteriaStorage().getBacteria(0);
         BacteriaInstance resultBacteria = getBacteriaStorage().getBacteria(1);
-        BacteriaMutationRecipe recipe1 = level.getRecipeManager().getRecipeFor(BacteriaMutationRecipe.TYPE, new BacteriaRecipeInput(inputBacteria, catalyst), level).map(RecipeHolder::value).orElse(null);
+        BacteriaMutationRecipe recipe1 = serverLevel.recipeAccess().getRecipeFor(BacteriaMutationRecipe.TYPE, new BacteriaRecipeInput(inputBacteria, catalyst), level).map(RecipeHolder::value).orElse(null);
         this.recipe = (recipe1 != null && (resultBacteria.isEmpty() || resultBacteria.is(recipe1.resultBacteria()))) ? recipe1 : null;
     }
 

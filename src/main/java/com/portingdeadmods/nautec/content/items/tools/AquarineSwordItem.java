@@ -14,33 +14,34 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import java.util.function.Consumer;
+import net.minecraft.sounds.SoundEvents;
 
-public class AquarineSwordItem extends SwordItem implements IPowerItem {
-    public AquarineSwordItem() {
-        super(NTToolMaterials.AQUARINE,
-                new Properties().attributes(
-                        SwordItem.createAttributes(
-                                NTToolMaterials.AQUARINE,
-                                3,
-                                -2.4f
-                        )
-                ).component(NTDataComponents.IS_INFUSED,false).component(NTDataComponents.ABILITY_ENABLED,false).component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200)));
+public class AquarineSwordItem extends Item implements IPowerItem {
+    public AquarineSwordItem(Properties properties) {
+        super(properties
+                .sword(NTToolMaterials.AQUARINE, 3, -2.4f)
+                .component(NTDataComponents.IS_INFUSED,false)
+                .component(NTDataComponents.ABILITY_ENABLED,false)
+                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(1200)));
     }
 
     @Override
@@ -60,11 +61,11 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
         return super.mineBlock(stack, level, state, pos, miningEntity);
     }
 
-    public static final AttributeModifier ENABLED_DAMAGE = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"damage"),0.7,AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-    public static final AttributeModifier DISABLED_DAMAGE = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Nautec.MODID,"damage"),0,AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+    public static final AttributeModifier ENABLED_DAMAGE = new AttributeModifier(Identifier.fromNamespaceAndPath(Nautec.MODID,"damage"),0.7,AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+    public static final AttributeModifier DISABLED_DAMAGE = new AttributeModifier(Identifier.fromNamespaceAndPath(Nautec.MODID,"damage"),0,AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
     @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slot) {
         if(NTDataComponentsUtils.isAbilityEnabled(stack)){
             IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
             ItemAttributeModifiers attributes = stack.getOrDefault(DataComponents.ATTRIBUTE_MODIFIERS, ItemAttributeModifiers.EMPTY);
@@ -76,26 +77,26 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
             attributes = attributes.withModifierAdded(Attributes.ATTACK_DAMAGE, DISABLED_DAMAGE, EquipmentSlotGroup.MAINHAND);
             stack.set(DataComponents.ATTRIBUTE_MODIFIERS, attributes);
         }
-        super.inventoryTick(stack, level, entity, slotId, isSelected);
+        super.inventoryTick(stack, level, entity, slot);
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         IPowerStorage powerStorage = attacker.getItemInHand(InteractionHand.MAIN_HAND).getCapability(NTCapabilities.PowerStorage.ITEM);
         if(NTDataComponentsUtils.isAbilityEnabled(stack)){
             powerStorage.tryDrainPower(10, false);
-            if (!target.level().isClientSide) {
-                LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(target.level());
+            if (!target.level().isClientSide()) {
+                LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(target.level(), EntitySpawnReason.TRIGGERED);
                 if (lightningBolt != null) {
-                    lightningBolt.moveTo(target.getX(), target.getY(), target.getZ());
+                    lightningBolt.setPos(target.getX(), target.getY(), target.getZ());
                     target.level().addFreshEntity(lightningBolt);
-                    target.level().playSound(null, target.blockPosition(), net.minecraft.sounds.SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.HOSTILE, 0.3F, 1.0F);
+                    target.level().playSound(null, target.blockPosition(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.HOSTILE, 0.3F, 1.0F);
                 }
             }
         }else{
             powerStorage.tryDrainPower(1, false);
         }
-        return super.hurtEnemy(stack, target, attacker);
+        super.hurtEnemy(stack, target, attacker);
     }
 
     @Override
@@ -139,8 +140,8 @@ public class AquarineSwordItem extends SwordItem implements IPowerItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, display, tooltipComponents, tooltipFlag);
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
         Tooltips.trans(tooltipComponents, "nautec.tool.sword.ability", ChatFormatting.DARK_PURPLE);
         if(!NTDataComponentsUtils.isInfused(stack)){

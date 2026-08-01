@@ -17,7 +17,7 @@ import net.minecraft.server.level.ServerPlayer;
 public class RemoveAugmentCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         LiteralArgumentBuilder<CommandSourceStack> nautecCommand = Commands.literal(Nautec.MODID)
-                .requires(player -> player.hasPermission(2));
+                .requires(source -> Commands.LEVEL_GAMEMASTERS.check(source.permissions()));
 
         dispatcher.register(nautecCommand
                 .then(Commands.literal("augments")
@@ -38,7 +38,6 @@ public class RemoveAugmentCommand {
             return 0;
         }
         
-        // Remove the augment (this will handle syncing)
         AugmentHelper.removeAugment(player, slot);
         
         player.sendSystemMessage(Component.literal("Removed augment from slot: " + slot.getName()));

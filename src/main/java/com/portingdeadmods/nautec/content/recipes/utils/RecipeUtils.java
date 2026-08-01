@@ -6,7 +6,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public final class RecipeUtils {
     public static List<IngredientWithCount> ingredientsToIWC(List<Ingredient> ingredients) {
@@ -22,7 +21,7 @@ public final class RecipeUtils {
     }
 
     public static @NotNull Ingredient iWCToIngredientSaveCount(IngredientWithCount ingredientWithCount) {
-        return Ingredient.of(Stream.of(ingredientWithCount.ingredient().getItems()).map(s -> s.copyWithCount(ingredientWithCount.count())));
+        return ingredientWithCount.ingredient();
     }
 
     public static <T> NonNullList<T> listToNonNullList(List<T> list) {

@@ -12,19 +12,18 @@
   "ingredients": [
     {
       "count": 4,
-      "item": "minecraft:dried_kelp"
+      "ingredient": "minecraft:dried_kelp"
     },
     {
       "count": 2,
-      "item": "minecraft:slime_ball"
+      "ingredient": "minecraft:slime_ball"
     },
     {
-      "item": "minecraft:prismarine_crystals"
+      "ingredient": "minecraft:prismarine_crystals"
     },
     {
       "count": 5,
-      "item": "minecraft:seagrass"
+      "ingredient": "minecraft:seagrass"
     }
-  ],
-  "result": {}
+  ]
 }

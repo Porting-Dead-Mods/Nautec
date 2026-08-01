@@ -1,49 +1,25 @@
 {
-  "background_u_index": 0,
-  "background_v_index": 0,
-  "category": "getting_started",
-  "description": "book.nautec.nautec_guide.getting_started.item_transformation.description",
-  "hide_while_locked": false,
-  "icon": {
-    "item": "nautec:aquarine_steel_ingot"
+  "type": "modonomicon:content",
+  "background": {
+    "height": 26,
+    "sprite": "modonomicon:modonomicon/themes/default/node/entry_backgrounds/square_gold",
+    "width": 26
   },
+  "category": "nautec:getting_started",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "description": "book.nautec.nautec_guide.getting_started.item_transformation.description",
+  "icon": {
+    "id": "nautec:aquarine_steel_ingot"
+  },
+  "id": "nautec:getting_started/item_transformation",
   "name": "book.nautec.nautec_guide.getting_started.item_transformation.name",
-  "pages": [
-    {
-      "type": "modonomicon:text",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.getting_started.item_transformation.item_transformation.text",
-      "title": "book.nautec.nautec_guide.getting_started.item_transformation.item_transformation.title",
-      "use_markdown_in_title": false
-    },
-    {
-      "type": "modonomicon:image",
-      "anchor": "",
-      "border": true,
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "images": [
-        "modonomicon:textures/gui/book/recipe/transformation_recipes.png"
-      ],
-      "text": "",
-      "title": "Recipe Exemples",
-      "use_legacy_rendering": false
-    }
-  ],
   "parents": [
     {
-      "draw_arrow": true,
-      "entry": "getting_started/laser_power",
-      "line_enabled": true,
-      "line_reversed": false
+      "entry": "nautec:getting_started/laser_power"
     }
   ],
-  "show_when_any_parent_unlocked": false,
   "sort_number": 4,
   "x": 4,
   "y": 0

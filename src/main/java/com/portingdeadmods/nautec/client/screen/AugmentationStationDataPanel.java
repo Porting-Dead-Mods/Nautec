@@ -1,15 +1,14 @@
 package com.portingdeadmods.nautec.client.screen;
 
-import com.mojang.blaze3d.vertex.Tesselator;
 import com.portingdeadmods.nautec.NTRegistries;
-import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.ARGB;
 import net.neoforged.neoforge.client.gui.widget.ScrollPanel;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,15 +57,14 @@ public class AugmentationStationDataPanel extends ScrollPanel {
     }
 
     @Override
-    protected void drawPanel(GuiGraphics guiGraphics, int entryRight, int relativeY, Tesselator tess, int mouseX, int mouseY) {
-        Nautec.LOGGER.debug("relative y: {}", relativeY);
+    protected void drawPanel(GuiGraphicsExtractor guiGraphics, int entryRight, int relativeY, int mouseX, int mouseY) {
         for (int i = 0; i < this.augmentSlots.size(); i++) {
             AugmentSlot augmentSlot = this.augmentSlots.get(i);
             int x = left + 2;
             int y = relativeY - 2 + i * client.font.lineHeight;
-            ResourceLocation loc = NTRegistries.AUGMENT_SLOT.getKey(augmentSlot);
-            guiGraphics.drawString(client.font, Component.translatable("augment_slot."+loc.getNamespace()+"."+loc.getPath()),
-                    x, y, FastColor.ARGB32.color(255, 255, 255));
+            Identifier loc = NTRegistries.AUGMENT_SLOT.getKey(augmentSlot);
+            guiGraphics.text(client.font, Component.translatable("augment_slot." + loc.getNamespace() + "." + loc.getPath()),
+                    x, y, ARGB.color(255, 255, 255));
         }
     }
 
@@ -93,12 +91,12 @@ public class AugmentationStationDataPanel extends ScrollPanel {
     }
 
     @Override
-    protected boolean clickPanel(double mouseX, double mouseY, int button) {
+    protected boolean clickPanel(double mouseX, double mouseY, MouseButtonEvent event) {
         int augmentIndex = (int) (mouseY / client.font.lineHeight);
-        if (augmentIndex >= 0) {
+        if (augmentIndex >= 0 && augmentIndex < this.augmentSlots.size()) {
             this.selectedSlot = this.augmentSlots.get(augmentIndex);
             return true;
         }
-        return super.clickPanel(mouseX, mouseY, button);
+        return super.clickPanel(mouseX, mouseY, event);
     }
 }

@@ -18,13 +18,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-// /modjam augments set <slot> <augment>
+// /nautec augments set <slot> <augment>
 
 // TODO: Only set ingredients for slots that support them
 public class SetAugmentCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         LiteralArgumentBuilder<CommandSourceStack> nautecCommand = Commands.literal(Nautec.MODID)
-                .requires(player -> player.hasPermission(2));
+                .requires(source -> Commands.LEVEL_GAMEMASTERS.check(source.permissions()));
 
         dispatcher.register(nautecCommand
                 .then(Commands.literal("augments")

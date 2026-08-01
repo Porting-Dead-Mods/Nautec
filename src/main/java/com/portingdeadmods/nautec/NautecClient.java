@@ -1,14 +1,15 @@
 package com.portingdeadmods.nautec;
 
-import com.mojang.blaze3d.shaders.FogShape;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.portingdeadmods.nautec.api.bacteria.Bacteria;
 import com.portingdeadmods.nautec.api.client.renderer.blockentities.LaserBlockEntityRenderer;
 import com.portingdeadmods.nautec.api.client.renderer.items.AnchorItemRenderer;
 import com.portingdeadmods.nautec.api.client.renderer.items.PrismarineCrystalItemRenderer;
 import com.portingdeadmods.nautec.api.fluids.BaseFluidType;
+import com.portingdeadmods.nautec.api.fluids.NTFluid;
 import com.portingdeadmods.nautec.client.hud.DivingSuitOverlay;
 import com.portingdeadmods.nautec.client.hud.PrismMonocleOverlay;
+import com.portingdeadmods.nautec.client.item.AbilityEnabledProperty;
+import com.portingdeadmods.nautec.client.item.BacteriaColorTintSource;
+import com.portingdeadmods.nautec.client.item.HasBacteriaProperty;
 import com.portingdeadmods.nautec.client.model.augment.DolphinFinModel;
 import com.portingdeadmods.nautec.client.model.augment.GuardianEyeModel;
 import com.portingdeadmods.nautec.client.model.block.*;
@@ -17,51 +18,41 @@ import com.portingdeadmods.nautec.client.renderer.augments.SimpleAugmentRenderer
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;
 import com.portingdeadmods.nautec.client.renderer.robotArms.ClawRobotArmRenderer;
 import com.portingdeadmods.nautec.client.screen.*;
-import com.portingdeadmods.nautec.data.NTDataComponents;
-import com.portingdeadmods.nautec.data.NTDataComponentsUtils;
 import com.portingdeadmods.nautec.events.helper.AugmentLayerRenderer;
 import com.portingdeadmods.nautec.events.helper.AugmentSlotsRenderer;
 import com.portingdeadmods.nautec.registries.*;
 import com.portingdeadmods.nautec.utils.ArmorModelsHandler;
-import com.portingdeadmods.nautec.utils.BacteriaHelper;
 import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.entity.player.AvatarRenderer;
+import net.minecraft.client.renderer.fog.FogData;
+import net.minecraft.client.renderer.fog.environment.FogEnvironment;
+import net.minecraft.client.resources.model.EquipmentClientInfo;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
-import net.minecraft.util.FastColor;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.PlayerModelType;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.client.fluid.FluidTintSources;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.client.model.DynamicFluidContainerModel;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.joml.Vector4i;
+import net.minecraft.client.renderer.block.FluidModel;
 
 @Mod(value = NautecClient.MODID, dist = Dist.CLIENT)
 public final class NautecClient {
@@ -76,13 +67,12 @@ public final class NautecClient {
         modEventBus.addListener(this::registerClientReloadListeners);
         modEventBus.addListener(this::registerLayerDefinitions);
         modEventBus.addListener(this::registerMenus);
-        modEventBus.addListener(this::onFMLClientSetupEvent);
         modEventBus.addListener(this::registerColorHandlers);
         modEventBus.addListener(this::onLayersAdded);
+        modEventBus.addListener(this::registerSpecialModelRenderers);
+        modEventBus.addListener(this::registerConditionalItemModelProperties);
+        modEventBus.addListener(this::registerFluidModels);
     }
-
-    public static final PrismarineCrystalItemRenderer PRISMARINE_CRYSTAL_RENDERER = new PrismarineCrystalItemRenderer();
-    public static final AnchorItemRenderer ANCHOR_RENDERER = new AnchorItemRenderer();
 
     private void registerGuiOverlays(RegisterGuiLayersEvent event) {
         event.registerAboveAll(Nautec.rl("scanner_info_overlay"), PrismMonocleOverlay.HUD);
@@ -90,74 +80,58 @@ public final class NautecClient {
     }
 
     private void registerClientExtensions(RegisterClientExtensionsEvent event) {
-        // Fluid renderers
-        for (FluidType fluidType : NeoForgeRegistries.FLUID_TYPES) {
+        for (NTFluid fluid : NTFluids.HELPER.getFluids()) {
+            FluidType fluidType = fluid.getFluidType().get();
             if (fluidType instanceof BaseFluidType baseFluidType) {
                 event.registerFluidType(new IClientFluidTypeExtensions() {
                     @Override
-                    public @NotNull ResourceLocation getStillTexture() {
-                        return baseFluidType.getStillTexture();
-                    }
-
-                    @Override
-                    public @NotNull ResourceLocation getFlowingTexture() {
-                        return baseFluidType.getFlowingTexture();
-                    }
-
-                    @Override
-                    public @Nullable ResourceLocation getOverlayTexture() {
-                        return baseFluidType.getOverlayTexture();
-                    }
-
-                    @Override
-                    public int getTintColor() {
+                    public void modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector4f fluidFogColor) {
                         Vector4i color = baseFluidType.getColor();
-                        return FastColor.ARGB32.color(color.w, color.x, color.y, color.z);
+                        fluidFogColor.set(color.x / 255f, color.y / 255f, color.z / 255f, fluidFogColor.w);
                     }
 
                     @Override
-                    public @NotNull Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
-                        Vector4i color = baseFluidType.getColor();
-                        return new Vector3f(color.x / 255f, color.y / 255f, color.z / 255f);
+                    public void modifyFogRender(Camera camera, @Nullable FogEnvironment environment, float renderDistance, float partialTick, FogData fogData) {
+                        fogData.environmentalStart = 1f;
+                        fogData.environmentalEnd = 6f;
                     }
-
-                    @Override
-                    public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick, float nearDistance, float farDistance, FogShape shape) {
-                        RenderSystem.setShaderFogStart(1f);
-                        RenderSystem.setShaderFogEnd(6f); // distance when the fog starts
-                    }
-                }, baseFluidType);
+                }, fluidType);
             }
         }
 
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return PRISMARINE_CRYSTAL_RENDERER;
-            }
-        }, NTBlocks.PRISMARINE_CRYSTAL.asItem());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return PRISMARINE_CRYSTAL_RENDERER;
-            }
-        }, NTBlocks.DECORATIVE_PRISMARINE_CRYSTAL.asItem());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return ANCHOR_RENDERER;
-            }
-        }, NTBlocks.ANCHOR.asItem());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack
-                    itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel<?> original) {
-                return ArmorModelsHandler.armorModel(ArmorModelsHandler.divingSuit, equipmentSlot);
+            public Model getHumanoidArmorModel(ItemStack itemStack, EquipmentClientInfo.LayerType layerType, Model original) {
+                return ArmorModelsHandler.armorModel(ArmorModelsHandler.divingSuit, EquipmentSlot.HEAD);
             }
         }, NTItems.DIVING_HELMET);
+    }
+
+    private void registerFluidModels(RegisterFluidModelsEvent event) {
+        for (NTFluid fluid : NTFluids.HELPER.getFluids()) {
+            FluidType fluidType = fluid.getFluidType().get();
+            if (fluidType instanceof BaseFluidType baseFluidType) {
+                Vector4i color = baseFluidType.getColor();
+                int tint = ARGB.color(color.w, color.x, color.y, color.z);
+                Identifier overlay = baseFluidType.getOverlayTexture();
+                event.register(new FluidModel.Unbaked(
+                        new Material(baseFluidType.getStillTexture()),
+                        new Material(baseFluidType.getFlowingTexture()),
+                        overlay != null ? new Material(overlay) : null,
+                        FluidTintSources.constant(tint)
+                ), fluid.stillFluid, fluid.flowingFluid);
+            }
+        }
+    }
+
+    private void registerSpecialModelRenderers(RegisterSpecialModelRendererEvent event) {
+        event.register(Nautec.rl("prismarine_crystal"), PrismarineCrystalItemRenderer.Unbaked.MAP_CODEC);
+        event.register(Nautec.rl("anchor"), AnchorItemRenderer.Unbaked.MAP_CODEC);
+    }
+
+    private void registerConditionalItemModelProperties(RegisterConditionalItemModelPropertyEvent event) {
+        event.register(Nautec.rl("ability_enabled"), AbilityEnabledProperty.MAP_CODEC);
+        event.register(Nautec.rl("has_bacteria"), HasBacteriaProperty.MAP_CODEC);
     }
 
     private void registerBERenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -180,7 +154,7 @@ public final class NautecClient {
         event.registerBlockEntityRenderer(NTBlockEntityTypes.FISHING_STATION.get(), FishingStationBERenderer::new);
 
         AugmentLayerRenderer.registerRenderer(NTAugments.DOLPHIN_FIN.get(),
-                ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.MATERIAL, true, ctx));
+                ctx -> new SimpleAugmentRenderer<>(DolphinFinModel::new, DolphinFinModel.LAYER_LOCATION, DolphinFinModel.RENDER_TYPE, true, ctx));
         AugmentLayerRenderer.registerRenderer(NTAugments.GUARDIAN_EYE.get(), GuardianEyeRenderer::new);
         AugmentStationExtensionBERenderer.registerRenderer(NTItems.CLAW_ROBOT_ARM.get(), ClawRobotArmRenderer::new);
 
@@ -193,8 +167,8 @@ public final class NautecClient {
         AugmentSlotsRenderer.registerAugmentSlotModelPart(NTAugmentSlots.BODY, model -> model.body);
     }
 
-    private void registerClientReloadListeners(RegisterClientReloadListenersEvent event) {
-        event.registerReloadListener((ResourceManagerReloadListener) resourceManager -> {
+    private void registerClientReloadListeners(AddClientReloadListenersEvent event) {
+        event.addListener(Nautec.rl("augment_renderers"), (ResourceManagerReloadListener) resourceManager -> {
             AugmentLayerRenderer.createRenderers();
             AugmentStationExtensionBERenderer.createRenderers();
         });
@@ -213,19 +187,12 @@ public final class NautecClient {
     }
 
     private void onLayersAdded(EntityRenderersEvent.AddLayers event) {
-        for (var skin : event.getSkins()) {
-            LivingEntityRenderer<? extends Player, ? extends EntityModel<? extends Player>> renderer = event.getSkin(skin);
+        for (PlayerModelType skin : event.getSkins()) {
+            AvatarRenderer<?> renderer = event.getPlayerRenderer(skin);
             if (renderer != null) {
-                try {
-                    castRenderer(renderer).addLayer(new AugmentLayerRenderer<>(castRenderer(renderer)));
-                } catch (ClassCastException ignored) {
-                }
+                renderer.addLayer(new AugmentLayerRenderer<>(renderer));
             }
         }
-    }
-
-    private static <T extends LivingEntity, M extends EntityModel<T>> LivingEntityRenderer<T, M> castRenderer(LivingEntityRenderer<? extends LivingEntity, ? extends EntityModel<? extends LivingEntity>> renderer) throws ClassCastException {
-        return (LivingEntityRenderer<T, M>) renderer;
     }
 
     private void registerMenus(RegisterMenuScreensEvent event) {
@@ -240,30 +207,8 @@ public final class NautecClient {
         event.register(NTMenuTypes.BACTERIAL_ANALYZER.get(), BacterialAnalyzerScreen::new);
     }
 
-    private void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            ItemProperties.register(NTItems.AQUARINE_SWORD.get(), Nautec.rl("enabled"),
-                    (stack, level, living, id) -> NTDataComponentsUtils.isAbilityEnabledNBT(stack));
-            ItemProperties.register(NTItems.AQUARINE_PICKAXE.get(), Nautec.rl("enabled"),
-                    (stack, level, living, id) -> NTDataComponentsUtils.isAbilityEnabledNBT(stack));
-            ItemProperties.register(NTItems.AQUARINE_AXE.get(), Nautec.rl("enabled"),
-                    (stack, level, living, id) -> NTDataComponentsUtils.isAbilityEnabledNBT(stack));
-            ItemProperties.register(NTItems.AQUARINE_SHOVEL.get(), Nautec.rl("enabled"),
-                    (stack, level, living, id) -> NTDataComponentsUtils.isAbilityEnabledNBT(stack));
-            ItemProperties.register(NTItems.AQUARINE_HOE.get(), Nautec.rl("enabled"),
-                    (stack, level, living, id) -> NTDataComponentsUtils.isAbilityEnabledNBT(stack));
-            ItemProperties.register(NTItems.PETRI_DISH.get(), Nautec.rl("has_bacteria"),
-                    (stack, level, living, id) -> NTDataComponentsUtils.hasBacteria(stack));
-        });
-    }
-
-    private void registerColorHandlers(RegisterColorHandlersEvent.Item event) {
-        event.register((stack, layer) -> {
-            ResourceKey<Bacteria> bacteriaType = stack.get(NTDataComponents.BACTERIA).bacteriaInstance().getBacteria();
-            Bacteria bacteria = BacteriaHelper.getBacteria(Minecraft.getInstance().level.registryAccess(), bacteriaType);
-            return layer == 1 ? bacteria.stats().color() : -1;
-        }, NTItems.PETRI_DISH);
-        event.register(new DynamicFluidContainerModel.Colors(), NTFluids.SALT_WATER.getBucket());
+    private void registerColorHandlers(RegisterColorHandlersEvent.ItemTintSources event) {
+        event.register(Nautec.rl("bacteria_color"), BacteriaColorTintSource.MAP_CODEC);
     }
 
 }

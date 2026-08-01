@@ -1,8 +1,6 @@
 {
   "type": "nautec:bacteria_mutation",
-  "catalyst": {
-    "item": "minecraft:gunpowder"
-  },
+  "catalyst": "minecraft:gunpowder",
   "chance": 5.0,
   "input_bacteria": "nautec:acidophiles",
   "result_bacteria": "nautec:sulfurophiles"

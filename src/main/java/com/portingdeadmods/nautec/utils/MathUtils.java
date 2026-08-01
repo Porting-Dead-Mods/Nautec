@@ -42,4 +42,3 @@ public final class MathUtils {
         return (float) Math.round(value * Math.pow(10, precision)) / (float) Math.pow(10, precision);
     }
 }
-// Wow this class is full of maths, I guess the person who did it, is just good at maths :shrug:

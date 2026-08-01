@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:multiblock",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "bio_reactor_1",
+  "multiblock_id": "nautec:bio_reactor",
+  "multiblock_name": "",
+  "show_visualize_button": true,
+  "sort_number": 1,
+  "text": "book.nautec.nautec_guide.aquatic_biology.bio_reactor.bio_reactor_1.text"
+}

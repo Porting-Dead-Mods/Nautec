@@ -1,59 +1,25 @@
 {
-  "background_u_index": 0,
-  "background_v_index": 0,
-  "category": "laser_chemistry",
-  "description": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.description",
-  "hide_while_locked": false,
-  "icon": {
-    "item": "nautec:eas_bucket"
+  "type": "modonomicon:content",
+  "background": {
+    "height": 26,
+    "sprite": "modonomicon:modonomicon/themes/default/node/entry_backgrounds/square_gold",
+    "width": 26
   },
+  "category": "nautec:laser_chemistry",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "description": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.description",
+  "icon": {
+    "id": "nautec:eas_bucket"
+  },
+  "id": "nautec:laser_chemistry/chemistry_introduction",
   "name": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.name",
-  "pages": [
-    {
-      "type": "modonomicon:text",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.chemistry.text",
-      "title": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.chemistry.title",
-      "use_markdown_in_title": false
-    },
-    {
-      "type": "modonomicon:spotlight",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "item": {
-        "item": "nautec:eas_bucket"
-      },
-      "text": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.eas.text",
-      "title": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.eas.title"
-    },
-    {
-      "type": "modonomicon:spotlight",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "item": {
-        "item": "nautec:saltwater_bucket"
-      },
-      "text": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.salt_water.text",
-      "title": "book.nautec.nautec_guide.laser_chemistry.chemistry_introduction.salt_water.title"
-    }
-  ],
   "parents": [
     {
-      "draw_arrow": true,
-      "entry": "laser_chemistry/mixer",
-      "line_enabled": true,
-      "line_reversed": false
+      "entry": "nautec:laser_chemistry/mixer"
     }
   ],
-  "show_when_any_parent_unlocked": false,
   "sort_number": 3,
   "x": 2,
   "y": 0

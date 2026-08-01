@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "L": {
-      "tag": "c:dyes/blue"
-    },
-    "R": {
-      "item": "nautec:cast_iron_rod"
-    }
+    "L": "#c:dyes/blue",
+    "R": "nautec:cast_iron_rod"
   },
   "pattern": [
     " LR",
@@ -15,7 +11,6 @@
     "RL "
   ],
   "result": {
-    "count": 1,
     "id": "nautec:crowbar"
   }
 }

@@ -11,7 +11,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -55,27 +54,27 @@ public class CrateBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (level.isClientSide) return ItemInteractionResult.sidedSuccess(true);
+    protected @NotNull InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
 
         if (!(level.getBlockEntity(pos) instanceof CrateBlockEntity be)
                 || !stack.is(NTItems.CROWBAR)
                 || state.getValue(BlockStateProperties.OPEN)
                 || !state.is(NTBlocks.CRATE.get()))
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return InteractionResult.TRY_WITH_EMPTY_HAND;
 
-        if (player.getCooldowns().isOnCooldown(stack.getItem())) return ItemInteractionResult.FAIL;
+        if (player.getCooldowns().isOnCooldown(stack)) return InteractionResult.FAIL;
 
         level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.OPEN, true));
-        player.getCooldowns().addCooldown(stack.getItem(), 30);
+        player.getCooldowns().addCooldown(stack, 30);
         be.playSound(state, SoundEvents.ANVIL_USE);
 
-        return ItemInteractionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
     protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (level.isClientSide) {
+        if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         } else if (player.isSpectator()) {
             return InteractionResult.CONSUME;
@@ -83,7 +82,7 @@ public class CrateBlock extends BaseEntityBlock {
             if (state.getValue(BlockStateProperties.OPEN)) {
                 player.openMenu(be);
                 player.awardStat(Stats.OPEN_BARREL);
-                PiglinAi.angerNearbyPiglins(player, true);
+                PiglinAi.angerNearbyPiglins((ServerLevel) level, player, true);
             } else {
                 be.playSound(state, SoundEvents.CHEST_LOCKED);
             }
@@ -102,7 +101,7 @@ public class CrateBlock extends BaseEntityBlock {
     protected @NotNull List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
         if (params.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof CrateBlockEntity be) {
             ItemStack stack = new ItemStack(this);
-            be.saveToItem(stack, params.getLevel().registryAccess());
+            stack.applyComponents(be.collectComponents());
             return List.of(stack);
         }
         return super.getDrops(state, params);

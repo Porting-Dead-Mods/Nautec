@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "nautec:aquarine_steel"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "nautec:aquarine_steel"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "nautec:aquarine_steel"
+      }
+    ]
+  }
+}

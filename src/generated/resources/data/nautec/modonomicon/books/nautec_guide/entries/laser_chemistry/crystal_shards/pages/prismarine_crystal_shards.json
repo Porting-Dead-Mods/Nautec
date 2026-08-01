@@ -1,0 +1,13 @@
+{
+  "type": "modonomicon:spotlight",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "prismarine_crystal_shards",
+  "item": {
+    "id": "nautec:prismarine_crystal_shard"
+  },
+  "sort_number": 0,
+  "text": "book.nautec.nautec_guide.laser_chemistry.crystal_shards.prismarine_crystal_shards.text",
+  "title": "book.nautec.nautec_guide.laser_chemistry.crystal_shards.prismarine_crystal_shards.title"
+}

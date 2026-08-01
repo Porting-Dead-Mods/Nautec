@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "nautec:block/decorative_prismarine_crystal",
+    "model": {
+      "type": "nautec:prismarine_crystal"
+    }
+  }
+}

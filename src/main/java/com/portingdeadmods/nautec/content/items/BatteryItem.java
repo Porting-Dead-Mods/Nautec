@@ -15,9 +15,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import top.theillusivec4.curios.api.SlotContext;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class BatteryItem extends Item implements IPowerItem, ICurioItem {
     public BatteryItem(Properties properties) {
@@ -57,11 +58,11 @@ public class BatteryItem extends Item implements IPowerItem, ICurioItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
         Tooltips.transtrans(tooltipComponents, "nautec.armor.status", NTDataComponentsUtils.isAbilityEnabled(stack)? "nautec.armor.enabled" : "nautec.armor.disabled", NTDataComponentsUtils.isAbilityEnabled(stack)?ChatFormatting.GREEN:ChatFormatting.RED);
         Tooltips.transInsert(tooltipComponents, "nautec.armor.power", " " + powerStorage.getPowerStored() + "/" + powerStorage.getPowerCapacity() , ChatFormatting.DARK_AQUA);
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, context, display, tooltipComponents, tooltipFlag);
     }
 
     @Override
@@ -69,7 +70,7 @@ public class BatteryItem extends Item implements IPowerItem, ICurioItem {
         IPowerStorage powerStorage = stack.getCapability(NTCapabilities.PowerStorage.ITEM);
         Player player = (Player) slotContext.entity();
         if (NTDataComponentsUtils.isAbilityEnabled(stack)) {
-            for (ItemStack itemStack : player.getInventory().items) {
+            for (ItemStack itemStack : player.getInventory().getNonEquipmentItems()) {
                 if (itemStack.getCapability(NTCapabilities.PowerStorage.ITEM) != null) {
                     IPowerStorage itemPowerStorage = itemStack.getCapability(NTCapabilities.PowerStorage.ITEM);
                     if (itemPowerStorage.getPowerStored() < itemPowerStorage.getPowerCapacity()) {

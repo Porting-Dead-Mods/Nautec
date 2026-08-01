@@ -6,13 +6,12 @@ import com.portingdeadmods.nautec.utils.AugmentClientHelper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.common.util.INBTSerializable;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnknownNullability;
 
-public abstract class Augment implements INBTSerializable<CompoundTag> {
+public abstract class Augment {
     protected final AugmentType<?> augmentType;
     protected Player player;
     protected final AugmentSlot augmentSlot;
@@ -63,10 +62,9 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
     public void commonTick(PlayerTickEvent.Post event) {
         if (player == null) return;
         if (isOnCooldown()) {
-            // Nautec.LOGGER.debug("cooldown Client: {}", event.getEntity().level().isClientSide);
             setCooldown(getCooldown() - 1);
         }
-        if (player.level().isClientSide) {
+        if (player.level().isClientSide()) {
             clientTick(event);
         } else {
             serverTick(event);
@@ -97,20 +95,18 @@ public abstract class Augment implements INBTSerializable<CompoundTag> {
     // Call this, whenever NBT should be saved
     protected final void setChanged() {
         player.setData(NTDataAttachments.AUGMENT_DATA_CHANGED, NTRegistries.AUGMENT_SLOT.getId(augmentSlot));
-        if (player.level().isClientSide) {
+        if (player.level().isClientSide()) {
             AugmentClientHelper.invalidateCacheFor(player, augmentSlot);
         }
     }
 
-    @Override
     public @UnknownNullability CompoundTag serializeNBT(HolderLookup.@NotNull Provider provider) {
         CompoundTag tag = new CompoundTag();
         tag.putInt("cooldown", cooldown);
         return tag;
     }
 
-    @Override
     public void deserializeNBT(HolderLookup.@NotNull Provider provider, CompoundTag nbt) {
-        this.cooldown = nbt.getInt("cooldown");
+        this.cooldown = nbt.getIntOr("cooldown", 0);
     }
 }

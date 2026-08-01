@@ -25,7 +25,7 @@
         "loot_table": "nautec:chests/crate"
       }
     },
-    "count": 1,
     "id": "nautec:crate"
-  }
+  },
+  "priority": 0
 }

@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "nautec:aquarine_steel_ingot"
-    },
-    "H": {
-      "item": "minecraft:heart_of_the_sea"
-    },
-    "R": {
-      "item": "nautec:prismarine_laser_relay"
-    }
+    "A": "nautec:aquarine_steel_ingot",
+    "H": "minecraft:heart_of_the_sea",
+    "R": "nautec:prismarine_laser_relay"
   },
   "pattern": [
     "ARA",

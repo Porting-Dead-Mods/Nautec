@@ -22,7 +22,7 @@ public class NTDataMapProvider extends DataMapProvider {
     }
 
     @Override
-    protected void gather() {
+    protected void gather(HolderLookup.Provider provider) {
         obtainBacteria(Blocks.STONE, NTBacterias.CYANOBACTERIA, BiomeTags.IS_OCEAN, 0.4f);
         obtainBacteria(Blocks.PODZOL, NTBacterias.METHANOGENS, BiomeTags.IS_FOREST, 0.4f);
         obtainBacteria(Blocks.SAND, NTBacterias.HALOBACTERIA, BiomeTags.IS_BEACH, 0.4f);

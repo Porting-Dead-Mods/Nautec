@@ -1,8 +1,6 @@
 {
   "type": "nautec:bacteria_mutation",
-  "catalyst": {
-    "item": "minecraft:bone_meal"
-  },
+  "catalyst": "minecraft:bone_meal",
   "chance": 5.0,
   "input_bacteria": "nautec:lithophiles",
   "result_bacteria": "nautec:calciophiles"

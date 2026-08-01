@@ -1,78 +1,76 @@
 package com.portingdeadmods.nautec.content.items.tiers;
 
-import com.portingdeadmods.nautec.registries.NTItems;
-import net.minecraft.Util;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
+import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.tags.NTTags;
+import net.minecraft.util.Util;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 
 import java.util.EnumMap;
-import java.util.List;
-import java.util.function.Supplier;
 
 public final class NTArmorMaterials {
-    public static final Holder<ArmorMaterial> PRISMARINE = register("prismarine", Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-        map.put(ArmorItem.Type.BOOTS, 0);
-        map.put(ArmorItem.Type.LEGGINGS, 0);
-        map.put(ArmorItem.Type.CHESTPLATE, 0);
-        map.put(ArmorItem.Type.HELMET, 2);
-        map.put(ArmorItem.Type.BODY, 2);
-    }), 10, SoundEvents.ARMOR_EQUIP_ELYTRA, 0, 0, () -> Ingredient.of(Items.PRISMARINE));
-    public static final Holder<ArmorMaterial> DIVING_SUIT = register("diving_suit", Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-        map.put(ArmorItem.Type.BOOTS, 2);
-        map.put(ArmorItem.Type.LEGGINGS, 4);
-        map.put(ArmorItem.Type.CHESTPLATE, 5);
-        map.put(ArmorItem.Type.HELMET, 3);
-        map.put(ArmorItem.Type.BODY, 4);
-    }), 10, SoundEvents.ARMOR_EQUIP_LEATHER, 1, 0.05f, () -> Ingredient.of(Items.COPPER_INGOT));
-    public static final Holder<ArmorMaterial> AQUARINE_STEEL = register("aquarine_steel", Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-        map.put(ArmorItem.Type.BOOTS, 3);
-        map.put(ArmorItem.Type.LEGGINGS, 6);
-        map.put(ArmorItem.Type.CHESTPLATE, 7);
-        map.put(ArmorItem.Type.HELMET, 3);
-        map.put(ArmorItem.Type.BODY, 4);
-    }), 10, SoundEvents.ARMOR_EQUIP_IRON, 1, 0.05f, () -> Ingredient.of(NTItems.AQUARINE_STEEL_INGOT));
+    public static final ResourceKey<EquipmentAsset> PRISMARINE_ASSET = assetKey("prismarine");
+    public static final ResourceKey<EquipmentAsset> DIVING_SUIT_ASSET = assetKey("diving_suit");
+    public static final ResourceKey<EquipmentAsset> DIVING_SUIT_HELMET_ASSET = assetKey("diving_suit_helmet");
+    public static final ResourceKey<EquipmentAsset> AQUARINE_STEEL_ASSET = assetKey("aquarine_steel");
 
-    private static Holder<ArmorMaterial> register(
-            String name,
-            EnumMap<ArmorItem.Type, Integer> defense,
-            int enchantmentValue,
-            Holder<SoundEvent> equipSound,
-            float toughness,
-            float knockbackResistance,
-            Supplier<Ingredient> repairIngredient
-    ) {
-        List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(ResourceLocation.withDefaultNamespace(name)));
-        return register(name, defense, enchantmentValue, equipSound, toughness, knockbackResistance, repairIngredient, list);
-    }
+    public static final ArmorMaterial PRISMARINE = new ArmorMaterial(
+            5,
+            Util.make(new EnumMap<>(ArmorType.class), map -> {
+                map.put(ArmorType.BOOTS, 0);
+                map.put(ArmorType.LEGGINGS, 0);
+                map.put(ArmorType.CHESTPLATE, 0);
+                map.put(ArmorType.HELMET, 2);
+                map.put(ArmorType.BODY, 2);
+            }),
+            10,
+            SoundEvents.ARMOR_EQUIP_ELYTRA,
+            0,
+            0,
+            NTTags.Items.REPAIRS_PRISMARINE_ARMOR,
+            PRISMARINE_ASSET
+    );
 
-    private static Holder<ArmorMaterial> register(
-            String name,
-            EnumMap<ArmorItem.Type, Integer> defense,
-            int enchantmentValue,
-            Holder<SoundEvent> equipSound,
-            float toughness,
-            float knockbackResistance,
-            Supplier<Ingredient> repairIngridient,
-            List<ArmorMaterial.Layer> layers
-    ) {
-        EnumMap<ArmorItem.Type, Integer> enummap = new EnumMap<>(ArmorItem.Type.class);
+    public static final ArmorMaterial DIVING_SUIT = new ArmorMaterial(
+            20,
+            Util.make(new EnumMap<>(ArmorType.class), map -> {
+                map.put(ArmorType.BOOTS, 2);
+                map.put(ArmorType.LEGGINGS, 4);
+                map.put(ArmorType.CHESTPLATE, 5);
+                map.put(ArmorType.HELMET, 3);
+                map.put(ArmorType.BODY, 4);
+            }),
+            10,
+            SoundEvents.ARMOR_EQUIP_LEATHER,
+            1,
+            0.05f,
+            NTTags.Items.REPAIRS_DIVING_SUIT,
+            DIVING_SUIT_ASSET
+    );
 
-        for (ArmorItem.Type armoritem$type : ArmorItem.Type.values()) {
-            enummap.put(armoritem$type, defense.get(armoritem$type));
-        }
+    public static final ArmorMaterial AQUARINE_STEEL = new ArmorMaterial(
+            5,
+            Util.make(new EnumMap<>(ArmorType.class), map -> {
+                map.put(ArmorType.BOOTS, 3);
+                map.put(ArmorType.LEGGINGS, 6);
+                map.put(ArmorType.CHESTPLATE, 7);
+                map.put(ArmorType.HELMET, 3);
+                map.put(ArmorType.BODY, 4);
+            }),
+            10,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            1,
+            0.05f,
+            NTTags.Items.REPAIRS_AQUARINE_ARMOR,
+            AQUARINE_STEEL_ASSET
+    );
 
-        return Registry.registerForHolder(
-                BuiltInRegistries.ARMOR_MATERIAL,
-                ResourceLocation.withDefaultNamespace(name),
-                new ArmorMaterial(enummap, enchantmentValue, equipSound, repairIngridient, layers, toughness, knockbackResistance)
-        );
+    private static ResourceKey<EquipmentAsset> assetKey(String name) {
+        return ResourceKey.create(EquipmentAssets.ROOT_ID, Nautec.rl(name));
     }
 }

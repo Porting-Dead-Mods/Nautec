@@ -47,17 +47,11 @@ public class CrateMenu extends AbstractContainerMenu {
         this(i,inventory);
     }
 
-    /**
-     * Determines whether supplied player can use this container
-     */
     @Override
     public boolean stillValid(Player player) {
         return this.container.stillValid(player);
     }
 
-    /**
-     * Handle when the stack in slot {@code index} is shift-clicked. Normally this moves the stack between the player inventory and the other inventory(s).
-     */
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
@@ -83,9 +77,6 @@ public class CrateMenu extends AbstractContainerMenu {
         return itemstack;
     }
 
-    /**
-     * Called when the container is closed.
-     */
     @Override
     public void removed(Player player) {
         super.removed(player);

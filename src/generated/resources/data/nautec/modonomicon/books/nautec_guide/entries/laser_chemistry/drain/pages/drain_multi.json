@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:multiblock",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "drain_multi",
+  "multiblock_id": "nautec:drain",
+  "multiblock_name": "",
+  "show_visualize_button": true,
+  "sort_number": 1,
+  "text": "book.nautec.nautec_guide.laser_chemistry.drain.drain_multi.text"
+}

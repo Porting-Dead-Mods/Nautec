@@ -1,8 +1,6 @@
 {
   "type": "nautec:bacteria_mutation",
-  "catalyst": {
-    "item": "minecraft:bamboo"
-  },
+  "catalyst": "minecraft:bamboo",
   "chance": 10.0,
   "input_bacteria": "nautec:rhizobacteria",
   "result_bacteria": "nautec:bamboophages"

@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "incubator_recipe",
+  "recipe_id_1": "nautec:incubator",
+  "sort_number": 1,
+  "text": "book.nautec.nautec_guide.aquatic_biology.incubator.incubator_recipe.text",
+  "title1": "Incubator Recipe"
+}

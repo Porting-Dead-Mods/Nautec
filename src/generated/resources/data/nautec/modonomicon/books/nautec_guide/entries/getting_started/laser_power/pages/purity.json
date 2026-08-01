@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:text",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "purity",
+  "show_title_separator": true,
+  "sort_number": 2,
+  "text": "book.nautec.nautec_guide.getting_started.laser_power.purity.text",
+  "title": "book.nautec.nautec_guide.getting_started.laser_power.purity.title"
+}

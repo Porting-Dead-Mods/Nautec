@@ -3,6 +3,7 @@ package com.portingdeadmods.nautec.content.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.AugmentType;
 import com.portingdeadmods.nautec.content.recipes.inputs.AugmentationRecipeInput;
 import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
@@ -17,7 +18,10 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeBookCategories;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -35,37 +39,49 @@ public record AugmentationRecipe(Item augmentItem, String desc, List<IngredientW
     }
 
     @Override
-    public @NotNull ItemStack assemble(@NotNull AugmentationRecipeInput input, HolderLookup.@NotNull Provider registries) {
+    public @NotNull ItemStack assemble(@NotNull AugmentationRecipeInput input) {
         return ItemStack.EMPTY;
     }
 
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
-    }
-
-    @Override
     public @NotNull ItemStack getResultItem(HolderLookup.@Nullable Provider registries) {
         return ItemStack.EMPTY;
     }
 
     @Override
-    public @NotNull RecipeSerializer<?> getSerializer() {
+    public @NotNull String group() {
+        return "";
+    }
+
+    @Override
+    public boolean showNotification() {
+        return false;
+    }
+
+    @Override
+    public @NotNull RecipeSerializer<? extends Recipe<AugmentationRecipeInput>> getSerializer() {
         return AugmentationRecipe.Serializer.INSTANCE;
     }
 
     @Override
-    public @NotNull RecipeType<?> getType() {
+    public @NotNull RecipeType<? extends Recipe<AugmentationRecipeInput>> getType() {
         return AugmentationRecipe.Type.INSTANCE;
     }
 
     @Override
+    public @NotNull PlacementInfo placementInfo() {
+        return PlacementInfo.NOT_PLACEABLE;
+    }
+
+    @Override
+    public @NotNull RecipeBookCategory recipeBookCategory() {
+        return RecipeBookCategories.CRAFTING_MISC;
+    }
+
     public @NotNull NonNullList<Ingredient> getIngredients() {
         return RecipeUtils.listToNonNullList(RecipeUtils.iWCToIngredientsSaveCount(ingredients));
     }
 
-    public static class Serializer implements RecipeSerializer<AugmentationRecipe> {
-        public static final AugmentationRecipe.Serializer INSTANCE = new AugmentationRecipe.Serializer();
+    public static class Serializer {
         private static final MapCodec<AugmentationRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec((builder) -> builder.group(
                 CodecUtils.ITEM_CODEC.fieldOf("augmentItem").forGetter(AugmentationRecipe::augmentItem),
                 Codec.STRING.fieldOf("desc").orElse("").forGetter(AugmentationRecipe::desc),
@@ -83,31 +99,16 @@ public record AugmentationRecipe(Item augmentItem, String desc, List<IngredientW
                 AugmentationRecipe::resultAugment,
                 AugmentationRecipe::new
         );
+        public static final RecipeSerializer<AugmentationRecipe> INSTANCE = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
 
         private Serializer() {
         }
-
-        @Override
-        public @NotNull MapCodec<AugmentationRecipe> codec() {
-            return MAP_CODEC;
-        }
-
-        @Override
-        public @NotNull StreamCodec<RegistryFriendlyByteBuf, AugmentationRecipe> streamCodec() {
-            return STREAM_CODEC;
-        }
     }
 
-    public static class Type implements RecipeType<AugmentationRecipe> {
-        public static final AugmentationRecipe.Type INSTANCE = new AugmentationRecipe.Type();
+    public static class Type {
+        public static final RecipeType<AugmentationRecipe> INSTANCE = RecipeType.simple(Nautec.rl(NAME));
 
         private Type() {
         }
-
-        @Override
-        public String toString() {
-            return AugmentationRecipe.NAME;
-        }
     }
 }
-

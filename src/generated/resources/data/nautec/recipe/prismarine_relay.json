@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "nautec:polished_prismarine"
-    }
+    "A": "nautec:polished_prismarine"
   },
   "pattern": [
     "AAA",

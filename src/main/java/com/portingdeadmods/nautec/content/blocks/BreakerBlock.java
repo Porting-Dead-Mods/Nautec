@@ -19,7 +19,7 @@ public class BreakerBlock extends LaserBlock {
 
     @Override
     public BlockEntityType<? extends ContainerBlockEntity> getBlockEntityType() {
-        return null; //NTBlockEntityTypes.BREAKER_BLOCK.get();
+        return null;
     }
 
     @Override

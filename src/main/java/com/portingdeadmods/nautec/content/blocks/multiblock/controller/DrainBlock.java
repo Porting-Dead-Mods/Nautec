@@ -12,11 +12,13 @@ import com.portingdeadmods.nautec.registries.NTMultiblocks;
 import com.portingdeadmods.nautec.utils.ItemUtils;
 import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -32,7 +34,8 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.enums.BubbleColumnDirection;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import com.portingdeadmods.nautec.capabilities.fluid.FluidTank;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
 import org.jetbrains.annotations.NotNull;
 
 public class DrainBlock extends ContainerBlock {
@@ -79,9 +82,9 @@ public class DrainBlock extends ContainerBlock {
 
             if (p_60503_.getValue(Multiblock.FORMED)) {
                 ItemStack stack = player.getMainHandItem();
-                IFluidHandler itemFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
-                if (itemFluidHandler != null) {
-                    extractFluid(player, level, InteractionHand.MAIN_HAND, (FluidTank) drainBlockEntity.getFluidHandler(), itemFluidHandler);
+                var itemFluidCap = stack.getCapability(Capabilities.Fluid.ITEM, ItemAccess.forPlayerInteraction(player, InteractionHand.MAIN_HAND));
+                if (itemFluidCap != null) {
+                    extractFluid(player, level, InteractionHand.MAIN_HAND, drainBlockEntity.getFluidTank(), IFluidHandler.of(itemFluidCap));
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -92,7 +95,7 @@ public class DrainBlock extends ContainerBlock {
     }
 
     @Override
-    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrimaryCollision) {
         if (state.getValue(DrainPartBlock.OPEN) && state.getValue(DrainPartBlock.HAS_POWER)) {
             entity.hurt(level.damageSources().drown(), 4.0F);
         }
@@ -127,13 +130,9 @@ public class DrainBlock extends ContainerBlock {
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock())) {
-            MultiblockHelper.unform(NTMultiblocks.DRAIN.get(), pos, level, null);
-            level.removeBlock(pos.above(), false);
-        }
-
-        super.onRemove(state, level, pos, newState, movedByPiston);
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
+        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+        level.removeBlock(pos.above(), false);
     }
 
 }

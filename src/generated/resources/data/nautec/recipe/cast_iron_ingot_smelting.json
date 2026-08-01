@@ -3,11 +3,8 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.2,
-  "ingredient": {
-    "item": "nautec:cast_iron_compound"
-  },
+  "ingredient": "nautec:cast_iron_compound",
   "result": {
-    "count": 1,
     "id": "nautec:cast_iron_ingot"
   }
 }

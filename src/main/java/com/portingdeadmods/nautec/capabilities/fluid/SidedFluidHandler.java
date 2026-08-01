@@ -4,49 +4,49 @@ import com.portingdeadmods.nautec.capabilities.IOActions;
 import com.portingdeadmods.nautec.utils.Utils;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.ints.IntList;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 
-public record SidedFluidHandler(IFluidHandler innerHandler,
+public record SidedFluidHandler(ResourceHandler<FluidResource> innerHandler,
                                 IOActions action,
-                                IntList tanks) implements IFluidHandler {
-    public SidedFluidHandler(IFluidHandler innerHandler, Pair<IOActions, int[]> actionSlotsPair) {
+                                IntList tanks) implements ResourceHandler<FluidResource> {
+    public SidedFluidHandler(ResourceHandler<FluidResource> innerHandler, Pair<IOActions, int[]> actionSlotsPair) {
         this(innerHandler, actionSlotsPair != null ? actionSlotsPair.left() : IOActions.NONE, actionSlotsPair != null ? Utils.intArrayToList(actionSlotsPair.right()) : IntList.of());
     }
 
     @Override
-    public int getTanks() {
-        return innerHandler.getTanks();
+    public int size() {
+        return innerHandler.size();
     }
 
     @Override
-    public @NotNull FluidStack getFluidInTank(int tank) {
-        return innerHandler.getFluidInTank(tank);
+    public FluidResource getResource(int index) {
+        return innerHandler.getResource(index);
     }
 
     @Override
-    public int getTankCapacity(int tank) {
-        return innerHandler.getTankCapacity(tank);
+    public long getAmountAsLong(int index) {
+        return innerHandler.getAmountAsLong(index);
     }
 
     @Override
-    public boolean isFluidValid(int tank, @NotNull FluidStack stack) {
-        return action == IOActions.INSERT || action == IOActions.BOTH && tanks.contains(tank) && innerHandler.isFluidValid(tank, stack);
+    public long getCapacityAsLong(int index, FluidResource resource) {
+        return innerHandler.getCapacityAsLong(index, resource);
     }
 
     @Override
-    public int fill(FluidStack resource, FluidAction fAction) {
-        return action == IOActions.INSERT || action == IOActions.BOTH ? innerHandler.fill(resource, fAction) : 0;
+    public boolean isValid(int index, FluidResource resource) {
+        return (action == IOActions.INSERT || action == IOActions.BOTH) && tanks.contains(index) && innerHandler.isValid(index, resource);
     }
 
     @Override
-    public @NotNull FluidStack drain(FluidStack resource, FluidAction fAction) {
-        return action == IOActions.EXTRACT || action == IOActions.BOTH ? innerHandler.drain(resource, fAction) : FluidStack.EMPTY;
+    public int insert(int index, FluidResource resource, int amount, TransactionContext transaction) {
+        return (action == IOActions.INSERT || action == IOActions.BOTH) && tanks.contains(index) ? innerHandler.insert(index, resource, amount, transaction) : 0;
     }
 
     @Override
-    public @NotNull FluidStack drain(int maxDrain, FluidAction fAction) {
-        return action == IOActions.EXTRACT || action == IOActions.BOTH ? innerHandler.drain(maxDrain, fAction) : FluidStack.EMPTY;
+    public int extract(int index, FluidResource resource, int amount, TransactionContext transaction) {
+        return (action == IOActions.EXTRACT || action == IOActions.BOTH) && tanks.contains(index) ? innerHandler.extract(index, resource, amount, transaction) : 0;
     }
 }

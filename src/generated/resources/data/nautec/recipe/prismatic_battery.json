@@ -2,25 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "nautec:aquarine_steel_ingot"
-    },
-    "C": {
-      "item": "nautec:laser_channeling_coil"
-    },
-    "R": {
-      "item": "minecraft:redstone"
-    },
-    "S": {
-      "item": "nautec:prismarine_crystal_shard"
-    }
+    "A": "nautec:aquarine_steel_ingot",
+    "C": "nautec:laser_channeling_coil",
+    "R": "minecraft:redstone",
+    "S": "nautec:prismarine_crystal_shard"
   },
   "pattern": [
     "SRS",
     "ACA"
   ],
   "result": {
-    "count": 1,
     "id": "nautec:prismatic_battery"
   }
 }

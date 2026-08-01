@@ -1,27 +1,21 @@
 package com.portingdeadmods.nautec.client.model.block;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.portingdeadmods.nautec.Nautec;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class WhiskModel extends Model {
-    public static final Material WHISK_LOCATION = new Material(
-            InventoryMenu.BLOCK_ATLAS, Nautec.rl("entity/whisk")
-    );
+public class WhiskModel extends Model.Simple {
+    public static final RenderType RENDER_TYPE = RenderTypes.entityCutout(Nautec.rl("textures/entity/whisk.png"));
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Nautec.rl("custommodel"), "main");
     private final ModelPart main;
 
     public WhiskModel(ModelPart root) {
-        super(RenderType::entityCutout);
+        super(root, RenderTypes::entityCutout);
         this.main = root.getChild("main");
     }
 
@@ -57,10 +51,5 @@ public class WhiskModel extends Model {
         main.x = 0;
         main.y = 0;
         main.z = 0;
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-        main.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

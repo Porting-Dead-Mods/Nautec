@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "tools_recipe_2",
+  "recipe_id_1": "nautec:aquarine_axe",
+  "recipe_id_2": "nautec:aquarine_shovel",
+  "sort_number": 2,
+  "title1": "Axe Recipe",
+  "title2": "Shovel Recipe"
+}

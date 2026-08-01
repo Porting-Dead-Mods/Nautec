@@ -14,16 +14,6 @@ import net.minecraft.world.item.Items;
 
 import java.util.List;
 
-/**
- * {@link Bacteria}! We begin with only one! <br>
- * {@link Bacteria}! Two's what we then become! <br>
- * {@link Bacteria}! Each of us becomes two more! <br>
- * {@link Bacteria}! We are stronger than before! <br>
- * {@link Bacteria}! We keep growing at this rate! <br>
- * {@link Bacteria}! No longer shall we wait! <br>
- * {@link Bacteria}! The plan now unfolds! <br>
- * {@link Bacteria}! We will take over the world! <br>
- */
 public interface Bacteria {
     Codec<ResourceKey<Bacteria>> BACTERIA_TYPE_CODEC = ResourceKey.codec(NTRegistries.BACTERIA_KEY);
     StreamCodec<ByteBuf, ResourceKey<Bacteria>> BACTERIA_TYPE_STREAM_CODEC = ResourceKey.streamCodec(NTRegistries.BACTERIA_KEY);

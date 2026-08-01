@@ -23,12 +23,14 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeMap;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +41,7 @@ import java.util.Map;
 public class NTJeiPlugin implements IModPlugin {
 
     @Override
-    public @NotNull ResourceLocation getPluginUid() {
+    public @NotNull Identifier getPluginUid() {
         return Nautec.rl("jei_plugin");
     }
 
@@ -71,38 +73,22 @@ public class NTJeiPlugin implements IModPlugin {
 
         registration.addRecipeCategories(new BacteriaGraftingCategory(
                 registration.getJeiHelpers().getGuiHelper()));
-
-        registration.addRecipeCategories();
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         ClientLevel level = Minecraft.getInstance().level;
-        RecipeManager recipeManager = level.getRecipeManager();
         RegistryAccess registryAccess = level.registryAccess();
 
-        List<ItemTransformationRecipe> transformationRecipes = recipeManager.getAllRecipesFor(ItemTransformationRecipe.Type.INSTANCE)
-                .stream().map(RecipeHolder::value).toList();
+        List<ItemTransformationRecipe> transformationRecipes = recipesFor(ItemTransformationRecipe.Type.INSTANCE);
+        List<AquaticCatalystChannelingRecipe> channelingRecipes = recipesFor(AquaticCatalystChannelingRecipe.Type.INSTANCE);
+        List<ItemEtchingRecipe> etchingRecipes = recipesFor(ItemEtchingRecipe.Type.INSTANCE);
+        List<MixingRecipe> mixingRecipes = recipesFor(MixingRecipe.Type.INSTANCE);
+        List<AugmentationRecipe> augmentationRecipes = recipesFor(AugmentationRecipe.Type.INSTANCE);
+        List<BacteriaMutationRecipe> mutationRecipes = recipesFor(BacteriaMutationRecipe.TYPE);
+        List<BacteriaIncubationRecipe> incubationRecipes = recipesFor(BacteriaIncubationRecipe.TYPE);
 
-        List<AquaticCatalystChannelingRecipe> channelingRecipes = recipeManager.getAllRecipesFor(AquaticCatalystChannelingRecipe.Type.INSTANCE)
-                .stream().map(RecipeHolder::value).toList();
-
-        List<ItemEtchingRecipe> etchingRecipes = recipeManager.getAllRecipesFor(ItemEtchingRecipe.Type.INSTANCE)
-                .stream().map(RecipeHolder::value).toList();
-
-        List<MixingRecipe> mixingRecipes = recipeManager.getAllRecipesFor(MixingRecipe.Type.INSTANCE)
-                .stream().map(RecipeHolder::value).toList();
-
-        List<AugmentationRecipe> augmentationRecipes = recipeManager.getAllRecipesFor(AugmentationRecipe.Type.INSTANCE)
-                .stream().map(RecipeHolder::value).toList();
-
-        List<BacteriaMutationRecipe> mutationRecipes = recipeManager.getAllRecipesFor(BacteriaMutationRecipe.TYPE)
-                .stream().map(RecipeHolder::value).toList();
-
-        List<BacteriaIncubationRecipe> incubationRecipes = recipeManager.getAllRecipesFor(BacteriaIncubationRecipe.TYPE)
-                .stream().map(RecipeHolder::value).toList();
-
-        Registry<Bacteria> registry = registryAccess.registryOrThrow(NTRegistries.BACTERIA_KEY);
+        Registry<Bacteria> registry = registryAccess.lookupOrThrow(NTRegistries.BACTERIA_KEY);
         List<BioReactorCategory.BioReactorRecipe> bioReactorRecipes = registry.entrySet().stream()
                 .map(entry -> new BioReactorCategory.BioReactorRecipe(entry.getKey(), entry.getValue().resource()))
                 .filter(recipe -> !(recipe.bacteria().equals(NTBacterias.EMPTY) || recipe.resource().isEmpty()))
@@ -110,7 +96,7 @@ public class NTJeiPlugin implements IModPlugin {
 
         Map<ResourceKey<Block>, BacteriaObtainValue> dataMap = BuiltInRegistries.BLOCK.getDataMap(NTDataMaps.BACTERIA_OBTAINING);
         List<BacteriaGraftingCategory.GraftingRecipe> graftingRecipes = dataMap.entrySet().stream()
-                .map(entry -> new BacteriaGraftingCategory.GraftingRecipe(registryAccess.holderOrThrow(entry.getKey()).value(), entry.getValue()))
+                .map(entry -> new BacteriaGraftingCategory.GraftingRecipe(BuiltInRegistries.BLOCK.getValueOrThrow(entry.getKey()), entry.getValue()))
                 .toList();
 
         registration.addRecipes(AugmentationRecipeCategory.RECIPE_TYPE, augmentationRecipes);
@@ -133,26 +119,39 @@ public class NTJeiPlugin implements IModPlugin {
         registration.addIngredientInfo(List.of(NTItems.BROKEN_WHISK.toStack(), NTItems.BURNT_COIL.toStack(), NTItems.ANCIENT_VALVE.toStack(), NTItems.RUSTY_GEAR.toStack()), VanillaTypes.ITEM_STACK, Component.literal("These ancient machine components can be found in chests and are dropped by underwater mobs"));
     }
 
+    private static <I extends RecipeInput, R extends Recipe<I>> List<R> recipesFor(RecipeType<R> type) {
+        return syncedRecipes().byType(type).stream().map(RecipeHolder::value).toList();
+    }
+
+    private static RecipeMap syncedRecipes() {
+        try {
+            Class<?> internal = Class.forName("mezz.jei.common.Internal");
+            return (RecipeMap) internal.getMethod("getClientSyncedRecipes").invoke(null);
+        } catch (ReflectiveOperationException | ClassCastException e) {
+            Nautec.LOGGER.error("Failed to access JEI synced recipes", e);
+            return RecipeMap.EMPTY;
+        }
+    }
+
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(NTBlocks.AQUATIC_CATALYST.get()),
-                AquaticCatalystChannelingRecipeCategory.RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(NTFluids.ETCHING_ACID.getBucket()),
-                ItemEtchingRecipeCategory.RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(NTBlocks.MIXER.get()),
-                MixingRecipeCategory.RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(NTBlocks.AUGMENTATION_STATION.get()),
-                AugmentationRecipeCategory.RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(NTBlocks.MUTATOR.get()),
-                BacteriaMutationsCategory.RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(NTBlocks.INCUBATOR.get()),
-                BacteriaIncubationCategory.RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(NTBlocks.BIO_REACTOR.get()),
-                BioReactorCategory.RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(NTItems.GRAFTING_TOOL.get()),
-                BacteriaGraftingCategory.RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(NTItems.PETRI_DISH.get()),
-                BacteriaGraftingCategory.RECIPE_TYPE);
+        registration.addCraftingStation(AquaticCatalystChannelingRecipeCategory.RECIPE_TYPE,
+                new ItemStack(NTBlocks.AQUATIC_CATALYST.get()));
+        registration.addCraftingStation(ItemEtchingRecipeCategory.RECIPE_TYPE,
+                new ItemStack(NTFluids.ETCHING_ACID.getBucket()));
+        registration.addCraftingStation(MixingRecipeCategory.RECIPE_TYPE,
+                new ItemStack(NTBlocks.MIXER.get()));
+        registration.addCraftingStation(AugmentationRecipeCategory.RECIPE_TYPE,
+                new ItemStack(NTBlocks.AUGMENTATION_STATION.get()));
+        registration.addCraftingStation(BacteriaMutationsCategory.RECIPE_TYPE,
+                new ItemStack(NTBlocks.MUTATOR.get()));
+        registration.addCraftingStation(BacteriaIncubationCategory.RECIPE_TYPE,
+                new ItemStack(NTBlocks.INCUBATOR.get()));
+        registration.addCraftingStation(BioReactorCategory.RECIPE_TYPE,
+                new ItemStack(NTBlocks.BIO_REACTOR.get()));
+        registration.addCraftingStation(BacteriaGraftingCategory.RECIPE_TYPE,
+                new ItemStack(NTItems.GRAFTING_TOOL.get()),
+                new ItemStack(NTItems.PETRI_DISH.get()));
     }
 
 }

@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "nautec:diving_suit"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "nautec:diving_suit"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "nautec:diving_suit"
+      }
+    ]
+  }
+}

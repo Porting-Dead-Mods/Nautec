@@ -6,19 +6,20 @@ import com.mojang.math.Axis;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
 public final class LaserRendererHelper {
-    public static final ResourceLocation BEAM_LOCATION = Nautec.rl("textures/entity/laser_beam.png");
-    private static final ResourceLocation GUARDIAN_BEAM_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/guardian_beam.png");
-    private static final RenderType BEAM_RENDER_TYPE = RenderType.entityCutoutNoCull(GUARDIAN_BEAM_LOCATION);
+    public static final Identifier BEAM_LOCATION = Nautec.rl("textures/entity/laser_beam.png");
+    private static final Identifier GUARDIAN_BEAM_LOCATION = Identifier.withDefaultNamespace("textures/entity/guardian_beam.png");
+    private static final RenderType BEAM_RENDER_TYPE = RenderTypes.entityCutout(GUARDIAN_BEAM_LOCATION);
 
     public static <T extends LaserBlockEntity> void renderOuterBeam(T blockEntity, BlockPos originPos, BlockPos targetPos, float targetOffset, Direction direction, PoseStack poseStack, MultiBufferSource bufferSource, float partialTicks) {
         float f = blockEntity.getLaserScale(partialTicks);
@@ -136,7 +137,7 @@ public final class LaserRendererHelper {
     public static void renderInnerBeam(
             PoseStack poseStack,
             MultiBufferSource bufferSource,
-            ResourceLocation beamLocation,
+            Identifier beamLocation,
             float partialTick,
             float textureScale,
             long gameTime,
@@ -162,7 +163,7 @@ public final class LaserRendererHelper {
         float f13 = (float) height * textureScale * (0.5F / beamRadius) + f12;
         renderPart(
                 poseStack,
-                bufferSource.getBuffer(RenderType.beaconBeam(beamLocation, false)),
+                bufferSource.getBuffer(RenderTypes.beaconBeam(beamLocation, false)),
                 color,
                 yOffset,
                 i,
@@ -188,8 +189,8 @@ public final class LaserRendererHelper {
         f13 = (float) height * textureScale + f12;
         renderPart(
                 poseStack,
-                bufferSource.getBuffer(RenderType.beaconBeam(beamLocation, true)),
-                FastColor.ARGB32.color(32, color),
+                bufferSource.getBuffer(RenderTypes.beaconBeam(beamLocation, true)),
+                ARGB.color(32, color),
                 yOffset,
                 i,
                 f3,

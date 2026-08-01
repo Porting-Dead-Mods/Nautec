@@ -1,0 +1,13 @@
+{
+  "type": "modonomicon:spotlight",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "drowned_lung",
+  "item": {
+    "id": "nautec:drowned_lungs"
+  },
+  "sort_number": 2,
+  "text": "book.nautec.nautec_guide.laser_augmentation.mob_augments.drowned_lung.text",
+  "title": "book.nautec.nautec_guide.laser_augmentation.mob_augments.drowned_lung.title"
+}

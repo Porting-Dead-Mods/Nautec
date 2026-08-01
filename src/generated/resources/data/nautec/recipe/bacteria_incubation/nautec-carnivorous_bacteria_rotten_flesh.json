@@ -6,7 +6,5 @@
     "max": 15,
     "min": 5
   },
-  "nutrient": {
-    "item": "minecraft:rotten_flesh"
-  }
+  "nutrient": "minecraft:rotten_flesh"
 }

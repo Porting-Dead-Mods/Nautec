@@ -7,7 +7,7 @@ import com.portingdeadmods.nautec.content.blockentities.IncubatorBlockEntity;
 import com.portingdeadmods.nautec.registries.NTMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import org.jetbrains.annotations.NotNull;
 
 public class IncubatorMenu extends NTMachineMenu<IncubatorBlockEntity> {
@@ -19,7 +19,7 @@ public class IncubatorMenu extends NTMachineMenu<IncubatorBlockEntity> {
         super(NTMenuTypes.INCUBATOR.get(), containerId, inv, blockEntity);
 
         // Nutrient
-        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 80, 49));
+        addSlot(new ResourceHandlerSlot(blockEntity.getItemStackHandler(), blockEntity.getItemStackHandler()::set, 0, 80, 49));
 
         addBacteriaStorageSlot(new SlotBacteriaStorage(blockEntity.getBacteriaStorage(), 0, 79, 26));
     }

@@ -11,7 +11,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
@@ -38,18 +38,15 @@ public record ClearAugmentPayload(AugmentSlot augmentSlot) implements CustomPack
             Player player = context.player();
             AugmentSlot slot = payload.augmentSlot();
             
-            // Get current augments and remove the specified slot
             Map<AugmentSlot, Augment> augments = new HashMap<>(AugmentHelper.getAugments(player));
             Map<AugmentSlot, CompoundTag> augmentsData = new HashMap<>(AugmentHelper.getAugmentsData(player));
             
             augments.remove(slot);
             augmentsData.remove(slot);
             
-            // Update player data
             player.setData(NTDataAttachments.AUGMENTS, augments);
             player.setData(NTDataAttachments.AUGMENTS_EXTRA_DATA, augmentsData);
             
-            // Invalidate client cache if on client side
             if (player.level().isClientSide()) {
                 AugmentClientHelper.invalidateCacheFor(player, slot);
             }

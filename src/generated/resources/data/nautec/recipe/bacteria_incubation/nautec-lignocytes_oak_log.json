@@ -6,7 +6,5 @@
     "max": 30,
     "min": 10
   },
-  "nutrient": {
-    "item": "minecraft:oak_log"
-  }
+  "nutrient": "minecraft:oak_log"
 }

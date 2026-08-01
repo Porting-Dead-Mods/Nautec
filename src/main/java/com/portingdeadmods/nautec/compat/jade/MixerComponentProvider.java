@@ -3,7 +3,7 @@ package com.portingdeadmods.nautec.compat.jade;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.blockentities.MixerBlockEntity;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.fluids.FluidStack;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
@@ -42,7 +42,7 @@ public enum MixerComponentProvider implements IBlockComponentProvider {
     }
 
     @Override
-    public ResourceLocation getUid() {
+    public Identifier getUid() {
         return Nautec.rl("mixer");
     }
 }

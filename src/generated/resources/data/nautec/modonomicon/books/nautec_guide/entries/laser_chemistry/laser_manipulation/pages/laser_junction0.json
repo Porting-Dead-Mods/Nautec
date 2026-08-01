@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "laser_junction0",
+  "recipe_id_1": "nautec:laser_junction",
+  "sort_number": 1,
+  "text": "book.nautec.nautec_guide.laser_chemistry.laser_manipulation.laser_junction0.text",
+  "title1": "Laser Junction"
+}

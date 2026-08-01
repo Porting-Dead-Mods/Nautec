@@ -7,7 +7,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import org.jetbrains.annotations.NotNull;
 
 public class FishingStationMenu extends NTMachineMenu<FishingStationBlockEntity> {
@@ -17,7 +17,7 @@ public class FishingStationMenu extends NTMachineMenu<FishingStationBlockEntity>
         int y = 20;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 3; j++) {
-                addSlot(new SlotItemHandler(blockEntity.getItemHandler(), j * 5 + i, x + i * 18, y + j * 18));
+                addSlot(new ResourceHandlerSlot(blockEntity.getItemStackHandler(), blockEntity.getItemStackHandler()::set, j * 5 + i, x + i * 18, y + j * 18));
             }
         }
     }

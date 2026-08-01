@@ -1,46 +1,25 @@
 {
-  "background_u_index": 0,
-  "background_v_index": 0,
-  "category": "getting_started",
-  "description": "book.nautec.nautec_guide.getting_started.monocle.description",
-  "hide_while_locked": false,
-  "icon": {
-    "item": "nautec:prism_monocle"
+  "type": "modonomicon:content",
+  "background": {
+    "height": 26,
+    "sprite": "modonomicon:modonomicon/themes/default/node/entry_backgrounds/square_gold",
+    "width": 26
   },
+  "category": "nautec:getting_started",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "description": "book.nautec.nautec_guide.getting_started.monocle.description",
+  "icon": {
+    "id": "nautec:prism_monocle"
+  },
+  "id": "nautec:getting_started/monocle",
   "name": "book.nautec.nautec_guide.getting_started.monocle.name",
-  "pages": [
-    {
-      "type": "modonomicon:text",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.getting_started.monocle.monocle.text",
-      "title": "book.nautec.nautec_guide.getting_started.monocle.monocle.title",
-      "use_markdown_in_title": false
-    },
-    {
-      "type": "modonomicon:crafting_recipe",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "recipe_id_1": "nautec:prism_monocle",
-      "text": "",
-      "title1": "Recipe",
-      "title2": ""
-    }
-  ],
   "parents": [
     {
-      "draw_arrow": true,
-      "entry": "getting_started/laser_power",
-      "line_enabled": true,
-      "line_reversed": false
+      "entry": "nautec:getting_started/laser_power"
     }
   ],
-  "show_when_any_parent_unlocked": false,
   "sort_number": 5,
   "x": 2,
   "y": 2

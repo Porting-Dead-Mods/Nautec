@@ -5,31 +5,39 @@ import com.portingdeadmods.nautec.content.recipes.utils.IngredientWithCount;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.fluids.FluidStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.neoforged.neoforge.fluids.FluidStackTemplate;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public class MixingRecipeBuilder implements NTRecipeBuilder {
     private List<IngredientWithCount> ingredients;
     @Nullable
-    private FluidStack fluidIngredient;  // Can now be null
-    private ItemStack result;
+    private FluidStackTemplate fluidIngredient;
     @Nullable
-    private FluidStack resultFluid;  // Can now be null
+    private final ItemStackTemplate result;
+    @Nullable
+    private FluidStackTemplate resultFluid;
     private int duration;
 
-    private MixingRecipeBuilder(ItemStack result) {
+    private MixingRecipeBuilder(@Nullable ItemStackTemplate result) {
         this.result = result;
         this.duration = 120;
     }
 
-    public static MixingRecipeBuilder newRecipe(ItemStack result) {
+    public static MixingRecipeBuilder newRecipe(ItemStackTemplate result) {
         return new MixingRecipeBuilder(result);
+    }
+
+    public static MixingRecipeBuilder newRecipe() {
+        return new MixingRecipeBuilder(null);
     }
 
     public MixingRecipeBuilder ingredients(IngredientWithCount... ingredients) {
@@ -37,13 +45,13 @@ public class MixingRecipeBuilder implements NTRecipeBuilder {
         return this;
     }
 
-    public MixingRecipeBuilder fluidIngredient(@Nullable FluidStack fluidIngredient) {
-        this.fluidIngredient = fluidIngredient;  // Optional fluid ingredient
+    public MixingRecipeBuilder fluidIngredient(@Nullable FluidStackTemplate fluidIngredient) {
+        this.fluidIngredient = fluidIngredient;
         return this;
     }
 
-    public MixingRecipeBuilder fluidResult(@Nullable FluidStack resultFluid) {
-        this.resultFluid = resultFluid;  // Optional fluid result
+    public MixingRecipeBuilder fluidResult(@Nullable FluidStackTemplate resultFluid) {
+        this.resultFluid = resultFluid;
         return this;
     }
 
@@ -64,20 +72,19 @@ public class MixingRecipeBuilder implements NTRecipeBuilder {
 
     @Override
     public Item getResult() {
-        return result.getItem();
+        return result != null ? result.item().value() : Items.AIR;
     }
 
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
-        // Create the recipe, handling null fluidIngredient and resultFluid
+    public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> key) {
         MixingRecipe recipe = new MixingRecipe(
                 ingredients,
-                fluidIngredient != null ? fluidIngredient : FluidStack.EMPTY,  // Use FluidStack.EMPTY if null
-                result,
-                resultFluid != null ? resultFluid : FluidStack.EMPTY,  // Use FluidStack.EMPTY if null
+                Optional.ofNullable(fluidIngredient),
+                Optional.ofNullable(result),
+                Optional.ofNullable(resultFluid),
                 duration
         );
-        recipeOutput.accept(resourceLocation, recipe, null);
+        recipeOutput.accept(key, recipe, null);
     }
 
     @Override

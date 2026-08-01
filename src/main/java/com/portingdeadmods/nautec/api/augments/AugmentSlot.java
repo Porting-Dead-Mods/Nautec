@@ -1,11 +1,11 @@
 package com.portingdeadmods.nautec.api.augments;
 
 import com.portingdeadmods.nautec.NTRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public interface AugmentSlot {
     default String getName() {
-        ResourceLocation id = NTRegistries.AUGMENT_SLOT.getKey(this);
+        Identifier id = NTRegistries.AUGMENT_SLOT.getKey(this);
         return id != null ? id.getPath() : "unknown";
     }
 }

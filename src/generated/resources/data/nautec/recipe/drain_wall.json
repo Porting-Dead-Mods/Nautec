@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "C": {
-      "item": "nautec:cast_iron_ingot"
-    },
-    "R": {
-      "item": "nautec:cast_iron_rod"
-    }
+    "C": "nautec:cast_iron_ingot",
+    "R": "nautec:cast_iron_rod"
   },
   "pattern": [
     "CCC",

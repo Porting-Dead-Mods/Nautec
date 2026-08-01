@@ -23,7 +23,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.NotNull;
 
@@ -102,7 +102,9 @@ public class AquarineWrenchItem extends Item {
             }
 
             for (Property<?> prop : blockState.getProperties()) {
-                if (prop instanceof DirectionProperty directionProperty && prop.getName().equals("facing")) {
+                if (prop instanceof EnumProperty<?> enumProperty && enumProperty.getValueClass() == Direction.class && prop.getName().equals("facing")) {
+                    @SuppressWarnings("unchecked")
+                    EnumProperty<Direction> directionProperty = (EnumProperty<Direction>) enumProperty;
                     BlockState rotatedState = BlockUtils.rotateBlock(blockState, directionProperty, blockState.getValue(directionProperty));
                     level.setBlock(pos, rotatedState, 3);
                     level.playSound(null, pos, SoundEvents.ITEM_FRAME_ROTATE_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);

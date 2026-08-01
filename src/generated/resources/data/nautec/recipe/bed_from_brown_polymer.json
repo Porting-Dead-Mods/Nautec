@@ -2,19 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "nautec:brown_polymer"
-    },
-    "P": {
-      "tag": "minecraft:planks"
-    }
+    "B": "nautec:brown_polymer",
+    "P": "#minecraft:planks"
   },
   "pattern": [
     "BBB",
     "PPP"
   ],
   "result": {
-    "count": 1,
     "id": "minecraft:brown_bed"
   }
 }

@@ -1,32 +1,17 @@
 {
   "variants": {
-    "facing=east,waterlogged=false": {
+    "facing=east": {
       "model": "nautec:block/bacterial_analyzer",
       "y": 90
     },
-    "facing=east,waterlogged=true": {
-      "model": "nautec:block/bacterial_analyzer",
-      "y": 90
-    },
-    "facing=north,waterlogged=false": {
+    "facing=north": {
       "model": "nautec:block/bacterial_analyzer"
     },
-    "facing=north,waterlogged=true": {
-      "model": "nautec:block/bacterial_analyzer"
-    },
-    "facing=south,waterlogged=false": {
+    "facing=south": {
       "model": "nautec:block/bacterial_analyzer",
       "y": 180
     },
-    "facing=south,waterlogged=true": {
-      "model": "nautec:block/bacterial_analyzer",
-      "y": 180
-    },
-    "facing=west,waterlogged=false": {
-      "model": "nautec:block/bacterial_analyzer",
-      "y": 270
-    },
-    "facing=west,waterlogged=true": {
+    "facing=west": {
       "model": "nautec:block/bacterial_analyzer",
       "y": 270
     }

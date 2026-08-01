@@ -2,21 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "nautec:aquarine_steel_ingot"
-    },
-    "D": {
-      "item": "nautec:polished_prismarine"
-    },
-    "G": {
-      "item": "nautec:gear"
-    },
-    "P": {
-      "item": "nautec:polished_prismarine"
-    },
-    "W": {
-      "item": "nautec:whisk"
-    }
+    "A": "nautec:aquarine_steel_ingot",
+    "D": "nautec:polished_prismarine",
+    "G": "nautec:gear",
+    "P": "nautec:polished_prismarine",
+    "W": "nautec:whisk"
   },
   "pattern": [
     "DGD",
@@ -24,7 +14,6 @@
     "PAP"
   ],
   "result": {
-    "count": 1,
     "id": "nautec:mixer"
   }
 }

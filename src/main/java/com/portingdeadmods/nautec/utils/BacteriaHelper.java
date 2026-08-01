@@ -22,7 +22,7 @@ import java.util.Optional;
 
 public final class BacteriaHelper {
     public static Bacteria getBacteria(HolderLookup.Provider lookup, ResourceKey<Bacteria> bacteriaType) {
-        Optional<HolderGetter<Bacteria>> lookup1 = lookup.asGetterLookup().lookup(NTRegistries.BACTERIA_KEY);
+        Optional<? extends HolderGetter<Bacteria>> lookup1 = lookup.lookup(NTRegistries.BACTERIA_KEY);
         return lookup1.map(bacteriaHolderGetter -> bacteriaHolderGetter.getOrThrow(bacteriaType).value())
                 .orElse(null);
     }

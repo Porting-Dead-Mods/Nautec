@@ -1,0 +1,10 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "charger_recipe",
+  "recipe_id_1": "nautec:charger",
+  "sort_number": 1,
+  "title1": "Charger Recipe"
+}

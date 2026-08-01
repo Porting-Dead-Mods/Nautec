@@ -1,0 +1,13 @@
+{
+  "type": "modonomicon:spotlight",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "incubator",
+  "item": {
+    "id": "nautec:mutator"
+  },
+  "sort_number": 0,
+  "text": "book.nautec.nautec_guide.aquatic_biology.incubator.incubator.text",
+  "title": "book.nautec.nautec_guide.aquatic_biology.incubator.incubator.title"
+}

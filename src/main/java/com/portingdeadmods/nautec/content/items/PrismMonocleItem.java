@@ -6,13 +6,25 @@ import com.portingdeadmods.nautec.content.items.tiers.NTArmorMaterials;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentPowerStorage;
 import com.portingdeadmods.nautec.utils.ItemUtils;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.Equippable;
 import top.theillusivec4.curios.api.SlotContext;
 
-public class PrismMonocleItem extends ArmorItem implements IPowerItem, ICurioItem {
+public class PrismMonocleItem extends Item implements IPowerItem, ICurioItem {
     public PrismMonocleItem(Properties properties) {
-        super(NTArmorMaterials.PRISMARINE, Type.HELMET, properties.component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(100)));
+        super(properties
+                .attributes(NTArmorMaterials.PRISMARINE.createAttributes(ArmorType.HELMET))
+                .enchantable(NTArmorMaterials.PRISMARINE.enchantmentValue())
+                .component(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.HEAD)
+                        .setEquipSound(NTArmorMaterials.PRISMARINE.equipSound())
+                        .setAsset(NTArmorMaterials.PRISMARINE.assetId())
+                        .build())
+                .repairable(NTArmorMaterials.PRISMARINE.repairIngredient())
+                .component(NTDataComponents.POWER, ComponentPowerStorage.withCapacity(100)));
     }
 
     @Override

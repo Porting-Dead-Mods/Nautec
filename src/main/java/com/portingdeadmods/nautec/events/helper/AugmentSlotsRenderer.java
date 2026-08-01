@@ -26,7 +26,7 @@ public class AugmentSlotsRenderer {
         return MODEL_PART_GETTERS.get(slot);
     }
 
-    public static void render(RenderPlayerEvent.Pre event) {
+    public static void render(RenderPlayerEvent.Pre<?> event) {
 
         Map<AugmentSlot, Augment> augments = AugmentLayerRenderer.AUGMENTS_CACHE;
         for (AugmentSlot slot : augments.keySet()) {

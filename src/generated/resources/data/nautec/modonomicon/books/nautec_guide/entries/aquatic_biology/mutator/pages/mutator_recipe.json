@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "mutator_recipe",
+  "recipe_id_1": "nautec:mutator",
+  "sort_number": 1,
+  "text": "book.nautec.nautec_guide.aquatic_biology.mutator.mutator_recipe.text",
+  "title1": "Mutator Recipe"
+}

@@ -5,14 +5,13 @@
     "amount": 1000,
     "id": "nautec:saltwater"
   },
-  "fluid_result": {},
   "ingredients": [
     {
       "count": 2,
-      "item": "minecraft:raw_iron"
+      "ingredient": "minecraft:raw_iron"
     },
     {
-      "item": "minecraft:prismarine_crystals"
+      "ingredient": "minecraft:prismarine_crystals"
     }
   ],
   "result": {

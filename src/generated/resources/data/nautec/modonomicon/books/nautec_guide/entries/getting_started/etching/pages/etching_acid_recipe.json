@@ -1,0 +1,10 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "etching_acid_recipe",
+  "recipe_id_1": "nautec:etching_acid_crafting",
+  "sort_number": 1,
+  "title1": "Etching Acid Recipe"
+}

@@ -22,12 +22,6 @@ import static com.portingdeadmods.nautec.NTConfig.bacteriaLifespanCap;
 
 /**
  * Collapses the ranges of a {@link BacteriaStats} instance.
- *
- * @param growthRate
- * @param mutationResistance
- * @param productionRate
- * @param lifespan
- * @param color
  */
 public record SimpleCollapsedStats(SimpleBacteriaStats baseStats,
                                    float growthRate,
@@ -132,16 +126,10 @@ public record SimpleCollapsedStats(SimpleBacteriaStats baseStats,
 
     // TODO: Might wanna move this to SimpleBacteriaInstance
     public SimpleCollapsedStats grow() {
-//        float newCS = colonySize + RNGUtils.floatInRangeOf(0, growthRate);
-//        newCS = Math.min(newCS, bacteriaColonySizeCap);
-//
-//        return new BacteriaStats(growthRate, mutationResistance, productionRate, newCS, lifespan, color);
         return this;
     }
 
     public SimpleCollapsedStats shrink() {
-//        float newCS = colonySize - colonySize * RNGUtils.uniformRandFloat(25) - 1;
-//        return new BacteriaStats(growthRate, mutationResistance, productionRate, newCS, lifespan, color);
         return this;
     }
 

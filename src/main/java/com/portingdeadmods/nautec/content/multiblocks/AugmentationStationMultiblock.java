@@ -25,7 +25,7 @@ import java.util.Map;
 public class AugmentationStationMultiblock implements Multiblock {
     public static final IntegerProperty AS_PART = IntegerProperty.create("as_part", 0, 8);
 
-    // FIXME: Problematic on multiplaye
+    // FIXME: Problematic on multiplayer
     private int actualIndex = 0;
 
     @Override

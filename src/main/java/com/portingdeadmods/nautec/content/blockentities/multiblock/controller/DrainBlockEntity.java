@@ -12,19 +12,23 @@ import com.portingdeadmods.nautec.content.blocks.multiblock.part.DrainPartBlock;
 import com.portingdeadmods.nautec.content.multiblocks.DrainMultiblock;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.registries.NTFluids;
+import com.portingdeadmods.nautec.registries.NTMultiblocks;
 import com.portingdeadmods.nautec.utils.BlockUtils;
+import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BubbleColumnBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -63,7 +67,6 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
         this.valveSpeed = 30;
         level.playSound(null, worldPosition, SoundEvents.IRON_DOOR_CLOSE, SoundSource.BLOCKS, 1, 1f);
 
-        // Set top blocks to open
         setOpen(true);
     }
 
@@ -94,7 +97,6 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
         BlockPos[] aroundSelf = BlockUtils.getBlocksAroundSelf3x3(selfPos);
         for (BlockPos blockPos : aroundSelf) {
             BlockState state = level.getBlockState(blockPos);
-            // Only set OPEN property on blocks that have it
             if (state.hasProperty(DrainPartBlock.OPEN)) {
                 level.setBlockAndUpdate(blockPos, state.setValue(DrainPartBlock.OPEN, value));
             }
@@ -147,7 +149,6 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
         boolean hasPower = getPower() > 15;
         for (BlockPos pos : aroundSelf) {
             BlockState state = level.getBlockState(pos);
-            // Only set HAS_POWER property on blocks that have it
             if (state.hasProperty(DrainPartBlock.HAS_POWER)) {
                 level.setBlockAndUpdate(pos, state.setValue(DrainPartBlock.HAS_POWER, hasPower));
             }
@@ -171,7 +172,7 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
             if (hasWater()) {
                 if (openAndFormed()) {
                     if (level.getBiome(worldPosition).is(BiomeTags.IS_OCEAN)) {
-                        getFluidHandler().fill(new FluidStack(NTFluids.SALT_WATER.getStillFluid(), NTConfig.drainSaltWaterAmount), IFluidHandler.FluidAction.EXECUTE);
+                        getFluidTank().fill(new FluidStack(NTFluids.SALT_WATER.getStillFluid(), NTConfig.drainSaltWaterAmount), IFluidHandler.FluidAction.EXECUTE);
                     }
                 }
             }
@@ -195,7 +196,6 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
                 } else {
                     this.closing = false;
 
-                    // Set top blocks to close
                     setOpen(false);
                 }
             }
@@ -207,7 +207,6 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
 
             if (valveLidInterval == 0) {
                 if (!closing) {
-                    // Start opening lid
                     this.lidInUse = 72;
                     this.lidSpeed = 3;
                 } else {
@@ -243,9 +242,9 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
             BlockPos[] aroundSelf = BlockUtils.getBlocksAroundSelfHorizontal(selfPos);
             for (BlockPos blockPos : aroundSelf) {
                 BlockState blockState = level.getBlockState(blockPos);
-                BubbleColumnBlock.updateColumn(level, blockPos.above(), blockState);
+                BubbleColumnBlock.updateColumn(Blocks.BUBBLE_COLUMN, level, blockPos.above(), blockState);
             }
-            BubbleColumnBlock.updateColumn(level, selfPos.above(), level.getBlockState(selfPos));
+            BubbleColumnBlock.updateColumn(Blocks.BUBBLE_COLUMN, level, selfPos.above(), level.getBlockState(selfPos));
         }
     }
 
@@ -267,7 +266,7 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
 
     @Override
     public <T> ImmutableMap<Direction, Pair<IOActions, int[]>> getSidedInteractions(BlockCapability<T, @Nullable Direction> capability) {
-        if (capability == Capabilities.FluidHandler.BLOCK) {
+        if (capability == Capabilities.Fluid.BLOCK) {
             return ImmutableMap.of(
                     Direction.DOWN, Pair.of(IOActions.EXTRACT, new int[]{0})
             );
@@ -286,16 +285,29 @@ public class DrainBlockEntity extends LaserBlockEntity implements MultiblockEnti
     }
 
     @Override
-    protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.saveData(tag, provider);
-        tag.put("multiblockData", saveMBData());
-        tag.putFloat("angle", this.lidIndependentAngle);
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        if (MultiblockEntity.UNFORMING.compareAndSet(false, true)) {
+            try {
+                MultiblockHelper.unform(NTMultiblocks.DRAIN.get(), pos, level, null);
+            } finally {
+                MultiblockEntity.UNFORMING.set(false);
+            }
+        }
+        level.removeBlock(pos.above(), false);
+        super.preRemoveSideEffects(pos, state);
     }
 
     @Override
-    protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.loadData(tag, provider);
-        this.multiblockData = loadMBData(tag.getCompound("multiblockData"));
-        this.lidIndependentAngle = tag.getFloat("angle");
+    protected void saveData(ValueOutput out) {
+        super.saveData(out);
+        out.store("multiblockData", CompoundTag.CODEC, saveMBData());
+        out.putFloat("angle", this.lidIndependentAngle);
+    }
+
+    @Override
+    protected void loadData(ValueInput in) {
+        super.loadData(in);
+        this.multiblockData = loadMBData(in.read("multiblockData", CompoundTag.CODEC).orElseGet(CompoundTag::new));
+        this.lidIndependentAngle = in.getFloatOr("angle", 0);
     }
 }

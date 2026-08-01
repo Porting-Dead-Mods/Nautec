@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class GuardianEyeAugment extends Augment {
     @Override
     public void clientTick(PlayerTickEvent.Post event) {
         if (NTKeybinds.ACTIVATE_LASER_KEYBIND.get().isDown()) {
-            PacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
+            ClientPacketDistributor.sendToServer(new KeyPressedPayload(augmentSlot));
             handleKeybindPress();
         }
 
@@ -96,7 +97,7 @@ public class GuardianEyeAugment extends Augment {
 
             for (LivingEntity entity : entities) {
                 if (entity != player) {
-                    if (!player.level().isClientSide) {
+                    if (!player.level().isClientSide()) {
                         entity.hurt(entity.damageSources().magic(), NTConfig.guardianAugmentDamage);
                         timeLeft = 1000;
                         laserFiredPos = entity.getEyePosition();

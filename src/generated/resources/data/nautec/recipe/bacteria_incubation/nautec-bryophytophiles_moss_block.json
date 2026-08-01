@@ -6,7 +6,5 @@
     "max": 30,
     "min": 10
   },
-  "nutrient": {
-    "item": "minecraft:moss_block"
-  }
+  "nutrient": "minecraft:moss_block"
 }

@@ -1,59 +1,25 @@
 {
-  "background_u_index": 0,
-  "background_v_index": 0,
-  "category": "laser_augmentation",
-  "description": "book.nautec.nautec_guide.laser_augmentation.aquarine_steel_armor.description",
-  "hide_while_locked": false,
-  "icon": {
-    "item": "nautec:aquarine_steel_chestplate"
+  "type": "modonomicon:content",
+  "background": {
+    "height": 26,
+    "sprite": "modonomicon:modonomicon/themes/default/node/entry_backgrounds/square_gold",
+    "width": 26
   },
+  "category": "nautec:laser_augmentation",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "description": "book.nautec.nautec_guide.laser_augmentation.aquarine_steel_armor.description",
+  "icon": {
+    "id": "nautec:aquarine_steel_chestplate"
+  },
+  "id": "nautec:laser_augmentation/aquarine_steel_armor",
   "name": "book.nautec.nautec_guide.laser_augmentation.aquarine_steel_armor.name",
-  "pages": [
-    {
-      "type": "modonomicon:text",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.laser_augmentation.aquarine_steel_armor.aquarine_steel_armor.text",
-      "title": "book.nautec.nautec_guide.laser_augmentation.aquarine_steel_armor.aquarine_steel_armor.title",
-      "use_markdown_in_title": false
-    },
-    {
-      "type": "modonomicon:crafting_recipe",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "recipe_id_1": "nautec:aquarine_helmet",
-      "recipe_id_2": "nautec:aquarine_chestplate",
-      "text": "",
-      "title1": "Aquarine Steel Helmet",
-      "title2": "Aquarine Steel Chestplate"
-    },
-    {
-      "type": "modonomicon:crafting_recipe",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "recipe_id_1": "nautec:aquarine_leggings",
-      "recipe_id_2": "nautec:aquarine_boots",
-      "text": "",
-      "title1": "Aquarine Steel Leggings",
-      "title2": "Aquarine Steel Boots"
-    }
-  ],
   "parents": [
     {
-      "draw_arrow": true,
-      "entry": "laser_augmentation/laser_augmentation_introduction",
-      "line_enabled": true,
-      "line_reversed": false
+      "entry": "nautec:laser_augmentation/laser_augmentation_introduction"
     }
   ],
-  "show_when_any_parent_unlocked": false,
   "sort_number": 2,
   "x": 2,
   "y": 2

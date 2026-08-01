@@ -1,0 +1,10 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "ldl_recipe",
+  "recipe_id_1": "nautec:long_distance_laser",
+  "sort_number": 1,
+  "title1": "Long Distance Laser Recipe"
+}

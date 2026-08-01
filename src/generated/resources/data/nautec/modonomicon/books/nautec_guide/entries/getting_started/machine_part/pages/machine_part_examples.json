@@ -1,0 +1,13 @@
+{
+  "type": "modonomicon:spotlight",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "machine_part_examples",
+  "item": {
+    "id": "nautec:burnt_coil"
+  },
+  "sort_number": 1,
+  "text": "",
+  "title": "book.nautec.nautec_guide.getting_started.machine_part.machine_part_examples.title"
+}

@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
+import net.neoforged.neoforge.common.CommonHooks;
 
 @Mixin(KelpBlock.class)
 public abstract class KelpBlockMixin extends GrowingPlantHeadBlock {
@@ -30,8 +31,8 @@ public abstract class KelpBlockMixin extends GrowingPlantHeadBlock {
     }
 
     @Override
-    public @NotNull BlockState getStateForPlacement(LevelAccessor level) {
-        return this.defaultBlockState().setValue(NTProperties.KELP_AGE, level.getRandom().nextInt(NTConfig.kelpHeight + 1));
+    public @NotNull BlockState getStateForPlacement(RandomSource random) {
+        return this.defaultBlockState().setValue(NTProperties.KELP_AGE, random.nextInt(NTConfig.kelpHeight + 1));
     }
 
     @Override
@@ -42,12 +43,12 @@ public abstract class KelpBlockMixin extends GrowingPlantHeadBlock {
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (state.getValue(NTProperties.KELP_AGE) < NTConfig.kelpHeight &&
-                net.neoforged.neoforge.common.CommonHooks.canCropGrow(level, pos.relative(this.growthDirection), state, random.nextDouble() < 0.14)) {
+                CommonHooks.canCropGrow(level, pos.relative(this.growthDirection), state, random.nextDouble() < 0.14)) {
             BlockPos blockpos = pos.relative(this.growthDirection);
             if (this.canGrowInto(level.getBlockState(blockpos))) {
                 BlockState growState = getGrowIntoState(state, random);
                 level.setBlockAndUpdate(blockpos, growState);
-                net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(level, blockpos, level.getBlockState(blockpos));
+                CommonHooks.fireCropGrowPost(level, blockpos, level.getBlockState(blockpos));
             }
         }
     }

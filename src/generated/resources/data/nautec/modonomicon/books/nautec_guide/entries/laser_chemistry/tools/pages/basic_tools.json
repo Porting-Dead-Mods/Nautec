@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:text",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "basic_tools",
+  "show_title_separator": true,
+  "sort_number": 0,
+  "text": "book.nautec.nautec_guide.laser_chemistry.tools.basic_tools.text",
+  "title": "book.nautec.nautec_guide.laser_chemistry.tools.basic_tools.title"
+}

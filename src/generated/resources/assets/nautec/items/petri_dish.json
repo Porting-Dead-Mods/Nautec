@@ -1,0 +1,23 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "nautec:item/petri_dish"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "nautec:item/petri_dish_bacteria",
+      "tints": [
+        {
+          "type": "minecraft:constant",
+          "value": -1
+        },
+        {
+          "type": "nautec:bacteria_color"
+        }
+      ]
+    },
+    "property": "nautec:has_bacteria"
+  }
+}

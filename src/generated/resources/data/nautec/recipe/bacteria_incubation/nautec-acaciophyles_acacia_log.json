@@ -6,7 +6,5 @@
     "max": 30,
     "min": 10
   },
-  "nutrient": {
-    "item": "minecraft:acacia_log"
-  }
+  "nutrient": "minecraft:acacia_log"
 }

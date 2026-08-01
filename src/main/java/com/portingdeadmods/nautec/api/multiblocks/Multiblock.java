@@ -23,10 +23,6 @@ public interface Multiblock {
     /**
      * This method provides the controller block of your unformed multiblock.
      * Your multiblock needs at least one of these in its structure.
-     * <br>
-     * <br>
-     * Example: {@link com.indref.industrial_reforged.registries.multiblocks.BlastFurnaceMultiblock#getUnformedController() BlastFurnaceMultiblock.getUnformedController()}
-     * <br>
      * @return The controller block of your unformed multiblock
      */
     Block getUnformedController();
@@ -34,55 +30,24 @@ public interface Multiblock {
     /**
      * This method provides the controller block of your formed multiblock.
      * Your multiblock needs at least one of these in its structure.
-     * <br>
-     * <br>
-     * Example: {@link com.indref.industrial_reforged.registries.multiblocks.BlastFurnaceMultiblock#getUnformedController() BlastFurnaceMultiblock.getFormedController()}
-     * <br>
      * @return The controller block of your formed multiblock
      */
     Block getFormedController();
 
     /**
-     * This method provides the layout of your unformed multiblock.
-     * <br>
-     * It consists of an array of multiblock layers. Each layer
-     * is constructed with a method call.
-     * <br>
-     * For this, you can use {@link Multiblock#layer(int...)}
-     * <br>
-     * Each of these methods ask you to provide you a list of integers.
-     * These integers represent the actual blocks used.
-     * Nonetheless, you still need to provide the actual blocks using
-     * the {@link Multiblock#getDefinition()} method.
-     * This provides the minimum and maximum height for this multiblock.
-     * <br>
-     * Example: {@code IntegerRange.of(1, 3)}
-     * <br>
+     * This method provides the layout of your unformed multiblock as an array
+     * of layers created via {@link Multiblock#layer(int...)}, whose integers are
+     * resolved to blocks through {@link Multiblock#getDefinition()}.
      * <br>
      * Note: The first layer in this array also represents the bottom layer of the multiblock
-     * <br>
-     * <br>
-     * Example: {@link com.indref.industrial_reforged.registries.multiblocks.BlastFurnaceMultiblock#getLayout() BlastFurnaceMultiblock.getLayout()}.
      * @return An array of multiblock layers that describes the layout of the multiblock
      */
     MultiblockLayer[] getLayout();
 
     /**
-     * This method provides a definition map that can be used to look up
-     * an integer key in {@link Multiblock#getLayout()} and will return a block.
-     * <br>
-     * <br>
-     * The keyset of this map needs to include
-     * every key that is used in {@link Multiblock#getLayout()}.
-     * <br>
-     * <br>
-     * The values of this map need to contain the block for each
-     * integer key. If you do not care about a block you can use {@code null}
-     * instead of a value.
-     * <br>
-     * <br>
-     * Example: {@link com.indref.industrial_reforged.registries.multiblocks.BlastFurnaceMultiblock#getDefinition() BlastFurnaceMultiblock.getDefintion()}
-     *
+     * This method provides a definition map that resolves every integer key used in
+     * {@link Multiblock#getLayout()} to its block. Use {@code null} as a value for
+     * positions where the block does not matter.
      * @return The integer to block map that provides the integer keys and their block values
      */
     Map<Integer, Block> getDefinition();
@@ -199,11 +164,6 @@ public interface Multiblock {
         return null;
     }
 
-    /**
-     * This method provides the maximum possible
-     * size for this multiblock.
-     * @return the maximum possible size
-     */
     default int getMaxSize() {
         int maxSize = 0;
         for (MultiblockLayer layer : getLayout()) {
@@ -212,11 +172,6 @@ public interface Multiblock {
         return maxSize;
     }
 
-    /**
-     * Create a new layer for your multiblock
-     * @param layer The block indices for your multiblock layer
-     * @return the newly created layer
-     */
     default MultiblockLayer layer(int... layer) {
         return new MultiblockLayer(false, IntegerRange.of(1, 1), layer);
     }

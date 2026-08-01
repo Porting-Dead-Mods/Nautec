@@ -13,8 +13,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.block.state.BlockState;
+import com.portingdeadmods.nautec.capabilities.item.ItemStackHandler;
 import net.neoforged.neoforge.capabilities.BlockCapability;
-import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -47,12 +47,12 @@ public class ChargerBlockEntity extends LaserBlockEntity {
     public void commonTick() {
         super.commonTick();
         if (getPower() > 0) {
-            IItemHandler itemHandler = getItemHandler();
+            ItemStackHandler itemHandler = getItemStackHandler();
             if (itemHandler.getStackInSlot(0).getItem() instanceof IPowerItem powerItem) {
                 IPowerStorage powerStorage = itemHandler.getStackInSlot(0).getCapability(NTCapabilities.PowerStorage.ITEM);
                 if(powerStorage.getPowerStored() < powerStorage.getPowerCapacity()) {
                     powerStorage.tryFillPower(4, false);
-                    if (level.isClientSide) {
+                    if (level.isClientSide()) {
                         ParticleUtils.spawnParticlesAroundBlock(getBlockPos(), getLevel(), ParticleTypes.ELECTRIC_SPARK);
                     }
                 }

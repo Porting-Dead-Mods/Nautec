@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:raw_iron"
-    },
-    {
-      "tag": "minecraft:coals"
-    },
-    {
-      "tag": "minecraft:coals"
-    }
+    "minecraft:raw_iron",
+    "#minecraft:coals",
+    "#minecraft:coals"
   ],
   "result": {
     "count": 2,

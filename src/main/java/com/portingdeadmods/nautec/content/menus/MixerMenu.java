@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.CauldronBlock;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import org.jetbrains.annotations.NotNull;
 
 public class MixerMenu extends NTMachineMenu<MixerBlockEntity> {
@@ -22,13 +22,13 @@ public class MixerMenu extends NTMachineMenu<MixerBlockEntity> {
         super(NTMenuTypes.MIXER.get(), containerId, inv, blockEntity);
 
         for (int i = 0; i < 4; i++) {
-            addSlot(new SlotItemHandler(blockEntity.getItemHandler(), i, 29 + i * (4 + 18), 12));
+            addSlot(new ResourceHandlerSlot(blockEntity.getItemStackHandler(), blockEntity.getItemStackHandler()::set, i, 29 + i * (4 + 18), 12));
         }
 
-        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 4, 29 + 2 * (4 + 18) - 11, 67));
+        addSlot(new ResourceHandlerSlot(blockEntity.getItemStackHandler(), blockEntity.getItemStackHandler()::set, 4, 29 + 2 * (4 + 18) - 11, 67));
 
-        addFluidHandlerSlot(new SlotFluidHandler(blockEntity.getFluidHandler(), 0, 122, 11, 18, 18));
-        addFluidHandlerSlot(new SlotFluidHandler(blockEntity.getSecondaryFluidHandler(), 0, 122, 66, 18, 18));
+        addFluidHandlerSlot(new SlotFluidHandler(blockEntity.getFluidTank(), 0, 122, 11, 18, 18));
+        addFluidHandlerSlot(new SlotFluidHandler(blockEntity.getSecondaryFluidTank(), 0, 122, 66, 18, 18));
     }
 
     @Override
@@ -50,12 +50,10 @@ public class MixerMenu extends NTMachineMenu<MixerBlockEntity> {
             int machineSlotEnd = 41;
 
             if (index < hotbarEnd) {
-                // Move from player inventory/hotbar to block slots
                 if (!moveItemStackTo(stack, machineSlotStart, machineSlotEnd, false)) {
                     return ItemStack.EMPTY;
                 }
             } else {
-                // Move from block slots to player inventory
                 if (!moveItemStackTo(stack, playerInventoryStart, hotbarEnd, false)) {
                     return ItemStack.EMPTY;
                 }

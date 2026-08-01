@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
@@ -17,14 +18,14 @@ public class AddItemModifier extends LootModifier {
 
     public static Supplier<MapCodec<AddItemModifier>> CODEC_SUPPLIER = Suppliers.memoize(() -> RecordCodecBuilder
             .mapCodec(instance -> AddItemModifier.codecStart(instance)
-            .and(ItemStack.CODEC.fieldOf("item")
+            .and(ItemStackTemplate.CODEC.fieldOf("item")
                     .forGetter(addItemModifierInstance -> addItemModifierInstance.item))
             .apply(instance, AddItemModifier::new)));
 
-    private final ItemStack item;
+    private final ItemStackTemplate item;
 
-    public AddItemModifier(LootItemCondition[] conditionsIn, ItemStack item) {
-        super(conditionsIn);
+    public AddItemModifier(LootItemCondition[] conditionsIn, int priority, ItemStackTemplate item) {
+        super(conditionsIn, priority);
         this.item = item;
     }
 
@@ -36,7 +37,7 @@ public class AddItemModifier extends LootModifier {
             }
         }
 
-        generatedLoot.add(item);
+        generatedLoot.add(item.create());
         return generatedLoot;
     }
 

@@ -9,7 +9,7 @@ import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -25,9 +25,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.FluidUtil;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
+import net.neoforged.neoforge.transfer.fluid.FluidUtil;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
@@ -79,14 +78,16 @@ public class MixerBlock extends LaserBlock {
     }
 
     @Override
-    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected @NotNull InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (level.getBlockEntity(pos) instanceof MixerBlockEntity mixerBE) {
-            if (stack.getCapability(Capabilities.FluidHandler.ITEM) != null) {
-                if (mixerBE.getFluidHandler() instanceof FluidTank fluidTank && mixerBE.getSecondaryFluidHandler() instanceof FluidTank secFluidTank) {
-                    FluidTank targetTank = secFluidTank.getFluidInTank(0).isEmpty() ? fluidTank : secFluidTank;
-                    
-                    if (FluidUtil.interactWithFluidHandler(player, hand, targetTank)) {
-                        return ItemInteractionResult.SUCCESS;
+            if (stack.getCapability(Capabilities.Fluid.ITEM, ItemAccess.forPlayerInteraction(player, hand)) != null) {
+                var fluidTank = mixerBE.getFluidTank();
+                var secFluidTank = mixerBE.getSecondaryFluidTank();
+                if (fluidTank != null && secFluidTank != null) {
+                    var targetTank = secFluidTank.getFluidInTank(0).isEmpty() ? fluidTank : secFluidTank;
+
+                    if (FluidUtil.interactWithFluidHandler(player, hand, pos, targetTank)) {
+                        return InteractionResult.SUCCESS;
                     }
                 }
             }
@@ -94,27 +95,27 @@ public class MixerBlock extends LaserBlock {
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
-    private ItemInteractionResult insertItemsSided(ItemStack stack, Player player, InteractionHand hand, IItemHandler itemHandler, Direction clickedFace) {
+    private InteractionResult insertItemsSided(ItemStack stack, Player player, InteractionHand hand, IItemHandler itemHandler, Direction clickedFace) {
         int slot = HorizontalDirection.fromRegularDirection(clickedFace).ordinal();
         ItemStack stackInSlot = itemHandler.getStackInSlot(slot);
 
         if (canInsert(stack, itemHandler, stackInSlot, slot)) {
             ItemStack itemStack = itemHandler.insertItem(slot, stack, false);
             player.setItemInHand(hand, itemStack);
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.TRY_WITH_EMPTY_HAND;
     }
 
-    private ItemInteractionResult extractItemsSided(Player player, IItemHandler itemHandler, Direction clickedFace) {
+    private InteractionResult extractItemsSided(Player player, IItemHandler itemHandler, Direction clickedFace) {
         int slot = HorizontalDirection.fromRegularDirection(clickedFace).ordinal();
         ItemStack stackInSlot = itemHandler.getStackInSlot(slot);
         ItemStack itemStack = itemHandler.extractItem(slot, stackInSlot.getMaxStackSize(), false);
         if (!itemStack.isEmpty()) {
             ItemHandlerHelper.giveItemToPlayer(player, itemStack);
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.TRY_WITH_EMPTY_HAND;
     }
 
     private static boolean canInsert(ItemStack stack, IItemHandler itemHandler, ItemStack stackInSlot, int slot) {

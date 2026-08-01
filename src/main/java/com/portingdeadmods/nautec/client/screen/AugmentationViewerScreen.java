@@ -4,11 +4,13 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
 import com.portingdeadmods.nautec.utils.AugmentHelper;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class AugmentationViewerScreen extends Screen {
     private int leftPos;
     private int topPos;
     private final Player player;
-    public static final ResourceLocation BACKGROUND = Nautec.rl("textures/gui/augments.png");
+    public static final Identifier BACKGROUND = Nautec.rl("textures/gui/augments.png");
 
     public AugmentationViewerScreen(Component title, Player player) {
         super(title);
@@ -39,7 +41,7 @@ public class AugmentationViewerScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         int scale = 30;
 
         int x1 = leftPos + 10;
@@ -49,7 +51,7 @@ public class AugmentationViewerScreen extends Screen {
         int y2 = y1 + 75;
 
 
-        InventoryScreen.renderEntityInInventoryFollowsMouse(
+        InventoryScreen.extractEntityInInventoryFollowsMouse(
                 guiGraphics, x1, y1, x2, y2, scale, 0.0625F, mouseX, mouseY, player
         );
         Map<AugmentSlot, Augment> augments = AugmentHelper.getAugments(player);
@@ -74,14 +76,12 @@ public class AugmentationViewerScreen extends Screen {
             displayAugment(guiGraphics, slot, augments.get(slot), x2, y += 20);
         }
 
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
     }
 
-    // TODO: Display a short description for the augments too, aswell as a proper name and not the registry name for the augment
-
-    public void displayAugment(GuiGraphics graphics, AugmentSlot slot, Augment aug, int x, int y) {
-        graphics.drawString(this.font, Component.translatable("augment_slot.nautec." + slot.getName()).append(Component.literal(":")), x, y, 0);
-        graphics.drawString(this.font, aug == null ? Component.literal("    No Augment in slot") : Component.literal("    ").append(Component.translatable("augment_type." + aug.getAugmentType().toString())), x, y + 10, 0);
+    public void displayAugment(GuiGraphicsExtractor graphics, AugmentSlot slot, Augment aug, int x, int y) {
+        graphics.text(this.font, Component.translatable("augment_slot.nautec." + slot.getName()).append(Component.literal(":")), x, y, ARGB.opaque(0));
+        graphics.text(this.font, aug == null ? Component.literal("    No Augment in slot") : Component.literal("    ").append(Component.translatable("augment_type." + aug.getAugmentType().toString())), x, y + 10, ARGB.opaque(0));
     }
 
     @Override
@@ -90,7 +90,7 @@ public class AugmentationViewerScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        guiGraphics.blit(BACKGROUND, leftPos, topPos, 0, 0, imageWidth, imageHeight);
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, leftPos, topPos, 0F, 0F, imageWidth, imageHeight, 256, 256);
     }
 }

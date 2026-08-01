@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "A": {
-      "item": "nautec:aquarine_steel_ingot"
-    },
-    "C": {
-      "item": "nautec:prismarine_crystal_shard"
-    },
-    "P": {
-      "item": "nautec:polished_prismarine"
-    }
+    "A": "nautec:aquarine_steel_ingot",
+    "C": "nautec:prismarine_crystal_shard",
+    "P": "nautec:polished_prismarine"
   },
   "pattern": [
     "APA",

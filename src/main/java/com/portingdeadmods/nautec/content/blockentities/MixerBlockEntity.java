@@ -3,7 +3,9 @@ package com.portingdeadmods.nautec.content.blockentities;
 import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
 import com.portingdeadmods.nautec.capabilities.IOActions;
+import com.portingdeadmods.nautec.capabilities.fluid.FluidTank;
 import com.portingdeadmods.nautec.capabilities.fluid.TwoTankSidedFluidHandler;
+import com.portingdeadmods.nautec.capabilities.item.ItemStackHandler;
 import com.portingdeadmods.nautec.content.menus.MixerMenu;
 import com.portingdeadmods.nautec.content.recipes.MixingRecipe;
 import com.portingdeadmods.nautec.content.recipes.inputs.MixingRecipeInput;
@@ -13,9 +15,8 @@ import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -23,13 +24,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,9 +64,7 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
     public MixerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(NTBlockEntityTypes.MIXER.get(), blockPos, blockState);
         addItemHandler(5, (slot, stack) -> slot != 4);
-        // in
         addFluidTank(NTConfig.mixerInputCapacity);
-        // out
         addSecondaryFluidTank(NTConfig.mixerOutputCapacity, fluidStack -> false);
     }
 
@@ -80,9 +80,9 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
 
     @Override
     public <T> Map<Direction, Pair<IOActions, int[]>> getSidedInteractions(BlockCapability<T, @Nullable Direction> capability) {
-        if (capability == Capabilities.ItemHandler.BLOCK) {
+        if (capability == Capabilities.Item.BLOCK) {
             return ITEM_HANDLER_SIDED_INTERACTIONS;
-        } else if (capability == Capabilities.FluidHandler.BLOCK) {
+        } else if (capability == Capabilities.Fluid.BLOCK) {
             return FLUID_HANDLER_SIDED_INTERACTIONS;
         }
         return Map.of();
@@ -130,8 +130,8 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
             return;
         }
 
-        IFluidHandler fluidHandler = getFluidHandler();
-        IItemHandler itemHandler = getItemHandler();
+        FluidTank fluidHandler = getFluidTank();
+        ItemStackHandler itemHandler = getItemStackHandler();
         List<IngredientWithCount> ingredients = new ArrayList<>(mixingRecipe.ingredients());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             ItemStack item = itemHandler.getStackInSlot(i);
@@ -147,9 +147,9 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
     }
 
     @Override
-    public IFluidHandler getFluidHandlerOnSide(Direction direction) {
+    public ResourceHandler<FluidResource> getFluidHandlerOnSide(Direction direction) {
         return getHandlerOnSide(
-                Capabilities.FluidHandler.BLOCK,
+                Capabilities.Fluid.BLOCK,
                 (ignored, actionSlotsPair) -> new TwoTankSidedFluidHandler(getFluidHandler(), getSecondaryFluidHandler(), actionSlotsPair),
                 direction,
                 getFluidHandler()
@@ -178,7 +178,10 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
     }
 
     private Optional<MixingRecipe> getRecipe() {
-        IItemHandler itemHandler = getItemHandler();
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return Optional.empty();
+        }
+        ItemStackHandler itemHandler = getItemStackHandler();
         int slots = itemHandler.getSlots();
         List<ItemStack> itemHandlerStacksList = new ArrayList<>(slots);
         for (int i = 0; i < slots - 1; i++) {
@@ -188,13 +191,11 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
             }
         }
         
-        // Try to find a recipe with all inputs first (original behavior)
         MixingRecipeInput input = new MixingRecipeInput(itemHandlerStacksList, getFluidTank().getFluid());
-        Optional<MixingRecipe> recipe = level.getRecipeManager()
+        Optional<MixingRecipe> recipe = serverLevel.recipeAccess()
                 .getRecipeFor(MixingRecipe.Type.INSTANCE, input, level).map(RecipeHolder::value);
         
-        // If no recipe found and we have multiple inputs, try with different combinations
-        // to handle overflow scenarios (e.g., single-item recipes with overflow in other slots)
+        // Retry with input subsets to handle overflow (e.g. single-item recipes with overflow in other slots)
         if (recipe.isEmpty() && itemHandlerStacksList.size() > 1) {
             recipe = tryRecipeWithSubsets(itemHandlerStacksList);
         }
@@ -206,38 +207,40 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
     }
     
     private Optional<MixingRecipe> tryRecipeWithSubsets(List<ItemStack> allInputs) {
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return Optional.empty();
+        }
         // Try with individual items first (most common overflow case)
         for (ItemStack singleInput : allInputs) {
             List<ItemStack> singleInputList = List.of(singleInput);
             MixingRecipeInput input = new MixingRecipeInput(singleInputList, getFluidTank().getFluid());
-            Optional<MixingRecipe> recipe = level.getRecipeManager()
+            Optional<MixingRecipe> recipe = serverLevel.recipeAccess()
                     .getRecipeFor(MixingRecipe.Type.INSTANCE, input, level).map(RecipeHolder::value);
             if (recipe.isPresent()) {
                 return recipe;
             }
         }
-        
-        // Try with combinations of different sizes
+
         for (int size = 2; size < allInputs.size(); size++) {
             for (int start = 0; start <= allInputs.size() - size; start++) {
                 List<ItemStack> subset = allInputs.subList(start, start + size);
                 MixingRecipeInput input = new MixingRecipeInput(subset, getFluidTank().getFluid());
-                Optional<MixingRecipe> recipe = level.getRecipeManager()
+                Optional<MixingRecipe> recipe = serverLevel.recipeAccess()
                         .getRecipeFor(MixingRecipe.Type.INSTANCE, input, level).map(RecipeHolder::value);
                 if (recipe.isPresent()) {
                     return recipe;
                 }
             }
         }
-        
+
         return Optional.empty();
     }
 
     private boolean canInsertItem(ItemStack result) {
-        ItemStack stack = getItemHandler().getStackInSlot(OUTPUT_SLOT);
+        ItemStack stack = getItemStackHandler().getStackInSlot(OUTPUT_SLOT);
         boolean itemMatches = result.isEmpty() || stack.isEmpty() || result.is(stack.getItem());
         int stackLimit = stack.isEmpty() ? result.getMaxStackSize() : stack.getMaxStackSize();
-        boolean amountMatches = result.getCount() + stack.getCount() <= Math.min(stackLimit, getItemHandler().getSlotLimit(OUTPUT_SLOT));
+        boolean amountMatches = result.getCount() + stack.getCount() <= Math.min(stackLimit, getItemStackHandler().getSlotLimit(OUTPUT_SLOT));
         return itemMatches && amountMatches;
     }
 
@@ -275,17 +278,17 @@ public class MixerBlockEntity extends LaserBlockEntity implements MenuProvider {
     }
 
     @Override
-    protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.loadData(tag, provider);
-        this.duration = tag.getInt("duration");
-        this.independentAngle = tag.getFloat("independentAngle");
+    protected void loadData(ValueInput in) {
+        super.loadData(in);
+        this.duration = in.getIntOr("duration", 0);
+        this.independentAngle = in.getFloatOr("independentAngle", 0);
     }
 
     @Override
-    protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.saveData(tag, provider);
-        tag.putInt("duration", this.duration);
-        tag.putFloat("independentAngle", this.independentAngle);
+    protected void saveData(ValueOutput out) {
+        super.saveData(out);
+        out.putInt("duration", this.duration);
+        out.putFloat("independentAngle", this.independentAngle);
     }
 
     public FluidStack getInputFluid() {

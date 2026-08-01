@@ -7,7 +7,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookImagePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import com.portingdeadmods.nautec.registries.NTItems;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ItemTransformationEntry extends BaseNautecEntry {
     public ItemTransformationEntry(CategoryProviderBase parent) {
@@ -28,7 +28,7 @@ public class ItemTransformationEntry extends BaseNautecEntry {
                 """);
         this.page("transformation_recipe", () -> BookImagePageModel.create()
                 .withTitle("Recipe Exemples")
-                .withImages(ResourceLocation.fromNamespaceAndPath(Modonomicon.MOD_ID, "textures/gui/book/recipe/transformation_recipes.png")));
+                .withImages(Identifier.fromNamespaceAndPath(Modonomicon.MOD_ID, "textures/gui/book/recipe/transformation_recipes.png")));
 
     }
 }

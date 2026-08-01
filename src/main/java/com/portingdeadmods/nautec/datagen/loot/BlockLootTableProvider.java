@@ -8,7 +8,7 @@ import com.portingdeadmods.nautec.content.multiblocks.BioReactorMultiblock;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -57,7 +57,6 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        // Generate loot tables here
         prismarineSand(NTBlocks.PRISMARINE_SAND.get());
         dropSelf(NTBlocks.AQUATIC_CATALYST.get());
         dropSelf(NTBlocks.PRISMARINE_RELAY.get());
@@ -156,21 +155,6 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
 
     protected void prismarineSand(Block prismarineSandOre) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
-//        add(
-//            prismarineSandOre,
-//            this.createSilkTouchDispatchTable(
-//                    prismarineSandOre,
-//                    this.applyExplosionDecay(
-//                            Items.AIR,
-//                            LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
-//                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
-//                                    .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
-//                    )).withPool(LootPool.lootPool()
-//                            .setRolls(ConstantValue.exactly(1f))
-//                            .add(LootItem.lootTableItem(Items.PRISMARINE_SHARD))
-//                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
-//            )
-//        );
 
         add(
                 prismarineSandOre,

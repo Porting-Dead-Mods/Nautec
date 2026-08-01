@@ -44,8 +44,8 @@ public class BacterialAnalyzerBlockEntity extends LaserBlockEntity implements Me
     protected void onItemsChanged(int slot) {
         super.onItemsChanged(slot);
 
-        ItemStack stack = getItemHandler().getStackInSlot(0);
-        ItemStack resultStack = getItemHandler().getStackInSlot(1);
+        ItemStack stack = getItemStackHandler().getStackInSlot(0);
+        ItemStack resultStack = getItemStackHandler().getStackInSlot(1);
         IBacteriaStorage iBacteriaStorage = stack.getCapability(NTCapabilities.BacteriaStorage.ITEM);
         if (iBacteriaStorage != null) {
             BacteriaInstance bacteria = iBacteriaStorage.getBacteria(0);
@@ -64,7 +64,7 @@ public class BacterialAnalyzerBlockEntity extends LaserBlockEntity implements Me
         if (hasRecipe) {
             if (getPower() >= POWER_USAGE) {
                 if (progress >= MAX_PROGRESS) {
-                    ItemStack extracted = getItemHandler().extractItem(0, 1, false);
+                    ItemStack extracted = getItemStackHandler().extractItem(0, 1, false);
 
                     ItemStack result = extracted.copy();
                     IBacteriaStorage storage = result.getCapability(NTCapabilities.BacteriaStorage.ITEM);

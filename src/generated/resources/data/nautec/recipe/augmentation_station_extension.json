@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "nautec:aquarine_steel_ingot"
-    },
-    "C": {
-      "item": "nautec:laser_channeling_coil"
-    },
-    "P": {
-      "item": "nautec:polished_prismarine"
-    },
-    "S": {
-      "item": "nautec:prismarine_crystal_shard"
-    }
+    "A": "nautec:aquarine_steel_ingot",
+    "C": "nautec:laser_channeling_coil",
+    "P": "nautec:polished_prismarine",
+    "S": "nautec:prismarine_crystal_shard"
   },
   "pattern": [
     "ASA",

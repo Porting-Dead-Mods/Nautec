@@ -2,13 +2,15 @@ package com.portingdeadmods.nautec.content.blocks;
 
 import com.portingdeadmods.nautec.capabilities.NTCapabilities;
 import com.portingdeadmods.nautec.utils.BlockUtils;
-import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
@@ -112,14 +114,13 @@ public class BacteriaPipeBlock extends Block {
         return shapes[i];
     }
 
-    // Check for newly added blocks
     @Override
-    public @NotNull BlockState updateShape(BlockState blockState, Direction facingDirection, BlockState facingBlockState, LevelAccessor level, BlockPos blockPos, BlockPos facingBlockPos) {
+    protected @NotNull BlockState updateShape(BlockState blockState, LevelReader level, ScheduledTickAccess tickAccess, BlockPos blockPos, Direction facingDirection, BlockPos facingBlockPos, BlockState facingBlockState, RandomSource random) {
         int connectionIndex = facingDirection.ordinal();
         BlockEntity blockEntity = level.getBlockEntity(facingBlockPos);
         if (canConnectToPipe(facingBlockState) || (blockEntity != null && canConnectTo(blockEntity))) {
             return blockState.setValue(CONNECTION[connectionIndex], true);
-        } else if (facingBlockState.isEmpty()) {
+        } else if (facingBlockState.isAir()) {
             return blockState.setValue(CONNECTION[connectionIndex], false);
         }
 

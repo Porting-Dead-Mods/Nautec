@@ -1,6 +1,7 @@
 package com.portingdeadmods.nautec.content.blockentities.multiblock.part;
 
 import com.portingdeadmods.nautec.api.blockentities.LaserBlockEntity;
+import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockEntity;
 import com.portingdeadmods.nautec.api.blockentities.multiblock.MultiblockPartEntity;
 import com.portingdeadmods.nautec.api.multiblocks.Multiblock;
 import com.portingdeadmods.nautec.capabilities.IOActions;
@@ -9,12 +10,13 @@ import com.portingdeadmods.nautec.content.items.RobotArmItem;
 import com.portingdeadmods.nautec.content.menus.AugmentationStationExtensionMenu;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.registries.NTItems;
+import com.portingdeadmods.nautec.registries.NTMultiblocks;
+import com.portingdeadmods.nautec.utils.MultiblockHelper;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
+import com.portingdeadmods.nautec.capabilities.item.ItemStackHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -24,8 +26,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.BlockCapability;
-import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -105,7 +108,7 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
     @Override
     protected void onItemsChanged(int slot) {
         super.onItemsChanged(slot);
-        IItemHandler handler = getItemHandler();
+        ItemStackHandler handler = getItemStackHandler();
         if (isFormed()) {
             BlockPos controllerPos1 = getControllerPos();
             if (level.getBlockEntity(controllerPos1) instanceof AugmentationStationBlockEntity be) {
@@ -123,8 +126,8 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
     }
 
     public ItemStack getAugmentItem() {
-        if (getItemHandler().getStackInSlot(1).is(NTItems.CLAW_ROBOT_ARM)) {
-            return getItemHandler().getStackInSlot(0);
+        if (getItemStackHandler().getStackInSlot(1).is(NTItems.CLAW_ROBOT_ARM)) {
+            return getItemStackHandler().getStackInSlot(0);
         }
         return ItemStack.EMPTY;
     }
@@ -177,16 +180,29 @@ public class AugmentationStationExtensionBlockEntity extends LaserBlockEntity im
     }
 
     @Override
-    protected void loadData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.loadData(tag, provider);
-        this.controllerPos = BlockPos.of(tag.getLong("controllerPos"));
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        BlockPos controllerPos1 = getControllerPos();
+        if (state.getValue(Multiblock.FORMED) && controllerPos1 != null && MultiblockEntity.UNFORMING.compareAndSet(false, true)) {
+            try {
+                MultiblockHelper.unform(NTMultiblocks.AUGMENTATION_STATION.get(), controllerPos1, level);
+            } finally {
+                MultiblockEntity.UNFORMING.set(false);
+            }
+        }
+        super.preRemoveSideEffects(pos, state);
     }
 
     @Override
-    protected void saveData(CompoundTag tag, HolderLookup.Provider provider) {
-        super.saveData(tag, provider);
+    protected void loadData(ValueInput in) {
+        super.loadData(in);
+        this.controllerPos = BlockPos.of(in.getLongOr("controllerPos", 0));
+    }
+
+    @Override
+    protected void saveData(ValueOutput out) {
+        super.saveData(out);
         if (controllerPos != null) {
-            tag.putLong("controllerPos", controllerPos.asLong());
+            out.putLong("controllerPos", controllerPos.asLong());
         }
     }
 

@@ -1,0 +1,14 @@
+{
+  "type": "modonomicon:image",
+  "border": true,
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "transformation_recipe",
+  "images": [
+    "modonomicon:textures/gui/book/recipe/transformation_recipes.png"
+  ],
+  "sort_number": 1,
+  "text": "",
+  "title": "Recipe Exemples"
+}

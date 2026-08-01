@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "nautec:brown_polymer"
-    },
-    "S": {
-      "tag": "c:rods/wooden"
-    }
+    "B": "nautec:brown_polymer",
+    "S": "#c:rods/wooden"
   },
   "pattern": [
     "BBB",

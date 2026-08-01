@@ -1,7 +1,8 @@
 package com.portingdeadmods.nautec.content.recipes.utils;
 
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -12,15 +13,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
 public record IngredientWithCount(Ingredient ingredient, int count) {
-    public static final IngredientWithCount EMPTY = new IngredientWithCount(Ingredient.EMPTY, -1);
-    // Note: for implementation reasons count has to be above ingredient, otherwise we will get a JSON Null issue thingy
-    private static final Codec<Pair<Integer, Ingredient>> PAIR_CODEC = Codec.pair(
-            Codec.INT.optionalFieldOf("count", 1).codec(),
-            Ingredient.CODEC
-    );
-
-    public static final Codec<IngredientWithCount> CODEC = PAIR_CODEC.xmap(pair -> new IngredientWithCount(pair.getSecond(), pair.getFirst()),
-            iwc -> new Pair<>(iwc.count, iwc.ingredient));
+    public static final Codec<IngredientWithCount> CODEC = RecordCodecBuilder.create(builder -> builder.group(
+            Ingredient.CODEC.fieldOf("ingredient").forGetter(IngredientWithCount::ingredient),
+            Codec.INT.optionalFieldOf("count", 1).forGetter(IngredientWithCount::count)
+    ).apply(builder, IngredientWithCount::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, IngredientWithCount> STREAM_CODEC = StreamCodec.composite(
             Ingredient.CONTENTS_STREAM_CODEC,
@@ -35,15 +31,15 @@ public record IngredientWithCount(Ingredient ingredient, int count) {
     }
 
     public static IngredientWithCount fromItemStack(ItemStack itemStack) {
-        return new IngredientWithCount(Ingredient.of(itemStack), itemStack.getCount());
+        return new IngredientWithCount(Ingredient.of(itemStack.getItem()), itemStack.getCount());
     }
 
     public static IngredientWithCount fromItemTag(TagKey<Item> itemTagKey) {
-        return new IngredientWithCount(Ingredient.of(itemTagKey), 1);
+        return fromItemTag(itemTagKey, 1);
     }
 
     public static IngredientWithCount fromItemTag(TagKey<Item> itemTagKey, int count) {
-        return new IngredientWithCount(Ingredient.of(itemTagKey), count);
+        return new IngredientWithCount(Ingredient.of(BuiltInRegistries.ITEM.getOrThrow(itemTagKey)), count);
     }
 
     public static IngredientWithCount fromItemLike(ItemLike itemLike) {

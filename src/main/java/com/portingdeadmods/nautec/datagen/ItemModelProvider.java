@@ -1,35 +1,68 @@
 package com.portingdeadmods.nautec.datagen;
 
 import com.portingdeadmods.nautec.Nautec;
+import com.portingdeadmods.nautec.api.client.renderer.items.AnchorItemRenderer;
+import com.portingdeadmods.nautec.api.client.renderer.items.PrismarineCrystalItemRenderer;
 import com.portingdeadmods.nautec.api.fluids.NTFluid;
+import com.portingdeadmods.nautec.client.item.AbilityEnabledProperty;
+import com.portingdeadmods.nautec.client.item.BacteriaColorTintSource;
+import com.portingdeadmods.nautec.client.item.HasBacteriaProperty;
 import com.portingdeadmods.nautec.registries.NTBlocks;
 import com.portingdeadmods.nautec.registries.NTFluids;
 import com.portingdeadmods.nautec.registries.NTItems;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.renderer.special.SpecialModelRenderer;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.loaders.DynamicFluidContainerModelBuilder;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.item.DynamicFluidContainerModel;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
-public class ItemModelProvider extends net.neoforged.neoforge.client.model.generators.ItemModelProvider {
-    public ItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, Nautec.MODID, existingFileHelper);
+public class ItemModelProvider extends ModelProvider {
+    private BlockModelGenerators blockModels;
+    private ItemModelGenerators itemModels;
+
+    public ItemModelProvider(PackOutput output) {
+        super(output, Nautec.MODID);
     }
 
     @Override
-    protected void registerModels() {
-        // Register item models here
+    public String getName() {
+        return "NauTec Item Model Definitions";
+    }
+
+    @Override
+    protected Stream<? extends Holder<Block>> getKnownBlocks() {
+        return Stream.empty();
+    }
+
+    @Override
+    protected Stream<? extends Holder<Item>> getKnownItems() {
+        return Stream.empty();
+    }
+
+    @Override
+    protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+        this.blockModels = blockModels;
+        this.itemModels = itemModels;
+
         basicItem(NTItems.AQUARINE_STEEL_INGOT.get());
         basicItem(NTItems.ATLANTIC_GOLD_INGOT.get());
         basicItem(NTItems.ATLANTIC_GOLD_NUGGET.get());
@@ -46,7 +79,6 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(NTItems.DOLPHIN_FIN.get());
 
         basicItem(NTItems.CLAW_ROBOT_ARM.get());
-//        basicItem(NTItems.SYRINGE_ROBOT_ARM.get());
 
         basicItem(NTItems.CAST_IRON_INGOT.get());
         basicItem(NTItems.CAST_IRON_NUGGET.get());
@@ -96,102 +128,78 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
         parentItemBlock(NTBlocks.LASER_JUNCTION.asItem(), "_base");
 
+        specialItemBlock(NTBlocks.ANCHOR.asItem(), new AnchorItemRenderer.Unbaked());
+        specialItemBlock(NTBlocks.PRISMARINE_CRYSTAL.asItem(), new PrismarineCrystalItemRenderer.Unbaked());
+        specialItemBlock(NTBlocks.DECORATIVE_PRISMARINE_CRYSTAL.asItem(), new PrismarineCrystalItemRenderer.Unbaked());
+
         blockItems();
     }
 
-    private void bucket(Fluid f) {
-        withExistingParent(key(f.getBucket()).getPath(), ResourceLocation.fromNamespaceAndPath("neoforge", "item/bucket"))
-                .customLoader(DynamicFluidContainerModelBuilder::begin)
-                .fluid(f);
+    private void specialItemBlock(Item item, SpecialModelRenderer.Unbaked<?> renderer) {
+        Identifier name = key(item);
+        itemModels.itemModelOutput.accept(item, ItemModelUtils.specialModel(
+                Identifier.fromNamespaceAndPath(name.getNamespace(), "block/" + name.getPath()), renderer));
     }
 
-    private static @NotNull ResourceLocation key(ItemLike item) {
+    private void bucket(Fluid f) {
+        itemModels.itemModelOutput.accept(f.getBucket(), new DynamicFluidContainerModel.Unbaked(
+                new DynamicFluidContainerModel.Textures(
+                        Optional.empty(),
+                        Optional.of(new Material(Identifier.withDefaultNamespace("item/bucket"))),
+                        Optional.of(new Material(Identifier.fromNamespaceAndPath("neoforge", "item/mask/bucket_fluid"))),
+                        Optional.empty()),
+                f, false, true, true));
+    }
+
+    private static @NotNull Identifier key(ItemLike item) {
         return BuiltInRegistries.ITEM.getKey(item.asItem());
     }
 
     private void blockItems() {
         for (Supplier<BlockItem> blockItem : NTItems.BLOCK_ITEMS) {
-            parentItemBlock(blockItem.get());
+            BlockItem item = blockItem.get();
+            if (item == NTBlocks.LASER_JUNCTION.asItem()
+                    || item == NTBlocks.ANCHOR.asItem()
+                    || item == NTBlocks.PRISMARINE_CRYSTAL.asItem()
+                    || item == NTBlocks.DECORATIVE_PRISMARINE_CRYSTAL.asItem()) {
+                continue;
+            }
+            parentItemBlock(item);
         }
     }
 
-    public ItemModelBuilder parentItemBlock(Item item, ResourceLocation loc) {
-        ResourceLocation name = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item));
-        return getBuilder(name.toString())
-                .parent(new ModelFile.UncheckedModelFile(loc));
+    public void parentItemBlock(Item item) {
+        parentItemBlock(item, "");
     }
 
-    public ItemModelBuilder parentItemBlock(Item item) {
-        return parentItemBlock(item, "");
-    }
-
-    public ItemModelBuilder parentItemBlock(Item item, String suffix) {
-        ResourceLocation name = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item));
-        return getBuilder(name.toString())
-                .parent(new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(name.getNamespace(), "block/" + name.getPath() + suffix)));
+    public void parentItemBlock(Item item, String suffix) {
+        Identifier name = key(item);
+        blockModels.registerSimpleItemModel(item, Identifier.fromNamespaceAndPath(name.getNamespace(), "block/" + name.getPath() + suffix));
     }
 
     public void petriDishItem(Item item) {
-        ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
-        ResourceLocation hasBacteria = Nautec.rl("has_bacteria");
-        getBuilder(location.toString())
-                .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .override()
-                .model(basicItem(item))
-                .predicate(hasBacteria, 0)
-                .end()
-                .override()
-                .model(basicItem(item, "_bacteria")
-                        .texture("layer1", itemTexture(item, "_overlay")))
-                .predicate(hasBacteria, 1)
-                .end()
-                .texture("layer0", itemTexture(item, ""));
+        Identifier base = itemModels.createFlatItemModel(item, ModelTemplates.FLAT_ITEM);
+        Identifier bacteria = ModelTemplates.TWO_LAYERED_ITEM.create(ModelLocationUtils.getModelLocation(item, "_bacteria"),
+                TextureMapping.layered(TextureMapping.getItemTexture(item), TextureMapping.getItemTexture(item, "_overlay")),
+                itemModels.modelOutput);
+        itemModels.itemModelOutput.accept(item, ItemModelUtils.conditional(new HasBacteriaProperty(),
+                ItemModelUtils.tintedModel(bacteria, ItemModelUtils.constantTint(-1), new BacteriaColorTintSource()),
+                ItemModelUtils.plainModel(base)));
     }
 
     public void aquarineSteelTool(Item item) {
-        ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
-        ResourceLocation enabled = Nautec.rl("enabled");
-        getBuilder(location.toString())
-                .parent(new ModelFile.UncheckedModelFile("item/handheld"))
-                .override()
-                .model(handHeldItem(item))
-                .predicate(enabled, 0)
-                .end()
-                .override()
-                .model(handHeldItem(item, "_enabled"))
-                .predicate(enabled, 1)
-                .end()
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath()));
+        Identifier base = itemModels.createFlatItemModel(item, ModelTemplates.FLAT_HANDHELD_ITEM);
+        Identifier enabled = itemModels.createFlatItemModel(item, "_enabled", ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.itemModelOutput.accept(item, ItemModelUtils.conditional(new AbilityEnabledProperty(),
+                ItemModelUtils.plainModel(enabled),
+                ItemModelUtils.plainModel(base)));
     }
 
-    public ItemModelBuilder handHeldItem(Item item) {
-        return handHeldItem(item, "");
+    public void handHeldItem(Item item) {
+        itemModels.generateFlatItem(item, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 
-    public ItemModelBuilder handHeldItem(Item item, String suffix) {
-        ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
-        return getBuilder(location + suffix)
-                .parent(new ModelFile.UncheckedModelFile("item/handheld"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath() + suffix));
-    }
-
-    private ResourceLocation itemTexture(Item item, String suffx) {
-        ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
-        return ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath() + suffx);
-    }
-
-    public ItemModelBuilder basicItem(Item item, String suffix) {
-        ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
-        return getBuilder(item.toString() + suffix)
-                .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath()));
-    }
-
-    private String name(ItemLike item) {
-        return key(item).getPath();
-    }
-
-    private ResourceLocation extend(ResourceLocation rl, String suffix) {
-        return ResourceLocation.fromNamespaceAndPath(rl.getNamespace(), rl.getPath() + suffix);
+    public void basicItem(Item item) {
+        itemModels.generateFlatItem(item, ModelTemplates.FLAT_ITEM);
     }
 }

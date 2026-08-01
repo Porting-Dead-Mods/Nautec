@@ -19,10 +19,10 @@ public record MultiblockLayer(boolean dynamic, IntegerRange range, int[] layer, 
 
     public static MultiblockLayer load(CompoundTag tag) {
         return new MultiblockLayer(
-                tag.getBoolean("dynamic"),
-                IntegerRange.of(tag.getInt("rangeMin"), tag.getInt("rangeMax")),
-                tag.getIntArray("layer"),
-                IntIntPair.of(tag.getInt("widthsX"), tag.getInt("widthsZ"))
+                tag.getBooleanOr("dynamic", false),
+                IntegerRange.of(tag.getIntOr("rangeMin", 0), tag.getIntOr("rangeMax", 0)),
+                tag.getIntArray("layer").orElse(new int[0]),
+                IntIntPair.of(tag.getIntOr("widthsX", 0), tag.getIntOr("widthsZ", 0))
         );
     }
 

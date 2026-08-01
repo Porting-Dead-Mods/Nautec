@@ -61,15 +61,6 @@ public class AugmentationStationExtensionBlock extends LaserBlock {
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock()) && state.getValue(Multiblock.FORMED)) {
-            AugmentationStationExtensionBlockEntity be = (AugmentationStationExtensionBlockEntity) level.getBlockEntity(pos);
-            MultiblockHelper.unform(NTMultiblocks.AUGMENTATION_STATION.get(), be.getControllerPos(), level);
-        }
-        super.onRemove(state, level, pos, newState, movedByPiston);
-    }
-
-    @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         if (state.getValue(Multiblock.FORMED)) {
             return Shapes.box(0, 0, 0, 1, 0.625, 1);

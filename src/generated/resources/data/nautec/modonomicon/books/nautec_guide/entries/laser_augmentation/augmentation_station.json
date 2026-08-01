@@ -1,46 +1,25 @@
 {
-  "background_u_index": 0,
-  "background_v_index": 0,
-  "category": "laser_augmentation",
-  "description": "book.nautec.nautec_guide.laser_augmentation.augmentation_station.description",
-  "hide_while_locked": false,
-  "icon": {
-    "item": "nautec:augmentation_station"
+  "type": "modonomicon:content",
+  "background": {
+    "height": 26,
+    "sprite": "modonomicon:modonomicon/themes/default/node/entry_backgrounds/square_gold",
+    "width": 26
   },
+  "category": "nautec:laser_augmentation",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "description": "book.nautec.nautec_guide.laser_augmentation.augmentation_station.description",
+  "icon": {
+    "id": "nautec:augmentation_station"
+  },
+  "id": "nautec:laser_augmentation/augmentation_station",
   "name": "book.nautec.nautec_guide.laser_augmentation.augmentation_station.name",
-  "pages": [
-    {
-      "type": "modonomicon:text",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "show_title_separator": true,
-      "text": "book.nautec.nautec_guide.laser_augmentation.augmentation_station.augmentation_station.text",
-      "title": "book.nautec.nautec_guide.laser_augmentation.augmentation_station.augmentation_station.title",
-      "use_markdown_in_title": false
-    },
-    {
-      "type": "modonomicon:multiblock",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "multiblock_id": "aumgentation_station",
-      "multiblock_name": "",
-      "show_visualize_button": true,
-      "text": "book.nautec.nautec_guide.laser_augmentation.augmentation_station.augmentation_station_multiblock.text"
-    }
-  ],
   "parents": [
     {
-      "draw_arrow": true,
-      "entry": "laser_augmentation/mob_augments",
-      "line_enabled": true,
-      "line_reversed": false
+      "entry": "nautec:laser_augmentation/mob_augments"
     }
   ],
-  "show_when_any_parent_unlocked": false,
   "sort_number": 4,
   "x": 4,
   "y": 0

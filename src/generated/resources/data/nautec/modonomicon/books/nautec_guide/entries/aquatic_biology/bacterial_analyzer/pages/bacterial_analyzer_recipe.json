@@ -1,0 +1,10 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "bacterial_analyzer_recipe",
+  "recipe_id_1": "nautec:bacterial_analyzer",
+  "sort_number": 1,
+  "title1": "Bacterial Analyzer Recipe"
+}

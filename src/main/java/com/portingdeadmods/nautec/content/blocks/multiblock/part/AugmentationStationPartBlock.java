@@ -57,13 +57,4 @@ public class AugmentationStationPartBlock extends BaseEntityBlock {
         return AugmentStationShapes.getShape(state.getValue(AugmentationStationMultiblock.AS_PART).intValue()).getShapeModifier().apply(Shapes.empty());
     }
 
-    @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock()) && !newState.is(NTBlocks.POLISHED_PRISMARINE) && !newState.is(NTBlocks.AQUARINE_STEEL_BLOCK)) {
-            Nautec.LOGGER.debug("unformingp");
-            AugmentationStationPartBlockEntity be = (AugmentationStationPartBlockEntity) level.getBlockEntity(pos);
-            MultiblockHelper.unform(NTMultiblocks.AUGMENTATION_STATION.get(), be.getControllerPos(), level);
-        }
-        super.onRemove(state, level, pos, newState, movedByPiston);
-    }
 }

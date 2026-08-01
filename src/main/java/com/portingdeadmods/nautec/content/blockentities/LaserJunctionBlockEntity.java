@@ -7,13 +7,12 @@ import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
+import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static org.codehaus.plexus.util.StringUtils.capitalizeFirstLetter;
+import java.util.List;
 
 public class LaserJunctionBlockEntity extends LaserBlockEntity {
     private final Set<Direction> inputDirections;
@@ -44,7 +44,6 @@ public class LaserJunctionBlockEntity extends LaserBlockEntity {
             return "No inputs";
         }
 
-        // Join the direction names into a readable string with first letter capitalized
         return inputs.stream()
                 .map(direction -> capitalizeFirstLetter(direction.getName()))
                 .reduce((a, b) -> a + ", " + b)
@@ -61,7 +60,6 @@ public class LaserJunctionBlockEntity extends LaserBlockEntity {
             return "No outputs";
         }
 
-        // Join the direction names into a readable string with first letter capitalized
         return outputs.stream()
                 .map(direction -> capitalizeFirstLetter(direction.getName()))
                 .reduce((a, b) -> a + ", " + b)
@@ -80,51 +78,30 @@ public class LaserJunctionBlockEntity extends LaserBlockEntity {
     }
 
     @Override
-    protected void saveData(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveData(tag, registries);
+    protected void saveData(ValueOutput out) {
+        super.saveData(out);
 
-        // Save input directions
-        ListTag inputList = new ListTag();
-        for (Direction direction : inputDirections) {
-            inputList.add(StringTag.valueOf(direction.getName()));
-        }
-        tag.put("InputDirections", inputList);
-
-        // Save output directions
-        ListTag outputList = new ListTag();
-        for (Direction direction : outputDirections) {
-            outputList.add(StringTag.valueOf(direction.getName()));
-        }
-        tag.put("OutputDirections", outputList);
+        out.store("InputDirections", Codec.STRING.listOf(), inputDirections.stream().map(Direction::getName).toList());
+        out.store("OutputDirections", Codec.STRING.listOf(), outputDirections.stream().map(Direction::getName).toList());
     }
 
     @Override
-    protected void loadData(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadData(tag, registries);
-        
-        // Load input directions
+    protected void loadData(ValueInput in) {
+        super.loadData(in);
+
         inputDirections.clear();
-        if (tag.contains("InputDirections")) {
-            ListTag inputList = tag.getList("InputDirections", 8); // 8 = StringTag
-            for (int i = 0; i < inputList.size(); i++) {
-                String directionName = inputList.getString(i);
-                Direction direction = Direction.byName(directionName);
-                if (direction != null) {
-                    inputDirections.add(direction);
-                }
+        for (String directionName : in.read("InputDirections", Codec.STRING.listOf()).orElse(List.of())) {
+            Direction direction = Direction.byName(directionName);
+            if (direction != null) {
+                inputDirections.add(direction);
             }
         }
-        
-        // Load output directions
+
         outputDirections.clear();
-        if (tag.contains("OutputDirections")) {
-            ListTag outputList = tag.getList("OutputDirections", 8); // 8 = StringTag
-            for (int i = 0; i < outputList.size(); i++) {
-                String directionName = outputList.getString(i);
-                Direction direction = Direction.byName(directionName);
-                if (direction != null) {
-                    outputDirections.add(direction);
-                }
+        for (String directionName : in.read("OutputDirections", Codec.STRING.listOf()).orElse(List.of())) {
+            Direction direction = Direction.byName(directionName);
+            if (direction != null) {
+                outputDirections.add(direction);
             }
         }
     }
