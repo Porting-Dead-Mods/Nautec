@@ -1,4 +1,4 @@
-package com.portingdeadmods.nautec.content.entites;
+package com.portingdeadmods.nautec.content.entities;
 
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;

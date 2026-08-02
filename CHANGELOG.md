@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.5.1]
+
+### Fixed
+- Spreading Tridents are no longer invisible when thrown.
+- The Mutator and Bacterial Analyzer now respect their config settings for
+  crafting speed and power requirement.
+- Laser purity now drops right away when its source is removed, instead of
+  sticking at the old value.
+- Prismarine Sand now generates on the ocean floor as intended.
+- Crystal Geodes and Ocean Ruins no longer generate on top of each other.
+- Salt water can now be collected in modded ocean biomes.
+- Machine particle effects no longer stutter when several machines run at
+  once.
+
+## [0.5.0]
+
+### Changed
+- Updated to Minecraft 26.1.
+
 ## [0.4.1]
 
 ### Fixed

@@ -111,11 +111,11 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         LootPool.Builder builder = LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1.0F));
 
-        for (Map.Entry<Integer, Block> entry : drops.entrySet()) {
-            builder.add(LootItem.lootTableItem(entry.getValue())
+        for (Integer key : drops.keySet().stream().sorted().toList()) {
+            builder.add(LootItem.lootTableItem(drops.get(key))
                     .when(
                             LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, entry.getKey()))
+                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, key))
                     ));
         }
 
@@ -135,11 +135,11 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         LootPool.Builder builder = LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1.0F));
 
-        for (Map.Entry<T, Block> entry : drops.entrySet()) {
-            builder.add(LootItem.lootTableItem(entry.getValue())
+        for (T key : drops.keySet().stream().sorted().toList()) {
+            builder.add(LootItem.lootTableItem(drops.get(key))
                     .when(
                             LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, entry.getKey()))
+                                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, key))
                     ));
         }
 

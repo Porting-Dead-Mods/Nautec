@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -46,7 +47,7 @@ public abstract class BucketItemMixin {
 
                 if (blockState.getBlock() instanceof BucketPickup bucketPickup) {
 
-                    if (level.getFluidState(blockPos).is(FluidTags.WATER) && level.getBiome(blockPos).getRegisteredName().contains("ocean")) {
+                    if (level.getFluidState(blockPos).is(FluidTags.WATER) && level.getBiome(blockPos).is(BiomeTags.IS_OCEAN)) {
 
                         ItemStack filledBucket = bucketPickup.pickupBlock(player, level, blockPos, blockState);
                         if (!filledBucket.isEmpty()) {

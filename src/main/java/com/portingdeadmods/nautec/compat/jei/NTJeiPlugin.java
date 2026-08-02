@@ -17,6 +17,7 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.common.Internal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Registry;
@@ -125,9 +126,8 @@ public class NTJeiPlugin implements IModPlugin {
 
     private static RecipeMap syncedRecipes() {
         try {
-            Class<?> internal = Class.forName("mezz.jei.common.Internal");
-            return (RecipeMap) internal.getMethod("getClientSyncedRecipes").invoke(null);
-        } catch (ReflectiveOperationException | ClassCastException e) {
+            return Internal.getClientSyncedRecipes();
+        } catch (LinkageError e) {
             Nautec.LOGGER.error("Failed to access JEI synced recipes", e);
             return RecipeMap.EMPTY;
         }

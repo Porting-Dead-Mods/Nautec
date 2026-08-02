@@ -30,9 +30,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider {
-    public static final int MAX_PROGRESS = NTConfig.mutatorCraftingSpeed;
-    public static final int POWER_USAGE = NTConfig.mutatorPowerUsage;
-
     private BacteriaMutationRecipe recipe;
     private int progress;
 
@@ -72,8 +69,8 @@ public class MutatorBlockEntity extends LaserBlockEntity implements MenuProvider
         super.commonTick();
 
         if (this.recipe != null) {
-            if (getPower() >= POWER_USAGE) {
-                if (progress >= MAX_PROGRESS) {
+            if (getPower() >= NTConfig.mutatorPowerUsage) {
+                if (progress >= NTConfig.mutatorCraftingSpeed) {
                     ResourceKey<Bacteria> resultBacteria = recipe.resultBacteria();
                     BacteriaInstance inputBacteria = getBacteriaStorage().getBacteria(0);
                     getBacteriaStorage().extractBacteria(0, inputBacteria.getSize(), false);

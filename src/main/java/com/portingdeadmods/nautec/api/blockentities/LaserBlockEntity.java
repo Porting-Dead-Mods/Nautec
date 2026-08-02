@@ -173,6 +173,7 @@ public abstract class LaserBlockEntity extends ContainerBlockEntity {
         this.purity = newPurity + purity / (size > 0 ? size : 1);
 
         this.powerPerSide.clear();
+        this.purityPerSide.clear();
     }
 
     private void damageLivingEntities(AABB box) {

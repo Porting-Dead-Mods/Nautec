@@ -14,7 +14,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
 public record KeyPressedPayload(AugmentSlot augmentSlot) implements CustomPacketPayload {
-    public static final Type<KeyPressedPayload> TYPE = new Type<>(Nautec.rl("key_pressesd_paylad"));
+    public static final Type<KeyPressedPayload> TYPE = new Type<>(Nautec.rl("key_pressed_payload"));
     public static final StreamCodec<RegistryFriendlyByteBuf, KeyPressedPayload> STREAM_CODEC = StreamCodec.composite(
             AugmentCodecs.AUGMENT_SLOT_STREAM_CODEC,
             KeyPressedPayload::augmentSlot,

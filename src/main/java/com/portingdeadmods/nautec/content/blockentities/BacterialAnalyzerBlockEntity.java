@@ -29,9 +29,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class BacterialAnalyzerBlockEntity extends LaserBlockEntity implements MenuProvider {
-    public static final int MAX_PROGRESS = NTConfig.bacteriaAnalyzerCraftingSpeed;
-    public static final int POWER_USAGE = NTConfig.bacteriaAnalyzerPowerUsage;
-
     private boolean hasRecipe;
     private int progress;
 
@@ -62,8 +59,8 @@ public class BacterialAnalyzerBlockEntity extends LaserBlockEntity implements Me
         super.commonTick();
 
         if (hasRecipe) {
-            if (getPower() >= POWER_USAGE) {
-                if (progress >= MAX_PROGRESS) {
+            if (getPower() >= NTConfig.bacteriaAnalyzerPowerUsage) {
+                if (progress >= NTConfig.bacteriaAnalyzerCraftingSpeed) {
                     ItemStack extracted = getItemStackHandler().extractItem(0, 1, false);
 
                     ItemStack result = extracted.copy();

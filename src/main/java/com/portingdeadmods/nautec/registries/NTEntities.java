@@ -1,8 +1,8 @@
 package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
-import com.portingdeadmods.nautec.content.entites.ThrownBouncingTrident;
-import com.portingdeadmods.nautec.content.entites.ThrownSpreadingTrident;
+import com.portingdeadmods.nautec.content.entities.ThrownBouncingTrident;
+import com.portingdeadmods.nautec.content.entities.ThrownSpreadingTrident;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;

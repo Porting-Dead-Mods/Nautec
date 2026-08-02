@@ -1,5 +1,6 @@
 package com.portingdeadmods.nautec.client.screen;
 
+import com.portingdeadmods.nautec.NTConfig;
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.api.client.screen.NTAbstractContainerScreen;
 import com.portingdeadmods.nautec.api.menu.NTAbstractContainerMenu;
@@ -29,7 +30,7 @@ public class BacterialAnalyzerScreen extends NTAbstractContainerScreen<Bacterial
 
         int progress = menu.blockEntity.getProgress();
 
-        int j1 = Mth.ceil(((float) progress / BacterialAnalyzerBlockEntity.MAX_PROGRESS) * 24.0F);
+        int j1 = Mth.ceil(((float) progress / NTConfig.bacteriaAnalyzerCraftingSpeed) * 24.0F);
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, PROGRESS_ARROW, 24, 24, 0, 0, i + 76, j + 29, j1, 24);
     }
 

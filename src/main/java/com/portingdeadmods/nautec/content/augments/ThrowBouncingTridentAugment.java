@@ -2,7 +2,7 @@ package com.portingdeadmods.nautec.content.augments;
 
 import com.portingdeadmods.nautec.api.augments.Augment;
 import com.portingdeadmods.nautec.api.augments.AugmentSlot;
-import com.portingdeadmods.nautec.content.entites.ThrownBouncingTrident;
+import com.portingdeadmods.nautec.content.entities.ThrownBouncingTrident;
 import com.portingdeadmods.nautec.network.KeyPressedPayload;
 import com.portingdeadmods.nautec.registries.NTAugments;
 import com.portingdeadmods.nautec.registries.NTKeybinds;

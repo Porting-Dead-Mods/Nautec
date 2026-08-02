@@ -82,8 +82,8 @@ public class DatapackRegistryProvider extends DatapackBuiltinEntriesProvider {
                                 CountPlacement.of(10),
                                 InSquarePlacement.spread(),
                                 HeightRangePlacement.uniform(
-                                        VerticalAnchor.absolute(40),
-                                        VerticalAnchor.absolute(-15)
+                                        VerticalAnchor.absolute(-15),
+                                        VerticalAnchor.absolute(40)
                                 )
                         )
                 ));

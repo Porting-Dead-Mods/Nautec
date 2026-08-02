@@ -14,11 +14,9 @@ public final class ParticleUtils {
     private static final double PARTICLE_RADIUS = 0.5;
     private static final int PARTICLE_DELAY = 5;
 
-    private static int particleTicks = 0;
-
     public static void spawnParticlesAroundItem(ItemEntity itemEntity, Level level, ParticleOptions particlesTypes) {
         assert level.isClientSide();
-        if (particleTicks % PARTICLE_DELAY == 0) {
+        if (level.getGameTime() % PARTICLE_DELAY == 0) {
             for (int i = 0; i < PARTICLE_COUNT; i++) {
                 double theta = level.getRandom().nextDouble() * Math.PI * 2;
                 double phi = level.getRandom().nextDouble() * Math.PI;
@@ -34,14 +32,12 @@ public final class ParticleUtils {
                         0, 0, 0);
             }
         }
-
-        particleTicks++;
     }
 
     public static void spawnParticlesAroundBlock(BlockPos blockPos, Level level, ParticleOptions particlesTypes) {
         assert level.isClientSide();
 
-        if (particleTicks % PARTICLE_DELAY == 0) {
+        if (level.getGameTime() % PARTICLE_DELAY == 0) {
             for (int i = 0; i < PARTICLE_COUNT; i++) {
                 double theta = level.getRandom().nextDouble() * Math.PI * 2;
                 double phi = level.getRandom().nextDouble() * Math.PI;
@@ -57,8 +53,6 @@ public final class ParticleUtils {
                         0, 0, 0);
             }
         }
-
-        particleTicks++;
     }
 
     public static void spawnBreakParticle(BlockPos pos, Block block, int count) {

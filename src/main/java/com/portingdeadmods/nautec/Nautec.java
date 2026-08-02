@@ -21,7 +21,6 @@ import com.portingdeadmods.nautec.data.NTDataAttachments;
 import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.NTDataMaps;
 import com.portingdeadmods.nautec.registries.*;
-import com.portingdeadmods.nautec.utils.NTProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
