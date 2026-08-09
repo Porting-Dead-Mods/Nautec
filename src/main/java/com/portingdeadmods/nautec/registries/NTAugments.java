@@ -43,4 +43,11 @@ public final class NTAugments {
             () -> AugmentType.of(ThrowSpreadingTrident::new, NTAugmentSlots.LEFT_ARM.get(), NTAugmentSlots.RIGHT_ARM.get()));
     public static final Supplier<AugmentType<EnderMagnetAugment>> ENDER_MAGNET_AUGMENT = AUGMENTS.register("ender_magnet",
             () -> AugmentType.of(EnderMagnetAugment::new, NTAugmentSlots.LEFT_ARM.get(), NTAugmentSlots.RIGHT_ARM.get()));
+
+    public static final Supplier<AugmentType<AbyssalEyesAugment>> ABYSSAL_EYES = AUGMENTS.register("abyssal_eyes",
+            () -> AugmentType.of(AbyssalEyesAugment::new, NTAugmentSlots.EYES.get()));
+    public static final Supplier<AugmentType<PhotophoreSkinAugment>> PHOTOPHORE_SKIN = AUGMENTS.register("photophore_skin",
+            () -> AugmentType.of(PhotophoreSkinAugment::new, NTAugmentSlots.BODY.get()));
+    public static final Supplier<AugmentType<VentCarapaceAugment>> VENT_CARAPACE = AUGMENTS.register("vent_carapace",
+            () -> AugmentType.of(VentCarapaceAugment::new, NTAugmentSlots.HEAD.get(), NTAugmentSlots.BODY.get()));
 }

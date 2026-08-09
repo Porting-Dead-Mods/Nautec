@@ -1,0 +1,13 @@
+{
+  "type": "modonomicon:spotlight",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "abyssal_eyes",
+  "item": {
+    "id": "nautec:abyssal_organ"
+  },
+  "sort_number": 1,
+  "text": "book.nautec.nautec_guide.laser_augmentation.deep_fauna_augments.abyssal_eyes.text",
+  "title": "book.nautec.nautec_guide.laser_augmentation.deep_fauna_augments.abyssal_eyes.title"
+}

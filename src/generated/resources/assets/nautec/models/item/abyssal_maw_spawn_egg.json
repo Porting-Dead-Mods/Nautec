@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nautec:item/abyssal_maw_spawn_egg"
+  }
+}

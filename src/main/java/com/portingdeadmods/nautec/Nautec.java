@@ -73,6 +73,7 @@ public final class Nautec {
         NTEntities.ENTITIES.register(modEventBus);
         NTItems.ITEMS.register(modEventBus);
         NTBlocks.BLOCKS.register(modEventBus);
+        NTParticles.PARTICLE_TYPES.register(modEventBus);
         NTRecipes.SERIALIZERS.register(modEventBus);
         NTDataAttachments.ATTACHMENTS.register(modEventBus);
         NTArgumentTypes.ARGUMENT_TYPES.register(modEventBus);

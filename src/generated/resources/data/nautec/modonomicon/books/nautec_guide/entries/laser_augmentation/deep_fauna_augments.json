@@ -1,0 +1,26 @@
+{
+  "type": "modonomicon:content",
+  "background": {
+    "height": 26,
+    "sprite": "modonomicon:modonomicon/themes/default/node/entry_backgrounds/square_gold",
+    "width": 26
+  },
+  "category": "nautec:laser_augmentation",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "description": "book.nautec.nautec_guide.laser_augmentation.deep_fauna_augments.description",
+  "icon": {
+    "id": "nautec:abyssal_organ"
+  },
+  "id": "nautec:laser_augmentation/deep_fauna_augments",
+  "name": "book.nautec.nautec_guide.laser_augmentation.deep_fauna_augments.name",
+  "parents": [
+    {
+      "entry": "nautec:laser_augmentation/augmentation"
+    }
+  ],
+  "sort_number": 7,
+  "x": 6,
+  "y": -2
+}

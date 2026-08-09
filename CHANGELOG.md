@@ -3,13 +3,50 @@
 ## [Unreleased]
 
 ### Added
+- Four new ocean biomes, added to the world's biome layout without replacing
+  any vanilla ocean outright:
+  - **Abyssal Trench** - the deepest, coldest water, near-black fog you can
+    barely see through, and far more Drowned than anywhere else.
+  - **Bioluminescent Grove** - clear teal water, glow squid, kelp and sea
+    pickles.
+  - **Hydrothermal Vents** - murky warm water over a basalt and magma floor.
+  - **Prismarine Reef** - bright shallow water at the edge of the drop-off,
+    coral, tropical fish and prismarine outcrops.
+- All four count as oceans, so salt water collection, the Deep Sea Drain,
+  Crystal Geodes, Ocean Ruins and shipwrecks all work in them.
+- `enableBiomeInjection` and `injectableWorldPresets` config options. Packs
+  using a custom overworld preset should add it to the second one.
+- Budding Prismarine, which grows Prismarine Buds and Clusters the way Budding
+  Amethyst does. Clusters drop Prismarine Crystal Shards, so shards are now
+  renewable. It generates rarely in all four new biomes.
+- Six new plants: Deep Kelp, Luminescent Algae, Prismarine Frond, Vent
+  Tubeworm, Abyssal Coral and Glow Polyp. Luminescent Algae and Glow Polyp
+  give off light.
+- Four new creatures: the schooling Silt Skipper, the drifting Lantern Jelly,
+  the armoured Vent Crawler, and the Abyssal Maw, which hunts in the dark
+  below y=40. They drop Luminous Membrane, Chitin Plate and Abyssal Organ.
+- Ambient particles in three of the new biomes: vent bubbles, glow spores and
+  abyssal motes.
 - Twelve augments that were already in the mod but impossible to install now
   have body slots, parts and recipes: Hydraulic Leg, Servo Knee, Shock
   Absorber, Tendon Weave, Magnetic Coil Arm, Ender Coil Arm, Hydro Drill Arm,
   Trident Launcher Arm, Volley Trident Arm, Syringe Robot Arm, Buoyancy Tank
   and Auxiliary Ventricle.
-- New guide entry "Crafted Augments" covering all twelve parts and how they
-  compete for slots.
+- Three augments built from the new creatures' drops:
+  - **Abyssal Eyes** (Abyssal Organ, eye slot) grants night vision, but only
+    at depth. Near the surface it stays dormant.
+  - **Photophore Skin** (Luminous Membrane, body slot) lights up every living
+    thing near you while you are in water, through terrain.
+  - **Vent Carapace** (4 Chitin Plates, head or body slot) adds armour,
+    knockback resistance, and halves how long you burn.
+- Two new guide entries: "Crafted Augments" for the twelve buildable parts and
+  "Deep Fauna Augments" for the three organ augments.
+
+### Fixed
+- Augments that change your attributes or abilities no longer stop working
+  after you die. Bonus Hearts, Step Up, Walking Speed and Creative Flight kept
+  showing as installed after a respawn but had no effect until you reapplied
+  them at the Augmentation Station.
 
 ### Changed
 - The Spreading Trident augment is now on 'U' by default. It shared 'Y' with

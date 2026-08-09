@@ -8,11 +8,14 @@ import com.portingdeadmods.nautec.api.fluids.NTFluid;
 import com.portingdeadmods.nautec.client.hud.DivingSuitOverlay;
 import com.portingdeadmods.nautec.client.hud.PrismMonocleOverlay;
 import com.portingdeadmods.nautec.client.item.AbilityEnabledProperty;
+import com.portingdeadmods.nautec.client.particle.DriftingMoteParticle;
 import com.portingdeadmods.nautec.client.item.BacteriaColorTintSource;
 import com.portingdeadmods.nautec.client.item.HasBacteriaProperty;
 import com.portingdeadmods.nautec.client.model.augment.DolphinFinModel;
 import com.portingdeadmods.nautec.client.model.augment.GuardianEyeModel;
 import com.portingdeadmods.nautec.client.model.block.*;
+import com.portingdeadmods.nautec.client.model.entity.*;
+import com.portingdeadmods.nautec.client.renderer.entity.NTMobRenderers;
 import com.portingdeadmods.nautec.client.renderer.augments.GuardianEyeRenderer;
 import com.portingdeadmods.nautec.client.renderer.augments.SimpleAugmentRenderer;
 import com.portingdeadmods.nautec.client.renderer.blockentities.*;
@@ -72,6 +75,16 @@ public final class NautecClient {
         modEventBus.addListener(this::registerSpecialModelRenderers);
         modEventBus.addListener(this::registerConditionalItemModelProperties);
         modEventBus.addListener(this::registerFluidModels);
+        modEventBus.addListener(this::registerParticleProviders);
+    }
+
+    private void registerParticleProviders(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(NTParticles.VENT_BUBBLE.get(),
+                sprites -> new DriftingMoteParticle.Provider(sprites, 0.85F, 0.86F, 0.88F, 0.055F, 0.09F, 24, 44));
+        event.registerSpriteSet(NTParticles.GLOW_SPORE.get(),
+                sprites -> new DriftingMoteParticle.Provider(sprites, 0.42F, 0.95F, 0.82F, 0.012F, 0.07F, 60, 110));
+        event.registerSpriteSet(NTParticles.ABYSSAL_MOTE.get(),
+                sprites -> new DriftingMoteParticle.Provider(sprites, 0.30F, 0.42F, 0.58F, -0.004F, 0.06F, 70, 130));
     }
 
     private void registerGuiOverlays(RegisterGuiLayersEvent event) {
@@ -137,6 +150,10 @@ public final class NautecClient {
     private void registerBERenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(NTEntities.THROWN_BOUNCING_TRIDENT.get(), ThrownTridentRenderer::new);
         event.registerEntityRenderer(NTEntities.THROWN_SPREADING_TRIDENT.get(), ThrownTridentRenderer::new);
+        event.registerEntityRenderer(NTEntities.SILT_SKIPPER.get(), NTMobRenderers.SiltSkipperRenderer::new);
+        event.registerEntityRenderer(NTEntities.LANTERN_JELLY.get(), NTMobRenderers.LanternJellyRenderer::new);
+        event.registerEntityRenderer(NTEntities.VENT_CRAWLER.get(), NTMobRenderers.VentCrawlerRenderer::new);
+        event.registerEntityRenderer(NTEntities.ABYSSAL_MAW.get(), NTMobRenderers.AbyssalMawRenderer::new);
         event.registerBlockEntityRenderer(NTBlockEntityTypes.AQUATIC_CATALYST.get(), LaserBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(NTBlockEntityTypes.PRISMARINE_LASER_RELAY.get(), LaserBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(NTBlockEntityTypes.CREATIVE_POWER_SOURCE.get(), LaserBlockEntityRenderer::new);
@@ -184,6 +201,10 @@ public final class NautecClient {
         event.registerLayerDefinition(RobotArmModel.LAYER_LOCATION, RobotArmModel::createBodyLayer);
         event.registerLayerDefinition(DolphinFinModel.LAYER_LOCATION, DolphinFinModel::createBodyLayer);
         event.registerLayerDefinition(GuardianEyeModel.LAYER_LOCATION, GuardianEyeModel::createBodyLayer);
+        event.registerLayerDefinition(NTMobRenderers.SILT_SKIPPER_LAYER, SiltSkipperModel::createBodyLayer);
+        event.registerLayerDefinition(NTMobRenderers.LANTERN_JELLY_LAYER, LanternJellyModel::createBodyLayer);
+        event.registerLayerDefinition(NTMobRenderers.VENT_CRAWLER_LAYER, VentCrawlerModel::createBodyLayer);
+        event.registerLayerDefinition(NTMobRenderers.ABYSSAL_MAW_LAYER, AbyssalMawModel::createBodyLayer);
         ArmorModelsHandler.registerLayers(event);
     }
 

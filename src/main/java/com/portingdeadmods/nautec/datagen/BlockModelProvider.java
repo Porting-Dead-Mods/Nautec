@@ -72,6 +72,23 @@ public class BlockModelProvider extends ModelProvider {
         simpleBlock(NTBlocks.AQUARINE_STEEL_BLOCK.get());
         simpleBlock(NTBlocks.CAST_IRON_BLOCK.get());
 
+        // Budding Prismarine
+        simpleBlock(NTBlocks.BUDDING_PRISMARINE.get());
+        prismarineBud(NTBlocks.SMALL_PRISMARINE_BUD.get());
+        prismarineBud(NTBlocks.MEDIUM_PRISMARINE_BUD.get());
+        prismarineBud(NTBlocks.LARGE_PRISMARINE_BUD.get());
+        prismarineBud(NTBlocks.PRISMARINE_CLUSTER.get());
+
+        // Flora
+        blockModels.createGrowingPlant(NTBlocks.DEEP_KELP.get(), NTBlocks.DEEP_KELP_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.registerSimpleFlatItemModel(NTBlocks.DEEP_KELP.get());
+        waterPlant(NTBlocks.LUMINESCENT_ALGAE.get());
+        waterPlant(NTBlocks.PRISMARINE_FROND.get());
+        waterPlant(NTBlocks.VENT_TUBEWORM.get());
+        waterPlant(NTBlocks.ABYSSAL_CORAL.get());
+        blockModels.createMultifaceBlockStates(NTBlocks.GLOW_POLYP.get());
+        blockModels.registerSimpleFlatItemModel(NTBlocks.GLOW_POLYP.get());
+
         // Laser Stuffs
         simpleBlock(NTBlocks.CREATIVE_POWER_SOURCE.get());
         aquaticCatalyst(NTBlocks.AQUATIC_CATALYST.get());
@@ -135,6 +152,16 @@ public class BlockModelProvider extends ModelProvider {
 
     private void simpleBlock(Block block) {
         blockModels.createTrivialCube(block);
+    }
+
+    private void prismarineBud(Block block) {
+        blockModels.createAmethystCluster(block);
+        blockModels.registerSimpleFlatItemModel(block);
+    }
+
+    private void waterPlant(Block block) {
+        blockModels.createCrossBlock(block, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.registerSimpleFlatItemModel(block);
     }
 
     private void simpleBlock(Block block, Identifier model) {

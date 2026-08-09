@@ -80,6 +80,16 @@ public class ItemModelProvider extends ModelProvider {
 
         basicItem(NTItems.CLAW_ROBOT_ARM.get());
 
+        basicItem(NTItems.LUMINOUS_MEMBRANE.get());
+        basicItem(NTItems.CHITIN_PLATE.get());
+        basicItem(NTItems.ABYSSAL_ORGAN.get());
+        basicItem(NTItems.SILT_SKIPPER.get());
+        basicItem(NTItems.SILT_SKIPPER_BUCKET.get());
+        basicItem(NTItems.SILT_SKIPPER_SPAWN_EGG.get());
+        basicItem(NTItems.LANTERN_JELLY_SPAWN_EGG.get());
+        basicItem(NTItems.VENT_CRAWLER_SPAWN_EGG.get());
+        basicItem(NTItems.ABYSSAL_MAW_SPAWN_EGG.get());
+
         basicItem(NTItems.HYDRAULIC_LEG.get());
         basicItem(NTItems.SERVO_KNEE.get());
         basicItem(NTItems.SHOCK_ABSORBER.get());

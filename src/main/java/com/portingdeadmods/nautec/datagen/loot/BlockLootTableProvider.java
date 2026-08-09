@@ -7,6 +7,7 @@ import com.portingdeadmods.nautec.content.multiblocks.AugmentationStationMultibl
 import com.portingdeadmods.nautec.content.multiblocks.BioReactorMultiblock;
 import com.portingdeadmods.nautec.registries.NTBlockEntityTypes;
 import com.portingdeadmods.nautec.registries.NTBlocks;
+import com.portingdeadmods.nautec.registries.NTItems;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
@@ -103,6 +104,24 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(NTBlocks.FISHING_STATION.get());
         dropSelf(NTBlocks.DECORATIVE_PRISMARINE_CRYSTAL.get());
         add(NTBlocks.DECORATIVE_PRISMARINE_CRYSTAL_PART.get(), noDrop());
+
+        dropSelf(NTBlocks.BUDDING_PRISMARINE.get());
+        add(NTBlocks.PRISMARINE_CLUSTER.get(), block -> createSilkTouchDispatchTable(block,
+                this.applyExplosionDecay(block, LootItem.lootTableItem(NTItems.PRISMARINE_CRYSTAL_SHARD.get())
+                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))
+                        .apply(ApplyBonusCount.addOreBonusCount(this.registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE)))
+                        .when(this.hasSilkTouch().invert()))));
+        add(NTBlocks.SMALL_PRISMARINE_BUD.get(), this::createSilkTouchOnlyTable);
+        add(NTBlocks.MEDIUM_PRISMARINE_BUD.get(), this::createSilkTouchOnlyTable);
+        add(NTBlocks.LARGE_PRISMARINE_BUD.get(), this::createSilkTouchOnlyTable);
+
+        add(NTBlocks.DEEP_KELP.get(), this::createShearsOnlyDrop);
+        add(NTBlocks.DEEP_KELP_PLANT.get(), noDrop());
+        add(NTBlocks.LUMINESCENT_ALGAE.get(), this::createShearsOnlyDrop);
+        add(NTBlocks.PRISMARINE_FROND.get(), this::createShearsOnlyDrop);
+        add(NTBlocks.VENT_TUBEWORM.get(), this::createShearsOnlyDrop);
+        add(NTBlocks.ABYSSAL_CORAL.get(), this::createShearsOnlyDrop);
+        add(NTBlocks.GLOW_POLYP.get(), this::createShearsOnlyDrop);
     }
 
     protected LootTable.Builder createStateDrop(

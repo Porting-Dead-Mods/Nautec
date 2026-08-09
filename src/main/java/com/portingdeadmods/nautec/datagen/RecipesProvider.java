@@ -795,6 +795,21 @@ public class RecipesProvider extends RecipeProvider {
                 .augmentItem(NTItems.AUXILIARY_VENTRICLE.get(), "Doubles your maximum health")
                 .ingredients(IngredientWithCount.fromItemLike(NTItems.AUXILIARY_VENTRICLE.get()))
                 .save(pRecipeOutput, key("bonus_hearts"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.ABYSSAL_EYES.get())
+                .augmentItem(NTItems.ABYSSAL_ORGAN.get(), "Grants night vision in the deep")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.ABYSSAL_ORGAN.get()))
+                .save(pRecipeOutput, key("abyssal_eyes"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.PHOTOPHORE_SKIN.get())
+                .augmentItem(NTItems.LUMINOUS_MEMBRANE.get(), "Lights up nearby creatures while you are in water")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.LUMINOUS_MEMBRANE.get()))
+                .save(pRecipeOutput, key("photophore_skin"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.VENT_CARAPACE.get())
+                .augmentItem(NTItems.CHITIN_PLATE.get(), "Armour plating that shrugs off knockback and burns out fast")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.CHITIN_PLATE.get(), 4))
+                .save(pRecipeOutput, key("vent_carapace"));
     }
 
     private void augmentPartRecipes(@NotNull RecipeOutput pRecipeOutput) {

@@ -5,6 +5,9 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+import java.util.List;
+import java.util.Set;
+
 @EventBusSubscriber(modid = Nautec.MODID)
 public final class NTConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
@@ -113,6 +116,23 @@ public final class NTConfig {
             .comment("The amount of power used by the Mutator each tick")
             .defineInRange("mutatorPowerUsage", 10, 0, Integer.MAX_VALUE);
 
+    private static final ModConfigSpec.IntValue ABYSSAL_EYES_DEPTH = BUILDER
+            .comment("The Y level at or below which the Abyssal Eyes augment grants night vision")
+            .defineInRange("abyssalEyesDepth", 45, -64, 320);
+
+    private static final ModConfigSpec.DoubleValue PHOTOPHORE_SKIN_RADIUS = BUILDER
+            .comment("The radius in which the Photophore Skin augment reveals nearby creatures")
+            .defineInRange("photophoreSkinRadius", 12.0, 1.0, 64.0);
+
+    // Worldgen
+    private static final ModConfigSpec.BooleanValue ENABLE_BIOME_INJECTION = BUILDER
+            .comment("Determines whether Nautec's ocean biomes are added to the world's biome layout. Turning this off leaves vanilla oceans untouched")
+            .define("enableBiomeInjection", true);
+
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> INJECTABLE_WORLD_PRESETS = BUILDER
+            .comment("The multi-noise presets Nautec's ocean biomes are added to. Packs using a custom overworld preset should list it here")
+            .defineList("injectableWorldPresets", List.of("minecraft:overworld"), () -> "minecraft:overworld", entry -> entry instanceof String);
+
 
 
     static final ModConfigSpec SPEC = BUILDER.build();
@@ -154,6 +174,20 @@ public final class NTConfig {
     public static int mutatorCraftingSpeed;
     public static int mutatorPowerUsage;
 
+    public static int abyssalEyesDepth;
+    public static double photophoreSkinRadius;
+
+    public static boolean biomeInjectionEnabled() {
+        return !SPEC.isLoaded() || ENABLE_BIOME_INJECTION.getAsBoolean();
+    }
+
+    public static Set<String> injectableWorldPresets() {
+        if (!SPEC.isLoaded()) {
+            return Set.of("minecraft:overworld");
+        }
+        return Set.copyOf(INJECTABLE_WORLD_PRESETS.get());
+    }
+
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
         kelpHeight = KELP_HEIGHT.get();
@@ -193,6 +227,9 @@ public final class NTConfig {
 
         mutatorCraftingSpeed = MUTATOR_CRAFTING_SPEED.get();
         mutatorPowerUsage = MUTATOR_POWER_USAGE.get();
+
+        abyssalEyesDepth = ABYSSAL_EYES_DEPTH.get();
+        photophoreSkinRadius = PHOTOPHORE_SKIN_RADIUS.getAsDouble();
     }
 
 }

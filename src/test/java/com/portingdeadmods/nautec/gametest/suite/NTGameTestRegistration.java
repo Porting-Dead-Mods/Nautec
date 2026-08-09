@@ -23,5 +23,7 @@ public final class NTGameTestRegistration {
         CrateAndCapabilityTests.register(r);
         RecipeAndBacteriaTests.register(r);
         PersistenceTests.register(r);
+        WorldgenInjectionTests.register(r);
+        ContentIntegrityTests.register(r);
     }
 }

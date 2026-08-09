@@ -5,6 +5,7 @@
   "mixins": [
     "BottleItemMixin",
     "BucketItemMixin",
+    "MultiNoiseBiomeSourceParameterListMixin",
     "StructurePieceMixin"
   ],
   "client": [

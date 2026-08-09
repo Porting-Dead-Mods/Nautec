@@ -53,6 +53,7 @@ public final class AugmentEvents {
             if (augment != null) {
                 AugmentSlot slot = augment.getAugmentSlot();
                 augment.setPlayer(player);
+                augment.onAdded(player);
                 CompoundTag nbt = data.get(slot);
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncAugmentPayload(augment, nbt != null ? nbt : new CompoundTag()));
             }

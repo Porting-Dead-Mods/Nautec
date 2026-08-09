@@ -4,6 +4,7 @@ import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.compat.modonomicon.datagen.ModonomiconDatagen;
 import com.portingdeadmods.nautec.datagen.loot.BlockLootTableProvider;
 import com.portingdeadmods.nautec.datagen.loot.ChestLootTableProvider;
+import com.portingdeadmods.nautec.datagen.loot.EntityLootTableProvider;
 import com.portingdeadmods.nautec.datagen.loot.LootModifierProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -36,12 +37,15 @@ public class DataGatherer {
         generator.addProvider(true, new RecipesProvider.Runner(output, lookupProvider));
         generator.addProvider(true, new LootTableProvider(output, Collections.emptySet(), List.of(
                 new LootTableProvider.SubProviderEntry(BlockLootTableProvider::new, LootContextParamSets.BLOCK),
-                new LootTableProvider.SubProviderEntry(provider -> new ChestLootTableProvider(), LootContextParamSets.CHEST)
+                new LootTableProvider.SubProviderEntry(provider -> new ChestLootTableProvider(), LootContextParamSets.CHEST),
+                new LootTableProvider.SubProviderEntry(EntityLootTableProvider::new, LootContextParamSets.ENTITY)
         ), lookupProvider));
         generator.addProvider(true, new BlockTagProvider(output, lookupProvider));
         generator.addProvider(true, new ItemTagProvider(output, lookupProvider));
         generator.addProvider(true, new LootModifierProvider(output, lookupProvider));
-        generator.addProvider(true, new DatapackRegistryProvider(output, lookupProvider));
+
+        DatapackRegistryProvider datapackRegistries = generator.addProvider(true, new DatapackRegistryProvider(output, lookupProvider));
+        generator.addProvider(true, new BiomeTagProvider(output, datapackRegistries.getRegistryProvider()));
         generator.addProvider(true, new NTDataMapProvider(output, lookupProvider));
 
         if (ModList.get().isLoaded("modonomicon")) {

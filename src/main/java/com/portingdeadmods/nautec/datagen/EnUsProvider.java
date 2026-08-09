@@ -27,6 +27,43 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         curiosIdent("prism_monocle", "Monocle");
         curiosIdent("battery", "Battery");
 
+        addItem(LUMINOUS_MEMBRANE, "Luminous Membrane");
+        addItem(CHITIN_PLATE, "Chitin Plate");
+        addItem(ABYSSAL_ORGAN, "Abyssal Organ");
+        addItem(SILT_SKIPPER, "Silt Skipper");
+        addItem(SILT_SKIPPER_BUCKET, "Bucket of Silt Skipper");
+        addItem(SILT_SKIPPER_SPAWN_EGG, "Silt Skipper Spawn Egg");
+        addItem(LANTERN_JELLY_SPAWN_EGG, "Lantern Jelly Spawn Egg");
+        addItem(VENT_CRAWLER_SPAWN_EGG, "Vent Crawler Spawn Egg");
+        addItem(ABYSSAL_MAW_SPAWN_EGG, "Abyssal Maw Spawn Egg");
+
+        add("augment_type.nautec.abyssal_eyes", "Abyssal Eyes");
+        add("augment_type.nautec.photophore_skin", "Photophore Skin");
+        add("augment_type.nautec.vent_carapace", "Vent Carapace");
+
+        add("entity.nautec.silt_skipper", "Silt Skipper");
+        add("entity.nautec.lantern_jelly", "Lantern Jelly");
+        add("entity.nautec.vent_crawler", "Vent Crawler");
+        add("entity.nautec.abyssal_maw", "Abyssal Maw");
+
+        addBlock("budding_prismarine", "Budding Prismarine");
+        addBlock("small_prismarine_bud", "Small Prismarine Bud");
+        addBlock("medium_prismarine_bud", "Medium Prismarine Bud");
+        addBlock("large_prismarine_bud", "Large Prismarine Bud");
+        addBlock("prismarine_cluster", "Prismarine Cluster");
+        addBlock("deep_kelp", "Deep Kelp");
+        addBlock("deep_kelp_plant", "Deep Kelp Plant");
+        addBlock("luminescent_algae", "Luminescent Algae");
+        addBlock("prismarine_frond", "Prismarine Frond");
+        addBlock("vent_tubeworm", "Vent Tubeworm");
+        addBlock("abyssal_coral", "Abyssal Coral");
+        addBlock("glow_polyp", "Glow Polyp");
+
+        add("biome.nautec.abyssal_trench", "Abyssal Trench");
+        add("biome.nautec.bioluminescent_grove", "Bioluminescent Grove");
+        add("biome.nautec.hydrothermal_vents", "Hydrothermal Vents");
+        add("biome.nautec.prismarine_reef", "Prismarine Reef");
+
         add("nautec.creative_tab.main", "NauTec");
         add("nautec.creative_tab.bacteria", "NauTec Bacteria");
 

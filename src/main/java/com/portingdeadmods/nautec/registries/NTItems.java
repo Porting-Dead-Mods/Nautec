@@ -8,7 +8,10 @@ import com.portingdeadmods.nautec.data.NTDataComponents;
 import com.portingdeadmods.nautec.data.components.ComponentBacteriaStorage;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.MobBucketItem;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.fml.ModList;
@@ -88,6 +91,29 @@ public final class NTItems {
     // Robot Arms
     public static final DeferredItem<RobotArmItem> CLAW_ROBOT_ARM = registerItem("claw_robot_arm",
             RobotArmItem::new, new Item.Properties());
+
+    // OCEAN LIFE
+    public static final DeferredItem<Item> LUMINOUS_MEMBRANE = registerItem("luminous_membrane",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> CHITIN_PLATE = registerItem("chitin_plate",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> ABYSSAL_ORGAN = registerItem("abyssal_organ",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> SILT_SKIPPER = registerItem("silt_skipper",
+            Item::new, new Item.Properties().food(new net.minecraft.world.food.FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).build()));
+    public static final DeferredItem<MobBucketItem> SILT_SKIPPER_BUCKET = registerItem("silt_skipper_bucket",
+            props -> new MobBucketItem(NTEntities.SILT_SKIPPER.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, props),
+            new Item.Properties().stacksTo(1));
+
+    // SPAWN EGGS
+    public static final DeferredItem<Item> SILT_SKIPPER_SPAWN_EGG = registerItem("silt_skipper_spawn_egg",
+            Item::new, () -> new Item.Properties().spawnEgg(NTEntities.SILT_SKIPPER.get()));
+    public static final DeferredItem<Item> LANTERN_JELLY_SPAWN_EGG = registerItem("lantern_jelly_spawn_egg",
+            Item::new, () -> new Item.Properties().spawnEgg(NTEntities.LANTERN_JELLY.get()));
+    public static final DeferredItem<Item> VENT_CRAWLER_SPAWN_EGG = registerItem("vent_crawler_spawn_egg",
+            Item::new, () -> new Item.Properties().spawnEgg(NTEntities.VENT_CRAWLER.get()));
+    public static final DeferredItem<Item> ABYSSAL_MAW_SPAWN_EGG = registerItem("abyssal_maw_spawn_egg",
+            Item::new, () -> new Item.Properties().spawnEgg(NTEntities.ABYSSAL_MAW.get()));
 
     // AUGMENT PARTS
     public static final DeferredItem<Item> HYDRAULIC_LEG = registerItem("hydraulic_leg",

@@ -1,0 +1,13 @@
+{
+  "type": "modonomicon:spotlight",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "photophore_skin",
+  "item": {
+    "id": "nautec:luminous_membrane"
+  },
+  "sort_number": 2,
+  "text": "book.nautec.nautec_guide.laser_augmentation.deep_fauna_augments.photophore_skin.text",
+  "title": "book.nautec.nautec_guide.laser_augmentation.deep_fauna_augments.photophore_skin.title"
+}

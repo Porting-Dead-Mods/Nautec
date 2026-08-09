@@ -1,0 +1,11 @@
+{
+  "type": "nautec:augmentation",
+  "augmentItem": "nautec:abyssal_organ",
+  "desc": "Grants night vision in the deep",
+  "ingredients": [
+    {
+      "ingredient": "nautec:abyssal_organ"
+    }
+  ],
+  "resultAugment": "nautec:abyssal_eyes"
+}

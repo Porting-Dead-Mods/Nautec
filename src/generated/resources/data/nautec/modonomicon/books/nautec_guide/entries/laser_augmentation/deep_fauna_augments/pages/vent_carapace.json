@@ -1,0 +1,13 @@
+{
+  "type": "modonomicon:spotlight",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "vent_carapace",
+  "item": {
+    "id": "nautec:chitin_plate"
+  },
+  "sort_number": 3,
+  "text": "book.nautec.nautec_guide.laser_augmentation.deep_fauna_augments.vent_carapace.text",
+  "title": "book.nautec.nautec_guide.laser_augmentation.deep_fauna_augments.vent_carapace.title"
+}

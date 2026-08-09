@@ -2,6 +2,7 @@ package com.portingdeadmods.nautec.registries;
 
 import com.portingdeadmods.nautec.Nautec;
 import com.portingdeadmods.nautec.content.blocks.*;
+import com.portingdeadmods.nautec.content.blocks.flora.*;
 import com.portingdeadmods.nautec.content.blocks.multiblock.controller.AugmentationStationBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.controller.BioReactorBlock;
 import com.portingdeadmods.nautec.content.blocks.multiblock.controller.DrainBlock;
@@ -15,7 +16,9 @@ import com.portingdeadmods.nautec.content.items.blocks.PrismarineCrystalItem;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.GlowLichenBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -118,6 +121,38 @@ public final class NTBlocks {
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), false, true);
     public static final DeferredBlock<EnergyConverterBlock> ENERGY_CONVERTER = registerBlockAndItem("energy_converter", EnergyConverterBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), false, true);
+
+    // BUDDING PRISMARINE
+    public static final DeferredBlock<BuddingPrismarineBlock> BUDDING_PRISMARINE = registerBlockAndItem("budding_prismarine", BuddingPrismarineBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.PRISMARINE).randomTicks().strength(1.5f).requiresCorrectToolForDrops());
+    public static final DeferredBlock<AmethystClusterBlock> SMALL_PRISMARINE_BUD = registerBlockAndItem("small_prismarine_bud",
+            props -> new AmethystClusterBlock(3.0f, 4.0f, props), prismarineBudProperties(3));
+    public static final DeferredBlock<AmethystClusterBlock> MEDIUM_PRISMARINE_BUD = registerBlockAndItem("medium_prismarine_bud",
+            props -> new AmethystClusterBlock(4.0f, 3.0f, props), prismarineBudProperties(5));
+    public static final DeferredBlock<AmethystClusterBlock> LARGE_PRISMARINE_BUD = registerBlockAndItem("large_prismarine_bud",
+            props -> new AmethystClusterBlock(5.0f, 3.0f, props), prismarineBudProperties(7));
+    public static final DeferredBlock<AmethystClusterBlock> PRISMARINE_CLUSTER = registerBlockAndItem("prismarine_cluster",
+            props -> new AmethystClusterBlock(7.0f, 3.0f, props), prismarineBudProperties(9));
+
+    // FLORA
+    public static final DeferredBlock<DeepKelpBlock> DEEP_KELP = registerBlockAndItem("deep_kelp", DeepKelpBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.KELP));
+    public static final DeferredBlock<DeepKelpPlantBlock> DEEP_KELP_PLANT = BLOCKS.registerBlock("deep_kelp_plant", DeepKelpPlantBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.KELP_PLANT));
+    public static final DeferredBlock<UnderwaterPlantBlock> LUMINESCENT_ALGAE = registerBlockAndItem("luminescent_algae", UnderwaterPlantBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEAGRASS).lightLevel(state -> 9));
+    public static final DeferredBlock<UnderwaterPlantBlock> PRISMARINE_FROND = registerBlockAndItem("prismarine_frond", UnderwaterPlantBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEAGRASS));
+    public static final DeferredBlock<UnderwaterPlantBlock> VENT_TUBEWORM = registerBlockAndItem("vent_tubeworm", UnderwaterPlantBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEAGRASS).lightLevel(state -> 3));
+    public static final DeferredBlock<UnderwaterPlantBlock> ABYSSAL_CORAL = registerBlockAndItem("abyssal_coral", UnderwaterPlantBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.SEAGRASS));
+    public static final DeferredBlock<GlowLichenBlock> GLOW_POLYP = registerBlockAndItem("glow_polyp", GlowLichenBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.GLOW_LICHEN).lightLevel(GlowLichenBlock.emission(7)));
+
+    private static BlockBehaviour.Properties prismarineBudProperties(int light) {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.SMALL_AMETHYST_BUD).lightLevel(state -> light);
+    }
 
     private static <T extends Block> DeferredBlock<T> registerBlockAndItem(String name, Function<BlockBehaviour.Properties, T> blockConstructor, BlockBehaviour.Properties properties) {
         return registerBlockAndItem(name, blockConstructor, properties, true, true);

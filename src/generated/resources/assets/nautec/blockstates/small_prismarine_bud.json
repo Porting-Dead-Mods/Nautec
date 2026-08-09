@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "nautec:block/small_prismarine_bud",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "nautec:block/small_prismarine_bud",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "nautec:block/small_prismarine_bud",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "nautec:block/small_prismarine_bud",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "nautec:block/small_prismarine_bud"
+    },
+    "facing=west": {
+      "model": "nautec:block/small_prismarine_bud",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
