@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "leg_recipes1",
+  "recipe_id_1": "nautec:shock_absorber",
+  "recipe_id_2": "nautec:tendon_weave",
+  "sort_number": 3,
+  "title1": "Shock Absorber",
+  "title2": "Tendon Weave"
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "nautec:aquatic_chip",
+    "E": "nautec:eldritch_heart",
+    "G": "nautec:atlantic_gold_ingot"
+  },
+  "pattern": [
+    " G ",
+    "GEG",
+    " C "
+  ],
+  "result": {
+    "id": "nautec:auxiliary_ventricle"
+  }
+}

@@ -89,6 +89,32 @@ public final class NTItems {
     public static final DeferredItem<RobotArmItem> CLAW_ROBOT_ARM = registerItem("claw_robot_arm",
             RobotArmItem::new, new Item.Properties());
 
+    // AUGMENT PARTS
+    public static final DeferredItem<Item> HYDRAULIC_LEG = registerItem("hydraulic_leg",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> SERVO_KNEE = registerItem("servo_knee",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> SHOCK_ABSORBER = registerItem("shock_absorber",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> TENDON_WEAVE = registerItem("tendon_weave",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> MAGNETIC_COIL_ARM = registerItem("magnetic_coil_arm",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> ENDER_COIL_ARM = registerItem("ender_coil_arm",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> HYDRO_DRILL_ARM = registerItem("hydro_drill_arm",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> TRIDENT_LAUNCHER_ARM = registerItem("trident_launcher_arm",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> VOLLEY_TRIDENT_ARM = registerItem("volley_trident_arm",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> SYRINGE_ROBOT_ARM = registerItem("syringe_robot_arm",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> BUOYANCY_TANK = registerItem("buoyancy_tank",
+            Item::new, new Item.Properties());
+    public static final DeferredItem<Item> AUXILIARY_VENTRICLE = registerItem("auxiliary_ventricle",
+            Item::new, new Item.Properties());
+
     // VIALS
     public static final DeferredItem<Item> GLASS_VIAL = registerItem("glass_vial", Item::new, new Item.Properties());
     public static final DeferredItem<Item> ELECTROLYTE_ALGAE_SERUM_VIAL = registerItem("eas_vial", Item::new, new Item.Properties());

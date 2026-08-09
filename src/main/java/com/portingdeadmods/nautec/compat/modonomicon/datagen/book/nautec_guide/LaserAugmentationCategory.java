@@ -31,6 +31,7 @@ public class LaserAugmentationCategory extends CategoryProvider {
         add(augmentationStationEntry.withParent(mobAugmentEntry));
         BookEntryModel augmentationEntry = new AugmentationEntry(this).generate(new Vec2(6, 0));
         add(augmentationEntry.withParent(augmentationStationEntry));
+        add(new CraftedAugmentsEntry(this).generate(new Vec2(6, 2)).withParent(augmentationEntry));
     }
 
     @Override

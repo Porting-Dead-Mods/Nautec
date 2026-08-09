@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "nautec:aquarine_steel_ingot",
+    "C": "nautec:aquatic_chip",
+    "L": "nautec:laser_channeling_coil",
+    "T": "minecraft:trident"
+  },
+  "pattern": [
+    " T ",
+    "ALA",
+    " C "
+  ],
+  "result": {
+    "id": "nautec:trident_launcher_arm"
+  }
+}

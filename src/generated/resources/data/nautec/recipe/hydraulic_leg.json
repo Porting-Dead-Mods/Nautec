@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "nautec:aquarine_steel_ingot",
+    "C": "nautec:aquatic_chip",
+    "P": "minecraft:piston",
+    "R": "nautec:cast_iron_rod"
+  },
+  "pattern": [
+    " R ",
+    "RPR",
+    "ACA"
+  ],
+  "result": {
+    "id": "nautec:hydraulic_leg"
+  }
+}

@@ -1,5 +1,20 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- Twelve augments that were already in the mod but impossible to install now
+  have body slots, parts and recipes: Hydraulic Leg, Servo Knee, Shock
+  Absorber, Tendon Weave, Magnetic Coil Arm, Ender Coil Arm, Hydro Drill Arm,
+  Trident Launcher Arm, Volley Trident Arm, Syringe Robot Arm, Buoyancy Tank
+  and Auxiliary Ventricle.
+- New guide entry "Crafted Augments" covering all twelve parts and how they
+  compete for slots.
+
+### Changed
+- The Spreading Trident augment is now on 'U' by default. It shared 'Y' with
+  the Bouncing Trident augment, so both fired at once when installed together.
+
 ## [0.5.1]
 
 ### Fixed

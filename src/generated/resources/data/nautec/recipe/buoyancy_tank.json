@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "nautec:brown_polymer",
+    "H": "minecraft:heart_of_the_sea",
+    "P": "minecraft:phantom_membrane"
+  },
+  "pattern": [
+    "PBP",
+    "BHB",
+    "PBP"
+  ],
+  "result": {
+    "id": "nautec:buoyancy_tank"
+  }
+}

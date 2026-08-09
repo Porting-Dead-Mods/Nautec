@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "core_recipes",
+  "recipe_id_1": "nautec:buoyancy_tank",
+  "recipe_id_2": "nautec:auxiliary_ventricle",
+  "sort_number": 10,
+  "title1": "Buoyancy Tank",
+  "title2": "Auxiliary Ventricle"
+}

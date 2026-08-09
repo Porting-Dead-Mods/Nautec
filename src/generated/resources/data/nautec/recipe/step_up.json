@@ -1,0 +1,11 @@
+{
+  "type": "nautec:augmentation",
+  "augmentItem": "nautec:servo_knee",
+  "desc": "Step up full blocks without jumping",
+  "ingredients": [
+    {
+      "ingredient": "nautec:servo_knee"
+    }
+  ],
+  "resultAugment": "nautec:step_up"
+}

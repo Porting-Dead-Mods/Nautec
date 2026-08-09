@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:text",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "core",
+  "show_title_separator": true,
+  "sort_number": 9,
+  "text": "book.nautec.nautec_guide.laser_augmentation.crafted_augments.core.text",
+  "title": "book.nautec.nautec_guide.laser_augmentation.crafted_augments.core.title"
+}

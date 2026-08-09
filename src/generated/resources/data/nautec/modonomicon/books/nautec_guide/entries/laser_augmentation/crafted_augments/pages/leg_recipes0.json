@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "leg_recipes0",
+  "recipe_id_1": "nautec:hydraulic_leg",
+  "recipe_id_2": "nautec:servo_knee",
+  "sort_number": 2,
+  "title1": "Hydraulic Leg",
+  "title2": "Servo Knee"
+}

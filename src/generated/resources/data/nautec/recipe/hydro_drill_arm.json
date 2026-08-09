@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "nautec:aquarine_steel_ingot",
+    "C": "nautec:aquatic_chip",
+    "G": "nautec:gear",
+    "S": "minecraft:prismarine_shard"
+  },
+  "pattern": [
+    "SAS",
+    "ACA",
+    " G "
+  ],
+  "result": {
+    "id": "nautec:hydro_drill_arm"
+  }
+}

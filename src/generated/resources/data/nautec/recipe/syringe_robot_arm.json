@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "nautec:aquarine_steel_ingot",
+    "C": "nautec:aquatic_chip",
+    "E": "nautec:eas_vial",
+    "V": "nautec:glass_vial"
+  },
+  "pattern": [
+    " V ",
+    "AEA",
+    " C "
+  ],
+  "result": {
+    "id": "nautec:syringe_robot_arm"
+  }
+}

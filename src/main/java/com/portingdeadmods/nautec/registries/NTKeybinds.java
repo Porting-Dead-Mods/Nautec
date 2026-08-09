@@ -28,7 +28,7 @@ public final class NTKeybinds {
             "Throw Potion", GLFW.GLFW_KEY_G);
 
     public static final Lazy<KeyMapping> THROW_SPREADING_KEYBIND = keyBind(
-            "Throw Spreading Trident", GLFW.GLFW_KEY_Y);
+            "Throw Spreading Trident", GLFW.GLFW_KEY_U);
 
     public static final Lazy<KeyMapping> ACTIVATE_LASER_KEYBIND = keyBind(
             "Activate Guardian Eye Augment Laser", GLFW.GLFW_KEY_L);

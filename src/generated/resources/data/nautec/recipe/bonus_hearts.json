@@ -1,0 +1,11 @@
+{
+  "type": "nautec:augmentation",
+  "augmentItem": "nautec:auxiliary_ventricle",
+  "desc": "Doubles your maximum health",
+  "ingredients": [
+    {
+      "ingredient": "nautec:auxiliary_ventricle"
+    }
+  ],
+  "resultAugment": "nautec:bonus_hearts"
+}

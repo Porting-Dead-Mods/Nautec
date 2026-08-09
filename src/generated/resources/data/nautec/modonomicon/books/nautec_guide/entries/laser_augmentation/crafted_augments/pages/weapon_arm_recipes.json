@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "weapon_arm_recipes",
+  "recipe_id_1": "nautec:trident_launcher_arm",
+  "recipe_id_2": "nautec:volley_trident_arm",
+  "sort_number": 8,
+  "title1": "Trident Launcher Arm",
+  "title2": "Volley Trident Arm"
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "nautec:brown_polymer",
+    "I": "nautec:cast_iron_ingot",
+    "R": "nautec:cast_iron_rod",
+    "S": "minecraft:slime_ball"
+  },
+  "pattern": [
+    " S ",
+    "BIB",
+    " R "
+  ],
+  "result": {
+    "id": "nautec:shock_absorber"
+  }
+}

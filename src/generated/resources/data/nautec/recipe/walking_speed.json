@@ -1,0 +1,11 @@
+{
+  "type": "nautec:augmentation",
+  "augmentItem": "nautec:tendon_weave",
+  "desc": "Greatly increased walking speed",
+  "ingredients": [
+    {
+      "ingredient": "nautec:tendon_weave"
+    }
+  ],
+  "resultAugment": "nautec:walking_speed"
+}

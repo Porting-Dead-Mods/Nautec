@@ -1,0 +1,11 @@
+{
+  "type": "nautec:augmentation",
+  "augmentItem": "nautec:hydraulic_leg",
+  "desc": "Launches you in the direction you are looking",
+  "ingredients": [
+    {
+      "ingredient": "nautec:hydraulic_leg"
+    }
+  ],
+  "resultAugment": "nautec:leap"
+}

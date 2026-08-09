@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "nautec:aquarine_steel_ingot",
+    "C": "nautec:aquatic_chip",
+    "I": "#c:ingots/iron",
+    "L": "nautec:laser_channeling_coil"
+  },
+  "pattern": [
+    "III",
+    "LCL",
+    " A "
+  ],
+  "result": {
+    "id": "nautec:magnetic_coil_arm"
+  }
+}

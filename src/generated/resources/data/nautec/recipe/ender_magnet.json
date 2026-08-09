@@ -1,0 +1,11 @@
+{
+  "type": "nautec:augmentation",
+  "augmentItem": "nautec:ender_coil_arm",
+  "desc": "Teleports nearby items straight into your inventory, hold crouch to suspend it",
+  "ingredients": [
+    {
+      "ingredient": "nautec:ender_coil_arm"
+    }
+  ],
+  "resultAugment": "nautec:ender_magnet"
+}

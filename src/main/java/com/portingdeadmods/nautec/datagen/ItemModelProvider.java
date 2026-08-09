@@ -80,6 +80,19 @@ public class ItemModelProvider extends ModelProvider {
 
         basicItem(NTItems.CLAW_ROBOT_ARM.get());
 
+        basicItem(NTItems.HYDRAULIC_LEG.get());
+        basicItem(NTItems.SERVO_KNEE.get());
+        basicItem(NTItems.SHOCK_ABSORBER.get());
+        basicItem(NTItems.TENDON_WEAVE.get());
+        basicItem(NTItems.MAGNETIC_COIL_ARM.get());
+        basicItem(NTItems.ENDER_COIL_ARM.get());
+        basicItem(NTItems.HYDRO_DRILL_ARM.get());
+        basicItem(NTItems.TRIDENT_LAUNCHER_ARM.get());
+        basicItem(NTItems.VOLLEY_TRIDENT_ARM.get());
+        basicItem(NTItems.SYRINGE_ROBOT_ARM.get());
+        basicItem(NTItems.BUOYANCY_TANK.get());
+        basicItem(NTItems.AUXILIARY_VENTRICLE.get());
+
         basicItem(NTItems.CAST_IRON_INGOT.get());
         basicItem(NTItems.CAST_IRON_NUGGET.get());
         basicItem(NTItems.CAST_IRON_ROD.get());

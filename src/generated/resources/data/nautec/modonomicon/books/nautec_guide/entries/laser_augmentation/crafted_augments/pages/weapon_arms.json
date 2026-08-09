@@ -1,0 +1,11 @@
+{
+  "type": "modonomicon:text",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "weapon_arms",
+  "show_title_separator": true,
+  "sort_number": 7,
+  "text": "book.nautec.nautec_guide.laser_augmentation.crafted_augments.weapon_arms.text",
+  "title": "book.nautec.nautec_guide.laser_augmentation.crafted_augments.weapon_arms.title"
+}

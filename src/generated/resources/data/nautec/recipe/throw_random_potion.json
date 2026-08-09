@@ -1,0 +1,11 @@
+{
+  "type": "nautec:augmentation",
+  "augmentItem": "nautec:syringe_robot_arm",
+  "desc": "Throws a randomly brewed splash potion",
+  "ingredients": [
+    {
+      "ingredient": "nautec:syringe_robot_arm"
+    }
+  ],
+  "resultAugment": "nautec:throw_random_potion"
+}

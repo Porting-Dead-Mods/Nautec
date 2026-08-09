@@ -1,0 +1,12 @@
+{
+  "type": "modonomicon:crafting_recipe",
+  "condition": {
+    "type": "modonomicon:none"
+  },
+  "id": "arm_recipes1",
+  "recipe_id_1": "nautec:hydro_drill_arm",
+  "recipe_id_2": "nautec:syringe_robot_arm",
+  "sort_number": 6,
+  "title1": "Hydro Drill Arm",
+  "title2": "Syringe Robot Arm"
+}

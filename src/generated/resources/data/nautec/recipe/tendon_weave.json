@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "nautec:brown_polymer",
+    "C": "nautec:aquatic_chip",
+    "T": "minecraft:string"
+  },
+  "pattern": [
+    "TBT",
+    "BCB",
+    "TBT"
+  ],
+  "result": {
+    "id": "nautec:tendon_weave"
+  }
+}

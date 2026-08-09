@@ -77,6 +77,17 @@ public class EnUsProvider extends AbstractModonomiconLanguageProvider {
         addItem("prismarine_crystal_shard", "Prismarine Crystal Shard");
         addItem("claw_robot_arm", "Claw Robot Arm");
         addItem("syringe_robot_arm", "Syringe Robot Arm");
+        addItem(HYDRAULIC_LEG, "Hydraulic Leg");
+        addItem(SERVO_KNEE, "Servo Knee");
+        addItem(SHOCK_ABSORBER, "Shock Absorber");
+        addItem(TENDON_WEAVE, "Tendon Weave");
+        addItem(MAGNETIC_COIL_ARM, "Magnetic Coil Arm");
+        addItem(ENDER_COIL_ARM, "Ender Coil Arm");
+        addItem(HYDRO_DRILL_ARM, "Hydro Drill Arm");
+        addItem(TRIDENT_LAUNCHER_ARM, "Trident Launcher Arm");
+        addItem(VOLLEY_TRIDENT_ARM, "Volley Trident Arm");
+        addItem(BUOYANCY_TANK, "Buoyancy Tank");
+        addItem(AUXILIARY_VENTRICLE, "Auxiliary Ventricle");
         addItem("deepslate_rod", "Deepslate Rod");
         addItem("brown_polymer", "Brown Polymer");
         addItem("cast_iron_ingot", "Cast Iron Ingot");

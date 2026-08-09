@@ -1,0 +1,11 @@
+{
+  "type": "nautec:augmentation",
+  "augmentItem": "nautec:trident_launcher_arm",
+  "desc": "Throws a trident that ricochets between targets",
+  "ingredients": [
+    {
+      "ingredient": "nautec:trident_launcher_arm"
+    }
+  ],
+  "resultAugment": "nautec:throw_bouncing_trident"
+}

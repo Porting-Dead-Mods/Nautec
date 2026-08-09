@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "nautec:aquarine_steel_ingot",
+    "G": "nautec:gear",
+    "R": "nautec:cast_iron_rod"
+  },
+  "pattern": [
+    " G ",
+    "RAR",
+    " G "
+  ],
+  "result": {
+    "id": "nautec:servo_knee"
+  }
+}

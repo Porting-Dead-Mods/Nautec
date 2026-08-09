@@ -44,6 +44,8 @@ public class RecipesProvider extends RecipeProvider {
 
         chemistryRecipes(pRecipeOutput);
 
+        augmentPartRecipes(pRecipeOutput);
+
         augmentationRecipes(pRecipeOutput);
 
         aquarineSteelToolsRecipes(pRecipeOutput);
@@ -733,6 +735,195 @@ public class RecipesProvider extends RecipeProvider {
                 .augmentItem(NTItems.ELDRITCH_HEART.get(), "Increased health regeneration when underwater")
                 .ingredients(IngredientWithCount.fromItemLike(NTItems.ELDRITCH_HEART.get()))
                 .save(pRecipeOutput, key("eldritch_heart"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.LEAP_AUGMENT.get())
+                .augmentItem(NTItems.HYDRAULIC_LEG.get(), "Launches you in the direction you are looking")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.HYDRAULIC_LEG.get()))
+                .save(pRecipeOutput, key("leap"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.STEP_UP_AUGMENT.get())
+                .augmentItem(NTItems.SERVO_KNEE.get(), "Step up full blocks without jumping")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.SERVO_KNEE.get()))
+                .save(pRecipeOutput, key("step_up"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.PREVENT_FALL_DAMAGE_AUGMENT.get())
+                .augmentItem(NTItems.SHOCK_ABSORBER.get(), "Negates all fall damage")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.SHOCK_ABSORBER.get()))
+                .save(pRecipeOutput, key("prevent_fall_damage"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.WALKING_SPEED_AUGMENT.get())
+                .augmentItem(NTItems.TENDON_WEAVE.get(), "Greatly increased walking speed")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.TENDON_WEAVE.get()))
+                .save(pRecipeOutput, key("walking_speed"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.MAGNET_AUGMENT.get())
+                .augmentItem(NTItems.MAGNETIC_COIL_ARM.get(), "Pulls nearby items towards you, hold crouch to suspend it")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.MAGNETIC_COIL_ARM.get()))
+                .save(pRecipeOutput, key("magnet"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.ENDER_MAGNET_AUGMENT.get())
+                .augmentItem(NTItems.ENDER_COIL_ARM.get(), "Teleports nearby items straight into your inventory, hold crouch to suspend it")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.ENDER_COIL_ARM.get()))
+                .save(pRecipeOutput, key("ender_magnet"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.UNDERWATER_MINING_SPEED_AUGMENT.get())
+                .augmentItem(NTItems.HYDRO_DRILL_ARM.get(), "Mine underwater as fast as you would on land")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.HYDRO_DRILL_ARM.get()))
+                .save(pRecipeOutput, key("underwater_mining_speed"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.THROWN_BOUNCING_TRIDENT_AUGMENT.get())
+                .augmentItem(NTItems.TRIDENT_LAUNCHER_ARM.get(), "Throws a trident that ricochets between targets")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.TRIDENT_LAUNCHER_ARM.get()))
+                .save(pRecipeOutput, key("throw_bouncing_trident"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.SPREADING_TRIDENT_AUGMENT.get())
+                .augmentItem(NTItems.VOLLEY_TRIDENT_ARM.get(), "Throws a spreading volley of tridents")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.VOLLEY_TRIDENT_ARM.get()))
+                .save(pRecipeOutput, key("spreading_trident"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.THROW_POTION_AUGMENT.get())
+                .augmentItem(NTItems.SYRINGE_ROBOT_ARM.get(), "Throws a randomly brewed splash potion")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.SYRINGE_ROBOT_ARM.get()))
+                .save(pRecipeOutput, key("throw_random_potion"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.CREATIVE_FLIGHT_AUGMENT.get())
+                .augmentItem(NTItems.BUOYANCY_TANK.get(), "Lets you fly freely, in water and out of it")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.BUOYANCY_TANK.get()))
+                .save(pRecipeOutput, key("creative_flight"));
+
+        AugmentationRecipeBuilder.newRecipe(NTAugments.BONUS_HEART_AUGMENT.get())
+                .augmentItem(NTItems.AUXILIARY_VENTRICLE.get(), "Doubles your maximum health")
+                .ingredients(IngredientWithCount.fromItemLike(NTItems.AUXILIARY_VENTRICLE.get()))
+                .save(pRecipeOutput, key("bonus_hearts"));
+    }
+
+    private void augmentPartRecipes(@NotNull RecipeOutput pRecipeOutput) {
+        shaped(RecipeCategory.MISC, NTItems.HYDRAULIC_LEG.get())
+                .pattern(" R ")
+                .pattern("RPR")
+                .pattern("ACA")
+                .define('R', NTItems.CAST_IRON_ROD.asItem())
+                .define('P', Items.PISTON)
+                .define('A', NTItems.AQUARINE_STEEL_INGOT.asItem())
+                .define('C', NTItems.AQUATIC_CHIP.asItem())
+                .unlockedBy("has_item", has(NTItems.AQUATIC_CHIP))
+                .save(pRecipeOutput, key("hydraulic_leg"));
+
+        shaped(RecipeCategory.MISC, NTItems.SERVO_KNEE.get())
+                .pattern(" G ")
+                .pattern("RAR")
+                .pattern(" G ")
+                .define('G', NTItems.GEAR.asItem())
+                .define('R', NTItems.CAST_IRON_ROD.asItem())
+                .define('A', NTItems.AQUARINE_STEEL_INGOT.asItem())
+                .unlockedBy("has_item", has(NTItems.GEAR))
+                .save(pRecipeOutput, key("servo_knee"));
+
+        shaped(RecipeCategory.MISC, NTItems.SHOCK_ABSORBER.get())
+                .pattern(" S ")
+                .pattern("BIB")
+                .pattern(" R ")
+                .define('S', Items.SLIME_BALL)
+                .define('B', NTItems.BROWN_POLYMER.asItem())
+                .define('I', NTItems.CAST_IRON_INGOT.asItem())
+                .define('R', NTItems.CAST_IRON_ROD.asItem())
+                .unlockedBy("has_item", has(NTItems.BROWN_POLYMER))
+                .save(pRecipeOutput, key("shock_absorber"));
+
+        shaped(RecipeCategory.MISC, NTItems.TENDON_WEAVE.get())
+                .pattern("TBT")
+                .pattern("BCB")
+                .pattern("TBT")
+                .define('T', Items.STRING)
+                .define('B', NTItems.BROWN_POLYMER.asItem())
+                .define('C', NTItems.AQUATIC_CHIP.asItem())
+                .unlockedBy("has_item", has(NTItems.AQUATIC_CHIP))
+                .save(pRecipeOutput, key("tendon_weave"));
+
+        shaped(RecipeCategory.MISC, NTItems.MAGNETIC_COIL_ARM.get())
+                .pattern("III")
+                .pattern("LCL")
+                .pattern(" A ")
+                .define('I', Tags.Items.INGOTS_IRON)
+                .define('L', NTItems.LASER_CHANNELING_COIL.asItem())
+                .define('C', NTItems.AQUATIC_CHIP.asItem())
+                .define('A', NTItems.AQUARINE_STEEL_INGOT.asItem())
+                .unlockedBy("has_item", has(NTItems.LASER_CHANNELING_COIL))
+                .save(pRecipeOutput, key("magnetic_coil_arm"));
+
+        shaped(RecipeCategory.MISC, NTItems.ENDER_COIL_ARM.get())
+                .pattern(" E ")
+                .pattern("PMP")
+                .pattern(" E ")
+                .define('E', Items.ENDER_EYE)
+                .define('P', Items.ENDER_PEARL)
+                .define('M', NTItems.MAGNETIC_COIL_ARM.asItem())
+                .unlockedBy("has_item", has(NTItems.MAGNETIC_COIL_ARM))
+                .save(pRecipeOutput, key("ender_coil_arm"));
+
+        shaped(RecipeCategory.MISC, NTItems.HYDRO_DRILL_ARM.get())
+                .pattern("SAS")
+                .pattern("ACA")
+                .pattern(" G ")
+                .define('S', Items.PRISMARINE_SHARD)
+                .define('A', NTItems.AQUARINE_STEEL_INGOT.asItem())
+                .define('C', NTItems.AQUATIC_CHIP.asItem())
+                .define('G', NTItems.GEAR.asItem())
+                .unlockedBy("has_item", has(NTItems.AQUATIC_CHIP))
+                .save(pRecipeOutput, key("hydro_drill_arm"));
+
+        shaped(RecipeCategory.MISC, NTItems.TRIDENT_LAUNCHER_ARM.get())
+                .pattern(" T ")
+                .pattern("ALA")
+                .pattern(" C ")
+                .define('T', Items.TRIDENT)
+                .define('A', NTItems.AQUARINE_STEEL_INGOT.asItem())
+                .define('L', NTItems.LASER_CHANNELING_COIL.asItem())
+                .define('C', NTItems.AQUATIC_CHIP.asItem())
+                .unlockedBy("has_item", has(Items.TRIDENT))
+                .save(pRecipeOutput, key("trident_launcher_arm"));
+
+        shaped(RecipeCategory.MISC, NTItems.VOLLEY_TRIDENT_ARM.get())
+                .pattern(" T ")
+                .pattern("NLN")
+                .pattern(" C ")
+                .define('T', Items.TRIDENT)
+                .define('N', Items.NAUTILUS_SHELL)
+                .define('L', NTItems.TRIDENT_LAUNCHER_ARM.asItem())
+                .define('C', NTItems.AQUATIC_CHIP.asItem())
+                .unlockedBy("has_item", has(NTItems.TRIDENT_LAUNCHER_ARM))
+                .save(pRecipeOutput, key("volley_trident_arm"));
+
+        shaped(RecipeCategory.MISC, NTItems.SYRINGE_ROBOT_ARM.get())
+                .pattern(" V ")
+                .pattern("AEA")
+                .pattern(" C ")
+                .define('V', NTItems.GLASS_VIAL.asItem())
+                .define('E', NTItems.ELECTROLYTE_ALGAE_SERUM_VIAL.asItem())
+                .define('A', NTItems.AQUARINE_STEEL_INGOT.asItem())
+                .define('C', NTItems.AQUATIC_CHIP.asItem())
+                .unlockedBy("has_item", has(NTItems.ELECTROLYTE_ALGAE_SERUM_VIAL))
+                .save(pRecipeOutput, key("syringe_robot_arm"));
+
+        shaped(RecipeCategory.MISC, NTItems.BUOYANCY_TANK.get())
+                .pattern("PBP")
+                .pattern("BHB")
+                .pattern("PBP")
+                .define('P', Items.PHANTOM_MEMBRANE)
+                .define('B', NTItems.BROWN_POLYMER.asItem())
+                .define('H', Items.HEART_OF_THE_SEA)
+                .unlockedBy("has_item", has(Items.HEART_OF_THE_SEA))
+                .save(pRecipeOutput, key("buoyancy_tank"));
+
+        shaped(RecipeCategory.MISC, NTItems.AUXILIARY_VENTRICLE.get())
+                .pattern(" G ")
+                .pattern("GEG")
+                .pattern(" C ")
+                .define('G', NTItems.ATLANTIC_GOLD_INGOT.asItem())
+                .define('E', NTItems.ELDRITCH_HEART.asItem())
+                .define('C', NTItems.AQUATIC_CHIP.asItem())
+                .unlockedBy("has_item", has(NTItems.ELDRITCH_HEART))
+                .save(pRecipeOutput, key("auxiliary_ventricle"));
     }
 
     private void mutationRecipes(RecipeOutput output) {

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": "minecraft:ender_eye",
+    "M": "nautec:magnetic_coil_arm",
+    "P": "minecraft:ender_pearl"
+  },
+  "pattern": [
+    " E ",
+    "PMP",
+    " E "
+  ],
+  "result": {
+    "id": "nautec:ender_coil_arm"
+  }
+}
